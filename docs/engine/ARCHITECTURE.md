@@ -109,9 +109,10 @@ MOVEC TC/root changes require guest PFLUSH. Translated supervisor stacks use
 model-specific fault frames; complete fault continuation/writeback recovery is
 not implemented. Paging is not qualified for general-purpose virtual-memory OS use.
 
-Optional 040 JIT compilation captures immutable RAM/ROM bytes within a single
-256-byte page. CPU, chipset DMA, CopperHDF and host-directory writes update canonical generations
-and invalidate observed Chip RAM aliases. Reset, overlay and Autoconfig mapping
+Optional 040 JIT compilation captures immutable RAM/ROM bytes within a
+256-byte page. Accelerated Fast RAM can span two adjacent pages, with both
+page generations captured. CPU, chipset DMA, CopperHDF and host-directory
+writes update canonical generations and invalidate observed Chip RAM aliases. Reset, overlay and Autoconfig mapping
 changes invalidate code context. Guest instruction-cache retention still follows
 the package policy and guest maintenance instructions. Compiled slices stop at
 the next device-visible deadline and accept pending interrupts before starting
@@ -119,6 +120,21 @@ another slice. Hardware remains single-owner on the canonical clock.
 MMU/transparent-translation contexts fall back to timed interpreter execution.
 Snapshot/compilation/invalidation allocation is outside the normal interpreter
 path; no new performance acceptance is claimed. See [implementation and checks](CPU_SUPPORT.md).
+
+The optional accelerated OCS 040 can use a development CPU package that ends
+a guarded batch after a timed bus transfer. A batch can span rendering,
+bitplane DMA and sprite DMA events. Hardware advancement executes their
+phases in order on the canonical clock. The CPU yields at raster lines and
+scheduled Copper, blitter, audio, disk, CIA, interrupt and storage edges.
+Each timed CPU transfer advances that clock before the instruction completes. CPU packages without the
+timed-transfer capability use the existing device deadline.
+
+The development CPU package can resume a promoted Fast RAM loop at an
+instruction boundary after a device edge. Each resumed slice opens through the
+normal hardware boundary and checks the saved CPU state, code generations and
+active return addresses before borrowing Fast RAM again. The package re-reads
+memory operands for each slice. A failed guard returns execution to ordinary
+CPU dispatch. Production builds use the published Copper68k 1.5.4 package.
 
 Absent OCS DENISEID readback retains one completed DMA word. Actual DMA
 transfers update it at output; untimed memory inspection does not. Readback

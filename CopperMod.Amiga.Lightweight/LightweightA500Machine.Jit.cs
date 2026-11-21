@@ -14,11 +14,20 @@ public sealed partial class LightweightA500Machine
     /// <summary>JIT counters, or null for interpreter execution. Read on the execution owner thread.</summary>
     public M68kJitStatistics? JitStatistics => (_cpu as IM68kJitDiagnostics)?.GetJitStatistics();
 
-    // Compilation is deliberately confined to one 256-byte page. This keeps
-    // both endpoint guards sufficient and snapshots bounded and immutable.
+    // Only accelerated Fast RAM can span two pages. Both endpoint guards
+    // still cover the complete snapshot.
     internal bool IsJitCodeAddress(uint address, int bytes, bool readOnly = false)
     {
-        if (bytes <= 0 || (address & 1) != 0 || (address & 255) + (uint)bytes > 256)
+        // The boot overlay ends at $400 and the first ROM window starts at
+        // ExtensionRomBase. Decode the complete range for the remaining cases.
+        if (readOnly && address is >= 0x400 and < ExtensionRomBase)
+            return false;
+
+        if (bytes <= 0 || (address & 1) != 0)
+            return false;
+        var pageSpan = (address & 255) + (uint)bytes;
+        if (pageSpan > 256 && (pageSpan > 512 || readOnly || !UsesAcceleratedCpuClock ||
+            !TryGetAcceleratedRam(address, bytes, out _, out _)))
             return false;
         for (var offset = 0; offset < bytes; offset += 2)
             if (!TryGetJitMemoryKey(address + (uint)offset, out _, out var rom) ||
@@ -64,17 +73,72 @@ public sealed partial class LightweightA500Machine
         => IsJitCodeAddress(address, bytes) && GetJitCodePageGeneration(address) == start &&
             GetJitCodePageGeneration(address + (uint)bytes - 1) == end;
 
+    private static int GetJitSnapshotPageLength(uint root, int maxBytes)
+        => Math.Min(maxBytes, 256 - (int)(root & 255)) & ~1;
+
+    internal bool CanCaptureJitCodeSnapshot(uint root, int maxBytes)
+    {
+        if (!UsesAcceleratedCpuClock || _jitPageGenerations is null || maxBytes < 2)
+            return false;
+
+        var count = GetJitSnapshotPageLength(root, maxBytes);
+        return (TryGetAcceleratedRam(root, count, out _, out _) ||
+                TryGetAcceleratedRom(root, count, out _, out _)) &&
+            IsJitCodeAddress(root, count);
+    }
+
     internal bool TryCaptureJitCodeSnapshot(uint root, int maxBytes, out M68kJitCodeSnapshot snapshot)
     {
         snapshot = default;
         if (_jitPageGenerations is null || maxBytes < 2) return false;
-        var count = Math.Min(maxBytes, 256 - (int)(root & 255)) & ~1;
+        var count = GetJitSnapshotPageLength(root, maxBytes);
+        if (UsesAcceleratedCpuClock)
+        {
+            var expanded = Math.Min(maxBytes, 512 - (int)(root & 255)) & ~1;
+            if (TryGetAcceleratedRam(root, expanded, out var memory, out var offset) &&
+                IsJitCodeAddress(root, expanded))
+            {
+                var rootPage = root & ~255u;
+                var lastPage = (root + (uint)expanded - 1) & ~255u;
+                var firstGeneration = GetJitCodePageGeneration(rootPage);
+                var stamp = rootPage == lastPage
+                    ? new M68kCodeGenerationStamp([rootPage], [firstGeneration])
+                    : new M68kCodeGenerationStamp([rootPage, lastPage], [firstGeneration, GetJitCodePageGeneration(lastPage)]);
+                snapshot = new(root, memory.AsSpan(offset, expanded).ToArray(), stamp, []);
+                return true;
+            }
+        }
+
         if (!IsJitCodeAddress(root, count)) return false;
         var bytes = new byte[count];
         for (var offset = 0; offset < count; offset += 2)
         { var word = ReadJitCodeWord(root + (uint)offset); bytes[offset] = (byte)(word >> 8); bytes[offset + 1] = (byte)word; }
         snapshot = new(root, bytes, new M68kCodeGenerationStamp([root & ~255u], [GetJitCodePageGeneration(root)]), []);
         return true;
+    }
+
+    internal bool TryGetUnwatchedAcceleratedRam(uint address, int bytes, out byte[] memory, out int offset)
+    {
+        if (_jitObservedPages is not null && bytes > 0 && address < 0x01000000 &&
+            TryGetAcceleratedRam(address, bytes, out memory, out offset))
+        {
+            var firstPage = address >> 8;
+            var lastPage = (address + (uint)bytes - 1) >> 8;
+            for (var page = firstPage; page <= lastPage; page++)
+            {
+                if (_jitObservedPages[page])
+                {
+                    memory = [];
+                    offset = 0;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        memory = [];
+        offset = 0;
+        return false;
     }
 
     internal void NotifyJitRamWrite(uint address, int bytes)

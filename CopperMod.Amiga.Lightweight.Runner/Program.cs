@@ -20,6 +20,8 @@ if (args.Contains("--help"))
           Use --hdf-rdb-writable to allow direct writes. The Full CopperStart pair mounts OFS/FFS and SFS partitions
           using TD64 offsets above 4 GiB and selects the highest signed boot priority stored in the RDB.
         --drives <1..4> --drive-type <0..3> <DD|HD>
+        --cpu 68040 --jit --cpu-clock-multiplier <power-of-two>
+          Optional accelerated CPU clock and zero-wait Fast RAM and ROM with the original motherboard clock.
         --boot-probe <directory> --boot-probe-extended --boot-probe-storage
           Optional diagnostic backing-file snapshots before disposal; observing storage does not flush it.
         See docs/COPPERSTART_APP.md for the qualified CopperStart ROM and machine settings.
@@ -42,6 +44,8 @@ var exportDisks = new List<(int Drive, string Path)>();
 var scalarCpu = false;
 var cpuModel = M68kCpuModel.M68000;
 var cpuExecutionMode = M68kExecutionMode.Interpreter;
+var cpuClockMultiplier = 1;
+LightweightA500Configuration? acceleratedCpu = null;
 var fastRamKiB = 0;
 var rtcEnabled = false;
 var deniseModel = LightweightDeniseModel.Mos8362;
@@ -199,6 +203,11 @@ for (var i = 0; i < args.Length; i++)
         };
     }
     else if (args[i] == "--jit") cpuExecutionMode = M68kExecutionMode.Jit;
+    else if (args[i] == "--cpu-clock-multiplier")
+    {
+        if (++i >= args.Length || !int.TryParse(args[i], out cpuClockMultiplier))
+            throw new ArgumentException("--cpu-clock-multiplier requires a positive power of two.");
+    }
     else if (args[i] == "--writable-drive" && i + 1 < args.Length)
         writableDrives.Add(int.Parse(args[++i]));
     else if (args[i] == "--export-adf" && i + 2 < args.Length)
@@ -284,6 +293,8 @@ if (writableDrives.Any(d => d < 0 || d >= driveCount) || exportDisks.Any(d => d.
 if (driveTypes.Keys.Any(unit => unit >= driveCount))
     throw new ArgumentException("--drive-type requires a connected drive; increase --drives.");
 if (syntheticPaulaDma) syntheticSpriteDma = true;
+if (cpuClockMultiplier != 1)
+    acceleratedCpu = ConfigureAcceleratedCpu(cpuModel, cpuExecutionMode, cpuClockMultiplier);
 for (var i = 0; i < extraAdfPaths.Length; i++)
     if (extraAdfPaths[i] != null && i + 1 >= driveCount)
         throw new ArgumentException($"--adf{i + 1} requires --drives {i + 2} or greater.");
@@ -296,10 +307,12 @@ catch (Exception ex) when (ex is ArgumentException or IOException or Unauthorize
 }
 
 using var machine = new LightweightA500Machine(
-    configuration: new LightweightA500Configuration
+    configuration: (acceleratedCpu ?? new LightweightA500Configuration()) with
         { FramebufferWidth = deniseModel != LightweightDeniseModel.Mos8362 ? 1816 : romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, FloppyDriveTypes = Enumerable.Range(0, driveCount).Select(unit => driveTypes.GetValueOrDefault(unit)).ToArray(), Hardfiles = hardfiles, HostDirectories = hostDirectories, CpuModel = cpuModel, CpuExecutionMode = cpuExecutionMode, FastRamBytes = fastRamKiB * 1024,
             AgnusModel = agnusModel, DeniseModel = deniseModel, ChipRamBytes = chipRamKiB * 1024, SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024, RtcEnabled = rtcEnabled },
     enableConservativeCpuLoopBatch: !scalarCpu);
+if (cpuClockMultiplier != 1)
+    Console.WriteLine($"CPU_CLOCK multiplier={cpuClockMultiplier} memory=zero-wait-fast-ram-and-rom motherboard=pal");
 if (agnusModel != LightweightAgnusModel.Mos8371 || deniseModel != LightweightDeniseModel.Mos8362 || chipRamKiB != 512 || slowRamKiB == 0)
     Console.WriteLine($"machine agnus={agnusModel} chipRamKiB={chipRamKiB} slowRamKiB={slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)} denise={deniseModel} video=pal");
 if (driveTypes.Count != 0) Console.WriteLine("floppyDriveTypes=" + string.Join(",", Enumerable.Range(0, driveCount).Select(unit => $"DF{unit}:{(driveTypes.GetValueOrDefault(unit) == LightweightFloppyDriveType.HighDensity ? "HD" : "DD")}")));
@@ -387,8 +400,8 @@ if (diskDma)
     // legitimate track-gap wait can otherwise leave a whole field without RAM DMA.
     machine.WriteCustomRegisterFromCopper(0x09E, 0x0400, machine.Cycle);
 }
-if (ciaTod) ConfigureTod(machine);
-if (inputReplay) ConfigureInputReplay(machine);
+if (ciaTod) ConfigureTod(machine, cpuClockMultiplier);
+if (inputReplay) ConfigureInputReplay(machine, cpuClockMultiplier);
 var todStartCycle = machine.Cycle;
 var todStartFrame = machine.CompletedFrames;
 var bootProbe = bootProbeDirectory is null ? null : new NativeBootProbe(
@@ -400,10 +413,10 @@ if (bootProbe is null && inputScript?.ChangesMediaBetween(warmup, checked(warmup
 for (var frame = 0; frame < warmup; frame++)
 {
     inputScript?.Apply(machine, frame);
-    if (inputReplay) BeginInputReplayFrame(machine, frame);
+    if (inputReplay) BeginInputReplayFrame(machine, frame, cpuClockMultiplier);
     if (diskDma) PrepareDiskDmaFrame(machine);
     ExecuteMeasuredFrame(machine, syntheticCiaTimer, serviceBlitter, serviceDescendingFill, serviceLineMode, syntheticSpriteDma || syntheticPaulaManual, syntheticPaulaManual);
-    if (inputReplay) ConsumeInputReplayFrame(machine, frame, 0);
+    if (inputReplay) ConsumeInputReplayFrame(machine, frame, 0, cpuClockMultiplier);
 }
 var diskPositionBefore = diskSerial ? ReadOptionalMachineProperty<int>(machine, "DiskBitPosition") : 0;
 GC.Collect();
@@ -418,7 +431,7 @@ ulong inputChecksum = 1469598103934665603UL;
 for (var frame = 0; frame < frames; frame++)
 {
     inputScript?.Apply(machine, warmup + frame);
-    if (inputReplay) BeginInputReplayFrame(machine, warmup + frame);
+    if (inputReplay) BeginInputReplayFrame(machine, warmup + frame, cpuClockMultiplier);
     var diskRemainingBefore = diskDma ? PrepareDiskDmaFrame(machine) : 0;
     if (bootProbe is null)
         ExecuteMeasuredFrame(machine, syntheticCiaTimer, serviceBlitter, serviceDescendingFill, serviceLineMode, syntheticSpriteDma || syntheticPaulaManual, syntheticPaulaManual);
@@ -426,7 +439,7 @@ for (var frame = 0; frame < frames; frame++)
         bootProbe.ExecuteFrame(machine, frame == frames - 1);
     checksum = AccumulateOutputChecksum(machine, checksum, frame);
     if (diskDma) diskRamChecksum = ConsumeDiskDmaFrame(machine, diskRemainingBefore, diskRamChecksum);
-    if (inputReplay) inputChecksum = ConsumeInputReplayFrame(machine, warmup + frame, inputChecksum);
+    if (inputReplay) inputChecksum = ConsumeInputReplayFrame(machine, warmup + frame, inputChecksum, cpuClockMultiplier);
 }
 stopwatch.Stop();
 if (machine.IsAga) Console.WriteLine("CPU_PROFILE experimental PAL A1200 68EC020: 2 native clocks per motherboard clock; 32-bit Chip/ROM, 16-bit custom, byte CIA/Gayle; physical timing not certified.");
@@ -515,18 +528,26 @@ foreach (var export in exportDisks)
 
 // Separate methods keep the same runner usable with frozen pre-DMA engines.
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void ConfigureInputReplay(LightweightA500Machine m)
+static LightweightA500Configuration ConfigureAcceleratedCpu(
+    M68kCpuModel model, M68kExecutionMode mode, int multiplier)
+{
+    LightweightA500Machine.ValidateCpuClockMultiplier(multiplier, model, mode);
+    return new LightweightA500Configuration { CpuClockMultiplier = multiplier };
+}
+
+[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+static void ConfigureInputReplay(LightweightA500Machine m, int cpuClockMultiplier)
 {
     if (m.GetType().GetProperty("KeyboardWaitingForHandshake", BindingFlags.Instance | BindingFlags.NonPublic) is null)
         throw new InvalidOperationException("This engine has no input execution path.");
     var cycle = m.Cycle;
     m.WriteByte(0xBFED01, 0x88, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite);
     m.WriteCustomRegisterFromCopper(0x09A, 0xC008, m.Cycle);
-    m.Cpu.Cycles = m.Cycle;
+    m.Cpu.Cycles = m.Cycle * cpuClockMultiplier;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static void BeginInputReplayFrame(LightweightA500Machine m, int frame)
+static void BeginInputReplayFrame(LightweightA500Machine m, int frame, int cpuClockMultiplier)
 {
     if (frame != 0)
     {
@@ -542,11 +563,11 @@ static void BeginInputReplayFrame(LightweightA500Machine m, int frame)
     var joystick = (byte)((1 << (frame & 3)) | ((frame & 1) * 0x10));
     m.SubmitInput(new(0, joystick, (byte)(frame & 3), (short)(frame % 7 - 3),
         (short)((frame & 1) == 0 ? 1 : -1), (ushort)(0x135 | ((frame & 1) << 7))));
-    m.Cpu.Cycles = m.Cycle;
+    m.Cpu.Cycles = m.Cycle * cpuClockMultiplier;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-static ulong ConsumeInputReplayFrame(LightweightA500Machine m, int frame, ulong hash)
+static ulong ConsumeInputReplayFrame(LightweightA500Machine m, int frame, ulong hash, int cpuClockMultiplier)
 {
     var cycle = m.Cycle;
     var sdr = m.ReadByte(0xBFEC01, ref cycle, Copper68k.M68kBusAccessKind.CpuDataRead);
@@ -564,7 +585,7 @@ static ulong ConsumeInputReplayFrame(LightweightA500Machine m, int frame, ulong 
         (fire & 0xC0) != ((frame & 1) == 0 ? 0xC0 : 0) ||
         (pot & 0x0400) != ((frame & 2) == 0 ? 0x0400 : 0))
         throw new InvalidOperationException($"Input replay mismatch at field {frame}: SDR={sdr:X2}, ICR={icr:X2}, JOY={joy0:X4}/{joy1:X4}.");
-    m.Cpu.Cycles = m.Cycle;
+    m.Cpu.Cycles = m.Cycle * cpuClockMultiplier;
     hash = (hash ^ sdr) * 1099511628211UL;
     hash = (hash ^ joy0) * 1099511628211UL;
     hash = (hash ^ joy1) * 1099511628211UL;
@@ -572,14 +593,14 @@ static ulong ConsumeInputReplayFrame(LightweightA500Machine m, int frame, ulong 
     return (hash ^ pot) * 1099511628211UL;
 }
 
-static void ConfigureTod(LightweightA500Machine machine)
+static void ConfigureTod(LightweightA500Machine machine, int cpuClockMultiplier)
 {
     if (machine.GetType().GetProperty("CiaATod", BindingFlags.Instance | BindingFlags.NonPublic) is null)
         throw new InvalidOperationException("This engine has no TOD execution path.");
     var cycle = machine.Cycle;
     machine.WriteByte(0xBFE801, 0, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite);
     machine.WriteByte(0xBFD800, 0, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite);
-    machine.Cpu.Cycles = cycle;
+    machine.Cpu.Cycles = cycle * cpuClockMultiplier;
 }
 
 static int PrepareDiskDmaFrame(LightweightA500Machine machine)

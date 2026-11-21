@@ -19,6 +19,79 @@ public sealed class LightweightCpuOptionsTests
         => Assert.Throws<ArgumentException>(() => new LightweightA500Machine(new() { CpuModel = model }));
 
     [Theory]
+    [InlineData(1)]
+    [InlineData(8)]
+    public void M68040JitStopsAtANewFieldBoundaryAfterGuestShortensRaster(int multiplier)
+    {
+        using var machine = new LightweightA500Machine(new()
+        {
+            CpuModel = M68kCpuModel.M68040,
+            CpuExecutionMode = M68kExecutionMode.Jit,
+            CpuClockMultiplier = multiplier,
+            AgnusModel = LightweightAgnusModel.Mos8375Pal2M,
+            ChipRamBytes = 2 * 1024 * 1024,
+            SlowRamBytes = 0
+        });
+        // Enable the shorter programmable raster from inside the CPU batch.
+        ushort[] code = [0x33FC, 0x0080, 0x00DF, 0xF1DC, 0x5280, 0x60FC];
+        for (var i = 0; i < code.Length; i++)
+            machine.WriteChipWordDma(0x1000u + (uint)i * 2, code[i]);
+        machine.Reset();
+        machine.WriteCustomRegisterFromCopper(0x1C0, 99, machine.Cycle);
+        machine.WriteCustomRegisterFromCopper(0x1C8, 19, machine.Cycle);
+        Assert.Equal(313, machine.FieldLines);
+
+        machine.ExecuteFrame();
+
+        Assert.Equal(1, machine.CompletedFrames);
+        Assert.Equal(20, machine.FieldLines);
+        Assert.InRange(machine.Cycle, 4000L, 4032L);
+        Assert.Equal(machine.Cpu.Cycles / multiplier, machine.Cycle);
+        Assert.True(machine.Cpu.D[0] > 0);
+    }
+
+    [Fact]
+    public void AcceleratedFastRamAndTimedChipRamShareTheBoardClock()
+    {
+        using var machine = new LightweightA500Machine(new()
+        {
+            CpuModel = M68kCpuModel.M68040,
+            CpuExecutionMode = M68kExecutionMode.Jit,
+            CpuClockMultiplier = 8,
+            FastRamBytes = 512 * 1024
+        });
+        long boardCycle = machine.Cycle;
+        machine.WriteByte(0xE8004A, 0, ref boardCycle, M68kBusAccessKind.CpuDataWrite);
+        machine.WriteByte(0xE80048, 0x20, ref boardCycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(0x200000u, machine.FastRamBase);
+
+        IM68kBus accelerated = new LightweightAccelerated040Bus(machine);
+        var direct = (IM68kJitFastMemoryBus)accelerated;
+        var previousBoardCycle = machine.Cycle;
+        var cpuCycle = machine.ToCpuCycle(previousBoardCycle);
+        accelerated.WriteLong(0x200000, 0x89ABCDEF, ref cpuCycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(0x89ABCDEFu, accelerated.ReadLong(0x200000, ref cpuCycle, M68kBusAccessKind.CpuDataRead));
+        Assert.Equal(previousBoardCycle, machine.Cycle);
+        Assert.Equal(machine.ToCpuCycle(previousBoardCycle), cpuCycle);
+        Assert.False(direct.TryGetJitZeroWaitReadMemory(0x1000, 4, out _, out _, out _));
+        Assert.False(direct.TryGetJitZeroWaitReadMemory(0x81000, 4, out _, out _, out _));
+        Assert.False(direct.TryGetJitZeroWaitReadMemory(0xC01000, 4, out _, out _, out _));
+
+        accelerated.WriteLong(0x1000, 0x12345678, ref cpuCycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(0x12345678u, accelerated.ReadLong(0x81000, ref cpuCycle, M68kBusAccessKind.CpuDataRead));
+        Assert.True(machine.Cycle > previousBoardCycle);
+        Assert.Equal(machine.ToCpuCycle(machine.Cycle), cpuCycle);
+        previousBoardCycle = machine.Cycle;
+
+        accelerated.WriteWord(0xDFF180, 0x0456, ref cpuCycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.True(machine.Cycle > previousBoardCycle);
+        Assert.Equal(machine.ToCpuCycle(machine.Cycle), cpuCycle);
+        var timed = new LightweightAcceleratorBus(machine, M68kCpuModel.M68040);
+        boardCycle = machine.Cycle;
+        Assert.Equal(0x0456, timed.ReadWord(0xDFF180, ref boardCycle, M68kBusAccessKind.CpuDataRead));
+    }
+
+    [Theory]
     [InlineData(M68kCpuModel.M68020)]
     [InlineData(M68kCpuModel.M68EC020)]
     [InlineData(M68kCpuModel.M68030)]
@@ -149,9 +222,13 @@ public sealed class LightweightCpuOptionsTests
     [InlineData(M68kCpuModel.M68030, 0x2000u)]
     [InlineData(M68kCpuModel.M68040, 0x2000u)]
     [InlineData(M68kCpuModel.M68060, 0x2000u)]
-    public void InterruptWakesStoppedAcceleratorWithFormatZeroFrame(M68kCpuModel model, uint vectorBase)
+    [InlineData(M68kCpuModel.M68040, 0u, M68kExecutionMode.Jit)]
+    [InlineData(M68kCpuModel.M68040, 0x2000u, M68kExecutionMode.Jit)]
+    [InlineData(M68kCpuModel.M68040, 0u, M68kExecutionMode.Jit, 8)]
+    public void InterruptWakesStoppedAcceleratorWithFormatZeroFrame(
+        M68kCpuModel model, uint vectorBase, M68kExecutionMode executionMode = M68kExecutionMode.Interpreter, int multiplier = 1)
     {
-        using var machine = new LightweightA500Machine(new() { CpuModel = model });
+        using var machine = new LightweightA500Machine(new() { CpuModel = model, CpuExecutionMode = executionMode, CpuClockMultiplier = multiplier });
         machine.WriteChipWordDma(0x1000, 0x4E72);
         machine.WriteChipWordDma(0x1002, 0x2000);
         machine.WriteChipWordDma(vectorBase + 0x0070, 0);
@@ -181,9 +258,12 @@ public sealed class LightweightCpuOptionsTests
     [InlineData(M68kCpuModel.M68030)]
     [InlineData(M68kCpuModel.M68040)]
     [InlineData(M68kCpuModel.M68060)]
-    public void MaskedInterruptDoesNotWakeStoppedAccelerator(M68kCpuModel model)
+    [InlineData(M68kCpuModel.M68040, M68kExecutionMode.Jit)]
+    [InlineData(M68kCpuModel.M68040, M68kExecutionMode.Jit, 8)]
+    public void MaskedInterruptDoesNotWakeStoppedAccelerator(
+        M68kCpuModel model, M68kExecutionMode executionMode = M68kExecutionMode.Interpreter, int multiplier = 1)
     {
-        using var machine = new LightweightA500Machine(new() { CpuModel = model });
+        using var machine = new LightweightA500Machine(new() { CpuModel = model, CpuExecutionMode = executionMode, CpuClockMultiplier = multiplier });
         machine.WriteChipWordDma(0x1000, 0x4E72);
         machine.WriteChipWordDma(0x1002, 0x2600);
         machine.Reset();
@@ -195,7 +275,7 @@ public sealed class LightweightCpuOptionsTests
         Assert.Equal(0x1004u, machine.Cpu.ProgramCounter);
         Assert.Equal(stack, machine.Cpu.A[7]);
         Assert.Equal(0x2600, machine.Cpu.StatusRegister);
-        Assert.Equal(machine.Cycle, machine.Cpu.Cycles);
+        Assert.Equal(machine.Cycle * multiplier, machine.Cpu.Cycles);
         Assert.Equal(1, machine.CompletedFrames);
     }
 }

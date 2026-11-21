@@ -73,6 +73,28 @@ implementation and evidence](../docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.m
 the [initial bridge](../docs/engine/CPU_OPTIONS_IMPLEMENTATION_2026-09-26.md), and
 [020 decoder/cache validation](../docs/engine/LOTUS_III_020_CACHE_2026-09-26.md).
 
+`--cpu 68040 --jit --cpu-clock-multiplier 64` selects the experimental
+accelerated clock. Engine callers set `CpuClockMultiplier` to a positive
+power of two. Fast RAM and backed ROM can complete without a motherboard wait.
+Chip RAM, Slow RAM, device transfers and DMA retain the PAL board schedule. In this mode, `Cycle`
+reports motherboard time and `Cpu.Cycles` uses the finer CPU units.
+Copper68k builds that expose `EnableUncachedFastRamTraces` can compile
+guarded Fast RAM code while the guest instruction cache is off. Accelerated
+Fast RAM code snapshots can span two adjacent 256-byte pages and track both
+generations. Development Copper68k builds can also promote a guarded loop
+when its code, operands and stack are in Fast RAM. A complete iteration must
+fit within the current CPU-visible deadline. The engine supplies a private
+stack range only when its pages have no code observers. A development build
+can advance an isolated additive counter across repeated iterations after
+checking that a taken iteration leaves all other registers and flags at their
+entry values. With a fixed device deadline, a batch that completes a whole
+iteration can also execute a partial next iteration. The cutoff publishes
+the current registers, flags and stack at their exact guest cycle. The next
+slice can resume there after validating the saved state and return addresses.
+Guard failures fall back to the ordinary execution tiers. The 1.5.4 pin runs
+uncached Fast RAM code in the interpreter.
+Report guest benchmark scores, host elapsed time and peak pacing lag separately.
+
 `LightweightA500Configuration.AgnusModel`, `ChipRamBytes` and `SlowRamBytes`
 select one of the implemented PAL memory layouts:
 

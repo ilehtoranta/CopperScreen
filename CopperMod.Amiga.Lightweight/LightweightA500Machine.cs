@@ -31,6 +31,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private readonly bool _dmaCanAddressSlowRam;
 
     private readonly LightweightA500Configuration _configuration;
+    private readonly int _cpuClockShift;
     private readonly byte[] _chipRam;
     private readonly byte[] _slowRam;
     private readonly byte[] _rom = new byte[512 * 1024];
@@ -125,6 +126,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_configuration.CpuExecutionMode is not (M68kExecutionMode.Interpreter or M68kExecutionMode.Jit) ||
             _configuration.CpuExecutionMode == M68kExecutionMode.Jit && _configuration.CpuModel != M68kCpuModel.M68040)
             throw new ArgumentException("JIT execution requires the 68040 CPU model.", nameof(configuration));
+        ValidateCpuClockMultiplier(_configuration.CpuClockMultiplier, _configuration.CpuModel, _configuration.CpuExecutionMode);
+        _cpuClockShift = System.Numerics.BitOperations.TrailingZeroCount((uint)_configuration.CpuClockMultiplier);
         if (_configuration.FloppyDriveCount is < 1 or > 4)
             throw new ArgumentOutOfRangeException(nameof(configuration), "Connect between one and four floppy drives.");
         _floppies = new LightweightFloppyDrive[_configuration.FloppyDriveCount];
@@ -176,13 +179,27 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             var pages = 65536 + (_configuration.FastRamBytes > 8388608 ? _configuration.FastRamBytes / 256 : 0);
             _jitPageGenerations = new uint[pages]; _jitObservedPages = new bool[pages];
         }
-        IM68kBus cpuBus = _configuration.CpuModel is M68kCpuModel.M68000 or M68kCpuModel.M68010
-            ? this : new LightweightAcceleratorBus(this, _configuration.CpuModel);
-        _cpu = IsAga && _configuration.CpuModel == M68kCpuModel.M68EC020 ? _cpuFactory.CreateA1200Ec020(cpuBus) : _cpuFactory.Create(_configuration.CpuModel, cpuBus,
-            new M68kCoreOptions { ExecutionMode = _configuration.CpuExecutionMode });
+        IM68kBus cpuBus = _configuration.CpuModel switch
+        {
+            M68kCpuModel.M68000 or M68kCpuModel.M68010 => this,
+            M68kCpuModel.M68040 when _cpuClockShift != 0 => new LightweightAccelerated040Bus(this),
+            _ => new LightweightAcceleratorBus(this, _configuration.CpuModel)
+        };
+        var cpuOptions = new M68kCoreOptions { ExecutionMode = _configuration.CpuExecutionMode };
+        if (_cpuClockShift != 0)
+            EnableUncachedFastRamTraces(cpuOptions);
+        _cpu = IsAga && _configuration.CpuModel == M68kCpuModel.M68EC020
+            ? _cpuFactory.CreateA1200Ec020(cpuBus)
+            : _cpuFactory.Create(_configuration.CpuModel, cpuBus, cpuOptions);
+        if (UsesAcceleratedCpuClock && !IsEcsAgnus && !IsAga)
+            _timedCpuBatchBoundary = GetTimedCpuBatchBoundaryRequest(_cpu);
         _batchCpu = (IM68kBatchCore)_cpu;
-        _cpuBoundary = _configuration.CpuExecutionMode == M68kExecutionMode.Jit
-            ? new LightweightJitCpuBoundary(this) : new LightweightCpuBoundary(this);
+        _cpuBoundary = (_configuration.CpuModel, _configuration.CpuExecutionMode) switch
+        {
+            (M68kCpuModel.M68040, M68kExecutionMode.Jit) => new Lightweight040JitCpuBoundary(this),
+            (_, M68kExecutionMode.Jit) => new LightweightJitCpuBoundary(this),
+            _ => new LightweightCpuBoundary(this)
+        };
         _enableConservativeCpuLoopBatch = enableConservativeCpuLoopBatch;
         try
         {
@@ -432,7 +449,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             if (_cpu.State.Halted)
             {
                 AdvanceHardwareTo(frameBoundary);
-                _cpu.State.Cycles = Math.Max(_cpu.State.Cycles, frameBoundary);
+                SynchronizeCpuToBoardCycle(frameBoundary);
                 continue;
             }
 
@@ -448,7 +465,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                     ? frameBoundary
                     : ClampCpuBatchTarget(frameBoundary);
                 AdvanceHardwareTo(wakeCycle);
-                _cpu.State.Cycles = Math.Max(_cpu.State.Cycles, wakeCycle);
+                SynchronizeCpuToBoardCycle(wakeCycle);
                 _ = DispatchPendingCpuInterrupt();
                 continue;
             }
@@ -465,12 +482,15 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 continue;
             }
 
-            _cpuBoundary.BeginBatchProbe(BatchProbeScalarInstructionBudget);
+            if (_cpuBoundary is Lightweight040JitCpuBoundary m68040Boundary)
+                m68040Boundary.BeginFrameProbe(targetCompletedFrames);
+            else
+                _cpuBoundary.BeginBatchProbe(BatchProbeScalarInstructionBudget);
             var executed = _batchCpu.ExecuteInstructions(
                 int.MaxValue,
-                frameBoundary,
+                ToCpuCycle(frameBoundary),
                 _cpuBoundary);
-            if (executed == 0 && !_cpu.State.Stopped && !_cpu.State.Halted)
+            if (executed == 0 && _completedFrames < targetCompletedFrames && !_cpu.State.Stopped && !_cpu.State.Halted)
             {
                 ExecuteScalarFallbackQuantum(frameBoundary);
             }
@@ -533,7 +553,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         var cpu = _cpu;
         var state = cpu.State;
-        while (state.Cycles < targetCycle)
+        var targetCpuCycle = ToCpuCycle(targetCycle);
+        while (state.Cycles < targetCpuCycle)
         {
             if (DispatchPendingCpuInterrupt())
             {
@@ -553,7 +574,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                     "The CPU core did not advance the lightweight clock.");
             }
 
-            AdvanceHardwareTo(state.Cycles);
+            AdvanceHardwareTo(ToBoardCycle(state.Cycles));
         }
     }
 
@@ -614,7 +635,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             var cycle = Cycle;
             ResetExternalDevices(cycle);
             _cpu.Reset(ReadLongRaw(4), ReadLongRaw(0));
-            _cpu.State.Cycles = cycle;
+            SynchronizeCpuToBoardCycle(cycle);
         }
         RefreshCiaInterruptCycle();
     }
@@ -1385,7 +1406,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         var boundary = Math.Min(targetCycle, NextFrameCycle);
         boundary = Math.Min(boundary, _nextDeviceCycle);
-        return Math.Max(_cpu.State.Cycles, boundary);
+        return Math.Max(ToBoardCycle(_cpu.State.Cycles), boundary);
     }
 
     // Rendering's inlined scalar out-locals are assigned before use. Keep this
@@ -1582,7 +1603,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             (uint)((24 + _interruptPinLevel) * 4));
         // Interrupt entry can retire internal cycles after its last bus access.
         // Complete that tail on the same clock before testing a frame boundary.
-        AdvanceHardwareTo(_cpu.State.Cycles);
+        AdvanceHardwareTo(ToBoardCycle(_cpu.State.Cycles));
         return true;
     }
 
@@ -2244,7 +2265,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         var cia = ciaA ? _ciaA : _ciaB;
         cia.WriteRegister(register, value, cycle, out var interruptCycle);
         if (ciaA && register == 1)
-            ParallelDataWritten?.Invoke(value, _cpu.State.Cycles, cycle);
+            ParallelDataWritten?.Invoke(value, ToBoardCycle(_cpu.State.Cycles), cycle);
         HandleCiaInterrupt(ciaA, interruptCycle);
         if (ciaA && register is 0x0C or 0x0E)
         {

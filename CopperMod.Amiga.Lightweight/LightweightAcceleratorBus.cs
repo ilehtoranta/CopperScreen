@@ -6,11 +6,19 @@ namespace CopperMod.Amiga.Lightweight;
 // clocks to the 7.09 MHz motherboard domain. All transfers below use that same
 // clock and the fitted motherboard bus, including split unaligned operands.
 // This is a bounded bridge policy, not a model of a particular accelerator card.
-internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpuModel model) : IM68kBus, IM68kCodeReader, IM68kJitBus, IM68kStablePhysicalAddressMap
+internal class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpuModel model)
+    : IM68kBus, IM68kCodeReader, IM68kJitBus, IM68kStablePhysicalAddressMap, IM68kFixedPhysicalAddressMap
 {
     private readonly uint _addressMask = model == M68kCpuModel.M68EC020 ? 0x00FF_FFFFu : uint.MaxValue;
+    protected LightweightA500Machine Machine => machine;
     // The existing floating-bus policy is preserved for unmapped addresses.
     public bool IsCpuPhysicalAddressMapped(uint address, int bytes, M68kBusAccessKind kind) => true;
+    public bool TryGetCpuPhysicalAddressMappedRange(M68kBusAccessKind kind, out uint startAddress, out uint endAddress)
+    {
+        startAddress = 0;
+        endAddress = uint.MaxValue;
+        return true;
+    }
     public uint CpuPhysicalAddressMapGeneration => machine.CpuMemoryMapGeneration;
     public event Action<uint, int>? JitCodeRangeWritten
     { add => machine.JitCodeRangeWritten += value; remove => machine.JitCodeRangeWritten -= value; }
@@ -24,6 +32,8 @@ internal sealed class LightweightAcceleratorBus(LightweightA500Machine machine, 
         => machine.JitCodeRangeGenerationMatches(address, bytes, start, end);
     public bool TryCaptureJitCodeSnapshot(uint root, int maxBytes, out M68kJitCodeSnapshot snapshot)
         => machine.TryCaptureJitCodeSnapshot(root, maxBytes, out snapshot);
+    public bool CanCaptureJitCodeSnapshot(uint root, int maxBytes)
+        => machine.CanCaptureJitCodeSnapshot(root, maxBytes);
 
     // Copper68k only captures cacheable RAM/ROM through this capability.
     // Peeking never performs a CIA/custom read strobe or advances hardware.
