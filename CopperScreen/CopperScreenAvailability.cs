@@ -61,7 +61,7 @@ internal static class CopperScreenAvailability
         "AccurateM68060" => "Motorola 68060 (requires 060 OS support)",
         "JitM68040" => "Motorola 68040 (JIT)",
         "Kickstart13Rom" => "Native Kickstart ROM",
-        "MinimalDiskBoot" => "Minimal disk boot (experimental)",
+        "MinimalDiskBoot" => CopperScreenBootMethods.Label(value),
         "CopperStart" => "CopperStart standalone ROM (experimental)",
         "Kickstart31Rom" => "Native Kickstart ROM",
         "KickstartRom" => "Native Kickstart ROM (version detected from file)",

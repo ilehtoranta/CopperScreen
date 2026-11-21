@@ -24,7 +24,7 @@ internal static class CopperScreenBootMethods
 
     public static string Label(string method) => method switch
     {
-        "MinimalDiskBoot" => "Minimal disk boot — Free",
+        "MinimalDiskBoot" => "CopperStart Mini",
         "KickstartRom" => "Original Kickstart ROM",
         "CopperStart" => "CopperStart ROM",
         _ => method
