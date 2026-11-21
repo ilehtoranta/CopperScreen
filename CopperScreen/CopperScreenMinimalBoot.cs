@@ -8,9 +8,9 @@ internal sealed class CopperScreenMinimalBoot
     internal const uint RomBase = 0xFC0000, StateAddress = 0x75800, BootAddress = 0x6800;
     internal byte[] Rom { get; }
     internal uint FaultAddress { get; }
-    internal CopperScreenMinimalBoot(CopperScreenAdfImage disk, bool slowRam, int chipRamBytes = 524288, bool ec020 = false)
+    internal CopperScreenMinimalBoot(CopperScreenAdfImage? disk, bool slowRam, int chipRamBytes = 524288, bool ec020 = false)
     {
-        ValidateDisk(disk);
+        if (disk != null) ValidateDisk(disk);
         var assembler = new CopperScreenBootAssembler(RomBase);
         var code = assembler.Assemble(BuildSource(chipRamBytes, ec020));
         Rom = new byte[262144];
@@ -24,8 +24,8 @@ internal sealed class CopperScreenMinimalBoot
         using var stream = typeof(CopperScreenMinimalBoot).Assembly.GetManifestResourceStream("CopperScreen.Firmware.MinimalDiskBoot.s")!;
         using var reader = new StreamReader(stream);
         // Specialize immutable fitted memory and CPU traits once, before execution.
-        // The A500 instruction stream stays byte-identical. Resident boot services
-        // keep their low-memory addresses; extended Chip RAM is a second free chunk.
+        // Resident boot services keep their low-memory addresses.
+        // Extended Chip RAM is a second free chunk.
         var firmware = reader.ReadToEnd()
             .Replace("chiplimit equ $80000", $"chiplimit equ ${chipRamBytes:x}")
             .Replace("chipfree equ $69000", $"chipfree equ ${0x69000 + chipRamBytes - 0x80000:x}")

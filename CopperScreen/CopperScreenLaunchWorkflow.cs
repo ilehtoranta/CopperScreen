@@ -51,7 +51,7 @@ internal static class CopperScreenLaunchWorkflow
             ? "Licensed CopperStart ROM and CopperOS system disk included with this edition."
             : "Licensed CopperStart ROM included with this edition. A500/A500+ compatibility is experimental."
         : draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot
-            ? CopperScreenBootMethods.Unavailable("MinimalDiskBoot", CopperScreenMachinePresets.Identify(draft)) ?? "Built-in floppy boot for compatible games and demos. Requires a startup ADF. DOS and Workbench require a native ROM."
+            ? CopperScreenBootMethods.Unavailable("MinimalDiskBoot", CopperScreenMachinePresets.Identify(draft)) ?? "Built-in floppy boot for compatible games and demos. A startup ADF is optional."
         : CopperScreenMachinePresets.Identify(draft) switch
         {
             CopperScreenMachineModel.Amiga500 => "Recommended for Amiga 500: Kickstart 1.3. Other supported versions are accepted; compatibility varies.",

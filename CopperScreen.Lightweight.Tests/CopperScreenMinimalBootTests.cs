@@ -241,12 +241,10 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         Assert.Contains(message, Assert.Throws<NotSupportedException>(() => Run(session)).Message);
     }
     [Fact]
-    public void BadChecksumAndMissingDiskAreRejectedBeforeStartup()
+    public void BadChecksumIsRejectedBeforeStartup()
     {
         var disk = Disk("loop:\nbra loop"); disk[42] ^= 1;
         Assert.Contains("checksum", Assert.Throws<NotSupportedException>(() => new CopperScreenLightweightSession(Options(disk))).Message);
-        var options = CopperScreenStartupOptions.Parse(["--minimal-disk-boot"], AppContext.BaseDirectory);
-        Assert.Contains("ADF startup disk", Assert.Throws<NotSupportedException>(() => new CopperScreenLightweightSession(options)).Message);
     }
     [Fact]
     public void BootChoiceRoundTripsWithoutLoadingRememberedNativeRom()

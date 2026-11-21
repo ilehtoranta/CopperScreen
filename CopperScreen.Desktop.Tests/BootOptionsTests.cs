@@ -24,7 +24,7 @@ public sealed partial class LaunchWorkflowTests
             Assert.Null(MenuDraft(window).KickstartRomPath);
             Assert.Equal(0, MenuDraft(window).RealFastRamKb);
             Assert.False(Button(window, "Choose ROM…").IsEffectivelyVisible);
-            Assert.Contains("no DOS", Named<TextBlock>(window, "ROM requirements").Text);
+            Assert.False(Named<TextBlock>(window, "ROM requirements").IsEffectivelyVisible);
             Capture(window, "minimal-boot");
             draft = MenuDraft(window); draft.DriveDiskPaths[0] = minimal; SetMenuDraft(window, draft);
             boot.SelectedItem = "KickstartRom";
@@ -57,9 +57,10 @@ public sealed partial class LaunchWorkflowTests
     });
 
     [Theory, Trait("Area", "BootOptions")]
+    [InlineData(0)]
     [InlineData(1)]
     [InlineData(2)]
-    public Task MinimalBootIsSelectableAndReadyOnExtendedModels(int model) => Ui(() =>
+    public Task MinimalBootCanStartWithOrWithoutAStartupDisk(int model) => Ui(() =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
@@ -68,8 +69,12 @@ public sealed partial class LaunchWorkflowTests
             Named<ComboBox>(window, "Amiga model").SelectedIndex = model;
             Assert.Equal(model, (int)CopperScreenMachinePresets.Identify(MenuDraft(window)));
             Assert.Equal(CopperScreenKickstartSource.MinimalDiskBoot, MenuDraft(window).KickstartSource);
-            Assert.False(Button(window, "Start Amiga").IsEnabled); // A startup disk is still required.
-            Assert.Contains("Startup ADF required", Named<TextBlock>(window, "ROM requirements").Text);
+            Assert.Empty(MenuDraft(window).HardDrives);
+            Assert.True(Button(window, "Start Amiga").IsEnabled);
+            Assert.False(Named<TextBlock>(window, "ROM requirements").IsEffectivelyVisible);
+            Click(Button(window, "Configure Amiga…"));
+            Assert.True(SettingsField<Button>(window, "_settingsStartButton").IsEnabled);
+            Click(SettingsField<Button>(window, "_settingsCloseButton"));
             var disk = new byte[901120]; "DOS\0"u8.CopyTo(disk);
             new CopperScreenBootAssembler(CopperScreenMinimalBoot.BootAddress + 12).Assemble("loop:\nbra loop").CopyTo(disk, 12);
             uint sum = 0;

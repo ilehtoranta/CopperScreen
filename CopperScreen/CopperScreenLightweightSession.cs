@@ -33,7 +33,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         byte[] rom;
         if (options.Profile.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot)
         {
-            bootDisk = CopperScreenDiskImageArchive.LoadDiskImage(options.DriveDiskPaths[0]!);
+            if (options.DriveDiskPaths[0] is { } path)
+                bootDisk = CopperScreenDiskImageArchive.LoadDiskImage(path);
             _minimalBoot = new(bootDisk, options.Profile.ExpansionRamSize != 0, options.Profile.ChipRamSize,
                 (options.CpuBackendOverride ?? options.Profile.CpuBackend) == M68kBackendKind.AccurateM68EC020);
             rom = _minimalBoot.Rom;
@@ -178,8 +179,6 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             return "Select an explicit supported PAL Agnus: 8371, 8372A, 8375 (318069-10) or A1200 Alice.";
         try { LightweightAgnus.ValidateMemory(GetAgnusModel(p.Chipset.DmaChip), p.ChipRamSize, p.ExpansionRamSize); }
         catch (ArgumentException ex) { return ex.Message; }
-        if (requireRomPath && minimal && string.IsNullOrWhiteSpace(options.DriveDiskPaths[0]))
-            return "Choose a standard ADF startup disk in DF0 for minimal disk boot.";
         if (requireRomPath && !minimal && string.IsNullOrWhiteSpace(options.KickstartRomPath))
             return copperStart ? CopperScreenCopperStartRom.RecoveryFor(aga) : "Choose a supported native Kickstart ROM in Settings > Setup, or supply --kickstart <path>. Recommended versions are 1.3 for A500, 2.04 for A500+ and 3.0 for A1200; other supported combinations may have compatibility issues.";
         var maxFast = LightweightA500Configuration.MaximumFastRamBytes(GetCpuModel(cpu));
@@ -506,7 +505,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         Array.Fill(Framebuffer, unchecked((int)0xFF000000));
         ApplyInput();
         StatusText = _workspace != null ? "CopperOS workspace - changes saved automatically"
-            : _minimalBoot != null ? ProfileName + " (experimental; no DOS or Workbench)"
+            : _minimalBoot != null ? ProfileName + (_machine.IsDriveMounted(0) ? " (experimental; no DOS or Workbench)" : " · DF0 empty")
             : _copperStart ? CopperScreenCopperStartRom.DescriptionFor(_machine.IsAga)
             : _machine.IsAga ? "Amiga 1200 (experimental) — native Kickstart 3.0, initial AGA display"
             : "Amiga 500 — native Kickstart, ADF / read-only IPF / CopperHDF";

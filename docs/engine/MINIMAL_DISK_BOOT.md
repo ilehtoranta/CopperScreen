@@ -1,9 +1,9 @@
 # Minimal disk boot
 
 CopperScreen supplies an original, deliberately limited boot firmware for demos
-and games that replace the operating system after boot. Select **Minimal disk
-boot — Free** in the launcher or Configure Amiga > Setup > Boot method.
-An ADF in DF0 is required; a Kickstart ROM is not required. The application
+and games that replace the operating system after boot. Select **CopperStart Mini**
+in the launcher or Configure Amiga > Setup > Boot method. Start with an ADF in
+DF0 or insert one while the firmware waits for media. The application
 remembers a separate setup for each model and boot method. Native Kickstart remains
 the default. The bootstrap is experimental; individual disks must support the
 selected machine and the bounded services below.
@@ -14,8 +14,8 @@ The equivalent command line is:
 dotnet CopperScreen.dll --minimal-disk-boot 'C:\path\demo.adf'
 ```
 
-`--profile minimal-disk-boot` also selects the shipped
-`lightweight-a500-minimal-disk-boot` profile. Supplying a native ROM and the minimal
+Omit the ADF path to start with empty drives. `--profile minimal-disk-boot` also
+selects the shipped `lightweight-a500-minimal-disk-boot` profile. Supplying a native ROM and the minimal
 boot option together is rejected. A remembered ROM path is retained for switching
 back to native boot, together with its version metadata, but is not opened or
 passed to the minimal boot session.
@@ -57,7 +57,7 @@ available in the standard application.
   No Autoconfig Fast RAM, hard drives or shared folders. Other CPU/memory/chipset
   combinations are rejected with an explanation. Additional connected drives remain physical devices
   that guest takeover code can operate; the shim's trackdisk service serves DF0.
-- Standard 880 KiB ADF, including a selected ZIP entry. Initial media validation
+- Optional standard 880 KiB ADF, including a selected ZIP entry. Startup media validation
   requires a DOS boot identifier and the end-around-carry boot checksum.
   IPF bootstrap through the shim is unavailable; use native Kickstart.
 - Firmware reads track zero through Paula disk DMA, decodes and verifies the

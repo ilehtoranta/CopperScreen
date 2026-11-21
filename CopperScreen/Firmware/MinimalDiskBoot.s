@@ -157,6 +157,10 @@ clearrequest:
     move.b #$76,ciab
     move.b #$77,ciab
     move.b #$77,state+40
+    ; The step clears /CHNG only if a disk is mounted.
+    btst #2,ciaa
+    beq boot_wait
+boot_read:
     bsr readtrack
     tst.l d0
     bne boot_invalid
@@ -193,6 +197,13 @@ boot_invalid:
     move.w #$f003,state
     clr.l state+4
     bra fault
+boot_wait:
+    ; Check /RDY once per frame. A newly inserted disk can boot without reset.
+    bsr waittof
+    btst #5,ciaa
+    bne boot_wait
+    bsr step
+    bra boot_read
 irq:
     move.l d0,-(sp)
     move.b $bfed01,d0

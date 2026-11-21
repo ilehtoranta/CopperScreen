@@ -476,7 +476,7 @@ internal sealed partial class MainWindow
         if (draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot)
         {
             var disk = draft.ToStartupOptions(AppContext.BaseDirectory).DriveDiskPaths[0];
-            if (string.IsNullOrWhiteSpace(disk)) return "Choose an ADF startup disk in DF0. No Kickstart ROM is needed.";
+            if (string.IsNullOrWhiteSpace(disk)) return null;
             if (!CopperScreenDiskImageArchive.DiskPathExists(disk)) return "Startup disk not found. Choose an existing ADF disk.";
             return ValidateMinimalBootDisk(disk);
         }

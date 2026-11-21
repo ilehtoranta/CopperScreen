@@ -56,6 +56,37 @@ public sealed partial class CopperScreenMinimalBootTests
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(2)]
+    public void StartsWithEmptyDrivesAndBootsAfterInsertion(int model)
+    {
+        var draft = CopperScreenLaunchWorkflow.SelectStartChoice(new(), 6 + model);
+        var options = draft.ToStartupOptions(AppContext.BaseDirectory);
+        Assert.Empty(options.HardDrives);
+        Assert.Null(CopperScreenLightweightSession.GetValidationError(options));
+
+        using var session = new CopperScreenLightweightSession(options);
+        Run(session, 250);
+        Assert.False(session.Machine.IsDriveMounted(0));
+        Assert.Null(session.FaultMessage);
+        Assert.Equal(0u, Read(session, 0x80c));
+
+        var path = ModelOptions(model, Disk("move.l #$12345678,$80c\nloop:\nbra loop")).DriveDiskPaths[0]!;
+        Assert.True(session.InsertLoadedDisk(0, path, CopperScreenDiskImageArchive.LoadDiskImage(path), markChanged: true));
+        Run(session, 200);
+        Assert.True(session.Machine.IsDriveMounted(0));
+        Assert.Null(session.FaultMessage);
+        Assert.Equal(0x12345678u, Read(session, 0x80c));
+
+        Assert.True(session.EjectDisk(0));
+        session.Reset();
+        Run(session, 250);
+        Assert.False(session.Machine.IsDriveMounted(0));
+        Assert.Null(session.FaultMessage);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
     public void TakeoverVerticalBlankInterruptsReturnToBootCode(int model)
     {
         var disk = Disk("""
@@ -88,10 +119,10 @@ public sealed partial class CopperScreenMinimalBootTests
     }
 
     [Fact]
-    public void A500InstructionStreamRetainsFrozenIdentity()
+    public void A500InstructionStreamHasExpectedSha256()
     {
         var code = new CopperScreenBootAssembler(CopperScreenMinimalBoot.RomBase).Assemble(CopperScreenMinimalBoot.BuildSource());
-        Assert.Equal("D6141AEAC4380561FA1831EB5D15BF7C064CF2476F3D623D441BA4F88A4ACE48", Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(code)));
+        Assert.Equal("0592864357770C01F9777A4F126F9605B23162AFE36DF2AB249A0D93752A99F7", Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(code)));
     }
 
     [Theory]

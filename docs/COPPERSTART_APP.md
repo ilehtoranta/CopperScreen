@@ -1,19 +1,19 @@
 # CopperStart standalone ROM in CopperScreen
 
 The start screen separates **Amiga model** (500, 500+, or 1200) from
-**Boot method** (free Minimal disk boot, your licensed original Kickstart ROM,
+**Boot method** (CopperStart Mini, your licensed original Kickstart ROM,
 or licensed CopperStart ROM when enabled by the build). For native boot, Kickstart 1.3 is
 recommended for A500, 2.04 for A500+, and 3.1 for A1200. Other supported native ROM versions
 can be selected on any model; compatibility varies by ROM and software. Floppy disks are optional;
 with no boot media, native Kickstart shows its insert-disk screen.
 
 The launcher and Configure Amiga share these boot choices and restore the saved
-setup for each model/method pair. Free minimal disk boot supports the standard PAL
+setup for each model/method pair. CopperStart Mini supports the standard PAL
 A500 (OCS, 68000, 512 KiB Chip plus optional 512 KiB slow RAM), A500+ (ECS, 68000,
-1 MiB Chip), and A1200 (Alice/Lisa, 68EC020, 2 MiB Chip). It requires a compatible
-880 KiB startup ADF and supplies no DOS or Workbench. Fast RAM, hard drives,
-shared folders and other hardware combinations remain unavailable with an
-explanation and disabled Start. See [boot contract and model evidence](engine/MINIMAL_DISK_BOOT.md).
+1 MiB Chip), and A1200 (Alice/Lisa, 68EC020, 2 MiB Chip). It can start with DF0
+empty and boot a compatible 880 KiB ADF when inserted. DOS and Workbench require
+a native ROM. Fast RAM, hard drives, shared folders and other hardware combinations
+remain unavailable with an explanation and disabled Start. See [boot contract and model evidence](engine/MINIMAL_DISK_BOOT.md).
 
 CopperStart is disabled by default. Build or publish with
 `-p:CopperScreenEnableCopperStart=true` to show its option and embed the qualified

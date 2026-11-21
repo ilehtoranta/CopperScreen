@@ -59,7 +59,7 @@ internal sealed partial class MainWindow
             ? "Requires the qualified A1200 ROM pair, an OFS/FFS DD or HD floppy and/or one OFS/FFS/SFS/SFS2 hard disk. Native writes and quick formatting are supported. Disable Fast RAM, RTC and shared folders."
             : "A500/A500+ can use the bundled ROM experimentally. Compatibility is unverified. Disable Fast RAM, RTC and shared folders.";
         _bootSettingsHelp.Text = "Choose any supported licensed native Kickstart ROM. Recommended versions are 1.3 for Amiga 500, 2.04 for Amiga 500+ and 3.0 for Amiga 1200. Other model/version combinations are allowed and may have compatibility issues. " +
-            "Minimal disk boot needs a standard ADF; it is experimental and has no DOS or Workbench. " +
+            "CopperStart Mini can start with DF0 empty. Insert a bootable standard ADF to run compatible games and demos. " +
             "Unavailable boot methods cannot be selected." +
             (copperStart
                 ? "\n" + CopperScreenCopperStartRom.DescriptionFor(a1200)

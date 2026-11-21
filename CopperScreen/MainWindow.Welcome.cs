@@ -124,11 +124,11 @@ internal sealed partial class MainWindow
         if (_welcomeRemoveDisk != null) _welcomeRemoveDisk.IsVisible = !_welcomeCopperOs && !hdf && !string.IsNullOrWhiteSpace(_settingsDraft.DriveDiskPaths[0]);
         if (_bootRomRow != null) _bootRomRow.IsVisible = !minimal;
         if (_welcomeRomRow != null) _welcomeRomRow.IsVisible = !minimal && !hdf;
-        if (_setupDiskBox != null) _setupDiskBox.PlaceholderText = minimal ? "Required · standard ADF or ZIP containing an ADF" : "Optional · boot without a floppy disk";
+        if (_setupDiskBox != null) _setupDiskBox.PlaceholderText = minimal ? "Optional · standard ADF or ZIP containing an ADF" : "Optional · boot without a floppy disk";
         if (_welcomeRequirements != null)
         {
             _welcomeRequirements.Text = CopperScreenLaunchWorkflow.RomGuidance(_settingsDraft);
-            _welcomeRequirements.IsVisible = source == CopperScreenKickstartSource.CopperStart || minimal || string.IsNullOrWhiteSpace(_kickstartRomBox.Text);
+            _welcomeRequirements.IsVisible = !minimal && (source == CopperScreenKickstartSource.CopperStart || string.IsNullOrWhiteSpace(_kickstartRomBox.Text));
         }
         if (_welcomeBootMethod != null)
         {
@@ -173,7 +173,7 @@ internal sealed partial class MainWindow
         _welcomeRom.Text = string.IsNullOrWhiteSpace(rom) ? "No ROM selected" : Path.GetFileName(rom);
         ToolTip.SetTip(_welcomeRom, rom);
         var disk = _setupDiskBox.Text;
-        _welcomeDisk.Text = string.IsNullOrWhiteSpace(disk) ? minimal ? "Required · standard ADF or ZIP containing an ADF" : "Optional · no disk selected" : Path.GetFileName(disk);
+        _welcomeDisk.Text = string.IsNullOrWhiteSpace(disk) ? "Optional · no disk selected" : Path.GetFileName(disk);
         ToolTip.SetTip(_welcomeDisk, disk);
         var workspaceReady = !_welcomeCopperOs || CopperOsWorkspace.IsWorkspace(disk);
         _welcomeStart.IsEnabled = valid && workspaceReady && !_settingsVisible && !_applyingSettings;
