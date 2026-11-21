@@ -2715,7 +2715,7 @@ internal sealed partial class MainWindow : Window
 		{
 			"Lightweight" => CopperScreenEngine.Lightweight,
 			"Legacy" => CopperScreenEngine.Legacy,
-			_ => throw new InvalidOperationException("Select Lightweight or Legacy as the engine.")
+			_ => throw new InvalidOperationException("Select an engine.")
 		};
 		draft.Chipset = draft.Chipset with { DmaChip = Enum.Parse<DmaChipModel>(_agnusModelBox.SelectedItem as string ?? throw new InvalidOperationException("Select an Agnus model.")) };
 		draft.Chipset = draft.Chipset with { DisplayChip = Enum.Parse<DisplayChipModel>(_deniseModelBox.SelectedItem as string ?? throw new InvalidOperationException("Select a Denise model.")) };

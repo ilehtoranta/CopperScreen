@@ -43,8 +43,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         BaseDirectory = options.BaseDirectory;
         var backend = options.CpuBackendOverride ?? options.Profile.CpuBackend;
         var modelName = options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Amiga 1200" : options.Profile.Chipset.DisplayChip == DisplayChipModel.EcsDenise ? "Amiga 500+" : "Amiga 500";
-        ProfileName = _minimalBoot != null ? modelName + " · Minimal disk boot [Lightweight]" : options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
-            ? " [Lightweight]" : $" [Lightweight, {CopperScreenAvailability.ChoiceLabel(backend.ToString())}]");
+        ProfileName = _minimalBoot != null ? modelName + " · Minimal disk boot" : options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
+            ? string.Empty : $" [{CopperScreenAvailability.ChoiceLabel(backend.ToString())}]");
         FloppyDriveAudioOptions = options.FloppyDriveAudio;
         _inputOptions = options.Input;
         var configuration = new LightweightA500Configuration
@@ -173,7 +173,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68010 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040) ||
             p.KickstartSource is not (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom or CopperScreenKickstartSource.MinimalDiskBoot or CopperScreenKickstartSource.CopperStart) ||
             (!minimal && !copperStart && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart20 or KickstartVersion.Kickstart30 or KickstartVersion.Kickstart31 or KickstartVersion.CopperStartMini)))
-            return "Lightweight supports PAL / OCS, ECS or AGA Alice/Lisa / 68000 or experimental 68010/68EC020/68020/68030/68040 (optional 040 JIT) / explicit PAL Agnus and compatible Chip/slow RAM / supported native Kickstart ROMs / one to four floppy drives / optional A501 RTC; no RTG. The 68060 requires separately validated 060-aware OS task/FPU support.";
+            return "CopperScreen supports PAL / OCS, ECS or AGA Alice/Lisa / 68000 or experimental 68010/68EC020/68020/68030/68040 (optional 040 JIT) / explicit PAL Agnus and compatible Chip/slow RAM / supported native Kickstart ROMs / one to four floppy drives / optional A501 RTC; no RTG. The 68060 requires separately validated 060-aware OS task/FPU support.";
         if (p.Chipset.DmaChip is not (DmaChipModel.OcsAgnus or DmaChipModel.Agnus8372A or DmaChipModel.Agnus8375Pal2M or DmaChipModel.AgaAlice))
             return "Select an explicit supported PAL Agnus: 8371, 8372A, 8375 (318069-10) or A1200 Alice.";
         try { LightweightAgnus.ValidateMemory(GetAgnusModel(p.Chipset.DmaChip), p.ChipRamSize, p.ExpansionRamSize); }
@@ -190,15 +190,15 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         if (p.RealFastRamSize != 0 && p.RealFastRamBase != CopperScreenDefaults.GetDefaultFastRamBase(p.RealFastRamSize))
             return "Fast RAM uses guest Autoconfig; restore the default assignment hint for its size.";
         if (options.DriveDiskPaths.Skip(p.FloppyDriveCount).Any(path => path != null))
-            return "Lightweight accepts media in connected floppy drives only.";
+            return "Insert media in a connected floppy drive.";
         if (options.AgnusBusArbitration != AgnusBusArbitrationMode.Legacy ||
             options.CopperQuiescentFastPath || options.CopperQuiescentFastPathVerify || options.CopperQuiescentDiagnostics ||
             options.DeferredCpuBusBatchConfigured || options.DeferredCpuChipWriteJournalConfigured ||
             options.DeferredCpuChipReadSegmentsConfigured || options.DeferredCpuChipInstructionFetchBatchConfigured ||
             options.DeferredCpuChipInstructionFetchShadowConfigured || options.DeferredCpuCustomPointerWritesConfigured ||
             options.DeferredCpuCustomCompositionWritesConfigured || options.CpuWaitSlotReference || !options.HardwareSpecialization)
-            return "Legacy execution overrides do not apply to Lightweight.";
-        if (options.Input.IsMousePort(1)) return "Lightweight currently supports a mouse on port 1 only.";
+            return "Legacy execution overrides are unavailable.";
+        if (options.Input.IsMousePort(1)) return "Connect the mouse to port 1.";
         return null;
     }
 
@@ -221,13 +221,13 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         M68kBackendKind.AccurateM68040 => Copper68k.M68kCpuModel.M68040,
         M68kBackendKind.JitM68040 => Copper68k.M68kCpuModel.M68040,
         M68kBackendKind.AccurateM68060 => Copper68k.M68kCpuModel.M68060,
-        _ => throw new NotSupportedException($"CPU backend {backend} is unavailable in Lightweight.")
+        _ => throw new NotSupportedException($"CPU backend {backend} is unavailable.")
     };
 
     private static void ValidateInput(CopperScreenInputOptions input)
     {
         if (input.IsMousePort(1))
-            throw new NotSupportedException("Lightweight currently supports a mouse on port 1 only.");
+            throw new NotSupportedException("Connect the mouse to port 1.");
     }
 
     public int Width => _nativeWidth;
@@ -274,7 +274,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public CopperScreenCpuState CpuState => new(_machine.Cpu.ProgramCounter,
         _machine.Cpu.LastInstructionProgramCounter, _machine.Cpu.StatusRegister);
     public CopperScreenDebugSnapshot? DebugSnapshot => null;
-    public string StatusText { get; private set; } = "Lightweight experimental A500";
+    public string StatusText { get; private set; } = "Amiga 500";
     public string? FaultMessage => _faulted ? StatusText : null;
     public bool IsPaused { get; private set; }
     public bool IsWorkbenchHandoffPending => false;
@@ -286,7 +286,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 
     public int AudioFramesPerAppFrame(int sampleRate)
         // Capacity, not a fixed sample count: a sync hold can extend a field.
-        => sampleRate == AudioSampleRate ? 1024 : throw new NotSupportedException("Lightweight delivers 48 kHz stereo without host resampling.");
+        => sampleRate == AudioSampleRate ? 1024 : throw new NotSupportedException("Audio requires 48 kHz stereo.");
 
     public void RenderNextFrame(int[] destination)
     {
@@ -298,7 +298,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             adf.Mount(_machine, i);
             _machine.SetDriveWriteProtected(i, true);
             _pendingAdf[i] = null;
-            StatusText = $"Lightweight: DF{i} inserted " + CopperScreenDiskImageArchive.GetDisplayName(_diskPaths[i]);
+            StatusText = $"DF{i} inserted " + CopperScreenDiskImageArchive.GetDisplayName(_diskPaths[i]);
         }
         var field = _machine.IsLongField ? 0 : 1;
         _machine.ExecuteFrame();
@@ -325,7 +325,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         }
         if (_machine.UnsupportedActiveFeature is { } feature)
         {
-            CaptureFatalException(new NotSupportedException("Lightweight unsupported: " + feature));
+            CaptureFatalException(new NotSupportedException("Unsupported feature: " + feature));
             throw new NotSupportedException(StatusText);
         }
         // Preserve all native pixels. Vertical duplication/weaving is host presentation only.
@@ -408,7 +408,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         else { adf.Mount(_machine, drive); _pendingAdf[drive] = null; }
         _machine.SetDriveWriteProtected(drive, true);
         _diskPaths[drive] = path;
-        StatusText = $"Lightweight: DF{drive} " + (markChanged ? "swapping " : "inserted ") + CopperScreenDiskImageArchive.GetDisplayName(path);
+        StatusText = $"DF{drive} " + (markChanged ? "swapping " : "inserted ") + CopperScreenDiskImageArchive.GetDisplayName(path);
         return true;
     }
 
@@ -427,7 +427,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         _pendingAdf[drive] = null;
         _machine.EjectAdf(drive);
         _diskPaths[drive] = null;
-        StatusText = $"Lightweight: DF{drive} ejected";
+        StatusText = $"DF{drive} ejected";
         return true;
     }
     public bool SetDriveWriteProtected(int drive, bool writeProtected)
@@ -508,8 +508,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         StatusText = _workspace != null ? "CopperOS workspace - changes saved automatically"
             : _minimalBoot != null ? ProfileName + " (experimental; no DOS or Workbench)"
             : _copperStart ? CopperScreenCopperStartRom.DescriptionFor(_machine.IsAga)
-            : _machine.IsAga ? "Lightweight experimental A1200 — native Kickstart 3.0, initial AGA display"
-            : "Lightweight experimental A500 — native Kickstart, ADF / read-only IPF / CopperHDF";
+            : _machine.IsAga ? "Amiga 1200 (experimental) — native Kickstart 3.0, initial AGA display"
+            : "Amiga 500 — native Kickstart, ADF / read-only IPF / CopperHDF";
     }
     private void ApplyInput(short dx = 0, short dy = 0)
         => _machine.SubmitInput(new((byte)(_joystick0 | (_inputOptions.IsMousePort(0) ? 0 : 128)),
@@ -544,8 +544,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public bool ConsumeCopperBenchRequest() => false;
     public bool LaunchCopperBenchPath(string path, out string message)
     { message = "Legacy CopperBench host services are unavailable. Standalone CopperStart uses guest floppy services only."; return Reject(message); }
-    public void QueueHostClipboardText(string text) => SetStatusText("Host clipboard integration is not available in Lightweight.");
-    public void QueueHostClipboardImage(ClipboardImage image) => SetStatusText("Host clipboard integration is not available in Lightweight.");
+    public void QueueHostClipboardText(string text) => SetStatusText("Host clipboard integration is unavailable.");
+    public void QueueHostClipboardImage(ClipboardImage image) => SetStatusText("Host clipboard integration is unavailable.");
     public bool TryTakeHostClipboardText(out string text) { text = string.Empty; return false; }
     public bool TryTakeHostClipboardImage(out ClipboardImage? image) { image = null; return false; }
     public void SavePersistentStorage()

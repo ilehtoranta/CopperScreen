@@ -279,7 +279,7 @@ internal static class CopperScreenDiskImageArchive
 			return disk;
 		}
 
-		throw new NotSupportedException("Lightweight requires a complete standard 880 KiB ADF entry.");
+		throw new NotSupportedException("Use a complete standard 880 KiB ADF entry.");
 	}
 
 	private static bool TryLoadArchiveEntryInMemory(ZipArchiveEntry entry, out CopperScreenAdfImage disk)

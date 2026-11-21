@@ -19,7 +19,7 @@ internal sealed class CopperScreenAdfImage
     public static CopperScreenAdfImage FromAdfBytes(byte[] data, string name)
     {
         if (data.Length != StandardAdfSize && data.Length != StandardAdfSize * 2)
-            throw new NotSupportedException("Lightweight requires a complete 880 KiB DD or 1760 KiB HD ADF.");
+            throw new NotSupportedException("Use a complete 880 KiB DD or 1760 KiB HD ADF.");
         return new((byte[])data.Clone(), name, LightweightFloppyImage.Prepare(data, "disk.adf"));
     }
     public static CopperScreenAdfImage FromBytes(byte[] data, string name)

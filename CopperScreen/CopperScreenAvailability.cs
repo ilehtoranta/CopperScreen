@@ -10,7 +10,7 @@ internal static class CopperScreenAvailability
         try
         {
             if (draft.Engine != CopperScreenEngine.Lightweight)
-                return "Legacy engine is not available. Use Lightweight; CopperStart requires its standalone ROM.";
+                return "Legacy engine is unavailable. CopperStart requires its standalone ROM.";
             return CopperScreenLightweightSession.GetValidationError(draft.ToStartupOptions(baseDirectory), requireRomPath: false);
         }
         catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or NotSupportedException or FormatException or OverflowException or IOException or InvalidDataException or UnauthorizedAccessException or System.Text.Json.JsonException)
@@ -43,6 +43,7 @@ internal static class CopperScreenAvailability
 
     public static string ChoiceLabel(string value) => value switch
     {
+        "Lightweight" => "Standard",
         "OcsAgnus" => "8371 · OCS PAL · 512 KiB",
         "Agnus8372A" => "8372A · ECS Agnus · up to 1 MiB",
         "Agnus8375Pal2M" => "8375 (318069-10) · ECS PAL · up to 2 MiB",

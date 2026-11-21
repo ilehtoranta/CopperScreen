@@ -186,7 +186,7 @@ internal sealed partial class MainWindow
             if (_updatingSettingsUi || _updatingMachineControls || _cpuBackendBox.SelectedItem is not string selected) return;
             EditMachine(draft => { CopperScreenMachinePresets.SetCpu(draft, Enum.Parse<M68kBackendKind>(selected)); draft.MarkRequiresRestart(); return draft; });
         };
-        options.Children.Add(SettingsHelp("Availability help", "Greyed choices are not yet available and cannot be selected. Legacy is unavailable; use Lightweight. CPU choices depend on the selected model."));
+        options.Children.Add(SettingsHelp("Availability help", "Greyed choices are not yet available and cannot be selected. Legacy is unavailable. CPU choices depend on the selected model."));
         var reset = CreatePanelButton("Use supported Amiga 500 settings", UseSupportedMachine);
         options.Children.Add(reset);
         layout.Children.Add(new Expander { Header = "Machine options and availability", Content = options, HorizontalAlignment = HorizontalAlignment.Stretch });

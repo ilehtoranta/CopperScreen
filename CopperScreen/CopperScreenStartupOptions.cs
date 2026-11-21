@@ -725,7 +725,7 @@ internal sealed class CopperScreenStartupOptions
         {
             try
             {
-                if (engine != CopperScreenEngine.Lightweight) throw new NotSupportedException("CopperOS storage requires Lightweight.");
+                if (engine != CopperScreenEngine.Lightweight) throw new NotSupportedException("CopperOS storage requires the standard engine.");
                 if (!CopperScreenProfile.TryLoadWithKickstartSource(profile, CopperScreenKickstartSource.CopperStart,
                     baseDirectory, out profile, out var osProfileError, userDataDirectory)) throw new InvalidOperationException(osProfileError);
                 if (error == defaultProfileError) error = null;

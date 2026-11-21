@@ -20,7 +20,7 @@ internal sealed class CopperScreenSettingsDraft
 
 	public string Id { get; set; } = CopperScreenProfile.DefaultProfileId;
 
-	public string DisplayName { get; set; } = "Lightweight A500 + Kickstart 1.3";
+	public string DisplayName { get; set; } = "Amiga 500 + Kickstart 1.3";
 
 	public string Description { get; set; } = string.Empty;
 

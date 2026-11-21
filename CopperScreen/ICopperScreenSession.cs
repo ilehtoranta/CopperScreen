@@ -70,7 +70,7 @@ internal static class CopperScreenSession
     public static ICopperScreenSession Create(CopperScreenStartupOptions options, ICopperScreenSession? previous = null)
         => options.Engine switch
         {
-            CopperScreenEngine.Legacy => throw new NotSupportedException("Legacy support is not included in this build. Use Lightweight with a native Kickstart ROM or the qualified standalone CopperStart ROM."),
+            CopperScreenEngine.Legacy => throw new NotSupportedException("Legacy support is not included in this build. Use the standard engine with a native Kickstart ROM or the qualified standalone CopperStart ROM."),
             CopperScreenEngine.Lightweight => CreateLightweight(options, previous as CopperScreenLightweightSession),
             _ => throw new ArgumentException("--engine must be Legacy or Lightweight.")
         };

@@ -61,7 +61,12 @@ internal sealed class CopperScreenProfile
         IReadOnlyList<LightweightFloppyDriveType>? floppyDriveTypes = null)
 	{
 		Id = id;
-		DisplayName = displayName;
+		DisplayName = displayName switch
+		{
+			"Lightweight A500 + Kickstart 1.3" => "Amiga 500 + Kickstart 1.3",
+			"Lightweight A500 + Kickstart 3.1" => "Amiga 500 + Kickstart 3.1",
+			_ => displayName
+		};
 		Description = description;
 		Chipset = chipset;
 		ChipRamSize = chipRamSize;
@@ -897,7 +902,7 @@ internal sealed class CopperScreenProfile
 	{
 		return new CopperScreenProfile(
 			DefaultProfileId,
-			"Lightweight A500 + Kickstart 1.3",
+			"Amiga 500 + Kickstart 1.3",
 			"PAL OCS, 512 KiB Chip + 512 KiB slow, native Kickstart 1.3, read-only DF0 ADF.",
 			AmigaChipset.OcsPal,
 			CopperScreenDefaults.A500BootChipRamSize,

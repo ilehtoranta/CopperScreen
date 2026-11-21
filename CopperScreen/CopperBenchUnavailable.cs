@@ -4,7 +4,7 @@ namespace CopperScreen;
 // The retired browser implementation is preserved in Git history and the legacy archive.
 internal sealed class CopperBenchViewModel
 {
-    private const string Unavailable = "The Legacy CopperBench browser is not included. Boot floppy applications with a native Kickstart ROM or the qualified standalone CopperStart ROM on Lightweight.";
+    private const string Unavailable = "The Legacy CopperBench browser is not included. Boot floppy applications with a native Kickstart ROM or the qualified standalone CopperStart ROM.";
     public bool IsOverlayVisible { get; private set; }
     public bool IsToolbarVisible { get; private set; } = true;
     public string DisplayPath => "CopperBench unavailable";

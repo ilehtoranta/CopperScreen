@@ -660,7 +660,7 @@ internal sealed class CopperScreenRuntime : IDisposable
     {
         try
         {
-            if (emulator is not CopperScreenLightweightSession session) throw new NotSupportedException("Workspace export requires Lightweight.");
+            if (emulator is not CopperScreenLightweightSession session) throw new NotSupportedException("Workspace export is unavailable for this session.");
             session.ExportWorkspaceBackup(destination);
             emulator.SetStatusText("Workspace backup exported. Primary save status is unchanged.");
             return new CopperScreenCommandResult(true, emulator.StatusText, CaptureState(0, _audio?.QueuedBufferCount ?? 0));
