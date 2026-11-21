@@ -4,7 +4,7 @@ Source and development now belong to the CopperScreen repository. The desktop
 app and headless runner build this project directly; Copper68k remains a shared
 external package. The original package ID and namespace are retained for compatibility.
 
-The published CPU baseline and current pin are Copper68k `1.5.4` from NuGet.org.
+The published CPU baseline and current pin are Copper68k `1.5.5` from NuGet.org.
 No private qualification feed is required. See the
 [release and consumer record](../docs/engine/COPPER68K_1_5_4_RELEASE_2026-10-22.md).
 See [CPU support and validation](../docs/engine/CPU_SUPPORT.md). Existing published
@@ -91,8 +91,8 @@ entry values. With a fixed device deadline, a batch that completes a whole
 iteration can also execute a partial next iteration. The cutoff publishes
 the current registers, flags and stack at their exact guest cycle. The next
 slice can resume there after validating the saved state and return addresses.
-Guard failures fall back to the ordinary execution tiers. The 1.5.4 pin runs
-uncached Fast RAM code in the interpreter.
+Guard failures fall back to the ordinary execution tiers. Published Copper68k
+1.5.5 includes the accelerated JIT path.
 Report guest benchmark scores, host elapsed time and peak pacing lag separately.
 
 `LightweightA500Configuration.AgnusModel`, `ChipRamBytes` and `SlowRamBytes`

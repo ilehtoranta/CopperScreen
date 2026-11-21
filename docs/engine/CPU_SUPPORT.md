@@ -1,6 +1,9 @@
 # CPU support and Copper68k package scope
 
-Updated 2026-10-23. The published baseline and current pin are Copper68k `1.5.4`
+CopperScreen currently pins Copper68k 1.5.5 from NuGet.org. See the
+[SysInfo and 040 JIT report](SYSINFO_040_JIT_2026-11-21.md).
+
+The 2026-10-23 published baseline used Copper68k `1.5.4`
 from NuGet.org. It retains the qualified integer suite, general logical handler
 including Detroit's reached `EORI.B #$9E,(A0)+`, and the merged memory BTST
 prefetch correction. No private qualification feed is required. Publication and

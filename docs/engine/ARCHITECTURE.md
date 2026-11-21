@@ -134,7 +134,7 @@ instruction boundary after a device edge. Each resumed slice opens through the
 normal hardware boundary and checks the saved CPU state, code generations and
 active return addresses before borrowing Fast RAM again. The package re-reads
 memory operands for each slice. A failed guard returns execution to ordinary
-CPU dispatch. Production builds use the published Copper68k 1.5.4 package.
+CPU dispatch. Production builds use the published Copper68k 1.5.5 package.
 
 Absent OCS DENISEID readback retains one completed DMA word. Actual DMA
 transfers update it at output; untimed memory inspection does not. Readback

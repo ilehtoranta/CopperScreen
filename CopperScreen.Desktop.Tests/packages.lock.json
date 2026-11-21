@@ -166,8 +166,8 @@
       },
       "Copper68k": {
         "type": "Transitive",
-        "resolved": "1.5.4",
-        "contentHash": "k23LflcKNLuTVGK4mJxHhPPcx15ThxwFKWnWhItUK9obPpYKo9jAOqYBc/8SCxiueVkJFUVUcVWlgINbeTaaxg==",
+        "resolved": "1.5.5",
+        "contentHash": "duafdsKrn6fgTUQHi8QWgEDw4I3bDG4v8hIW7slwm6k3xnU8PFkVe99mdZr9Mip3umD65XN/70rfwe1hMsAZ+A==",
         "dependencies": {
           "CopperFloat": "[1.0.0]"
         }
@@ -214,10 +214,10 @@
       },
       "CopperStart.FileSystem.Service": {
         "type": "Transitive",
-        "resolved": "0.5.0-dev.1",
-        "contentHash": "Q5rfPe/koyAJIBer0osmVz5B38p+rx/kS1LiHmg9iwXFBU90vkp9ZeRKA+72Fi1j+CaXzsMg1PJEmRUw12w1fw==",
+        "resolved": "0.5.0-dev.2",
+        "contentHash": "liw7QGjingty7Dih4umGA++lYR3QwU9bHNqrurxTrkhbqucyRTKV60jr2rcLW/qPS4gkjrWbxskn/HIRGyI5iw==",
         "dependencies": {
-          "Copper68k": "[1.5.4]"
+          "Copper68k": "[1.5.5]"
         }
       },
       "HarfBuzzSharp": {
@@ -373,15 +373,15 @@
       "copperdisk.filesystem": {
         "type": "Project",
         "dependencies": {
-          "Copper68k": "[1.5.4, 1.5.4]",
+          "Copper68k": "[1.5.5, 1.5.5]",
           "CopperDisk": "[3.0.1-dev.5, )",
-          "CopperStart.FileSystem.Service": "[0.5.0-dev.1, 0.5.0-dev.1]"
+          "CopperStart.FileSystem.Service": "[0.5.0-dev.2, 0.5.0-dev.2]"
         }
       },
       "coppermod.amiga.lightweight": {
         "type": "Project",
         "dependencies": {
-          "Copper68k": "[1.5.4, 1.5.4]",
+          "Copper68k": "[1.5.5, 1.5.5]",
           "CopperDisk": "[3.0.1-dev.5, )"
         }
       },
@@ -391,14 +391,14 @@
           "Avalonia": "[12.0.3, )",
           "Avalonia.Desktop": "[12.0.3, )",
           "Avalonia.Themes.Fluent": "[12.0.3, )",
-          "Copper68k": "[1.5.4, 1.5.4]",
+          "Copper68k": "[1.5.5, 1.5.5]",
           "CopperDisk": "[3.0.1-dev.5, )",
           "CopperDisk.FileSystem": "[0.1.0-dev.6, )",
           "CopperMod.Amiga.Lightweight": "[0.1.0-preview.2, )",
           "CopperPad": "[2.0.0-preview.2, )",
           "CopperPad.HidSharp": "[2.0.0-preview.2, )",
           "CopperScreen.FileSystems": "[1.0.0, )",
-          "CopperStart.FileSystem.Service": "[0.5.0-dev.1, 0.5.0-dev.1]",
+          "CopperStart.FileSystem.Service": "[0.5.0-dev.2, 0.5.0-dev.2]",
           "HotPathGuard.Abstractions": "[0.1.0, )",
           "Miniaudio-CS": "[1.0.4, )"
         }

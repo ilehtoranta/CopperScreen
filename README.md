@@ -79,7 +79,7 @@ The CopperOS option starts the native Home/Files/Editor desktop directly.
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
-Copper68k is pinned to published [version `1.5.4`](https://www.nuget.org/packages/Copper68k/1.5.4).
+Copper68k is pinned to published [version `1.5.5`](https://www.nuget.org/packages/Copper68k/1.5.5).
 Normal restore uses NuGet.org and requires no private qualification feed or
 sibling project reference. Package locks retain the public package identity;
 published package versions remain immutable. See the
@@ -98,11 +98,11 @@ and the [020 CopperHDF release](docs/engine/COPPERHDF_020_2026-09-27.md).
 The [040 fetch correction](docs/engine/LOTUS_III_040_FETCH_2026-09-27.md)
 passes the original Lotus III input through a driving demo without changing its press timings.
 
-Stage the pinned local development filesystem-service package once before restoring
-on a fresh checkout; see the [Disk Image Manager build instructions](docs/DISK_IMAGE_MANAGER.md#development-package).
+An offline restore can stage the pinned filesystem-service archive
+before restoring. See the [Disk Image Manager build instructions](docs/DISK_IMAGE_MANAGER.md#development-package).
 
 ```powershell
-./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.4.0-dev.3.nupkg"
+./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.2.nupkg"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_13.rom" "path/to/disk.adf"
