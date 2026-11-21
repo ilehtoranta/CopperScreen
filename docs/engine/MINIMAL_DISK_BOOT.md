@@ -1,8 +1,12 @@
-# Minimal disk boot
+# Minimal floppy boot for source builds
 
 CopperScreen supplies an original, deliberately limited boot firmware for demos
-and games that replace the operating system after boot. Select **CopperStart Mini**
-in the launcher or Configure Amiga > Setup > Boot method. Start with an ADF in
+and games that replace the operating system after boot. In source-only builds
+select **Minimal floppy boot** in the launcher or Configure Amiga > Setup > Boot
+method. The [CopperStart Mini bundle](../COPPERSTART_APP.md#copperstart-mini-bundle)
+uses the WinUAE-qualified standalone ROM under the same profile ID. The
+boot services and historical evidence below describe the original source-only
+firmware. Start with an ADF in
 DF0 or insert one while the firmware waits for media. The application
 remembers a separate setup for each model and boot method. Native Kickstart remains
 the default. The bootstrap is experimental; individual disks must support the
@@ -166,7 +170,8 @@ before-fix evidence; the subsequent general Copper correction is recorded below.
 Ignored evidence is in `artifacts/minimal-boot-models-20261103/`: baseline source,
 TRX results, per-model `replay.json` and PNG checkpoints. Repeat the functional
 tests with `dotnet test CopperScreen.Lightweight.Tests -c Release --filter
-FullyQualifiedName~CopperScreenMinimalBootTests`. The optional
+FullyQualifiedName~CopperScreenMinimalBootTests` with
+`-p:CopperScreenIncludeMiniRom=false`. The optional
 `MinimalBootNativeReplayTests` requires `COPPERSCREEN_MINIMAL_BOOT_ADF` (ADF or
 ZIP-entry path); set `COPPERSCREEN_MINIMAL_BOOT_OUTPUT` for captures/results.
 Unset media means skipped/unavailable native coverage, never a pass.

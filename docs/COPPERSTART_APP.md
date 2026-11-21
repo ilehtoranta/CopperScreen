@@ -8,12 +8,40 @@ can be selected on any model; compatibility varies by ROM and software. Floppy d
 with no boot media, native Kickstart shows its insert-disk screen.
 
 The launcher and Configure Amiga share these boot choices and restore the saved
-setup for each model/method pair. CopperStart Mini supports the standard PAL
-A500 (OCS, 68000, 512 KiB Chip plus optional 512 KiB slow RAM), A500+ (ECS, 68000,
-1 MiB Chip), and A1200 (Alice/Lisa, 68EC020, 2 MiB Chip). It can start with DF0
-empty and boot a compatible 880 KiB ADF when inserted. DOS and Workbench require
-a native ROM. Fast RAM, hard drives, shared folders and other hardware combinations
-remain unavailable with an explanation and disabled Start. See [boot contract and model evidence](engine/MINIMAL_DISK_BOOT.md).
+setup for each model/method pair.
+
+## CopperStart Mini bundle
+
+Choose **CopperStart Mini** to boot the bundled 512 KiB ROM without choosing a
+ROM file. This is the ROM qualified in WinUAE with the two-stage startup screen.
+Its splash appears at reset. With DF0 empty, Mini then shows **Insert boot disk**
+and waits for a compatible disk. With a bootable disk already inserted, Mini
+hands off directly after the splash. Mini supports standard PAL A500, A500+
+and A1200 and qualified takeover, OFS and FFS startup disks.
+
+Stage the qualified binary and its binary license before building a bundle.
+
+```powershell
+./scripts/prepare-copperstart-mini-bundle.ps1 -Rom 'C:\path\CopperStart-Mini.rom' -License 'C:\path\LICENSE.txt'
+dotnet build CopperScreen.slnx -c Release
+./scripts/package.ps1
+```
+
+The default staging directory is `artifacts/copperstart-mini-bundle`. Its
+inputs stay outside Git. The build checks the ROM against
+[the pinned SHA-256](../CopperScreen/Firmware/CopperStartMini.sha256), embeds
+the original bytes and includes the binary license at
+`Firmware/CopperStartMini/LICENSE.txt` in the output. A different staging
+location can be set with `CopperStartMiniBundleDirectory`. The ZIP packaging
+script requires the staged ROM. MSIX can include it with
+`-IncludeCopperStartMini` for noncommercial builds.
+
+A source-only build offers **Minimal floppy boot**, which uses the
+[original CopperScreen firmware](engine/MINIMAL_DISK_BOOT.md). Use
+`-p:CopperScreenIncludeMiniRom=false` to build that variant with staging present.
+Both variants use the existing `--minimal-disk-boot` flag and saved profile IDs.
+
+## CopperStart ROM and CopperOS
 
 CopperStart is disabled by default. Build or publish with
 `-p:CopperScreenEnableCopperStart=true` to show its option and embed the qualified

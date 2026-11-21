@@ -26,6 +26,9 @@
     <CopperScreenEnableCopperStart Condition="'$(CopperScreenEnableCopperStart)' == ''">false</CopperScreenEnableCopperStart>
     <DefineConstants Condition="'$(CopperScreenEnableCopperStart)' == 'true'">$(DefineConstants);COPPERSCREEN_ENABLE_COPPERSTART</DefineConstants>
     <CopperOsBundleDirectory Condition="'$(CopperOsBundleDirectory)' == ''">$(MSBuildProjectDirectory)/../artifacts/copperos-bundle</CopperOsBundleDirectory>
+    <CopperStartMiniBundleDirectory Condition="'$(CopperStartMiniBundleDirectory)' == ''">$(MSBuildProjectDirectory)/../artifacts/copperstart-mini-bundle</CopperStartMiniBundleDirectory>
+    <CopperScreenIncludeMiniRom Condition="'$(CopperScreenIncludeMiniRom)' == '' And Exists('$(CopperStartMiniBundleDirectory)/CopperStart-Mini.rom')">true</CopperScreenIncludeMiniRom>
+    <CopperScreenIncludeMiniRom Condition="'$(CopperScreenIncludeMiniRom)' == ''">false</CopperScreenIncludeMiniRom>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(CopperScreenInstalledTests)' == 'true'">
@@ -67,6 +70,8 @@
     <None Include="Presets\*.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="Firmware/CopperStart-LICENSE.txt" Link="CopperStart-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <EmbeddedResource Include="Firmware\MinimalDiskBoot.s" />
+    <EmbeddedResource Condition="'$(CopperScreenIncludeMiniRom)' == 'true'" Include="$(CopperStartMiniBundleDirectory)/CopperStart-Mini.rom" LogicalName="CopperScreen.Bundled.CopperStart-Mini.rom" />
+    <None Condition="'$(CopperScreenIncludeMiniRom)' == 'true'" Include="$(CopperStartMiniBundleDirectory)/LICENSE.txt" Link="Firmware/CopperStartMini/LICENSE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <EmbeddedResource Include="Firmware\CopperStartA1200.json" LogicalName="CopperScreen.Firmware.CopperStartA1200.json" />
     <EmbeddedResource Include="Firmware\CopperStart.json" />
     <EmbeddedResource Include="Firmware\CopperOS.json" />
@@ -88,6 +93,19 @@
       <Output TaskParameter="Items" ItemName="_CopperOsBundleHash" />
     </GetFileHash>
     <Error Condition="'%(_CopperOsBundleHash.FileHash)' != '%(_CopperOsBundleHash.ExpectedHash)'" Text="Unqualified CopperOS bundle input: %(_CopperOsBundleHash.Identity). Run scripts/prepare-copperos-bundle.ps1 with the qualified files." />
+  </Target>
+
+  <Target Name="VerifyCopperStartMiniBundle" BeforeTargets="PrepareForBuild" Condition="'$(CopperScreenIncludeMiniRom)' == 'true'">
+    <Error Condition="!Exists('$(CopperStartMiniBundleDirectory)/CopperStart-Mini.rom') Or !Exists('$(CopperStartMiniBundleDirectory)/LICENSE.txt')"
+           Text="Stage the qualified Mini ROM and license with scripts/prepare-copperstart-mini-bundle.ps1." />
+    <ReadLinesFromFile File="$(MSBuildProjectDirectory)/Firmware/CopperStartMini.sha256">
+      <Output TaskParameter="Lines" ItemName="_CopperStartMiniExpectedHash" />
+    </ReadLinesFromFile>
+    <GetFileHash Files="$(CopperStartMiniBundleDirectory)/CopperStart-Mini.rom" Algorithm="SHA256">
+      <Output TaskParameter="Items" ItemName="_CopperStartMiniHash" />
+    </GetFileHash>
+    <Error Condition="'%(_CopperStartMiniHash.FileHash)' != '@(_CopperStartMiniExpectedHash)'"
+           Text="CopperStart Mini does not match the qualified ROM hash in Firmware/CopperStartMini.sha256." />
   </Target>
 
   <ItemGroup>

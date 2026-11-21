@@ -9,6 +9,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     private readonly LightweightA500Machine _machine;
     private readonly IReadOnlyList<LightweightFloppyDriveType> _driveTypes;
     private readonly CopperScreenMinimalBoot? _minimalBoot;
+    private readonly bool _bundledMini;
     private readonly bool _copperStart;
     private readonly CopperOsWorkspace? _workspace;
     private int _checkpointFields;
@@ -28,10 +29,13 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         Validate(options);
         _driveTypes = options.Profile.FloppyDriveTypes;
         _copperStart = options.Profile.KickstartSource == CopperScreenKickstartSource.CopperStart;
+        var minimal = options.Profile.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot;
+        _bundledMini = minimal && CopperScreenBundledMiniRom.Included;
         // Media decoding is mount-time only; none of the old execution machinery is created.
         CopperScreenAdfImage? bootDisk = null;
         byte[] rom;
-        if (options.Profile.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot)
+        if (_bundledMini) rom = CopperScreenBundledMiniRom.Read();
+        else if (minimal)
         {
             if (options.DriveDiskPaths[0] is { } path)
                 bootDisk = CopperScreenDiskImageArchive.LoadDiskImage(path);
@@ -44,7 +48,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         BaseDirectory = options.BaseDirectory;
         var backend = options.CpuBackendOverride ?? options.Profile.CpuBackend;
         var modelName = options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Amiga 1200" : options.Profile.Chipset.DisplayChip == DisplayChipModel.EcsDenise ? "Amiga 500+" : "Amiga 500";
-        ProfileName = _minimalBoot != null ? modelName + " · Minimal disk boot" : options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
+        ProfileName = minimal ? modelName + " · " + (_bundledMini ? "CopperStart Mini" : "Minimal disk boot") : options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
             ? string.Empty : $" [{CopperScreenAvailability.ChoiceLabel(backend.ToString())}]");
         FloppyDriveAudioOptions = options.FloppyDriveAudio;
         _inputOptions = options.Input;
@@ -505,6 +509,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         Array.Fill(Framebuffer, unchecked((int)0xFF000000));
         ApplyInput();
         StatusText = _workspace != null ? "CopperOS workspace - changes saved automatically"
+            : _bundledMini ? ProfileName
             : _minimalBoot != null ? ProfileName + (_machine.IsDriveMounted(0) ? " (experimental; no DOS or Workbench)" : " · DF0 empty")
             : _copperStart ? CopperScreenCopperStartRom.DescriptionFor(_machine.IsAga)
             : _machine.IsAga ? "Amiga 1200 (experimental) — native Kickstart 3.0, initial AGA display"

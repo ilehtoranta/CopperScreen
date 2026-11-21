@@ -22,7 +22,8 @@ draft.DriveDiskPaths[0] = args[0];
 var disk = CopperScreenDiskImageArchive.LoadDiskImage(args[0]);
 if (Convert.ToHexString(SHA256.HashData(disk.Data)) != "EB7521FC1DE886C69706AB0E21898A89199FB12256DB40743F3ED190957E896A")
     throw new InvalidDataException("This probe's recorded scene evidence requires the qualified Arte ADF. See docs/engine/MINIMAL_DISK_BOOT.md.");
-var rom = new CopperScreenMinimalBoot(disk, model == 0, draft.ChipRamKb * 1024, model == 2);
+var rom = CopperScreenBundledMiniRom.Included ? CopperScreenBundledMiniRom.Read()
+    : new CopperScreenMinimalBoot(disk, model == 0, draft.ChipRamKb * 1024, model == 2).Rom;
 using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(AppContext.BaseDirectory));
 using var log = new StreamWriter(Path.Combine(output, "frames.jsonl")) { AutoFlush = true };
 using var pcm = File.Create(Path.Combine(output, "audio.wav")); pcm.Write(new byte[44]);
@@ -95,7 +96,7 @@ File.WriteAllText(Path.Combine(output, "summary.json"), JsonSerializer.Serialize
     failure,
     exceptions,
     mediaSha256 = Convert.ToHexString(SHA256.HashData(disk.Data)),
-    firmwareSha256 = Convert.ToHexString(SHA256.HashData(rom.Rom)),
+    firmwareSha256 = Convert.ToHexString(SHA256.HashData(rom)),
     engineSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(typeof(CopperMod.Amiga.Lightweight.LightweightA500Machine).Assembly.Location))),
     scope = "No-input full-sequence investigation; frame PNG every 50 fields, continuous guest PCM; no host performance measurement"
 }, new JsonSerializerOptions { WriteIndented = true }));

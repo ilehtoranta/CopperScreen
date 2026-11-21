@@ -515,7 +515,12 @@ internal sealed partial class MainWindow
         _validatedBootDisk = path;
         _validatedBootDiskWriteTime = info.LastWriteTimeUtc;
         _validatedBootDiskLength = info.Length;
-        try { CopperScreenMinimalBoot.ValidateDisk(CopperScreenDiskImageArchive.LoadDiskImage(path)); _bootDiskError = null; }
+        try
+        {
+            var disk = CopperScreenDiskImageArchive.LoadDiskImage(path);
+            if (!CopperScreenBundledMiniRom.Included) CopperScreenMinimalBoot.ValidateDisk(disk);
+            _bootDiskError = null;
+        }
         catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException or NotSupportedException or ArgumentException)
         { _bootDiskError = ex.Message; }
         return _bootDiskError;

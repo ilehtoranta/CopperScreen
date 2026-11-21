@@ -19,7 +19,8 @@ public sealed class MinimalBootNativeReplayTests
         var draft = CopperScreenLaunchWorkflow.SelectStartChoice(new(), 6 + model);
         draft.DriveDiskPaths[0] = path;
         var disk = CopperScreenDiskImageArchive.LoadDiskImage(path);
-        var firmware = new CopperScreenMinimalBoot(disk, false, draft.ChipRamKb * 1024, model == 2);
+        var rom = CopperScreenBundledMiniRom.Included ? CopperScreenBundledMiniRom.Read()
+            : new CopperScreenMinimalBoot(disk, false, draft.ChipRamKb * 1024, model == 2).Rom;
         using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(AppContext.BaseDirectory));
         var frames = 0; var audibleFrames = 0;
         var checkpoints = new List<object>();
@@ -48,7 +49,7 @@ public sealed class MinimalBootNativeReplayTests
             model = CopperScreenMachinePresets.Label((CopperScreenMachineModel)model),
             cpu = session.Machine.CpuModel.ToString(), chipRamBytes = session.Machine.ChipRam.Length,
             path, mediaSha256 = Convert.ToHexString(SHA256.HashData(disk.Data)),
-            firmwareSha256 = Convert.ToHexString(SHA256.HashData(firmware.Rom)), frames, audibleFrames,
+            firmwareSha256 = Convert.ToHexString(SHA256.HashData(rom)), frames, audibleFrames,
             failure, checkpoints, scope = "3000 fields of original-media startup; no gameplay or performance acceptance"
         }, new JsonSerializerOptions { WriteIndented = true }));
         Assert.Null(failure);

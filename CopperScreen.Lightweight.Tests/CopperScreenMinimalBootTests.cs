@@ -7,7 +7,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
 {
     private readonly string _directory = Path.Combine(Path.GetTempPath(), "copperscreen-minimal-" + Guid.NewGuid().ToString("N"));
     public CopperScreenMinimalBootTests() => Directory.CreateDirectory(_directory);
-    private static byte[] Disk(string code)
+    internal static byte[] Disk(string code)
     {
         var disk = new byte[901120];
         "DOS\0"u8.CopyTo(disk);
@@ -38,7 +38,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
     {
         for (var i = 0; i < frames; i++) session.RenderNextFrame(session.Framebuffer);
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void NullListTraversalTerminatesWithoutFollowingBootFirmware()
     {
         using var session = new CopperScreenLightweightSession(Options(Disk("""
@@ -56,7 +56,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         Assert.Equal(0x12345678u, Read(session, 0x800));
         Assert.Equal(0x78000u, Read(session, 4));
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void OriginalBootblockReceivesIoRequestAndExecAndRunsWithoutRom()
     {
         var options = Options(Disk("""
@@ -76,7 +76,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         Assert.Equal(0x78000u, Read(session, 0x808));
         Assert.Equal(0x12345678u, Read(session, 0x80c));
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void TrackdiskReadsCrossHeadAndCylinder()
     {
         var disk = Disk("""
@@ -104,7 +104,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         Assert.Equal(2048u, Read(session, 0x808));
         Assert.Equal(disk.AsSpan(10240, 2048).ToArray(), session.Machine.ChipRam.Span.Slice((int)Read(session, 0x800), 2048).ToArray());
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void LoadedSecondStageCanStillUseExecAndTrackdisk()
     {
         var disk = Disk("""
@@ -138,7 +138,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         Assert.InRange(session.Machine.Cpu.ProgramCounter, 0x10000u, 0x10100u);
         Assert.Equal(disk.AsSpan(5632, 512).ToArray(), session.Machine.ChipRam.Span.Slice((int)Read(session, 0x800), 512).ToArray());
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void FreeMemCoalescesAndMemoryHeaderStaysConsistent()
     {
         using var session = new CopperScreenLightweightSession(Options(Disk("""
@@ -175,7 +175,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         Assert.Equal(0x69000u - 64, Read(session, memoryHeader + 28));
         Assert.Equal(0x80000u, Read(session, memoryHeader + 24));
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void SupervisorCallbackReturnsToUserBootContext()
     {
         using var session = new CopperScreenLightweightSession(Options(Disk("""
@@ -198,7 +198,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         Assert.Equal(0u, Read(session, 0x804));
         Assert.Equal(0x12345678u, Read(session, 0x80c));
     }
-    [Theory]
+    [SourceFloppyBootTheory]
     [InlineData(0x70000)]
     [InlineData(0x7c800)]
     public void ReadCanFillTakeoverLoaderMemoryOutsideResidentServices(int destination)
@@ -211,7 +211,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         Assert.Equal(0x12345678u, Read(session, 0x80c));
         Assert.Equal(disk.AsSpan(5632, 5632).ToArray(), session.Machine.ChipRam.Span.Slice(destination, 5632).ToArray());
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void ResetReadsTheCurrentlyInsertedDisk()
     {
         using var session = new CopperScreenLightweightSession(Options(Disk("move.l #$11111111,$80c\nloop:\nbra loop")));
@@ -223,7 +223,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         Run(session);
         Assert.Equal(0x22222222u, Read(session, 0x80c));
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void UnsupportedServiceReportsLvoAndCallerInsteadOfReturningSuccess()
     {
         using var session = new CopperScreenLightweightSession(Options(Disk("jsr -462(a6)\nloop:\nbra loop")));
@@ -232,7 +232,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         Assert.Contains("006810", error.Message);
         Assert.True(session.IsPaused);
     }
-    [Theory]
+    [SourceFloppyBootTheory]
     [InlineData("rts", "boot block returned")]
     [InlineData("dc.w $4afc", "guest exception")]
     public void BootFailuresAreVisible(string code, string message)
@@ -240,13 +240,13 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         using var session = new CopperScreenLightweightSession(Options(Disk(code)));
         Assert.Contains(message, Assert.Throws<NotSupportedException>(() => Run(session)).Message);
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void BadChecksumIsRejectedBeforeStartup()
     {
         var disk = Disk("loop:\nbra loop"); disk[42] ^= 1;
         Assert.Contains("checksum", Assert.Throws<NotSupportedException>(() => new CopperScreenLightweightSession(Options(disk))).Message);
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void BootChoiceRoundTripsWithoutLoadingRememberedNativeRom()
     {
         var draft = CopperScreenSettingsDraft.FromStartupOptions(Options(Disk("loop:\nbra loop")));
@@ -265,14 +265,14 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         var mixed = CopperScreenStartupOptions.Parse(["--minimal-disk-boot", "--rom", draft.KickstartRomPath], AppContext.BaseDirectory);
         Assert.Contains("one boot method", mixed.Error);
     }
-    [Theory]
+    [SourceFloppyBootTheory]
     [InlineData("AccurateM68020")]
     [InlineData("AccurateM68040")]
     public void UnqualifiedCpuIsRejected(string cpu)
     {
         Assert.Contains("68000", Assert.Throws<NotSupportedException>(() => new CopperScreenLightweightSession(Options(Disk("loop:\nbra loop"), "--cpu", cpu))).Message);
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void WritesAndOverlappingReadsReportTheirBoundary()
     {
         using (var session = new CopperScreenLightweightSession(Options(Disk("move.w #3,28(a1)\njsr -456(a6)"))))
@@ -280,7 +280,7 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         using (var session = new CopperScreenLightweightSession(Options(Disk("move.l #$78000,40(a1)\njsr -456(a6)"))))
             Assert.Contains("overlaps resident", Assert.Throws<NotSupportedException>(() => Run(session)).Message);
     }
-    [Fact]
+    [SourceFloppyBootFact]
     public void PublicListVectorsUseTheExecRegisterAbi()
     {
         using var session = new CopperScreenLightweightSession(Options(Disk("""
@@ -305,4 +305,22 @@ public sealed partial class CopperScreenMinimalBootTests : IDisposable
         Assert.Equal(0x900u, Read(session, 0x944));
     }
     public void Dispose() => Directory.Delete(_directory, true);
+}
+
+public sealed class SourceFloppyBootFactAttribute : FactAttribute
+{
+    internal const string BundledReason = "These boot-service tests exercise the source-only floppy firmware. Use -p:CopperScreenIncludeMiniRom=false.";
+
+    public SourceFloppyBootFactAttribute()
+    {
+        if (CopperScreenBundledMiniRom.Included) Skip = BundledReason;
+    }
+}
+
+public sealed class SourceFloppyBootTheoryAttribute : TheoryAttribute
+{
+    public SourceFloppyBootTheoryAttribute()
+    {
+        if (CopperScreenBundledMiniRom.Included) Skip = SourceFloppyBootFactAttribute.BundledReason;
+    }
 }

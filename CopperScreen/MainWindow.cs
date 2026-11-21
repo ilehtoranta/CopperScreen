@@ -2554,7 +2554,7 @@ internal sealed partial class MainWindow : Window
 			var draft = ReadSettingsDraft();
 			var unavailable = CopperScreenAvailability.GetUnavailableReason(draft, AppContext.BaseDirectory);
 			var romError = ValidateSelectedRom(draft);
-			_romValidation.Text = romError ?? (draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "CopperStart ROM ready · experimental" : draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? "Minimal disk boot · experimental" : draft.RomVersion switch
+			_romValidation.Text = romError ?? (draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "CopperStart ROM ready · experimental" : draft.KickstartSource == CopperScreenKickstartSource.MinimalDiskBoot ? CopperScreenBootMethods.Label("MinimalDiskBoot") : draft.RomVersion switch
             {
                 KickstartVersion.Kickstart20 => "Kickstart 2.x detected · compatibility may vary",
                 KickstartVersion.Kickstart30 => "Kickstart 3.0 detected · compatibility may vary",

@@ -13,7 +13,7 @@ public sealed partial class CopperScreenMinimalBootTests
         return draft.ToStartupOptions(AppContext.BaseDirectory);
     }
 
-    [Theory]
+    [SourceFloppyBootTheory]
     [InlineData(0, 524288)]
     [InlineData(1, 1048576)]
     [InlineData(2, 2097152)]
@@ -52,7 +52,7 @@ public sealed partial class CopperScreenMinimalBootTests
         Assert.Null(session.Machine.UnsupportedActiveFeature);
     }
 
-    [Theory]
+    [SourceFloppyBootTheory]
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(2)]
@@ -83,7 +83,7 @@ public sealed partial class CopperScreenMinimalBootTests
         Assert.Null(session.FaultMessage);
     }
 
-    [Theory]
+    [SourceFloppyBootTheory]
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(2)]
@@ -118,14 +118,14 @@ public sealed partial class CopperScreenMinimalBootTests
         Assert.Null(session.FaultMessage);
     }
 
-    [Fact]
+    [SourceFloppyBootFact]
     public void A500InstructionStreamHasExpectedSha256()
     {
         var code = new CopperScreenBootAssembler(CopperScreenMinimalBoot.RomBase).Assemble(CopperScreenMinimalBoot.BuildSource());
         Assert.Equal("0592864357770C01F9777A4F126F9605B23162AFE36DF2AB249A0D93752A99F7", Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(code)));
     }
 
-    [Theory]
+    [SourceFloppyBootTheory]
     [InlineData(1, 1048576)]
     [InlineData(2, 2097152)]
     public void ExtendedChipAllocationClearFreeAndCoalescingRespectResidentMemory(int model, int chipBytes)
@@ -184,7 +184,7 @@ public sealed partial class CopperScreenMinimalBootTests
         Assert.Null(session.FaultMessage);
     }
 
-    [Theory]
+    [SourceFloppyBootTheory]
     [InlineData(1, 1048576)]
     [InlineData(2, 2097152)]
     public void GuestDmaLoadsExecutableSecondStageAtTopOfChipRamAcrossHeadsAndCylinders(int model, int chipBytes)
@@ -220,7 +220,7 @@ public sealed partial class CopperScreenMinimalBootTests
         Assert.Null(session.FaultMessage);
     }
 
-    [Theory]
+    [SourceFloppyBootTheory]
     [InlineData(1)]
     [InlineData(2)]
     public void ExtendedModelsResetAndRereadReplacementDisk(int model)
@@ -235,7 +235,7 @@ public sealed partial class CopperScreenMinimalBootTests
         Assert.Null(session.FaultMessage);
     }
 
-    [Theory]
+    [SourceFloppyBootTheory]
     [InlineData(1, "jsr -462(a6)", "LVO -462")]
     [InlineData(2, "jsr -462(a6)", "LVO -462")]
     [InlineData(1, "move.l #$78000,40(a1)\njsr -456(a6)", "overlaps resident")]

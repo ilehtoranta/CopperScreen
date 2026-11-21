@@ -13,6 +13,7 @@ param(
     [string]$CopperOsSeed,
     [string]$CopperStartRom,
     [switch]$EnableCopperStart,
+    [switch]$IncludeCopperStartMini,
     [switch]$InstalledTestBuild
 )
 
@@ -52,6 +53,7 @@ $arguments = @('publish', (Join-Path $repository 'CopperScreen/CopperScreen.cspr
     "-p:Version=$PackageVersion", "-p:AssemblyVersion=$PackageVersion", "-p:FileVersion=$PackageVersion",
     "-p:CustomBeforeMicrosoftCommonTargets=$lockTargets", "-p:CopperScreenInstalledTests=$($InstalledTestBuild.IsPresent.ToString().ToLowerInvariant())")
 $arguments += "-p:CopperScreenEnableCopperStart=$($EnableCopperStart.IsPresent.ToString().ToLowerInvariant())"
+$arguments += "-p:CopperScreenIncludeMiniRom=$($IncludeCopperStartMini.IsPresent.ToString().ToLowerInvariant())"
 if ($AdditionalPackageSource) { $arguments += "-p:RestoreAdditionalProjectSources=$AdditionalPackageSource" }
 if ($PackagesPath) { $arguments += "-p:RestorePackagesPath=$PackagesPath" }
 & dotnet @arguments 2>&1 | Tee-Object -FilePath (Join-Path $output 'publish.log') | Out-Host
