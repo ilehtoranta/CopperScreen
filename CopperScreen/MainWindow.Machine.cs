@@ -9,11 +9,12 @@ namespace CopperScreen;
 
 internal sealed partial class MainWindow
 {
-    private sealed record MachineControls(ComboBox Model, ComboBox Cpu, ComboBox FastSize, CheckBox SlowRam, CheckBox FastRam, CheckBox Rtc, CheckBox DriveSounds, TextBlock Note, bool Welcome);
+    private sealed record MachineControls(ComboBox Model, ComboBox FastSize, CheckBox SlowRam, CheckBox FastRam, CheckBox Rtc, CheckBox DriveSounds, TextBlock Note);
     private readonly List<MachineControls> _machineControls = [];
+    private TextBlock _cpuRestrictionNote = null!;
     private bool _updatingMachineControls;
 
-    private Control CreateMachineControls(bool welcome)
+    private Control CreateMachineControls()
     {
         var model = new ComboBox
         {
@@ -21,9 +22,6 @@ internal sealed partial class MainWindow
             ItemTemplate = new FuncDataTemplate<CopperScreenMachineModel>((value, _) => new TextBlock { Text = CopperScreenMachinePresets.Label(value) })
         };
         AutomationProperties.SetName(model, "Amiga model");
-        var cpu = new ComboBox { HorizontalAlignment = HorizontalAlignment.Stretch,
-            ItemTemplate = new FuncDataTemplate<string>((value, _) => new TextBlock { Text = CopperScreenAvailability.ChoiceLabel(value ?? "") }) };
-        AutomationProperties.SetName(cpu, "Amiga CPU");
         var fastSize = new ComboBox { MinWidth = 105,
             ItemTemplate = new FuncDataTemplate<int>((value, _) => new TextBlock { Text = value == 0 ? "None" : value < 1024 ? $"{value} KiB" : $"{value / 1024} MiB" }) };
         AutomationProperties.SetName(fastSize, "Fast RAM size");
@@ -32,17 +30,12 @@ internal sealed partial class MainWindow
         var rtc = new CheckBox { Content = "RTC clock" };
         var sounds = new CheckBox { Content = "Floppy drive sounds" };
         var note = SettingsNote("");
-        var controls = new MachineControls(model, cpu, fastSize, slow, fast, rtc, sounds, note, welcome);
+        var controls = new MachineControls(model, fastSize, slow, fast, rtc, sounds, note);
         _machineControls.Add(controls);
         model.SelectionChanged += (_, _) =>
         {
             if (_updatingMachineControls || _updatingSettingsUi || _applyingSettings || model.SelectedItem is not CopperScreenMachineModel selected) return;
             EditMachine(draft => SelectModelSetup(draft, selected));
-        };
-        cpu.SelectionChanged += (_, _) =>
-        {
-            if (_updatingMachineControls || _updatingSettingsUi || _applyingSettings || cpu.SelectedItem is not string value) return;
-            EditMachine(draft => { CopperScreenMachinePresets.SetCpu(draft, Enum.Parse<M68kBackendKind>(value)); draft.MarkRequiresRestart(); return draft; });
         };
         fastSize.SelectionChanged += (_, _) =>
         {
@@ -63,11 +56,6 @@ internal sealed partial class MainWindow
         Toggle(rtc, (draft, enabled) => draft.RtcEnabled = enabled);
         Toggle(sounds, (draft, enabled) => draft.FloppyDriveAudio = draft.FloppyDriveAudio with { Enabled = enabled });
         var options = new StackPanel { Spacing = 4 };
-        options.Children.Add(SectionLabel("CPU"));
-        options.Children.Add(cpu);
-        options.Children.Add(welcome
-            ? SettingsNote("CPU changes may reduce Fast RAM to its address limit. Upgrades use experimental timing.")
-            : SettingsHelp("CPU help", "CPU changes may reduce Fast RAM to its address limit. Upgrades use experimental timing."));
         options.Children.Add(slow);
         options.Children.Add(WithAction(fast, fastSize));
         options.Children.Add(rtc);
@@ -76,6 +64,21 @@ internal sealed partial class MainWindow
         panel.Children.Add(SectionLabel("Amiga model"));
         panel.Children.Add(model);
         panel.Children.Add(note);
+        var cpuForm = CreateSettingsGroupForm();
+        _cpuBackendBox = AddComboSetting(cpuForm, "CPU backend",
+            ["AccurateM68000", "AccurateM68010", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "AccurateM68060", "JitM68040"],
+            markRestart: false);
+        AutomationProperties.SetName(_cpuBackendBox, "Amiga CPU");
+        _cpuBackendBox.SelectionChanged += (_, _) =>
+        {
+            if (_updatingSettingsUi || _updatingMachineControls || _applyingSettings || _cpuBackendBox.SelectedItem is not string selected) return;
+            EditMachine(draft => { CopperScreenMachinePresets.SetCpu(draft, Enum.Parse<M68kBackendKind>(selected)); draft.MarkRequiresRestart(); return draft; });
+        };
+        _cpuRestrictionNote = SettingsNote("");
+        AutomationProperties.SetName(_cpuRestrictionNote, "CPU requirements");
+        cpuForm.Children.Add(_cpuRestrictionNote);
+        cpuForm.Children.Add(SettingsHelp("CPU help", "CPU changes may reduce Fast RAM to its address limit. Upgrades use experimental timing."));
+        panel.Children.Add(cpuForm);
         panel.Children.Add(new Expander { Header = "Optional features", Content = options, HorizontalAlignment = HorizontalAlignment.Stretch });
         return panel;
     }
@@ -106,15 +109,20 @@ internal sealed partial class MainWindow
         _updatingMachineControls = true;
         try
         {
+            var cpuChoices = CopperScreenMachinePresets.CpuChoices(draft);
+            var fixedCpu = cpuChoices.Length == 1;
+            _cpuBackendBox.IsEnabled = !_applyingSettings && (!fixedCpu || !cpuChoices.Contains(draft.CpuBackend.ToString()));
+            _cpuRestrictionNote.IsVisible = fixedCpu;
+            if (fixedCpu)
+            {
+                var rom = draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "CopperStart" : "CopperStart Mini";
+                _cpuRestrictionNote.Text = $"{rom} requires this model’s standard CPU. Choose an original Kickstart ROM for CPU upgrades.";
+            }
             foreach (var controls in _machineControls)
             {
-                var enabled = !_applyingSettings && (!controls.Welcome || !_settingsVisible);
+                var enabled = !_applyingSettings;
                 controls.Model.SelectedItem = CopperScreenMachinePresets.Identify(draft);
                 controls.Model.IsEnabled = enabled;
-                var cpuChoices = CopperScreenMachinePresets.CpuChoices(draft);
-                if (controls.Cpu.ItemsSource is not string[] currentCpus || !currentCpus.SequenceEqual(cpuChoices)) controls.Cpu.ItemsSource = cpuChoices;
-                controls.Cpu.SelectedItem = draft.CpuBackend.ToString();
-                controls.Cpu.IsEnabled = enabled && draft.KickstartSource != CopperScreenKickstartSource.MinimalDiskBoot;
                 var sizes = CopperScreenMachinePresets.FastRamChoices(draft);
                 if (controls.FastSize.ItemsSource is not int[] currentSizes || !currentSizes.SequenceEqual(sizes)) controls.FastSize.ItemsSource = sizes;
                 controls.FastSize.SelectedItem = draft.RealFastRamKb;

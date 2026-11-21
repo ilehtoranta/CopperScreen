@@ -31,6 +31,11 @@ public sealed partial class LaunchWorkflowTests
             var settings = SettingsField<Window>(window, "_settingsWindow");
             Assert.DoesNotContain(settings.GetLogicalDescendants().OfType<ComboBox>(), control => AutomationProperties.GetName(control) == "Boot method");
             Assert.True(SettingsNamed<Button>(settings, "Browse for boot ROM").IsEffectivelyVisible);
+            var cpu = SettingsNamed<ComboBox>(settings, "Amiga CPU");
+            Assert.True(cpu.IsEffectivelyVisible);
+            Assert.Equal(model == 2 ? "AccurateM68EC020" : "AccurateM68000", cpu.SelectedItem);
+            Assert.Equal(!CopperScreenBundledMiniRom.Included, cpu.IsEnabled);
+            Assert.Equal(CopperScreenBundledMiniRom.Included, SettingsNamed<TextBlock>(settings, "CPU requirements").IsEffectivelyVisible);
             Assert.Equal(CopperScreenBundledMiniRom.Included, SettingsField<Button>(window, "_settingsStartButton").IsEnabled);
             if (CopperScreenBundledMiniRom.Included)
             {

@@ -145,7 +145,7 @@ internal sealed partial class MainWindow
         var layout = CreateSettingsPageLayout();
         layout.Spacing = 16;
         layout.Children.Add(new TextBlock { Text = "Start your Amiga", FontSize = 24, FontWeight = FontWeight.SemiBold, Foreground = Brushes.White });
-        layout.Children.Add(CreateMachineControls(welcome: false));
+        layout.Children.Add(CreateMachineControls());
         layout.Children.Add(SettingsHelp("Model help", "Selecting a model restores its saved configuration. Changes are saved automatically. Change memory sizes and connected drives in their settings pages."));
         var form = CreateSettingsGroupForm();
         _kickstartRomBox = new TextBox { PlaceholderText = "Choose a boot ROM", MinWidth = 0 };
@@ -181,12 +181,6 @@ internal sealed partial class MainWindow
 
         var options = CreateSettingsGroupForm();
         _engineBox = AddComboSetting(options, "Engine", ["Lightweight", "Legacy"]);
-        _cpuBackendBox = AddComboSetting(options, "CPU backend", ["AccurateM68000", "AccurateM68010", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "AccurateM68060", "JitM68040"], markRestart: false);
-        _cpuBackendBox.SelectionChanged += (_, _) =>
-        {
-            if (_updatingSettingsUi || _updatingMachineControls || _cpuBackendBox.SelectedItem is not string selected) return;
-            EditMachine(draft => { CopperScreenMachinePresets.SetCpu(draft, Enum.Parse<M68kBackendKind>(selected)); draft.MarkRequiresRestart(); return draft; });
-        };
         options.Children.Add(SettingsHelp("Availability help", "Greyed choices are not yet available and cannot be selected. Legacy is unavailable. CPU choices depend on the selected model."));
         var reset = CreatePanelButton("Use supported Amiga 500 settings", UseSupportedMachine);
         options.Children.Add(reset);

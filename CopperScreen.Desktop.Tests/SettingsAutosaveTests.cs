@@ -24,7 +24,10 @@ public sealed partial class LaunchWorkflowTests
             LaunchSelection.Select(window, model);
             Click(Button(window, "Configure Amiga…"));
             var settings = SettingsField<Window>(window, "_settingsWindow");
-            settings.GetLogicalDescendants().OfType<ComboBox>().Single(c => AutomationProperties.GetName(c) == "Amiga CPU").SelectedItem = cpu.ToString();
+            var cpuSelector = SettingsNamed<ComboBox>(settings, "Amiga CPU");
+            Assert.True(cpuSelector.IsEffectivelyVisible);
+            Assert.True(cpuSelector.IsEnabled);
+            cpuSelector.SelectedItem = cpu.ToString();
             SettingsField<TextBox>(window, "_realFastRamBox").Text = "2048";
             SettingsField<CheckBox>(window, "_rtcEnabledBox").IsChecked = true;
             await Task.Delay(25); // Deliver queued text-change notifications.
