@@ -30,7 +30,7 @@ public sealed partial class LaunchWorkflowTests
             Assert.Equal(1, LaunchSelection.Current(window));
             Assert.Contains("Kickstart 2.04", Named<TextBlock>(window, "ROM requirements").Text);
             Assert.True(Button(window, "Start Amiga").IsEnabled);
-            Assert.StartsWith("Optional", Named<TextBlock>(window, "Startup disk selection").Text);
+            Assert.Equal("No disk inserted", Named<ComboBox>(window, "DF0 disk · choose from recent disks").SelectedItem?.ToString());
             Assert.Equal(KickstartVersion.Kickstart20, new CopperScreenRecentSession(_root).LoadMachine(AppContext.BaseDirectory)!.RomVersion);
         }
         finally { window.Close(); }

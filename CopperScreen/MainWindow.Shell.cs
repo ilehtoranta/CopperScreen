@@ -406,7 +406,7 @@ internal sealed partial class MainWindow
         var drive = state.Drives.FirstOrDefault();
         RefreshPrimaryDiskChoices(drive);
         var canChangeDisk = !_settingsVisible && !_applyingSettings && !_selectingRecentDisk && !workspace && !_welcomeCopperOs
-            && CopperScreenLaunchWorkflow.StartChoice(_settingsDraft) != 3;
+            && (CopperScreenLaunchWorkflow.StartChoice(_settingsDraft) != 3 || (!running && _settingsDraft.HardDrives.Count == 0));
         _browseDiskButton.IsEnabled = _primaryDiskCombo.IsEnabled = canChangeDisk;
         _ejectDiskButton.IsEnabled = (drive.HasDisk || drive.IsSwapPending) && canChangeDisk;
         ToolTip.SetTip(_primaryDiskCombo, drive.DiskPath ?? "Choose a recent disk, use Browse, or drop an ADF, ADZ, DMS, IPF, SCP or ZIP here.");

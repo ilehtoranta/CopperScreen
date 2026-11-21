@@ -139,7 +139,8 @@ public sealed partial class DesktopQualificationTests(LaunchUiFixture ui) : IDis
                 if (window.FocusManager?.GetFocusedElement() is Control focused)
                     reached.Add(ControlAutomationPeer.CreatePeerForElement(focused)?.GetName() ?? "");
             }
-            Assert.Contains("Choose disk…", reached);
+            Assert.Contains("DF0 disk · choose from recent disks", reached);
+            Assert.Contains("Browse…", reached);
             Assert.Contains("Configure Amiga…", reached);
         }
         finally { window.Close(); }

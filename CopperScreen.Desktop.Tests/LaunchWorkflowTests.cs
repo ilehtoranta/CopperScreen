@@ -45,7 +45,9 @@ public sealed partial class LaunchWorkflowTests
             Assert.DoesNotContain("COPPERSCREEN", labels);
             Assert.DoesNotContain("Start your Amiga", labels);
             Assert.DoesNotContain(CopperScreenLaunchWorkflow.ContentGuidance, labels);
+            Assert.DoesNotContain("Startup disk", labels);
             Assert.Contains("Amiga model", labels);
+            Assert.True(Named<Button>(window, "Browse…").IsEnabled);
             Assert.Contains("Recommended for Amiga 500: Kickstart 1.3", Named<TextBlock>(window, "ROM requirements").Text);
             Assert.Contains("Other supported versions are accepted", Named<TextBlock>(window, "ROM requirements").Text);
             Assert.Equal(new[] { "Amiga 500", "Amiga 500+", "Amiga 1200" }, Named<ComboBox>(window, "Amiga model").Items.Cast<object>().Select(m => m.ToString()));
@@ -64,7 +66,7 @@ public sealed partial class LaunchWorkflowTests
             LaunchSelection.Select(window, 3);
             Assert.True(Button(window, "Start CopperOS").IsEnabled);
             Assert.False(Button(window, "Choose ROM…").IsEffectivelyVisible);
-            Assert.False(Button(window, "Choose disk…").IsEffectivelyVisible);
+            Assert.False(Named<Button>(window, "Browse…").IsEnabled);
             Assert.Contains("included", Named<TextBlock>(window, "ROM requirements").Text);
             Capture(window, "copperos-setup");
             Assert.True(File.Exists(Assert.Single(MenuDraft(window).HardDrives).Path));
@@ -147,10 +149,11 @@ public sealed partial class LaunchWorkflowTests
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
         {
+            var df0 = Named<ComboBox>(window, "DF0 disk · choose from recent disks");
             await window.InsertDriveDiskAsync(0, disk);
-            Assert.Equal("user-owned.adf", Named<TextBlock>(window, "Startup disk selection").Text);
+            Assert.Equal("user-owned.adf", df0.SelectedItem?.ToString());
             await window.InsertDriveDiskAsync(0, invalid);
-            Assert.Equal("user-owned.adf", Named<TextBlock>(window, "Startup disk selection").Text);
+            Assert.Equal("user-owned.adf", df0.SelectedItem?.ToString());
             Assert.Contains("previous selection is unchanged", Named<TextBlock>(window, "Startup guidance").Text);
             Assert.Equal(new byte[901120], File.ReadAllBytes(disk));
         }

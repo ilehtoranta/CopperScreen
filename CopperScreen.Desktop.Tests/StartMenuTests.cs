@@ -182,7 +182,7 @@ public sealed partial class LaunchWorkflowTests
             var image = Assert.Single(draft.HardDrives).Path;
             Assert.False(draft.HardDrives[0].ReadOnly);
             Assert.False(Button(window, "Choose ROM…").IsEffectivelyVisible);
-            Assert.False(Button(window, "Choose disk…").IsEffectivelyVisible);
+            Assert.False(Named<Button>(window, "Browse…").IsEnabled);
             Assert.True(Button(window, "Start CopperOS").IsEnabled);
             Capture(window, "copperos-hdf-ready");
             Click(Button(window, "Start CopperOS"));
@@ -281,10 +281,12 @@ public sealed partial class LaunchWorkflowTests
         try
         {
             await window.InsertDriveDiskAsync(0, path);
-            Assert.True(Button(window, "Remove floppy disk").IsEffectivelyVisible);
-            Click(Button(window, "Remove floppy disk"));
+            var eject = Named<Button>(window, "Eject");
+            Assert.True(eject.IsEffectivelyVisible);
+            Assert.True(eject.IsEnabled);
+            Click(eject);
             Assert.Null(MenuDraft(window).DriveDiskPaths[0]);
-            Assert.False(Button(window, "Remove floppy disk").IsEffectivelyVisible);
+            Assert.False(eject.IsEnabled);
             var draft = MenuDraft(window); draft.KickstartRomPath = DefaultRomFixture(0, "carried-rom");
             var selectedRom = draft.KickstartRomPath;
             var selectedVersion = draft.RomVersion;
@@ -328,9 +330,13 @@ public sealed partial class LaunchWorkflowTests
             var restored = new CopperScreenRecentSession(_root).LoadMachine(AppContext.BaseDirectory)!;
             Assert.Equal(draft.HardDrives[0], restored.HardDrives[0]);
             Assert.Equal(bytes, File.ReadAllBytes(path));
+            Assert.False(Named<Button>(window, "Browse…").IsEnabled);
+            draft.HardDrives.Clear();
+            SetMenuDraft(window, draft);
+            Assert.True(Named<Button>(window, "Browse…").IsEnabled);
             LaunchSelection.Select(window, 2);
             Assert.Empty(MenuDraft(window).HardDrives);
-            Assert.True(Button(window, "Choose disk…").IsEffectivelyVisible);
+            Assert.True(Named<Button>(window, "Browse…").IsEnabled);
             Assert.True(Button(window, "Choose ROM…").IsEffectivelyVisible);
         }
         finally { window.Close(); }

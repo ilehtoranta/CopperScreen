@@ -73,7 +73,7 @@ public sealed partial class LaunchWorkflowTests
             await window.InsertDriveDiskAsync(0, disk);
             var restored = new CopperScreenRecentSession(_root).RestoreDisks(CopperScreenLaunchWorkflow.SelectStartChoice(new(), 0));
             Assert.Equal(disk, restored.DriveDiskPaths[0]);
-            Click(Button(window, "Remove floppy disk"));
+            Click(Named<Button>(window, "Eject"));
             restored = new CopperScreenRecentSession(_root).RestoreDisks(CopperScreenLaunchWorkflow.SelectStartChoice(new(), 0));
             Assert.Null(restored.DriveDiskPaths[0]);
             LaunchSelection.Select(window, 1);
