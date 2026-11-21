@@ -82,8 +82,15 @@ internal sealed partial class MainWindow
         var customise = CreatePanelButton("Configure Amiga…", ShowSettingsWindow);
         customise.Background = Brushes.Transparent;
         customise.BorderBrush = QuietBorder;
-        content.Children.Add(CommandGroup(_welcomeStart, customise));
-        content.Children.Add(CreatePanelButton("Disk Image Manager…", () => _ = ShowDiskImageManagerAsync()));
+        var diskManager = CreatePanelButton("Disk Image Manager…", () => _ = ShowDiskImageManagerAsync());
+        diskManager.Background = Brushes.Transparent;
+        diskManager.BorderBrush = QuietBorder;
+        content.Children.Add(new WrapPanel
+        {
+            ItemSpacing = 6,
+            LineSpacing = 6,
+            Children = { _welcomeStart, customise, diskManager }
+        });
         _welcomeProfiles = new ComboBox { HorizontalAlignment = HorizontalAlignment.Stretch };
         AutomationProperties.SetName(_welcomeProfiles, "Saved launch profiles");
         var load = CreatePanelButton("Load profile", LoadWelcomeProfile);
