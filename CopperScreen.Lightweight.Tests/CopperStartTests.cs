@@ -101,7 +101,7 @@ public sealed class CopperStartTests : IDisposable
             Assert.Equal(CopperScreenKickstartSource.CopperStart, changed.KickstartSource);
             Assert.Equal(draft.KickstartRomPath, changed.KickstartRomPath);
         }
-        Assert.Equal(new[] { "AccurateM68000" }, CopperScreenMachinePresets.CpuChoices(draft));
+        Assert.Equal(new[] { "AccurateM68000", "AccurateM68060" }, CopperScreenMachinePresets.CpuChoices(draft));
         Assert.Equal(new[] { 0 }, CopperScreenMachinePresets.FastRamChoices(draft));
         draft.DriveWriteProtected[0] = false;
         CopperStartAvailabilityAssert.ForProfile(draft, _directory, "read-only DF0");
@@ -121,7 +121,7 @@ public sealed class CopperStartTests : IDisposable
     {
         var draft = A1200HdfDraft();
         CopperStartAvailabilityAssert.ForProfile(draft, _directory);
-        Assert.Equal(new[] { "AccurateM68EC020" }, CopperScreenMachinePresets.CpuChoices(draft));
+        Assert.Equal(new[] { "AccurateM68EC020", "AccurateM68060" }, CopperScreenMachinePresets.CpuChoices(draft));
         Assert.Equal(new[] { 0 }, CopperScreenMachinePresets.FastRamChoices(draft));
         var path = CopperScreenProfileStore.Save(draft, AppContext.BaseDirectory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var loaded, out var error, _directory), error);

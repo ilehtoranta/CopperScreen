@@ -6,7 +6,7 @@ public sealed class CpuMemoryConfigurationTests
 {
     [Theory]
     [InlineData(0)] [InlineData(1)] [InlineData(2)]
-    public void EveryAvailableCpuAndMemoryChoicePassesTheSessionValidator(int value)
+    public void TheSessionValidatorChecksSelectableCpuAndMemoryChoices(int value)
     {
         var draft = CopperScreenMachinePresets.Apply(new(), (CopperScreenMachineModel)value);
         if (value != 2) { draft.KickstartSource = CopperScreenKickstartSource.Kickstart31Rom; draft.RomVersion = KickstartVersion.Kickstart31; }
@@ -18,7 +18,8 @@ public sealed class CpuMemoryConfigurationTests
                 CopperScreenMachinePresets.SetFastRam(draft, size);
                 var restored = draft.Clone();
                 Assert.Equal(size, restored.RealFastRamKb);
-                Assert.Null(CopperScreenAvailability.GetUnavailableReason(restored, AppContext.BaseDirectory));
+                var expected = value != 2 && cpu == "AccurateM68060" ? CopperScreenMachinePresets.Cpu68060Requirement : null;
+                Assert.Equal(expected, CopperScreenAvailability.GetUnavailableReason(restored, AppContext.BaseDirectory));
             }
         }
     }

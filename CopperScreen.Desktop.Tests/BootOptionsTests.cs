@@ -34,18 +34,24 @@ public sealed partial class LaunchWorkflowTests
             var cpu = SettingsNamed<ComboBox>(settings, "Amiga CPU");
             Assert.True(cpu.IsEffectivelyVisible);
             Assert.Equal(model == 2 ? "AccurateM68EC020" : "AccurateM68000", cpu.SelectedItem);
-            var fixedCpu = CopperScreenBundledMiniRom.Included && model != 2;
-            Assert.Equal(!fixedCpu, cpu.IsEnabled);
+            Assert.True(cpu.IsEnabled);
             var cpuRequirements = SettingsNamed<TextBlock>(settings, "CPU requirements");
-            Assert.Equal(fixedCpu, cpuRequirements.IsEffectivelyVisible);
+            Assert.False(cpuRequirements.IsEffectivelyVisible);
             Assert.Equal(CopperScreenBundledMiniRom.Included, SettingsField<Button>(window, "_settingsStartButton").IsEnabled);
             if (CopperScreenBundledMiniRom.Included)
             {
+                cpu.SelectedItem = "AccurateM68060";
+                Assert.Equal("AccurateM68060", cpu.SelectedItem);
+                Assert.True(cpuRequirements.IsEffectivelyVisible);
                 if (model == 2)
                 {
-                    cpu.SelectedItem = "AccurateM68060";
-                    Assert.True(cpuRequirements.IsEffectivelyVisible);
                     Assert.Contains("FPU disabled", cpuRequirements.Text);
+                }
+                else
+                {
+                    Assert.Equal(CopperScreenMachinePresets.Cpu68060Requirement, cpuRequirements.Text);
+                    Assert.False(SettingsField<Button>(window, "_settingsStartButton").IsEnabled);
+                    cpu.SelectedItem = "AccurateM68000";
                 }
                 Click(SettingsField<Button>(window, "_settingsCloseButton"));
                 var start = Button(window, "Start Amiga");
@@ -54,6 +60,40 @@ public sealed partial class LaunchWorkflowTests
                 Click(Named<Button>(window, "Stop"));
                 await Until(() => start.IsEffectivelyVisible && start.IsEnabled && start.Content is "Start Amiga");
             }
+        }
+        finally { window.Close(); }
+    });
+
+    [Fact, Trait("Area", "BootOptions")]
+    public Task Selecting68060LetsTheUserFixTheModelAndRom() => Ui(() =>
+    {
+        var window = new MainWindow([], new CopperScreenRecentSession(_root));
+        window.Show();
+        try
+        {
+            window.SelectOriginalRom(DefaultRomFixture(0, "68060-kickstart-13"));
+            Click(Button(window, "Configure Amiga…"));
+            var settings = SettingsField<Window>(window, "_settingsWindow");
+            var cpu = SettingsNamed<ComboBox>(settings, "Amiga CPU");
+            var requirements = SettingsNamed<TextBlock>(settings, "CPU requirements");
+            var start = SettingsField<Button>(window, "_settingsStartButton");
+            Assert.True(start.IsEnabled);
+
+            cpu.SelectedItem = "AccurateM68060";
+            Assert.Equal("AccurateM68060", cpu.SelectedItem);
+            Assert.Equal(CopperScreenMachinePresets.Cpu68060Requirement, requirements.Text);
+            Assert.False(start.IsEnabled);
+            Assert.Equal(M68kBackendKind.AccurateM68060,
+                new CopperScreenRecentSession(_root).LoadMachine(AppContext.BaseDirectory)!.CpuBackend);
+
+            SettingsNamed<ComboBox>(settings, "Amiga model").SelectedItem = CopperScreenMachineModel.Amiga1200;
+            Assert.Equal("AccurateM68060", cpu.SelectedItem);
+            Assert.False(start.IsEnabled);
+
+            window.SelectOriginalRom(DefaultRomFixture(2, "68060-kickstart-31", kickstart31: true));
+            Assert.Equal("AccurateM68060", cpu.SelectedItem);
+            Assert.Contains("FPU disabled", requirements.Text);
+            Assert.True(start.IsEnabled);
         }
         finally { window.Close(); }
     });

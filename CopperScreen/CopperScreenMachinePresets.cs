@@ -69,17 +69,11 @@ internal static class CopperScreenMachinePresets
     public static string[] CpuChoices(CopperScreenSettingsDraft draft)
     {
         var a1200 = Identify(draft) == CopperScreenMachineModel.Amiga1200;
-        var canUse68060 = CanUse68060(draft.Chipset, draft.KickstartSource, draft.RomVersion);
         if (draft.KickstartSource is CopperScreenKickstartSource.CopperStart or CopperScreenKickstartSource.MinimalDiskBoot)
-        {
-            if (!a1200) return ["AccurateM68000"];
-            return canUse68060 ? ["AccurateM68EC020", "AccurateM68060"] : ["AccurateM68EC020"];
-        }
-        if (!a1200)
-            return ["AccurateM68000", "AccurateM68010", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"];
-        return canUse68060
+            return [a1200 ? "AccurateM68EC020" : "AccurateM68000", "AccurateM68060"];
+        return a1200
             ? ["AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040", "AccurateM68060"]
-            : ["AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"];
+            : ["AccurateM68000", "AccurateM68010", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040", "AccurateM68060"];
     }
 
     public static bool CanUse68060(AmigaChipset chipset, CopperScreenKickstartSource source, KickstartVersion version)

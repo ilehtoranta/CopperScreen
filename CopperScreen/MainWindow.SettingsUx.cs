@@ -298,7 +298,7 @@ internal sealed partial class MainWindow
             if (!CopperScreenAvailability.IsChoiceAvailable(label, value))
                 return "Unsupported by this version";
             if (label == "CPU backend" && !CopperScreenMachinePresets.CpuChoices(_settingsDraft).Contains(value))
-                return value == "AccurateM68060" ? CopperScreenMachinePresets.Cpu68060Requirement : "Unavailable with this model and boot ROM";
+                return "Unavailable with this model and boot ROM";
             if (label == "Profile kind" && value == "Mouse" &&
                 _controllerProfileChooser.SelectedItem is CopperScreenControllerProfile profile &&
                 string.Equals(profile.Id, _settingsDraft.Input.Port2ProfileId, StringComparison.OrdinalIgnoreCase))

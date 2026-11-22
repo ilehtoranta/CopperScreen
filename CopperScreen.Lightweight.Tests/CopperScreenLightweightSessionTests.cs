@@ -185,7 +185,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         var options = Options("--cpu", "68060");
         var draft = CopperScreenSettingsDraft.FromStartupOptions(options);
         Assert.Equal(M68kBackendKind.AccurateM68060, draft.CpuBackend);
-        Assert.Contains("Amiga 1200 with an original Kickstart 3.1 ROM", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        Assert.Equal(CopperScreenMachinePresets.Cpu68060Requirement, CopperScreenAvailability.GetUnavailableReason(draft, _directory));
         var path = CopperScreenProfileStore.Save(draft, _directory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
         Assert.Equal(M68kBackendKind.AccurateM68060, profile.CpuBackend);

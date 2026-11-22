@@ -39,6 +39,13 @@ internal sealed partial class MainWindow
         var draft = _recentSession.RestoreConfiguration(fallback, AppContext.BaseDirectory);
         draft = _recentSession.RestoreKickstart(draft);
         draft = _recentSession.RestoreDisks(draft);
+        if (current.CpuBackend == M68kBackendKind.AccurateM68060 &&
+            (!CopperScreenMachinePresets.CanUse68060(current.Chipset, current.KickstartSource, current.RomVersion) ||
+             CopperScreenBootMethods.Method(current) == CopperScreenBootMethod.KickstartRom && string.IsNullOrWhiteSpace(current.KickstartRomPath)))
+        {
+            // Keep the pending CPU choice while the user fixes the model or boot ROM.
+            draft.CpuBackend = current.CpuBackend;
+        }
         if (ReferenceEquals(draft, fallback) && draft.DriveDiskPaths.All(string.IsNullOrWhiteSpace) &&
             CopperScreenMachinePresets.Identify(current) == CopperScreenMachinePresets.Identify(draft) &&
             CopperScreenBootMethods.Method(current) != CopperScreenBootMethods.Method(draft) &&
