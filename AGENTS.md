@@ -74,12 +74,6 @@ Normal background applications are allowed; process presence is not contaminatio
 Noisy/missing-telemetry samples are INVALID / RERUN; never relabel older evidence.
 Do not treat an ordinary short runner smoke test as an acceptance measurement.
 
-G6/G7 Legacy cutover is retired. Completed Lightweight H-stage procedures and
-dated approval/STOP/GO language under `docs/history/` are historical evidence,
-not active instructions or prerequisites for ordinary development. The forwarding
-notes under `CopperMod.Amiga/` point to current guidance. Documentation-only changes
-need link/instruction checks, not emulator suites or new gameplay/FPS acceptance.
-
 Never commit ROMs, game media, local build artifacts or credentials. Existing
 published package versions are immutable. New source versions are development
 versions until explicitly released; moving source does not authorize publication.
