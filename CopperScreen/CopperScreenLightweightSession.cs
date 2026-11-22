@@ -6,6 +6,7 @@ namespace CopperScreen;
 // One owner, one machine. Host commands run on CopperScreenRuntime's thread.
 internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 {
+    private const string Cpu68060Requirement = "The 68060 option requires an Amiga 1200 with an original Kickstart 3.1 ROM.";
     private readonly LightweightA500Machine _machine;
     private readonly IReadOnlyList<LightweightFloppyDriveType> _driveTypes;
     private readonly bool _bundledMini;
@@ -35,6 +36,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         else rom = CopperScreenKickstartRomArchive.ReadNativeRom(options.KickstartRomPath!, options.Profile.KickstartVersion);
         BaseDirectory = options.BaseDirectory;
         var backend = options.CpuBackendOverride ?? options.Profile.CpuBackend;
+        if (backend == M68kBackendKind.AccurateM68060 && CopperScreenKickstartRomArchive.IdentifyNativeVersion(rom) != KickstartVersion.Kickstart31)
+            throw new NotSupportedException(Cpu68060Requirement);
         var modelName = options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Amiga 1200" : options.Profile.Chipset.DisplayChip == DisplayChipModel.EcsDenise ? "Amiga 500+" : "Amiga 500";
         ProfileName = _bundledMini ? modelName + " · CopperStart Mini" : options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
             ? string.Empty : $" [{CopperScreenAvailability.ChoiceLabel(backend.ToString())}]");
@@ -44,7 +47,8 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             { FramebufferWidth = options.Profile.Chipset.DisplayChip != DisplayChipModel.OcsDenise ? 1816 : 908,
                 DeniseModel = options.Profile.Chipset.DisplayChip switch { DisplayChipModel.AgaLisa => LightweightDeniseModel.Lisa4203, DisplayChipModel.EcsDenise => LightweightDeniseModel.Mos8373, _ => LightweightDeniseModel.Mos8362 }, FloppyDriveCount = options.Profile.FloppyDriveCount,
                 FloppyDriveTypes = _driveTypes.Take(options.Profile.FloppyDriveCount).ToArray(),
-                CpuModel = GetCpuModel(options.CpuBackendOverride ?? options.Profile.CpuBackend),
+                CpuModel = GetCpuModel(backend),
+                DisableM68060FpuOnReset = backend == M68kBackendKind.AccurateM68060,
                 CpuExecutionMode = backend == M68kBackendKind.JitM68040 ? Copper68k.M68kExecutionMode.Jit : Copper68k.M68kExecutionMode.Interpreter,
                 AgnusModel = GetAgnusModel(options.Profile.Chipset.DmaChip),
                 ChipRamBytes = options.Profile.ChipRamSize, SlowRamBytes = options.Profile.ExpansionRamSize,
@@ -156,18 +160,20 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         if (minimal && ((!minimalA500 && !copperStartA500Plus && !minimalA1200) ||
             p.RealFastRamSize != 0 || options.HardDrives.Count != 0 || options.HostDirectories.Count != 0))
             return "CopperStart Mini requires a standard PAL A500 (OCS, 68000, 512 KiB Chip and optional 512 KiB slow RAM), A500+ (ECS, 68000, 1 MiB Chip RAM), or A1200 (Alice/Lisa, 68EC020, 2 MiB Chip RAM). Fast RAM, hard drives and shared folders require an original Kickstart ROM.";
+        if (cpu == M68kBackendKind.AccurateM68060 && !CopperScreenMachinePresets.CanUse68060(p.Chipset, p.KickstartSource, p.KickstartVersion))
+            return Cpu68060Requirement;
         var aga = p.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
         if (aga != (p.Chipset.DmaChip == DmaChipModel.AgaAlice) ||
-            aga && cpu is not (M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040))
-            return "A1200 requires PAL Alice/Lisa, 68EC020 or a 68020/030/040 upgrade, 2 MiB Chip RAM and no slow RAM.";
+            aga && cpu is not (M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040 or M68kBackendKind.AccurateM68060))
+            return "A1200 requires PAL Alice/Lisa, 68EC020 or a 68020/030/040/060 upgrade, 2 MiB Chip RAM and no slow RAM.";
         if (p.Chipset.DisplayChip is not (DisplayChipModel.OcsDenise or DisplayChipModel.EcsDenise or DisplayChipModel.AgaLisa) || p.Chipset.VideoStandard != VideoStandard.Pal ||
             p.ExpansionRamBase != 0xC00000 ||
             p.RtgVramSize != 0 ||
             p.FloppyDriveCount is < 1 or > 4 ||
-            (options.CpuBackendOverride ?? p.CpuBackend) is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68010 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040) ||
+            cpu is not (M68kBackendKind.AccurateM68000 or M68kBackendKind.AccurateM68010 or M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040 or M68kBackendKind.AccurateM68060) ||
             p.KickstartSource is not (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart13Rom or CopperScreenKickstartSource.Kickstart31Rom or CopperScreenKickstartSource.MinimalDiskBoot or CopperScreenKickstartSource.CopperStart) ||
             (!minimal && !copperStart && p.KickstartVersion is not (KickstartVersion.Kickstart13 or KickstartVersion.Kickstart20 or KickstartVersion.Kickstart30 or KickstartVersion.Kickstart31 or KickstartVersion.CopperStartMini)))
-            return "CopperScreen supports PAL / OCS, ECS or AGA Alice/Lisa / 68000 or experimental 68010/68EC020/68020/68030/68040 (optional 040 JIT) / explicit PAL Agnus and compatible Chip/slow RAM / supported native Kickstart ROMs / one to four floppy drives / optional A501 RTC; no RTG. The 68060 requires separately validated 060-aware OS task/FPU support.";
+            return "CopperScreen requires a supported PAL chipset and CPU, compatible Chip/slow RAM, a supported ROM and one to four floppy drives. RTG is unavailable.";
         if (p.Chipset.DmaChip is not (DmaChipModel.OcsAgnus or DmaChipModel.Agnus8372A or DmaChipModel.Agnus8375Pal2M or DmaChipModel.AgaAlice))
             return "Select an explicit supported PAL Agnus: 8371, 8372A, 8375 (318069-10) or A1200 Alice.";
         try { LightweightAgnus.ValidateMemory(GetAgnusModel(p.Chipset.DmaChip), p.ChipRamSize, p.ExpansionRamSize); }

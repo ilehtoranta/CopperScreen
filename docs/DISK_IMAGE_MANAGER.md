@@ -302,7 +302,7 @@ opening an image does not eagerly instantiate a runtime for every partition.
 Switching volumes disposes the previous session. Entries from a prior mount cannot
 be used in a new session. The window serializes background operations.
 
-The service embeds its ROM and versioned manifest and uses pinned Copper68k 1.5.5,
+The service embeds its ROM and versioned manifest and uses pinned Copper68k 1.5.6,
 M68020 interpreter execution, flat ROM/RAM and bounded storage gateways. Writes require an explicit writable staged source and service opt-in.
 The default per-command budget is 50 million instructions; cancellation is checked
 every 256 interpreted instructions. There is no managed filesystem fallback or
@@ -313,7 +313,7 @@ in `CopperScreenDiskExtraction`.
 ## Development package
 
 The app builds `CopperDisk.FileSystem` from source and uses the pinned
-`CopperStart.FileSystem.Service` **[0.5.0-dev.2]** from NuGet.org. A clean
+`CopperStart.FileSystem.Service` **[0.5.0-dev.3]** from NuGet.org. A clean
 checkout needs no private feed credentials:
 
 ```powershell
@@ -324,13 +324,13 @@ dotnet build CopperScreen.slnx -c Release --no-restore
 If you have the original qualified archive, you can also stage it in the local feed:
 
 ```powershell
-./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.2.nupkg"
+./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.3.nupkg"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 ```
 
 The script verifies the pinned package SHA-256:
-`32FDC533BCB44359BEFE9CB6BABF4EB7F52EBE30A04DBEA97DCD39D21ADF197F`.
+`ACCF8693852B9BD0FEE2BFCE49190BE70670021ABAFEA57EBC74FF130E5A8DF9`.
 It copies the package to ignored `artifacts/filesystem-service-feed`, an additional
 restore source when present. Lock files also pin the NuGet content hash.
 Consumers need the managed package and its pinned CPU dependency; CopperStart,

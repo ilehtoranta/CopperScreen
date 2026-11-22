@@ -185,7 +185,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             M68kCpuModel.M68040 when _cpuClockShift != 0 => new LightweightAccelerated040Bus(this),
             _ => new LightweightAcceleratorBus(this, _configuration.CpuModel)
         };
-        var cpuOptions = new M68kCoreOptions { ExecutionMode = _configuration.CpuExecutionMode };
+        var cpuOptions = new M68kCoreOptions
+        {
+            ExecutionMode = _configuration.CpuExecutionMode,
+            DisableM68060FpuOnReset = _configuration.DisableM68060FpuOnReset
+        };
         if (_cpuClockShift != 0)
             EnableUncachedFastRamTraces(cpuOptions);
         _cpu = IsAga && _configuration.CpuModel == M68kCpuModel.M68EC020

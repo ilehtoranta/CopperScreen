@@ -180,16 +180,43 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     }
 
     [Fact]
-    public void Cpu060SelectionIsRetainedButExplainsItsOsRequirement()
+    public void Cpu060SelectionIsRetainedButExplainsItsMachineAndRomRequirement()
     {
         var options = Options("--cpu", "68060");
         var draft = CopperScreenSettingsDraft.FromStartupOptions(options);
         Assert.Equal(M68kBackendKind.AccurateM68060, draft.CpuBackend);
-        Assert.Contains("060-aware OS", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
+        Assert.Contains("Amiga 1200 with an original Kickstart 3.1 ROM", CopperScreenAvailability.GetUnavailableReason(draft, _directory));
         var path = CopperScreenProfileStore.Save(draft, _directory, _directory);
         Assert.True(CopperScreenProfile.TryLoad(path, _directory, out var profile, out var error), error);
         Assert.Equal(M68kBackendKind.AccurateM68060, profile.CpuBackend);
         Assert.Throws<NotSupportedException>(() => new CopperScreenLightweightSession(options));
+    }
+
+    [Fact]
+    public void A1200WithKickstart31Starts68060WithFpuDisabledOnEveryReset()
+    {
+        var rom = new byte[524288];
+        BinaryPrimitives.WriteUInt32BigEndian(rom, 0x70000);
+        BinaryPrimitives.WriteUInt32BigEndian(rom.AsSpan(4), 0xF80100);
+        BinaryPrimitives.WriteUInt16BigEndian(rom.AsSpan(12), 40);
+        // MOVEC PCR,D0; BRA.S to the same branch.
+        new byte[] { 0x4E, 0x7A, 0x08, 0x08, 0x60, 0xFE }.CopyTo(rom, 0x100);
+        var path = Path.Combine(_directory, "fixture-68060.rom");
+        File.WriteAllBytes(path, rom);
+
+        var draft = CopperScreenMachinePresets.Apply(CopperScreenSettingsDraft.FromStartupOptions(Options()), CopperScreenMachineModel.Amiga1200);
+        draft.KickstartRomPath = path;
+        draft.RomVersion = KickstartVersion.Kickstart31;
+        CopperScreenMachinePresets.SetCpu(draft, M68kBackendKind.AccurateM68060);
+        using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(_directory));
+        Assert.Equal(Copper68k.M68kCpuModel.M68060, session.Machine.CpuModel);
+
+        session.RenderNextFrame(session.Framebuffer);
+        Assert.Equal(2u, session.Machine.Cpu.D[0] & 2u);
+        session.Reset();
+        session.RenderNextFrame(session.Framebuffer);
+        Assert.Equal(2u, session.Machine.Cpu.D[0] & 2u);
+        Assert.Null(session.FaultMessage);
     }
 
     [Fact]

@@ -67,8 +67,15 @@ internal static class CopperScreenMachinePresets
     public static string[] CpuChoices(CopperScreenSettingsDraft draft)
         => draft.KickstartSource is CopperScreenKickstartSource.CopperStart or CopperScreenKickstartSource.MinimalDiskBoot ? Identify(draft) == CopperScreenMachineModel.Amiga1200 ? ["AccurateM68EC020"] : ["AccurateM68000"]
             : Identify(draft) == CopperScreenMachineModel.Amiga1200
-            ? ["AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"]
+            ? CanUse68060(draft.Chipset, draft.KickstartSource, draft.RomVersion)
+                ? ["AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040", "AccurateM68060"]
+                : ["AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"]
             : ["AccurateM68000", "AccurateM68010", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "JitM68040"];
+
+    public static bool CanUse68060(AmigaChipset chipset, CopperScreenKickstartSource source, KickstartVersion version)
+        => chipset == new AmigaChipset(DmaChipModel.AgaAlice, DisplayChipModel.AgaLisa, VideoStandard.Pal) &&
+            source is (CopperScreenKickstartSource.KickstartRom or CopperScreenKickstartSource.Kickstart31Rom) &&
+            version == KickstartVersion.Kickstart31;
 
     public static int MaximumFastRamKb(M68kBackendKind cpu)
         => CopperMod.Amiga.Lightweight.LightweightA500Configuration.MaximumFastRamBytes(CopperScreenLightweightSession.GetCpuModel(cpu)) / 1024;

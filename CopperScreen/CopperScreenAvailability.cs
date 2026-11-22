@@ -22,8 +22,15 @@ internal static class CopperScreenAvailability
     public static bool IsChoiceAvailable(string setting, string value) => setting switch
     {
         "Engine" => value == "Lightweight",
-        "CPU backend" => value is "AccurateM68000" or "AccurateM68010" or "AccurateM68EC020" or "AccurateM68020" or "AccurateM68030" or "AccurateM68040" or "JitM68040",
+        "CPU backend" => value is "AccurateM68000" or "AccurateM68010" or "AccurateM68EC020" or "AccurateM68020" or "AccurateM68030" or "AccurateM68040" or "JitM68040" or "AccurateM68060",
         "Agnus" => value is "OcsAgnus" or "Agnus8372A" or "Agnus8375Pal2M" or "AgaAlice",
+        "Kickstart" => value switch
+        {
+            nameof(CopperScreenKickstartSource.CopperStart) => CopperScreenBootMethods.CopperStartEnabled,
+            nameof(CopperScreenKickstartSource.MinimalDiskBoot) => CopperScreenBundledMiniRom.Included,
+            nameof(CopperScreenKickstartSource.KickstartRom) or nameof(CopperScreenKickstartSource.Kickstart13Rom) or nameof(CopperScreenKickstartSource.Kickstart31Rom) => true,
+            _ => false
+        },
         "Connected" => value is "1" or "2" or "3" or "4",
         _ => true
     };
@@ -52,12 +59,12 @@ internal static class CopperScreenAvailability
         "OcsDenise" => "8362 · OCS Denise",
         "EcsDenise" => "8373 · ECS Denise",
         "AccurateM68000" => "Motorola 68000",
-        "AccurateM68010" => "Motorola 68010 (experimental)",
-        "AccurateM68EC020" => "Motorola 68EC020 (experimental)",
-        "AccurateM68020" => "Motorola 68020 (experimental)",
-        "AccurateM68030" => "Motorola 68030 (experimental)",
-        "AccurateM68040" => "Motorola 68040 (experimental)",
-        "AccurateM68060" => "Motorola 68060 (requires 060 OS support)",
+        "AccurateM68010" => "Motorola 68010",
+        "AccurateM68EC020" => "Motorola 68EC020",
+        "AccurateM68020" => "Motorola 68020",
+        "AccurateM68030" => "Motorola 68030",
+        "AccurateM68040" => "Motorola 68040",
+        "AccurateM68060" => "Motorola 68060",
         "JitM68040" => "Motorola 68040 (JIT)",
         "Kickstart13Rom" => "Native Kickstart ROM",
         "MinimalDiskBoot" => "CopperStart Mini",

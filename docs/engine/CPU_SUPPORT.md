@@ -1,7 +1,7 @@
 # CPU support and Copper68k package scope
 
-CopperScreen currently pins Copper68k 1.5.5 from NuGet.org. See the
-[SysInfo and 040 JIT report](SYSINFO_040_JIT_2026-11-21.md).
+CopperScreen pins Copper68k 1.5.6 for the desktop 68060 reset option. See the
+[SysInfo and 040 JIT report](SYSINFO_040_JIT_2026-11-21.md) for the 1.5.5 baseline.
 
 The 2026-10-23 published baseline used Copper68k `1.5.4`
 from NuGet.org. It retains the qualified integer suite, general logical handler
@@ -20,7 +20,7 @@ Advanced CPU features retain the experimental scope below.
 | --- | --- | --- |
 | 68010 | Engine, runner, profile persistence and experimental desktop choice. Direct motherboard bus with forwarded timing; VBR/SFC/DFC/USP, SR privilege, MOVE from CCR, MOVES, RTD, format-0 exceptions and 58-byte format-8 address-error frames/RTE consumption. | Internal format-8 continuation/retry state is incomplete. Loop-mode and exact physical timing are not qualified. |
 | 68040 FPU | Existing CopperFloat ext80 arithmetic is retained and checked through guest instructions. | Full FPSP and exceptional operand conformance is not certified. External 68881/68882 for 020/030 is outside this slice. |
-| 68060 FPU | Arithmetic uses the shared ext80 implementation. Own 12-byte NULL/IDLE/EXCP save/restore, exceptional operand payload, deferred arithmetic exceptions and removed-instruction traps. Disabled-FPU faults use the 060 frame. | Compatible OS/FPSP installation and native task switching remain unverified. Old Kickstart task frames are incompatible. Desktop 060 remains unavailable; engine and runner can execute original guest programs. |
+| 68060 FPU | Arithmetic uses shared ext80. The 68060 owns its 12-byte NULL/IDLE/EXCP frames, deferred arithmetic exceptions and removed-instruction traps. The A1200 desktop option starts with PCR.DFP set to boot Kickstart 3.1. | Guest FPSP installation and native FPU-enabled task switching remain unverified. |
 | 040/060 MMU | Enabled three-level translation, 4/8 KiB pages, indirect page descriptors, supervisor/write protection at all applicable levels, U/M updates, transparent translation, explicit PFLUSH, 040 PTEST and 060 PLPA. Timed physical table walks and translated supervisor fault stacks. | ATC placement and cache attributes are bounded host policies. Full 040 format-7 writeback/continuation and partially completed operand recovery are incomplete. General-purpose virtual-memory OS use is not qualified. 030 PMMU remains open. |
 | 68040 JIT | Optional desktop choice and runner `--cpu 68040 --jit`. Compiled execution, immutable snapshots, code/map invalidation, device deadlines, interrupt acceptance and public counters. | MMU/TT contexts execute through the interpreter. JIT is not provided for other models. Broad native gameplay parity and throughput acceptance remain open. Compilation/invalidation may allocate. |
 
@@ -36,6 +36,28 @@ at 8 MiB for 24-bit CPUs and 1 GiB for full 32-bit CPUs; banks above 8 MiB use
 virtual Zorro III Autoconfig and require native Kickstart 3.x. See the
 [2026-10-08 model/CPU/memory verification](CPU_MEMORY_UPGRADES.md). This host
 integration does not change the pinned shared CPU package or certify card timing.
+
+### Native A1200 68060 boot
+
+The desktop offers 68060 on PAL Alice/Lisa with native Kickstart 3.1.
+Copper68k's opt-in reset policy sets PCR.DFP before the ROM runs. Guest
+software can clear PCR.DFP when it is ready for 68060 FPU frames. The default
+engine and runner reset policy still leaves DFP clear.
+
+The desktop session with 2 MiB Chip RAM and native A1200 Kickstart 3.1 booted
+Workbench 3.1 rev 40.42 from a write-protected DF0 on cold start and after a
+session reset. Both field-2400 screens matched the stock 68EC020 control.
+With DF0 empty, the 68060 displayed the original Kickstart insert-disk screen.
+With 32 MiB of Zorro III Fast RAM, Kickstart assigned the bank at `$40000000`
+and the field-4800 Workbench screen matched a 68020 with the same RAM.
+The earlier run with DFP clear stayed in ROM without reaching Workbench.
+This verifies the integer-mode boot path. Native 68060 software installation
+and FPU-enabled task switching need separate validation.
+
+| A1200 input | SHA-256 |
+| --- | --- |
+| Decoded Kickstart 3.1 ROM | `6D43840D4099A74170EA0F0425B6257C3891EBCAA39C4D1840075A9AB22B5707` |
+| Workbench 3.1 rev 40.42 ADF, Disk 2 of 6 | `A8F167BAD2897E8C7F2CFE73DE7A9F8DAD10C7A5B1F78CA17F818AB17278B985` |
 
 The former 040 flat-map translation has been replaced by the documented root,
 pointer and page tables. TC enable is bit 15; bit 14 selects 8 KiB pages. Root

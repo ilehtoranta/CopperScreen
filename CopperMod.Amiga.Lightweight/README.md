@@ -4,7 +4,7 @@ Source and development now belong to the CopperScreen repository. The desktop
 app and headless runner build this project directly; Copper68k remains a shared
 external package. The original package ID and namespace are retained for compatibility.
 
-The published CPU baseline and current pin are Copper68k `1.5.5` from NuGet.org.
+The published CPU baseline and current pin are Copper68k `1.5.6` from NuGet.org.
 No private qualification feed is required. See the
 [release and consumer record](../docs/engine/COPPER68K_1_5_4_RELEASE_2026-10-22.md).
 See [CPU support and validation](../docs/engine/CPU_SUPPORT.md). Existing published
@@ -64,7 +64,7 @@ It cannot boot the supported Kickstart 1.3 profile: native task frames lack the
 060's 12-byte FPU state layout. FPU arithmetic and enabled 040/060 three-level
 paging are implemented, including translated accesses, permissions and descriptor
 updates. Full access-error continuation/recovery remains incomplete. The 060 is
-unavailable in the desktop pending native 060-aware OS validation.
+available on desktop A1200 configurations with native Kickstart 3.1 and the FPU disabled at reset.
 `CpuExecutionMode = M68kExecutionMode.Jit` selects optional 040 JIT execution;
 MMU/transparent-translation contexts use interpreter fallback. The runner accepts
 `--cpu 68040 --jit` and reports actual compiled-instruction counts. See

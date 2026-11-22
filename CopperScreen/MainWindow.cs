@@ -1938,7 +1938,7 @@ internal sealed partial class MainWindow : Window
 		layout.Children.Add(CreateSettingsGroupPair(
 			CreateSettingsGroup("Chipset and memory", chipAndPseudoFast),
 			CreateSettingsGroup("Expansion memory and RTC", realFast)));
-		layout.Children.Add(SettingsHelp("How do Chip RAM and Fast RAM work?", "Chip RAM follows the selected Agnus model. Larger Chip RAM layouts replace trapdoor slow RAM. Display chips: OCS Denise, ECS Denise or AGA Lisa. Fast RAM uses standard power-of-two sizes from 512 KiB to 8 MiB with 24-bit CPUs, or up to 1 GiB with full 68020/030/040 CPUs. More than 8 MiB requires Kickstart 3.x. Kickstart assigns its address; changing the size requires a restart."));
+		layout.Children.Add(SettingsHelp("How do Chip RAM and Fast RAM work?", "Chip RAM follows the selected Agnus model. Larger Chip RAM layouts replace trapdoor slow RAM. Display chips: OCS Denise, ECS Denise or AGA Lisa. Fast RAM uses standard power-of-two sizes from 512 KiB to 8 MiB with 24-bit CPUs, or up to 1 GiB with full 68020/030/040/060 CPUs. More than 8 MiB requires Kickstart 3.x. Kickstart assigns its address; changing the size requires a restart."));
 
 		return CreateScrollableSettingsPage(layout);
 	}

@@ -82,7 +82,7 @@ The CopperOS option starts the native Home/Files/Editor desktop directly.
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
-Copper68k is pinned to published [version `1.5.5`](https://www.nuget.org/packages/Copper68k/1.5.5).
+Copper68k is pinned to published [version `1.5.6`](https://www.nuget.org/packages/Copper68k/1.5.6).
 Normal restore uses NuGet.org and requires no private qualification feed or
 sibling project reference. Package locks retain the public package identity;
 published package versions remain immutable. See the
@@ -94,9 +94,7 @@ CPU release evidence remains in [the 1.5.0 record](docs/engine/COPPER68K_MAINLIN
 The [Brian the Lion investigation](docs/engine/BRIAN_THE_LION_2026-10-03.md)
 records preceding CPU corrections now included in 1.5.3, and Paula's software request bit 14.
 Advanced CPU profiles remain experimental;
-physical accelerator timing and full compatibility are not certified. The 060 is
-unavailable in the desktop: Kickstart 1.3's task frames are incompatible with its
-FPU state format. See [030/040/060 evidence and limits](docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.md)
+physical accelerator timing and full compatibility are not certified. The desktop 68060 boots an A1200 with native Kickstart 3.1 and the FPU disabled at reset. See [030/040/060 evidence and limits](docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.md)
 and the [020 CopperHDF release](docs/engine/COPPERHDF_020_2026-09-27.md).
 The [040 fetch correction](docs/engine/LOTUS_III_040_FETCH_2026-09-27.md)
 passes the original Lotus III input through a driving demo without changing its press timings.
@@ -105,7 +103,7 @@ An offline restore can stage the pinned filesystem-service archive
 before restoring. See the [Disk Image Manager build instructions](docs/DISK_IMAGE_MANAGER.md#development-package).
 
 ```powershell
-./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.2.nupkg"
+./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.3.nupkg"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_13.rom" "path/to/disk.adf"

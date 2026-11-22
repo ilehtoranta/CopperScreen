@@ -13,7 +13,7 @@ public sealed class SettingsWorkflowTests
     [InlineData("CPU backend", "AccurateM68020", true)]
     [InlineData("CPU backend", "AccurateM68030", true)]
     [InlineData("CPU backend", "AccurateM68040", true)]
-    [InlineData("CPU backend", "AccurateM68060", false)]
+    [InlineData("CPU backend", "AccurateM68060", true)]
     [InlineData("CPU backend", "JitM68040", true)]
     [InlineData("Kickstart", "DiagRom", false)]
     [InlineData("Kickstart", "Kickstart31Rom", true)]

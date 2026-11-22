@@ -13,6 +13,7 @@ layout while retaining selected media, storage mounts and input settings.
 | A500 OCS or ECS | 68020, 68030, 68040, 68040 JIT | 1 GiB |
 | A1200 Alice/Lisa | 68EC020 (default) | 8 MiB |
 | A1200 Alice/Lisa | 68020, 68030, 68040, 68040 JIT | 1 GiB |
+| A1200 Alice/Lisa with Kickstart 3.1 | 68060 | 1 GiB |
 
 Optional features include slow RAM when compatible with the Chip RAM layout,
 Fast RAM, RTC and floppy sounds. Fast RAM sizes are None, 512 KiB, 1, 2, 4,
@@ -25,8 +26,7 @@ Banks above 8 MiB require Kickstart 3.x. Kickstart 3.1 is recommended for the
 A1200; other recognized native ROM versions are accepted, with varying compatibility.
 Native A500 Fast RAM evidence uses Kickstart 3.1 (40.63), and the original A1200
 evidence uses Kickstart 3.0 (39.106), PAL Alice/Lisa, 2 MiB Chip RAM and no trapdoor
-slow RAM. The 060 remains an engine/runner option, unavailable in the desktop pending compatible OS/FPU
-validation. See [CPU support](CPU_SUPPORT.md).
+slow RAM. The desktop 68060 starts with its FPU disabled for Kickstart 3.1 boot compatibility. See [CPU support](CPU_SUPPORT.md).
 
 ## Engine behavior
 

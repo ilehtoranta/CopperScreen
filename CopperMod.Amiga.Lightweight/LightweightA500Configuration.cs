@@ -14,6 +14,8 @@ public sealed record LightweightA500Configuration
     /// frames are incompatible. Other OS combinations need validation. Fault continuation and physical
     /// accelerator timing remain incomplete.</remarks>
     public M68kCpuModel CpuModel { get; init; } = M68kCpuModel.M68000;
+    /// <summary>Boot a 68060 with its FPU disabled until guest software enables it.</summary>
+    public bool DisableM68060FpuOnReset { get; init; }
     /// <summary>Optional 68040 JIT with interpreter fallback at unsupported instructions and MMU accesses.</summary>
     public M68kExecutionMode CpuExecutionMode { get; init; } = M68kExecutionMode.Interpreter;
     /// <summary>

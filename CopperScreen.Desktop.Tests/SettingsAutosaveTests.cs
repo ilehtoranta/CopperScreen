@@ -18,7 +18,7 @@ public sealed partial class LaunchWorkflowTests
     public Task SettingsEditsSurviveClosingWithoutStartingOrSwitching(int model) => UiAsync(async () =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
-        var cpu = model == 2 ? M68kBackendKind.AccurateM68030 : M68kBackendKind.AccurateM68010;
+        var cpu = model == 2 ? M68kBackendKind.AccurateM68060 : M68kBackendKind.AccurateM68010;
         try
         {
             LaunchSelection.Select(window, model);
@@ -27,6 +27,7 @@ public sealed partial class LaunchWorkflowTests
             var cpuSelector = SettingsNamed<ComboBox>(settings, "Amiga CPU");
             Assert.True(cpuSelector.IsEffectivelyVisible);
             Assert.True(cpuSelector.IsEnabled);
+            Assert.DoesNotContain(cpuSelector.Items.Cast<string>(), value => CopperScreenAvailability.ChoiceLabel(value).Contains("experimental", StringComparison.OrdinalIgnoreCase));
             cpuSelector.SelectedItem = cpu.ToString();
             SettingsField<TextBox>(window, "_realFastRamBox").Text = "2048";
             SettingsField<CheckBox>(window, "_rtcEnabledBox").IsChecked = true;

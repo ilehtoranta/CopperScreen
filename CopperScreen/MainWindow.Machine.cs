@@ -81,7 +81,7 @@ internal sealed partial class MainWindow
         _cpuRestrictionNote = SettingsNote("");
         AutomationProperties.SetName(_cpuRestrictionNote, "CPU requirements");
         cpuForm.Children.Add(_cpuRestrictionNote);
-        cpuForm.Children.Add(SettingsNote("CPU changes may reduce Fast RAM to its address limit. Upgrades use experimental timing."));
+        cpuForm.Children.Add(SettingsNote("Changing CPU can reduce available Fast RAM. CPU upgrades use approximate accelerator timing."));
         panel.Children.Add(cpuForm);
         panel.Children.Add(new Expander { Header = "Optional features", Content = options, HorizontalAlignment = HorizontalAlignment.Stretch });
         return panel;
@@ -116,12 +116,14 @@ internal sealed partial class MainWindow
             var cpuChoices = CopperScreenMachinePresets.CpuChoices(draft);
             var fixedCpu = cpuChoices.Length == 1;
             _cpuBackendBox.IsEnabled = !_applyingSettings && (!fixedCpu || !cpuChoices.Contains(draft.CpuBackend.ToString()));
-            _cpuRestrictionNote.IsVisible = fixedCpu;
+            _cpuRestrictionNote.IsVisible = fixedCpu || draft.CpuBackend == M68kBackendKind.AccurateM68060;
             if (fixedCpu)
             {
                 var rom = draft.KickstartSource == CopperScreenKickstartSource.CopperStart ? "CopperStart" : "CopperStart Mini";
                 _cpuRestrictionNote.Text = $"{rom} requires this model’s standard CPU. Choose an original Kickstart ROM for CPU upgrades.";
             }
+            else if (draft.CpuBackend == M68kBackendKind.AccurateM68060)
+                _cpuRestrictionNote.Text = "The 68060 starts with its FPU disabled. Guest 68060 software can enable it.";
             foreach (var controls in _machineControls)
             {
                 var enabled = !_applyingSettings;
