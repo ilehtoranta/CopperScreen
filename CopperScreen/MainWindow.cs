@@ -135,7 +135,6 @@ internal sealed partial class MainWindow : Window
 	private ComboBox _cpuBackendBox = null!;
 	private ComboBox _engineBox = null!;
 	private ComboBox _agnusModelBox = null!, _chipRamBox = null!, _deniseModelBox = null!;
-	private TextBlock _chipRamHint = null!;
 	private TextBox _pseudoFastRamBox = null!;
 	private TextBox _pseudoFastBaseBox = null!;
 	private TextBox _realFastRamBox = null!;
@@ -1918,8 +1917,7 @@ internal sealed partial class MainWindow : Window
 		_agnusModelBox = AddComboSetting(chipAndPseudoFast, "Agnus", ["OcsAgnus", "Agnus8372A", "Agnus8375Pal2M", "EcsAgnus", "AgaAlice"]);
 		_deniseModelBox = AddComboSetting(chipAndPseudoFast, "Denise", ["OcsDenise", "EcsDenise", "AgaLisa"]);
 		_chipRamBox = AddComboSetting(chipAndPseudoFast, "Chip RAM (KiB)", ["512", "1024", "2048"]);
-		_chipRamHint = SettingsNote(string.Empty);
-		chipAndPseudoFast.Children.Add(_chipRamHint);
+		chipAndPseudoFast.Children.Add(SettingsNote("The selected Agnus determines the available Chip RAM sizes."));
 		_agnusModelBox.SelectionChanged += (_, _) => UpdateChipRamChoices();
 		_chipRamBox.SelectionChanged += (_, _) => UpdateChipRamChoices();
 		_pseudoFastRamBox = AddTextSetting(chipAndPseudoFast, "Slow RAM (KiB)");
@@ -2069,10 +2067,7 @@ internal sealed partial class MainWindow : Window
 		_pixelAspectModeBox.SelectionChanged += (_, _) => StagePresentationSettings();
 		_lacedPresentationModeBox = AddComboSetting(display, "Laced display", ["CRT phosphor", "Stable weave"], markRestart: false);
 		_lacedPresentationModeBox.SelectionChanged += (_, _) => StagePresentationSettings();
-		const string lacedHint = "CRT phosphor lets each field’s scan lines fade like a CRT. Stable weave combines the odd and even lines from successive fields for a steady picture.";
-		display.Children.Add(SettingsNote(lacedHint));
-		AutomationProperties.SetHelpText(_lacedPresentationModeBox, lacedHint);
-		display.Children.Add(SettingsHelp("How does pixel aspect affect the picture?", "LCD crisp uses 1:1 hires and 1:2 superhires pixels. CRT-correct aspect follows the proportions of a CRT display."));
+		display.Children.Add(SettingsHelp("How do pixel aspect and interlacing affect the picture?", "LCD crisp uses 1:1 hires and 1:2 superhires pixels. CRT-correct aspect follows the proportions of a CRT display. For interlaced video, CRT phosphor blends fields with persistence; Stable weave combines alternating fields for a steady image."));
 		layout.Children.Add(CreateSettingsGroup("Video Output", display));
 
 		return CreateScrollableSettingsPage(layout);
