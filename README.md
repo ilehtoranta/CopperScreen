@@ -37,105 +37,25 @@ See the [engine issue register](docs/engine/ISSUES.md) for compatibility and tim
 
 ## Build and run
 
-Requires the .NET 10 SDK. External dependencies are pinned by package locks.
-
-Copper68k is pinned to published [version `1.5.7`](https://www.nuget.org/packages/Copper68k/1.5.7).
-Normal restore uses NuGet.org and requires no private qualification feed or
-sibling project reference. Package locks retain the public package identity;
-published package versions remain immutable. See the
-[release and consumer record](docs/engine/COPPER68K_1_5_4_RELEASE_2026-10-22.md) and
-[CPU support, validation and remaining limits](docs/engine/CPU_SUPPORT.md).
-The explicit A1200 EC020 profile and native ROM operand forms
-are recorded with [AGA verification](docs/engine/AGA_INITIAL_2026-10-01.md); preceding
-CPU release evidence remains in [the 1.5.0 record](docs/engine/COPPER68K_MAINLINE_1_5_0.md).
-The [Brian the Lion investigation](docs/engine/BRIAN_THE_LION_2026-10-03.md)
-records preceding CPU corrections now included in 1.5.3, and Paula's software request bit 14.
-Advanced CPU profiles remain experimental;
-physical accelerator timing and full compatibility are not certified. The desktop 68060 boots a PAL A1200 with CopperStart Mini or native Kickstart 3.1. The FPU starts disabled. See [030/040/060 evidence and limits](docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.md)
-and the [020 CopperHDF release](docs/engine/COPPERHDF_020_2026-09-27.md).
-The [040 fetch correction](docs/engine/LOTUS_III_040_FETCH_2026-09-27.md)
-passes the original Lotus III input through a driving demo without changing its press timings.
-
-An offline restore can stage the pinned filesystem-service archive
-before restoring. See the [Disk Image Manager build instructions](docs/DISK_IMAGE_MANAGER.md#development-package).
+Install the .NET 10 SDK, then restore the locked dependencies, build, and open the launcher.
 
 ```powershell
-./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.4.nupkg"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
-dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_13.rom" "path/to/disk.adf"
+dotnet run --project CopperScreen -c Release --no-build
 ```
 
-To enable licensed CopperStart, stage its qualified inputs and opt in explicitly:
+To launch with your own Kickstart 1.3 ROM and floppy image, pass their paths.
 
 ```powershell
-./scripts/prepare-copperos-bundle.ps1 -CopperStartA1200Rom "path/to/CopperStart-A1200.rom" -CopperOsHdf "path/to/CopperOS.hdf"
-dotnet build CopperScreen.slnx -c Release -p:CopperScreenEnableCopperStart=true
+dotnet run --project CopperScreen -c Release --no-build -- --kickstart "path/to/Kickstart_13.rom" "path/to/disk.adf"
 ```
 
-Use the same property with `dotnet run`, `test` and `publish`. Existing
-CopperStart/CopperOS qualification suites require the enabled build. The public
-boot-option UI checks can run with the default disabled build using
-`dotnet test CopperScreen.Desktop.Tests -c Release --filter Area=BootOptions`.
-ZIP and MSIX packaging scripts expose the opt-in as `-EnableCopperStart`;
-omitting it produces a public build. They create local artifacts only.
-
-Bundle preparation is a developer build step using the qualified producer outputs;
-it is not an end-user setup step. Inputs are hash checked and staged under ignored
-`artifacts/copperos-bundle`, then embedded in build and publish outputs. CI can
-set `CopperOsBundleDirectory` to an equivalent staged directory. Missing or
-unqualified inputs fail a CopperStart-enabled build. Default builds require no
-CopperStart bundle. Media binaries are not committed.
-The [desktop HDF recipe and verification](docs/COPPEROS_DESKTOP_A1200.md) identify
-the native desktop payloads, reproducible composition command and workspace migration.
-
-Starting without arguments opens the start screen. Native Amiga choices ask for
-your Kickstart ROM; CopperOS needs no file selection.
-Browse identifies native 1.3/3.1 ROMs and, with the A1200 profile selected,
-validates its 3.0 ROM. It selects the matching Kickstart choice.
-For native 3.1 from the command line, select its profile explicitly:
-
-```powershell
-dotnet run --project CopperScreen -c Release -- --profile lightweight-a500-kickstart31 --rom "path/to/kickstart-3.1-a500.rom" "path/to/Workbench31.adf"
-```
-
-Use `--profile a1200-aga-pal --rom "path/to/A1200-39.106.rom"` for the initial AGA profile.
-
-Storage settings include **Shared folders**. Desktop and runner accept repeatable
-`--host-dir HOST0 Exchange "path/to/folder"` (read-only) or `--host-dir-rw` with
-the same three arguments. Add `--host-dir-boot-priority HOST0 0` to boot a folder
-containing your Workbench installation. Native Kickstart is required; Minimal disk
-boot has no DOS. See [folder behavior and native verification](docs/engine/HOST_DIRECTORIES.md).
-
-Desktop hardfile imports use `--hdf "path/to/disk.hdf"` read-only by default.
-For CopperStart, use `--hdf-rdb "path/to/disk.hdf"` (or
-`--hdf-rdb-writable`) to discover FFS partitions from the RDB and use its boot
-priorities. Use `--hdf-ffs "path/to/disk.hdf" DH0:2:32:4:58` (or
-`--hdf-ffs-writable`) to specify an existing 512-byte FFS partition explicitly.
-The app and runner share this syntax; see the
-[RDB and hard-disk settings guide](docs/COPPERSTART_RDB_2026-10-18.md).
-`--hdf-writable` explicitly allows direct changes to that file; copy it first.
-Existing profiles retain their explicit write permissions. Ordinary floppy writes
-stay in memory until **Save ADF**; use **Export workspace** for a CopperOS backup.
-
-The welcome screen and Settings > Setup offer Amiga 500 (default), Amiga 500
-with ECS and experimental Amiga 1200, with CPU and optional-feature controls.
-CPU changes require restarting the emulated machine and preserve the selected
-motherboard. Both A500 and A1200 support CPU upgrades and configurable Fast RAM.
-The RAM selector offers standard power-of-two sizes from 512 KiB to the CPU's
-limit: 8 MiB for 68000/68010/68EC020, or 1 GiB for full 68020/030/040.
-Banks above 8 MiB require native Kickstart 3.x; see [choices and verification limits](docs/engine/CPU_MEMORY_UPGRADES.md).
-Kickstart assigns the address; size changes require restarting the machine.
-The runner accepts `--fast-ram-kib` with the same sizes, up to 1048576 KiB.
-The Memory page also selects Agnus and compatible Chip RAM sizes. The runner
-accepts `--agnus 8371|8372a|8375-318069-10`, `--chip-ram-kib 512|1024|2048`
-and `--slow-ram-kib 0|512`; unsupported combinations fail explicitly.
-Settings > Memory also selects 8362 OCS or 8373 ECS Denise; the runner accepts
-`--denise 8362|8373`. ECS display supports SuperHires, extended windows and
-programmable timing with safe output resizing. Agnus, Denise and RAM changes
-require restarting the machine. The board oscillator remains PAL; guest ECS
-counters can select NTSC geometry. See [ECS display evidence and monitor-driver
-coverage limits](docs/engine/ECS_DISPLAY_2026-10-01.md).
+- [Launcher setup and everyday controls](docs/ONBOARDING.md)
+- [CopperStart Mini and CopperOS build options](docs/COPPERSTART_APP.md)
+- [Filesystem-service package and offline staging](docs/DISK_IMAGE_MANAGER.md#development-package)
+- [Hard disks](docs/engine/STORAGE.md) and [shared folders](docs/engine/HOST_DIRECTORIES.md)
+- [CPU and memory configuration](docs/engine/CPU_MEMORY_UPGRADES.md)
 
 ## Tests and headless execution
 
