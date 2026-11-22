@@ -59,46 +59,23 @@ dotnet run --project CopperScreen -c Release --no-build -- --kickstart "path/to/
 
 ## Tests and headless execution
 
-Run the host and disk-library tests after building the solution:
+After building the solution in Release, run the host and disk tests. Engine diagnostics build separately under `artifacts/diagnostic-tests`.
 
 ```powershell
 dotnet test CopperScreen.Lightweight.Tests/CopperScreen.Lightweight.Tests.csproj -c Release --no-build --no-restore
 dotnet test CopperDisk.Tests/CopperDisk.Tests.csproj -c Release --no-build --no-restore
-```
-
-Optional native Lemmings replay and input tests require local ROM and disk images.
-See [native validation](docs/NATIVE_VALIDATION.md) for setup. Normal CI skips
-these tests when the media is unavailable.
-
-The [native regression suite](docs/engine/NATIVE_REGRESSION.md) runs six pinned
-game/demo replays with supplied local media, checks normal/scalar execution and
-produces an HTML report against a reviewed baseline. Missing media is reported
-as unavailable coverage. Its Python tooling tests run in CI without game media.
-
-Engine timing tests use separate diagnostic build outputs:
-
-```powershell
 dotnet test CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj -c Release --artifacts-path artifacts/diagnostic-tests
 ```
 
-Keep diagnostic outputs separate from the production build. The diagnostic test
-project is intentionally outside the main solution; CI runs it in a separate job.
-
-For a short headless smoke test without a ROM or game image:
+Run a 10-frame synthetic smoke test without supplying a ROM or disk image.
 
 ```powershell
 dotnet run --project CopperMod.Amiga.Lightweight.Runner -c Release --no-build --no-restore -- --synthetic-rom-loop --frames 10
 ```
 
-This synthetic run is not a gameplay benchmark. Native performance harnesses
-are under `scripts`; the [performance guide](docs/engine/PERFORMANCE.md)
-describes workloads, measurement requirements and their current portability limits.
-The retained native benchmark scripts have host and frozen-workload restrictions;
-a smoke test or optional native replay does not establish formal throughput acceptance.
-
-Engine development guidance is in [architecture](docs/engine/ARCHITECTURE.md) and
-[known issues](docs/engine/ISSUES.md). Dated implementation, acceptance and
-performance records are in the [history archive](docs/history/amiga/README.md).
+- [Native validation setup](docs/NATIVE_VALIDATION.md) and [regression replays](docs/engine/NATIVE_REGRESSION.md)
+- [Performance workloads and measurement requirements](docs/engine/PERFORMANCE.md)
+- [Engine architecture](docs/engine/ARCHITECTURE.md) and [known issues](docs/engine/ISSUES.md)
 
 ## Windows package
 
