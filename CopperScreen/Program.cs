@@ -7,11 +7,19 @@ namespace CopperScreen;
 internal static class Program
 {
 	public static string[] StartupArgs { get; private set; } = Array.Empty<string>();
+	internal static string? DesktopSmokeDataDirectory { get; private set; }
 
 	[STAThread]
 	public static void Main(string[] args)
 	{
 		StartupArgs = args ?? Array.Empty<string>();
+		if (StartupArgs is ["--desktop-smoke", var directory])
+		{
+			DesktopSmokeDataDirectory = Path.GetFullPath(directory);
+			StartupArgs = [];
+			RunDesktop(DesktopSmokeDataDirectory);
+			return;
+		}
 #if COPPERSCREEN_INSTALLED_TESTS
         if (StartupArgs.FirstOrDefault() == "--installed-rdb")
         {

@@ -244,6 +244,14 @@ Create a local Windows build:
 
 This creates build artifacts; it does not publish a release.
 
+CopperScreen CI publishes self-contained desktop archives for Apple Silicon
+and Intel Macs, plus x64 and Arm64 Linux. Each job opens the application from
+the extracted archive and runs a synthetic 68040 JIT workload on the native
+runner. Download the archives and their SHA-256 checksums from the
+[CopperScreen CI runs](https://github.com/ilehtoranta/CopperScreen/actions/workflows/ci.yml).
+CI archives require a user-supplied Kickstart ROM. The macOS app bundles
+come without Developer ID signing or notarization.
+
 For Microsoft Store MSIX generation, diagnostic install/update tests and Windows
 App Certification Kit checks, see [MSIX packaging](docs/MSIX_PACKAGING.md).
 See [onboarding and everyday launches](docs/ONBOARDING.md) for the native ROM,

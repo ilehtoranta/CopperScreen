@@ -70,3 +70,98 @@ jobs:
         run: dotnet restore CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj --locked-mode --artifacts-path artifacts/diagnostic-tests
       - name: Engine timing tests
         run: dotnet test CopperMod.Amiga.Lightweight.Tests/CopperMod.Amiga.Lightweight.Tests.csproj -c Release --no-restore --artifacts-path artifacts/diagnostic-tests
+
+  native-desktop:
+    name: Native desktop (${{ matrix.rid }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { runner: macos-15, rid: osx-arm64, arch: arm64 }
+          - { runner: macos-15-intel, rid: osx-x64, arch: x86_64 }
+          - { runner: ubuntu-24.04, rid: linux-x64, arch: x86_64 }
+          - { runner: ubuntu-24.04-arm, rid: linux-arm64, arch: aarch64 }
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 20
+    env:
+      RID: ${{ matrix.rid }}
+      NATIVE_ARCH: ${{ matrix.arch }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Set up Linux desktop dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb xauth libx11-6 libice6 libsm6 libfontconfig1 libgl1
+      - name: Restore locked packages
+        run: dotnet restore CopperScreen.slnx --locked-mode
+      - name: Publish and package the desktop app
+        shell: bash
+        run: |
+          test "$(uname -m)" = "$NATIVE_ARCH"
+          project=CopperScreen/CopperScreen.csproj
+          version="$(dotnet msbuild "$project" -getProperty:Version)"
+          mkdir -p artifacts/native/package
+          package="$PWD/artifacts/native/package"
+          if [[ "$RID" == osx-* ]]; then
+            app=CopperScreen.app
+            output="$package/$app/Contents/MacOS"
+            mkdir -p "$output"
+            cat > "$package/$app/Contents/Info.plist" <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>CFBundleExecutable</key><string>CopperScreen</string>
+            <key>CFBundleIdentifier</key><string>org.copperscreen.CopperScreen</string>
+            <key>CFBundleName</key><string>CopperScreen</string>
+            <key>CFBundlePackageType</key><string>APPL</string>
+            <key>CFBundleShortVersionString</key><string>$version</string>
+            <key>CFBundleVersion</key><string>$version</string>
+            <key>NSHighResolutionCapable</key><true/>
+          </dict>
+          </plist>
+          EOF
+            plutil -lint "$package/$app/Contents/Info.plist"
+          else
+            app=CopperScreen
+            output="$package/$app"
+          fi
+          # Use a separate lock for the RID-specific runtime packs.
+          dotnet publish "$project" -c Release -r "$RID" --self-contained true \
+            -p:PublishTrimmed=false -p:CopperScreenIncludeMiniRom=false \
+            -p:DebugType=None -p:DebugSymbols=false \
+            "-p:NuGetLockFilePath=$package/../runtime.packages.lock.json" -o "$output"
+          cp LICENSE THIRD-PARTY-NOTICES.md "$output/"
+          archive="CopperScreen-$version-$RID.tar.gz"
+          tar -czf "artifacts/native/$archive" -C "$package" "$app"
+          (cd artifacts/native && shasum -a 256 "$archive" > "$archive.sha256")
+          echo "NATIVE_ARCHIVE=$archive" >> "$GITHUB_ENV"
+      - name: Smoke-test the extracted desktop package
+        shell: bash
+        run: |
+          testdir="$(mktemp -d)"
+          tar -xzf "artifacts/native/$NATIVE_ARCHIVE" -C "$testdir"
+          if [[ "$RID" == osx-* ]]; then
+            "$testdir/CopperScreen.app/Contents/MacOS/CopperScreen" --desktop-smoke "$testdir/data" | tee "$testdir/desktop.log"
+          else
+            xvfb-run -a "$testdir/CopperScreen/CopperScreen" --desktop-smoke "$testdir/data" | tee "$testdir/desktop.log"
+          fi
+          grep -Fx 'CopperScreen desktop smoke passed.' "$testdir/desktop.log"
+      - name: Smoke-test the 68040 JIT on the native runner
+        shell: bash
+        run: |
+          dotnet run --project CopperMod.Amiga.Lightweight.Runner -c Release --no-restore -- \
+            --synthetic-rom-loop --frames 10 --cpu 68040 --jit | tee artifacts/native/jit-smoke.log
+          grep -E 'JIT .*compiledInstructions=[1-9][0-9]*' artifacts/native/jit-smoke.log
+          grep -E 'completed=10 .*unsupported=none' artifacts/native/jit-smoke.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CopperScreen-${{ matrix.rid }}
+          path: |
+            artifacts/native/*.tar.gz
+            artifacts/native/*.sha256
+          if-no-files-found: error
