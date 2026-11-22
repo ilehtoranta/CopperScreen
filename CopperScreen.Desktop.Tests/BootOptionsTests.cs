@@ -1,6 +1,7 @@
 using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.LogicalTree;
+using Avalonia.VisualTree;
 using CopperScreen;
 
 namespace CopperScreen.Tests;
@@ -46,6 +47,36 @@ public sealed partial class LaunchWorkflowTests
                 Click(Named<Button>(window, "Stop"));
                 await Until(() => start.IsEffectivelyVisible && start.IsEnabled && start.Content is "Start Amiga");
             }
+        }
+        finally { window.Close(); }
+    });
+
+    [Fact, Trait("Area", "BootOptions")]
+    public Task A1200ShowsDisabledOlderCpusWithPlainLabels() => UiAsync(async () =>
+    {
+        var window = new MainWindow([], new CopperScreenRecentSession(_root));
+        window.Show();
+        try
+        {
+            Named<ComboBox>(window, "Amiga model").SelectedIndex = (int)CopperScreenMachineModel.Amiga1200;
+            window.SelectOriginalRom(DefaultRomFixture(2, "a1200-cpu-labels", kickstart31: true));
+            Click(Button(window, "Configure Amiga…"));
+            var settings = SettingsField<Window>(window, "_settingsWindow");
+            var cpu = SettingsNamed<ComboBox>(settings, "Amiga CPU");
+            Assert.True(cpu.IsEnabled);
+            Assert.Equal("AccurateM68EC020", cpu.SelectedItem);
+            cpu.IsDropDownOpen = true;
+            await Until(() => cpu.ContainerFromIndex(2) is ComboBoxItem);
+
+            var labels = new[] { "Motorola 68000", "Motorola 68010" };
+            for (var index = 0; index < labels.Length; index++)
+            {
+                var item = Assert.IsType<ComboBoxItem>(cpu.ContainerFromIndex(index));
+                Assert.False(item.IsEnabled);
+                Assert.Equal(labels[index], AutomationProperties.GetName(item));
+                Assert.Equal(labels[index], Assert.Single(item.GetVisualDescendants().OfType<TextBlock>()).Text);
+            }
+            Assert.True(Assert.IsType<ComboBoxItem>(cpu.ContainerFromIndex(2)).IsEnabled);
         }
         finally { window.Close(); }
     });
