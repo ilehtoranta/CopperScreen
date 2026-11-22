@@ -1,7 +1,9 @@
 # CPU support and Copper68k package scope
 
-CopperScreen pins Copper68k 1.5.6 for the desktop 68060 reset option. See the
-[SysInfo and 040 JIT report](SYSINFO_040_JIT_2026-11-21.md) for the 1.5.5 baseline.
+CopperScreen pins Copper68k 1.5.7 from NuGet.org. This version preserves address
+registers when the 68060 hands unimplemented floating-point memory operations to
+guest software. See the [SysInfo and 040 JIT report](SYSINFO_040_JIT_2026-11-21.md)
+for the 1.5.5 performance baseline.
 
 The 2026-10-23 published baseline used Copper68k `1.5.4`
 from NuGet.org. It retains the qualified integer suite, general logical handler
@@ -20,7 +22,7 @@ Advanced CPU features retain the experimental scope below.
 | --- | --- | --- |
 | 68010 | Engine, runner, profile persistence and experimental desktop choice. Direct motherboard bus with forwarded timing; VBR/SFC/DFC/USP, SR privilege, MOVE from CCR, MOVES, RTD, format-0 exceptions and 58-byte format-8 address-error frames/RTE consumption. | Internal format-8 continuation/retry state is incomplete. Loop-mode and exact physical timing are not qualified. |
 | 68040 FPU | Existing CopperFloat ext80 arithmetic is retained and checked through guest instructions. | Full FPSP and exceptional operand conformance is not certified. External 68881/68882 for 020/030 is outside this slice. |
-| 68060 FPU | Arithmetic uses shared ext80. The 68060 owns its 12-byte NULL/IDLE/EXCP frames, deferred arithmetic exceptions and removed-instruction traps. The A1200 desktop option starts with PCR.DFP set to boot Kickstart 3.1. | Guest FPSP installation and native FPU-enabled task switching remain unverified. |
+| 68060 FPU | Arithmetic uses shared ext80 with 12-byte NULL/IDLE/EXCP frames. The A1200 starts with PCR.DFP set for Kickstart 3.1. SetPatch with MuLib 46.4 enables the FPU and preserves state across blocking waits and preemption. The tested software-emulated instructions include postincrement and predecrement memory operands. | Native coverage is limited to the tested MuLib configuration, operand values and instruction forms below. |
 | 040/060 MMU | Enabled three-level translation, 4/8 KiB pages, indirect page descriptors, supervisor/write protection at all applicable levels, U/M updates, transparent translation, explicit PFLUSH, 040 PTEST and 060 PLPA. Timed physical table walks and translated supervisor fault stacks. | ATC placement and cache attributes are bounded host policies. Full 040 format-7 writeback/continuation and partially completed operand recovery are incomplete. General-purpose virtual-memory OS use is not qualified. 030 PMMU remains open. |
 | 68040 JIT | Optional desktop choice and runner `--cpu 68040 --jit`. Compiled execution, immutable snapshots, code/map invalidation, device deadlines, interrupt acceptance and public counters. | MMU/TT contexts execute through the interpreter. JIT is not provided for other models. Broad native gameplay parity and throughput acceptance remain open. Compilation/invalidation may allocate. |
 
@@ -58,6 +60,46 @@ and FPU-enabled task switching need separate validation.
 | --- | --- |
 | Decoded Kickstart 3.1 ROM | `6D43840D4099A74170EA0F0425B6257C3891EBCAA39C4D1840075A9AB22B5707` |
 | Workbench 3.1 rev 40.42 ADF, Disk 2 of 6 | `A8F167BAD2897E8C7F2CFE73DE7A9F8DAD10C7A5B1F78CA17F818AB17278B985` |
+
+### A1200 FPU replay for Copper68k 1.5.7
+
+CopperScreen Release used the native A1200 Kickstart 3.1 ROM above, SetPatch
+45.15, MuLib `68060.library` 46.4, `680x0.library` 46.1 and `mmu.library` 46.18.
+SetPatch cleared PCR.DFP. The guest read `$04300002` before SetPatch and
+`$04300001` afterwards.
+
+The production build restored Copper68k 1.5.7 and CopperStart.FileSystem.Service
+0.5.0-dev.4 into an empty NuGet.org package cache. The desktop and both
+replay probes loaded the same .NET 10 Copper68k assembly. The filesystem
+service archive retains the 0.5.0-dev.3 service assembly and embedded firmware.
+[Copper68k release run](https://github.com/ilehtoranta/CopperMod/actions/runs/45032564185) and
+[filesystem service release run](https://github.com/ilehtoranta/CopperStart/actions/runs/45037674306).
+
+| Production artifact | SHA-256 |
+| --- | --- |
+| Copper68k 1.5.7 .NET 10 assembly | `47591A018421E1C7E4D63117A6B6176BF159D96A1941AA3F7FBC0AE2915799C9` |
+| CopperStart.FileSystem.Service 0.5.0-dev.4 signed archive | `FC791BE4D4A18A19D9185614507464F92E918E4BEDD2845E73E0CEC15DD0BC3F` |
+
+| Replay | Observed outcome |
+| --- | --- |
+| Unimplemented register and indirect memory operations | `FSIN`, `FSINCOS`, `FLOGN`, `FMOVECR`, `FMOD`, `FST` and `FCOS.S (A0),FP1` returned the expected results. |
+| `FCOS.S (A0)+,FP1` | A0 remained `$00214E6E` at handler entry. The guest advanced it by four bytes and returned binary32 cosine `$3F60A940`. |
+| `FCOS.S -(A0),FP1` | A0 remained `$00214E74` at handler entry. The frame carried the effective address `$00214E70`. The guest applied the single four-byte decrement. |
+| Native `FADD` controls | Register and memory arithmetic passed. Native postincrement advanced A0 once. |
+| Two tasks blocking in `Delay` | Two distinct tasks preserved FP0, FP7 and FPCR across 64 waits each, both with no Fast RAM and with 8 MiB Fast RAM. |
+| Two runnable tasks under timer-driven preemption | With 8 MiB Fast RAM, both tasks progressed concurrently and passed 64 FP0, FP7 and FPCR checks each. |
+
+Both address-mode traces used vector 11, frame word `$202C` and the correct
+next-instruction PC. The 1.5.6 baseline had updated A0 once before entering
+MuLib, so each operand produced two updates. The 1.5.7 core supplies the
+effective address and leaves the operand read and register update to MuLib.
+The architectural handoff is described in the
+[MC68060 User's Manual](https://www.nxp.com/docs/en/data-sheet/MC68060UM.pdf)
+§6.5.1.
+
+All nine native replays passed. The isolated engine suite passed 1,351 tests
+with seven optional native cases skipped. The focused desktop and host suites
+passed 9 and 32 tests respectively.
 
 The former 040 flat-map translation has been replaced by the documented root,
 pointer and page tables. TC enable is bit 15; bit 14 selects 8 KiB pages. Root

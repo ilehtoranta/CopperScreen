@@ -82,7 +82,7 @@ The CopperOS option starts the native Home/Files/Editor desktop directly.
 
 Requires the .NET 10 SDK. External dependencies are pinned by package locks.
 
-Copper68k is pinned to published [version `1.5.6`](https://www.nuget.org/packages/Copper68k/1.5.6).
+Copper68k is pinned to published [version `1.5.7`](https://www.nuget.org/packages/Copper68k/1.5.7).
 Normal restore uses NuGet.org and requires no private qualification feed or
 sibling project reference. Package locks retain the public package identity;
 published package versions remain immutable. See the
@@ -103,7 +103,7 @@ An offline restore can stage the pinned filesystem-service archive
 before restoring. See the [Disk Image Manager build instructions](docs/DISK_IMAGE_MANAGER.md#development-package).
 
 ```powershell
-./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.3.nupkg"
+./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.4.nupkg"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 dotnet run --project CopperScreen -c Release -- --kickstart "path/to/Kickstart_13.rom" "path/to/disk.adf"

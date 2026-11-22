@@ -302,7 +302,7 @@ opening an image does not eagerly instantiate a runtime for every partition.
 Switching volumes disposes the previous session. Entries from a prior mount cannot
 be used in a new session. The window serializes background operations.
 
-The service embeds its ROM and versioned manifest and uses pinned Copper68k 1.5.6,
+The service embeds its ROM and versioned manifest and uses pinned Copper68k 1.5.7,
 M68020 interpreter execution, flat ROM/RAM and bounded storage gateways. Writes require an explicit writable staged source and service opt-in.
 The default per-command budget is 50 million instructions; cancellation is checked
 every 256 interpreted instructions. There is no managed filesystem fallback or
@@ -313,7 +313,7 @@ in `CopperScreenDiskExtraction`.
 ## Development package
 
 The app builds `CopperDisk.FileSystem` from source and uses the pinned
-`CopperStart.FileSystem.Service` **[0.5.0-dev.3]** from NuGet.org. A clean
+`CopperStart.FileSystem.Service` **[0.5.0-dev.4]** from NuGet.org. A clean
 checkout needs no private feed credentials:
 
 ```powershell
@@ -324,7 +324,7 @@ dotnet build CopperScreen.slnx -c Release --no-restore
 If you have the original qualified archive, you can also stage it in the local feed:
 
 ```powershell
-./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.3.nupkg"
+./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.4.nupkg"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 ```
