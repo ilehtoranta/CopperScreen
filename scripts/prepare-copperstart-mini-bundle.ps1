@@ -12,7 +12,7 @@ $expected = (Get-Content -Raw -LiteralPath (Join-Path $repository 'CopperScreen/
 $romSource = (Get-Item -LiteralPath $Rom).FullName
 $licenseSource = (Get-Item -LiteralPath $License).FullName
 if ((Get-FileHash -LiteralPath $romSource -Algorithm SHA256).Hash -ine $expected) {
-    throw 'The Mini ROM does not match the qualified WinUAE build.'
+    throw 'The Mini ROM does not match the hash in CopperScreen/Firmware/CopperStartMini.sha256.'
 }
 if ([string]::IsNullOrWhiteSpace((Get-Content -Raw -LiteralPath $licenseSource))) {
     throw 'Provide the CopperStart Mini binary license.'

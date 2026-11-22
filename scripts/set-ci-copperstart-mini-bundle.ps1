@@ -21,7 +21,7 @@ try {
     for ($i = 0; $i -lt $partCount; $i++) {
         $offset = $i * $partLength
         $part = $encoded.Substring($offset, [Math]::Min($partLength, $encoded.Length - $offset))
-        $name = 'COPPERSTART_MINI_BUNDLE_{0:D2}' -f ($i + 1)
+        $name = 'COPPERSTART_MINI_BUNDLE_V2_{0:D2}' -f ($i + 1)
         $part | gh secret set $name --repo ilehtoranta/CopperScreen
         if ($LASTEXITCODE -ne 0) { throw "Failed to configure $name." }
     }

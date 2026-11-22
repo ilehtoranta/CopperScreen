@@ -103,14 +103,14 @@ jobs:
         if: env.INCLUDE_MINI_ROM == 'true'
         shell: pwsh
         env:
-          MINI_01: ${{ secrets.COPPERSTART_MINI_BUNDLE_01 }}
-          MINI_02: ${{ secrets.COPPERSTART_MINI_BUNDLE_02 }}
-          MINI_03: ${{ secrets.COPPERSTART_MINI_BUNDLE_03 }}
-          MINI_04: ${{ secrets.COPPERSTART_MINI_BUNDLE_04 }}
-          MINI_05: ${{ secrets.COPPERSTART_MINI_BUNDLE_05 }}
-          MINI_06: ${{ secrets.COPPERSTART_MINI_BUNDLE_06 }}
-          MINI_07: ${{ secrets.COPPERSTART_MINI_BUNDLE_07 }}
-          MINI_08: ${{ secrets.COPPERSTART_MINI_BUNDLE_08 }}
+          MINI_01: ${{ secrets.COPPERSTART_MINI_BUNDLE_V2_01 }}
+          MINI_02: ${{ secrets.COPPERSTART_MINI_BUNDLE_V2_02 }}
+          MINI_03: ${{ secrets.COPPERSTART_MINI_BUNDLE_V2_03 }}
+          MINI_04: ${{ secrets.COPPERSTART_MINI_BUNDLE_V2_04 }}
+          MINI_05: ${{ secrets.COPPERSTART_MINI_BUNDLE_V2_05 }}
+          MINI_06: ${{ secrets.COPPERSTART_MINI_BUNDLE_V2_06 }}
+          MINI_07: ${{ secrets.COPPERSTART_MINI_BUNDLE_V2_07 }}
+          MINI_08: ${{ secrets.COPPERSTART_MINI_BUNDLE_V2_08 }}
         run: |
           $parts = @($env:MINI_01, $env:MINI_02, $env:MINI_03, $env:MINI_04,
                      $env:MINI_05, $env:MINI_06, $env:MINI_07, $env:MINI_08)

@@ -13,8 +13,8 @@ for each model and ROM.
 
 ## CopperStart Mini bundle
 
-Press **Start Amiga** to boot the default 512 KiB Mini ROM. This is the ROM
-qualified in WinUAE with the two-stage startup screen.
+Press **Start Amiga** to boot the default 512 KiB Mini ROM with its two-stage
+startup screen.
 Its splash appears at reset. With DF0 empty, Mini then shows **Insert boot disk**
 and waits for a compatible disk. With a bootable disk already inserted, Mini
 hands off directly after the splash. Mini supports standard PAL A500, A500+
@@ -45,7 +45,8 @@ The ZIP packaging script requires the staged ROM. MSIX can include it with
 The official `main` GitHub Actions builds package the same qualified ROM and
 license for macOS and Linux. To configure those build inputs, run
 `scripts/set-ci-copperstart-mini-bundle.ps1` with the same `-Rom` and
-`-License` arguments. It verifies the ROM and stores the archive in eight
+`-License` arguments. It verifies the ROM and stores the archive in the eight
+`COPPERSTART_MINI_BUNDLE_V2_01` through `COPPERSTART_MINI_BUNDLE_V2_08`
 repository Actions secrets. Pull request and fork builds omit the bundle.
 
 Builds without the bundle use **Choose ROM…** for an original Kickstart.

@@ -33,7 +33,7 @@ public sealed class CopperStartMiniRomTests
         try
         {
             var rom = CopperScreenBundledMiniRom.Read();
-            Assert.Equal("3060AB0DDF37EE264C3FD804EC6E8A1A825784B55DAE92DAB0B49CDC7BE24DD4",
+            Assert.Equal("48023D94649757F319D14C8775841DDEC10D5B41D79EEAFEC2B48438FA230575",
                 Convert.ToHexString(SHA256.HashData(rom)));
             var path = Path.Combine(directory.FullName, "CopperStart-Mini.rom");
             File.WriteAllBytes(path, rom);
