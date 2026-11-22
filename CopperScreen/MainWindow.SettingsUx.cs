@@ -213,8 +213,17 @@ internal sealed partial class MainWindow
         RefreshSettingsUi();
     }
 
-    private void SetChipRamChoices(DmaChipModel model)
-        => _chipRamBox.ItemsSource = CopperScreenAvailability.ChipRamChoices(model);
+    private string[] SetChipRamChoices(DmaChipModel model)
+    {
+        var choices = CopperScreenAvailability.ChipRamChoices(model);
+        _chipRamBox.ItemsSource = choices;
+        var slowRamEffect = choices.Length == 1 && choices[0] == "512"
+            ? "This size preserves the Slow RAM setting."
+            : "Selecting more than 512 KiB of Chip RAM clears Slow RAM.";
+        _chipRamHint.Text = $"This chip supports {string.Join(" or ", choices)} KiB of Chip RAM. {slowRamEffect}";
+        AutomationProperties.SetHelpText(_chipRamBox, _chipRamHint.Text);
+        return choices;
+    }
 
     private void UpdateChipRamChoices()
     {
@@ -224,8 +233,7 @@ internal sealed partial class MainWindow
         _updatingSettingsUi = true;
         try
         {
-            var choices = CopperScreenAvailability.ChipRamChoices(model);
-            _chipRamBox.ItemsSource = choices;
+            var choices = SetChipRamChoices(model);
             _chipRamBox.SelectedItem = choices.Contains(previous) ? previous : choices[0];
             if (_chipRamBox.SelectedItem is not "512") _pseudoFastRamBox.Text = "0";
         }
