@@ -9,7 +9,7 @@ is the default for a new setup and uses the same native ROM qualified in WinUAE.
 Use **Choose ROM…** for an original Kickstart and **Use built-in ROM** to switch
 back. Builds without the bundle need an original Kickstart ROM.
 It shows its splash at startup and prompts for a boot disk if DF0 is empty.
-It supports compatible takeovers and OFS/FFS startup disks. Workbench requires a
+It supports compatible takeovers and OFS/FFS startup disks, including on a PAL A1200 with the Motorola 68060 selected. Workbench requires a
 native Kickstart ROM.
 Unsupported model combinations remain visible with a requirement message and
 cannot start. Launcher and Configure Amiga remember a separate complete setup
@@ -94,7 +94,7 @@ CPU release evidence remains in [the 1.5.0 record](docs/engine/COPPER68K_MAINLIN
 The [Brian the Lion investigation](docs/engine/BRIAN_THE_LION_2026-10-03.md)
 records preceding CPU corrections now included in 1.5.3, and Paula's software request bit 14.
 Advanced CPU profiles remain experimental;
-physical accelerator timing and full compatibility are not certified. The desktop 68060 boots an A1200 with native Kickstart 3.1 and the FPU disabled at reset. See [030/040/060 evidence and limits](docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.md)
+physical accelerator timing and full compatibility are not certified. The desktop 68060 boots a PAL A1200 with CopperStart Mini or native Kickstart 3.1. The FPU starts disabled. See [030/040/060 evidence and limits](docs/engine/CPU_OPTIONS_030_040_060_2026-09-27.md)
 and the [020 CopperHDF release](docs/engine/COPPERHDF_020_2026-09-27.md).
 The [040 fetch correction](docs/engine/LOTUS_III_040_FETCH_2026-09-27.md)
 passes the original Lotus III input through a driving demo without changing its press timings.

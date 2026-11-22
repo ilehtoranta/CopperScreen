@@ -41,7 +41,7 @@ integration does not change the pinned shared CPU package or certify card timing
 
 ### Native A1200 68060 boot
 
-The desktop offers 68060 on PAL Alice/Lisa with native Kickstart 3.1.
+The desktop can start a 68060 on PAL Alice/Lisa with bundled CopperStart Mini or native Kickstart 3.1. Mini supports compatible floppy boot on this profile. The Workbench and MuLib results below use native Kickstart 3.1.
 Copper68k's opt-in reset policy sets PCR.DFP before the ROM runs. Guest
 software can clear PCR.DFP when it is ready for 68060 FPU frames. The default
 engine and runner reset policy still leaves DFP clear.
