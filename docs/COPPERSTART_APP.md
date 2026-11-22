@@ -20,6 +20,11 @@ and waits for a compatible disk. With a bootable disk already inserted, Mini
 hands off directly after the splash. Mini supports standard PAL A500, A500+
 and A1200 and qualified takeover, OFS and FFS startup disks.
 
+On the PAL A1200, **Configure Amiga…** also offers an experimental Motorola
+68060 with the FPU disabled at reset. Mini was verified on this profile with
+2 MiB Chip RAM through the splash, empty-drive prompt, OFS and FFS startup
+commands, and reboot with each floppy still inserted.
+
 Stage the qualified binary and its binary license before building a bundle.
 
 ```powershell

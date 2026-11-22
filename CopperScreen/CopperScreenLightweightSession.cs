@@ -6,7 +6,6 @@ namespace CopperScreen;
 // One owner, one machine. Host commands run on CopperScreenRuntime's thread.
 internal sealed class CopperScreenLightweightSession : ICopperScreenSession
 {
-    private const string Cpu68060Requirement = "The 68060 option requires an Amiga 1200 with an original Kickstart 3.1 ROM.";
     private readonly LightweightA500Machine _machine;
     private readonly IReadOnlyList<LightweightFloppyDriveType> _driveTypes;
     private readonly bool _bundledMini;
@@ -36,8 +35,9 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         else rom = CopperScreenKickstartRomArchive.ReadNativeRom(options.KickstartRomPath!, options.Profile.KickstartVersion);
         BaseDirectory = options.BaseDirectory;
         var backend = options.CpuBackendOverride ?? options.Profile.CpuBackend;
-        if (backend == M68kBackendKind.AccurateM68060 && CopperScreenKickstartRomArchive.IdentifyNativeVersion(rom) != KickstartVersion.Kickstart31)
-            throw new NotSupportedException(Cpu68060Requirement);
+        if (backend == M68kBackendKind.AccurateM68060 && !_bundledMini &&
+            CopperScreenKickstartRomArchive.IdentifyNativeVersion(rom) != KickstartVersion.Kickstart31)
+            throw new NotSupportedException(CopperScreenMachinePresets.Cpu68060Requirement);
         var modelName = options.Profile.Chipset.DisplayChip == DisplayChipModel.AgaLisa ? "Amiga 1200" : options.Profile.Chipset.DisplayChip == DisplayChipModel.EcsDenise ? "Amiga 500+" : "Amiga 500";
         ProfileName = _bundledMini ? modelName + " · CopperStart Mini" : options.Profile.DisplayName + (backend == M68kBackendKind.AccurateM68000
             ? string.Empty : $" [{CopperScreenAvailability.ChoiceLabel(backend.ToString())}]");
@@ -156,12 +156,13 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         var minimalA500 = p.Chipset == AmigaChipset.OcsPal && cpu == M68kBackendKind.AccurateM68000 &&
             p.ChipRamSize == 524288 && p.ExpansionRamSize is 0 or 524288;
         var minimalA1200 = p.Chipset == new AmigaChipset(DmaChipModel.AgaAlice, DisplayChipModel.AgaLisa, VideoStandard.Pal) &&
-            cpu == M68kBackendKind.AccurateM68EC020 && p.ChipRamSize == 2097152 && p.ExpansionRamSize == 0;
+            cpu is (M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68060) &&
+            p.ChipRamSize == 2097152 && p.ExpansionRamSize == 0;
         if (minimal && ((!minimalA500 && !copperStartA500Plus && !minimalA1200) ||
             p.RealFastRamSize != 0 || options.HardDrives.Count != 0 || options.HostDirectories.Count != 0))
-            return "CopperStart Mini requires a standard PAL A500 (OCS, 68000, 512 KiB Chip and optional 512 KiB slow RAM), A500+ (ECS, 68000, 1 MiB Chip RAM), or A1200 (Alice/Lisa, 68EC020, 2 MiB Chip RAM). Fast RAM, hard drives and shared folders require an original Kickstart ROM.";
+            return "CopperStart Mini requires a PAL A500 (OCS, 68000, 512 KiB Chip and optional 512 KiB slow RAM), A500+ (ECS, 68000, 1 MiB Chip RAM), or A1200 (Alice/Lisa, 68EC020 or 68060, 2 MiB Chip RAM). Fast RAM, hard drives and shared folders require an original Kickstart ROM.";
         if (cpu == M68kBackendKind.AccurateM68060 && !CopperScreenMachinePresets.CanUse68060(p.Chipset, p.KickstartSource, p.KickstartVersion))
-            return Cpu68060Requirement;
+            return CopperScreenMachinePresets.Cpu68060Requirement;
         var aga = p.Chipset.DisplayChip == DisplayChipModel.AgaLisa;
         if (aga != (p.Chipset.DmaChip == DmaChipModel.AgaAlice) ||
             aga && cpu is not (M68kBackendKind.AccurateM68EC020 or M68kBackendKind.AccurateM68020 or M68kBackendKind.AccurateM68030 or M68kBackendKind.AccurateM68040 or M68kBackendKind.JitM68040 or M68kBackendKind.AccurateM68060))

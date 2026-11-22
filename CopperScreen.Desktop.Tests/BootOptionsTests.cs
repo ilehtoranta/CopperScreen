@@ -34,11 +34,19 @@ public sealed partial class LaunchWorkflowTests
             var cpu = SettingsNamed<ComboBox>(settings, "Amiga CPU");
             Assert.True(cpu.IsEffectivelyVisible);
             Assert.Equal(model == 2 ? "AccurateM68EC020" : "AccurateM68000", cpu.SelectedItem);
-            Assert.Equal(!CopperScreenBundledMiniRom.Included, cpu.IsEnabled);
-            Assert.Equal(CopperScreenBundledMiniRom.Included, SettingsNamed<TextBlock>(settings, "CPU requirements").IsEffectivelyVisible);
+            var fixedCpu = CopperScreenBundledMiniRom.Included && model != 2;
+            Assert.Equal(!fixedCpu, cpu.IsEnabled);
+            var cpuRequirements = SettingsNamed<TextBlock>(settings, "CPU requirements");
+            Assert.Equal(fixedCpu, cpuRequirements.IsEffectivelyVisible);
             Assert.Equal(CopperScreenBundledMiniRom.Included, SettingsField<Button>(window, "_settingsStartButton").IsEnabled);
             if (CopperScreenBundledMiniRom.Included)
             {
+                if (model == 2)
+                {
+                    cpu.SelectedItem = "AccurateM68060";
+                    Assert.True(cpuRequirements.IsEffectivelyVisible);
+                    Assert.Contains("FPU disabled", cpuRequirements.Text);
+                }
                 Click(SettingsField<Button>(window, "_settingsCloseButton"));
                 var start = Button(window, "Start Amiga");
                 Click(start);

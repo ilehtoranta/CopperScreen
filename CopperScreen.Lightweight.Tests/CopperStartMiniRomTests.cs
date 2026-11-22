@@ -1,5 +1,6 @@
 using System.Buffers.Binary;
 using System.Security.Cryptography;
+using Copper68k;
 using CopperScreen;
 
 namespace CopperScreen.Tests;
@@ -67,6 +68,46 @@ public sealed class CopperStartMiniRomTests
             RunToScreen(bundled, Splash);
             Assert.True(bundled.Framebuffer.Distinct().Count() > 2, "A mounted disk suppressed the splash.");
             RunUntil(bundled, 0x800, 0x12345678u);
+        }
+        finally
+        {
+            directory.Delete(recursive: true);
+        }
+    }
+
+    [BundledMiniTheory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void A1200With68060BootsAFloppyAndBootsItAgainAfterReset(bool diskPresentAtColdStart)
+    {
+        var directory = Directory.CreateTempSubdirectory("copperscreen-mini-68060-");
+        try
+        {
+            var diskPath = Path.Combine(directory.FullName, "takeover.adf");
+            File.WriteAllBytes(diskPath, TakeoverDisk());
+            var draft = CopperScreenLaunchWorkflow.SelectStartChoice(new(), 8);
+            CopperScreenMachinePresets.SetCpu(draft, M68kBackendKind.AccurateM68060);
+            if (diskPresentAtColdStart) draft.DriveDiskPaths[0] = diskPath;
+            using var session = new CopperScreenLightweightSession(draft.ToStartupOptions(directory.FullName));
+            Assert.Equal(M68kCpuModel.M68060, session.Machine.CpuModel);
+            RunToScreen(session, Splash);
+            Assert.True(session.Framebuffer.Distinct().Count() > 2, "The ROM splash did not render.");
+            if (!diskPresentAtColdStart)
+            {
+                RunToScreen(session, WaitingForDisk);
+                Assert.True(session.Framebuffer.Distinct().Count() > 2, "The insert-disk screen did not render.");
+                Assert.True(session.InsertLoadedDisk(0, diskPath, CopperScreenDiskImageArchive.LoadDiskImage(diskPath), markChanged: true));
+            }
+            RunUntil(session, 0x800, 0x12345678u);
+
+            // Chip RAM survives reset. Require the boot block to write a new marker.
+            var cycle = session.Machine.Cycle;
+            session.Machine.WriteLong(0x800, 0, ref cycle, M68kBusAccessKind.CpuDataWrite);
+            Assert.Equal(0u, BinaryPrimitives.ReadUInt32BigEndian(session.Machine.ChipRam.Span[0x800..]));
+            session.Reset();
+            Assert.True(session.Machine.IsDriveMounted(0));
+            RunToScreen(session, Splash);
+            RunUntil(session, 0x800, 0x12345678u);
         }
         finally
         {
