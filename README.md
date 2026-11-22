@@ -18,48 +18,13 @@ Download the package for your platform. Each includes CopperStart Mini.
 
 ## Getting started
 
-Select **Amiga 500**, **Amiga 500+**, or **Amiga 1200** and press **Start Amiga**.
-The [bundled CopperStart Mini ROM](docs/COPPERSTART_APP.md#copperstart-mini-bundle)
-is the default for a new setup and uses the same native ROM qualified in WinUAE.
-Use **Choose ROM…** for an original Kickstart and **Use built-in ROM** to switch
-back. Builds without the bundle need an original Kickstart ROM.
-It shows its splash at startup and prompts for a boot disk if DF0 is empty.
-It supports compatible takeovers and OFS/FFS startup disks, including on a PAL A1200 with the Motorola 68060 selected. Workbench requires a
-native Kickstart ROM.
-Unsupported model combinations remain visible with a requirement message and
-cannot start. Launcher and Configure Amiga remember a separate complete setup
-for each model and ROM, including disks and optional hardware.
-The bundled CopperStart
-ROM and CopperOS desktop are selectable on all three models; A500/A500+
-compatibility is experimental and has not been verified. The screen explains each ROM requirement and lets
-native Kickstart start without a floppy disk. CopperOS includes its CopperStart
-A1200 ROM and 8 MiB FFS HDF. Selecting it creates a personal writable disk on
-first use for each model and reuses that disk thereafter. See [ROM and HDF setup](docs/COPPERSTART_APP.md).
-Each native Amiga model remembers its own selected Kickstart ROM across model
-switches and app restarts. Choosing another valid ROM updates only that model's default.
-Selected floppy and hard disks are also remembered per model, including empty
-drives, drive types and write protection.
-The last selected model is saved immediately, so reopening the app restores its
-ROM and disks even if emulation was never started.
-Each model also restores its full saved configuration, including CPU, RAM,
-chipset, RTC, input, display and drive settings. Complete Configure Amiga edits
-are saved automatically, including when closing without starting emulation.
-The Close button and settings window's close control keep edits. Partially typed
-invalid fields keep the most recent complete configuration.
-While running, input, display, volume/mute and floppy media changes apply
-immediately. Hardware, ROM, hard-disk/shared-folder mounts and floppy sound
-configuration show a restart notice listing the pending changes. Live settings
-continue to apply while hardware changes await Restart Amiga.
-After closing Settings, a main-screen notice lists pending changes and provides
-a Restart Amiga button to apply them. It clears after restarting or reverting them.
-The toolbar Restart button applies the same pending settings. With no pending
-changes, it resets the current Amiga configuration.
-Restart preserves whether the Amiga was paused or running, including when
-either restart button applies pending settings.
-Revert pending changes restores the running configuration without restarting,
-keeps changes already applied live, and updates the saved configuration.
-The same Revert pending changes button is available inside Settings and keeps
-the settings window open while restoring the running configuration.
+1. Extract the download for your platform and open CopperScreen.
+2. Choose **Amiga 500**, **Amiga 500+**, or **Amiga 1200**.
+3. Select **Start Amiga**. The bundled CopperStart Mini ROM starts by default and prompts for a bootable floppy image if DF0 is empty.
+
+To run Workbench or attach an HDF, use **Choose ROM…** to select an original Kickstart ROM. Use **Use built-in ROM** to switch back to CopperStart Mini.
+
+CopperScreen saves settings per model and ROM. Input, display, volume, and floppy changes apply live. Select **Restart Amiga** to apply pending hardware changes. See the [onboarding guide](docs/ONBOARDING.md) and [ROM and HDF setup](docs/COPPERSTART_APP.md).
 
 ## Supported machine
 
