@@ -11,18 +11,23 @@ public sealed class SparseHardfileTests : IDisposable
     {
         var path = Path.Combine(_root, "disk.hdf");
         var original = Enumerable.Repeat((byte)0xA5, 1024 * 1024).ToArray();
-        File.WriteAllBytes(path, original);
-        using var stream = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+        using var stream = new FileStream(path, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.Read);
+        stream.Write(original);
+        // Measure host allocation after flushing the OS write cache on both sides of the discard.
+        stream.Flush(flushToDisk: true);
         Assert.True(AmigaSparseFile.TryEnable(stream), "This platform/filesystem does not provide sparse deallocation; native sparse coverage is unavailable.");
         var before = AmigaSparseFile.GetAllocatedBytes(path);
         AmigaSparseFile.Discard(stream, 65536 + 512, 65536 * 6 - 1024);
+        stream.Flush(flushToDisk: true);
         Assert.Equal(original.Length, stream.Length);
         var actual = new byte[original.Length]; stream.Position = 0; stream.ReadExactly(actual);
         Assert.All(actual[..131072], b => Assert.Equal(0xA5, b));
         Assert.All(actual[131072..393216], b => Assert.Equal(0, b));
         Assert.All(actual[393216..], b => Assert.Equal(0xA5, b));
         var after = AmigaSparseFile.GetAllocatedBytes(path);
-        Assert.NotNull(before); Assert.NotNull(after); Assert.True(after < before);
+        Assert.NotNull(before);
+        Assert.NotNull(after);
+        Assert.True(after < before, $"Discard should reduce host allocation. Before: {before} bytes. After: {after} bytes.");
         stream.Position = 200000; stream.Write([1, 2, 3]); stream.Flush(true);
         stream.Dispose();
         using var reopened = File.OpenRead(path); reopened.Position = 200000;
