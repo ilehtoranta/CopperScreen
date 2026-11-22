@@ -306,8 +306,13 @@ internal sealed partial class MainWindow
             return null;
         }
         bool Available(string value) => UnavailableReason(value) == null;
-        string ChoiceText(string value) => UnavailableReason(value) is { } reason
-            ? $"{DisplayLabel(value)} — {reason}" : DisplayLabel(value);
+        string ChoiceText(string value)
+        {
+            var text = DisplayLabel(value);
+            if (label == "CPU backend" && value is ("AccurateM68000" or "AccurateM68010"))
+                return text;
+            return UnavailableReason(value) is { } reason ? $"{text} — {reason}" : text;
+        }
         // Keyboard selection must also respect availability before a popup has
         // realized its containers. Programmatic loading keeps unsupported values visible.
         object? previous = combo.Items.FirstOrDefault(item => Available(item?.ToString() ?? ""));
