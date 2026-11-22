@@ -69,6 +69,7 @@ internal sealed partial class MainWindow
             }));
             var size = AddDiskSizeInput(form, "Disk capacity", source == null ? "100" : (sourceCapacity / 1048576m).ToString(CultureInfo.InvariantCulture), out var sizeUnit);
             size.IsEnabled = sizeUnit.IsEnabled = existing == null;
+            if (existing != null) form.Children.Add(SettingsNote("The existing image determines disk capacity."));
             var fs = AddComboSetting(form, "Filesystem", existing == null
                 ? ["Unformatted", .. CopperScreenHardDiskSetup.FileSystemNames] : CopperScreenHardDiskSetup.FileSystemNames, markRestart: false);
             fs.SelectedIndex = existing == null ? 1 : 0;
@@ -81,12 +82,14 @@ internal sealed partial class MainWindow
             device.Text = $"DH{deviceNumber}";
             var fill = new CheckBox { Content = "Use available space", IsChecked = true }; partition.Children.Add(fill);
             var partitionSize = AddDiskSizeInput(partition, "Partition size", "8", out var partitionUnit);
+            var sizeHint = SettingsNote("");
+            partition.Children.Add(sizeHint);
             var blockSize = AddComboSetting(partition, "Filesystem block size", ["512 bytes", "1 KiB", "2 KiB", "4 KiB"], markRestart: false);
             blockSize.SelectedIndex = 0;
             partition.Children.Add(SettingsNote("Filesystem blocks are independent of the disk's 512-byte sectors. The guest filesystem handler must support the chosen block size."));
             var label = AddTextSetting(partition, "Volume label", markRestart: false); label.Text = "Work";
             var bootable = new CheckBox { Content = "Bootable partition", IsChecked = false }; partition.Children.Add(bootable);
-            partition.Children.Add(SettingsHelp("Filesystem details", "FFS uses DOS1; SFS and SFS2 require a compatible guest ROM or handler. CopperNova (CNFS) is experimental and requires a compatible CNFS handler. Formatting does not install a handler or boot files."));
+            partition.Children.Add(SettingsHelp("Which filesystems need a guest handler?", "FFS uses DOS1; SFS and SFS2 require a compatible guest ROM or handler. CopperNova (CNFS) is experimental and requires a compatible CNFS handler. Formatting does not install a handler or boot files."));
             var experimental = new CheckBox { Content = "I want to create an experimental CopperNova (CNFS) volume", IsVisible = false }; partition.Children.Add(experimental);
             var preview = SettingsNote(string.Empty); AutomationProperties.SetName(preview, "Partition size preview"); partition.Children.Add(preview);
             partition.Children.Add(SettingsNote("A partition uses one contiguous free area. The preview shows the usable size after alignment and disk metadata."));
@@ -122,6 +125,8 @@ internal sealed partial class MainWindow
                 first.IsEnabled = last.IsEnabled = manual;
                 fill.IsEnabled = !manual;
                 partitionSize.IsEnabled = partitionUnit.IsEnabled = !manual && fill.IsChecked != true;
+                sizeHint.IsVisible = !partitionSize.IsEnabled;
+                sizeHint.Text = manual ? "The explicit cylinder range determines partition size." : "Clear Use available space to enter a partition size.";
                 if (IsBlank()) { currentRange = null; return; }
                 try
                 {

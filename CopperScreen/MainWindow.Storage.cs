@@ -43,7 +43,7 @@ internal sealed partial class MainWindow
         layout.Children.Add(CreatePanelButton("Export hard-disk backup…", async () => await ExportHardDiskBackupAsync()));
         layout.Children.Add(SettingsNote("Restore creates new disk files and loads the saved machine configuration, including disk write protection. Check the ROM path before starting the Amiga."));
         layout.Children.Add(CreatePanelButton("Restore hard-disk backup…", async () => await RestoreHardDiskBackupAsync()));
-        layout.Children.Add(SettingsHelp("Backup details", "Every complete hard-disk image is included, with all RDB partitions and unpartitioned space. Existing files and backups are preserved. CopperOS floppy workspace backups are managed separately from the launcher."));
+        layout.Children.Add(SettingsHelp("What does a hard disk backup include?", "Every complete hard-disk image is included, with all RDB partitions and unpartitioned space. Existing files and backups are preserved. CopperOS floppy workspace backups are managed separately from the launcher."));
         _hardDiskBackupStatus = SettingsNote(string.Empty);
         _hardDiskBackupStatus.IsVisible = false;
         layout.Children.Add(_hardDiskBackupStatus);
@@ -54,7 +54,7 @@ internal sealed partial class MainWindow
     private Control CreateHardfileSettings()
     {
         var layout = new StackPanel { Spacing = 10 };
-        layout.Children.Add(SettingsHelp("Hard disk help", "Hard disks attach when the Amiga starts. CopperStart accepts one existing image on unit 0: choose RDB to discover its FFS partitions and boot priorities, or Partition to enter exact geometry. TD64 supports FFS offsets above 4 GiB. Changes require a restart."));
+        layout.Children.Add(SettingsHelp("How does CopperStart attach a hard disk?", "Hard disks attach when the Amiga starts. CopperStart accepts one existing image on unit 0: choose RDB to discover its FFS partitions and boot priorities, or Partition to enter exact geometry. TD64 supports FFS offsets above 4 GiB. Changes require a restart."));
         layout.Children.Add(SettingsNote("Attach an existing image or create a new one. Changes apply when the Amiga restarts."));
         _hardfileRows = new StackPanel { Spacing = 10 };
         layout.Children.Add(_hardfileRows);
@@ -141,7 +141,7 @@ internal sealed partial class MainWindow
                 }
                 catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ArgumentException) { SetSettingsError(ex.Message); }
             }));
-            sparseForm.Children.Add(SettingsNote("Virtual capacity stays fixed. CopperTrim reclaims free guest blocks after you enable writes. Enabling sparse storage alone does not reclaim existing data. Host storage is allocated as data is written and may run out before the virtual disk is full."));
+            sparseForm.Children.Add(SettingsHelp("How does sparse storage use host disk space?", "Virtual capacity stays fixed. CopperTrim reclaims free guest blocks after you enable writes. Enabling sparse storage alone does not reclaim existing data. Host storage is allocated as data is written and may run out before the virtual disk is full."));
             path.TextChanged += (_, _) => { sparseEnabled = null; RefreshAllocation(); };
             RefreshAllocation();
             var readOnly = new CheckBox { Content = "Read-only", IsChecked = settings.ReadOnly };
@@ -156,12 +156,14 @@ internal sealed partial class MainWindow
             readOnly.IsCheckedChanged += (_, _) => MarkSettingsRestartRequired(); form.Children.Add(readOnly);
             form.Children.Add(SettingsWriteWarning(readOnly, "Writes directly to this file.", $"Hard disk {settings.Unit} write warning"));
             var mode = AddComboSetting(diskOptions, "Image layout", ["Auto", "RDB", "Partition"]); mode.SelectedIndex = (int)settings.Mode;
+            var layoutHint = SettingsNote(string.Empty);
+            diskOptions.Children.Add(layoutHint);
             var createSizeBytes = settings.CreateSizeBytes;
             var creationNote = SettingsNote($"Blank image: {createSizeBytes / 1048576d:N1} MiB. Created on start if the file does not exist; format it inside the Amiga.");
             form.Children.Add(creationNote);
             var advanced = CreateSettingsGroupForm();
             var partitionForm = CreateSettingsGroupForm();
-            diskOptions.Children.Add(SettingsHelp("Image layout help", "RDB reads partition names, geometry and boot priorities from the image. Partition mode uses the fields below. No disk is formatted. Use Create disk image to add a new blank image."));
+            diskOptions.Children.Add(SettingsNote("Changing the layout leaves the image contents intact. Use Create disk image to add a new blank image."));
             var partition = settings.Partition ?? new AmigaHardfilePartitionMetadata();
             var fields = new Dictionary<string, TextBox>();
             // The advanced fields correspond directly to the saved profile's
@@ -178,7 +180,7 @@ internal sealed partial class MainWindow
                     ? "From the image's partition definition" : "Default";
                 fields.Add(property.Name, box);
             }
-            partitionForm.Children.Add(SettingsHelp("Partition help", "First and last cylinders are inclusive. Heads and blocks per track must match the formatted image. FFS uses 512-byte blocks; its DOS type is $444F5301."));
+            partitionForm.Children.Add(SettingsHelp("Which geometry values does my partition need?", "First and last cylinders are inclusive. Heads and blocks per track must match the formatted image. FFS uses 512-byte blocks; its DOS type is $444F5301."));
             diskOptions.Children.Add(CreatePanelButton("Use FFS partition settings", () =>
             {
                 mode.SelectedItem = "Partition";
@@ -195,6 +197,16 @@ internal sealed partial class MainWindow
             diskOptions.Children.Add(partitionForm);
             void UpdateLayout()
             {
+                layoutHint.Text = (AmigaHardfileMountMode)mode.SelectedIndex switch
+                {
+                    AmigaHardfileMountMode.Auto when _settingsDraft.KickstartSource == CopperScreenKickstartSource.CopperStart =>
+                        "CopperStart requires an explicit layout. Choose RDB to read the image’s partition table, or Partition to enter the geometry yourself.",
+                    AmigaHardfileMountMode.Auto => "Auto reads the image’s partition table if it finds an RDB. Otherwise it mounts the image as one partition.",
+                    AmigaHardfileMountMode.RigidDiskBlock => "Reads partition names, geometry and boot priorities from the image’s rigid disk block (RDB).",
+                    AmigaHardfileMountMode.Partition => "Mounts one partition using the geometry and filesystem settings below.",
+                    _ => string.Empty
+                };
+                AutomationProperties.SetHelpText(mode, layoutHint.Text);
                 var rdb = mode.SelectedIndex == (int)AmigaHardfileMountMode.RigidDiskBlock;
                 partitionForm.IsVisible = !rdb;
                 if (rdb) createSizeBytes = 0;

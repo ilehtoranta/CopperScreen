@@ -30,6 +30,17 @@ internal sealed partial class MainWindow
         return help;
     }
 
+    private static TextBlock DisabledSettingsNote(Control control, string reason)
+    {
+        var note = SettingsNote(reason);
+        note.IsVisible = !control.IsEnabled;
+        control.PropertyChanged += (_, change) =>
+        {
+            if (change.Property == IsEnabledProperty) note.IsVisible = !control.IsEnabled;
+        };
+        return note;
+    }
+
     private static TextBlock SettingsWriteWarning(CheckBox readOnly, string text, string name, TextBox? diskPath = null)
     {
         var warning = SettingsNote(text);

@@ -12,7 +12,7 @@ internal sealed partial class MainWindow
     private Control CreateSharedFolderSettings()
     {
         var layout = new StackPanel { Spacing = 10 };
-        layout.Children.Add(SettingsHelp("Shared folder help", "Shared folders appear as Amiga drives. Bootable folders require your own Workbench files. Changes require a restart."));
+        layout.Children.Add(SettingsNote("Shared folders appear as Amiga drives. Bootable folders require your own Workbench files. Changes require a restart."));
         _sharedFolderRows = new StackPanel { Spacing = 10 }; layout.Children.Add(_sharedFolderRows);
         layout.Children.Add(CreatePanelButton("Add shared folder", () =>
         {
@@ -55,6 +55,7 @@ internal sealed partial class MainWindow
             form.Children.Add(SettingsWriteWarning(readOnly, "Changes files in this folder directly.", $"Shared folder {mount.DeviceName} write warning"));
             var boot = new CheckBox { Content = "Boot from this folder", IsChecked = mount.BootPriority.HasValue }; form.Children.Add(boot);
             var priority = AddTextSetting(form, "Boot priority"); priority.Text = (mount.BootPriority ?? 0).ToString(); priority.IsEnabled = boot.IsChecked == true;
+            form.Children.Add(DisabledSettingsNote(priority, "Enable booting from this folder to set its priority."));
             boot.IsCheckedChanged += (_, _) => { priority.IsEnabled = boot.IsChecked == true; MarkSettingsRestartRequired(); };
             readOnly.IsCheckedChanged += (_, _) => MarkSettingsRestartRequired();
             form.Children.Add(CreatePanelButton("Remove shared folder", () =>

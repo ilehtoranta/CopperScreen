@@ -30,7 +30,7 @@ public sealed partial class LaunchWorkflowTests
             var settings = SettingsField<Window>(window, "_settingsWindow");
             SettingsCall(window, "SelectSettingsPage", 2);
             settings.UpdateLayout();
-            var help = SettingsNamed<Expander>(settings, "Memory help");
+            var help = SettingsNamed<Expander>(settings, "How do Chip RAM and Fast RAM work?");
             Assert.False(help.IsExpanded);
             var savedPath = Path.Combine(_root, "last-machine.json");
             var saved = File.ReadAllText(savedPath);
@@ -67,7 +67,7 @@ public sealed partial class LaunchWorkflowTests
             var settings = SettingsField<Window>(window, "_settingsWindow");
             var note = SettingsField<TextBlock>(window, "_copperStartSettingsNote");
             Assert.False(note.IsVisible);
-            Assert.False(SettingsNamed<Expander>(settings, "Boot help").IsExpanded);
+            Assert.False(SettingsNamed<Expander>(settings, "Which boot ROM should I use?").IsExpanded);
             SettingsField<TextBox>(window, "_realFastRamBox").Text = "0";
             SettingsField<TextBox>(window, "_kickstartRomBox").Text = Path.Combine(_root, "missing.rom");
             SettingsCall(window, "UpdateSettingsStatus");
@@ -84,6 +84,32 @@ public sealed partial class LaunchWorkflowTests
         finally { window.Close(); }
     });
 
+    [Fact]
+    public Task PlaybackGuidanceIsInlineAndKeyBindingHintFollowsProfile() => Ui(() =>
+    {
+        var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
+        try
+        {
+            Click(Button(window, "Configure Amiga…"));
+            var settings = SettingsField<Window>(window, "_settingsWindow");
+            SettingsCall(window, "SelectSettingsPage", 5);
+            var volumeHint = settings.GetLogicalDescendants().OfType<TextBlock>()
+                .First(t => t.Text == "Adjusts playback volume in CopperScreen.");
+            Assert.True(volumeHint.IsEffectivelyVisible);
+
+            SettingsCall(window, "SelectSettingsPage", 6);
+            var chooser = SettingsField<ComboBox>(window, "_controllerProfileChooser");
+            var profiles = chooser.Items.OfType<CopperScreenControllerProfile>();
+            var hint = settings.GetLogicalDescendants().OfType<TextBlock>()
+                .First(t => t.Text == "Select a keyboard joystick profile to change its keys.");
+            chooser.SelectedItem = profiles.First(p => p.Kind == CopperScreenControllerKind.Mouse);
+            Assert.True(hint.IsEffectivelyVisible);
+            chooser.SelectedItem = profiles.First(p => p.Kind == CopperScreenControllerKind.KeyboardJoystick);
+            Assert.False(hint.IsVisible);
+        }
+        finally { window.Close(); }
+    });
+
     [CopperStartFact]
     public Task CopperStartBootHelpAppearsOnlyForItsBootMethod() => Ui(() =>
     {
@@ -95,7 +121,7 @@ public sealed partial class LaunchWorkflowTests
             Assert.False(note.IsVisible);
             Click(SettingsField<Button>(window, "_settingsUseCopperOs"));
             Assert.True(note.IsVisible); Assert.Contains("A500", note.Text);
-            Assert.False(SettingsNamed<Expander>(SettingsField<Window>(window, "_settingsWindow"), "Boot help").IsExpanded);
+            Assert.False(SettingsNamed<Expander>(SettingsField<Window>(window, "_settingsWindow"), "Which boot ROM should I use?").IsExpanded);
             window.SelectOriginalRom(DefaultRomFixture(0, "return-from-copperos"));
             Assert.False(note.IsVisible);
         }

@@ -146,7 +146,6 @@ internal sealed partial class MainWindow
         layout.Spacing = 16;
         layout.Children.Add(new TextBlock { Text = "Start your Amiga", FontSize = 24, FontWeight = FontWeight.SemiBold, Foreground = Brushes.White });
         layout.Children.Add(CreateMachineControls());
-        layout.Children.Add(SettingsHelp("Model help", "Selecting a model restores its saved configuration. Changes are saved automatically. Change memory sizes and connected drives in their settings pages."));
         var form = CreateSettingsGroupForm();
         _kickstartRomBox = new TextBox { PlaceholderText = "Choose a boot ROM", MinWidth = 0 };
         _kickstartRomBox.TextChanged += (_, _) => MarkSettingsRestartRequired();
@@ -176,12 +175,12 @@ internal sealed partial class MainWindow
         form.Children.Add(CreateSettingsRow("Startup disk", WithAction(_setupDiskBox, diskBrowse)));
         AutomationProperties.SetName(_setupDiskBox, "Optional startup disk path");
         _bootSettingsHelp = SettingsNote(string.Empty);
-        form.Children.Add(SettingsHelp("Boot help", _bootSettingsHelp));
+        form.Children.Add(SettingsHelp("Which boot ROM should I use?", _bootSettingsHelp));
         layout.Children.Add(CreateSettingsGroup("Boot and disk", form));
 
         var options = CreateSettingsGroupForm();
         _engineBox = AddComboSetting(options, "Engine", ["Lightweight", "Legacy"]);
-        options.Children.Add(SettingsHelp("Availability help", "Greyed choices are not yet available and cannot be selected. Legacy is unavailable. CPU choices depend on the selected model."));
+        options.Children.Add(SettingsNote("Standard is the supported engine. Legacy is unavailable."));
         var reset = CreatePanelButton("Use supported Amiga 500 settings", UseSupportedMachine);
         options.Children.Add(reset);
         layout.Children.Add(new Expander { Header = "Machine options and availability", Content = options, HorizontalAlignment = HorizontalAlignment.Stretch });
@@ -246,11 +245,18 @@ internal sealed partial class MainWindow
                 if (profile == null) return new TextBlock();
                 var item = new StackPanel { Spacing = 3, Margin = new Thickness(4) };
                 item.Children.Add(new TextBlock { Text = profile.DisplayName, TextWrapping = TextWrapping.Wrap, FontWeight = FontWeight.SemiBold });
-                item.Children.Add(new TextBlock { Text = profile.IsAvailable ? (profile.IsBundled ? "Bundled preset" : "Personal profile") : "Not yet available", Foreground = MutedText, FontSize = 12 });
+                item.Children.Add(new TextBlock
+                {
+                    Text = profile.UnavailableReason ?? (profile.IsBundled ? "Bundled preset" : "Personal profile"),
+                    TextWrapping = TextWrapping.Wrap,
+                    Foreground = MutedText,
+                    FontSize = 12
+                });
                 ToolTip.SetTip(item, profile.UnavailableReason ?? profile.Path);
                 return item;
             })
         };
+        ScrollViewer.SetHorizontalScrollBarVisibility(_profileList, Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled);
         AutomationProperties.SetName(_profileList, "Machine profiles");
         _profileList.ContainerPrepared += (_, args) =>
         {
@@ -263,10 +269,13 @@ internal sealed partial class MainWindow
         layout.Children.Add(_profileList);
         var actions = new WrapPanel();
         var load = CreatePanelButton("Load profile", LoadSelectedProfile);
+        load.IsEnabled = false;
         _profileList.SelectionChanged += (_, _) => load.IsEnabled = _profileList.SelectedItem is CopperScreenProfileSummary { IsAvailable: true };
         foreach (var button in new[] { load, CreatePanelButton("Save profile", SaveCurrentProfile), CreatePanelButton("Save a copy", SaveCurrentProfileAs) })
         { button.Margin = new Thickness(0, 0, 8, 0); actions.Children.Add(button); }
         layout.Children.Add(actions);
+        layout.Children.Add(DisabledSettingsNote(load, "Select an available profile to load it."));
+        layout.Children.Add(SettingsNote("Saving a bundled preset creates a personal copy."));
         var metadata = CreateSettingsGroupForm();
         _profileNameBox = AddTextSetting(metadata, "Display name");
         _profileDescriptionBox = AddTextSetting(metadata, "Description");
@@ -275,7 +284,6 @@ internal sealed partial class MainWindow
         _profileDescriptionBox.MinHeight = 64;
         _profileIdBox = AddTextSetting(metadata, "File name");
         layout.Children.Add(CreateSettingsGroup("Profile details", metadata));
-        layout.Children.Add(SettingsHelp("Profile help", "Choose a profile, then Load profile. Saving a bundled preset creates a personal profile and keeps the original. Unavailable machines cannot be selected."));
         layout.Children.Add(new Expander { Header = "Personal profile folder", Content = _profileDirectoryText });
         return CreateScrollableSettingsPage(layout);
     }
@@ -285,11 +293,21 @@ internal sealed partial class MainWindow
         // Display copy is independent of selection values and availability keys.
         string DisplayLabel(string value) => label == "Pixel aspect" && value == "LCD crisp (1:1 hires / 1:2 superhires)"
             ? "LCD crisp" : CopperScreenAvailability.ChoiceLabel(value);
-        bool Available(string value) => CopperScreenAvailability.IsChoiceAvailable(label, value) &&
-            (label != "CPU backend" || CopperScreenMachinePresets.CpuChoices(_settingsDraft).Contains(value)) &&
-            (label != "Profile kind" || value != "Mouse" ||
-             _controllerProfileChooser.SelectedItem is not CopperScreenControllerProfile profile ||
-             !string.Equals(profile.Id, _settingsDraft.Input.Port2ProfileId, StringComparison.OrdinalIgnoreCase));
+        string? UnavailableReason(string value)
+        {
+            if (!CopperScreenAvailability.IsChoiceAvailable(label, value))
+                return "Unsupported by this version";
+            if (label == "CPU backend" && !CopperScreenMachinePresets.CpuChoices(_settingsDraft).Contains(value))
+                return "Unavailable with this model and boot ROM";
+            if (label == "Profile kind" && value == "Mouse" &&
+                _controllerProfileChooser.SelectedItem is CopperScreenControllerProfile profile &&
+                string.Equals(profile.Id, _settingsDraft.Input.Port2ProfileId, StringComparison.OrdinalIgnoreCase))
+                return "A mouse requires Port 1";
+            return null;
+        }
+        bool Available(string value) => UnavailableReason(value) == null;
+        string ChoiceText(string value) => UnavailableReason(value) is { } reason
+            ? $"{DisplayLabel(value)} — {reason}" : DisplayLabel(value);
         // Keyboard selection must also respect availability before a popup has
         // realized its containers. Programmatic loading keeps unsupported values visible.
         object? previous = combo.Items.FirstOrDefault(item => Available(item?.ToString() ?? ""));
@@ -301,14 +319,14 @@ internal sealed partial class MainWindow
         };
         combo.ItemTemplate = new FuncDataTemplate<string>((value, _) => new TextBlock
         {
-            Text = value == null ? string.Empty : DisplayLabel(value) + (Available(value) ? "" : " — Not yet available"),
+            Text = value == null ? string.Empty : ChoiceText(value),
             TextWrapping = TextWrapping.Wrap
         });
         combo.ContainerPrepared += (_, args) =>
         {
             var value = combo.Items[args.Index]?.ToString() ?? "";
             args.Container.IsEnabled = Available(value);
-            AutomationProperties.SetName(args.Container, DisplayLabel(value) + (args.Container.IsEnabled ? "" : ", not yet available"));
+            AutomationProperties.SetName(args.Container, ChoiceText(value));
         };
         combo.DropDownOpened += (_, _) =>
         {
@@ -352,10 +370,10 @@ internal sealed partial class MainWindow
         };
         AutomationProperties.SetName(_masterVolumeSlider, "Emulator playback volume");
         playback.Children.Add(CreateSettingsRow("Emulator volume", WithAction(_masterVolumeSlider, level)));
+        playback.Children.Add(SettingsNote("Adjusts playback volume in CopperScreen."));
         _masterMuteBox = new CheckBox { Content = "Mute emulator audio", IsChecked = _outputMuted };
         _masterMuteBox.IsCheckedChanged += (_, _) => UpdateSettingsStatus();
         playback.Children.Add(_masterMuteBox);
-        playback.Children.Add(SettingsHelp("Playback help", "Playback volume controls what you hear in CopperScreen. It does not change the Amiga's emulated audio output."));
         layout.Children.Add(CreateSettingsGroup("Playback", playback));
         var floppy = CreateSettingsGroupForm();
         _floppySoundsEnabledBox = new CheckBox { Content = "Play floppy drive sounds" };

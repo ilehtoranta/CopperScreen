@@ -9,7 +9,7 @@ namespace CopperScreen;
 
 internal sealed partial class MainWindow
 {
-    private sealed record MachineControls(ComboBox Model, ComboBox FastSize, CheckBox SlowRam, CheckBox FastRam, CheckBox Rtc, CheckBox DriveSounds, TextBlock Note);
+    private sealed record MachineControls(ComboBox Model, ComboBox FastSize, CheckBox SlowRam, CheckBox FastRam, CheckBox Rtc, CheckBox DriveSounds, TextBlock Note, TextBlock RamNote);
     private readonly List<MachineControls> _machineControls = [];
     private TextBlock _cpuRestrictionNote = null!;
     private bool _updatingMachineControls;
@@ -30,7 +30,9 @@ internal sealed partial class MainWindow
         var rtc = new CheckBox { Content = "RTC clock" };
         var sounds = new CheckBox { Content = "Floppy drive sounds" };
         var note = SettingsNote("");
-        var controls = new MachineControls(model, fastSize, slow, fast, rtc, sounds, note);
+        var ramNote = SettingsNote("");
+        AutomationProperties.SetName(ramNote, "RAM requirements");
+        var controls = new MachineControls(model, fastSize, slow, fast, rtc, sounds, note, ramNote);
         _machineControls.Add(controls);
         model.SelectionChanged += (_, _) =>
         {
@@ -58,12 +60,14 @@ internal sealed partial class MainWindow
         var options = new StackPanel { Spacing = 4 };
         options.Children.Add(slow);
         options.Children.Add(WithAction(fast, fastSize));
+        options.Children.Add(ramNote);
         options.Children.Add(rtc);
         options.Children.Add(sounds);
         var panel = new StackPanel { Spacing = 8 };
         panel.Children.Add(SectionLabel("Amiga model"));
         panel.Children.Add(model);
         panel.Children.Add(note);
+        panel.Children.Add(SettingsNote("Switching models restores the settings last saved for that model."));
         var cpuForm = CreateSettingsGroupForm();
         _cpuBackendBox = AddComboSetting(cpuForm, "CPU backend",
             ["AccurateM68000", "AccurateM68010", "AccurateM68EC020", "AccurateM68020", "AccurateM68030", "AccurateM68040", "AccurateM68060", "JitM68040"],
@@ -77,7 +81,7 @@ internal sealed partial class MainWindow
         _cpuRestrictionNote = SettingsNote("");
         AutomationProperties.SetName(_cpuRestrictionNote, "CPU requirements");
         cpuForm.Children.Add(_cpuRestrictionNote);
-        cpuForm.Children.Add(SettingsHelp("CPU help", "CPU changes may reduce Fast RAM to its address limit. Upgrades use experimental timing."));
+        cpuForm.Children.Add(SettingsNote("CPU changes may reduce Fast RAM to its address limit. Upgrades use experimental timing."));
         panel.Children.Add(cpuForm);
         panel.Children.Add(new Expander { Header = "Optional features", Content = options, HorizontalAlignment = HorizontalAlignment.Stretch });
         return panel;
@@ -126,13 +130,20 @@ internal sealed partial class MainWindow
                 var sizes = CopperScreenMachinePresets.FastRamChoices(draft);
                 if (controls.FastSize.ItemsSource is not int[] currentSizes || !currentSizes.SequenceEqual(sizes)) controls.FastSize.ItemsSource = sizes;
                 controls.FastSize.SelectedItem = draft.RealFastRamKb;
-                controls.FastSize.IsEnabled = enabled && CopperScreenMachinePresets.CanUseFastRam(draft);
+                var canUseFast = CopperScreenMachinePresets.CanUseFastRam(draft);
+                var canUseSlow = CopperScreenMachinePresets.CanUseSlowRam(draft);
+                controls.FastSize.IsEnabled = enabled && canUseFast;
                 controls.SlowRam.IsChecked = draft.PseudoFastRamKb > 0;
-                controls.SlowRam.IsEnabled = enabled && (CopperScreenMachinePresets.CanUseSlowRam(draft) || draft.PseudoFastRamKb > 0);
-                ToolTip.SetTip(controls.SlowRam, "Available with a 512 KiB Chip RAM layout.");
+                controls.SlowRam.IsEnabled = enabled && (canUseSlow || draft.PseudoFastRamKb > 0);
                 controls.FastRam.IsChecked = draft.RealFastRamKb > 0;
-                controls.FastRam.IsEnabled = enabled && (CopperScreenMachinePresets.CanUseFastRam(draft) || draft.RealFastRamKb > 0);
-                ToolTip.SetTip(controls.FastRam, "24-bit CPUs: up to 8 MiB. Full 32-bit CPUs: up to 1 GiB. More than 8 MiB requires Kickstart 3.x. CopperStart Mini uses Chip RAM and optional A500 slow RAM.");
+                controls.FastRam.IsEnabled = enabled && (canUseFast || draft.RealFastRamKb > 0);
+                var fastLimit = !canUseFast ? "Fast RAM requires an original Kickstart ROM."
+                    : sizes[^1] <= 8192 ? "This CPU supports up to 8 MiB of Fast RAM."
+                    : draft.RomVersion is KickstartVersion.Kickstart30 or KickstartVersion.Kickstart31
+                        ? $"This configuration supports up to {sizes[^1] / 1024} MiB of Fast RAM."
+                        : "Fast RAM above 8 MiB requires Kickstart 3.x.";
+                controls.RamNote.Text = canUseSlow ? fastLimit
+                    : "Slow RAM requires 512 KiB of Chip RAM with an 8371 or 8372A Agnus. " + fastLimit;
                 controls.Rtc.IsChecked = draft.RtcEnabled;
                 controls.Rtc.IsEnabled = controls.DriveSounds.IsEnabled = enabled;
                 controls.DriveSounds.IsChecked = draft.FloppyDriveAudio.Enabled;
