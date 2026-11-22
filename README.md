@@ -89,13 +89,11 @@ See the [MSIX packaging guide](docs/MSIX_PACKAGING.md) for Microsoft Store packa
 
 ## Components
 
-| Component | Purpose |
-| --- | --- |
-| CopperScreen | Desktop interface, input, presentation and audio delivery. |
-| [CopperMod.Amiga.Lightweight](CopperMod.Amiga.Lightweight/README.md) | Independent A500 engine with a single execution clock. |
-| [CopperDisk](CopperDisk/README.md) | ADF/ADZ/DMS/IPF/SCP decoding used by the engine and host, plus hardfile metadata/range handling. |
-| CopperMod.Amiga.Lightweight.Runner | Headless execution and workload measurement. |
-| [Copper68k](https://github.com/ilehtoranta/CopperMod/tree/main/Copper68k) | Shared CPU interpreter, consumed as a pinned NuGet package. |
+- [CopperScreen desktop app](docs/ONBOARDING.md)
+- [Lightweight Amiga engine](CopperMod.Amiga.Lightweight/README.md)
+- [CopperDisk image library](CopperDisk/README.md)
+- [Headless runner and workloads](docs/engine/PERFORMANCE.md)
+- [Copper68k CPU emulation package](docs/engine/CPU_SUPPORT.md)
 
 ## License
 
