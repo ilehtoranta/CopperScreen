@@ -42,6 +42,12 @@ A different staging location can be set with `CopperStartMiniBundleDirectory`.
 The ZIP packaging script requires the staged ROM. MSIX can include it with
 `-IncludeCopperStartMini` for noncommercial builds.
 
+The official `main` GitHub Actions builds package the same qualified ROM and
+license for macOS and Linux. To configure those build inputs, run
+`scripts/set-ci-copperstart-mini-bundle.ps1` with the same `-Rom` and
+`-License` arguments. It verifies the ROM and stores the archive in eight
+repository Actions secrets. Pull request and fork builds omit the bundle.
+
 Builds without the bundle use **Choose ROM…** for an original Kickstart.
 Use `-p:CopperScreenIncludeMiniRom=false` to omit the bundle with staging
 present. The `--minimal-disk-boot` flag and existing minimal disk boot profiles

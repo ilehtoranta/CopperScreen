@@ -86,6 +86,7 @@ jobs:
     env:
       RID: ${{ matrix.rid }}
       NATIVE_ARCH: ${{ matrix.arch }}
+      INCLUDE_MINI_ROM: ${{ github.repository == 'ilehtoranta/CopperScreen' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -98,6 +99,29 @@ jobs:
           sudo apt-get install -y xvfb xauth libx11-6 libice6 libsm6 libfontconfig1 libgl1
       - name: Restore locked packages
         run: dotnet restore CopperScreen.slnx --locked-mode
+      - name: Stage the qualified CopperStart Mini ROM and license
+        if: env.INCLUDE_MINI_ROM == 'true'
+        shell: pwsh
+        env:
+          MINI_01: ${{ secrets.COPPERSTART_MINI_BUNDLE_01 }}
+          MINI_02: ${{ secrets.COPPERSTART_MINI_BUNDLE_02 }}
+          MINI_03: ${{ secrets.COPPERSTART_MINI_BUNDLE_03 }}
+          MINI_04: ${{ secrets.COPPERSTART_MINI_BUNDLE_04 }}
+          MINI_05: ${{ secrets.COPPERSTART_MINI_BUNDLE_05 }}
+          MINI_06: ${{ secrets.COPPERSTART_MINI_BUNDLE_06 }}
+          MINI_07: ${{ secrets.COPPERSTART_MINI_BUNDLE_07 }}
+          MINI_08: ${{ secrets.COPPERSTART_MINI_BUNDLE_08 }}
+        run: |
+          $parts = @($env:MINI_01, $env:MINI_02, $env:MINI_03, $env:MINI_04,
+                     $env:MINI_05, $env:MINI_06, $env:MINI_07, $env:MINI_08)
+          if ($parts -contains '' -or $parts -contains $null) {
+              throw 'The CopperStart Mini bundle inputs are incomplete.'
+          }
+          $zip = Join-Path $env:RUNNER_TEMP 'copperstart-mini.zip'
+          $inputs = Join-Path $env:RUNNER_TEMP 'copperstart-mini'
+          [IO.File]::WriteAllBytes($zip, [Convert]::FromBase64String($parts -join ''))
+          Expand-Archive -LiteralPath $zip -DestinationPath $inputs
+          ./scripts/prepare-copperstart-mini-bundle.ps1 -Rom "$inputs/CopperStart-Mini.rom" -License "$inputs/LICENSE.txt"
       - name: Publish and package the desktop app
         shell: bash
         run: |
@@ -132,7 +156,7 @@ jobs:
           fi
           # Use a separate lock for the RID-specific runtime packs.
           dotnet publish "$project" -c Release -r "$RID" --self-contained true \
-            -p:PublishTrimmed=false -p:CopperScreenIncludeMiniRom=false \
+            -p:PublishTrimmed=false "-p:CopperScreenIncludeMiniRom=$INCLUDE_MINI_ROM" \
             -p:DebugType=None -p:DebugSymbols=false \
             "-p:NuGetLockFilePath=$package/../runtime.packages.lock.json" -o "$output"
           cp LICENSE THIRD-PARTY-NOTICES.md "$output/"
@@ -145,10 +169,23 @@ jobs:
         run: |
           testdir="$(mktemp -d)"
           tar -xzf "artifacts/native/$NATIVE_ARCHIVE" -C "$testdir"
+          smoke_args=(--desktop-smoke "$testdir/data")
+          if [[ "$INCLUDE_MINI_ROM" == true ]]; then
+            smoke_args+=(--boot-mini)
+          fi
           if [[ "$RID" == osx-* ]]; then
-            "$testdir/CopperScreen.app/Contents/MacOS/CopperScreen" --desktop-smoke "$testdir/data" | tee "$testdir/desktop.log"
+            executable="$testdir/CopperScreen.app/Contents/MacOS/CopperScreen"
+            launcher=()
           else
-            xvfb-run -a "$testdir/CopperScreen/CopperScreen" --desktop-smoke "$testdir/data" | tee "$testdir/desktop.log"
+            executable="$testdir/CopperScreen/CopperScreen"
+            launcher=(xvfb-run -a)
+          fi
+          if [[ "$INCLUDE_MINI_ROM" == true ]]; then
+            test -s "$(dirname "$executable")/ROM/LICENSE.txt"
+          fi
+          "${launcher[@]}" "$executable" "${smoke_args[@]}" | tee "$testdir/desktop.log"
+          if [[ "$INCLUDE_MINI_ROM" == true ]]; then
+            grep -Fx 'CopperStart Mini boot smoke passed.' "$testdir/desktop.log"
           fi
           grep -Fx 'CopperScreen desktop smoke passed.' "$testdir/desktop.log"
       - name: Smoke-test the 68040 JIT on the native runner
