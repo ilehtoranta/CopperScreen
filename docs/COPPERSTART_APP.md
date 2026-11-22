@@ -29,12 +29,11 @@ dotnet build CopperScreen.slnx -c Release
 ```
 
 The default staging directory is `artifacts/copperstart-mini-bundle`. Its
-inputs stay outside Git. The build checks the ROM against
-[the pinned SHA-256](../CopperScreen/Firmware/CopperStartMini.sha256), embeds
-the original bytes and includes the binary license at
-`Firmware/CopperStartMini/LICENSE.txt` in the output. A different staging
-location can be set with `CopperStartMiniBundleDirectory`. The ZIP packaging
-script requires the staged ROM. MSIX can include it with
+inputs stay outside Git. The build copies `ROM/CopperStart-Mini.rom` and
+`ROM/LICENSE.txt` beside the application. The build and the Mini boot path
+check the ROM against [the pinned SHA-256](../CopperScreen/Firmware/CopperStartMini.sha256).
+A different staging location can be set with `CopperStartMiniBundleDirectory`.
+The ZIP packaging script requires the staged ROM. MSIX can include it with
 `-IncludeCopperStartMini` for noncommercial builds.
 
 Builds without the bundle use **Choose ROM…** for an original Kickstart.
