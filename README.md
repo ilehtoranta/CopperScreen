@@ -79,48 +79,13 @@ dotnet run --project CopperMod.Amiga.Lightweight.Runner -c Release --no-build --
 
 ## Windows package
 
-The [Microsoft Store productization roadmap](docs/PRODUCTIZATION_ROADMAP.md)
-tracks planned release work, priorities and acceptance criteria, including
-CopperStart and CopperOS integration. It does not change current support claims.
-
-The [CopperStart/CopperOS draft integration contract](docs/COPPEROS_INTEGRATION.md)
-records the inspected artifacts, a bounded CLI-first target and the producer
-work still needed. That inspection is frozen. The later
-[original native boot proof](docs/COPPEROS_BOOT_PROOF_2026-10-16.md) and
-[native storage/workspace continuation](docs/COPPEROS_STORAGE.md) define separate
-development pairs and evidence. Store shipping/default activation remain closed.
-
-Create a local Windows build:
+Stage the qualified CopperStart Mini ROM and license, then create a local Windows x64 ZIP. [CopperStart Mini staging guide](docs/COPPERSTART_APP.md#copperstart-mini-bundle)
 
 ```powershell
 ./scripts/package.ps1
 ```
 
-This creates build artifacts; it does not publish a release.
-
-CopperScreen CI publishes self-contained desktop archives for Apple Silicon
-and Intel Macs, plus x64 and Arm64 Linux. Each job opens the application from
-the extracted archive and runs a synthetic 68040 JIT workload on the native
-runner. Download the archives and their SHA-256 checksums from the
-[CopperScreen CI runs](https://github.com/ilehtoranta/CopperScreen/actions/workflows/ci.yml).
-Archives built from `main` include the qualified CopperStart Mini ROM and
-its license. Each packaged app must reach Mini's insert-disk screen in CI.
-The macOS app bundles come without Developer ID signing or notarization.
-
-For Microsoft Store MSIX generation, diagnostic install/update tests and Windows
-App Certification Kit checks, see [MSIX packaging](docs/MSIX_PACKAGING.md).
-See [onboarding and everyday launches](docs/ONBOARDING.md) for the native ROM,
-CopperStart and CopperOS workspace flows and their remaining release checks.
-
-The [simple CopperOS desktop implementation plan](docs/COPPEROS_DESKTOP_PLAN.md)
-defines the native CopperStart prerequisites, desktop features, producer ownership
-and qualification milestones for the itch.io experience.
-
-Bundled machine presets are read-only defaults in `Presets/`. Saved profiles and
-preferences use `%LOCALAPPDATA%/CopperScreen/`, so saving does not require write
-access to the application folder. Existing portable profiles are copied without
-overwriting originals or personal profiles; see the [storage and migration
-contract](docs/PROFILE_STORAGE.md) for locations, recovery and verification limits.
+See the [MSIX packaging guide](docs/MSIX_PACKAGING.md) for Microsoft Store packages and installed validation.
 
 ## Components
 
