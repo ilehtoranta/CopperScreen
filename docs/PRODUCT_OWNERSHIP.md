@@ -102,7 +102,7 @@ that user's unfinished work. No historical host/CopperStart work was discarded.
 
 The owner subsequently authorized removing the six old CopperScreen project
 trees from CopperMod after archiving their working contents. The
-[recovery archive](../archive/legacy-copperscreen-20260916/README.md) supersedes
+[recovery archive](https://github.com/ilehtoranta/CopperScreen/blob/5a32c4830e1195ba01fc0a2772ff827a16449979/archive/legacy-copperscreen-20260916/README.md) supersedes
 the earlier statement that these project trees must remain there. Shared
 CopperMod.Amiga/Cust/AHX and unrelated CopperStart/CPU work are not removed.
 The previously uncommitted phosphor hold/resume regression test is carried into

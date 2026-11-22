@@ -17,7 +17,7 @@ project to the app. CPU/device execution code has not changed for this move.
 At extraction, the excluded Legacy implementation files were retained as
 references, not dependencies of the active host. The emulator adapter,
 CopperBench browser and presentation-frame helper were removed on 2026-10-17;
-Git history and the [legacy workspace archive](../archive/legacy-copperscreen-20260916/README.md)
+Git history and the [legacy workspace archive](https://github.com/ilehtoranta/CopperScreen/blob/5a32c4830e1195ba01fc0a2772ff827a16449979/archive/legacy-copperscreen-20260916/README.md)
 preserve their history.
 
 Dependency versions: Copper68k `1.4.1-boundary.1`, CopperDisk `2.1.1-boundary.1`,

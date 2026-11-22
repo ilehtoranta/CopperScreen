@@ -11,7 +11,7 @@ instructions. Use [product ownership](../../PRODUCT_OWNERSHIP.md) and the
   public-package verification, retained at its existing location.
 - [Product ownership](../../PRODUCT_OWNERSHIP.md): subsequent whole-product move,
   validation and CopperMod cleanup provenance.
-- [Legacy host recovery archive](../../../archive/legacy-copperscreen-20260916/README.md):
+- [Legacy host recovery archive](https://github.com/ilehtoranta/CopperScreen/blob/5a32c4830e1195ba01fc0a2772ff827a16449979/archive/legacy-copperscreen-20260916/README.md):
   retained source boundary for separately scoped restoration.
 
 The isolation document was preserved with relative links rebased; its source/archive

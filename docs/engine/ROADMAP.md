@@ -52,7 +52,7 @@ for the implemented four-drive read support; verification boundaries remain expl
 Settings entries, enums, raw register storage and historical Legacy code are not
 implementation evidence. The excluded Legacy emulator adapter, CopperBench browser
 and presentation-frame helper were removed on 2026-10-17. Git history and the
-[legacy workspace archive](../../archive/legacy-copperscreen-20260916/README.md)
+[legacy workspace archive](https://github.com/ilehtoranta/CopperScreen/blob/5a32c4830e1195ba01fc0a2772ff827a16449979/archive/legacy-copperscreen-20260916/README.md)
 preserve their history. The unavailable CopperBench UI and service scaffolding
 remain in the host. CopperStart's archived OS-service matrix must not be read as
 Lightweight hardware coverage.

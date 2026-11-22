@@ -32,7 +32,7 @@ not a gameplay or throughput benchmark.
 The historical `CopperMod.sln`, `CopperScreen.Tests` and Legacy benchmark
 projects include the unfinished CopperStart migration. They are not the native
 host build/test entry points. Their source is preserved in the
-[legacy workspace archive](../archive/legacy-copperscreen-20260916/README.md).
+[legacy workspace archive](https://github.com/ilehtoranta/CopperScreen/blob/5a32c4830e1195ba01fc0a2772ff827a16449979/archive/legacy-copperscreen-20260916/README.md).
 The native host suite links the focused existing session, presentation
 and audio tests and adds build-boundary/media checks.
 
