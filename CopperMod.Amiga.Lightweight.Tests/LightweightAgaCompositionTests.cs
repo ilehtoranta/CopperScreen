@@ -122,6 +122,27 @@ public sealed class LightweightAgaCompositionTests
     }
 
     [Theory]
+    [InlineData(1, 0x9011, 0x112211)]
+    [InlineData(2, 0x9011, 0x112233)]
+    [InlineData(3, 0x9011, 0x112277)]
+    [InlineData(4, 0x9011, 0x1122FF)]
+    [InlineData(4, 0x0011, 0x142536)]
+    public void NarrowHamUsesHam6ControlAndPaletteWithFewerDataPlanes(
+        int planes, ushort bplcon4, int expected)
+    {
+        var code = (1 << planes) - 1;
+        using var m = Create([code], (ushort)(planes << 12 | 0x0A00));
+        Palette(m, 0, 0x112200);
+        Palette(m, code, 0x142536);
+        Write(m, 0x10C, bplcon4);
+
+        m.ExecuteFrame();
+
+        Pixel(m, 0, expected);
+        Assert.Null(m.UnsupportedActiveFeature);
+    }
+
+    [Theory]
     [InlineData(0x0A10, 0x0111, 0x80, 0x112283)] // XOR chooses blue; modification data stays raw.
     [InlineData(0x0A10, 0xFC11, 0, 0x142536)] // XOR transforms direct register 0 to register 63.
     [InlineData(0x6A00, 0x1311, 0, 0x112200)] // HAM6 XOR chooses blue, raw component remains zero.
