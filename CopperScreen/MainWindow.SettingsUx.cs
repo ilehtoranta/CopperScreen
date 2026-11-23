@@ -453,12 +453,11 @@ internal sealed partial class MainWindow
     private async Task PickRomAsync(bool copperStart = false)
     {
         var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
-        var files = await owner.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        var path = await PickReadableMediaPathAsync(owner, new FilePickerOpenOptions
         {
             Title = copperStart ? "Choose a CopperStart ROM" : "Choose an original Kickstart ROM", AllowMultiple = false,
             FileTypeFilter = [new FilePickerFileType("Boot ROM") { Patterns = ["*.rom", "*.bin", "*.kick", "*.zip"] }, FilePickerFileTypes.All]
         });
-        var path = files.FirstOrDefault()?.TryGetLocalPath();
         if (path == null) return;
         if (copperStart)
         {
@@ -470,6 +469,36 @@ internal sealed partial class MainWindow
             });
         }
         else SelectOriginalRom(path);
+    }
+
+    private async Task<string?> PickReadableMediaPathAsync(TopLevel owner, FilePickerOpenOptions options)
+    {
+        void ReportError(string message)
+        {
+            if (owner == this && _runtime != null) ShowDiskFeedback(message, false);
+            else SetSettingsError(message);
+        }
+
+        try
+        {
+            var files = await owner.StorageProvider.OpenFilePickerAsync(options);
+            if (files.Count == 0) return null;
+            if (files[0].TryGetLocalPath() is not { } path)
+            {
+                ReportError("Choose a file available on this computer.");
+                return null;
+            }
+
+            // Validate the same path the emulator will reopen, so access failures
+            // are reported at selection rather than mistaken for a missing file.
+            using var stream = File.OpenRead(path);
+            return path;
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            ReportError($"Could not open the selected file. {ex.Message}");
+            return null;
+        }
     }
 
     internal void SelectOriginalRom(string path)

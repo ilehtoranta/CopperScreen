@@ -142,10 +142,14 @@ jobs:
             <key>CFBundleExecutable</key><string>CopperScreen</string>
             <key>CFBundleIdentifier</key><string>org.copperscreen.CopperScreen</string>
             <key>CFBundleName</key><string>CopperScreen</string>
+            <key>CFBundleDisplayName</key><string>CopperScreen</string>
             <key>CFBundlePackageType</key><string>APPL</string>
             <key>CFBundleShortVersionString</key><string>$version</string>
             <key>CFBundleVersion</key><string>$version</string>
             <key>NSHighResolutionCapable</key><true/>
+            <key>NSDesktopFolderUsageDescription</key><string>CopperScreen opens Amiga ROMs and disk images you keep on your Desktop.</string>
+            <key>NSDocumentsFolderUsageDescription</key><string>CopperScreen opens Amiga ROMs and disk images you keep in Documents.</string>
+            <key>NSDownloadsFolderUsageDescription</key><string>CopperScreen opens Amiga ROMs and disk images you keep in Downloads.</string>
           </dict>
           </plist>
           EOF
@@ -175,6 +179,11 @@ jobs:
           fi
           if [[ "$RID" == osx-* ]]; then
             executable="$testdir/CopperScreen.app/Contents/MacOS/CopperScreen"
+            plist="$testdir/CopperScreen.app/Contents/Info.plist"
+            test "$(plutil -extract CFBundleDisplayName raw "$plist")" = CopperScreen
+            for folder in Desktop Documents Downloads; do
+              test -n "$(plutil -extract "NS${folder}FolderUsageDescription" raw "$plist")"
+            done
             launcher=()
           else
             executable="$testdir/CopperScreen/CopperScreen"

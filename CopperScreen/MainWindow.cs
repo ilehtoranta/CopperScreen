@@ -2934,7 +2934,7 @@ internal sealed partial class MainWindow : Window
 			return;
 		}
 
-		var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+		var path = await PickReadableMediaPathAsync(topLevel, new FilePickerOpenOptions
 		{
 			Title = $"Select DF{driveIndex} disk image",
 			AllowMultiple = false,
@@ -2946,7 +2946,6 @@ internal sealed partial class MainWindow : Window
 				}
 			}
 		});
-		var path = files.Count == 0 ? null : files[0].TryGetLocalPath();
 		if (path == null)
 		{
 			return;
@@ -4017,7 +4016,7 @@ internal sealed partial class MainWindow : Window
 			return;
 		}
 
-		var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+		var path = await PickReadableMediaPathAsync(topLevel, new FilePickerOpenOptions
 		{
 			Title = $"Insert Amiga disk image in DF{driveIndex}",
 			AllowMultiple = false,
@@ -4029,7 +4028,6 @@ internal sealed partial class MainWindow : Window
 				}
 			}
 		});
-		var path = files.Count == 0 ? null : files[0].TryGetLocalPath();
 		if (path == null)
 		{
 			return;

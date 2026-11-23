@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Headless;
+using Avalonia.Layout;
 using Avalonia.LogicalTree;
 using CopperScreen;
 
@@ -78,6 +79,20 @@ public sealed partial class LaunchWorkflowTests : IDisposable
     public LaunchWorkflowTests(LaunchUiFixture ui) { _ui = ui; Directory.CreateDirectory(_root); }
     public void Dispose() => Directory.Delete(_root, true);
     private async Task Ui(Action action) => await _ui.Session.Dispatch(action, CancellationToken.None);
+
+    [Fact]
+    public Task LauncherUsesTheApplicationNameAndCentersButtonLabels() => Ui(() =>
+    {
+        var window = new MainWindow([], new CopperScreenRecentSession(_root));
+        window.Show();
+        try
+        {
+            Assert.Equal("CopperScreen", Application.Current!.Name);
+            Assert.Equal(VerticalAlignment.Center, Button(window, "Start Amiga").VerticalContentAlignment);
+            Assert.Equal(VerticalAlignment.Center, Button(window, "Choose ROM…").VerticalContentAlignment);
+        }
+        finally { window.Close(); }
+    });
 
     [Theory]
     [InlineData("Kickstart13Rom")]

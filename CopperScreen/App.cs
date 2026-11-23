@@ -11,6 +11,7 @@ internal sealed class App : Application
 {
 	public override void Initialize()
 	{
+		Name = "CopperScreen";
 		RequestedThemeVariant = ThemeVariant.Dark;
 		var theme = new FluentTheme();
 		theme.Palettes[ThemeVariant.Dark] = new ColorPaletteResources

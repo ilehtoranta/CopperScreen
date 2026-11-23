@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Styling;
 
@@ -36,6 +37,10 @@ internal static class CopperScreenAppearance
         app.Resources["ComboBoxBackgroundPointerOver"] = Hover;
         app.Resources["ComboBoxBackgroundPressed"] = ControlSurface;
         app.Resources["ComboBoxBorderBrushPointerOver"] = MutedText;
+        app.Styles.Add(new Style(selector => selector.OfType<Button>())
+        {
+            Setters = { new Setter(Button.VerticalContentAlignmentProperty, VerticalAlignment.Center) }
+        });
         app.Styles.Add(new Style(selector => selector.OfType<Window>())
         {
             Setters = { new Setter(TemplatedControl.ForegroundProperty, Text) }

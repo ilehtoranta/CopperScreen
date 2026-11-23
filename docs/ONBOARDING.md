@@ -30,6 +30,17 @@ Imported media open read-only with the welcome defaults. Saved profiles retain
 their explicit write-protection choices; this work does not broaden format write
 support. Missing saved paths remain visible for repair rather than being dropped.
 
+### macOS downloads and file access
+
+The macOS archives come without Developer ID signing or notarization. A
+downloaded app is subject to Gatekeeper approval on first launch.
+
+Open CopperScreen.app from Finder. Use **Choose ROM…** and **Browse…** to
+select a ROM and floppy image in the macOS file picker. Selecting a file in
+that picker can grant access without a separate folder prompt. If macOS denies
+folder access, check **System Settings → Privacy & Security → Files and
+Folders → CopperScreen**. [Apple's Desktop folder access documentation](https://developer.apple.com/documentation/bundleresources/information-property-list/nsdesktopfolderusagedescription)
+
 ### CopperStart disk boot preview
 
 1. Choose **CopperStart disk boot (experimental)**. This resets the machine to
