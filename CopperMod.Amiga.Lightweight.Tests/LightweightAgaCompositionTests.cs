@@ -186,6 +186,31 @@ public sealed class LightweightAgaCompositionTests
     }
 
     [Theory]
+    [InlineData(0x002D, 0xFF0000)] // Both priorities 5; PF1 wins.
+    [InlineData(0x0076, 0x0000FF)] // Both priorities 6; PF2 wins.
+    [InlineData(0x003F, 0xFF0000)] // Both priorities 7; PF1 wins.
+    public void LisaKeepsDualPlayfieldColorsAndPlacesSpritesAbovePrioritiesFiveThroughSeven(
+        ushort bplcon2, int overlapColor)
+    {
+        using var m = Create([3, 3, 1, 2, 0], 0x0610);
+        Palette(m, 1, 0xFF0000);
+        Palette(m, 9, 0x0000FF);
+        Palette(m, 17, 0x00FF00);
+        Write(m, 0x104, bplcon2);
+        Write(m, 0x140, 0x2C40); Write(m, 0x142, 0x2D00);
+        Write(m, 0x146, 0); Write(m, 0x144, 0x8000);
+
+        m.ExecuteFrame();
+
+        Pixel(m, 0, 0x00FF00);
+        Pixel(m, 1, overlapColor);
+        Pixel(m, 2, 0xFF0000);
+        Pixel(m, 3, 0x0000FF);
+        Pixel(m, 4, 0);
+        Assert.Null(m.UnsupportedActiveFeature);
+    }
+
+    [Theory]
     [InlineData(0)] [InlineData(1)] [InlineData(2)] [InlineData(3)]
     [InlineData(4)] [InlineData(5)] [InlineData(6)] [InlineData(7)]
     public void EveryPf2OffsetAddsToTheSelectedColor(int offset)

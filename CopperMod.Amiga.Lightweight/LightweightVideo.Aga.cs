@@ -194,6 +194,8 @@ internal sealed partial class LightweightVideo
 
     private void UpdateAgaDualPixels()
     {
+        // Lisa places all sprite groups ahead of priorities 4–7 and still
+        // displays the winning playfield's color for each of those codes.
         var priority1 = Math.Min(_ecsBplcon2 & 7, 4);
         var priority2 = Math.Min(_ecsBplcon2 >> 3 & 7, 4);
         var pf2First = (_ecsBplcon2 & 0x40) != 0;
@@ -214,8 +216,6 @@ internal sealed partial class LightweightVideo
         if ((_effectiveBplcon0 & 0xC00) == 0xC00) UnsupportedActiveFeature = "AGA combined HAM/dual playfield (unverified)";
         else if ((_effectiveBplcon0 & 0x800) != 0 && _effectivePlaneCount != 0 && _effectivePlaneCount != 6 && _effectivePlaneCount != 8)
             UnsupportedActiveFeature = "AGA HAM with nonstandard plane count (unverified)";
-        else if ((_effectiveBplcon0 & 0x400) != 0 && ((_ecsBplcon2 & 7) >= 5 || (_ecsBplcon2 >> 3 & 7) >= 5))
-            UnsupportedActiveFeature = "AGA nonstandard dual-playfield priority (unverified)";
     }
 
     internal void ReportUnsupportedAgaSpriteWrite()
