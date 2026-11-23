@@ -31,7 +31,7 @@ CopperScreen saves settings per model and ROM. Input, display, volume, and flopp
 - **PAL Amiga 500, 500+, and 1200.** Includes OCS, ECS, and AGA profiles, configurable Chip and Fast RAM, and an optional A501 RTC. [Machine configurations](CopperMod.Amiga.Lightweight/README.md)
 - **CPU upgrades.** Includes an optional 68040 JIT. The 68060 boots on a PAL A1200 with CopperStart Mini or native Kickstart 3.1. [CPU support](docs/engine/CPU_SUPPORT.md)
 - **Floppy drives.** Connect up to four DD or HD drives. Open ADF, ADZ, DMS, extended ADF, IPF, and SCP images, including supported images inside ZIP archives. [Formats and write support](docs/engine/DISK_FORMATS.md)
-- **Hard disks and shared folders.** Attach HDF images and share host folders with native Kickstart. Browse, copy, and inspect files in Disk Image Manager. [Storage](docs/engine/STORAGE.md) · [Disk Image Manager](docs/DISK_IMAGE_MANAGER.md)
+- **Hard disks and shared folders.** Attach raw HDFs and WinUAE VHDs, and share host folders with native Kickstart. Browse, copy, and inspect files in Disk Image Manager. [Storage](docs/engine/STORAGE.md) · [Disk Image Manager](docs/DISK_IMAGE_MANAGER.md)
 
 See the [engine issue register](docs/engine/ISSUES.md) for compatibility and timing limits.
 

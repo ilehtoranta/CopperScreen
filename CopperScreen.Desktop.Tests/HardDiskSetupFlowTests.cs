@@ -8,8 +8,9 @@ namespace CopperScreen.Tests;
 public sealed partial class LaunchWorkflowTests
 {
     [Theory]
-    [InlineData(false)] [InlineData(true)]
-    public Task DiskSetupCreatesAFormattedImageAndAddsAPartitionInACopy(bool cpx) => UiAsync(async () =>
+    [InlineData(false, false)] [InlineData(true, false)]
+    [InlineData(false, true)] [InlineData(true, true)]
+    public Task DiskSetupCreatesAFormattedImageAndAddsAPartitionInACopy(bool cpx, bool vhd) => UiAsync(async () =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
@@ -25,7 +26,10 @@ public sealed partial class LaunchWorkflowTests
             Click(createButton);
             await Until(() => owner.OwnedWindows.Any(w => w.Title == "Create disk image"));
             var dialog = owner.OwnedWindows.Single(w => w.Title == "Create disk image");
-            var source = Path.Combine(_root, "formatted.hdf");
+            var source = Path.Combine(_root, vhd ? "formatted.vhd" : "formatted.hdf");
+            var format = SettingsNamed<ComboBox>(dialog, "Image format");
+            Assert.Equal("Raw HDF", format.SelectedItem);
+            if (vhd) format.SelectedItem = "Dynamic VHD";
             SettingsNamed<TextBox>(dialog, "New image file").Text = source;
             Assert.Equal("FFS", SettingsNamed<ComboBox>(dialog, "Filesystem").SelectedItem);
             SettingsNamed<TextBox>(dialog, "Disk capacity").Text = "16";
@@ -44,13 +48,19 @@ public sealed partial class LaunchWorkflowTests
                 Assert.False(File.Exists(source));
                 dialog.GetLogicalDescendants().OfType<CheckBox>().Single(c => c.Content is "I want to create an experimental CopperNova (CNFS) volume").IsChecked = true;
             }
-            Capture(dialog, cpx ? "harddisk-format-cpx" : "harddisk-format-ffs");
+            if (!vhd) Capture(dialog, cpx ? "harddisk-format-cpx" : "harddisk-format-ffs");
             Click(dialog.GetLogicalDescendants().OfType<Button>().Single(b => b.Content is "Create image"));
             await Until(() => !dialog.IsVisible);
             var drive = Assert.Single(MenuDraft(window).HardDrives);
             Assert.Equal(source, drive.Path); Assert.True(drive.ReadOnly);
             Assert.Equal(AmigaHardfileMountMode.RigidDiskBlock, drive.Mode); Assert.Equal(0, drive.CreateSizeBytes);
             var before = File.ReadAllBytes(source);
+            if (vhd)
+            {
+                Assert.Null(drive.SparseStorage);
+                Assert.True(before.Length < 16 * 1048576);
+                Assert.True(before.AsSpan().StartsWith("conectix"u8));
+            }
             var addButton = owner.GetLogicalDescendants().OfType<Button>().Distinct().Single(b => b.Content is "Add partition and format…");
             Assert.True(addButton.IsEffectivelyVisible); Assert.True(addButton.IsEnabled);
             Click(addButton);
@@ -58,16 +68,22 @@ public sealed partial class LaunchWorkflowTests
             dialog = owner.OwnedWindows.Single(w => w.Title == "Add partition and format");
             var copy = Path.Combine(_root, "partitioned.hdf");
             SettingsNamed<TextBox>(dialog, "New image file").Text = copy;
+            if (vhd) SettingsNamed<ComboBox>(dialog, "Image format").SelectedItem = "Dynamic VHD";
             Assert.DoesNotContain("Unformatted", SettingsNamed<ComboBox>(dialog, "Filesystem").Items);
             Assert.False(dialog.GetLogicalDescendants().OfType<Expander>().Single(e => e.Header is "Advanced geometry").IsExpanded);
             Assert.Equal("DH1", SettingsNamed<TextBox>(dialog, "New partition device").Text);
             Assert.Equal(4096u, Assert.Single(CopperScreenHardDiskSetup.Inspect(source).Partitions).BlockSize);
-            Capture(dialog, "harddisk-add-partition");
+            if (!vhd) Capture(dialog, "harddisk-add-partition");
             Click(dialog.GetLogicalDescendants().OfType<Button>().Single(b => b.Content is "Save partitioned copy"));
             await Until(() => !dialog.IsVisible);
             Assert.Equal(copy, Assert.Single(MenuDraft(window).HardDrives).Path);
             Assert.Equal(2, CopperScreenHardDiskSetup.Inspect(copy).Partitions.Count);
             Assert.Equal(257u, CopperScreenHardDiskSetup.Inspect(copy).Partitions.Single(p => p.DeviceName == "DH1").FirstCylinder);
+            if (vhd)
+            {
+                using var backing = File.OpenRead(copy);
+                Assert.Equal((16L * 1048576, true), CopperDisk.AmigaHardfileImage.Inspect(backing));
+            }
             Assert.True(before.AsSpan().SequenceEqual(File.ReadAllBytes(source)));
         }
         finally { window.Close(); }

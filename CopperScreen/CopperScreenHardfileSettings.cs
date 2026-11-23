@@ -38,9 +38,10 @@ internal sealed record CopperScreenHardfileSettings(
             : CopperDisk.AmigaFfsPartition.GetByteRange(partition);
         if (checkImage)
         {
-            var info = new FileInfo(Path);
-            if (!info.Exists) throw new FileNotFoundException("Choose an existing hard disk image.", Path);
-            if (info.Length % 512 != 0 || info.Length < start + length)
+            if (!File.Exists(Path)) throw new FileNotFoundException("Choose an existing hard disk image.", Path);
+            using var source = new FileStream(Path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            var (capacity, _) = CopperDisk.AmigaHardfileImage.Inspect(source);
+            if (capacity % 512 != 0 || capacity < start + length)
                 throw new InvalidOperationException("The hard disk image must contain the entire configured partition and have a size divisible by 512 bytes.");
         }
     }

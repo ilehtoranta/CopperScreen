@@ -43,7 +43,7 @@ internal sealed partial class DiskImageManagerWindow : Window
         var picked = await StorageProvider.OpenFilePickerAsync(new()
         {
             Title = $"Open {pane.Side.ToLowerInvariant()} disk image", AllowMultiple = false,
-            FileTypeFilter = [new("Amiga disk images") { Patterns = ["*.adf", "*.hdf", "*.img", "*.ipf", "*.dms"] }]
+            FileTypeFilter = [new("Amiga disk images") { Patterns = ["*.adf", "*.hdf", "*.img", "*.vhd", "*.ipf", "*.dms"] }]
         });
         if (picked.FirstOrDefault()?.TryGetLocalPath() is { } path) await OpenImageAsync(pane, path);
         ApplyMode(pane);

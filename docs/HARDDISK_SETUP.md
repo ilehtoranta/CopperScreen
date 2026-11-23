@@ -6,18 +6,26 @@ The Amiga must be stopped. Existing disks are edited by saving a **new copy**
 and attaching it; the source is never overwritten. Removing, resizing and
 reformatting existing partitions are outside this editor's scope.
 
-Choose **Create disk image…** for a new image. The filesystem picker defaults to
-FFS and also offers Unformatted, SFS, SFS2 and CopperNova (CNFS). CNFS remains
-experimental. Unformatted hides
-the partition options and adds a blank image that is created on the next Amiga
-start; format it inside the Amiga before use. Formatted images are created and
-verified immediately. Choose **Add partition and format…** on an existing disk
-configured with RDB layout. Enter a new destination filename, disk capacity,
+Choose **Create disk image…** for a new image. **Image format** defaults to
+**Raw HDF**. Choose **Dynamic VHD** to create a WinUAE-compatible image with a
+fixed virtual capacity that grows on the host as blocks are written. You can
+save it with a `.vhd` or `.hdf` filename. Dynamic VHDs support up to 2040 GiB.
+
+The filesystem picker defaults to FFS and also offers Unformatted, SFS, SFS2 and
+CopperNova (CNFS). CNFS remains experimental. Unformatted hides the partition
+options. Setup creates blank VHDs immediately and blank raw HDFs on the next
+Amiga start. Enable writes and format a blank image inside the Amiga before use.
+Setup creates and verifies formatted images immediately. Choose **Add partition
+and format…** on an existing disk configured with RDB layout. Enter a new
+destination filename, disk capacity,
 partition size, filesystem and volume label. Disk and partition sizes accept
 fractional **MiB** or **GiB** values. **Use available space** fills one contiguous
 free area; turn it off to set a partition size and leave space for more partitions.
 Automatic placement chooses the first free area large enough for that size.
 The preview shows actual aligned partition size and remaining free space.
+Existing fixed and dynamic VHDs with an RDB can be used as the source. The editor
+copies the virtual sectors into a new raw HDF or dynamic VHD with the added
+partition.
 
 Cylinder boundaries are calculated internally. **Advanced geometry** shows the
 device geometry and offers **Use explicit cylinder range** for an exact override;

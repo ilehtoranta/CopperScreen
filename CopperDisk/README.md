@@ -14,6 +14,9 @@ documents the library's track APIs, supported formats and decoder limits.
 
 The source also owns `AmigaHardfileConfiguration`/partition metadata and internal
 file-range, RDB and filesystem metadata helpers used by Lightweight CopperHDF.
+CopperHDF mounts raw HDFs and fixed or dynamically expanding VHDs. Host tools can
+read their virtual sectors with `AmigaHardfileImage.OpenRead` and prepare a new
+dynamic VHD with `AmigaHardfileImage.CreateDynamicVhd`.
 Guest device registration, boot discovery and I/O gateways remain in the engine.
 Source also exposes `AmigaRdbSetup` for strict offline 512-byte RDB
 inspection and adding partitions in unpublished image copies. Filesystem

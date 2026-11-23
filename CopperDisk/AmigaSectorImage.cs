@@ -2,22 +2,24 @@ using System.Buffers.Binary;
 namespace CopperDisk;
 
 /// <summary>A read-only, protected against concurrent writers, sector image for desktop disk tools.</summary>
-/// <remarks>Single-consumer API. Supports raw ADF/HDF, RDB partitions and read-only IPF/DMS; contains no filesystem implementation.</remarks>
+/// <remarks>Single-consumer API. Supports raw ADF/HDF, VHD, RDB partitions and read-only IPF/DMS; contains no filesystem implementation.</remarks>
 public sealed class AmigaSectorImage : IDisposable
 {
-    private readonly FileStream _stream;
+    private readonly Stream _stream;
     private readonly ValidatedSectorImage? _decoded;
     private readonly byte[]? _dmsSectors;
     private readonly DmsArchive? _dmsArchive;
 
-    private AmigaSectorImage(FileStream stream) => _stream = stream;
+    private AmigaSectorImage(Stream stream) => _stream = stream;
     private AmigaSectorImage(FileStream stream, ValidatedSectorImage decoded) => (_stream, _decoded) = (stream, decoded);
     private AmigaSectorImage(FileStream stream, byte[] sectors, DmsArchive archive) => (_stream, _dmsSectors, _dmsArchive) = (stream, sectors, archive);
 
     /// <summary>Whether decoded sectors must be encoded as DMS before publication.</summary>
     public bool IsDms => _dmsArchive != null;
     /// <summary>Container-level write restriction, independent of host file permissions.</summary>
-    public string? WriteUnavailableReason => _decoded != null ? "IPF images are read-only." : _dmsArchive?.WriteUnavailableReason;
+    public string? WriteUnavailableReason => _stream is AmigaHardfileImage.VhdStream
+        ? "VHD images are read-only in Disk Image Manager."
+        : _decoded != null ? "IPF images are read-only." : _dmsArchive?.WriteUnavailableReason;
 
     /// <summary>Encode and verify a DMS replacement, preserving archive header metadata. Does not publish it.</summary>
     public void WriteDmsReplacement(Stream sectors, Stream destination, CancellationToken cancellationToken = default)
@@ -79,12 +81,12 @@ public sealed class AmigaSectorImage : IDisposable
     /// <summary>Open an existing sector image without permitting concurrent writers.</summary>
     public static AmigaSectorImage Open(string path)
     {
-        var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        var stream = AmigaHardfileImage.OpenRead(path);
         var image = new AmigaSectorImage(stream);
         try
         {
             if (stream.Length < 3 * 512 || stream.Length % 512 != 0)
-                throw new InvalidDataException("Choose a sector-based ADF or HDF image with complete 512-byte sectors.");
+                throw new InvalidDataException("Choose an ADF, HDF or VHD image with complete 512-byte sectors.");
             var rdbMarker = false;
             var probe = new byte[512];
             for (var i = 0; i < Math.Min(16, stream.Length / 512); i++)

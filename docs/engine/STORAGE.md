@@ -27,7 +27,7 @@ performance evidence below remains attached to its original candidate.
 | ADZ / DMS | DF0–DF3; direct or selected ZIP entry | Read-only complete DD sectors (DMS) or DD/HD sectors (ADZ); ADZ may also carry extended raw tracks. |
 | Modern UAE-1ADF | DF0–DF3; direct or selected ZIP entry | Read-only; exact stored raw track bytes/bit lengths, no incomplete sector reconstruction. |
 | SCP | DF0–DF3; direct or selected ZIP entry | Read-only first-revolution DD decoding; no live flux or multirevolution playback. |
-| HDF | Construction-time CopperHDF unit configuration | Writable mounts update the backing file; Update/Flush and disposal flush it. Read-only mounts reject writes. No implicit ADF-style save step. |
+| HDF, VHD | Construction-time CopperHDF unit configuration | Writable mounts update the backing file; Update/Flush and disposal flush it. Read-only mounts reject writes. No implicit ADF-style save step. |
 | Host directory | Construction-time shared-folder configuration; separate virtual Autoconfig board | Read-only by default. Writable mounts update host files directly; close/flush/reset/disposal flush streams. Optional native folder boot. See [shared folders](HOST_DIRECTORIES.md). |
 
 HD sector media requires a configured HD mechanism and uses a nominal 150 RPM
@@ -105,6 +105,15 @@ explicit RDB requires one; Partition uses the configured synthetic environment.
 Metadata meanings/defaults follow Legacy. RDB checksums, bounded lists, partition
 environment vectors, filesystem headers and load segments are handled in CopperDisk.
 Guest registration and executable relocation stay in Lightweight.
+
+CopperHDF detects fixed and dynamically expanding VHD containers by their
+metadata, including WinUAE **Dynamic HDF** images saved with an `.hdf` extension.
+RDB discovery, partition geometry and guest reads use the virtual disk's 512-byte
+sectors. Unallocated sectors read as zeros. Writable dynamic mounts allocate blocks
+as the guest writes data. VHD images do not advertise guest TRIM. VHDX and
+differencing VHDs are unsupported. Hard Disk Setup can create blank or formatted
+dynamic VHDs and save partitioned copies in that format.
+The existing `--hdf` options accept VHD paths in the desktop and runner.
 
 Desktop profiles and **Settings > Storage > Hard disks** expose these
 settings; applying hardware changes requires restart. Existing desktop `--hdf`

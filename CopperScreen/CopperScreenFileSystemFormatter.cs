@@ -9,7 +9,7 @@ namespace CopperScreen;
 
 internal static class CopperScreenFileSystemFormatter
 {
-    internal static void Format(FileStream disk, long start, long length, CopperScreenHardDiskSetup.FileSystem fs,
+    internal static void Format(Stream disk, long start, long length, CopperScreenHardDiskSetup.FileSystem fs,
         string label, CancellationToken cancellation, uint blockSize = 512)
     {
         if (!CopperScreenHardDiskSetup.BlockSizes.Contains(blockSize) || start < 0 || length < blockSize || start % 512 != 0 || length % blockSize != 0 || start > disk.Length - length)
@@ -39,7 +39,7 @@ internal static class CopperScreenFileSystemFormatter
         if (!mounted) throw new InvalidDataException("The newly formatted volume could not be mounted for verification.");
     }
 
-    private static void FormatCpx(FileStream disk, long start, long length, string label, CancellationToken cancellation, uint blockSize)
+    private static void FormatCpx(Stream disk, long start, long length, string label, CancellationToken cancellation, uint blockSize)
     {
         var bytes = new byte[100000]; Encoding.Latin1.GetBytes(label).CopyTo(bytes, 90000);
         var ram = new CpxMemory(bytes); var engine = new CpxEngine<CpxMemory>(ram, 32);
@@ -54,7 +54,7 @@ internal static class CopperScreenFileSystemFormatter
         DriveCpx(ref engine, bytes, disk, start, length, cancellation);
         if (!engine.IsMounted) throw new InvalidDataException("The new CopperNova (CNFS) volume could not be mounted for verification.");
     }
-    private static void DriveCpx(ref CpxEngine<CpxMemory> engine, byte[] ram, FileStream disk,
+    private static void DriveCpx(ref CpxEngine<CpxMemory> engine, byte[] ram, Stream disk,
         long start, long length, CancellationToken cancellation)
     {
         while (true)
@@ -65,7 +65,7 @@ internal static class CopperScreenFileSystemFormatter
             if (step == StepResult.Failed) throw new InvalidDataException("CopperNova (CNFS) setup failed: " + engine.Error);
             if (step != StepResult.NeedIo) continue;
             var io = engine.Request;
-            if (io.Kind == IoKind.Flush) disk.Flush(true);
+            if (io.Kind == IoKind.Flush) FlushDisk(disk);
             else if (io.Kind is IoKind.Read or IoKind.Write)
             {
                 var sector = ((ulong)io.Sector.High << 32) | io.Sector.Low;
@@ -87,7 +87,13 @@ internal static class CopperScreenFileSystemFormatter
         public void Write32(uint p, uint value) => BinaryPrimitives.WriteUInt32BigEndian(bytes.AsSpan((int)p), value);
     }
 
-    private struct Platform(FileStream disk, byte[] ram, AmigaVolumeGeometry geometry, CancellationToken cancellation) : IAmigaFormatFileSystemPlatform
+    private static void FlushDisk(Stream disk)
+    {
+        if (disk is FileStream file) file.Flush(flushToDisk: true);
+        else disk.Flush();
+    }
+
+    private struct Platform(Stream disk, byte[] ram, AmigaVolumeGeometry geometry, CancellationToken cancellation) : IAmigaFormatFileSystemPlatform
     {
         public AmigaVolumeGeometry Geometry => geometry;
         public uint BlockBytes => geometry.BlockBytes;
@@ -109,7 +115,7 @@ internal static class CopperScreenFileSystemFormatter
         public bool ReadMetadataBlock(uint block, uint id, APTR target) => AmigaFileSystemBlockIo.ReadMetadata(ref this, block, id, target);
         public APTR ReadMetadataView(uint block, uint id, APTR scratch) => ReadMetadataBlock(block, id, scratch) ? scratch : APTR.Null;
         public bool WriteProtected() => false;
-        public bool Flush() { cancellation.ThrowIfCancellationRequested(); disk.Flush(true); return true; }
+        public bool Flush() { cancellation.ThrowIfCancellationRequested(); FlushDisk(disk); return true; }
         public byte ReadUInt8(APTR p, int offset = 0) => ram[(int)p.Raw + offset];
         public ushort ReadUInt16(APTR p, int offset = 0) => BinaryPrimitives.ReadUInt16BigEndian(ram.AsSpan((int)p.Raw + offset));
         public uint ReadUInt32(APTR p, int offset = 0) => BinaryPrimitives.ReadUInt32BigEndian(ram.AsSpan((int)p.Raw + offset));

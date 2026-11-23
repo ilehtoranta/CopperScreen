@@ -14,7 +14,7 @@ if (args.Contains("--help"))
           One explicit FFS/DOS1 partition, 512-byte blocks, inclusive cylinders; TD64 supports offsets above 4 GiB.
           Read-only by default. Use --hdf-ffs-writable to allow direct backing-file writes.
           Example: --hdf-ffs disk.hdf DH0:2:32:4:58
-        --hdf <image> / --hdf-ro <image>: automatic RDB/OFS detection for native Kickstart.
+        --hdf <image> / --hdf-ro <image>: attach a raw HDF or VHD with automatic RDB/OFS detection for native Kickstart.
           The legacy --hdf runner option permits writes; --hdf-ro protects the image.
         --hdf-rdb <existing-image>: require the image's RDB partition table; read-only by default.
           Use --hdf-rdb-writable to allow direct writes. The Full CopperStart pair mounts OFS/FFS and SFS partitions

@@ -38,10 +38,10 @@ internal sealed partial class MainWindow
             var source = existing == null ? null : CopperScreenStartupOptions.ResolveOptionalPath(existing.Path, AppContext.BaseDirectory);
             if (existing != null && existing.Mode != AmigaHardfileMountMode.RigidDiskBlock)
                 throw new InvalidOperationException("Choose RDB layout before adding a partition. Raw partition images cannot be repartitioned here.");
-            var layout = source == null ? null : CopperScreenHardDiskSetup.Inspect(source);
+            long sourceCapacity = 0;
+            var layout = source == null ? null : CopperScreenHardDiskSetup.Inspect(source, out sourceCapacity);
             var free = layout == null ? null : CopperScreenHardDiskSetup.FirstFreeRange(layout);
             if (layout != null && free == null) throw new InvalidOperationException("This disk has no free space. Existing partitions are preserved.");
-            var sourceCapacity = source == null ? 0 : new FileInfo(source).Length;
             var owner = _settingsVisible ? (Window)_settingsWindow : this;
             var dialog = new Window
             {
@@ -57,13 +57,17 @@ internal sealed partial class MainWindow
             if (layout != null)
                 foreach (var p in layout.Partitions)
                     form.Children.Add(SettingsNote($"{p.DeviceName}: {DiskSizeText(checked(((long)p.LastCylinder - p.FirstCylinder + 1) * layout.Heads * layout.SectorsPerTrack * 512))}, {p.BlockSize}-byte blocks."));
+            var imageFormat = AddComboSetting(form, "Image format", ["Raw HDF", "Dynamic VHD"], markRestart: false);
+            imageFormat.SelectedIndex = 0;
+            CopperScreenHardDiskSetup.ImageFormat SelectedFormat() => (CopperScreenHardDiskSetup.ImageFormat)imageFormat.SelectedIndex;
             var path = AddTextSetting(form, "New image file", markRestart: false);
             form.Children.Add(CreatePanelButton("Choose destination…", async () =>
             {
+                var extension = SelectedFormat() == CopperScreenHardDiskSetup.ImageFormat.DynamicVhd ? "vhd" : "hdf";
                 var file = await dialog.StorageProvider.SaveFilePickerAsync(new()
                 {
-                    Title = "New hard disk image", SuggestedFileName = "Amiga.hdf", DefaultExtension = "hdf",
-                    ShowOverwritePrompt = false, FileTypeChoices = [new("Hard disk image") { Patterns = ["*.hdf"] }]
+                    Title = "New hard disk image", SuggestedFileName = $"Amiga.{extension}", DefaultExtension = extension,
+                    ShowOverwritePrompt = false, FileTypeChoices = [new("Hard disk image") { Patterns = [$"*.{extension}"] }]
                 });
                 if (file?.TryGetLocalPath() is { } selected) path.Text = selected;
             }));
@@ -144,6 +148,11 @@ internal sealed partial class MainWindow
             var status = SettingsNote(string.Empty); form.Children.Add(status);
             using var cancellation = new CancellationTokenSource();
             var busy = false;
+            void StartWrite(string message)
+            {
+                busy = true; _applyingSettings = true; UpdateSettingsStatus(); UpdateToolbarStatus();
+                status.Text = message;
+            }
             var cancel = CreatePanelButton("Cancel", () => { if (busy) cancellation.Cancel(); else dialog.Close(); });
             var save = CreatePanelButton(existing == null ? "Create image" : "Save partitioned copy", async () =>
             {
@@ -156,6 +165,9 @@ internal sealed partial class MainWindow
                         throw new InvalidOperationException("Confirm that you want an experimental CopperNova (CNFS) volume.");
                     var destination = CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory)
                         ?? throw new InvalidOperationException("Choose a new destination filename.");
+                    var format = SelectedFormat();
+                    var isVhd = format == CopperScreenHardDiskSetup.ImageFormat.DynamicVhd;
+                    CopperScreenHardDiskSetup.ValidateFormatDestination(destination, format);
                     if (IsBlank())
                     {
                         if (_settingsDraft.KickstartSource == CopperScreenKickstartSource.CopperStart)
@@ -164,7 +176,13 @@ internal sealed partial class MainWindow
                         if (bytes < 1048576) throw new ArgumentException("Unformatted images need at least 1 MiB.");
                         if (Path.Exists(destination)) throw new IOException("Choose a new filename. Existing files are preserved.");
                         ReadHardfileSettings(_settingsDraft);
-                        _settingsDraft.HardDrives.Add(new(NextHardDiskUnit(), destination, true, bytes, SparseStorage: true));
+                        if (isVhd)
+                        {
+                            StartWrite("Creating and verifying the dynamic VHD…");
+                            await Task.Run(() => CopperScreenHardDiskSetup.CreateBlankVhd(destination, bytes, cancellation.Token));
+                        }
+                        _settingsDraft.HardDrives.Add(new(NextHardDiskUnit(), destination, true,
+                            isVhd ? 0 : bytes, SparseStorage: isVhd ? null : true));
                         RefreshHardfileSettings(); ClearSettingsStartupError(); MarkSettingsRestartRequired();
                         close = true; return;
                     }
@@ -172,12 +190,11 @@ internal sealed partial class MainWindow
                     ReadHardfileSettings(_settingsDraft);
                     var name = device.Text ?? ""; var volume = label.Text ?? "";
                     var fileSystem = (CopperScreenHardDiskSetup.FileSystem)FileSystemIndex(); var boot = bootable.IsChecked == true;
-                    busy = true; _applyingSettings = true; UpdateSettingsStatus(); UpdateToolbarStatus();
-                    status.Text = "Preparing and verifying disk… Cancel leaves the original disk unchanged.";
+                    StartWrite("Preparing and verifying disk… Cancel leaves the original disk unchanged.");
                     await Task.Run(() => CopperScreenHardDiskSetup.Create(destination, planned.Capacity, source, name,
-                        planned.Range.First, planned.Range.Last, fileSystem, volume, boot, cancellation.Token, planned.BlockSize));
+                        planned.Range.First, planned.Range.Last, fileSystem, volume, boot, cancellation.Token, planned.BlockSize, format));
                     var attached = new CopperScreenHardfileSettings(existing?.Unit ?? NextHardDiskUnit(), destination, existing?.ReadOnly ?? true,
-                        0, AmigaHardfileMountMode.RigidDiskBlock, SparseStorage: true);
+                        0, AmigaHardfileMountMode.RigidDiskBlock, SparseStorage: isVhd ? null : true);
                     if (diskIndex is { } row) _settingsDraft.HardDrives[row] = attached; else _settingsDraft.HardDrives.Add(attached);
                     RefreshHardfileSettings(); ClearSettingsStartupError(); MarkSettingsRestartRequired(); close = true;
                 }
@@ -189,17 +206,26 @@ internal sealed partial class MainWindow
                     if (close) dialog.Close();
                 }
             });
-            fs.SelectionChanged += (_, _) =>
+            void RefreshCreationOptions()
             {
                 partition.IsVisible = !IsBlank();
-                experimental.IsVisible = !IsBlank() && FileSystemIndex() == 3; experimental.IsChecked = false;
+                experimental.IsVisible = !IsBlank() && FileSystemIndex() == 3;
                 status.Text = string.Empty;
+                var deferred = IsBlank() && SelectedFormat() == CopperScreenHardDiskSetup.ImageFormat.RawHdf;
                 if (existing == null) explanation.Text = IsBlank()
-                    ? "Add an unformatted image to this machine. The file is created when the Amiga starts; format it inside the Amiga before use."
+                    ? deferred
+                        ? "Add an unformatted image to this machine. The file is created when the Amiga starts; format it inside the Amiga before use."
+                        : "Create an unformatted dynamic VHD. Enable writes in disk settings to format it inside the Amiga."
                     : "Create a new disk with one formatted partition. It starts read-only; enable writes in disk settings when ready.";
-                if (existing == null) save.Content = IsBlank() ? "Add blank image" : "Create image";
+                if (existing == null) save.Content = deferred ? "Add blank image" : "Create image";
                 RefreshPreview();
+            }
+            fs.SelectionChanged += (_, _) =>
+            {
+                experimental.IsChecked = false;
+                RefreshCreationOptions();
             };
+            imageFormat.SelectionChanged += (_, _) => RefreshCreationOptions();
             explicitRange.IsCheckedChanged += (_, _) =>
             {
                 if (explicitRange.IsChecked == true && currentRange is { } range)

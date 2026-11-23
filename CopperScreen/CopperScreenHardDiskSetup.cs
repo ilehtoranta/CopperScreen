@@ -7,6 +7,7 @@ namespace CopperScreen;
 internal static class CopperScreenHardDiskSetup
 {
     internal enum FileSystem { Ffs, Sfs, Sfs2, Cpx }
+    internal enum ImageFormat { RawHdf, DynamicVhd }
     internal static readonly string[] FileSystemNames = ["FFS", "SFS", "SFS2", "CopperNova (CNFS)"];
     internal static readonly uint[] BlockSizes = [512, 1024, 2048, 4096];
     internal const long NewCylinderBytes = 2 * 32 * 512;
@@ -73,10 +74,22 @@ internal static class CopperScreenHardDiskSetup
         _ => throw new ArgumentOutOfRangeException(nameof(fs))
     };
 
-    internal static AmigaRdbSetupLayout Inspect(string path)
+    internal static AmigaRdbSetupLayout Inspect(string path) => Inspect(path, out _);
+
+    internal static AmigaRdbSetupLayout Inspect(string path, out long capacity)
     {
-        using var disk = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+        using var disk = AmigaHardfileImage.OpenRead(path);
+        capacity = disk.Length;
         return AmigaRdbSetup.ReadLayout(disk);
+    }
+
+    internal static void ValidateFormatDestination(string path, ImageFormat format)
+    {
+        var extension = Path.GetExtension(path);
+        if (extension.Equals(".vhdx", StringComparison.OrdinalIgnoreCase))
+            throw new ArgumentException("Choose a .vhd or .hdf filename.");
+        if (format == ImageFormat.RawHdf && extension.Equals(".vhd", StringComparison.OrdinalIgnoreCase))
+            throw new ArgumentException("Select Dynamic VHD for a .vhd filename, or choose a .hdf filename for the raw image.");
     }
 
     internal static (uint First, uint Last)? FirstFreeRange(AmigaRdbSetupLayout layout)
@@ -99,48 +112,69 @@ internal static class CopperScreenHardDiskSetup
 
     // Always publishes a new file. Failure or cancellation never changes the source.
     internal static void Create(string destination, long capacity, string? source, string device,
-        uint? first, uint? last, FileSystem fs, string label, bool bootable, CancellationToken cancellation = default, uint blockSize = 512)
+        uint? first, uint? last, FileSystem fs, string label, bool bootable, CancellationToken cancellation = default,
+        uint blockSize = 512, ImageFormat format = ImageFormat.RawHdf)
     {
         _ = DosType(fs);
         if (!BlockSizes.Contains(blockSize)) throw new ArgumentException("Choose a supported filesystem block size.");
         if (string.IsNullOrWhiteSpace(label) || label.Length > 30 || label.Any(c => c > 255 || c is '\0' or ':' or '/'))
             throw new ArgumentException("Use a volume label of 1–30 Latin-1 characters without colons or slashes.");
-        destination = Path.GetFullPath(destination);
-        CopperScreenAtomicFile.ValidateDestination(destination);
-        if (Path.Exists(destination)) throw new IOException("Choose a new filename. Existing files are preserved.");
-        using var input = source == null ? null : new FileStream(source, FileMode.Open, FileAccess.Read, FileShare.Read);
+        using var input = source == null ? null : AmigaHardfileImage.OpenRead(source);
         if (input != null) capacity = input.Length;
         else if (capacity < 8L * 1024 * 1024 || capacity % 32768 != 0)
             throw new ArgumentException("Capacity must be at least 8 MiB and contain whole 32 KiB cylinders.");
         // Reject a damaged/unsupported source before allocating its copy.
         if (input != null) _ = AmigaRdbSetup.ReadLayout(input);
+        Publish(destination, capacity, format, cancellation, output =>
+        {
+            if (input != null)
+            {
+                input.Position = 0; var buffer = new byte[1024 * 1024];
+                while (input.Position < input.Length)
+                {
+                    cancellation.ThrowIfCancellationRequested();
+                    var bytes = (int)Math.Min(buffer.Length, input.Length - input.Position);
+                    input.ReadExactly(buffer.AsSpan(0, bytes));
+                    // Retain sparse zero ranges while preserving every source byte.
+                    if (buffer.AsSpan(0, bytes).ContainsAnyExcept((byte)0)) output.Write(buffer, 0, bytes);
+                    else output.Position += bytes;
+                }
+            }
+            var layout = input == null ? AmigaRdbSetup.Initialize(output) : AmigaRdbSetup.ReadLayout(output);
+            var p = AmigaRdbSetup.AddPartition(output, device, first ?? layout.FirstCylinder, last ?? layout.LastCylinder, DosType(fs), bootable, blockSize);
+            var start = checked((long)p.LowCylinder!.Value * layout.Heads * layout.SectorsPerTrack * 512);
+            var length = checked(((long)p.HighCylinder!.Value - p.LowCylinder.Value + 1) * layout.Heads * layout.SectorsPerTrack * 512);
+            cancellation.ThrowIfCancellationRequested();
+            CopperScreenFileSystemFormatter.Format(output, start, length, fs, label, cancellation, blockSize);
+            _ = AmigaRdbSetup.ReadLayout(output);
+        });
+    }
+
+    internal static void CreateBlankVhd(string destination, long capacity, CancellationToken cancellation = default) =>
+        Publish(destination, capacity, ImageFormat.DynamicVhd, cancellation);
+
+    private static void Publish(string destination, long capacity, ImageFormat format, CancellationToken cancellation, Action<Stream>? initialize = null)
+    {
+        cancellation.ThrowIfCancellationRequested();
+        destination = Path.GetFullPath(destination);
+        ValidateFormatDestination(destination, format);
+        CopperScreenAtomicFile.ValidateDestination(destination);
+        if (Path.Exists(destination)) throw new IOException("Choose a new filename. Existing files are preserved.");
         var temporary = Path.Combine(Path.GetDirectoryName(destination)!, ".disk-setup-" + Guid.NewGuid().ToString("N") + ".tmp");
         try
         {
-            using (var output = new FileStream(temporary, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
+            using (var backing = new FileStream(temporary, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None))
             {
-                AmigaSparseFile.TryEnable(output); output.SetLength(capacity);
-                if (input != null)
+                using var vhd = format == ImageFormat.DynamicVhd ? AmigaHardfileImage.CreateDynamicVhd(backing, capacity) : null;
+                if (vhd == null)
                 {
-                    input.Position = 0; var buffer = new byte[1024 * 1024];
-                    while (input.Position < input.Length)
-                    {
-                        cancellation.ThrowIfCancellationRequested();
-                        var bytes = (int)Math.Min(buffer.Length, input.Length - input.Position);
-                        input.ReadExactly(buffer.AsSpan(0, bytes));
-                        // Retain sparse zero ranges while preserving every source byte.
-                        if (buffer.AsSpan(0, bytes).ContainsAnyExcept((byte)0)) output.Write(buffer, 0, bytes);
-                        else output.Position += bytes;
-                    }
+                    AmigaSparseFile.TryEnable(backing);
+                    backing.SetLength(capacity);
                 }
-                var layout = input == null ? AmigaRdbSetup.Initialize(output) : AmigaRdbSetup.ReadLayout(output);
-                var p = AmigaRdbSetup.AddPartition(output, device, first ?? layout.FirstCylinder, last ?? layout.LastCylinder, DosType(fs), bootable, blockSize);
-                var start = checked((long)p.LowCylinder!.Value * layout.Heads * layout.SectorsPerTrack * 512);
-                var length = checked(((long)p.HighCylinder!.Value - p.LowCylinder.Value + 1) * layout.Heads * layout.SectorsPerTrack * 512);
-                cancellation.ThrowIfCancellationRequested();
-                CopperScreenFileSystemFormatter.Format(output, start, length, fs, label, cancellation, blockSize);
-                _ = AmigaRdbSetup.ReadLayout(output);
-                output.Flush(flushToDisk: true);
+                initialize?.Invoke(vhd ?? backing);
+                backing.Flush(flushToDisk: true);
+                if (vhd != null && AmigaHardfileImage.Inspect(backing) != (capacity, true))
+                    throw new InvalidDataException("The new VHD could not be verified.");
             }
             cancellation.ThrowIfCancellationRequested();
             CopperScreenAtomicFile.ValidateDestination(destination);

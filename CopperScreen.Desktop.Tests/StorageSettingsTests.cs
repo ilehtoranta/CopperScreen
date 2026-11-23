@@ -91,8 +91,9 @@ public sealed partial class LaunchWorkflowTests
         finally { SetPrivate(window, "_runtime", null); window.Close(); }
     });
 
-    [Fact]
-    public Task BlankDiskCreationIsExplicitAndDoesNotTouchExistingFiles() => UiAsync(async () =>
+    [Theory]
+    [InlineData(false)] [InlineData(true)]
+    public Task BlankDiskCreationIsExplicitAndDoesNotTouchExistingFiles(bool vhd) => UiAsync(async () =>
     {
         var window = new MainWindow([], new CopperScreenRecentSession(_root)); window.Show();
         try
@@ -107,6 +108,7 @@ public sealed partial class LaunchWorkflowTests
             var path = SettingsNamed<TextBox>(dialog, "New image file");
             var size = SettingsNamed<TextBox>(dialog, "Disk capacity");
             var filesystem = SettingsNamed<ComboBox>(dialog, "Filesystem");
+            if (vhd) SettingsNamed<ComboBox>(dialog, "Image format").SelectedItem = "Dynamic VHD";
             Assert.Equal("FFS", filesystem.SelectedItem);
             var firstCylinder = SettingsNamed<TextBox>(dialog, "First cylinder");
             dialog.UpdateLayout();
@@ -122,11 +124,12 @@ public sealed partial class LaunchWorkflowTests
             Assert.Contains(firstCylinder.GetLogicalAncestors().OfType<Control>(), c => !c.IsVisible);
             // Hidden partition fields cannot prevent creating an unformatted image.
             firstCylinder.Text = "unused geometry";
-            var add = dialog.GetLogicalDescendants().OfType<Button>().Single(b => b.Content is "Add blank image");
+            var caption = vhd ? "Create image" : "Add blank image";
+            var add = dialog.GetLogicalDescendants().OfType<Button>().Single(b => b.Content as string == caption);
             var existing = Path.Combine(_root, "existing.hdf"); File.WriteAllText(existing, "keep");
             path.Text = existing; Click(add);
             Assert.True(dialog.IsVisible); Assert.Empty(MenuDraft(window).HardDrives);
-            var destination = Path.Combine(_root, "blank.hdf"); path.Text = destination;
+            var destination = Path.Combine(_root, vhd ? "blank.vhd" : "blank.hdf"); path.Text = destination;
             foreach (var invalid in new[] { "0", "-1", "invalid", long.MaxValue.ToString() })
             {
                 size.Text = invalid; Click(add);
@@ -134,9 +137,16 @@ public sealed partial class LaunchWorkflowTests
             }
             size.Text = "64"; Click(add); await create;
             var drive = Assert.Single(MenuDraft(window).HardDrives);
-            Assert.Equal(64L * 1024 * 1024, drive.CreateSizeBytes);
+            const long capacity = 64L * 1024 * 1024;
+            Assert.Equal(vhd ? 0 : capacity, drive.CreateSizeBytes);
             Assert.True(drive.ReadOnly); Assert.Equal(destination, drive.Path);
-            Assert.False(File.Exists(destination)); Assert.Equal("keep", File.ReadAllText(existing));
+            Assert.Equal(vhd, File.Exists(destination)); Assert.Equal("keep", File.ReadAllText(existing));
+            if (vhd)
+            {
+                using var file = File.OpenRead(destination);
+                Assert.Equal((capacity, true), CopperDisk.AmigaHardfileImage.Inspect(file));
+                Assert.True(file.Length < capacity);
+            }
             var controls = SettingsField<StackPanel>(window, "_hardfileRows").GetLogicalDescendants().ToArray();
             Assert.False(controls.OfType<Expander>().Single(e => e.Header is "Disk layout and partition settings").IsExpanded);
             Assert.False(controls.OfType<Expander>().Single(e => e.Header is "Host storage allocation").IsExpanded);

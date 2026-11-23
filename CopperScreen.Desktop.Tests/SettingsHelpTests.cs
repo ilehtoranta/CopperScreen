@@ -163,7 +163,7 @@ public sealed partial class LaunchWorkflowTests
                 readOnly.IsChecked = true; Assert.False(warning.IsVisible);
                 readOnly.IsChecked = false; Assert.True(warning.IsVisible);
             }
-            var hdfPath = SettingsNamed<TextBox>(SettingsField<StackPanel>(window, "_hardfileRows"), "HDF path");
+            var hdfPath = SettingsNamed<TextBox>(SettingsField<StackPanel>(window, "_hardfileRows"), "Image path");
             hdfPath.Text = Path.Combine(_root, "different.hdf"); await Task.Delay(25);
             Assert.False(SettingsNamed<TextBlock>(settings, "Hard disk 0 write warning").IsVisible);
         }

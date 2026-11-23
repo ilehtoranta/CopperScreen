@@ -10,7 +10,7 @@ selector. The highlighted pane is the source. **Copy →** or **← Copy** copie
 selection into the other pane's current directory. Clicking a centre command
 retains the source pane. **Open image…** opens an image in the active pane.
 
-1. Activate a pane, choose **Open image…** and select an ADF/HDF, IPF or DMS image.
+1. Activate a pane, choose **Open image…** and select an ADF, HDF, VHD, IPF or DMS image.
 2. For an RDB hard disk, select a volume in **Image volumes**.
 3. Double-click directories or press Enter to browse; **Parent** goes up in the
    active pane. Choose **…** in the host header to pick a folder, or enter a path
@@ -18,8 +18,9 @@ retains the source pane. **Open image…** opens an image in the active pane.
 4. Choose a location in the other pane, select source entries, then choose **Copy**. Directories include their entire tree, including
    empty directories and ordinary `.info` files.
 
-IPF images are read-only sources. Complete, unencrypted standard DD DMS archives
-support imports, New directory, Rename, Delete, Move and Protect on recognizable
+IPF and VHD images are read-only sources in Disk Image Manager. Complete,
+unencrypted standard DD DMS archives support imports, New directory, Rename,
+Delete, Move and Protect on recognizable
 filesystems. DMS saves recompress and verify the entire disk before staged
 replacement; compression methods and archive size may change. Header metadata is
 preserved. Archives with auxiliary records (such as banners/FILEID), trailing data

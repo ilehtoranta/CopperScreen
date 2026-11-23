@@ -55,7 +55,7 @@ public sealed partial class LaunchWorkflowTests
             typeof(MainWindow).GetMethod("RefreshHardfileSettings", flags)!.Invoke(window, null);
             var rows = (StackPanel)typeof(MainWindow).GetField("_hardfileRows", flags)!.GetValue(window)!;
             var controls = rows.GetLogicalDescendants().ToArray();
-            var path = controls.OfType<TextBox>().Single(c => AutomationProperties.GetName(c) == "HDF path");
+            var path = controls.OfType<TextBox>().Single(c => AutomationProperties.GetName(c) == "Image path");
             path.Text = "another.hdf";
             var protection = controls.OfType<CheckBox>().Single();
             await Until(() => protection.IsChecked == true);

@@ -290,9 +290,11 @@ open, and P1-07 owns the wider frozen compatibility matrix.
 
 Stop the Amiga, then open Settings > Storage > Backups and choose
 **Export hard-disk backup…**. Save the `.copperhdf` file outside app data.
-It contains every complete configured HDF and the machine profile, including
+It contains every complete configured hard disk image and the machine profile, including
 RDB metadata, every partition, boot priorities, explicit partition geometry
 and disk write protection. Existing backup files are never replaced.
+VHD backups preserve the complete container. Restored disk names use `.hdf` and
+CopperScreen recognizes VHD contents from their metadata.
 
 After reinstall, open the same settings page and choose **Restore hard-disk
 backup…**. Integrity checks finish before new working disks are published.

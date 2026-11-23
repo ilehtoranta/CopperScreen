@@ -13,9 +13,9 @@ namespace CopperDisk
     /// Production hardfiles use the FileStream directly when this is absent.</summary>
     public interface IAmigaHardfileIoHook
     {
-        /// <summary>Read bytes at an absolute hardfile offset.</summary>
+        /// <summary>Read bytes at an absolute backing-file offset.</summary>
         void Read(FileStream backing, long offset, Span<byte> destination);
-        /// <summary>Write bytes at an absolute hardfile offset.</summary>
+        /// <summary>Write bytes at an absolute backing-file offset.</summary>
         void Write(FileStream backing, long offset, ReadOnlySpan<byte> source);
         /// <summary>Persist writes that must survive a power cut.</summary>
         void Flush(FileStream backing);
@@ -170,9 +170,10 @@ namespace CopperDisk
     internal sealed class AmigaHardfile : IDisposable
     {
         public const int SectorSize = 512;
-        private sealed class Backing(FileStream stream)
+        private sealed class Backing(FileStream stream, VhdImage? vhd)
         {
             internal readonly FileStream Stream = stream;
+            internal readonly VhdImage? Vhd = vhd;
             internal int References = 1;
         }
         private readonly Backing _backing;
@@ -213,11 +214,11 @@ namespace CopperDisk
 
         public AmigaHardfilePartitionMetadata? Partition { get; }
 
-        public long Length => _stream.Length;
+        public long Length => _backing.Vhd?.Length ?? _stream.Length;
 
         public long SectorCount => Length / SectorSize;
 
-        internal bool SupportsDiscard => !ReadOnly && (_ioHook is null ? _sparseDiscard : _ioHook is IAmigaHardfileDiscardIoHook
+        internal bool SupportsDiscard => !ReadOnly && _backing.Vhd is null && (_ioHook is null ? _sparseDiscard : _ioHook is IAmigaHardfileDiscardIoHook
             { SupportsDiscard: true, MaximumDiscardSectors: > 0 });
         internal uint MaximumDiscardSectors => SupportsDiscard
             ? _ioHook is IAmigaHardfileDiscardIoHook hook ? Math.Min(hook.MaximumDiscardSectors, int.MaxValue / SectorSize) : 4096u : 0;
@@ -252,11 +253,14 @@ namespace CopperDisk
             var access = configuration.ReadOnly ? FileAccess.Read : FileAccess.ReadWrite;
             var sharing = configuration.ReadOnly ? FileShare.ReadWrite : FileShare.Read;
             var stream = new FileStream(fullPath, FileMode.Open, access, sharing);
-            if (stream.Length % SectorSize != 0)
+            VhdImage? vhd;
+            try
             {
-                stream.Dispose();
-                throw new InvalidDataException($"Hardfile '{fullPath}' size must be a multiple of {SectorSize} bytes.");
+                vhd = VhdImage.Open(stream);
+                if (vhd is null && stream.Length % SectorSize != 0)
+                    throw new InvalidDataException($"Hardfile '{fullPath}' size must be a multiple of {SectorSize} bytes.");
             }
+            catch { stream.Dispose(); throw; }
 
             var hardfile = new AmigaHardfile(
                 configuration.Unit,
@@ -264,10 +268,10 @@ namespace CopperDisk
                 configuration.ReadOnly,
                 configuration.MountMode,
                 configuration.Partition,
-                new Backing(stream), configuration.IoHook, configuration.ExposeBootNode);
+                new Backing(stream, vhd), configuration.IoHook, configuration.ExposeBootNode);
             try
             {
-                hardfile._sparseDiscard = !configuration.ReadOnly && configuration.IoHook is null &&
+                hardfile._sparseDiscard = vhd is null && !configuration.ReadOnly && configuration.IoHook is null &&
                     (configuration.SparseStorage ?? creating) && AmigaSparseFile.TryEnable(stream);
                 if (configuration.MountMode == AmigaHardfileMountMode.RigidDiskBlock && !hardfile.HasRigidDiskBlock)
                     throw new InvalidDataException($"Hardfile '{fullPath}' was configured for RDB mounting but no valid RDB was found.");
@@ -292,7 +296,7 @@ namespace CopperDisk
                 configuration.ExposeBootNode);
             try
             {
-                replacement._sparseDiscard = !configuration.ReadOnly && configuration.IoHook is null &&
+                replacement._sparseDiscard = _backing.Vhd is null && !configuration.ReadOnly && configuration.IoHook is null &&
                     (configuration.SparseStorage ?? _sparseDiscard) && (_sparseDiscard || AmigaSparseFile.TryEnable(_stream));
                 if (configuration.MountMode == AmigaHardfileMountMode.RigidDiskBlock && !replacement.HasRigidDiskBlock)
                     throw new InvalidDataException($"Hardfile '{Path}' has no valid RDB.");
@@ -312,6 +316,8 @@ namespace CopperDisk
             {
                 throw new ArgumentOutOfRangeException(nameof(sizeBytes), sizeBytes, $"Hardfile size must be a positive multiple of {SectorSize} bytes.");
             }
+            if (VhdImage.HasVhdExtension(path))
+                throw new NotSupportedException("Automatic blank disk creation uses raw HDF. Use Hard Disk Setup to create a dynamic VHD before mounting it.");
 
             var directory = System.IO.Path.GetDirectoryName(System.IO.Path.GetFullPath(path));
             if (!string.IsNullOrWhiteSpace(directory))
@@ -358,6 +364,11 @@ namespace CopperDisk
         public void Read(long byteOffset, Span<byte> destination)
         {
             ValidateRange(byteOffset, destination.Length);
+            if (_backing.Vhd is { } vhd)
+            {
+                vhd.Read(_stream, byteOffset, destination, _ioHook);
+                return;
+            }
             if (_ioHook is not null)
             {
                 _ioHook.Read(_stream, byteOffset, destination);
@@ -385,6 +396,11 @@ namespace CopperDisk
             }
 
             ValidateRange(byteOffset, source.Length);
+            if (_backing.Vhd is { } vhd)
+            {
+                vhd.Write(_stream, byteOffset, source, _ioHook);
+                return;
+            }
             if (_ioHook is not null)
             {
                 _ioHook.Write(_stream, byteOffset, source);

@@ -79,7 +79,7 @@ internal sealed partial class MainWindow
             var selected = await owner.StorageProvider.OpenFilePickerAsync(new()
             {
                 Title = "Choose hard disk image", AllowMultiple = false,
-                FileTypeFilter = [new("Hard disk images") { Patterns = ["*.hdf", "*.img"] }, FilePickerFileTypes.All]
+                FileTypeFilter = [new("Hard disk images") { Patterns = ["*.hdf", "*.img", "*.vhd"] }, FilePickerFileTypes.All]
             });
             if (selected.FirstOrDefault()?.TryGetLocalPath() is not { } path) return;
             ReadHardfileSettings(_settingsDraft);
@@ -108,25 +108,12 @@ internal sealed partial class MainWindow
             var form = CreateSettingsGroupForm();
             var diskOptions = CreateSettingsGroupForm();
             var unit = AddTextSetting(diskOptions, "Unit"); unit.Text = settings.Unit.ToString(CultureInfo.InvariantCulture);
-            var path = AddTextSetting(form, "HDF path"); path.Text = settings.Path;
+            var path = AddTextSetting(form, "Image path"); path.Text = settings.Path;
             bool? sparseEnabled = settings.SparseStorage;
             var sparseForm = CreateSettingsGroupForm();
             var allocation = SettingsNote(string.Empty);
-            void RefreshAllocation()
-            {
-                try
-                {
-                    var selectedPath = CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory);
-                    if (selectedPath is null || !File.Exists(selectedPath)) { allocation.Text = "New images use sparse storage where supported."; return; }
-                    var allocated = CopperDisk.AmigaSparseFile.GetAllocatedBytes(selectedPath);
-                    allocation.Text = $"Virtual capacity: {new FileInfo(selectedPath).Length:N0} bytes. Host allocation: " +
-                        (allocated is { } bytes ? $"{bytes:N0} bytes." : "unavailable.") +
-                        (sparseEnabled == true ? " Sparse storage enabled; guest TRIM requires host filesystem support." : " Sparse storage not enabled.");
-                }
-                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException) { allocation.Text = "Disk allocation unavailable."; }
-            }
             sparseForm.Children.Add(allocation);
-            sparseForm.Children.Add(CreatePanelButton("Enable sparse storage", () =>
+            var enableSparse = CreatePanelButton("Enable sparse storage", () =>
             {
                 try
                 {
@@ -134,23 +121,41 @@ internal sealed partial class MainWindow
                     var selectedPath = CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory)
                         ?? throw new InvalidOperationException("Choose an existing disk image.");
                     using var file = new FileStream(selectedPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+                    if (CopperDisk.AmigaHardfileImage.Inspect(file).IsVhd) throw new InvalidOperationException("The VHD container manages host storage.");
                     if (!CopperDisk.AmigaSparseFile.TryEnable(file)) throw new IOException("Sparse storage is unavailable on this filesystem. The image can still be used normally.");
                     sparseEnabled = true;
                     file.Dispose();
                     RefreshAllocation(); MarkSettingsRestartRequired();
                 }
-                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or ArgumentException) { SetSettingsError(ex.Message); }
-            }));
+                catch (Exception ex) when (IsWorkspaceFileError(ex)) { SetSettingsError(ex.Message); }
+            });
+            sparseForm.Children.Add(enableSparse);
+            bool RefreshAllocation()
+            {
+                try
+                {
+                    var selectedPath = CopperScreenStartupOptions.ResolveOptionalPath(path.Text, AppContext.BaseDirectory);
+                    if (selectedPath is null || !File.Exists(selectedPath)) { allocation.Text = "New images use sparse storage where supported."; return false; }
+                    using var source = new FileStream(selectedPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    var (capacity, isVhd) = CopperDisk.AmigaHardfileImage.Inspect(source);
+                    var allocated = CopperDisk.AmigaSparseFile.GetAllocatedBytes(selectedPath);
+                    allocation.Text = $"Virtual capacity: {capacity:N0} bytes. Host allocation: " +
+                        (allocated is { } bytes ? $"{bytes:N0} bytes." : "unavailable.") +
+                        (isVhd ? " The VHD container manages host storage." : sparseEnabled == true ? " Sparse storage enabled; guest TRIM requires host filesystem support." : " Sparse storage not enabled.");
+                    return !isVhd;
+                }
+                catch (Exception ex) when (IsWorkspaceFileError(ex)) { allocation.Text = ex.Message; return false; }
+            }
             sparseForm.Children.Add(SettingsHelp("How does sparse storage use host disk space?", "Virtual capacity stays fixed. CopperTrim reclaims free guest blocks after you enable writes. Enabling sparse storage alone does not reclaim existing data. Host storage is allocated as data is written and may run out before the virtual disk is full."));
-            path.TextChanged += (_, _) => { sparseEnabled = null; RefreshAllocation(); };
-            RefreshAllocation();
+            path.TextChanged += (_, _) => { sparseEnabled = null; enableSparse.IsEnabled = RefreshAllocation(); };
+            enableSparse.IsEnabled = RefreshAllocation();
             var readOnly = new CheckBox { Content = "Read-only", IsChecked = settings.ReadOnly };
             path.TextChanged += (_, _) => { if (path.Text != settings.Path) readOnly.IsChecked = true; };
-            form.Children.Add(CreatePanelButton("Browse HDF…", async () =>
+            form.Children.Add(CreatePanelButton("Browse image…", async () =>
             {
                 var owner = _settingsVisible ? (TopLevel)_settingsWindow : this;
                 var selected = await owner.StorageProvider.OpenFilePickerAsync(new() { Title = "Choose hard disk image", AllowMultiple = false,
-                    FileTypeFilter = [new("Hard disk images") { Patterns = ["*.hdf", "*.img"] }, FilePickerFileTypes.All] });
+                    FileTypeFilter = [new("Hard disk images") { Patterns = ["*.hdf", "*.img", "*.vhd"] }, FilePickerFileTypes.All] });
                 if (selected.Count == 1) { path.Text = selected[0].TryGetLocalPath(); readOnly.IsChecked = true; }
             }));
             readOnly.IsCheckedChanged += (_, _) => MarkSettingsRestartRequired(); form.Children.Add(readOnly);

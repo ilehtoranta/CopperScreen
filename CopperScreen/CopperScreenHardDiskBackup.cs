@@ -52,7 +52,8 @@ internal static class CopperScreenHardDiskBackup
             {
                 var source = new FileStream(CopperScreenStartupOptions.ResolveOptionalPath(drive.Path, baseDirectory)!, FileMode.Open, FileAccess.Read, FileShare.Read);
                 sources.Add(source);
-                if (source.Length == 0 || source.Length % 512 != 0) throw new InvalidDataException("A hard disk image must contain complete 512-byte blocks.");
+                var (capacity, _) = CopperDisk.AmigaHardfileImage.Inspect(source);
+                if (capacity == 0 || capacity % 512 != 0) throw new InvalidDataException("A hard disk image must contain complete 512-byte blocks.");
             }
             Observe("export-opening", temporary);
             using (var output = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
