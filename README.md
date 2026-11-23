@@ -3,18 +3,18 @@
 CopperScreen is an Amiga emulator with an Avalonia desktop interface,
 a lightweight emulation engine, a disk-image library and a headless runner.
 
-## Download CopperScreen 1.2.0
+## Download CopperScreen 1.2.1
 
 Download the package for your platform. Each includes CopperStart Mini.
-[Release notes](https://github.com/ilehtoranta/CopperScreen/releases/tag/v1.2.0) · [SHA-256 checksums](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.0/SHA256SUMS.txt)
+[Release notes](https://github.com/ilehtoranta/CopperScreen/releases/tag/v1.2.1) · [SHA-256 checksums](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.1/SHA256SUMS.txt)
 
 | Platform | Download |
 | --- | --- |
-| Windows x64 | [ZIP](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.0/CopperScreen-1.2.0-win-x64.zip) |
-| macOS Apple Silicon | [Arm64 archive](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.0/CopperScreen-1.2.0-osx-arm64.tar.gz) |
-| macOS Intel | [x64 archive](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.0/CopperScreen-1.2.0-osx-x64.tar.gz) |
-| Linux x64 | [x64 archive](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.0/CopperScreen-1.2.0-linux-x64.tar.gz) |
-| Linux Arm64 | [Arm64 archive](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.0/CopperScreen-1.2.0-linux-arm64.tar.gz) |
+| Windows x64 | [ZIP](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.1/CopperScreen-1.2.1-win-x64.zip) |
+| macOS Apple Silicon | [Arm64 archive](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.1/CopperScreen-1.2.1-osx-arm64.tar.gz) |
+| macOS Intel | [x64 archive](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.1/CopperScreen-1.2.1-osx-x64.tar.gz) |
+| Linux x64 | [x64 archive](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.1/CopperScreen-1.2.1-linux-x64.tar.gz) |
+| Linux Arm64 | [Arm64 archive](https://github.com/ilehtoranta/CopperScreen/releases/download/v1.2.1/CopperScreen-1.2.1-linux-arm64.tar.gz) |
 
 ## Getting started
 
