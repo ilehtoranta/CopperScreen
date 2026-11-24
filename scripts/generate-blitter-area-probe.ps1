@@ -6,10 +6,12 @@ param(
     [switch]$CpuPressure,
     [switch]$Fill,
     [switch]$Overlap,
+    [ValidateSet('AD', 'BC')][string]$LiveModulo,
     [switch]$Ocs
 )
 
 $ErrorActionPreference = 'Stop'
+if ($Overlap -and $LiveModulo) { throw 'Choose either the overlap probe or a live modulo probe.' }
 
 $asm = [Collections.Generic.List[uint16]]::new()
 $copper = [Collections.Generic.List[uint16]]::new()
@@ -50,25 +52,59 @@ WriteCopperWord 0x0046 0xFFFF
 foreach ($register in 0x0060, 0x0062, 0x0064, 0x0066) { WriteCopperWord $register 0 }
 foreach ($register in 0x0048, 0x004C, 0x0050, 0x0054) { WriteCopperWord $register 1 }
 
-$channels = if ($Overlap) { @(9, 15) } else { 0..15 }
-foreach ($mode in $channels) {
-    $line = 64 + 6 * $mode
-    $data = 0x16000 + 0x80 * $mode
-    $d = if ($Overlap) { $data + 2 } else { $data + 0x60 }
-    WriteCopperWord (($line -shl 8) + 1) 0xFFFE
-    WriteCopperWord 0x0040 (($mode -shl 8) + 0x00F0)
-    WriteCopperWord 0x0052 ($data -band 0xFFFF)
-    WriteCopperWord 0x004E (($data + 0x20) -band 0xFFFF)
-    WriteCopperWord 0x004A (($data + 0x40) -band 0xFFFF)
-    WriteCopperWord 0x0056 ($d -band 0xFFFF)
-    WriteCopperWord 0x009C 0x0040
-    WriteCopperWord (($line -shl 8) + ($WaitPosition -bor 1)) 0xFFFE
-    WriteCopperWord 0x0058 (0x0040 + $Width)
-    if ($Overlap) {
-        WriteWord 0x1111 $data
-        WriteWord 0x2222 ($data + 2)
-        WriteWord 0x3333 ($data + 4)
-        WriteWord 0x4444 ($data + 6)
+if ($LiveModulo) {
+    # Four rows per blit expose writes before and after the first row boundary.
+    $allSources = $LiveModulo -eq 'BC'
+    for ($test = 0; $test -lt 12; $test++) {
+        $line = (64 + 6 * $test) -shl 8
+        $data = 0x16000 + $(if ($allSources) { 0x400 } else { 0x200 }) * $test
+        WriteCopperWord ($line + 1) 0xFFFE
+        if ($allSources) {
+            WriteCopperWord 0x0040 0x0FF0
+            WriteCopperWord 0x0052 ($data -band 0xFFFF)
+            WriteCopperWord 0x004E (($data + 0x100) -band 0xFFFF)
+            WriteCopperWord 0x004A (($data + 0x200) -band 0xFFFF)
+            WriteCopperWord 0x0056 (($data + 0x300) -band 0xFFFF)
+            WriteCopperWord 0x0062 2
+            WriteCopperWord 0x0060 4
+            $firstModulo = 0x0062; $secondModulo = 0x0060
+            $writeBeam = 0x31
+        } else {
+            WriteCopperWord 0x0040 0x09F0
+            WriteCopperWord 0x0052 ($data -band 0xFFFF)
+            WriteCopperWord 0x0056 (($data + 0x100) -band 0xFFFF)
+            WriteCopperWord 0x0064 2
+            WriteCopperWord 0x0066 4
+            $firstModulo = 0x0064; $secondModulo = 0x0066
+            $writeBeam = 0x29
+        }
+        WriteCopperWord 0x009C 0x0040
+        WriteCopperWord ($line + 0x23) 0xFFFE
+        WriteCopperWord 0x0058 0x0104
+        WriteCopperWord ($line + $writeBeam + ($test % 6) * 4) 0xFFFE
+        WriteCopperWord $(if ($test -lt 6) { $firstModulo } else { $secondModulo }) 0x0010
+    }
+} else {
+    $channels = if ($Overlap) { @(9, 15) } else { 0..15 }
+    foreach ($mode in $channels) {
+        $line = 64 + 6 * $mode
+        $data = 0x16000 + 0x80 * $mode
+        $d = if ($Overlap) { $data + 2 } else { $data + 0x60 }
+        WriteCopperWord (($line -shl 8) + 1) 0xFFFE
+        WriteCopperWord 0x0040 (($mode -shl 8) + 0x00F0)
+        WriteCopperWord 0x0052 ($data -band 0xFFFF)
+        WriteCopperWord 0x004E (($data + 0x20) -band 0xFFFF)
+        WriteCopperWord 0x004A (($data + 0x40) -band 0xFFFF)
+        WriteCopperWord 0x0056 ($d -band 0xFFFF)
+        WriteCopperWord 0x009C 0x0040
+        WriteCopperWord (($line -shl 8) + ($WaitPosition -bor 1)) 0xFFFE
+        WriteCopperWord 0x0058 (0x0040 + $Width)
+        if ($Overlap) {
+            WriteWord 0x1111 $data
+            WriteWord 0x2222 ($data + 2)
+            WriteWord 0x3333 ($data + 4)
+            WriteWord 0x4444 ($data + 6)
+        }
     }
 }
 

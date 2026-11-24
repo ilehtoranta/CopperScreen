@@ -42,6 +42,29 @@ public sealed class LightweightBlitterTests
         SlowRamBytes = 0
     });
 
+    [Theory]
+    [InlineData(LightweightRegisters.Bltamod, LightweightRegisters.Bltapth, SourceA)]
+    [InlineData(LightweightRegisters.Bltbmod, LightweightRegisters.Bltbpth, SourceB)]
+    [InlineData(LightweightRegisters.Bltcmod, LightweightRegisters.Bltcpth, SourceC)]
+    [InlineData(LightweightRegisters.Bltdmod, LightweightRegisters.Bltdpth, DestinationD)]
+    public void ActiveAreaModuloWriteAffectsTheNextRowBoundary(
+        ushort moduloRegister, ushort pointerRegister, uint address)
+    {
+        using var machine = CreateAgaMachine();
+        ConfigureArea(machine, 0x0FF0);
+        WriteRegister(machine, moduloRegister, 2);
+        EnableBlitter(machine, nasty: false);
+        var start = StartBlit(machine, 0x0104);
+        machine.AdvanceHardwareTo(start + 20);
+        Assert.True(machine.BlitterActive);
+        Assert.InRange(machine.GetBlitterPointer(pointerRegister), address, address + 6);
+
+        machine.WriteCustomRegisterFromCopper(moduloRegister, 0x0010, machine.Cycle);
+        AdvanceUntilBlitterIdle(machine);
+
+        Assert.Equal(address + 4 * (8 + 16), machine.GetBlitterPointer(pointerRegister));
+    }
+
     [Fact]
     public void AliceCompletionProtectsFinalDestinationFromCpuStealAcrossBitplaneDma()
     {

@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace CopperMod.Amiga.Lightweight;
@@ -96,6 +97,9 @@ internal sealed class LightweightBlitter
     private short _moduloB;
     private short _moduloC;
     private short _moduloD;
+    [InlineArray(4)] private struct ModuloVisibilityCycles { private long _first; }
+    private ModuloVisibilityCycles _moduloVisibilityCycles;
+    private uint _delayedModuloWrites;
     private uint _pointerA;
     private uint _pointerB;
     private uint _pointerC;
@@ -116,6 +120,7 @@ internal sealed class LightweightBlitter
     private bool _pendingUsesBus;
     private AreaChannel _pendingChannel;
     private uint _pendingAddress;
+    private short _pendingAreaModulo;
     private ushort _pendingWriteValue;
     private long _pendingOutputCycle;
     private bool _deferredStart;
@@ -192,6 +197,7 @@ internal sealed class LightweightBlitter
         _moduloB = 0;
         _moduloC = 0;
         _moduloD = 0;
+        _delayedModuloWrites = 0;
         _pointerA = 0;
         _pointerB = 0;
         _pointerC = 0;
@@ -296,6 +302,64 @@ internal sealed class LightweightBlitter
         }
 
         Start(width, height, cycle, machine);
+    }
+
+    internal void WriteAreaModulo(
+        ushort offset,
+        ushort value,
+        long cycle,
+        bool fromCopper,
+        LightweightA500Machine machine)
+    {
+        if (!_active || _lineMode)
+        {
+            return;
+        }
+
+        // The register file still contains the preceding write. Settle any
+        // visible value before the write replaces it.
+        var stalled = _beamStopped || !_dmaEnabled;
+        ApplyDelayedAreaModulos(cycle, stalled, machine);
+        var index = (offset - LightweightRegisters.Bltcmod) >> 1;
+        var bit = 1u << index;
+        if (fromCopper && !stalled)
+        {
+            // Two full address clocks use the old value after a Copper MOVE.
+            _moduloVisibilityCycles[index] = LightweightBusArbiter.AlignToSlot(
+                cycle + 3 * LightweightClock.CpuCyclesPerColorClock);
+            _delayedModuloWrites |= bit;
+        }
+        else
+        {
+            SetAreaModulo(offset, value);
+            _delayedModuloWrites &= ~bit;
+        }
+    }
+
+    private void ApplyDelayedAreaModulos(long cycle, bool stalled, LightweightA500Machine machine)
+    {
+        for (var writes = _delayedModuloWrites; writes != 0; writes &= writes - 1)
+        {
+            var index = BitOperations.TrailingZeroCount(writes);
+            if (stalled || cycle >= _moduloVisibilityCycles[index])
+            {
+                var offset = (ushort)(LightweightRegisters.Bltcmod + index * 2);
+                SetAreaModulo(offset, machine.GetCustomRegister(offset));
+                _delayedModuloWrites &= ~(1u << index);
+            }
+        }
+    }
+
+    private void SetAreaModulo(ushort offset, ushort value)
+    {
+        var modulo = unchecked((short)value);
+        switch (offset)
+        {
+            case LightweightRegisters.Bltamod: _moduloA = modulo; break;
+            case LightweightRegisters.Bltbmod: _moduloB = modulo; break;
+            case LightweightRegisters.Bltcmod: _moduloC = modulo; break;
+            case LightweightRegisters.Bltdmod: _moduloD = modulo; break;
+        }
     }
 
     internal void BeginCpuRequest(long candidateCycle)
@@ -429,6 +493,7 @@ internal sealed class LightweightBlitter
         _moduloB = unchecked((short)machine.GetCustomRegister(LightweightRegisters.Bltbmod));
         _moduloC = unchecked((short)machine.GetCustomRegister(LightweightRegisters.Bltcmod));
         _moduloD = unchecked((short)machine.GetCustomRegister(LightweightRegisters.Bltdmod));
+        _delayedModuloWrites = 0;
         _pointerA = machine.GetBlitterPointer(LightweightRegisters.Bltapth);
         _pointerB = machine.GetBlitterPointer(LightweightRegisters.Bltbpth);
         _pointerC = machine.GetBlitterPointer(LightweightRegisters.Bltcpth);
@@ -500,6 +565,7 @@ internal sealed class LightweightBlitter
         // established by H3a.
         if (!_lineMode && !machine.CanBlitterAdvanceControl(cycle))
         {
+            if (_delayedModuloWrites != 0) ApplyDelayedAreaModulos(cycle, stalled: true, machine);
             return;
         }
 
@@ -523,8 +589,9 @@ internal sealed class LightweightBlitter
             return;
         }
 
-        if (_phaseIndex >= _phaseCount ||
-            !machine.CanBlitterAdvanceControl(cycle))
+        var canAdvance = _phaseIndex < _phaseCount && machine.CanBlitterAdvanceControl(cycle);
+        if (_delayedModuloWrites != 0) ApplyDelayedAreaModulos(cycle, !canAdvance, machine);
+        if (!canAdvance)
         {
             return;
         }
@@ -539,17 +606,18 @@ internal sealed class LightweightBlitter
         var usesBus = channel == AreaChannel.D ? _areaResultPending : ChannelEnabled(channel);
         if (ShouldYieldToCpu(cycle, machine, ownedBusThisCycle))
         {
+            if (_delayedModuloWrites != 0) ApplyDelayedAreaModulos(cycle, stalled: true, machine);
             return;
         }
 
         _pendingChannel = channel;
         _pendingUsesBus = usesBus;
-        _pendingAddress = channel switch
+        (_pendingAddress, _pendingAreaModulo) = channel switch
         {
-            AreaChannel.A => _pointerA,
-            AreaChannel.B => _pointerB,
-            AreaChannel.C => _pointerC,
-            _ => _pointerD
+            AreaChannel.A => (_pointerA, _moduloA),
+            AreaChannel.B => (_pointerB, _moduloB),
+            AreaChannel.C => (_pointerC, _moduloC),
+            _ => (_pointerD, _moduloD)
         };
         if (channel == AreaChannel.D)
         {
@@ -651,13 +719,13 @@ internal sealed class LightweightBlitter
         {
             case AreaChannel.A when _useA:
                 _dataA = machine.ReadChipWordBus(address);
-                _pointerA = AdvanceAreaSource(_pointerA, _moduloA);
+                _pointerA = AdvanceAreaSource(_pointerA, _pendingAreaModulo);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltadat, _dataA);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltapth, _pointerA);
                 break;
             case AreaChannel.B when _useB:
                 _dataB = machine.ReadChipWordBus(address);
-                _pointerB = AdvanceAreaSource(_pointerB, _moduloB);
+                _pointerB = AdvanceAreaSource(_pointerB, _pendingAreaModulo);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltbdat, _dataB);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltbpth, _pointerB);
                 if (_bOnly && IsFinalWord())
@@ -667,7 +735,7 @@ internal sealed class LightweightBlitter
                 break;
             case AreaChannel.C when _useC:
                 _dataC = machine.ReadChipWordBus(address);
-                _pointerC = AdvanceAreaSource(_pointerC, _moduloC);
+                _pointerC = AdvanceAreaSource(_pointerC, _pendingAreaModulo);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltcdat, _dataC);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltcpth, _pointerC);
                 break;
@@ -677,7 +745,7 @@ internal sealed class LightweightBlitter
                 if (++_destinationX == _widthWords)
                 {
                     _destinationX = 0;
-                    _pointerD = AddModulo(_pointerD, _moduloD, _descending);
+                    _pointerD = AddModulo(_pointerD, _pendingAreaModulo, _descending);
                 }
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltdpth, _pointerD);
                 break;

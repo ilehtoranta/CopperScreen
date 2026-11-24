@@ -1476,7 +1476,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         ushort offset,
         ushort value,
         long cycle)
-        => WriteCustomRegister(offset, value, cycle);
+        => WriteCustomRegister(offset, value, cycle, fromCopper: true);
 
     internal long ClampCpuBatchTarget(long targetCycle)
     {
@@ -2167,7 +2167,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         WriteCustomRegister(offset, value, cycle);
     }
 
-    private void WriteCustomRegister(ushort offset, ushort value, long cycle)
+    private void WriteCustomRegister(ushort offset, ushort value, long cycle, bool fromCopper = false)
     {
         offset &= 0x01FE;
         if (offset == LightweightRegisters.Clxdat)
@@ -2231,6 +2231,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         var previousIntreq = offset == LightweightRegisters.IntreqWrite
             ? _registers.Intreq
             : (ushort)0;
+        if (offset is >= LightweightRegisters.Bltcmod and <= LightweightRegisters.Bltdmod)
+            _blitter.WriteAreaModulo(offset, value, cycle, fromCopper, this);
         _registers.Write(offset, value);
 
         if (IsAga && offset == LightweightRegisters.Clxcon)

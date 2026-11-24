@@ -176,9 +176,42 @@ The production build and diagnostics were repeated on pushed revision
 `4169eac` with Copper68k 1.5.10. The same Zool 2 replay matched all 39
 captures and all three final fingerprints from the run with Copper68k 1.5.7.
 
-Absolute Copper start timing, source-only channel schedules, physical signal
-measurement and a matched capture of the game's active blitter register
-rewrites remain open.
+### Active area blitter modulo writes
+
+The area blitter held BLTAMOD, BLTBMOD, BLTCMOD and BLTDMOD from BLTSIZE
+until the blit finished. The original [area probe generator](../../scripts/generate-blitter-area-probe.ps1)
+with `-LiveModulo AD` runs four-row A-to-D copies and sweeps Copper modulo
+writes through the first row boundary. The second row starts at
+`$00016018` for source A on line 64 in WinUAE 6.1 beta 23. CopperScreen
+used `$0001600A`, its original two-byte modulo. A write after the first
+boundary on line 76 leaves the second row at `$0001640A` and advances
+the third row to `$00016422`. The reference shows the same distinction for
+destination writes. The correction matches all 384 transferred addresses
+in order. The earlier build differed at 104. The `-LiveModulo BC` sweep
+writes BLTBMOD and BLTCMOD with all four DMA channels enabled. It matches
+all 768 transfer addresses in order.
+
+The sequencer accepts new CPU modulos for subsequent address requests.
+Copper writes pass through a two-CCK delay that can retire early when the
+blitter loses a slot. Each accepted transfer keeps its modulo through RAM
+output. Four regressions verify a live update for every area channel.
+[WinUAE register writes](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/custom.cpp#L3737-L3776)
+[WinUAE blitter modulo processing](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1492-L1528)
+
+The Release build completed with zero warnings and engine diagnostics
+passed 1,444 tests with seven optional tests skipped. P.P. Hammer matched
+all 25 captures and all three final fingerprints on the PAL OCS profile.
+The 11,250-field Zool 2 replay passed the original code wheel, reached
+Swan Lake Stage 1 and matched all 39 captures and all three final
+fingerprints from the previous build. It reported no unsupported feature.
+
+An independent A-to-D control probe starts with BLTCON0 `$09FF` and moves
+`$0900` into it during the blit. On line 82 in WinUAE, the Copper writes at
+`$3A`, D still writes `$FFFF` at `$3B` and switches to `$0000` at `$3F`.
+CopperScreen writes `$FFFF` through the last destination word. The exact
+control phase, other live data writes, absolute Copper start timing,
+source-only schedules, the game's actual register rewrites and physical
+signal measurements remain open.
 
 ## P.P. Hammer and His Pneumatic Weapon
 
