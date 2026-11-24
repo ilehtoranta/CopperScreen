@@ -8,7 +8,7 @@ following media in DF0–DF3, directly or through selected ZIP entries.
 | Standard 880 KiB ADF | Canonical DD sector encoding; existing compact receiver | Optional in-memory writes and explicit Save ADF |
 | ADZ | CopperDisk gzip decoding of standard or modern extended ADF | Read-only |
 | DMS | CopperDisk complete, unencrypted DD archive decoding | Read-only |
-| Modern extended ADF (`UAE-1ADF`) | CopperDisk normal/raw tracks, up to 84 cylinders; raw bytes and exact bit lengths retained; omitted tracks and zero raw bit lengths mean unformatted | Read-only |
+| Modern extended ADF (`UAE-1ADF`) | CopperDisk normal/raw tracks, up to 84 cylinders; raw bytes and exact bit lengths retained; omitted tracks and zero raw bit lengths mean unformatted | Optional in-memory writes and explicit Save ADF |
 | IPF | Existing preserved track/index/density/weak-region preparation | Read-only |
 | SCP | CopperDisk first-revolution Amiga DD decoding; preserved receiver | Read-only |
 
@@ -49,6 +49,19 @@ files and archives are never implicitly rewritten. The desktop retains its
 32 MiB limit per source image/ZIP entry. ZIP bootability ordering is a best-effort
 standard ADF/ADZ boot-block heuristic; extended/raw/DMS/IPF/SCP entries may need
 explicit boot-disk selection. Minimal disk boot remains limited to standard ADF.
+
+`ExportFloppyImage` keeps standard ADF output for complete AmigaDOS sectors.
+If a guest writes custom tracks to a DD ADF and sector export would fail,
+the desktop's Save ADF action stores single-revolution raw tracks as UAE-1ADF.
+Mounted extended ADFs export in the same format. Drives start write protected.
+`ExportAdf` continues to require standard sectors for callers such as the
+CopperOS workspace.
+
+Chambers of Shaolin, the Quartex Amiga floppy release, exercised this path
+on a PAL A500 with Kickstart 1.3. The guest formatted a blank DD disk and
+saved a character. Standard export rejected track 0.0 with zero valid
+AmigaDOS sectors. The exported UAE-1ADF was ejected and remounted, and the
+game recovered the character and its training scores in single-player Combat.
 
 Runner `--disk` selects DF0; `--disk1`, `--disk2`, `--disk3` select external drives
 with `--drives 4`. Existing `--adf`/`--ipf` aliases remain supported. ZIP selection

@@ -24,8 +24,11 @@ public sealed class LightweightDiskFormatTests
         if (extension == "scp") image = DiskFormatFixture.ScpEncoded(encoded);
         using var machine = new LightweightA500Machine();
         machine.MountDisk(0, image, "disk." + extension);
-        Assert.False(machine.CanWriteDrive(0)); Assert.True(machine.IsDriveWriteProtected(0));
-        Assert.Throws<InvalidOperationException>(() => machine.SetDriveWriteProtected(0, false));
+        var writable = extension == "adf";
+        Assert.Equal(writable, machine.CanWriteDrive(0));
+        Assert.True(machine.IsDriveWriteProtected(0));
+        if (!writable)
+            Assert.Throws<InvalidOperationException>(() => machine.SetDriveWriteProtected(0, false));
         Assert.Throws<InvalidOperationException>(() => machine.ExportAdf(0));
         Capture(machine);
         var recovered = new byte[5632];

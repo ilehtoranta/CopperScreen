@@ -10,7 +10,10 @@ public sealed class LightweightFloppyImage
     public LightweightFloppyFormat Format { get; }
     /// <summary>Whether sector media requires a 150 RPM HD mechanism.</summary>
     public bool IsHighDensity => Sectors?.Length == AmigaDiskGeometry.HighDensityAdfSize;
-    public bool CanWrite => Format == LightweightFloppyFormat.Adf;
+    public bool CanWrite => IsWritableFormat(Format);
+
+    internal static bool IsWritableFormat(LightweightFloppyFormat format)
+        => format is LightweightFloppyFormat.Adf or LightweightFloppyFormat.ExtendedAdf;
 
     private LightweightFloppyImage(LightweightFloppyFormat format, byte[]? sectors, LightweightIpfImage? tracks)
         => (Format, Sectors, Tracks) = (format, sectors, tracks);

@@ -160,7 +160,7 @@ internal sealed partial class MainWindow
     }
 
     private bool IsDrivePermanentlyReadOnly(CopperScreenDriveState drive) =>
-        drive.Format is not (LightweightFloppyFormat.None or LightweightFloppyFormat.Adf) || (_runtime == null && Path.GetExtension(CopperScreenDiskImageArchive.GetDisplayName(drive.DiskPath)).ToLowerInvariant() is ".adz" or ".dms" or ".ipf" or ".scp");
+        drive.Format is not (LightweightFloppyFormat.None or LightweightFloppyFormat.Adf or LightweightFloppyFormat.ExtendedAdf) || (_runtime == null && Path.GetExtension(CopperScreenDiskImageArchive.GetDisplayName(drive.DiskPath)).ToLowerInvariant() is ".adz" or ".dms" or ".ipf" or ".scp");
 
     private async Task SetDriveWriteProtectionAsync(int index, bool writeProtected)
     {

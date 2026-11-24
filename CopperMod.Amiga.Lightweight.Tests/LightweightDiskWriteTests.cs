@@ -36,6 +36,7 @@ public sealed class LightweightDiskWriteTests
         Assert.Equal((uint)(0x1000 + track.Length + 2), m.GetDiskPointer());
         Assert.True(m.IsDriveDirty(drive));
         Assert.Equal(expected, m.ExportAdf(drive));
+        Assert.Equal(expected, m.ExportFloppyImage(drive));
         Assert.All(original, value => Assert.Equal(0, value));
         m.Reset(); // Reset preserves the magnetic medium.
         Assert.Equal(expected, m.ExportAdf(drive));
@@ -124,7 +125,7 @@ public sealed class LightweightDiskWriteTests
     }
 
     [Fact]
-    public void DamagedSectorCannotBeSilentlyExportedAsOldData()
+    public void CustomTrackExportsAsExtendedAdfAndReopensWritable()
     {
         var drive = new LightweightFloppyDrive();
         drive.Mount(new byte[901120]);
@@ -135,6 +136,26 @@ public sealed class LightweightDiskWriteTests
         for (var i = 0; i < 9000; i++) drive.WriteBit(0, cycle += 14, false);
         Assert.True(drive.IsDirty);
         Assert.Throws<InvalidOperationException>(() => drive.ExportAdf());
+        var exported = drive.ExportAdf(allowExtended: true);
+        Assert.True(exported.AsSpan().StartsWith("UAE-1ADF"u8));
+
+        var image = LightweightFloppyImage.Prepare(exported, "character.adf");
+        var reopened = new LightweightFloppyDrive();
+        var secondDrive = new LightweightFloppyDrive();
+        reopened.MountPreserved(image.Tracks!, image.Format);
+        secondDrive.MountPreserved(image.Tracks!, image.Format);
+        Assert.True(reopened.WriteProtected);
+        Assert.True(reopened.Track.SequenceEqual(drive.Track));
+        Assert.Equal(drive.TrackBitLength, reopened.TrackBitLength);
+
+        reopened.WriteProtected = false;
+        reopened.WriteControlPins(0x77, 0);
+        reopened.UpdateRotation(0, false);
+        reopened.WriteBit(1, reopened.ReadyCycle, false);
+        Assert.True(reopened.IsDirty);
+        Assert.False(reopened.Track.SequenceEqual(secondDrive.Track));
+        Assert.Equal(exported, secondDrive.ExportAdf(allowExtended: true));
+        Assert.True(secondDrive.WriteProtected);
     }
 
     [Fact]

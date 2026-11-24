@@ -1,3 +1,4 @@
+using System.Buffers.Binary;
 using CopperDisk;
 
 namespace CopperMod.Amiga.Lightweight;
@@ -18,6 +19,7 @@ internal sealed class LightweightFloppyDrive
     private int _fraction;
     internal const int StandardAdfBytes = 80 * 2 * 11 * 512;
     internal const int HighDensityAdfBytes = StandardAdfBytes * 2;
+    private const int LastPreservedCylinder = 83;
     // Chosen drive-model spin-up time, not a universal drive timing claim.
     internal const long MotorSpinUpCycles = LightweightPaulaAudio.PalCpuFrequency / 2;
     private byte[]? _image;
@@ -33,13 +35,13 @@ internal sealed class LightweightFloppyDrive
     private uint _revolution;
     private bool _writeProtected = true;
     private byte _controlPins = 0xFF;
-    private readonly bool[] _dirtyTracks = new bool[160];
+    private readonly bool[] _dirtyTracks = new bool[(LastPreservedCylinder + 1) * 2];
     private long _lastWriteCycle = long.MinValue;
     private int _writePosition, _writeTrack = -1;
 
     internal bool Mounted => _tracks is not null;
     internal LightweightFloppyFormat Format { get; private set; }
-    internal bool CanWrite => Format == LightweightFloppyFormat.Adf;
+    internal bool CanWrite => LightweightFloppyImage.IsWritableFormat(Format);
     internal bool UsesPreservedReceiver => _trackLengths is not null;
     internal bool WriteProtected
     {
@@ -109,7 +111,9 @@ internal sealed class LightweightFloppyDrive
     internal void MountPreserved(LightweightIpfImage image, LightweightFloppyFormat format)
     {
         ArgumentNullException.ThrowIfNull(image);
-        var tracks = image.Tracks;
+        var tracks = format == LightweightFloppyFormat.ExtendedAdf
+            ? Array.ConvertAll(image.Tracks, track => (byte[])track.Clone())
+            : image.Tracks;
         var lengths = image.Lengths;
         var masks = image.WeakMasks;
         var seed = image.Seed;
@@ -190,7 +194,7 @@ internal sealed class LightweightFloppyDrive
             if (Mounted) DiskChanged = false;
             if ((pins & 2) != 0)
                 Cylinder = Math.Max(0, Cylinder - 1);
-            else if (Cylinder < (UsesPreservedReceiver ? 83 : 79))
+            else if (Cylinder < (UsesPreservedReceiver ? LastPreservedCylinder : 79))
                 Cylinder++;
             // At the model's end stop, further inward pulses leave the head
             // in place. They must not halt the guest or skip a side change.
@@ -317,7 +321,7 @@ internal sealed class LightweightFloppyDrive
         return value ^ (value >> 16);
     }
 
-    // Ideal-ADF splice: preserve consecutive emitted cells in the encoded
+    // Digital splice: preserve consecutive emitted cells in the encoded
     // grid. Nominal 300/150 RPM and Paula's 7-CCK write clock differ by a few
     // cells/revolution; this model does not simulate analog splice drift.
     internal void WriteBit(int bit, long cycle, bool slow)
@@ -341,9 +345,12 @@ internal sealed class LightweightFloppyDrive
         _dirtyTracks[track] = IsDirty = true;
     }
 
-    internal byte[] ExportAdf()
+    internal byte[] ExportAdf(bool allowExtended = false)
     {
-        if (Mounted && !CanWrite) throw new InvalidOperationException($"Read-only {Format} media cannot be exported as standard ADF.");
+        if (allowExtended && Format == LightweightFloppyFormat.ExtendedAdf)
+            return ExportExtendedAdf();
+        if (Mounted && Format != LightweightFloppyFormat.Adf)
+            throw new InvalidOperationException($"{Format} media cannot be exported as standard ADF.");
         if (_image is null || _tracks is null) throw new InvalidOperationException("No ADF is mounted.");
         var result = (byte[])_image.Clone();
         var sectors = _highDensityMedia ? 22 : 11;
@@ -354,10 +361,41 @@ internal sealed class LightweightFloppyDrive
             var decoded = AmigaDosTrackDecoder.DecodeTrackBestEffort(
                 AmigaEncodedTrack.FromBytes(_tracks[track]), track / 2, track & 1,
                 result.AsSpan(track * bytesPerTrack, bytesPerTrack));
-            if (decoded != sectors)
-                throw new InvalidOperationException($"Track {track / 2}.{track & 1} contains {decoded}/{sectors} valid AmigaDOS sectors; it cannot be saved as a standard ADF.");
+            if (decoded == sectors) continue;
+            if (allowExtended && !_highDensityMedia) return ExportExtendedAdf();
+            throw new InvalidOperationException($"Track {track / 2}.{track & 1} contains {decoded}/{sectors} valid AmigaDOS sectors; it cannot be saved as a standard ADF.");
         }
         return result;
+    }
+
+    private byte[] ExportExtendedAdf()
+    {
+        const int headerBytes = 12;
+        const int trackHeaderBytes = 12;
+        var tracks = _tracks!;
+        var dataOffset = headerBytes + tracks.Length * trackHeaderBytes;
+        var fileBytes = dataOffset;
+        for (var i = 0; i < tracks.Length; i++)
+            fileBytes += AlignedTrackBytes(TrackBits(i));
+
+        var result = new byte[fileBytes];
+        "UAE-1ADF"u8.CopyTo(result);
+        BinaryPrimitives.WriteUInt16BigEndian(result.AsSpan(10), (ushort)tracks.Length);
+        for (var i = 0; i < tracks.Length; i++)
+        {
+            var bits = TrackBits(i);
+            var bytes = AlignedTrackBytes(bits);
+            var header = result.AsSpan(headerBytes + i * trackHeaderBytes, trackHeaderBytes);
+            BinaryPrimitives.WriteUInt16BigEndian(header[2..], 1); // Single-revolution raw MFM.
+            BinaryPrimitives.WriteInt32BigEndian(header[4..], bytes);
+            BinaryPrimitives.WriteInt32BigEndian(header[8..], bits);
+            tracks[i].AsSpan(0, (bits + 7) / 8).CopyTo(result.AsSpan(dataOffset));
+            dataOffset += bytes;
+        }
+        return result;
+
+        int TrackBits(int track) => _trackLengths?[track] ?? tracks[track].Length * 8;
+        static int AlignedTrackBytes(int bits) => ((bits + 15) / 16) * 2;
     }
 
     internal void MarkSaved() => IsDirty = false;

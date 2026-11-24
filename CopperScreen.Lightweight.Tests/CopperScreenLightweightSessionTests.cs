@@ -256,6 +256,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
     [InlineData("scp", LightweightFloppyFormat.Scp)]
     public async Task AdditionalFormatsSupportDirectZipAndPendingSwaps(string extension, LightweightFloppyFormat format)
     {
+        var writable = format == LightweightFloppyFormat.ExtendedAdf;
         var sectors = new byte[901120];
         var bytes = extension switch
         {
@@ -271,7 +272,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         var startupDraft = CopperScreenSettingsDraft.FromStartupOptions(Options());
         startupDraft.DriveDiskPaths[0] = path; startupDraft.DriveWriteProtected[0] = false;
         using (var startup = new CopperScreenLightweightSession(startupDraft.ToStartupOptions(_directory)))
-            Assert.True(startup.Machine.IsDriveWriteProtected(0));
+            Assert.Equal(!writable, startup.Machine.IsDriveWriteProtected(0));
         var zip = Path.Combine(_directory, "disks.zip");
         using (var archive = System.IO.Compression.ZipFile.Open(zip, System.IO.Compression.ZipArchiveMode.Create))
         {
@@ -294,6 +295,20 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
             Assert.Throws<InvalidOperationException>(() => session.ExportAdf(drive));
         }
         session.TogglePaused(); using var runtime = CopperScreenRuntime.CreateForTests(session); runtime.Start();
+        var unprotected = await runtime.SetDriveWriteProtectedAsync(0, false);
+        Assert.Equal(writable, unprotected.Success);
+        if (writable)
+        {
+            Assert.False(unprotected.State.Drives[0].WriteProtected);
+            Assert.True(unprotected.State.Drives[0].CanExportAdf);
+            var savedPath = Path.Combine(_directory, "saved-extended.adf");
+            var saved = await runtime.SaveAdfAsync(0, savedPath);
+            Assert.True(saved.Success, saved.Message);
+            var reopened = await runtime.InsertDriveDiskAsync(1, savedPath, false);
+            Assert.True(reopened.Success, reopened.Message);
+            Assert.Equal(format, reopened.State.Drives[1].Format);
+            Assert.True(reopened.State.Drives[1].WriteProtected);
+        }
         var invalid = Path.Combine(_directory, "invalid." + extension); File.WriteAllBytes(invalid, new byte[8]);
         var failed = await runtime.InsertDriveDiskAsync(0, invalid, false);
         Assert.False(failed.Success); Assert.Equal(format, failed.State.Drives[0].Format);

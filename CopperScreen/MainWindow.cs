@@ -2107,7 +2107,7 @@ internal sealed partial class MainWindow : Window
 			driveForm.Children.Add(SettingsWriteWarning(writeProtect, "Changes stay in memory. Save ADF to keep them.", $"DF{driveIndex} write warning", box));
 		}
 
-        driveMedia.Children.Add(SettingsHelp("Which floppy images can I use and save?", "DF0–DF3 accept ADF, ADZ, DMS, IPF and SCP files, including selected ZIP entries. Only standard ADF is writable. Save ADF before replacing a writable disk or closing the app. HD drives accept DD and HD media. Changing the connected drive count or drive type requires a restart."));
+        driveMedia.Children.Add(SettingsHelp("Which floppy images can I use and save?", "DF0–DF3 accept ADF, ADZ, DMS, IPF and SCP files, including selected ZIP entries. Standard and modern extended ADF can be made writable. Save ADF preserves custom DD tracks in an extended ADF. HD drives accept DD and HD media. Changing the connected drive count or drive type requires a restart."));
         layout.Children.Add(CreateSettingsGroup("Disk images", driveMedia));
 		layout.Children.Add(configuration);
 		return CreateScrollableSettingsPage(layout);

@@ -429,7 +429,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         if (!writeProtected && _pendingAdf[drive] != null) return Reject("Wait for the disk swap to finish before enabling writes.");
         if (_copperStart && !writeProtected && _workspace == null &&
             !(_machine.IsAga && CopperScreenCopperStartRom.HasFullFileSystemsFor(true))) return Reject("CopperStart writes require a user-owned CopperOS workspace. The seed stays read-only.");
-        if (!writeProtected && (_pendingAdf[drive]?.Format ?? _machine.GetDriveFormat(drive)) is not (LightweightFloppyFormat.None or LightweightFloppyFormat.Adf))
+        if (!writeProtected && _machine.IsDriveMounted(drive) && !_machine.CanWriteDrive(drive))
             return Reject("This disk format is permanently read-only.");
         _machine.SetDriveWriteProtected(drive, writeProtected);
         SetStatusText($"DF{drive}: " + (writeProtected ? "write protected" : "writable in memory; use Save ADF to keep changes"));
@@ -465,6 +465,9 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         }
         finally { IsPaused=paused; }
     }
+    public byte[] ExportFloppyImage(int drive)
+        => _workspace != null && drive == 0 ? ExportAdf(drive) : _machine.ExportFloppyImage(drive);
+
     // Exporting elsewhere must not acknowledge an unsaved primary workspace.
     public void MarkAdfSaved(int drive) { if (_workspace == null || drive != 0) _machine.MarkAdfSaved(drive); }
     public void DiscardPersistentStorage() { _discardWorkspaceChanges = true; } // Direct host writes already made cannot be rolled back.

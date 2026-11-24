@@ -695,7 +695,7 @@ internal sealed class CopperScreenRuntime : IDisposable
                 if (workspaceExport && File.Exists(destination)) throw new IOException("Export the workspace to a new file. Existing disks, seeds and backups are preserved.");
                 if (workspaceExport && emulator is CopperScreenLightweightSession ownerSession && ownerSession.IsInsideWorkspace(destination))
                     throw new IOException("Export outside the managed workspace folder so checkpoints and backups remain protected.");
-				var bytes = emulator.ExportAdf(driveIndex);
+				var bytes = emulator.ExportFloppyImage(driveIndex);
                 CopperScreenAtomicFile.Write(destination, bytes, overwriteExisting);
 				emulator.MarkAdfSaved(driveIndex);
 				emulator.SetStatusText($"Saved DF{driveIndex}: {destination}");

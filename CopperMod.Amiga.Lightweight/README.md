@@ -14,7 +14,7 @@ versions are unchanged. A1200 integration evidence is retained in
 Independent PAL A500 engine with OCS 8362 or ECS 8373 Denise: Copper68k accurate 68000,
 configurable Agnus and Chip RAM, native 256 KiB Kickstart 1.3 (v34) or 512 KiB A500 Kickstart 3.1
 (v40.63), one to four floppy drives with standard writable
-880 KiB DD / 1760 KiB HD ADF and read-only ADZ/DMS/extended ADF/IPF/SCP (including selected ZIP entries through the host/runner),
+880 KiB DD / 1760 KiB HD ADF, modern extended ADF and read-only ADZ/DMS/IPF/SCP (including selected ZIP entries through the host/runner),
 and optional file-backed CopperHDF units.
 Optional [timed CopperHDF and native A1200 Gayle IDE](../docs/engine/TIMED_STORAGE.md)
 share a bounded synthetic drive model. They are read-only opt-in devices; the
@@ -321,13 +321,14 @@ Received WORDSYNC aligns DSKBYTR byte reads even without DMA. The
 passes Alien Breed SE '92's black boot and reaches its disk-two menu; exact
 physical coincident-edge timing remains unverified.
 
-Drives start write protected. For standard ADF, `SetDriveWriteProtected(drive, false)` enables
-guest memory-to-disk DMA into the owned encoded tracks. `ExportAdf(drive)` copies
-standard sectors and rejects damaged/custom tracks that cannot be represented in
-an ordinary ADF. Export and persistence are host operations, outside emulated
-execution. The desktop Floppy settings expose Read-only, Save ADF and Discard and
-eject. Changes stay in memory until saved; mounting from a ZIP never modifies the
-archive automatically. Native Workbench format/write/read and a fresh-machine
+Drives start write protected. For standard and modern extended ADF,
+`SetDriveWriteProtected(drive, false)` enables guest memory-to-disk DMA into
+the drive's owned tracks. `ExportAdf(drive)` requires complete standard sectors.
+`ExportFloppyImage(drive)` also supports UAE-1ADF and uses it when modified DD
+tracks lack a complete standard sector representation. Export and persistence
+are host operations. The desktop Floppy settings expose Read-only, Save ADF
+and Discard and eject. Changes stay in memory until saved. Native Workbench
+format/write/read and a fresh-machine
 save/reopen check have run on disposable media.
 
 `LightweightFloppyImage.Prepare(bytes, filename)` validates/decodes all supported
@@ -336,7 +337,7 @@ floppy formats before attachment; `MountDisk(drive, prepared)` attaches them.
 sector path; modern UAE-1ADF and compressed extended ADF retain raw track lengths
 and bytes. SCP retains CopperDisk's decoded first DD revolution and uses the
 preserved receiver; original flux intervals and multiple revolutions are not replayed.
-Only standard ADF is writable or exportable. See [format contract and validation](../docs/engine/DISK_FORMATS.md).
+See [format contract and validation](../docs/engine/DISK_FORMATS.md).
 
 `MountIpf(drive, bytes)` decodes preserved tracks at mount time;
 `LightweightIpfImage.Prepare` and `MountIpf(drive, prepared)` separate preparation

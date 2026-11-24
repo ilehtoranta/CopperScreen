@@ -50,6 +50,7 @@ internal interface ICopperScreenSession : IDisposable
     bool InsertLoadedDisk(int drive, string path, CopperScreenAdfImage disk, bool markChanged);
     bool SetDriveWriteProtected(int drive, bool writeProtected);
     byte[] ExportAdf(int drive) => throw new NotSupportedException("ADF export is not exposed by this session.");
+    byte[] ExportFloppyImage(int drive) => ExportAdf(drive);
     void MarkAdfSaved(int drive) { }
     void SavePersistentStorage() { }
     void DiscardPersistentStorage() { }

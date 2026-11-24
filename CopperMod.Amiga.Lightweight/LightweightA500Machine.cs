@@ -781,7 +781,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public void MountIpf(ReadOnlySpan<byte> image) => MountIpf(0, image);
 
     /// <summary>Attach prepared ADF, ADZ, DMS, extended ADF, IPF or SCP media.
-    /// Only standard ADF is writable. Preparation/validation precedes replacement.</summary>
+    /// Standard and modern extended ADF are writable. Preparation/validation precedes replacement.</summary>
     public void MountDisk(int drive, LightweightFloppyImage image)
     {
         ThrowIfDisposed();
@@ -801,6 +801,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     /// <summary>Copies current standard sectors. Rejects incomplete/custom tracks.
     /// Call on the machine owner thread; export does not change the mounted medium.</summary>
     public byte[] ExportAdf(int drive = 0) => GetDrive(drive).ExportAdf();
+
+    /// <summary>Copies standard ADF sectors or, for custom DD tracks, a modern UAE-1ADF image.
+    /// Call on the machine owner thread before replacing or ejecting the disk.</summary>
+    public byte[] ExportFloppyImage(int drive = 0) => GetDrive(drive).ExportAdf(allowExtended: true);
 
     /// <summary>Acknowledge a successfully persisted export on the owner thread.</summary>
     public void MarkAdfSaved(int drive) => GetDrive(drive).MarkSaved();
