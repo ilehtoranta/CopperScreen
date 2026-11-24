@@ -123,9 +123,15 @@ DMA overrun fix for the title. [WinUAE changelog](https://github.com/tonioni/Win
 A diagnostic four-word AGA area blit with all four channels enabled under
 seven-plane DMA cleared BUSY at the same cycle that the last destination word
 was written in CopperScreen. The destination-only control cleared BUSY one
-CCK before its last write. The reference distinguishes main completion from the
-final-D drain for area blits. The remaining task is to trace that interval
-against cycle-exact WinUAE and establish which in-game blits expose it.
+CCK before its last write. An independent bootable PAL A1200 probe runs an
+all-channel four-word blit from the Copper, with FMODE 0, seven-plane DMA,
+blitter priority off and continuous CPU chip accesses. WinUAE 6.1 beta 23
+records the blitter IRQ at horizontal slot `$13` and the final D write to
+`$017806` at slot `$14` of the following trace line. The transfer drains in
+the early part of that line. The reference also pipelines later source reads
+ahead of earlier D writes. A case that isolates the motherboard's BLS signal
+during the display fetch interval, and a trace of the in-game blits that
+expose it, remain open.
 [WinUAE area blitter completion](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L408-L461)
 
 ## P.P. Hammer and His Pneumatic Weapon
@@ -159,12 +165,41 @@ historical WinUAE timing note identifies a broad CPU and blitter improvement.
 Later rooms and exact CPU and blitter contention remain unverified.
 [WinUAE P.P. Hammer history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19736-L19741)
 
-## Other baseline observations
+## All New World of Lemmings
 
-The initial 2,100-field CopperScreen replays at `e086a46` reached the DMA
-Design logo in All New World of Lemmings and the expected access-denied
-screen in RoboCop 3 with no dongle fitted. These captures establish boot
-checkpoints.
+The original SPS 0625 set boots on the PAL A1200 profile with all four disks
+mounted. CopperScreen `0347773` and cycle-exact WinUAE 6.1 beta 23 reached the
+title, the animated Ark menu and the first Classic level. The CopperScreen
+replay used mouse movement and a left click on the Classic Lemming on the
+Ark's roof. It completed 11,500 fields and drew the playfield, moving
+Lemmings, mouse cursor and skill bar without an unsupported feature report.
+The final CPU, hardware and output fingerprints were `0xB596337889663E10`,
+`0x104B88F5AB42E4EE` and `0xEC9DCD3447260BA2`.
 
-The same changelog records an All New World of Lemmings bitplane modulo
-correction. [WinUAE Lemmings history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19933-L19936)
+The title logo matched all 5,328 sampled RGB pixels. At field 11,500,
+125,214 of 128,000 samples from the first-level playfield and skill bar
+matched the independent WinUAE capture. The captures show different
+animation positions and timer states. The first-level comparison samples
+even CopperScreen x values from 516 through 1,794 and rows 70 through 269.
+Reference coordinates are `(x - 400) / 2` and `2 * y - 54`.
+
+The first-level capture SHA-256 hashes were
+`65027C8257D07112A070745B9614C8C860005D5740FEFFEE28BC53BBD0393975`
+for CopperScreen and
+`A49D7E450D88F2A56A4A2D78C29F457B89253CA924B56032B8AC0D7845C99A55`
+for WinUAE. The hardware checkpoints show DDFSTRT `$0028`, DDFSTOP `$00C8`
+and a modulo of `-8` at the CopperScreen frame boundary. A WinUAE register
+dump from the level shows FMODE `$0003` and a modulo of zero at a different
+raster position.
+The changelog records a historical cycle-exact bitplane modulo correction.
+Moving the cursor to both edges in a 13,750-field replay left this level's
+view fixed while animation continued. WinUAE also kept the first-level view
+fixed at the right edge. Modulo write timing and scrolling in a larger
+level still need a matched trace. [WinUAE Lemmings history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19933-L19936)
+
+## RoboCop 3
+
+The initial 2,100-field CopperScreen replay of SPS 0805 reached the expected
+access-denied screen with no dongle fitted. With its RoboCop 3 dongle option
+enabled, WinUAE 6.1 beta 23 reached the original developer logo, credits
+and language selection.
