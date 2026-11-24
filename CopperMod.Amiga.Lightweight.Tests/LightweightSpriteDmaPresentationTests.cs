@@ -217,7 +217,8 @@ public sealed class LightweightSpriteDmaPresentationTests
         SetPointer(machine, channel: 1, address);
         WriteRegister(machine, LightweightRegisters.DmaconWrite, 0x8320);
 
-        var shrinkCycle = At(spriteY + 1, 0x16);
+        // Publish the new DDF start before its comparator reaches $18.
+        var shrinkCycle = At(spriteY + 1, 0x12);
         machine.AdvanceHardwareTo(shrinkCycle);
         WriteRegister(machine, LightweightRegisters.Ddfstrt, 0x0018);
         machine.ExecuteFrame();

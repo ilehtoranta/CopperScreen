@@ -724,6 +724,35 @@ ZooL 2, Banshee, P.P. Hammer, Lemmings 3 and RoboCop 3 replays retained all
 13 reference-build frame captures and all final CPU, hardware and output
 fingerprints. Sqrxz reached its title on PAL and NTSC CD32.
 
+### Live DDFSTRT writes
+
+The [bootable bitplane probe](../../scripts/generate-bitplane-modulo-probe.ps1)
+with `-DdfStartSweep` changes DDFSTRT between `$0038` and `$0050` at six
+points in each direction. It uses two lores planes and distinct bitplane
+addresses per test line. In stock WinUAE 6.1 beta 23, a change near the
+start position can prevent the old and new values from comparing on the
+same CCK. The previous CopperScreen engine issued 16 extra reads on
+each of lines 76 and 80 and missed six reads on line 104 on both chipsets.
+[WinUAE DDFSTRT write timing](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/custom.cpp#L3668-L3677)
+· [WinUAE AGA start comparator](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/custom.cpp#L9418-L9433)
+· [WinUAE OCS start comparator](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/custom.cpp#L9558-L9576)
+
+The sequencer publishes the new DDFSTRT comparator four CCKs after the
+write and suppresses the comparison on the CCK immediately before
+publication. Adding the delay alone produced six extra reads on line 100.
+With both edges modeled, the PAL A500 and PAL A1200 each match WinUAE in
+all 12 cases, covering 120 DMA transfers per chipset. The plane, address,
+width and CCK agree after applying a constant three-CCK offset between
+trace origins. Capture with `DBG vl 64 32 13` and repeat every four lines
+through line 108. Five automated cases check the final bitplane pointers
+when a write moves the start earlier or later around the sampling edge.
+
+The Release solution build completed with zero warnings. Engine diagnostics
+passed 1,502 tests and skipped seven optional native cases. The five original
+game replays retained all 13 captures and final CPU, hardware and output
+fingerprints. Sqrxz retained both title captures and final fingerprints on
+PAL and NTSC CD32.
+
 ### Egyptian opening level
 
 CopperScreen `9b3e8e4` selected the Egyptian Lemming in the Ark and reached
@@ -765,6 +794,9 @@ The skill bar stayed fixed and Lemmings continued moving during the
 scroll. The Release runner with the DDFSTOP correction reproduced the
 level 2 frame at field 18,184 byte for byte. The capture SHA-256 is
 `F6C3E0620B0DB1D217F2DBFFDE81EEA45B19534F1E25D5728FCD5657A7038E42`.
+With the DDFSTRT correction, a fresh Release replay from boot reproduced
+the field 19,474 framebuffer and Chip RAM byte for byte. The framebuffer
+SHA-256 is `217334EC8B5364207DEF2850A6C28B5387432AA5E339792B74B60578920DA483`.
 Independent comparison of the second level remains open.
 
 ## RoboCop 3

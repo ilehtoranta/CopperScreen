@@ -1,9 +1,12 @@
 param(
     [Parameter(Mandatory)][string]$Path,
-    [switch]$DdfStopSweep
+    [switch]$DdfStopSweep,
+    [switch]$DdfStartSweep
 )
 
 $ErrorActionPreference = 'Stop'
+if ($DdfStopSweep -and $DdfStartSweep) { throw 'Select one DDF sweep.' }
+$ddfSweep = $DdfStopSweep -or $DdfStartSweep
 $asm = [Collections.Generic.List[uint16]]::new()
 $copper = [Collections.Generic.List[uint16]]::new()
 function Word([uint16]$Value) { $asm.Add($Value) }
@@ -23,27 +26,38 @@ WriteWord 0x7FFF 0xDFF096
 WriteCopperWord 0x008E 0x2C81
 WriteCopperWord 0x0090 0xB4C1
 WriteCopperWord 0x0092 0x0038
-WriteCopperWord 0x0094 $(if ($DdfStopSweep) { 0x0070 } else { 0x0050 })
+WriteCopperWord 0x0094 $(if ($ddfSweep) { 0x0070 } else { 0x0050 })
 WriteCopperWord 0x0100 0x2201
 WriteCopperWord 0x0106 0x0C00
-WriteCopperWord 0x01FC $(if ($DdfStopSweep) { 0 } else { 3 })
+WriteCopperWord 0x01FC $(if ($ddfSweep) { 0 } else { 3 })
 WriteCopperWord 0x00E0 1
 WriteCopperWord 0x00E4 1
 
-if ($DdfStopSweep) {
-    # Move the stop comparator in both directions during the DMA run.
+if ($ddfSweep) {
+    # Move the comparator in both directions around its sampling edge.
+    if ($DdfStartSweep) {
+        $register = 0x0092
+        $early = 0x0038
+        $late = 0x0050
+        $wait = 0x2D
+    } else {
+        $register = 0x0094
+        $early = 0x0048
+        $late = 0x0070
+        $wait = 0x3D
+    }
     for ($test = 0; $test -lt 12; $test++) {
         $line = (64 + 4 * $test) -shl 8
         $bank = 0x2000 + $test * 0x800
-        $earlyStop = $test -ge 6
+        $movesLater = $test -ge 6
         WriteCopperWord ($line + 1) 0xFFFE
-        WriteCopperWord 0x0094 $(if ($earlyStop) { 0x0048 } else { 0x0070 })
+        WriteCopperWord $register $(if ($movesLater) { $early } else { $late })
         WriteCopperWord 0x00E2 $bank
         WriteCopperWord 0x00E6 ($bank + 0x400)
         WriteCopperWord 0x0108 0
         WriteCopperWord 0x010A 0
-        WriteCopperWord ($line + 0x3D + ($test % 6) * 2) 0xFFFE
-        WriteCopperWord 0x0094 $(if ($earlyStop) { 0x0070 } else { 0x0048 })
+        WriteCopperWord ($line + $wait + ($test % 6) * 2) 0xFFFE
+        WriteCopperWord $register $(if ($movesLater) { $late } else { $early })
     }
 } else {
     # Separate bitplane banks expose which modulo won on the next scanline.

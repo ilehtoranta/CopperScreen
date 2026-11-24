@@ -14,7 +14,7 @@ internal sealed class LightweightBitplanes
     private const int DdfLimitReleaseHorizontal = 0x18;
     private const int DdfHardStopCompareHorizontal = 0xD7;
     private const int DdfHardStopTargetHorizontal = 0xD8;
-    private const int DdfStopWriteDelay = 4 * LightweightClock.CpuCyclesPerColorClock;
+    private const int DdfWriteDelay = 4 * LightweightClock.CpuCyclesPerColorClock;
     private const int FetchUnitColorClocks = 8;
     private readonly uint _addressMask;
     private readonly bool _ecs, _aga;
@@ -42,6 +42,9 @@ internal sealed class LightweightBitplanes
     private int _terminalFetchOffset;
     private ushort _pendingBplcon0;
     private long _pendingBplcon0Cycle;
+    private ushort _ddfStart;
+    private ushort _pendingDdfStart;
+    private long _pendingDdfStartCycle = long.MaxValue;
     private ushort _ddfStop;
     private ushort _pendingDdfStop;
     private long _pendingDdfStopCycle = long.MaxValue;
@@ -71,6 +74,8 @@ internal sealed class LightweightBitplanes
     internal bool RunActive => _runActive;
     internal int OwnerLine => _ownerLine;
 
+    private long PendingDdfWriteCycle => Math.Min(_pendingDdfStartCycle, _pendingDdfStopCycle);
+
     internal void Reset()
     {
         _fmode = _pendingFmode = _pendingMode = 0; _pendingFmodeCycle = long.MaxValue;
@@ -84,6 +89,8 @@ internal sealed class LightweightBitplanes
         _terminalFetchOffset = 0;
         _pendingBplcon0 = 0;
         _pendingBplcon0Cycle = long.MaxValue;
+        _ddfStart = _pendingDdfStart = 0;
+        _pendingDdfStartCycle = long.MaxValue;
         _ddfStop = _pendingDdfStop = 0;
         _pendingDdfStopCycle = long.MaxValue;
         _startPermit = false;
@@ -139,13 +146,20 @@ internal sealed class LightweightBitplanes
                 _pointers[plane] = machine.GetBitplanePointer(plane);
             }
         }
+        else if (offset == LightweightRegisters.Ddfstrt && value != _pendingDdfStart)
+        {
+            ApplyDdfStart(cycle);
+            _pendingDdfStart = value;
+            _pendingDdfStartCycle = LightweightBusArbiter.AlignToSlot(cycle + DdfWriteDelay);
+            Publish(_pendingDdfStartCycle);
+        }
         else if (offset == LightweightRegisters.Ddfstop && value != _pendingDdfStop)
         {
             // The comparator keeps the old stop through the register-write
             // pipeline, including when a Copper MOVE falls on the stop edge.
             ApplyDdfStop(cycle);
             _pendingDdfStop = value;
-            _pendingDdfStopCycle = LightweightBusArbiter.AlignToSlot(cycle + DdfStopWriteDelay);
+            _pendingDdfStopCycle = LightweightBusArbiter.AlignToSlot(cycle + DdfWriteDelay);
             Publish(_pendingDdfStopCycle);
         }
 
@@ -178,7 +192,7 @@ internal sealed class LightweightBitplanes
         if (_beamStopped)
         {
             _syncStopCycle = cycle;
-            NextCycle = Math.Min(_pendingDdfStopCycle,
+            NextCycle = Math.Min(PendingDdfWriteCycle,
                 Math.Min(_pendingFmodeCycle, Math.Min(_pendingBplcon0Cycle, PendingOutputCycle)));
         }
         else
@@ -204,6 +218,7 @@ internal sealed class LightweightBitplanes
         }
 
         ApplyDdfStop(cycle);
+        ApplyDdfStart(cycle);
         var modeChanged = TPath.Aga && _pendingFmodeCycle <= cycle;
         if (modeChanged) { _fmode = _pendingFmode; _pendingFmodeCycle = long.MaxValue; }
         if (_pendingBplcon0Cycle <= cycle || modeChanged)
@@ -234,7 +249,7 @@ internal sealed class LightweightBitplanes
 
         if (_beamStopped)
         {
-            NextCycle = Math.Min(_pendingDdfStopCycle,
+            NextCycle = Math.Min(PendingDdfWriteCycle,
                 Math.Min(_pendingFmodeCycle, Math.Min(_pendingBplcon0Cycle, PendingOutputCycle)));
             return;
         }
@@ -255,7 +270,7 @@ internal sealed class LightweightBitplanes
             return;
         }
 
-        NextCycle = Math.Min(_pendingDdfStopCycle, TPath.Aga
+        NextCycle = Math.Min(PendingDdfWriteCycle, TPath.Aga
             ? Math.Min(_pendingFmodeCycle, _pendingBplcon0Cycle) : _pendingBplcon0Cycle);
         if (dmaEnabled && planeCount != 0)
         {
@@ -329,7 +344,7 @@ internal sealed class LightweightBitplanes
             var stopMatch = horizontal == (_ddfStop & _ddfMask);
             if (horizontal < DdfLimitReleaseHorizontal)
             {
-                if (horizontal == (machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & _ddfMask))
+                if (MatchesDdfStart(cycle, horizontal))
                     _earlyDdfStartLine = machine.BeamLine;
                 if (stopMatch) _earlyDdfStartLine = -1;
                 return;
@@ -339,7 +354,7 @@ internal sealed class LightweightBitplanes
         }
 
         if (_startPermit && dmaEnabled && planeCount != 0 &&
-            (earlyStartMatch || horizontal == (machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & _ddfMask)) &&
+            (earlyStartMatch || MatchesDdfStart(cycle, horizontal)) &&
             IsVerticalWindowOpen<TPath>(machine))
         {
             _runActive = true;
@@ -504,10 +519,10 @@ internal sealed class LightweightBitplanes
         var hardLimits = !(TPath.EnhancedDisplay && _ecs) || (_effectiveBplcon0 & 0x20) == 0;
         var target = !_startPermit
             ? (hardLimits ? DdfLimitReleaseHorizontal : 0)
-            : machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & _ddfMask;
+            : _ddfStart & _ddfMask;
         if (TPath.Aga && hardLimits)
         {
-            var ddfStart = _startPermit ? target : machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & _ddfMask;
+            var ddfStart = _ddfStart & _ddfMask;
             var hasEarlyStart = _earlyDdfStartLine >= 0 && _earlyDdfStartLine == machine.BeamLine;
             if (ddfStart < DdfLimitReleaseHorizontal || hasEarlyStart)
             {
@@ -538,6 +553,21 @@ internal sealed class LightweightBitplanes
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void Publish(long cycle)
         => NextCycle = Math.Min(NextCycle, cycle);
+
+    // Neither comparator value can match on the clock before publication.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private bool MatchesDdfStart(long cycle, int horizontal)
+        => horizontal == (_ddfStart & _ddfMask) &&
+            cycle + LightweightClock.CpuCyclesPerColorClock != _pendingDdfStartCycle;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private void ApplyDdfStart(long cycle)
+    {
+        if (_pendingDdfStartCycle > cycle) return;
+
+        _ddfStart = _pendingDdfStart;
+        _pendingDdfStartCycle = long.MaxValue;
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void ApplyDdfStop(long cycle)
