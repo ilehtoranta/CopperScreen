@@ -375,6 +375,19 @@ matched all final CPU, hardware and output fingerprints from the
 preceding build. The five ZooL 2 captures through field 12,850
 also matched byte for byte.
 
+### EC020 fetch order around the pointer write
+
+A standalone A1200 boot probe repeats the `MOVE.L` and the following
+`ADDA.L` with custom DMA disabled. WinUAE fetches the two following
+instruction longwords at CCKs `$06` and `$08`, then writes the custom
+register halves at `$0A` and `$0C`. A direct trace of the pinned
+Copper68k 1.5.11 A1200 core on a logging bus shows the operand write
+before either following instruction fetch. The discrepancy is
+reproducible outside blitter arbitration. A correction belongs in
+the shared core's instruction pipeline, with physical timing and
+coverage of other instruction forms still open.
+[Motorola MC68020 and MC68EC020 user’s manual](https://www.nxp.com/docs/en/data-sheet/MC68020UM.pdf)
+
 ### Live B, C and D channel investigation
 
 A separate synthetic AGA test reproduced a live channel discrepancy.
