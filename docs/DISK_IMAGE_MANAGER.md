@@ -303,7 +303,7 @@ opening an image does not eagerly instantiate a runtime for every partition.
 Switching volumes disposes the previous session. Entries from a prior mount cannot
 be used in a new session. The window serializes background operations.
 
-The service embeds its ROM and versioned manifest and uses pinned Copper68k 1.5.11,
+The service embeds its ROM and versioned manifest and uses pinned Copper68k 1.5.12,
 M68020 interpreter execution, flat ROM/RAM and bounded storage gateways. Writes require an explicit writable staged source and service opt-in.
 The default per-command budget is 50 million instructions; cancellation is checked
 every 256 interpreted instructions. There is no managed filesystem fallback or
@@ -314,10 +314,11 @@ in `CopperScreenDiskExtraction`.
 ## Development package
 
 The app builds `CopperDisk.FileSystem` from source and uses the pinned
-`CopperStart.FileSystem.Service` **[0.5.0-dev.7]** from NuGet.org. A clean
+`CopperStart.FileSystem.Service` **[0.5.0-dev.8]** from the CopperScreen GitHub prerelease. A clean
 checkout needs no private feed credentials:
 
 ```powershell
+./scripts/stage-filesystem-service.ps1
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 ```
@@ -325,13 +326,13 @@ dotnet build CopperScreen.slnx -c Release --no-restore
 If you have the original qualified archive, you can also stage it in the local feed:
 
 ```powershell
-./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.7.nupkg"
+./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.8.nupkg"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 ```
 
 The script verifies the pinned package SHA-256:
-`EDEEE8EE61616566508495E767AAF17408225F195711F4ACA915DBD0D5504492`.
+`3E6D033A8AAAA07659BC54E3A0B7B0F762ECD84E4C8351049DEE1559BF41CC08`.
 It copies the package to ignored `artifacts/filesystem-service-feed`, an additional
 restore source when present. Lock files also pin the NuGet content hash.
 Consumers need the managed package and its pinned CPU dependency; CopperStart,

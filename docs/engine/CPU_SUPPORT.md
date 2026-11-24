@@ -1,6 +1,6 @@
 # CPU support and Copper68k package scope
 
-CopperScreen pins Copper68k 1.5.11 from NuGet.org. MOVES operands use their selected address space,
+CopperScreen pins Copper68k 1.5.12 from NuGet.org. MOVES operands use their selected address space,
 memory bit fields use sized transfers, and MOVE16 starts each burst at the
 addressed longword within the line. On 68000/68010, arithmetic
 and logical longword writeback stores the low word first. The 68010 clears

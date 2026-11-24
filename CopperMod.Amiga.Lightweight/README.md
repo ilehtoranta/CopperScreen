@@ -4,7 +4,7 @@ Source and development now belong to the CopperScreen repository. The desktop
 app and headless runner build this project directly; Copper68k remains a shared
 external package. The original package ID and namespace are retained for compatibility.
 
-The published CPU baseline and current pin are Copper68k `1.5.11` from NuGet.org.
+The published CPU baseline and current pin are Copper68k `1.5.12` from NuGet.org.
 No private qualification feed is required. See the
 [release and consumer record](../docs/engine/COPPER68K_1_5_4_RELEASE_2026-10-22.md).
 See [CPU support and validation](../docs/engine/CPU_SUPPORT.md). Existing published
