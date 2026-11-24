@@ -488,8 +488,31 @@ for CopperScreen and
 `73D8A3CBC93A2724D607D6631DA93ABCCABC1F93A27DB1C8E5F51C27A1AD4DA5`
 for WinUAE. The opening-room comparison required no emulator change. The
 historical WinUAE timing note identifies a broad CPU and blitter improvement.
-Later rooms and exact CPU and blitter contention remain unverified.
+Later rooms remain unverified.
 [WinUAE P.P. Hammer history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19736-L19741)
+
+### Four-plane chipset contention
+
+Another WinUAE changelog entry identifies bitplane DMA taking blitter slots
+as a source of rendering glitches in P.P. Hammer. The captured opening-room
+Copper list uses four lores planes, with DDFSTRT `$38` and DDFSTOP `$D0` for
+one display region. BLTPRI is set in the recorded gameplay field.
+[WinUAE bitplane contention history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19206-L19210)
+
+The [area probe generator](../../scripts/generate-blitter-area-probe.ps1)
+reproduces that display and runs eight-by-eight word blits while the 68000
+reads Chip RAM. Use `-Ocs -FourPlanes -CpuPressure -Width 8 -Height 8
+-WaitPosition 0x47 -BlitterPriority`. CopperScreen and WinUAE 6.1 beta 23
+match all 128 A+D and 256 A+B+C+D transfers by address and CCK. The traces
+use the Copper BLTSIZE write to align the horizontal origin.
+
+Remove `-BlitterPriority` and add `-Modes 9` to isolate a shared-bus A+D
+blit. The CPU prefetches match before the first arbitration difference.
+WinUAE grants its slot `$56` to the CPU read at `$40000`. CopperScreen
+accepts the blitter A read in the preceding input phase, before the CPU
+request is visible, and grants the CPU the following eligible slot. The
+128 transfers still match by address. Their timing under shared priority
+requires a separate correction and physical verification.
 
 ## All New World of Lemmings
 

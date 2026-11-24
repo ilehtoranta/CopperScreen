@@ -1,9 +1,13 @@
 param(
     [Parameter(Mandatory)][string]$Path,
     [ValidateRange(1, 8)][int]$Width = 3,
+    [ValidateRange(1, 1024)][int]$Height = 1,
     [ValidateRange(1, 255)][int]$WaitPosition = 0x23,
+    [ValidateRange(0, 15)][int[]]$Modes,
+    [switch]$FourPlanes,
     [switch]$SevenPlanes,
     [switch]$CpuPressure,
+    [switch]$BlitterPriority,
     [switch]$Fill,
     [switch]$Overlap,
     [ValidateSet('AD', 'BC')][string]$LiveModulo,
@@ -16,6 +20,10 @@ param(
 
 $ErrorActionPreference = 'Stop'
 if ($Overlap -and $LiveModulo) { throw 'Choose either the overlap probe or a live modulo probe.' }
+if ($FourPlanes -and $SevenPlanes) { throw 'Choose either four or seven display bitplanes.' }
+if (($Modes.Count -gt 0 -or $Height -ne 1) -and ($Overlap -or $LiveModulo)) {
+    throw 'Custom modes and height apply to the standard area probe.'
+}
 if ($LiveMinterm -and ($Overlap -or $LiveModulo)) {
     throw 'Choose one probe for overlap, live modulo or live minterm writes.'
 }
@@ -54,14 +62,15 @@ WriteWord 0x7FFF 0xDFF09C
 WriteWord 0x7FFF 0xDFF096
 WriteWord 0x8002 0xDFF02E
 
-if ($SevenPlanes) {
+if ($FourPlanes -or $SevenPlanes) {
     WriteCopperWord 0x008E 0x2C81
     WriteCopperWord 0x0090 0xF4C1
     WriteCopperWord 0x0092 0x0038
     WriteCopperWord 0x0094 0x00D0
-    WriteCopperWord 0x0100 0x7401
-    WriteCopperWord 0x01FC 0
-    for ($plane = 0; $plane -lt 7; $plane++) { Pointer (0x00E0 + 4 * $plane) (0x20000 + 0x4000 * $plane) }
+    WriteCopperWord 0x0100 $(if ($SevenPlanes) { 0x7401 } else { 0x4200 })
+    if ($SevenPlanes) { WriteCopperWord 0x01FC 0 }
+    $planeCount = if ($SevenPlanes) { 7 } else { 4 }
+    for ($plane = 0; $plane -lt $planeCount; $plane++) { Pointer (0x00E0 + 4 * $plane) (0x20000 + 0x4000 * $plane) }
 }
 WriteCopperWord 0x0042 $(if ($Fill) { 0x0012 } else { 0 })
 WriteCopperWord 0x0044 0xFFFF
@@ -199,7 +208,7 @@ if ($LiveData) {
         WriteCopperWord $(if ($test -lt 6) { $firstModulo } else { $secondModulo }) 0x0010
     }
 } else {
-    $channels = if ($Overlap) { @(9, 15) } else { 0..15 }
+    $channels = if ($Overlap) { @(9, 15) } elseif ($Modes.Count -gt 0) { $Modes } else { 0..15 }
     foreach ($mode in $channels) {
         $line = 64 + 6 * $mode
         $data = 0x16000 + 0x80 * $mode
@@ -212,7 +221,7 @@ if ($LiveData) {
         WriteCopperWord 0x0056 ($d -band 0xFFFF)
         WriteCopperWord 0x009C 0x0040
         WriteCopperWord (($line -shl 8) + ($WaitPosition -bor 1)) 0xFFFE
-        WriteCopperWord 0x0058 (0x0040 + $Width)
+        WriteCopperWord 0x0058 ((($Height -band 1023) -shl 6) + $Width)
         if ($Overlap) {
             WriteWord 0x1111 $data
             WriteWord 0x2222 ($data + 2)
@@ -240,7 +249,9 @@ WriteWord ($listBase -shr 16) 0xDFF080
 WriteWord ($listBase -band 0xFFFF) 0xDFF082
 WriteWord 0 0xDFF088
 WriteWord 0xC040 0xDFF09A
-WriteWord $(if ($SevenPlanes) { 0x83C0 } else { 0x82C0 }) 0xDFF096
+$dmaControl = if ($FourPlanes -or $SevenPlanes) { 0x83C0 } else { 0x82C0 }
+if ($BlitterPriority) { $dmaControl = $dmaControl -bor 0x0400 }
+WriteWord $dmaControl 0xDFF096
 if ($CpuPressure) {
     Word 0x207C; Word 4; Word 0  # MOVEA.L #$40000,A0
     Word 0x3010; Word 0x60FC     # Repeat MOVE.W (A0),D0
