@@ -49,7 +49,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private readonly LightweightBlitter _blitter;
     private readonly LightweightSpriteDma _spriteDma;
     private readonly LightweightSprites _sprites;
-    private readonly LightweightPaulaAudio _paula = new();
+    private readonly LightweightPaulaAudio _paula;
     private readonly LightweightPaulaSerial _serial = new();
     private readonly LightweightCia _ciaA = new();
     private readonly LightweightCia _ciaB = new();
@@ -115,7 +115,17 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         LightweightRealTimeClock? previousRtc = null)
     {
         _configuration = configuration ?? new LightweightA500Configuration();
-        _hasClockedStorage = _configuration.IdeMaster is not null || _configuration.HardfileTimings.Count != 0;
+        ValidateCd32Configuration(_configuration);
+        MotherboardClockHz = Cd32Region == LightweightCd32Region.Ntsc
+            ? LightweightPaulaAudio.NtscCpuFrequency : LightweightPaulaAudio.PalCpuFrequency;
+        _paula = new(MotherboardClockHz);
+        _overlaySize = Cd32Region.HasValue ? ChipRamCpuDecodeSize : 0x400;
+        if (Cd32Region.HasValue)
+        {
+            _akiko = new(MotherboardClockHz);
+            _cd32Pads = new();
+        }
+        _hasClockedStorage = _akiko is not null || _configuration.IdeMaster is not null || _configuration.HardfileTimings.Count != 0;
         _rtc = _configuration.RtcEnabled
             ? previousRtc?.CreateRestartClock(_configuration.RtcNowProvider) ?? new(_configuration.RtcNowProvider)
             : null;
@@ -128,7 +138,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             throw new ArgumentException("JIT execution requires the 68040 CPU model.", nameof(configuration));
         ValidateCpuClockMultiplier(_configuration.CpuClockMultiplier, _configuration.CpuModel, _configuration.CpuExecutionMode);
         _cpuClockShift = System.Numerics.BitOperations.TrailingZeroCount((uint)_configuration.CpuClockMultiplier);
-        if (_configuration.FloppyDriveCount is < 1 or > 4)
+        if (!Cd32Region.HasValue && _configuration.FloppyDriveCount is < 1 or > 4)
             throw new ArgumentOutOfRangeException(nameof(configuration), "Connect between one and four floppy drives.");
         _floppies = new LightweightFloppyDrive[_configuration.FloppyDriveCount];
         if (_configuration.FloppyDriveTypes.Count > _floppies.Length ||
@@ -143,7 +153,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             throw new ArgumentException("Alice and Lisa require the complete A1200 configuration.", nameof(configuration));
         if (IsAga && _configuration.CpuModel is M68kCpuModel.M68000 or M68kCpuModel.M68010)
             throw new ArgumentException("A1200 requires 68EC020 or a 68020/030/040/060 upgrade.", nameof(configuration));
-        _a1200Io = IsAga ? new() : null;
+        _a1200Io = IsAga && !Cd32Region.HasValue ? new() : null;
         if (_configuration.IdeMaster is not null && !IsAga)
             throw new ArgumentException("Native Gayle IDE requires an A1200 motherboard.", nameof(configuration));
         _registers = new(IsEcsAgnus ? 0x001F_FFFEu : 0x0007_FFFEu);
@@ -253,10 +263,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     internal LightweightDisplayWindow DmaDisplayWindow => LightweightDisplayWindow.Decode(
         _registers.Read(LightweightRegisters.Diwstrt), _registers.Read(LightweightRegisters.Diwstop),
         _registers.Read(LightweightRegisters.Diwhigh), IsEcsAgnus && DiwHighValid);
-    public double VideoVBlankHz => 7_093_790.0 / Math.Min(MaximumOutputIntervalCycles,
+    public double VideoVBlankHz => (double)MotherboardClockHz / Math.Min(MaximumOutputIntervalCycles,
         (_clock.AlternatingLines ? 455.0 : _clock.ColorClocksPerLine * 2.0) * _clock.LinesThisField);
     /// <summary>Completed field PCM, interleaved left/right; valid until the next ExecuteFrame.
-    /// The sample count follows the PAL clock and can vary between fields.</summary>
+    /// The sample count follows the board clock and can vary between fields.</summary>
     public ReadOnlyMemory<short> AudioSamples => _paula.Audio;
     internal bool AudioProducesPcm => true;
     public ReadOnlyMemory<byte> ChipRam => _chipRam;
@@ -271,10 +281,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         RefreshCiaInterruptCycle();
     }
     public int FloppyDriveCount => _floppies.Length;
-    public bool IsAdfMounted => IsDriveMounted(0);
+    public bool IsAdfMounted => _floppies.Length != 0 && IsDriveMounted(0);
     public bool IsDriveMounted(int drive) => GetDrive(drive).Mounted;
     /// <summary>Read-only host metadata; sample on the hardware owner thread.</summary>
-    public LightweightDriveState DriveState => GetDriveState(0);
+    public LightweightDriveState DriveState => _floppies.Length == 0 ? default : GetDriveState(0);
     public LightweightDriveState GetDriveState(int drive)
     {
         var floppy = GetDrive(drive);
@@ -302,7 +312,22 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _unsupportedActiveFeature ?? _video.UnsupportedActiveFeature;
     internal int LinesThisField => _clock.LinesThisField;
     public bool IsLongField => _clock.IsLongField;
-    internal long NextFrameCycle => Math.Min(_clock.NextFrameCycle, _nextOutputCycle);
+    internal long NextFrameCycle
+    {
+        get
+        {
+            var output = _nextOutputCycle;
+            if (output <= Cycle)
+            {
+                // Bounded output retires on a rasterline boundary. If a
+                // nonstandard field reaches the limit mid-line, let that line
+                // finish before attempting to publish it.
+                output = _clock.SyncStopped ? (Cycle & ~1L) + LightweightClock.CpuCyclesPerColorClock :
+                    _clock.NextLineCycle;
+            }
+            return Math.Min(_clock.NextFrameCycle, output);
+        }
+    }
     internal long NextDeviceCycle => _nextDeviceCycle;
     internal ushort Dmacon => _registers.Dmacon;
     internal ushort Adkcon => _registers.Adkcon;
@@ -387,6 +412,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _clock.Reset();
         _registers.Reset();
         _a1200Io?.Reset();
+        _akiko?.Reset(0, cold: true);
+        _cd32Pads?.Reset(cold: true);
+        _cd32TodLines = 1;
         _rtc?.ResetControlRegisters();
         ResetEcsRegisters();
         _copper.Reset();
@@ -432,15 +460,19 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _unsupportedActiveFeature = null;
         var stackPointer = ReadLongRaw(0);
         var programCounter = ReadLongRaw(4);
-        if (stackPointer == 0 || stackPointer >= _chipRam.Length)
-            stackPointer = (uint)(_chipRam.Length - 4);
-        var programCounterInChipRam = programCounter < _chipRam.Length;
-        var programCounterInRom = _romLoaded && programCounter >= RomBase && programCounter < RomBase + (uint)_rom.Length;
-        if (programCounter == 0 || (!programCounterInChipRam && !programCounterInRom))
-            programCounter = 0x1000;
+        if (_akiko is null || !_romLoaded)
+        {
+            if (stackPointer == 0 || stackPointer >= _chipRam.Length)
+                stackPointer = (uint)(_chipRam.Length - 4);
+            var programCounterInChipRam = programCounter < _chipRam.Length;
+            var programCounterInRom = _romLoaded && programCounter >= RomBase && programCounter < RomBase + (uint)_rom.Length;
+            if (programCounter == 0 || (!programCounterInChipRam && !programCounterInRom))
+                programCounter = 0x1000;
+        }
         _cpu.Reset(programCounter, stackPointer);
         _input = default;
         RefreshCiaInterruptCycle();
+        if (_akiko is not null) RefreshStorageSchedule(Cycle);
     }
 
     public void ExecuteFrame()
@@ -535,14 +567,14 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
         address &= 0x00FF_FFFFu;
         var readable =
-            _overlayEnabled && address + 1 < 0x400 ||
             address + 1 < ChipRamCpuDecodeSize ||
             address >= 0x00C00000 &&
                 address + 1 < 0x00C00000 + _slowRam.Length ||
             _fastRam?.ContainsRange(address, 2) == true ||
             _extensionRomLoaded && address >= ExtensionRomBase &&
                 address + 1 < ExtensionRomBase + _extensionRomImageLength ||
-            address >= RomBase && address + 1 < RomBase + _rom.Length;
+            address >= RomBase && address + 1 < RomBase + _rom.Length ||
+            IsCd32RomAlias(address);
         if (!readable)
         {
             value = 0;
@@ -591,7 +623,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             (input.JoystickPort1 & 0xC0) != 0)
             throw new ArgumentOutOfRangeException(nameof(input), "Unsupported controller flags.");
         if (input.KeyCode != 0) SubmitKey((byte)input.KeyCode);
-        _pots.Advance(Cycle, _controllers.ReadPotgor(_registers.Read(0x034)));
+        _pots.Advance(Cycle, ReadControllerPotPins(_registers.Read(0x034)));
         _input = input;
         _controllers.Submit(input);
     }
@@ -601,7 +633,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public void SetPaddlePosition(int port, byte x, byte y)
     {
         if ((uint)port > 1) throw new ArgumentOutOfRangeException(nameof(port));
-        _pots.SetPosition(port, x, y, Cycle, _controllers.ReadPotgor(_registers.Read(0x034)));
+        _pots.SetPosition(port, x, y, Cycle, ReadControllerPotPins(_registers.Read(0x034)));
     }
 
     /// <summary>Pulse the light-pen beam trigger at the current canonical cycle.</summary>
@@ -682,6 +714,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public void LoadKickstart(ReadOnlySpan<byte> image, uint baseAddress = RomBase)
     {
         ThrowIfDisposed();
+        if (_akiko is not null) throw new InvalidOperationException("Use LoadCd32Rom for this motherboard.");
         if (image.Length is not (0x40000 or 0x80000))
             throw new ArgumentException("The A500 engine accepts 256 KiB or 512 KiB Kickstart images.", nameof(image));
 
@@ -704,6 +737,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public void LoadExtensionRom(ReadOnlySpan<byte> image)
     {
         ThrowIfDisposed();
+        if (_akiko is not null) throw new InvalidOperationException("Use LoadCd32Rom for this motherboard.");
         if (image.Length is not (0x40000 or 0x80000))
             throw new ArgumentException("The extension ROM must be 256 KiB or 512 KiB.", nameof(image));
         image.CopyTo(_extensionRom);
@@ -790,7 +824,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         if (_disposed) return;
         _disposed = true;
-        try { _hdf?.Dispose(); _a1200Io?.Dispose(); }
+        try { _hdf?.Dispose(); _a1200Io?.Dispose(); _akiko?.Dispose(); }
         finally { _cpu.Dispose(); }
     }
 
@@ -834,6 +868,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public uint ReadLong(uint address, ref long cycle, M68kBusAccessKind accessKind)
     {
         _ = accessKind;
+        if ((address & 3) == 0 && IsAkikoAddress(address))
+            return ReadAgaLong(address, ref cycle);
         GrantCpuWord(address, cycle, out var firstWordCycle, out var firstCompletedCycle);
         var high = ReadWordAt(address, firstWordCycle);
         AdvanceHardwareTo(firstCompletedCycle);
@@ -868,6 +904,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public void WriteLong(uint address, uint value, ref long cycle, M68kBusAccessKind accessKind)
     {
         _ = accessKind;
+        if ((address & 3) == 0 && IsAkikoAddress(address))
+        {
+            WriteAgaLong(address, value, ref cycle);
+            return;
+        }
         GrantCpuWord(address, cycle, out var firstWordCycle, out var firstCompletedCycle);
         WriteWordRaw(address, (ushort)(value >> 16), firstWordCycle);
         AdvanceHardwareTo(firstCompletedCycle);
@@ -888,8 +929,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _hdf?.Reset();
         _registers.Reset();
         _a1200Io?.Reset();
+        _akiko?.Reset(cycle, cold: false);
+        _cd32Pads?.Reset(cold: false);
+        _cd32TodLines = 1;
         _rtc?.ResetControlRegisters();
-        RefreshStorageSchedule(cycle);
+        if (_akiko is null) RefreshStorageSchedule(cycle);
         ResetEcsRegisters();
         _copper.Reset();
         _bitplanes.Reset();
@@ -926,6 +970,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         SetKeyboardPins(_keyboard.DataHigh, _keyboard.ClockHigh, cycle);
         _keyboard.HostDataChanged(_ciaA.SerialSpHigh, cycle);
         RephaseBeamDma(cycle);
+        if (_akiko is not null) RefreshStorageSchedule(cycle);
     }
 
     // Return at the data strobe on the owner clock. Agnus arbitration already
@@ -1003,7 +1048,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private bool UsesAgnusBus(uint address)
     {
         address &= 0x00FF_FFFFu;
-        if (_overlayEnabled && address < 0x400)
+        if (_overlayEnabled && address < _overlaySize)
             return false;
         return address < ChipRamCpuDecodeSize ||
             address >= 0x00C00000 && address < 0x00C00000 + _slowRam.Length ||
@@ -1314,13 +1359,14 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         DiwHighValid = false;
         if (!IsEcsAgnus) return;
         if (IsAga) { _registers.Write(LightweightRegisters.Bplcon3, 0x0C00); _registers.Write(LightweightRegisters.Bplcon4, 0x0011); }
-        _registers.Write(LightweightRegisters.Beamcon0, 0x20);
+        var pal = Cd32Region != LightweightCd32Region.Ntsc;
+        _registers.Write(LightweightRegisters.Beamcon0, pal ? (ushort)0x20 : (ushort)0);
         _registers.Write(LightweightRegisters.Htotal, 226);
-        _registers.Write(LightweightRegisters.Vtotal, 312);
+        _registers.Write(LightweightRegisters.Vtotal, pal ? (ushort)312 : (ushort)262);
         _registers.Write(LightweightRegisters.Hbstrt, 0);
         _registers.Write(LightweightRegisters.Hbstop, 49);
-        _registers.Write(LightweightRegisters.Vbstrt, 311);
-        _registers.Write(LightweightRegisters.Vbstop, 26);
+        _registers.Write(LightweightRegisters.Vbstrt, pal ? (ushort)311 : (ushort)261);
+        _registers.Write(LightweightRegisters.Vbstop, pal ? (ushort)26 : (ushort)21);
         _clock.ConfigureEcs(this);
     }
 
@@ -1504,6 +1550,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_clock.Line == 25) _lightPenLatched = false;
         if (_ciaB.TodRunning)
             HandleCiaInterrupt(ciaA: false, _ciaB.PulseTod(cycle));
+        if (_akiko is not null) PulseCd32Tod(cycle);
     }
 
     internal void OnFrameCompleted(long cycle)
@@ -1514,9 +1561,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             _lightPenVhpos = (ushort)(((_clock.LinesThisField & 255) << 8) | 4);
             _lightPenLatched = true;
         }
-        HandleCiaInterrupt(ciaA: true, _ciaA.PulseTod(cycle));
+        if (_akiko is null) HandleCiaInterrupt(ciaA: true, _ciaA.PulseTod(cycle));
         var completedFieldLines = _clock.LinesThisField;
-        _paula.CompleteFrame(cycle);
+        CompleteAudioFrame(cycle);
         if (_unsynchronizedField)
             _video.DiscardUnsynchronizedField(cycle, this);
         else
@@ -1542,7 +1589,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         if (cycle < _nextOutputCycle) return;
         // Bounded host output without inventing TOD, VERTB, LOF or DMA reloads.
-        _paula.CompleteFrame(cycle);
+        CompleteAudioFrame(cycle);
         _completedFrames++;
         _nextOutputCycle = cycle + MaximumOutputIntervalCycles;
     }
@@ -1776,6 +1823,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         lastCycle = Math.Max(lastCycle, _spriteDma.LastOutputCycle);
         lastCycle = Math.Max(lastCycle, _copper.LastOutputCycle);
         lastCycle = Math.Max(lastCycle, _blitter.LastBusOutputCycle);
+        if (_akiko is not null) lastCycle = Math.Max(lastCycle, _akiko.Cd.LastOutputCycle);
         return _clock.Cycle == lastCycle + LightweightBusArbiter.SlotCycles
             ? _lastDmaBusWord : (ushort)0xFFFF;
     }
@@ -1783,8 +1831,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private ushort ReadWordRaw(uint address)
     {
         address &= 0x00FF_FFFFu;
-        if (_overlayEnabled && address + 1 < 0x400)
-            return ReadRomWord(_romImageOffset + (int)address);
+        if (_overlayEnabled && address + 1 < _overlaySize)
+            return ReadOverlayWord(address);
         if (address + 1 < ChipRamCpuDecodeSize)
         {
             var chipAddress = address & _chipRamCpuAddressMask;
@@ -1824,10 +1872,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 0x07C when IsEcsDenise => 0xFFFC,
                 LightweightRegisters.Hhposr when IsEcsAgnus => (ushort)_clock.ColorClock,
                 0x07C => ReadUndrivenCustomBus(),
-                0x00A => _controllers.ReadJoy(port1: false),
+                0x00A => _controllers.ReadJoy(port1: false, padConnected: _cd32Pads?.IsConnected(0) == true),
                 0x00C => _controllers.ReadJoy(port1: true),
-                0x012 or 0x014 => _pots.ReadCounters((offset - 0x012) / 2, Cycle, _controllers.ReadPotgor(_registers.Read(0x034))),
-                0x016 => _pots.ReadPins(Cycle, _controllers.ReadPotgor(_registers.Read(0x034)), _registers.Read(0x034)),
+                0x012 or 0x014 => _pots.ReadCounters((offset - 0x012) / 2, Cycle, ReadControllerPotPins(_registers.Read(0x034))),
+                0x016 => _pots.ReadPins(Cycle, ReadControllerPotPins(_registers.Read(0x034)), _registers.Read(0x034)),
                 _ => _registers.Read(offset)
             };
         }
@@ -1838,6 +1886,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return ReadRomWord((int)(address - RomBase));
         if (_fastRam is { } ram && ram.ContainsRange(address, 2))
             return BinaryPrimitives.ReadUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2));
+        if (IsCd32RomAlias(address)) return ReadCd32RomAlias(address);
+        if (IsAkikoAddress(address)) return (ushort)_akiko!.Read(address, 2, Cycle, strobe: false);
         if (_a1200Io is not null && IsA1200IoAddress(address)) return _a1200Io.ReadWord(address, Cycle, false);
         if (_rtc is not null && LightweightRealTimeClock.ContainsAddress(address))
         {
@@ -1851,6 +1901,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     private ushort ReadWordAt(uint address, long cycle)
     {
+        if (IsAkikoAddress(address)) return (ushort)ReadAkiko(address, 2, cycle);
         if (_hasClockedStorage && address >= 0x200000 && _hdf?.CopperHdf.TryReadCompletionWord(address, out var completion) == true)
         { RefreshStorageSchedule(cycle); return completion; }
         if (_a1200Io is not null && IsA1200IoAddress(address))
@@ -1875,6 +1926,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     private byte ReadByteAt(uint address, long cycle)
     {
+        if (IsAkikoAddress(address)) return (byte)ReadAkiko(address, 1, cycle);
         if (_hasClockedStorage && address >= 0x200000 && _hdf?.CopperHdf.TryReadCompletionByte(address, out var completion) == true)
         { RefreshStorageSchedule(cycle); return completion; }
         if (_rtc is not null && _rtc.TryReadByte(address, out var rtcValue)) return rtcValue;
@@ -1920,6 +1972,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
 
         address &= 0x00FF_FFFFu;
+        if (IsAkikoAddress(address))
+        {
+            WriteAkiko(address, 1, value, cycle);
+            return;
+        }
         if (_rtc is not null && _rtc.TryWriteByte(address, value)) return;
         if (_a1200Io is not null && IsA1200IoAddress(address))
         { _a1200Io.WriteByte(address, value, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 1, true, value, cycle); RefreshStorageSchedule(cycle); } return; }
@@ -1947,7 +2004,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             WriteCiaRegister(ciaA, register, (byte)value, cycle);
             return;
         }
-        if (_overlayEnabled && address + 1 < 0x400)
+        if (_overlayEnabled && address + 1 < _overlaySize)
             return;
         if (address + 1 < ChipRamCpuDecodeSize)
         {
@@ -1975,6 +2032,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         {
             BinaryPrimitives.WriteUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2), value);
             NotifyJitRamWrite(address, 2);
+            return;
+        }
+        if (IsAkikoAddress(address))
+        {
+            WriteAkiko(address, 2, value, cycle);
             return;
         }
         if (_a1200Io is not null && IsA1200IoAddress(address))
@@ -2030,7 +2092,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             if (offset == LightweightRegisters.Clxcon2) value &= 0x00C3;
         }
         if (offset == 0x036) _controllers.WriteJoytest(value);
-        if (offset == 0x034) _pots.WriteControl(value, cycle, _controllers.ReadPotgor(_registers.Read(0x034)));
+        if (offset == 0x034)
+        {
+            _pots.WriteControl(value, cycle, ReadControllerPotPins(_registers.Read(0x034)));
+            _cd32Pads?.WritePotgo(value);
+        }
         if (offset == LightweightRegisters.Vposw)
         {
             _clock.SelectLongField((value & 0x8000) != 0);
@@ -2229,7 +2295,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                     {
                         ushort held = 0;
                         if (_ciaA.InterruptAsserted) held |= 0x0008;
-                        if (_a1200Io?.InterruptAsserted == true || TimedStorageInterrupt) held |= 0x0008;
+                        if (StorageInterruptAsserted) held |= 0x0008;
                         if (_ciaB.InterruptAsserted) held |= 0x2000;
                         _registers.SetHardwareInterruptRequest((ushort)(held & value));
                     }
@@ -2257,7 +2323,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (ciaA && register == 1) pins = _parallelInputPins;
         if (ciaA && register == 0)
             foreach (var drive in _floppies) pins &= drive.ReadInputPins(cycle);
-        if (ciaA && register == 0) pins &= _controllers.FirePins;
+        if (ciaA && register == 0)
+        {
+            pins &= _controllers.ReadFirePins(_cd32Pads?.IsConnected(0) == true);
+            if (_cd32Pads is not null) pins = _cd32Pads.FirePins(pins);
+        }
         var value = cia.ReadRegister(register, pins, cycle, out var interruptCycle);
         HandleCiaInterrupt(ciaA, interruptCycle);
         RefreshCiaInterruptCycle();
@@ -2275,8 +2345,18 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         {
             _keyboard.HostDataChanged(_ciaA.SerialSpHigh, cycle);
         }
-        if (ciaA && register is 0x00 or 0x02)
-            UpdateOverlayFromCiaA();
+        if (ciaA)
+        {
+            if (_cd32Pads is not null)
+            {
+                // The first write to CIA-A releases the CD32 boot overlay.
+                if (_overlayEnabled) SetOverlay(false);
+                if (register is 0x00 or 0x02)
+                    _cd32Pads.WriteCiaPort(cia.ReadPortLatch(0), cia.ReadDataDirection(0));
+            }
+            else if (register is 0x00 or 0x02)
+                UpdateOverlayFromCiaA();
+        }
         if (!ciaA) UpdateFloppyControlPins(cycle);
         RefreshCiaInterruptCycle();
     }
@@ -2348,8 +2428,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _nextCiaInterruptCycle = Math.Min(
             _ciaA.GetNextActiveInterruptCycle(),
             _ciaB.GetNextActiveInterruptCycle());
-        _nextCiaInterruptCycle = Math.Min(_nextCiaInterruptCycle,
-            _ciaA.GetNextTodInterruptCycle(_clock.NextFrameCycle, 0));
+        if (_akiko is null)
+            _nextCiaInterruptCycle = Math.Min(_nextCiaInterruptCycle,
+                _ciaA.GetNextTodInterruptCycle(_clock.NextFrameCycle, 0));
+        else if (_ciaA.TodRunning)
+            _nextCiaInterruptCycle = Math.Min(_nextCiaInterruptCycle, _clock.NextLineCycle);
         var lineAlarm = _ciaB.GetNextTodInterruptCycle(_clock.NextLineCycle, LineCycles);
         // NTSC alternates 227/228 CCK lines and restarts the parity each field.
         // Revisit an enabled future alarm at the next real line boundary rather
@@ -2368,7 +2451,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         var latch = _ciaA.ReadPortLatch(0);
         var direction = _ciaA.ReadDataDirection(0);
         var outputPins = (byte)((latch & direction) | (0xFF & ~direction));
-        var enabled = _romLoaded && (outputPins & 1) != 0;
+        SetOverlay(_romLoaded && (outputPins & 1) != 0);
+    }
+
+    private void SetOverlay(bool enabled)
+    {
         if (_overlayEnabled != enabled) { _overlayEnabled = enabled; InvalidateCpuMemoryMap(); }
     }
 

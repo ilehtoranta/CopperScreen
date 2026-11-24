@@ -4,19 +4,28 @@ internal sealed partial class LightweightPaulaAudio
 {
     internal const int OutputSampleRate = 48_000;
     internal const int PalCpuFrequency = 7_093_790;
+    internal const int NtscCpuFrequency = 7_159_090;
+    private readonly int _clockFrequency;
     // The longest supported field contains fewer than 1,024 stereo samples.
     private short[] _renderingAudio = new short[2048];
     private short[] _completedAudio = new short[2048];
     private int _audioWriteIndex;
     private int _completedAudioCount;
     private long _outputCycle;
-    private long _sampleTicksRemaining = PalCpuFrequency;
+    private long _sampleTicksRemaining;
     private long _leftArea;
     private long _rightArea;
     private int _volumeAttachMask;
     private int _periodAttachMask;
 
     internal ReadOnlyMemory<short> Audio => _completedAudio.AsMemory(0, _completedAudioCount);
+    internal Span<short> CompletedAudioSpan => _completedAudio.AsSpan(0, _completedAudioCount);
+
+    internal LightweightPaulaAudio(int clockFrequency = PalCpuFrequency)
+    {
+        _clockFrequency = clockFrequency;
+        _sampleTicksRemaining = clockFrequency;
+    }
 
     private void ResetOutput()
     {
@@ -24,7 +33,7 @@ internal sealed partial class LightweightPaulaAudio
         Array.Clear(_completedAudio);
         _audioWriteIndex = _completedAudioCount = 0;
         _outputCycle = 0;
-        _sampleTicksRemaining = PalCpuFrequency;
+        _sampleTicksRemaining = _clockFrequency;
         _leftArea = _rightArea = 0;
     }
 
@@ -60,19 +69,28 @@ internal sealed partial class LightweightPaulaAudio
         // Complete the sample that may contain earlier DAC levels.
         _leftArea += left * _sampleTicksRemaining;
         _rightArea += right * _sampleTicksRemaining;
-        _renderingAudio[_audioWriteIndex++] = (short)(_leftArea * 2 / PalCpuFrequency);
-        _renderingAudio[_audioWriteIndex++] = (short)(_rightArea * 2 / PalCpuFrequency);
+        var clockFrequency = (long)_clockFrequency;
+        if (clockFrequency == PalCpuFrequency)
+        {
+            _renderingAudio[_audioWriteIndex++] = (short)(_leftArea * 2 / PalCpuFrequency);
+            _renderingAudio[_audioWriteIndex++] = (short)(_rightArea * 2 / PalCpuFrequency);
+        }
+        else
+        {
+            _renderingAudio[_audioWriteIndex++] = (short)(_leftArea * 2 / NtscCpuFrequency);
+            _renderingAudio[_audioWriteIndex++] = (short)(_rightArea * 2 / NtscCpuFrequency);
+        }
         ticks -= _sampleTicksRemaining;
 
         // Whole samples at this level need neither integration nor division.
         // Two full-volume signed 8-bit channels fit exactly in int16.
-        while (ticks >= PalCpuFrequency)
+        while (ticks >= clockFrequency)
         {
             _renderingAudio[_audioWriteIndex++] = (short)(left * 2);
             _renderingAudio[_audioWriteIndex++] = (short)(right * 2);
-            ticks -= PalCpuFrequency;
+            ticks -= clockFrequency;
         }
-        _sampleTicksRemaining = PalCpuFrequency - ticks;
+        _sampleTicksRemaining = clockFrequency - ticks;
         _leftArea = left * ticks;
         _rightArea = right * ticks;
     }

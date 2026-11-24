@@ -6,12 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.5.7</Copper68kBoundaryVersion>
+    <DefineConstants Condition="'$(LightweightReferencePath)' == ''">$(DefineConstants);LIGHTWEIGHT_CD32</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="'$(LightweightReferencePath)' == ''">
     <ProjectReference Include="..\CopperMod.Amiga.Lightweight\CopperMod.Amiga.Lightweight.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(LightweightReferencePath)' != ''">
     <Reference Include="CopperMod.Amiga.Lightweight" HintPath="$(LightweightReferencePath)" Private="true" />
+    <Reference Include="CopperDisk" HintPath="$([System.IO.Path]::GetDirectoryName('$(LightweightReferencePath)'))/CopperDisk.dll" Private="true" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Copper68k" Version="[$(Copper68kBoundaryVersion)]" />

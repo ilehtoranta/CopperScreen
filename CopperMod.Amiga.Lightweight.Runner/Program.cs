@@ -10,6 +10,9 @@ if (args.Contains("--help"))
     Console.WriteLine("""
         Lightweight runner: --rom <ROM> [--frames <count>] [--disk <ADF/IPF/SCP>]
           ROM may be a standard reset image or a 1 MiB CopperStart pair (E00000 bank, then F80000 bank).
+        --cd32 [--video-standard <pal|ntsc>] --rom <40.60 or combined CD32 ROM>
+          Experimental stock CD32. For split ROMs add --extended-rom <path>. Use --nvram <path> for persistent saves.
+          --cd <image> mounts a Mode 1 ISO/BIN/IMG or single-file BIN/CUE with CD audio. --cd-turbo accelerates data reads.
         --hdf-ffs <existing-image> <DEVICE:HEADS:BLOCKS-PER-TRACK:FIRST-CYLINDER:LAST-CYLINDER>
           One explicit FFS/DOS1 partition, 512-byte blocks, inclusive cylinders; TD64 supports offsets above 4 GiB.
           Read-only by default. Use --hdf-ffs-writable to allow direct backing-file writes.
@@ -32,6 +35,13 @@ if (args.Contains("--help"))
 var frames = 10;
 var warmup = 0;
 var romPath = (string?)null;
+var cd32 = false;
+bool? cd32Ntsc = null;
+LightweightA500Configuration? cd32Configuration = null;
+string? extendedRomPath = null;
+string? nvramPath = null;
+string? cdPath = null;
+var cdTurbo = false;
 var adfPath = (string?)null;
 var extraAdfPaths = new string?[3];
 var driveCount = 1;
@@ -78,6 +88,7 @@ var probeContinueUnsupported = false;
 var bootProbeInterval = 60;
 var bootProbeExtended = false;
 var bootProbeStorage = false;
+var syntheticRom = false;
 try
 {
 for (var i = 0; i < args.Length; i++)
@@ -85,6 +96,26 @@ for (var i = 0; i < args.Length; i++)
     if (args[i] == "--frames" && i + 1 < args.Length && int.TryParse(args[++i], out var parsed)) frames = parsed;
     else if (args[i] == "--warmup" && i + 1 < args.Length && int.TryParse(args[++i], out var warmupFrames)) warmup = warmupFrames;
     else if (args[i] == "--rom" && i + 1 < args.Length) romPath = args[++i];
+    else if (args[i] == "--cd32") cd32 = true;
+    else if (args[i] == "--cd-turbo") cdTurbo = true;
+    else if (args[i] == "--video-standard")
+    {
+        cd32Ntsc = ++i < args.Length ? args[i].ToLowerInvariant() switch
+        {
+            "pal" => false,
+            "ntsc" => true,
+            _ => throw new ArgumentException("--video-standard requires pal or ntsc.")
+        } : throw new ArgumentException("--video-standard requires pal or ntsc.");
+    }
+    else if (args[i] is "--extended-rom" or "--nvram" or "--cd")
+    {
+        var option = args[i];
+        if (++i >= args.Length || args[i].StartsWith("--", StringComparison.Ordinal))
+            throw new ArgumentException(option + " requires a file path.");
+        if (option == "--extended-rom") extendedRomPath = args[i];
+        else if (option == "--nvram") nvramPath = Path.GetFullPath(args[i]);
+        else cdPath = args[i];
+    }
     else if (args[i] is "--adf" or "--ipf" or "--disk" && i + 1 < args.Length) adfPath = args[++i];
     else if (args[i] is "--adf1" or "--adf2" or "--adf3" or "--ipf1" or "--ipf2" or "--ipf3" or "--disk1" or "--disk2" or "--disk3" && i + 1 < args.Length)
     {
@@ -244,6 +275,39 @@ for (var i = 0; i < args.Length; i++)
     else if (args[i] == "--probe-continue-unsupported") probeContinueUnsupported = true;
 }
 
+syntheticRom = syntheticRomLoop || syntheticRomStop || syntheticCiaTimer || syntheticCopper || syntheticBitplanes ||
+    syntheticDisplayDma || syntheticBlitter || syntheticBlitterFill || syntheticBlitterLine || syntheticSprites ||
+    syntheticSpriteDma || syntheticPaulaManual || syntheticPaulaDma;
+if (cd32)
+{
+#if LIGHTWEIGHT_CD32
+    if (args.Any(a => a is "--cpu" or "--jit" or "--cpu-clock-multiplier" or "--agnus" or "--denise" or
+        "--chip-ram-kib" or "--slow-ram-kib" or "--fast-ram-kib" or "--rtc" or "--drives" or "--drive-type") ||
+        adfPath is not null || extraAdfPaths.Any(p => p is not null) || hardfiles.Count != 0 || hostDirectories.Count != 0 ||
+        diskSerial || ciaTod)
+        throw new ArgumentException("The stock CD32 owns its CPU, memory and drives. Remove incompatible hardware and floppy options.");
+    if (romPath is null && !syntheticRom)
+        throw new ArgumentException("--cd32 requires a verified --rom or a synthetic workload.");
+    if (syntheticRom && (romPath is not null || extendedRomPath is not null))
+        throw new ArgumentException("Choose either native CD32 ROMs or a synthetic workload.");
+    if (nvramPath is not null && (PathsEqual(nvramPath, romPath) ||
+        PathsEqual(nvramPath, extendedRomPath) || PathsEqual(nvramPath, cdPath) || PathsEqual(nvramPath, inputScriptPath)))
+        throw new ArgumentException("--nvram must specify a separate file.");
+    var stock = LightweightA500Configuration.CreateCd32(cd32Ntsc == true ? LightweightCd32Region.Ntsc : LightweightCd32Region.Pal);
+    cd32Configuration = stock;
+    cpuModel = stock.CpuModel;
+    agnusModel = stock.AgnusModel;
+    deniseModel = stock.DeniseModel;
+    chipRamKiB = stock.ChipRamBytes / 1024;
+    slowRamKiB = 0;
+    driveCount = 0;
+#else
+    throw new ArgumentException("CD32 requires the current engine source build.");
+#endif
+}
+else if (cd32Ntsc.HasValue || extendedRomPath is not null || nvramPath is not null || cdPath is not null || cdTurbo)
+    throw new ArgumentException("--video-standard, --extended-rom, --nvram, --cd and --cd-turbo require --cd32.");
+
 if (args.Any(a => a is "--hdf-ffs" or "--hdf-ffs-writable") &&
     (hardfiles.Count != 1 || romPath is null || args.Any(a => a.StartsWith("--synthetic-", StringComparison.Ordinal))))
     throw new ArgumentException("Explicit FFS boot requires a native --rom and exactly one hard disk on unit 0.");
@@ -307,12 +371,18 @@ catch (Exception ex) when (ex is ArgumentException or IOException or Unauthorize
 }
 
 using var machine = new LightweightA500Machine(
-    configuration: (acceleratedCpu ?? new LightweightA500Configuration()) with
+    configuration: cd32Configuration ??
+        (acceleratedCpu ?? new LightweightA500Configuration()) with
         { FramebufferWidth = deniseModel != LightweightDeniseModel.Mos8362 ? 1816 : romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, FloppyDriveTypes = Enumerable.Range(0, driveCount).Select(unit => driveTypes.GetValueOrDefault(unit)).ToArray(), Hardfiles = hardfiles, HostDirectories = hostDirectories, CpuModel = cpuModel, CpuExecutionMode = cpuExecutionMode, FastRamBytes = fastRamKiB * 1024,
             AgnusModel = agnusModel, DeniseModel = deniseModel, ChipRamBytes = chipRamKiB * 1024, SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024, RtcEnabled = rtcEnabled },
     enableConservativeCpuLoopBatch: !scalarCpu);
 if (cpuClockMultiplier != 1)
     Console.WriteLine($"CPU_CLOCK multiplier={cpuClockMultiplier} memory=zero-wait-fast-ram-and-rom motherboard=pal");
+#if LIGHTWEIGHT_CD32
+if (cd32)
+    Console.WriteLine($"machine=cd32 region={machine.Cd32Region} clockHz={machine.MotherboardClockHz} floppyDrives={machine.FloppyDriveCount}");
+else
+#endif
 if (agnusModel != LightweightAgnusModel.Mos8371 || deniseModel != LightweightDeniseModel.Mos8362 || chipRamKiB != 512 || slowRamKiB == 0)
     Console.WriteLine($"machine agnus={agnusModel} chipRamKiB={chipRamKiB} slowRamKiB={slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)} denise={deniseModel} video=pal");
 if (driveTypes.Count != 0) Console.WriteLine("floppyDriveTypes=" + string.Join(",", Enumerable.Range(0, driveCount).Select(unit => $"DF{unit}:{(driveTypes.GetValueOrDefault(unit) == LightweightFloppyDriveType.HighDensity ? "HD" : "DD")}")));
@@ -337,8 +407,40 @@ var supportsLineMode = machine.GetType().GetProperty(
 var supportsSpriteDma = machine.GetType().GetProperty(
     "SpriteDmaLastOutputCycle",
     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic) is not null;
-if (syntheticRomLoop || syntheticRomStop || syntheticCiaTimer || syntheticCopper || syntheticBitplanes || syntheticDisplayDma || syntheticBlitter || syntheticBlitterFill || syntheticBlitterLine || syntheticSprites || syntheticSpriteDma || syntheticPaulaManual)
-    machine.LoadKickstart(CreateSyntheticRom(syntheticRomStop || syntheticCiaTimer || syntheticCopper || syntheticBitplanes || syntheticDisplayDma || syntheticBlitter || syntheticBlitterFill || syntheticBlitterLine || syntheticSprites || syntheticSpriteDma || syntheticPaulaManual));
+#if LIGHTWEIGHT_CD32
+if (cd32)
+{
+    try
+    {
+        if (syntheticRom)
+        {
+            var bank = new byte[512 * 1024];
+            CreateSyntheticRom(stopped: !syntheticRomLoop).CopyTo(bank, 256 * 1024);
+            bank.AsSpan(256 * 1024, 8).CopyTo(bank);
+            machine.LoadCd32RomBanks(bank, new byte[512 * 1024]);
+        }
+        else if (romPath is not null)
+        {
+            var image = ReadImage(romPath, ".rom", ".bin", ".kick");
+            var extension = extendedRomPath is null ? [] : ReadImage(extendedRomPath, ".rom", ".bin", ".kick");
+            machine.LoadCd32Rom(image, extension);
+        }
+        if (nvramPath is not null && File.Exists(nvramPath))
+            machine.LoadCd32Nvram(File.ReadAllBytes(nvramPath));
+        if (cdPath is not null) machine.MountCd32Image(cdPath);
+        machine.SetCd32TurboReads(cdTurbo);
+    }
+    catch (Exception ex) when (ex is ArgumentException or IOException or InvalidDataException or UnauthorizedAccessException)
+    {
+        Console.Error.WriteLine("CD32 configuration error: " + ex.Message);
+        Environment.ExitCode = 2;
+        return;
+    }
+}
+else
+#endif
+if (syntheticRom)
+    machine.LoadKickstart(CreateSyntheticRom(stopped: !syntheticRomLoop));
 else if (romPath is not null)
 {
     var image = ReadImage(romPath, ".rom", ".bin", ".kick");
@@ -407,7 +509,7 @@ var todStartFrame = machine.CompletedFrames;
 var bootProbe = bootProbeDirectory is null ? null : new NativeBootProbe(
     bootProbeDirectory, probeContinueUnsupported, bootProbeInterval, bootProbeExtended, bootProbeStorage ? hardfiles : null);
 var inputScript = inputScriptPath is null ? null : new NativeInputScript(inputScriptPath,
-    path => ReadImage(path, ".adf", ".adz", ".dms", ".ipf", ".scp"), driveCount);
+    path => ReadImage(path, ".adf", ".adz", ".dms", ".ipf", ".scp"), driveCount, cd32);
 if (bootProbe is null && inputScript?.ChangesMediaBetween(warmup, checked(warmup + frames)) == true)
     throw new ArgumentException("Scripted media changes must precede measurement or use --boot-probe.");
 for (var frame = 0; frame < warmup; frame++)
@@ -442,7 +544,8 @@ for (var frame = 0; frame < frames; frame++)
     if (inputReplay) inputChecksum = ConsumeInputReplayFrame(machine, warmup + frame, inputChecksum, cpuClockMultiplier);
 }
 stopwatch.Stop();
-if (machine.IsAga) Console.WriteLine("CPU_PROFILE experimental PAL A1200 68EC020: 2 native clocks per motherboard clock; 32-bit Chip/ROM, 16-bit custom, byte CIA/Gayle; physical timing not certified.");
+if (cd32) Console.WriteLine("CPU_PROFILE experimental CD32 68EC020: 2 native clocks per motherboard clock; 32-bit Chip RAM, 16-bit ROM.");
+else if (machine.IsAga) Console.WriteLine("CPU_PROFILE experimental PAL A1200 68EC020: 2 native clocks per motherboard clock; 32-bit Chip/ROM, 16-bit custom, byte CIA/Gayle; physical timing not certified.");
 else if (cpuModel != M68kCpuModel.M68000) Console.WriteLine($"CPU_PROFILE experimental {cpuModel}: {(cpuModel == M68kCpuModel.M68010 ? 1 : cpuModel == M68kCpuModel.M68060 ? 8 : cpuModel == M68kCpuModel.M68040 ? 4 : 2)} native clocks per motherboard clock, 16-bit OCS bus; physical CPU timing is not hardware-certified.");
 if (machine.JitStatistics is { } jit) Console.WriteLine($"JIT compiledTraces={jit.CompiledTraces} compiledInstructions={jit.CompiledInstructions} fallbackInstructions={jit.FallbackInstructions} invalidations={jit.Invalidations}");
 if (bootProbe is not null) Console.WriteLine("BOOT_PROBE diagnostic run: FPS/allocation totals are not acceptance measurements; native gameplay is not verified.");
@@ -515,8 +618,8 @@ if (inputReplay)
 }
 if (wideOutput) workload += "-wide";
 if (hires) workload += "-hires";
-var timingPolicy = machine.IsAga ? cpuModel == M68kCpuModel.M68EC020 ? "a1200-initial-v1" : "a1200-accelerator-v1" : "ocs-accelerator-v1";
-Console.WriteLine($"engine=lightweight-a500 workload={workload}{(cpuModel == M68kCpuModel.M68000 ? string.Empty : $" cpuModel={cpuModel} timingPolicy={timingPolicy}")} executionMode={cpuExecutionMode} cpuMode={(scalarCpu ? "scalar" : "conservative-batch")} warmup={warmup} frames={frames} completed={machine.CompletedFrames} fps={frames / stopwatch.Elapsed.TotalSeconds:F2} cycle={machine.Cycle} cpu=0x{cpuChecksum:X16} hardware=0x{hardwareChecksum:X16} output=0x{checksum:X16} pixels={machine.Framebuffer.Length} audioSamples={machine.AudioSamples.Length} pcm={(producesPcm ? "real" : "placeholder")} allocated={allocatedBytes} adf={machine.IsAdfMounted} unsupported={unsupported}");
+var timingPolicy = cd32 ? "cd32-initial-v1" : machine.IsAga ? cpuModel == M68kCpuModel.M68EC020 ? "a1200-initial-v1" : "a1200-accelerator-v1" : "ocs-accelerator-v1";
+Console.WriteLine($"engine={(cd32 ? "lightweight-cd32" : "lightweight-a500")} workload={workload}{(cpuModel == M68kCpuModel.M68000 ? string.Empty : $" cpuModel={cpuModel} timingPolicy={timingPolicy}")} executionMode={cpuExecutionMode} cpuMode={(scalarCpu ? "scalar" : "conservative-batch")} warmup={warmup} frames={frames} completed={machine.CompletedFrames} fps={frames / stopwatch.Elapsed.TotalSeconds:F2} cycle={machine.Cycle} cpu=0x{cpuChecksum:X16} hardware=0x{hardwareChecksum:X16} output=0x{checksum:X16} pixels={machine.Framebuffer.Length} audioSamples={machine.AudioSamples.Length} pcm={(producesPcm ? "real" : "placeholder")} allocated={allocatedBytes} adf={machine.IsAdfMounted} unsupported={unsupported}");
 if (unsupported != "none")
     Environment.ExitCode = 2;
 // Host exports are after all timing/allocation samples and never replace the input implicitly.
@@ -525,6 +628,42 @@ foreach (var export in exportDisks)
     File.WriteAllBytes(export.Path, machine.ExportAdf(export.Drive));
     Console.WriteLine($"Exported DF{export.Drive}: {Path.GetFullPath(export.Path)}");
 }
+#if LIGHTWEIGHT_CD32
+if (nvramPath is not null && machine.IsCd32NvramDirty)
+{
+    var temporary = Path.Combine(Path.GetDirectoryName(nvramPath)!, Path.GetRandomFileName());
+    var ownTemporary = false;
+    try
+    {
+        using (var target = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write))
+        {
+            ownTemporary = true;
+            target.Write(machine.Cd32Nvram.Span);
+            target.Flush(flushToDisk: true);
+        }
+        File.Move(temporary, nvramPath, overwrite: true);
+        machine.MarkCd32NvramSaved();
+    }
+    catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+    {
+        Console.Error.WriteLine("CD32 NVRAM save failed: " + ex.Message);
+        Environment.ExitCode = 2;
+    }
+    finally
+    {
+        if (ownTemporary) File.Delete(temporary);
+    }
+}
+
+static bool PathsEqual(string fullPath, string? other)
+{
+    if (other is null) return false;
+    var selector = other.IndexOf("#/", StringComparison.Ordinal);
+    if (selector >= 0) other = other[..selector];
+    return string.Equals(fullPath, Path.GetFullPath(other),
+        OperatingSystem.IsWindows() || OperatingSystem.IsMacOS() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+}
+#endif
 
 // Separate methods keep the same runner usable with frozen pre-DMA engines.
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]

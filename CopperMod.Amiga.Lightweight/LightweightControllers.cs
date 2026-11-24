@@ -17,9 +17,9 @@ internal struct LightweightControllers
         _buttons = input.MouseButtons;
     }
 
-    internal ushort ReadJoy(bool port1) => port1
+    internal ushort ReadJoy(bool port1, bool padConnected = false) => port1
         ? (ushort)(_joy1Upper | Directions(_joy1))
-        : (_joy0 & 0x80) != 0
+        : (_joy0 & 0x80) != 0 || padConnected
             ? (ushort)((((_mouseY << 8) | _mouseX) & 0xFCFC) | Directions(_joy0))
             : (ushort)((_mouseY << 8) | _mouseX);
 
@@ -39,21 +39,18 @@ internal struct LightweightControllers
         _joy1Upper = (ushort)(value & 0xFCFC);
     }
 
-    internal byte FirePins
+    internal byte ReadFirePins(bool padConnected = false)
     {
-        get
-        {
-            var fire0 = (_joy0 & 0x80) != 0 ? (_joy0 & 0x10) != 0 : (_buttons & 1) != 0;
-            return (byte)(0xFF & ~(fire0 ? 0x40 : 0) & ~((_joy1 & 0x10) != 0 ? 0x80 : 0));
-        }
+        var fire0 = (_joy0 & 0x80) != 0 || padConnected ? (_joy0 & 0x10) != 0 : (_buttons & 1) != 0;
+        return (byte)(0xFF & ~(fire0 ? 0x40 : 0) & ~((_joy1 & 0x10) != 0 ? 0x80 : 0));
     }
 
-    internal ushort ReadPotgor(ushort potgo)
+    internal ushort ReadPotgor(ushort potgo, bool padConnected = false)
     {
         var pins = 0x5500;
-        if (((_buttons & 2) != 0 && (_joy0 & 0x80) == 0) ||
-            (_joy0 & 0xA0) == 0xA0) pins &= ~0x0400;
-        if ((_buttons & 4) != 0 && (_joy0 & 0x80) == 0) pins &= ~0x0100;
+        var port0Joystick = (_joy0 & 0x80) != 0 || padConnected;
+        if (port0Joystick ? (_joy0 & 0x20) != 0 : (_buttons & 2) != 0) pins &= ~0x0400;
+        if ((_buttons & 4) != 0 && !port0Joystick) pins &= ~0x0100;
         if ((_joy1 & 0x20) != 0) pins &= ~0x4000;
         var lowOutputs = (potgo >> 1) & ~potgo & 0x5500;
         return (ushort)(pins & ~lowOutputs);

@@ -14,16 +14,18 @@ public sealed partial class LightweightA500Machine
         => LightweightA1200Io.ContainsAddress(address) &&
             (address >= LightweightA1200Io.PcmciaMemoryEndExclusive || _fastRam?.ContainsRange(address, 1) != true);
 
-    // A1200 RAM and ROM use a native long bus. Custom/CIA/Gayle remain narrower.
+    // AGA Chip RAM, A1200 ROM and Akiko data accesses use a native long bus.
     // This bounded bridge retains the canonical motherboard clock and arbitration.
     internal bool HasAgaLongBus(uint address)
-        => IsAga && (address < 0x1FFFFD || address is >= RomBase and <= 0xFFFFFC);
+        => IsAga && (address < 0x1FFFFD ? !_overlayEnabled || _akiko is null :
+            address is >= RomBase and <= 0xFFFFFC ? _akiko is null : IsAkikoAddress(address));
 
     internal uint ReadAgaLong(uint address, ref long cycle)
     {
         GrantCpuWord(address, cycle, out var grant, out var complete);
         AdvanceHardwareTo(grant);
-        var value = ((uint)ReadWordRaw(address) << 16) | ReadWordRaw(address + 2);
+        var value = IsAkikoAddress(address) ? ReadAkiko(address, 4, grant) :
+            ((uint)ReadWordRaw(address) << 16) | ReadWordRaw(address + 2);
         AdvanceHardwareTo(complete);
         cycle = complete;
         return value;
@@ -33,8 +35,12 @@ public sealed partial class LightweightA500Machine
     {
         GrantCpuWord(address, cycle, out var grant, out var complete);
         AdvanceHardwareTo(grant);
-        WriteWordRaw(address, (ushort)(value >> 16), grant);
-        WriteWordRaw(address + 2, (ushort)value, grant);
+        if (IsAkikoAddress(address)) WriteAkiko(address, 4, value, grant);
+        else
+        {
+            WriteWordRaw(address, (ushort)(value >> 16), grant);
+            WriteWordRaw(address + 2, (ushort)value, grant);
+        }
         AdvanceHardwareTo(complete);
         cycle = complete;
     }

@@ -3,9 +3,27 @@ using Copper68k;
 
 namespace CopperMod.Amiga.Lightweight;
 
-/// <summary>Configuration for a PAL OCS/ECS board or experimental Alice/Lisa A1200.</summary>
+public enum LightweightCd32Region { Pal, Ntsc }
+
+/// <summary>Configuration for a Lightweight motherboard.</summary>
 public sealed record LightweightA500Configuration
 {
+    /// <summary>Fitted stock CD32 board and oscillator. Null selects the existing floppy motherboard.</summary>
+    public LightweightCd32Region? Cd32Region { get; init; }
+
+    public static LightweightA500Configuration CreateCd32(LightweightCd32Region region = LightweightCd32Region.Pal) => new()
+    {
+        Cd32Region = region,
+        AgnusModel = LightweightAgnusModel.Mos8374Alice,
+        DeniseModel = LightweightDeniseModel.Lisa4203,
+        CpuModel = M68kCpuModel.M68EC020,
+        ChipRamBytes = 2 * 1024 * 1024,
+        SlowRamBytes = 0,
+        FloppyDriveCount = 0,
+        FramebufferWidth = 1816,
+        FramebufferHeight = region == LightweightCd32Region.Ntsc ? 263 : 313
+    };
+
     /// <summary>68000/68010, or an experimental 68EC020/68020/68030/68040 accelerator.
     /// 020/030 use two native clocks per motherboard clock; 040 uses four with
     /// approximate fixed instruction timing. This does not model a physical card.</summary>
@@ -23,7 +41,7 @@ public sealed record LightweightA500Configuration
     /// Powers of two greater than one select experimental zero-wait Fast RAM and ROM.
     /// </summary>
     public int CpuClockMultiplier { get; init; } = 1;
-    /// <summary>Connected drives, DF0 through DF3 (1–4). Media starts write protected.</summary>
+    /// <summary>Connected drives, DF0 through DF3 (1–4). Stock CD32 has zero drives.</summary>
     public int FloppyDriveCount { get; init; } = 1;
     /// <summary>Fitted drive types in DF0–DF3 order. Unspecified connected drives are DD.</summary>
     public IReadOnlyList<LightweightFloppyDriveType> FloppyDriveTypes { get; init; } = [];

@@ -11,6 +11,7 @@ internal sealed partial class LightweightVideo
     private ushort _ecsBplcon2, _ecsBplcon3, _ecsDiwHigh;
     private bool _ecsDiwHighValid;
     private int _ecsLineClocks = 227, _ecsHeight = 313;
+    private readonly int _initialEcsLineClocks, _initialEcsHeight;
     private bool _externalBlank;
 
     internal void SetExternalBlank(bool blank) => _externalBlank = blank;
@@ -20,8 +21,8 @@ internal sealed partial class LightweightVideo
         Array.Clear(_ecsColors);
         _ecsBplcon2 = _ecsBplcon3 = _ecsDiwHigh = 0;
         _ecsDiwHighValid = _externalBlank = false;
-        _ecsLineClocks = 227;
-        _ecsHeight = 313;
+        _ecsLineClocks = _initialEcsLineClocks;
+        _ecsHeight = _initialEcsHeight;
         FramebufferWidth = _ecsLineClocks * 2 * _outputScale;
         FramebufferHeight = _ecsHeight;
     }

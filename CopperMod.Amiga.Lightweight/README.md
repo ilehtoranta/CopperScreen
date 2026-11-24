@@ -21,6 +21,10 @@ share a bounded synthetic drive model. They are read-only opt-in devices; the
 unconfigured empty IDE bus and synchronous CopperHDF remain the defaults.
 ROMs and game media are not distributed with this package.
 
+The [experimental CD32 runner](../docs/engine/CD32.md) fits a stock PAL or NTSC
+console with Akiko, CD32 pads, EEPROM and selected disc image formats. Native
+parity qualification is open.
+
 CopperScreen also accepts a separately supplied, hash-qualified
 [standalone CopperStart ROM](../docs/COPPERSTART_APP.md) on the bounded PAL OCS
 A500 configuration. It uses this engine's existing ROM/reset/floppy interfaces;

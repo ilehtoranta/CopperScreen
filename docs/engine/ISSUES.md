@@ -4,6 +4,17 @@ Updated 2026-09-19 for accepted `67c13f6`, the current OCS gap audit and the
 ERSY optimization follow-up, accepted on 2026-09-19 with a scoped hires
 performance exception recorded in [PERFORMANCE.md](PERFORMANCE.md).
 Storage acceptance remains incomplete; see [STORAGE.md](STORAGE.md).
+The [experimental CD32 profile](CD32.md) has synthetic board, media and input
+coverage. The CD32 qualification matrix tracks the open WinUAE parity work.
+The 2026-11-24 native replay uses the verified Amiga Forever 40.60 ROM pair
+and [Retroguru's Sqrxz disc](https://www.sqrxz.de/sqrxz/), ISO SHA-256
+`F3ECFD7F9D8840EE80F59E8EEE3DEE757E3F6E8498B6CD2C9480A3AFE030C988`.
+The PAL firmware draws its startup animation and delivers disc sectors
+through LBA 41 before returning to the ROM startup sequence. The title
+screen remains unverified. An NTSC replay reproduced a host spin when the
+bounded output deadline expired mid-rasterline. The clock now waits for the
+line boundary that retires that output. The NTSC rerun completed 1,260 fields
+and observed the same disc-read limit and guest restart.
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.

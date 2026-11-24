@@ -153,7 +153,7 @@ internal sealed class LightweightClock
         System.Diagnostics.Debug.Assert(_cpuPhase == 0);
         if (machine.HasClockedStorage)
         {
-            while (machine.IsCpuOutputOwned(Cycle))
+            while (machine.IsCpuOutputOwned(Cycle) || machine.AkikoOwnsOutput(Cycle))
             {
                 var next = Cycle + CpuCyclesPerColorClock;
                 machine.UpdateCpuRequestCandidate(next);

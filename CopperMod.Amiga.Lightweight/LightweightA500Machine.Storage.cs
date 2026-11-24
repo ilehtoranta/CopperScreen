@@ -8,9 +8,11 @@ public sealed partial class LightweightA500Machine
     internal long NextStorageCycle => _nextStorageCycle;
     internal IReadOnlyDictionary<int, LightweightDriveTimingProfile> StorageTimings => _configuration.HardfileTimings;
     internal ILightweightStorageObserver? StorageObserver => _configuration.StorageObserver;
-    private bool TimedStorageInterrupt => _hdf?.CopperHdf.TimedInterrupt == true;
+    private bool StorageInterruptAsserted =>
+        _a1200Io?.InterruptAsserted == true || _hdf?.CopperHdf.TimedInterrupt == true || _akiko?.Cd.InterruptAsserted == true;
     internal void TickStorage(long cycle)
     {
+        _akiko?.Step(cycle, this);
         _a1200Io?.Step(cycle);
         _hdf?.CopperHdf.StepTimed(cycle);
         RefreshStorageSchedule(cycle);
@@ -18,7 +20,8 @@ public sealed partial class LightweightA500Machine
     internal void RefreshStorageSchedule(long cycle)
     {
         _nextStorageCycle = Math.Min(_a1200Io?.NextCycle ?? long.MaxValue, _hdf?.CopperHdf.NextTimedCycle ?? long.MaxValue);
-        if (_a1200Io?.InterruptAsserted == true || TimedStorageInterrupt)
+        if (_akiko is not null) _nextStorageCycle = Math.Min(_nextStorageCycle, _akiko.NextCycle);
+        if (StorageInterruptAsserted)
             LatchHardwareInterrupt(0x0008, cycle, cpuVisibilityDelay: 0);
         RefreshNextDeviceCycle();
     }

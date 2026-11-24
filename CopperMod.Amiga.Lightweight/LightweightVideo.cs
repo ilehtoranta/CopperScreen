@@ -75,17 +75,21 @@ internal sealed partial class LightweightVideo
         _ecsAgnus = configuration.AgnusModel != LightweightAgnusModel.Mos8371;
         _ecsDenise = configuration.DeniseModel != LightweightDeniseModel.Mos8362;
         _ecsDisplay = _ecsAgnus || _ecsDenise;
+        var ntsc = configuration.Cd32Region == LightweightCd32Region.Ntsc;
+        _initialEcsLineClocks = ntsc ? 228 : 227;
+        _initialEcsHeight = ntsc ? 263 : PalRasterHeight;
         if (configuration.FramebufferWidth != PalRasterWidth && configuration.FramebufferWidth != 2 * PalRasterWidth &&
             !(_ecsDisplay && configuration.FramebufferWidth == 4 * PalRasterWidth) ||
-            configuration.FramebufferHeight != PalRasterHeight)
+            configuration.FramebufferHeight != _initialEcsHeight)
         {
             throw new ArgumentException(
-                $"Output requires an uncropped 454/908-pixel raster (1816 also available with ECS) of initial height {PalRasterHeight}.",
+                $"Output requires a 454/908-pixel PAL-width selection (1816 also available with ECS) and initial height {_initialEcsHeight}.",
                 nameof(configuration));
         }
         _outputScale = configuration.FramebufferWidth / PalRasterWidth;
-        _bufferA = new int[configuration.FramebufferWidth * PalRasterHeight];
-        _bufferB = new int[configuration.FramebufferWidth * PalRasterHeight];
+        var initialPixels = _initialEcsLineClocks * 2 * _outputScale * _initialEcsHeight;
+        _bufferA = new int[initialPixels];
+        _bufferB = new int[initialPixels];
         _completed = _bufferA;
         _rendering = _bufferB;
         Reset();

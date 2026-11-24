@@ -31,13 +31,17 @@ internal sealed class NativeBootProbe
     {
         if (!_wroteCpuProfile && machine.CpuModel != Copper68k.M68kCpuModel.M68000)
         {
+            var timingPolicy = machine.IsAga ? "a1200-initial-v1" : "ocs-accelerator-v1";
+#if LIGHTWEIGHT_CD32
+            if (machine.Cd32Region.HasValue) timingPolicy = "cd32-initial-v1";
+#endif
             File.WriteAllText(Path.Combine(_directory, "cpu-profile.json"), JsonSerializer.Serialize(new
             {
                 schemaVersion = 1, cpuModel = machine.CpuModel.ToString(), experimental = true,
                 nativeClocksPerMotherboardClock = machine.CpuModel == Copper68k.M68kCpuModel.M68060 ? 8 : machine.CpuModel == Copper68k.M68kCpuModel.M68040 ? 4 : 2,
                 motherboardBusBits = machine.IsAga ? 32 : 16,
                 instructionTiming = machine.CpuModel is Copper68k.M68kCpuModel.M68040 or Copper68k.M68kCpuModel.M68060 ? "approximate-fixed" : "approximate-operand-shape",
-                timingPolicy = machine.IsAga ? "a1200-initial-v1" : "ocs-accelerator-v1",
+                timingPolicy,
                 copper68k = typeof(Copper68k.M68kCpuState).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
             }));
             _wroteCpuProfile = true;
@@ -63,7 +67,7 @@ internal sealed class NativeBootProbe
     {
         var registers = Field<LightweightRegisters>(m, "_registers");
         var drives = Field<LightweightFloppyDrive[]>(m, "_floppies");
-        var drive = drives[0];
+        var drive = drives.FirstOrDefault();
         var stem = Path.Combine(_directory, $"frame-{m.CompletedFrames:D6}");
         var state = new
         {
@@ -75,7 +79,8 @@ internal sealed class NativeBootProbe
             adkcon = $"{m.Adkcon:X4}", dsklen = $"{registers.Read(0x024):X4}",
             copperPc = $"{m.CopperProgramCounter:X8}", copperWaiting = m.CopperWaiting,
             blitterBusy = m.BlitterBusy, diskActive = m.DiskDmaActive, diskRemaining = m.DiskDmaRemaining,
-            diskBit = m.DiskBitPosition, drive.Cylinder, drive.Head, drive.Selected, drive.MotorOn, drive.ReadyCycle,
+            diskBit = drive?.BitPosition ?? -1, Cylinder = drive?.Cylinder, Head = drive?.Head,
+            Selected = drive?.Selected, MotorOn = drive?.MotorOn, ReadyCycle = drive?.ReadyCycle,
             drives = drives.Select((d, i) => new
             {
                 index = i, d.Mounted, d.Cylinder, d.Head, d.Selected, d.MotorOn,
@@ -95,6 +100,23 @@ internal sealed class NativeBootProbe
         var json = JsonSerializer.Serialize(state);
         File.WriteAllText(stem + ".json", json);
         File.WriteAllBytes(stem + ".chipram", m.ChipRam.ToArray());
+#if LIGHTWEIGHT_CD32
+        if (m.Cd32Region.HasValue)
+        {
+            var akiko = Field<LightweightAkiko>(m, "_akiko");
+            File.WriteAllText(stem + ".cd32.json", JsonSerializer.Serialize(new
+            {
+                m.IsCd32DiscMounted,
+                control = $"{akiko.Read(0xB80024, 4, m.Cycle, strobe: false):X8}",
+                irq = $"{akiko.Read(0xB80004, 4, m.Cycle, strobe: false):X8}",
+                tx = akiko.Read(0xB80019, 1, m.Cycle, strobe: false),
+                rx = akiko.Read(0xB8001A, 1, m.Cycle, strobe: false),
+                lastLba = Field<int>(akiko.Cd, "_lastLba"),
+                sectorsAccepted = Field<int>(akiko.Cd, "_sectorNumber"),
+                m.IsCd32NvramDirty
+            }));
+        }
+#endif
         // Optional diagnostic observation while the machine still owns its open
         // backing files. Do not flush: that would hide a missing guest CMD_UPDATE.
         foreach (var disk in _hardfiles)
