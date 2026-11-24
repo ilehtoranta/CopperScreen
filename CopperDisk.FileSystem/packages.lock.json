@@ -4,20 +4,20 @@
     "net10.0": {
       "Copper68k": {
         "type": "Direct",
-        "requested": "[1.5.7, 1.5.7]",
-        "resolved": "1.5.7",
-        "contentHash": "fVcMGm0+06uV5l8/cSV4skxBRW19Olafs+1hDRXX72sKe3jk1bC6yc+VyUCknRwHftofN5VrJnfWc0B8EfH+9A==",
+        "requested": "[1.5.10, 1.5.10]",
+        "resolved": "1.5.10",
+        "contentHash": "dZTCQd0LH8W7pRqg/eVO9jUaOFSfEtL6hrr7xbZbQLFfJLpY4/f0odDd1GXgO+Yp3+3iSu4F0aXwB3HaDYEneg==",
         "dependencies": {
           "CopperFloat": "[1.0.0]"
         }
       },
       "CopperStart.FileSystem.Service": {
         "type": "Direct",
-        "requested": "[0.5.0-dev.4, 0.5.0-dev.4]",
-        "resolved": "0.5.0-dev.4",
-        "contentHash": "LJ2IwaXUc2wYpFyydDhEZnNNku17QjoMqb3TWjZA5wQKVzAXn9G94+Cbaj6mPFz4/wYDyssSoXPEqQDFFAMJfw==",
+        "requested": "[0.5.0-dev.6, 0.5.0-dev.6]",
+        "resolved": "0.5.0-dev.6",
+        "contentHash": "a0oC+deOHGYaaCxhFb0VjKWomwgR7/Ux+Lzi+oAsdtQUf+Yu93LFSeHuwl1RyEHd7kLQb4fIgTgYyez76zMZpQ==",
         "dependencies": {
-          "Copper68k": "[1.5.7]"
+          "Copper68k": "[1.5.10]"
         }
       },
       "CopperFloat": {

@@ -1,8 +1,10 @@
 # CPU support and Copper68k package scope
 
-CopperScreen pins Copper68k 1.5.7 from NuGet.org. This version preserves address
-registers when the 68060 hands unimplemented floating-point memory operations to
-guest software. See the [SysInfo and 040 JIT report](SYSINFO_040_JIT_2026-11-21.md)
+CopperScreen pins Copper68k 1.5.10 from NuGet.org. On 68000/68010, arithmetic
+and logical longword writeback stores the low word first. The 68010 clears
+memory without reading the destination. On 68040/68060, memory ADDX.L and
+SUBX.L use native longword transfers. The 1.5.7 correction for unimplemented
+68060 floating-point memory operations is retained. See the [SysInfo and 040 JIT report](SYSINFO_040_JIT_2026-11-21.md)
 for the 1.5.5 performance baseline.
 
 The 2026-10-23 published baseline used Copper68k `1.5.4`

@@ -4,8 +4,8 @@
     "net10.0": {
       "Copper68k": {
         "type": "Transitive",
-        "resolved": "1.5.7",
-        "contentHash": "fVcMGm0+06uV5l8/cSV4skxBRW19Olafs+1hDRXX72sKe3jk1bC6yc+VyUCknRwHftofN5VrJnfWc0B8EfH+9A==",
+        "resolved": "1.5.10",
+        "contentHash": "dZTCQd0LH8W7pRqg/eVO9jUaOFSfEtL6hrr7xbZbQLFfJLpY4/f0odDd1GXgO+Yp3+3iSu4F0aXwB3HaDYEneg==",
         "dependencies": {
           "CopperFloat": "[1.0.0]"
         }
@@ -21,7 +21,7 @@
       "coppermod.amiga.lightweight": {
         "type": "Project",
         "dependencies": {
-          "Copper68k": "[1.5.7, 1.5.7]",
+          "Copper68k": "[1.5.10, 1.5.10]",
           "CopperDisk": "[3.0.1-dev.5, )"
         }
       }

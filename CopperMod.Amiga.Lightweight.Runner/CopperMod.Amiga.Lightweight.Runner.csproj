@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
-    <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.5.7</Copper68kBoundaryVersion>
+    <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.5.10</Copper68kBoundaryVersion>
     <DefineConstants Condition="'$(LightweightReferencePath)' == ''">$(DefineConstants);LIGHTWEIGHT_CD32</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="'$(LightweightReferencePath)' == ''">
