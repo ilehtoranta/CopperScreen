@@ -118,6 +118,28 @@ public sealed class LightweightAgaTests
     }
 
     [Theory]
+    [InlineData(0x2001u, 4, 0x23456789u, 0x01CAFE67u)]
+    [InlineData(0x2003u, 8, 0x6789ABCDu, 0x45CAFEABu)]
+    public void OddChipOperandsUseOneGrantPerAlignedLongword(uint address, int wordCycles, uint expectedLong, uint afterWrite)
+    {
+        using var machine = Create();
+        var bus = new LightweightAcceleratorBus(machine, M68kCpuModel.M68EC020);
+        machine.WriteChipWordDma(0x2000, 0x0123);
+        machine.WriteChipWordDma(0x2002, 0x4567);
+        machine.WriteChipWordDma(0x2004, 0x89AB);
+        machine.WriteChipWordDma(0x2006, 0xCDEF);
+        long cycle = 20;
+        Assert.Equal(expectedLong, bus.ReadLong(address, ref cycle, M68kBusAccessKind.CpuDataRead));
+        Assert.Equal(28, cycle);
+        Assert.Equal((ushort)(expectedLong >> 16), bus.ReadWord(address, ref cycle, M68kBusAccessKind.CpuDataRead));
+        Assert.Equal(28 + wordCycles, cycle);
+        bus.WriteWord(address, 0xCAFE, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(28 + 2 * wordCycles, cycle);
+        Assert.Equal((ushort)(afterWrite >> 16), machine.ReadChipWordDma(address - 1));
+        Assert.Equal((ushort)afterWrite, machine.ReadChipWordDma(address + 1));
+    }
+
+    [Theory]
     [InlineData(4, 0xFFFFFFFFu)]
     [InlineData(8, 0x12345678u)]
     public void ConfiguredFastRamTakesPriorityOverEmptyPcmciaMemory(int fastRamMiB, uint expected)

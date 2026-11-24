@@ -20,12 +20,21 @@ public sealed partial class LightweightA500Machine
         => IsAga && (address < 0x1FFFFD ? !_overlayEnabled || _akiko is null :
             address is >= RomBase and <= 0xFFFFFC ? _akiko is null : IsAkikoAddress(address));
 
-    internal uint ReadAgaLong(uint address, ref long cycle)
+    internal uint ReadAgaBusLanes(uint address, int size, ref long cycle)
     {
         GrantCpuWord(address, cycle, out var grant, out var complete);
         AdvanceHardwareTo(grant);
-        var value = IsAkikoAddress(address) ? ReadAkiko(address, 4, grant) :
-            ((uint)ReadWordRaw(address) << 16) | ReadWordRaw(address + 2);
+        uint value;
+        if (IsAkikoAddress(address))
+            value = ReadAkiko(address, size, grant);
+        else if (size == 2)
+            value = ReadWordRaw(address);
+        else
+        {
+            value = ReadLongRaw(address & ~3u);
+            if (size == 3)
+                value = (address & 1) == 0 ? value >> 8 : value & 0x00FFFFFF;
+        }
         AdvanceHardwareTo(complete);
         cycle = complete;
         return value;
@@ -36,6 +45,8 @@ public sealed partial class LightweightA500Machine
         GrantCpuWord(address, cycle, out var grant, out var complete);
         AdvanceHardwareTo(grant);
         if (IsAkikoAddress(address)) WriteAkiko(address, size, value, grant);
+        else if (size == 2)
+            WriteWordRaw(address, (ushort)value, grant);
         else if (size == 4)
         {
             WriteWordRaw(address, (ushort)(value >> 16), grant);

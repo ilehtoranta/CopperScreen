@@ -52,7 +52,19 @@ to extend it. All device progress remains owned by the machine.
 The initial PAL A1200 uses an explicit `CreateA1200Ec020` package profile and
 `a1200-initial-v1` host bridge. An aligned Chip/ROM longword occupies one accepted
 motherboard transfer; custom registers stay 16-bit and CIA/Gayle byte-wide.
-Unaligned operands split through the existing bus adapter. A1200 CPU upgrades
+On a 32-bit port, a word at byte offset 1 fits in one transfer. At offset 3 it
+spans two. An odd longword uses three lanes on one side of the aligned boundary
+and one on the other. The bridge decodes the port width separately on each
+side, including at the EC020 address wrap. Each Akiko C2P read advances one
+bitplane per transfer that selects the converter.
+
+For custom-register byte writes, stock OCS/ECS drives the byte on both lanes.
+Stock AGA drives both lanes at even addresses and only the low byte (upper
+byte zero) at odd addresses. The 040/060 upgrade profiles drive only the high
+byte at even addresses and both lanes at odd addresses, following the
+[WinUAE custom-register implementation](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/custom.cpp#L7756-L7785).
+
+A1200 CPU upgrades
 use the shared accelerator factory with this fitted AGA bus; the stock EC020
 factory is unchanged. See [CPU/memory upgrades](CPU_MEMORY_UPGRADES.md). Alice bitplane DMA
 retains its accepted address and FMODE until the output phase samples RAM,

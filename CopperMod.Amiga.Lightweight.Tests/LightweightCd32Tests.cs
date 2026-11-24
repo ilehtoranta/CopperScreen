@@ -115,10 +115,27 @@ public sealed class LightweightCd32Tests
     }
 
     [Theory]
-    [InlineData(0x001FFFFDu, 0x1FFFFC, 0xFF112233u, 8)]
-    [InlineData(0x001FFFFFu, 0x1FFFFC, 0xFFFFFF11u, 12)]
-    [InlineData(0x00FFFFFFu, 0, 0x223344FFu, 8)]
-    public void Ec020LongWriteDecodesEachSideOfChipRamBoundary(uint address, int inspectAt, uint expected, int cycles)
+    [InlineData(0x37, 4, 0x00FFFFFFu)]
+    [InlineData(0x39, 4, 0xFFFFFF00u)]
+    [InlineData(0x39, 2, 0xFFFFu)]
+    [InlineData(0x3B, 2, 0xFF00u)]
+    public void OddAkikoReadAdvancesOnceForTheSelectedPixelLanes(int offset, int size, uint expected)
+    {
+        using var machine = Create();
+        long cycle = 20;
+        for (var i = 0; i < 8; i++)
+            machine.WriteLong(0xB80038, 0x01030103, ref cycle, Write);
+        var address = 0xB80000u + (uint)offset;
+        var actual = size == 2 ? machine.ReadWord(address, ref cycle, Read) : machine.ReadLong(address, ref cycle, Read);
+        Assert.Equal(expected, actual);
+        Assert.Equal(0x55555555u, machine.ReadLong(0xB80038, ref cycle, Read));
+    }
+
+    [Theory]
+    [InlineData(0x001FFFFDu, 0x1FFFFC, 0xFF112233u, 0x112233FFu, 8)]
+    [InlineData(0x001FFFFFu, 0x1FFFFC, 0xFFFFFF11u, 0x11FFFFFFu, 12)]
+    [InlineData(0x00FFFFFFu, 0, 0x223344FFu, 0xFF223344u, 8)]
+    public void Ec020LongAccessDecodesEachSideOfChipRamBoundary(uint address, int inspectAt, uint expected, uint readback, int cycles)
     {
         using var machine = Create();
         var bus = new LightweightAcceleratorBus(machine, M68kCpuModel.M68EC020);
@@ -128,6 +145,9 @@ public sealed class LightweightCd32Tests
         bus.WriteLong(address, 0x11223344, ref cycle, Write);
         Assert.Equal(cycles, cycle - before);
         Assert.Equal(expected, BinaryPrimitives.ReadUInt32BigEndian(machine.ChipRam.Span[inspectAt..]));
+        before = cycle;
+        Assert.Equal(readback, bus.ReadLong(address, ref cycle, Read));
+        Assert.Equal(cycles, cycle - before);
     }
 
     [Theory]

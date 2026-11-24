@@ -55,10 +55,14 @@ internal class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpu
 
     public ushort ReadWord(uint address, ref long cycle, M68kBusAccessKind kind)
     {
+        address &= _addressMask;
         if ((address & 1) != 0)
+        {
+            if ((address & 3) == 1 && machine.HasAgaLongBus(address & ~3u))
+                return (ushort)ReadWideLanes(address, 2, ref cycle);
             return (ushort)((ReadByte(address, ref cycle, kind) << 8) |
                 ReadByte(unchecked(address + 1), ref cycle, kind));
-        address &= _addressMask;
+        }
         BeginTransfer(ref cycle);
         var requested = cycle;
         var result = address <= 0x00FF_FFFF ? machine.ReadWord(address, ref cycle, kind)
@@ -69,17 +73,36 @@ internal class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpu
 
     public uint ReadLong(uint address, ref long cycle, M68kBusAccessKind kind)
     {
-        if ((address & 3) == 0 && machine.HasAgaLongBus(address & _addressMask))
-        {
-            address &= _addressMask; BeginTransfer(ref cycle); var requested = cycle;
-            var value = machine.ReadAgaLong(address, ref cycle); CompleteTransfer(requested, ref cycle); return value;
-        }
+        address &= _addressMask;
+        if ((address & 3) == 0 && machine.HasAgaLongBus(address))
+            return ReadWideLanes(address, 4, ref cycle);
         if ((address & 1) == 0)
             return ((uint)ReadWord(address, ref cycle, kind) << 16) |
                 ReadWord(unchecked(address + 2), ref cycle, kind);
+        if ((address & 3) == 1)
+            return (ReadThreeBytes(address, ref cycle, kind) << 8) |
+                ReadByte(unchecked(address + 3), ref cycle, kind);
         return ((uint)ReadByte(address, ref cycle, kind) << 24) |
-            ((uint)ReadWord(unchecked(address + 1), ref cycle, kind) << 8) |
-            ReadByte(unchecked(address + 3), ref cycle, kind);
+            ReadThreeBytes(unchecked(address + 1), ref cycle, kind);
+    }
+
+    private uint ReadThreeBytes(uint address, ref long cycle, M68kBusAccessKind kind)
+    {
+        address &= _addressMask;
+        if (machine.HasAgaLongBus(address & ~3u))
+            return ReadWideLanes(address, 3, ref cycle);
+        if ((address & 1) == 0)
+            return ((uint)ReadWord(address, ref cycle, kind) << 8) | ReadByte(address + 2, ref cycle, kind);
+        return ((uint)ReadByte(address, ref cycle, kind) << 16) | ReadWord(address + 1, ref cycle, kind);
+    }
+
+    private uint ReadWideLanes(uint address, int size, ref long cycle)
+    {
+        BeginTransfer(ref cycle);
+        var requested = cycle;
+        var value = machine.ReadAgaBusLanes(address, size, ref cycle);
+        CompleteTransfer(requested, ref cycle);
+        return value;
     }
 
     public void WriteByte(uint address, byte value, ref long cycle, M68kBusAccessKind kind)
@@ -94,13 +117,18 @@ internal class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpu
 
     public void WriteWord(uint address, ushort value, ref long cycle, M68kBusAccessKind kind)
     {
+        address &= _addressMask;
         if ((address & 1) != 0)
         {
+            if ((address & 3) == 1 && machine.HasAgaLongBus(address & ~3u))
+            {
+                WriteWideLanes(address, value, 2, ref cycle);
+                return;
+            }
             WriteByte(address, (byte)(value >> 8), ref cycle, kind);
             WriteByte(unchecked(address + 1), (byte)value, ref cycle, kind);
             return;
         }
-        address &= _addressMask;
         BeginTransfer(ref cycle);
         var requested = cycle;
         if (address <= 0x00FF_FFFF) machine.WriteWord(address, value, ref cycle, kind);
@@ -113,11 +141,7 @@ internal class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpu
     {
         if ((address & 3) == 0 && machine.HasAgaLongBus(address & _addressMask))
         {
-            address &= _addressMask;
-            BeginTransfer(ref cycle);
-            var requested = cycle;
-            machine.WriteAgaBusLanes(address, value, 4, ref cycle);
-            CompleteTransfer(requested, ref cycle);
+            WriteWideLanes(address & _addressMask, value, 4, ref cycle);
             return;
         }
         if ((address & 1) == 0)
@@ -145,10 +169,7 @@ internal class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpu
         address &= _addressMask;
         if (machine.HasAgaLongBus(address & ~3u))
         {
-            BeginTransfer(ref cycle);
-            var requested = cycle;
-            machine.WriteAgaBusLanes(address, value, 3, ref cycle);
-            CompleteTransfer(requested, ref cycle);
+            WriteWideLanes(address, value, 3, ref cycle);
         }
         else if ((address & 1) == 0)
         {
@@ -160,6 +181,14 @@ internal class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpu
             WriteByte(address, (byte)(value >> 16), ref cycle, kind);
             WriteWord(unchecked(address + 1), (ushort)value, ref cycle, kind);
         }
+    }
+
+    private void WriteWideLanes(uint address, uint value, int size, ref long cycle)
+    {
+        BeginTransfer(ref cycle);
+        var requested = cycle;
+        machine.WriteAgaBusLanes(address, value, size, ref cycle);
+        CompleteTransfer(requested, ref cycle);
     }
 
     public bool HasHostGateway(uint address)

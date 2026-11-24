@@ -858,7 +858,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public ushort ReadWord(uint address, ref long cycle, M68kBusAccessKind accessKind)
     {
-        _ = accessKind;
+        if ((address & 1) != 0 && _configuration.CpuModel == M68kCpuModel.M68EC020)
+            return _cpuBus.ReadWord(address, ref cycle, accessKind);
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle);
         var value = ReadWordAt(address, grantedCycle);
         AdvanceHardwareTo(completedCycle);
@@ -868,9 +869,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public uint ReadLong(uint address, ref long cycle, M68kBusAccessKind accessKind)
     {
-        _ = accessKind;
+        if ((address & 1) != 0 && _configuration.CpuModel == M68kCpuModel.M68EC020)
+            return _cpuBus.ReadLong(address, ref cycle, accessKind);
         if ((address & 3) == 0 && IsAkikoAddress(address))
-            return ReadAgaLong(address, ref cycle);
+            return ReadAgaBusLanes(address, 4, ref cycle);
         GrantCpuWord(address, cycle, out var firstWordCycle, out var firstCompletedCycle);
         var high = ReadWordAt(address, firstWordCycle);
         AdvanceHardwareTo(firstCompletedCycle);
@@ -895,7 +897,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public void WriteWord(uint address, ushort value, ref long cycle, M68kBusAccessKind accessKind)
     {
-        _ = accessKind;
+        if ((address & 1) != 0 && _configuration.CpuModel == M68kCpuModel.M68EC020)
+        {
+            _cpuBus.WriteWord(address, value, ref cycle, accessKind);
+            return;
+        }
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle);
         WriteWordRaw(address, value, grantedCycle);
         AdvanceHardwareTo(completedCycle);
@@ -1954,8 +1960,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private void StrobeCopperRead(uint address, long cycle)
     {
-        // COPJMP1/2 are address strobes on reads as well as writes. Keep peeks
-        // and the byte-write merge's raw read side-effect-free.
+        // COPJMP1/2 are address strobes on reads as well as writes. Peeks bypass this path.
         if ((address & 0x00FF_FFFCu) != CustomBase + LightweightRegisters.Copjmp1)
             return;
         _copper.OnRegisterWrite((ushort)(LightweightRegisters.Copjmp1 + (address & 2)), cycle, this);
@@ -1988,6 +1993,19 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         { _a1200Io.WriteByte(address, value, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 1, true, value, cycle); RefreshStorageSchedule(cycle); } return; }
         if (address >= 0x200000 && TryWriteExpansionByte(address, value)) return;
         var aligned = address & ~1u;
+        if (aligned >= CustomBase && aligned < CustomBase + 0x200)
+        {
+            // The custom chips latch a whole word even for a CPU byte write.
+            var lanes = (ushort)(value * 0x0101);
+            if (_configuration.CpuModel is M68kCpuModel.M68040 or M68kCpuModel.M68060)
+            {
+                if ((address & 1) == 0) lanes = (ushort)(value << 8);
+            }
+            else if (IsAga && (address & 1) != 0)
+                lanes = value;
+            WriteCustomRegister((ushort)(aligned - CustomBase), lanes, cycle);
+            return;
+        }
         if (IsCiaWordAccess(aligned))
             return;
         var word = ReadWordRaw(aligned);

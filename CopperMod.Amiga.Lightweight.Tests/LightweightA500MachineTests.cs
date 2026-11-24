@@ -6,6 +6,31 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 
 public sealed class LightweightA500MachineTests
 {
+    [Theory]
+    [InlineData(M68kCpuModel.M68000, false, 0x0181, 0x0181)]
+    [InlineData(M68kCpuModel.M68EC020, true, 0x0181, 0x0000)]
+    [InlineData(M68kCpuModel.M68040, false, 0x0100, 0x0181)]
+    [InlineData(M68kCpuModel.M68060, true, 0x0100, 0x0181)]
+    public void CustomByteWriteDrivesInterruptEnableLanes(M68kCpuModel cpu, bool aga, int even, int odd)
+    {
+        var configuration = aga ? new LightweightA500Configuration
+        {
+            CpuModel = cpu, AgnusModel = LightweightAgnusModel.Mos8374Alice, DeniseModel = LightweightDeniseModel.Lisa4203,
+            ChipRamBytes = 2097152, SlowRamBytes = 0
+        } : new LightweightA500Configuration { CpuModel = cpu };
+        using var machine = new LightweightA500Machine(configuration);
+        long cycle = 20;
+        const M68kBusAccessKind write = M68kBusAccessKind.CpuDataWrite;
+        const M68kBusAccessKind read = M68kBusAccessKind.CpuDataRead;
+        machine.WriteWord(0xDFF09A, 0x7FFF, ref cycle, write);
+        machine.WriteByte(0xDFF09A, 0x81, ref cycle, write);
+        Assert.Equal(even, machine.ReadWord(0xDFF01C, ref cycle, read));
+        machine.WriteWord(0xDFF09A, 0x7FFF, ref cycle, write);
+        machine.WriteWord(0xDFF09A, 0x8081, ref cycle, write);
+        machine.WriteByte(0xDFF09B, 0x81, ref cycle, write);
+        Assert.Equal(odd, machine.ReadWord(0xDFF01C, ref cycle, read));
+    }
+
     [Fact]
     public void ResetStartsAtDeterministic68000Loop()
     {
