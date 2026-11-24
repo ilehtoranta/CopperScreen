@@ -1,8 +1,11 @@
 # Website maintenance
 
 The public site is static HTML/CSS with progressive enhancement for the gallery.
-GitHub Pages deploys `docs/` through `.github/workflows/pages.yml`. No framework,
-package installation, analytics, external fonts or runtime API is required.
+[The GitHub Pages workflow](../.github/workflows/pages.yml) builds the gallery
+from `docs/gallery.json` and stages the HTML, CSS, gallery script, sitemap and
+assets for deployment. Engineering documentation and validation receipts are
+available through the repository. No framework, package installation, analytics,
+external fonts or runtime API is required.
 
 ## CopperDisk page
 

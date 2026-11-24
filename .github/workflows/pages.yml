@@ -4,8 +4,12 @@ on:
   push:
     branches: [main]
     paths:
-      - docs/**
-      - '!docs/**/*.md'
+      - 'docs/*.html'
+      - 'docs/*.css'
+      - docs/gallery.js
+      - docs/gallery.json
+      - docs/sitemap.xml
+      - docs/assets/**
       - scripts/build-website.mjs
       - .github/workflows/pages.yml
   workflow_dispatch:
@@ -37,10 +41,15 @@ jobs:
         run: |
           node scripts/build-website.mjs --check
           node --check docs/gallery.js
+      - name: Stage public site files
+        run: |
+          mkdir -p "$RUNNER_TEMP/copperscreen-pages"
+          cp docs/*.html docs/*.css docs/gallery.js docs/sitemap.xml "$RUNNER_TEMP/copperscreen-pages/"
+          cp -R docs/assets "$RUNNER_TEMP/copperscreen-pages/"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: ${{ runner.temp }}/copperscreen-pages
       - name: Wait for the Pages artifact to become visible
         env:
           GH_TOKEN: ${{ github.token }}
