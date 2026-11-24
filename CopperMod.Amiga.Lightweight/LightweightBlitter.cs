@@ -308,17 +308,28 @@ internal sealed class LightweightBlitter
         Start(width, height, cycle, machine);
     }
 
-    internal void WriteAreaMinterm(byte minterm, bool reloadFillCarry)
+    internal void WriteAreaControl0(ushort control, bool lowOnly)
     {
         if (_active && !_lineMode)
         {
             // The next calculation sees the new control bits. A completed
             // result is still held for the destination slot.
-            _minterm = minterm;
-            if (reloadFillCarry)
+            _minterm = (byte)control;
+            if (!lowOnly)
             {
+                _shiftA = control >> 12;
                 _fillCarry = _fillCarryInitial;
             }
+        }
+    }
+
+    internal void WriteAreaControl1(ushort control)
+    {
+        if (_active && !_lineMode)
+        {
+            _shiftB = control >> 12;
+            _fillCarryInitial = (control & Bltcon1FillCarryIn) != 0;
+            _fillCarry = _fillCarryInitial;
         }
     }
 

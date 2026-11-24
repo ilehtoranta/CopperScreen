@@ -296,8 +296,39 @@ fingerprints. Both builds use Copper68k 1.5.11. The Release solution
 build succeeds and the diagnostic engine suite passes 1,463 tests
 with seven optional tests skipped.
 
-Live area channel and shift changes, line-mode data writes, absolute
-Copper start timing, source-only schedules, the game's actual register
+### Live area shifts and fill carry
+
+The `-LiveShift` probe changes A's shift count on A+D blits and B's on
+ascending and descending B+D blits. A uses the new count at the next
+calculation. B uses it on the next data load and retains the previous
+shifted word until that load. Results already calculated remain in the
+D pipeline. The `-LiveShift -Fill` variant also changes the initial fill
+carry while the descending B+D blit is active. Full BLTCON1 writes
+reload the carry from the new FCI bit for subsequent calculations and
+row boundaries.
+
+Generate the disk with the [area probe script](../../scripts/generate-blitter-area-probe.ps1).
+Use `-Ocs` for a PAL A500. In WinUAE, enable the DMA trace with
+`DBG v -4` and capture lines 64 through 130 in six-line steps with
+`DBG vl <line> 30 7`.
+
+Before the correction, the AGA probe differed from WinUAE in 148 of 192
+writes. The corrected engine matches WinUAE 6.1.0 beta 23 on 192 AGA
+and 192 OCS shift-probe writes and all 192 writes in the AGA fill
+variant, including destination addresses, data and relative CCK. The
+576 preceding live minterm probe writes and 384 live data probe
+writes also retain their reference results.
+[WinUAE control update](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1045-L1144)
+· [WinUAE area data path](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1411-L1466)
+
+The 12,850-field ZooL 2 wall replay, 7,200-field P.P. Hammer opening
+replay and 10,500-field Banshee first mission replay matched every
+capture and the final CPU, hardware and output fingerprints from the
+source-data correction. The Release build passed with zero warnings.
+Engine diagnostics passed 1,467 tests with seven optional tests skipped.
+
+Live area channel changes, line-mode data writes, absolute Copper
+start timing, source-only schedules, the game's actual register
 rewrites and physical signal measurements remain open.
 
 ## P.P. Hammer and His Pneumatic Weapon

@@ -9,6 +9,7 @@ param(
     [ValidateSet('AD', 'BC')][string]$LiveModulo,
     [ValidateSet('Full', 'Alternate')][string]$LiveMinterm,
     [switch]$LiveData,
+    [switch]$LiveShift,
     [switch]$Ocs
 )
 
@@ -19,6 +20,10 @@ if ($LiveMinterm -and ($Overlap -or $LiveModulo)) {
 }
 if ($LiveData -and ($Overlap -or $LiveModulo -or $LiveMinterm)) {
     throw 'Choose one probe for overlap, live modulo, live minterm or live data writes.'
+}
+
+if ($LiveShift -and ($Overlap -or $LiveModulo -or $LiveMinterm -or $LiveData)) {
+    throw 'Choose the live shift probe separately from other probe variants.'
 }
 
 $asm = [Collections.Generic.List[uint16]]::new()
@@ -81,6 +86,34 @@ if ($LiveData) {
         WriteCopperWord 0x0058 0x0104
         WriteCopperWord ($line + 0x35 + ($test % 4) * 2) 0xFFFE
         WriteCopperWord $dataRegister 0xABCD
+    }
+} elseif ($LiveShift) {
+    # Change the A or B shift count after several area calculations.
+    $source = 0x24000
+    foreach ($register in 0x004C, 0x0050) { WriteCopperWord $register 2 }
+    $patterns = @(0xA105, 0x0248, 0x5A00, 0x1030, 0x8000, 0x0001, 0x44C0, 0x0091,
+                  0x0200, 0xA00A, 0x6000, 0x0016, 0x1001, 0x0814, 0x0004, 0x5000)
+    for ($i = 0; $i -lt $patterns.Count; $i++) { WriteWord $patterns[$i] ($source + 2 * $i) }
+
+    $descendingControl = if ($Fill) { 0x0012 } else { 0x0002 }
+    $descendingChange = if ($Fill) { 0x4016 } else { 0x4002 }
+    for ($test = 0; $test -lt 12; $test++) {
+        $line = (64 + 6 * $test) -shl 8
+        $target = 0x16100 + 0x200 * $test
+        $bank = $test -shr 2
+        $offset = if ($bank -eq 2) { 30 } else { 0 }
+        WriteCopperWord ($line + 1) 0xFFFE
+        WriteCopperWord 0x0040 ((0x09F0, 0x05CC, 0x05CC)[$bank])
+        WriteCopperWord 0x0042 ((0, 0, $descendingControl)[$bank])
+        WriteCopperWord 0x0052 (($source + $offset) -band 0xFFFF)
+        WriteCopperWord 0x004E (($source + $offset) -band 0xFFFF)
+        WriteCopperWord 0x0056 (($target + $offset) -band 0xFFFF)
+        WriteCopperWord 0x009C 0x0040
+        WriteCopperWord ($line + 0x2B) 0xFFFE
+        WriteCopperWord 0x0058 0x0104
+        WriteCopperWord ($line + 0x39 + ($test % 4) * 2) 0xFFFE
+        $controlRegister = if ($bank -eq 0) { 0x0040 } else { 0x0042 }
+        WriteCopperWord $controlRegister ((0x49F0, 0x4000, $descendingChange)[$bank])
     }
 } elseif ($LiveMinterm) {
     # Sweep control writes over A+D, shifted ABCD and descending fill.

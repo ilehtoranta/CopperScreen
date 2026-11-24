@@ -95,6 +95,35 @@ public sealed class LightweightBlitterTests
     }
 
     [Theory]
+    [InlineData(LightweightRegisters.Bltcon0, 0x09F0, 0x49F0, SourceA)]
+    [InlineData(LightweightRegisters.Bltcon1, 0x05CC, 0x4000, SourceB)]
+    public void LiveAreaShiftWriteAppliesAfterTheAlreadyCalculatedWord(
+        ushort register, ushort initialControl0, ushort newControl, uint source)
+    {
+        using var machine = CreateAgaMachine();
+        machine.WriteChipWordDma(source, 0xA00B);
+        machine.WriteChipWordDma(source + 2, 0x135C);
+        machine.WriteChipWordDma(source + 4, 0xB460);
+        ConfigureArea(machine, initialControl0);
+        EnableBlitter(machine, nasty: false);
+        var start = StartBlit(machine, 0x0043);
+        for (var cycle = start + 2;
+             cycle <= start + 32 && machine.GetBlitterPointer(LightweightRegisters.Bltdpth) == DestinationD;
+             cycle += LightweightClock.CpuCyclesPerColorClock)
+        {
+            machine.AdvanceHardwareTo(cycle);
+        }
+        Assert.Equal(DestinationD + 2, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+
+        machine.WriteCustomRegisterFromCopper(register, newControl, machine.Cycle);
+        AdvanceUntilBlitterIdle(machine);
+
+        Assert.Equal(0xA00B, machine.ReadChipWordDma(DestinationD));
+        Assert.Equal(0x135C, machine.ReadChipWordDma(DestinationD + 2));
+        Assert.Equal(0xCB46, machine.ReadChipWordDma(DestinationD + 4));
+    }
+
+    [Theory]
     [InlineData(LightweightRegisters.Bltadat, 0x01F0, 0, 0x1234, 0xABCD)]
     [InlineData(LightweightRegisters.Bltbdat, 0x01CC, 0x5000, 0x0091, 0x055E)]
     [InlineData(LightweightRegisters.Bltcdat, 0x01AA, 0, 0x1234, 0xABCD)]
@@ -123,10 +152,12 @@ public sealed class LightweightBlitterTests
     }
 
     [Theory]
-    [InlineData(LightweightRegisters.Bltcon0, 0x0000)]
-    [InlineData(LightweightRegisters.Bltcon0l, 0xFFFF)]
-    public void AreaControlWriteReloadsFillCarryOnlyForTheFullRegister(
-        ushort controlRegister, ushort lastWord)
+    [InlineData(LightweightRegisters.Bltcon0, 0x09F0, 0x0000)]
+    [InlineData(LightweightRegisters.Bltcon0l, 0x09F0, 0xFFFF)]
+    [InlineData(LightweightRegisters.Bltcon1, 0x0012, 0x0000)]
+    [InlineData(LightweightRegisters.Bltcon1, 0x0016, 0xFFFF)]
+    public void LiveAreaControlWriteAppliesFillCarryAfterTheAlreadyCalculatedWord(
+        ushort controlRegister, ushort controlValue, ushort lastWord)
     {
         using var machine = CreateAgaMachine();
         machine.WriteChipWordDma(SourceA + 4, 1);
@@ -138,7 +169,7 @@ public sealed class LightweightBlitterTests
         machine.AdvanceHardwareTo(start + 18);
         Assert.Equal(DestinationD + 2, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
 
-        machine.WriteCustomRegisterFromCopper(controlRegister, 0x09F0, machine.Cycle);
+        machine.WriteCustomRegisterFromCopper(controlRegister, controlValue, machine.Cycle);
         AdvanceUntilBlitterIdle(machine);
 
         Assert.Equal(0xFFFF, machine.ReadChipWordDma(DestinationD + 4));
