@@ -318,6 +318,22 @@ internal sealed class LightweightBlitter
         if (height == 0) height = offset == LightweightRegisters.Bltsize ? 1024 : 32768;
         if (_active && !LiveAreaPulseLost)
         {
+            // Keep the alternating D-only phases and any accepted transfer.
+            // The current result does not advance the reset word counter.
+            // The second retained D write receives the first row modulo.
+            if (!machine.IsEcsAgnus && _busy && !_lineMode &&
+                !_areaUsesLiveStages && !_areaChannelsChanged && _areaResultCycle != long.MinValue &&
+                !_useA && !_useB && !_useC && _useD && !_fillEnabled &&
+                (machine.GetCustomRegister(LightweightRegisters.Bltcon1) & Bltcon1LineMode) == 0)
+            {
+                _widthWords = width;
+                _height = height;
+                _rowY = 0;
+                _wordX = -1;
+                _destinationX = width - 2;
+                _zero = true;
+                return;
+            }
             _deferredStart = true;
             _deferredWidth = width;
             _deferredHeight = height;

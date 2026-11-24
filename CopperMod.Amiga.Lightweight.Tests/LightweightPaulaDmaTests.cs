@@ -5,6 +5,86 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 public sealed class LightweightPaulaDmaTests
 {
     [Theory]
+    [InlineData(0, 2, 0)]
+    [InlineData(1, 2, 0)]
+    [InlineData(2, 2, 0)]
+    [InlineData(3, 2, 0)]
+    [InlineData(0, 6, 1)]
+    [InlineData(1, 6, 1)]
+    [InlineData(2, 6, 1)]
+    [InlineData(3, 6, 1)]
+    public void AudioDmaUsesTheSharedEarlyLineRequestForEveryChannel(
+        int channel, int enableCycle, int linesUntilTransfer)
+    {
+        using var m = new LightweightA500Machine();
+        Configure(m, channel);
+        var firstOutput = 28 + channel * 4;
+        var expectedOutput = firstOutput + linesUntilTransfer * LightweightClock.CpuCyclesPerLine;
+        Write(m, 0x096, (ushort)(0x8200 | 1 << channel), enableCycle);
+        m.AdvanceHardwareTo(expectedOutput - 2);
+        Assert.Equal(expectedOutput, m.GetPaulaChannelSnapshot(channel).DmaOutputCycle);
+        m.AdvanceHardwareTo(expectedOutput);
+        Assert.Equal(0x1000u, m.GetPaulaChannelSnapshot(channel).CurrentAddress);
+        Assert.True(m.IsHigherPriorityOutputOwned(expectedOutput));
+    }
+
+    [Theory]
+    [InlineData(330, 4)]
+    [InlineData(331, 5)]
+    [InlineData(332, 5)]
+    public void RunningAudioUsesTheSameEarlyLineCutoff(ushort period, int thirdWordLine)
+    {
+        const int channel = 3;
+        const int output = 40;
+        const int lineCycles = LightweightClock.CpuCyclesPerLine;
+        using var m = new LightweightA500Machine();
+        Configure(m, channel, length: 4, period: period);
+        m.WriteChipWordDma(0x1004, 0x1262);
+        Write(m, 0x096, 0x8208, 0);
+
+        var requestCycle = lineCycles + output + 2 + period * 4;
+        var outputCycle = thirdWordLine * lineCycles + output;
+        m.AdvanceHardwareTo(requestCycle);
+        Assert.Equal(outputCycle - 2, m.GetPaulaChannelSnapshot(channel).DmaInputCycle);
+        m.AdvanceHardwareTo(outputCycle);
+        Assert.Equal((ushort)0x1262, m.GetPaulaChannelSnapshot(channel).PendingData);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    public void StartupDiscardsOldPointerWordThenPlaysFromTheLocationRegister(int channel)
+    {
+        using var m = new LightweightA500Machine();
+        Configure(m, channel, length: 4, period: 350);
+        m.WriteChipWordDma(0, 0xDEAD);
+        m.WriteChipWordDma(0x1000, 0x1230);
+        m.WriteChipWordDma(0x1002, 0x1231);
+        var outputCycle = 28 + channel * 4;
+
+        Write(m, 0x096, (ushort)(0x8200 | 1 << channel), 0);
+        m.AdvanceHardwareTo(outputCycle);
+
+        var discarded = m.GetPaulaChannelSnapshot(channel);
+        Assert.Equal(0u, discarded.PendingAddress);
+        Assert.Equal((ushort)0xDEAD, discarded.PendingData);
+        Assert.Equal(0x1000u, discarded.CurrentAddress);
+
+        m.AdvanceHardwareTo(outputCycle + LightweightClock.CpuCyclesPerLine + 2);
+        var first = m.GetPaulaChannelSnapshot(channel);
+        Assert.Equal(0x1000u, first.PendingAddress);
+        Assert.Equal((ushort)0x1230, first.OutputLatch);
+        Assert.Equal(3, first.RemainingWords);
+
+        m.AdvanceHardwareTo(outputCycle + 2 * LightweightClock.CpuCyclesPerLine + 2);
+        var second = m.GetPaulaChannelSnapshot(channel);
+        Assert.Equal(0x1002u, second.PendingAddress);
+        Assert.Equal((ushort)0x1231, second.HoldingLatch);
+    }
+
+    [Theory]
     [InlineData(0, 600)]
     [InlineData(1, 600)]
     [InlineData(2, 900)]
@@ -13,7 +93,7 @@ public sealed class LightweightPaulaDmaTests
     {
         using var m = new LightweightA500Machine();
         Configure(m, channel, period: 200);
-        m.WriteChipWordDma(0x1002, 0x1122);
+        m.WriteChipWordDma(0x1000, 0x1122);
         var irq = (ushort)(0x80 << channel);
         Write(m, 0x096, (ushort)(0x8200 | 1 << channel), 0);
         Write(m, 0x096, (ushort)(1 << channel), disableCycle);
@@ -40,26 +120,26 @@ public sealed class LightweightPaulaDmaTests
         using var m = new LightweightA500Machine();
         Configure(m, channel);
         var slot = 28 + channel * 4;
-        m.WriteChipWordDma(0x1000, 0x1122);
+        m.WriteChipWordDma(0, 0x1122);
         Write(m, 0x096, (ushort)(0x8200 | 1 << channel), 0);
         m.AdvanceHardwareTo(slot - 2);
         var accepted = m.GetPaulaChannelSnapshot(channel);
-        Assert.Equal(0x1000u, accepted.PendingAddress);
+        Assert.Equal(0u, accepted.PendingAddress);
         Assert.Equal(slot, accepted.DmaOutputCycle);
         Assert.Equal(3, accepted.RemainingWords);
         Assert.False(m.CanCopperOwnOutputSlot(slot));
         Assert.False(m.CanBlitterAdvanceControl(slot - 2));
         // A future location update must not redirect an accepted address.
         Write(m, (ushort)(0x0A2 + channel * 16), 0x2000, slot - 1);
-        m.WriteChipWordDma(0x1000, 0x3344);
+        m.WriteChipWordDma(0, 0x3344);
         m.AdvanceHardwareTo(slot);
         var output = m.GetPaulaChannelSnapshot(channel);
-        Assert.Equal(0x1002u, output.CurrentAddress);
-        Assert.Equal(2, output.RemainingWords);
+        Assert.Equal(0x2000u, output.CurrentAddress);
+        Assert.Equal(3, output.RemainingWords);
         Assert.Equal((ushort)0x3344, output.PendingData);
         Assert.True(m.IsHigherPriorityOutputOwned(slot));
         Assert.Equal(0, m.Intreq & (0x80 << channel));
-        m.WriteChipWordDma(0x1000, 0x5566);
+        m.WriteChipWordDma(0, 0x5566);
         m.AdvanceHardwareTo(slot + 2);
         Assert.Equal(LightweightPaulaAudioState.DmaStartupData,
             m.GetPaulaChannelSnapshot(channel).State);
@@ -73,8 +153,8 @@ public sealed class LightweightPaulaDmaTests
     {
         using var m = new LightweightA500Machine();
         Configure(m, period: 4);
-        m.WriteChipWordDma(0x1000, 0x7777);
-        m.WriteChipWordDma(0x1002, 0x1182);
+        m.WriteChipWordDma(0, 0x7777);
+        m.WriteChipWordDma(0x1000, 0x1182);
         Write(m, 0x096, 0x8201, 0);
         m.AdvanceHardwareTo(483);
         Assert.Equal((sbyte)0, m.GetPaulaChannelSnapshot(0).CurrentSample);
@@ -87,7 +167,7 @@ public sealed class LightweightPaulaDmaTests
         Assert.Equal(unchecked((sbyte)0x82), m.GetPaulaChannelSnapshot(0).CurrentSample);
         m.AdvanceHardwareTo(900);
         Assert.Equal(unchecked((sbyte)0x82), m.GetPaulaChannelSnapshot(0).CurrentSample);
-        Assert.Equal(0x1004u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
+        Assert.Equal(0x1002u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
     }
 
     [Fact]
@@ -138,12 +218,12 @@ public sealed class LightweightPaulaDmaTests
         Write(m, 0x096, 0x8201, 0);
         Write(m, 0x096, disable, 24);
         m.AdvanceHardwareTo(30);
-        Assert.Equal(0x1000u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
+        Assert.Equal(0u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
         Write(m, 0x096, (ushort)(0x8000 | disable), 32);
         m.AdvanceHardwareTo(480);
         Write(m, 0x096, disable, 481);
         m.AdvanceHardwareTo(484);
-        Assert.Equal(0x1002u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
+        Assert.Equal(0x1000u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
         Assert.NotEqual(0, m.Intreq & 0x80);
         Assert.Equal(long.MaxValue, m.GetPaulaChannelSnapshot(0).DmaInputCycle);
     }
@@ -153,8 +233,8 @@ public sealed class LightweightPaulaDmaTests
     {
         using var m = new LightweightA500Machine();
         Configure(m, period: 200);
-        m.WriteChipWordDma(0x1002, 0x1122);
-        m.WriteChipWordDma(0x1004, 0x3344);
+        m.WriteChipWordDma(0x1000, 0x1122);
+        m.WriteChipWordDma(0x1002, 0x3344);
         Write(m, 0x096, 0x8201, 0);
         Write(m, 0x096, 1, 600);
         Write(m, 0x096, 0x8001, 602);
@@ -176,7 +256,7 @@ public sealed class LightweightPaulaDmaTests
         Assert.Equal(LightweightClock.PalLongFieldCycles + 26,
             m.GetPaulaChannelSnapshot(0).DmaInputCycle);
         m.AdvanceHardwareTo(LightweightClock.PalLongFieldCycles + 30);
-        Assert.Equal(0x1002u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
+        Assert.Equal(0x1000u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
         Assert.Equal(1, m.CompletedFrames);
     }
 
@@ -204,7 +284,7 @@ public sealed class LightweightPaulaDmaTests
         Write(m, 0x0A0, 7, 0);
         Write(m, 0x0A2, 0xFFFE, 0);
         Write(m, 0x096, 0x8201, 0);
-        m.AdvanceHardwareTo(28);
+        m.AdvanceHardwareTo(LightweightClock.CpuCyclesPerLine + 28);
         Assert.Equal(0u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
         Assert.Equal(65535, m.GetPaulaChannelSnapshot(0).RemainingWords);
     }
@@ -232,7 +312,7 @@ public sealed class LightweightPaulaDmaTests
         Assert.Equal(36, cpuCycle);
         m.AdvanceHardwareTo(42);
         for (var channel = 0; channel < 4; channel++)
-            Assert.Equal(0x1002u, m.GetPaulaChannelSnapshot(channel).CurrentAddress);
+            Assert.Equal(0x1000u, m.GetPaulaChannelSnapshot(channel).CurrentAddress);
     }
 
     [Fact]
@@ -240,8 +320,8 @@ public sealed class LightweightPaulaDmaTests
     {
         using var m = new LightweightA500Machine();
         Configure(m, period: 200);
-        m.WriteChipWordDma(0x1002, 0x1122);
-        m.WriteChipWordDma(0x1004, 0x3344);
+        m.WriteChipWordDma(0x1000, 0x1122);
+        m.WriteChipWordDma(0x1002, 0x3344);
         Write(m, 0x096, 0x8201, 0);
         m.AdvanceHardwareTo(938);
         Assert.Equal((ushort)0x3344, m.GetPaulaChannelSnapshot(0).HoldingLatch);
@@ -257,8 +337,8 @@ public sealed class LightweightPaulaDmaTests
     {
         using var m = new LightweightA500Machine();
         Configure(m, period: 200);
-        m.WriteChipWordDma(0x1002, 0x1122);
-        m.WriteChipWordDma(0x1004, 0x3344);
+        m.WriteChipWordDma(0x1000, 0x1122);
+        m.WriteChipWordDma(0x1002, 0x3344);
         var start = LightweightClock.PalLongFieldCycles - 2 * 454;
         Write(m, 0x096, 0x8201, start);
         m.AdvanceHardwareTo(start + 896);

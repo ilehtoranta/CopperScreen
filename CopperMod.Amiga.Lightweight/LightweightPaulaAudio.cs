@@ -9,6 +9,7 @@ namespace CopperMod.Amiga.Lightweight;
 internal sealed partial class LightweightPaulaAudio
 {
     private const ushort DmaconMaster = 0x0200;
+    private const int DmaRequestSampleCycle = 2 * LightweightClock.CpuCyclesPerColorClock;
     private readonly Channel[] _channels =
     {
         new(0),
@@ -311,7 +312,6 @@ internal sealed partial class LightweightPaulaAudio
             _hasOutputWord = false;
             _nextSampleCycle = long.MaxValue;
             _hasPrefetch = false;
-            _currentAddress = Location;
             _remainingWords = LengthWords;
             _streamInitialized = true;
             _discardRequest = true;
@@ -351,14 +351,15 @@ internal sealed partial class LightweightPaulaAudio
                 _requestHeldForBeam = true;
                 return;
             }
-            // One request uses the next channel-specific address phase. Late
-            // enables never recreate an input that has already happened.
+            // Agnus samples the Paula request bits together near the start
+            // of the line. A missed sample waits for the next line, even
+            // when the channel's own address phase has yet to run.
             var lineStart = machine.IsEcsAgnus ? machine.LineStartCycle : cycle - (cycle - _beamOffset) % LightweightClock.CpuCyclesPerLine;
+            if (cycle >= lineStart + DmaRequestSampleCycle)
+                lineStart += machine.LineCycles;
             // HRM figure 6-9: audio address slots $0D/$0F/$11/$13
             // precede sprite 0 at $15. RAM output is one CCK later.
-            var input = lineStart + (0x0D + _index * 2) * 2;
-            if (input <= cycle) input += machine.LineCycles;
-            _dmaInputCycle = input;
+            _dmaInputCycle = lineStart + (0x0D + _index * 2) * 2;
         }
 
         private void AdvanceDmaAt(long cycle, LightweightA500Machine machine, LightweightPaulaAudio audio)
@@ -366,16 +367,19 @@ internal sealed partial class LightweightPaulaAudio
             if (_dmaInputCycle == cycle)
             {
                 _dmaInputCycle = long.MaxValue;
-                _pendingReload = _remainingWords == 0;
-                _pendingAddress = _pendingReload ? Location : _currentAddress;
-                _pendingRemainingWords = (_pendingReload ? LengthWords : _remainingWords) - 1;
                 _pendingDiscard = _discardRequest;
+                _pendingReload = !_pendingDiscard && _remainingWords == 0;
+                _pendingAddress = _pendingReload ? Location : _currentAddress;
+                _pendingRemainingWords = _pendingDiscard
+                    ? _remainingWords
+                    : (_pendingReload ? LengthWords : _remainingWords) - 1;
                 _dmaOutputCycle = cycle + 2;
             }
             if (_dmaOutputCycle == cycle)
             {
                 _pendingData = machine.ReadChipWordBus(_pendingAddress);
-                _currentAddress = (_pendingAddress + 2) & machine.DmaAddressMask;
+                // The startup restart loads AUDxLC after the discarded bus read.
+                _currentAddress = (_pendingDiscard ? Location : _pendingAddress + 2) & machine.DmaAddressMask;
                 _remainingWords = _pendingRemainingWords;
                 if (_pendingReload && !_pendingDiscard && _hasOutputWord)
                     _delayedInterrupt = true;

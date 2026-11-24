@@ -168,13 +168,19 @@ internal sealed class LightweightFloppyDrive
         var previous = _controlPins;
         var previousTrack = Cylinder * 2 + Head;
         _controlPins = pins;
-        if (!Selected)
+        // The active-low STEP pulse moves the head on its trailing edge.
+        if ((previous & (_selectMask | 1)) == 0 && (pins & 1) != 0)
         {
-            if (previousTrack != Cylinder * 2 + Head) SelectTrack(cycle, preservePhase: true);
-            return;
+            if (Mounted) DiskChanged = false;
+            if ((pins & 2) != 0)
+                Cylinder = Math.Max(0, Cylinder - 1);
+            else if (Cylinder < (UsesPreservedReceiver ? LastPreservedCylinder : 79))
+                Cylinder++;
+            // At the model's end stop, further inward pulses leave the head
+            // in place. They must not halt the guest or skip a side change.
         }
 
-        if ((previous & _selectMask) != 0)
+        if (Selected && (previous & _selectMask) != 0)
         {
             // MOTOR is latched on selection, not on every PRB write.
             var motor = (pins & 0x80) == 0;
@@ -189,16 +195,6 @@ internal sealed class LightweightFloppyDrive
             }
         }
 
-        if ((previous & 1) != 0 && (pins & 1) == 0)
-        {
-            if (Mounted) DiskChanged = false;
-            if ((pins & 2) != 0)
-                Cylinder = Math.Max(0, Cylinder - 1);
-            else if (Cylinder < (UsesPreservedReceiver ? LastPreservedCylinder : 79))
-                Cylinder++;
-            // At the model's end stop, further inward pulses leave the head
-            // in place. They must not halt the guest or skip a side change.
-        }
         if (previousTrack != Cylinder * 2 + Head) SelectTrack(cycle, preservePhase: true);
     }
 

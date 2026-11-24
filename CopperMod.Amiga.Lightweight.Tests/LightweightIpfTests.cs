@@ -153,7 +153,12 @@ public sealed class LightweightIpfTests
         var decoded = IpfDecoder.Decode(ipf);
         Assert.Equal(83, Assert.Single(decoded.Tracks).Cylinder);
         var drive = new LightweightFloppyDrive(); drive.MountIpf(ipf);
-        for (var i = 0; i < 83; i++) { drive.WriteControlPins(0x75, 0); drive.WriteControlPins(0x74, 0); }
+        drive.WriteControlPins(0x75, 0);
+        for (var i = 0; i < 83; i++)
+        {
+            drive.WriteControlPins(0x74, 0);
+            drive.WriteControlPins(0x75, 0);
+        }
         drive.UpdateRotation(0, false);
         Assert.Equal(83, drive.Cylinder);
         for (var i = 0; i < 100100; i++) { Assert.Equal(0, drive.ReadBit()); drive.AdvanceRotation(); }
@@ -223,8 +228,8 @@ public sealed class LightweightIpfTests
         machine.AdvanceHardwareTo(machine.Cycle + LightweightFloppyDrive.MotorSpinUpCycles + 300000);
         machine.WriteCustomRegisterFromCopper(0x020, 0, machine.Cycle);
         machine.WriteCustomRegisterFromCopper(0x022, 0x2000, machine.Cycle);
-        machine.WriteCustomRegisterFromCopper(0x024, 0x8001, machine.Cycle);
-        machine.WriteCustomRegisterFromCopper(0x024, 0x8001, machine.Cycle);
+        machine.WriteCustomRegisterFromCopper(0x024, 0x8002, machine.Cycle);
+        machine.WriteCustomRegisterFromCopper(0x024, 0x8002, machine.Cycle);
         machine.AdvanceHardwareTo(machine.Cycle + 2 * 1418758);
         Assert.False(machine.DiskDmaActive);
         Assert.Equal(0x4489, System.Buffers.Binary.BinaryPrimitives.ReadUInt16BigEndian(machine.ChipRam.Span[0x2000..]));

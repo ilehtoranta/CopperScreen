@@ -627,6 +627,46 @@ focused tests are in [the engine](../../CopperMod.Amiga.Lightweight) and
 [diagnostic test project](../../CopperMod.Amiga.Lightweight.Tests); host regressions
 are in [CopperScreen.Lightweight.Tests](../../CopperScreen.Lightweight.Tests).
 
+## Hardwired PAL OCS replay
+
+Use the two-disk The Party 1991 release with a PAL A500, 512 KiB Chip RAM,
+512 KiB slow RAM, Kickstart 1.3, and DF0 at normal speed. Eject after
+field 4,600, insert disk two after field 4,660, and hold the right mouse
+button after fields 4,750 through 4,764. The reference is WinUAE 6.0.3
+with CPU, memory and blitter cycle-exact enabled and seed `1795535325`.
+
+| Input | SHA-256 |
+| --- | --- |
+| Disk 1 | `C4129BC68A506D3BEB0804BF3D9FE9E41DB91E04E575C41AF6F0ADF84BDB3435` |
+| Disk 2 | `E197F632618EF9EFD6BDBFDCBA91A2F051F70A151C20D8D614A0213CE92F0066` |
+| Kickstart 1.3 | `EE05862D8102A08436AC4056DA7D549DB31625C7D47B24DFB7B3C9A5C113CA53` |
+
+This change covers PAL beam readback, Copper reload and strobe phases,
+Paula audio requests, floppy serial and DMA boundaries, the OCS blitter
+restart sequence, and border output through raster 311. Focused synthetic
+cases exercise those boundaries. The published Copper68k 1.5.11 pin still
+passes the engine diagnostic suite with 1,527 passes and seven skips.
+
+The integrated candidate used a local package built from the [Copper68k
+source correction](https://github.com/ilehtoranta/CopperMod/commit/77eaf8fbdc2ee309463d32fa524493b0ebec7bbb).
+It completed 39,000 fields and reached the ending loop. The renderer bus
+operation order matched all 2,820 traced blocks. The renderer scene lasted
+628 fields versus 629 in the reference. All 78 active captures of the ending
+matched pixel for pixel at a common 13-field offset with warp disabled. The
+second music cue started 19 fields later under the retained drive-ready
+model. After the closing audio transition, the audio offset was about 14
+fields. The shorter drive-ready experiment altered later scene timing and
+remains outside the change.
+
+The native Lemmings adapter replay reaches active gameplay on both clean
+`2b47027` and the integrated candidate. Both miss the historical terminal
+cycle assertion. All eight sampled gameplay frames from field 13,000 onward
+match, both replays consume all 19 scripted inputs, and both produce PCM in
+all 3,600 measured fields. The audio and terminal fingerprints differ. The
+historical values remain useful for their original configuration and are
+retained. The full Hardwired replay uses the combined source candidate and
+the development CPU package, whose release and package pin are separate.
+
 ## Storage benchmark follow-up, 2026-11-07
 
 - **LWA-HDF-002 — repaired synthetic read-ahead stream resumption:** after a

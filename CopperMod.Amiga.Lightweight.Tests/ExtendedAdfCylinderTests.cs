@@ -28,10 +28,11 @@ public sealed class ExtendedAdfCylinderTests
         Assert.True(media.CanWrite);
         var drive = new LightweightFloppyDrive();
         drive.MountPreserved(media.Tracks!, media.Format);
+        drive.WriteControlPins(0x71, 0); // Head 1, inward, selected.
         for (var cylinder = 0; cylinder < lastCylinder; cylinder++)
         {
-            drive.WriteControlPins(0x71, cylinder * 20); // Head 1, inward, selected.
             drive.WriteControlPins(0x70, cylinder * 20 + 10);
+            drive.WriteControlPins(0x71, cylinder * 20 + 20);
         }
         Assert.Equal(lastCylinder, drive.Cylinder);
         Assert.Equal(1, drive.Head);

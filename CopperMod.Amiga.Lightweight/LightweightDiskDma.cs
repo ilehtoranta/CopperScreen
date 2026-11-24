@@ -138,7 +138,17 @@ internal struct LightweightDiskDma
             _wordBits = 0;
             if (DmaEnabled(machine) && Remaining > _fifoCount + (_pendingCounts ? 1 : 0))
             {
-                if (_fifoCount == 3)
+                if (Remaining == 1)
+                {
+                    // No earlier word is buffered or in flight. Paula sees
+                    // the empty FIFO at the end of the serial countdown,
+                    // before it can queue this final word for RAM.
+                    Remaining = 0;
+                    machine.SetDiskLengthFromDma(0);
+                    CompleteRead(cycle, machine);
+                    RefreshNextCycle();
+                }
+                else if (_fifoCount == 3)
                 {
                     machine.ReportUnsupportedFeature("disk FIFO overrun timing");
                 }
@@ -183,14 +193,7 @@ internal struct LightweightDiskDma
                 _pendingCounts = false;
                 Remaining--;
                 machine.SetDiskLengthFromDma(Remaining);
-                if (Remaining == 0 && !_pendingWrite)
-                {
-                    Active = _armed = false;
-                    _fifo = 0;
-                    _fifoCount = 0;
-                    _inputCycle = long.MaxValue;
-                    machine.LatchDiskBlock(cycle);
-                }
+                if (Remaining == 0 && !_pendingWrite) CompleteRead(cycle, machine);
                 if (Writing && DmaEnabled(machine)) ScheduleInput(cycle, machine);
             }
         }
@@ -218,6 +221,15 @@ internal struct LightweightDiskDma
         }
         if (cycle == _writeCycle) StepWrite(cycle, machine);
         RefreshNextCycle();
+    }
+
+    private void CompleteRead(long cycle, LightweightA500Machine machine)
+    {
+        Active = _armed = false;
+        _fifo = 0;
+        _fifoCount = 0;
+        _inputCycle = long.MaxValue;
+        machine.LatchDiskBlock(cycle);
     }
 
     private static bool DmaEnabled(LightweightA500Machine machine)
