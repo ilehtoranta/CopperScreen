@@ -565,8 +565,9 @@ internal sealed class LightweightBlitter
         }
         else
         {
+            // The last shifter stage is bypassed when D is disabled.
             _phaseCount = 2 + (_useB ? 1 : 0) +
-                (_useC || _fillEnabled ? 1 : 0);
+                (_useD && (_useC || _fillEnabled) ? 1 : 0);
             _startupRemaining = _bOnly ? 2 : 3;
         }
         _areaResultPending = false;
@@ -685,13 +686,20 @@ internal sealed class LightweightBlitter
             }
         }
 
-        // Fill can drain the preceding result before the last, idle phase.
-        // The completion and final write stay anchored to the last phase.
-        if (_useD && !draining && _phaseIndex == _phaseCount - 1 && IsFinalWord())
+        if (!draining && _phaseIndex == _phaseCount - 1 && IsFinalWord())
         {
-            _areaDrainCycle = cycle + 2 * LightweightClock.CpuCyclesPerColorClock;
-            if (_alice) _areaCompletionCycle = _areaDrainCycle;
-            else PublishMainCompletion(cycle, machine);
+            if (_useD)
+            {
+                // Fill can drain the preceding result before the last idle phase.
+                // The final write stays anchored to the last phase.
+                _areaDrainCycle = cycle + 2 * LightweightClock.CpuCyclesPerColorClock;
+                if (_alice) _areaCompletionCycle = _areaDrainCycle;
+                else PublishMainCompletion(cycle, machine);
+            }
+            else if (channel == AreaChannel.C)
+            {
+                PublishMainCompletion(cycle, machine);
+            }
         }
 
         _hasPendingOutput = true;
@@ -839,6 +847,10 @@ internal sealed class LightweightBlitter
         }
         else
         {
+            // A source-only C slot is the end of the word. Its fresh data
+            // reaches the minterm after the accepted DMA read retires.
+            if (channel == AreaChannel.C && ComputeAreaOutput() != 0)
+                _zero = false;
             AdvanceWord(cycle, machine);
         }
     }

@@ -520,9 +520,29 @@ waiting and verifies the first A transfer with both priority settings.
 
 After the correction, all 128 shared A+D transfers match WinUAE in the
 isolated and full probes. The isolated shared A+B+C+D mode (`-Modes 15`)
-also matches all 256 transfers. In the full shared probe, CPU and blitter
-bus order still diverges while the A+B+C+D blit crosses a scanline.
+also matches all 256 transfers.
 [WinUAE blitter startup arbitration](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1741-L1778)
+
+### Source-only C blits
+
+In the full shared probe, C, A+C and A+B+C ran slow because CopperScreen
+inserted an idle phase after C when D was disabled. An isolated 3-word C
+blit (`-Modes 2 -Width 3 -Ocs -BlitterPriority -WaitPosition 0x47`)
+shows three WinUAE C reads at CCKs `$53`, `$55` and `$57`, with BLIT IRQ
+at `$56`, the input phase of the final read. The area pipeline now ends
+each source-only word on the C slot, tests the freshly read data for the
+zero flag, and clears BUSY while the last C output is still pending.
+
+The full shared probe matches all 384 transfers in C, A+C and A+B+C,
+and 127 of 128 in B+C. A+B+C+D now matches all 256 through the scanline
+boundary after the earlier source-only blits. B, B+D and one B+C
+startup transfer still differ in this mixed sequence.
+[WinUAE area shifter stages](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1120-L1152)
+
+The source-only correction retained the CPU, hardware and output
+fingerprints of all five original game replays on the preceding startup
+build. The Release solution built cleanly, and engine diagnostics passed
+1,479 tests with seven optional cases skipped.
 
 ## All New World of Lemmings
 

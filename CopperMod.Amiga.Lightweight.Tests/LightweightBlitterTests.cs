@@ -631,6 +631,43 @@ public sealed class LightweightBlitterTests
         Assert.Equal((ushort)0xCAFE, ReadWord(machine, DestinationD));
     }
 
+    [Theory]
+    [InlineData(0x02AA, 10, 4)]
+    [InlineData(0x06AA, 12, 6)]
+    [InlineData(0x0AAA, 10, 4)]
+    [InlineData(0x0EAA, 12, 6)]
+    public void AreaBlitsWithCAndWithoutDRepeatAfterTheCRead(
+        ushort control, int firstReadOffset, int readSpacing)
+    {
+        using var machine = new LightweightA500Machine();
+        WriteWord(machine, SourceC, 0xCAFE);
+        WriteWord(machine, DestinationD, 0x4321);
+        ConfigureArea(machine, bltcon0: control);
+        EnableBlitter(machine, nasty: true);
+        var start = StartBlit(machine, 0x0043);
+
+        Assert.True(machine.BlitterZero);
+        for (var word = 0; word < 3; word++)
+        {
+            var readCycle = start + firstReadOffset + word * readSpacing;
+            if (word == 2)
+            {
+                var inputCycle = readCycle - LightweightClock.CpuCyclesPerColorClock;
+                machine.AdvanceHardwareTo(inputCycle);
+                Assert.False(machine.BlitterStatusBusy);
+                Assert.True(machine.BlitterActive);
+                Assert.Equal(inputCycle, machine.BlitterLastCompletionCycle);
+            }
+            machine.AdvanceHardwareTo(readCycle);
+            Assert.Equal(readCycle, machine.BlitterLastOutputCycle);
+            Assert.Equal(SourceC + (uint)((word + 1) * 2), machine.GetBlitterPointer(LightweightRegisters.Bltcpth));
+            Assert.False(machine.BlitterZero);
+        }
+
+        AdvanceUntilBlitterIdle(machine);
+        Assert.Equal((ushort)0x4321, ReadWord(machine, DestinationD));
+    }
+
     [Fact]
     public void BitplaneOutputKeepsPriorityAndDelaysOnlyIncomingBlitterPhase()
     {
