@@ -335,7 +335,6 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     internal ushort Adkcon => _registers.Adkcon;
     internal ushort Intena => _registers.Intena;
     internal ushort Intreq => _registers.Intreq;
-    internal ushort DdfStop => _registers.DdfStopValue;
     internal int InterruptPinLevel => _interruptPinLevel;
     internal long InterruptPinChangeCycle => _interruptPinChangeCycle;
     internal byte CiaAInterruptMask => _ciaA.InterruptMask;

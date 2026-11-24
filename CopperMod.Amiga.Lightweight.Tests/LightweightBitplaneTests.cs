@@ -136,6 +136,27 @@ public sealed class LightweightBitplaneTests
         Assert.False(machine.BitplaneRunActive);
     }
 
+    [Theory]
+    [InlineData(0x70, 0x48, 0x43, 3)]
+    [InlineData(0x70, 0x48, 0x45, 21)]
+    [InlineData(0x48, 0x70, 0x43, 8)]
+    [InlineData(0x48, 0x70, 0x45, 3)]
+    public void DdfStopWriteKeepsTheOldComparatorThroughTheWriteDelay(
+        ushort initialStop, ushort newStop, int writeClock, uint wordsPerPlane)
+    {
+        using var machine = new LightweightA500Machine();
+        ConfigureLowRes(machine, planeCount: 2, ddfStop: initialStop);
+        var lineStart = (long)DisplayLine * LightweightClock.CpuCyclesPerLine;
+        var writeCycle = lineStart + writeClock * LightweightClock.CpuCyclesPerColorClock;
+
+        machine.AdvanceHardwareTo(writeCycle);
+        machine.WriteCustomRegisterFromCopper(LightweightRegisters.Ddfstop, newStop, writeCycle);
+        machine.AdvanceHardwareTo(lineStart + LightweightClock.CpuCyclesPerLine);
+
+        Assert.Equal(PlaneBase + 2 * wordsPerPlane, machine.GetLiveBitplanePointer(0));
+        Assert.Equal(PlaneBase + 0x100 + 2 * wordsPerPlane, machine.GetLiveBitplanePointer(1));
+    }
+
     [Fact]
     public void LateDdfStartPreservesFetchPhaseAcrossRasterlineWrap()
     {

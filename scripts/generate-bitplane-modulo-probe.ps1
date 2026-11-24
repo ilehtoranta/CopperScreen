@@ -1,5 +1,6 @@
 param(
-    [Parameter(Mandatory)][string]$Path
+    [Parameter(Mandatory)][string]$Path,
+    [switch]$DdfStopSweep
 )
 
 $ErrorActionPreference = 'Stop'
@@ -22,26 +23,42 @@ WriteWord 0x7FFF 0xDFF096
 WriteCopperWord 0x008E 0x2C81
 WriteCopperWord 0x0090 0xB4C1
 WriteCopperWord 0x0092 0x0038
-WriteCopperWord 0x0094 0x0050
+WriteCopperWord 0x0094 $(if ($DdfStopSweep) { 0x0070 } else { 0x0050 })
 WriteCopperWord 0x0100 0x2201
 WriteCopperWord 0x0106 0x0C00
-WriteCopperWord 0x01FC 3
+WriteCopperWord 0x01FC $(if ($DdfStopSweep) { 0 } else { 3 })
 WriteCopperWord 0x00E0 1
 WriteCopperWord 0x00E4 1
 
-# Reserve separate bitplane banks so the next scanline exposes which modulo won.
-# Sweep the Copper wait across both terminal fetches.
-for ($test = 0; $test -lt 14; $test++) {
-    $line = (64 + 4 * $test) -shl 8
-    $bank = 0x2000 + $test * 0x800
-    WriteCopperWord ($line + 1) 0xFFFE
-    WriteCopperWord 0x00E2 $bank
-    WriteCopperWord 0x00E6 ($bank + 0x400)
-    WriteCopperWord 0x0108 0
-    WriteCopperWord 0x010A 8
-    WriteCopperWord ($line + 0x45 + $test * 2) 0xFFFE
-    WriteCopperWord 0x0108 0x20
-    WriteCopperWord 0x010A 0x70
+if ($DdfStopSweep) {
+    # Move the stop comparator in both directions during the DMA run.
+    for ($test = 0; $test -lt 12; $test++) {
+        $line = (64 + 4 * $test) -shl 8
+        $bank = 0x2000 + $test * 0x800
+        $earlyStop = $test -ge 6
+        WriteCopperWord ($line + 1) 0xFFFE
+        WriteCopperWord 0x0094 $(if ($earlyStop) { 0x0048 } else { 0x0070 })
+        WriteCopperWord 0x00E2 $bank
+        WriteCopperWord 0x00E6 ($bank + 0x400)
+        WriteCopperWord 0x0108 0
+        WriteCopperWord 0x010A 0
+        WriteCopperWord ($line + 0x3D + ($test % 6) * 2) 0xFFFE
+        WriteCopperWord 0x0094 $(if ($earlyStop) { 0x0070 } else { 0x0048 })
+    }
+} else {
+    # Separate bitplane banks expose which modulo won on the next scanline.
+    for ($test = 0; $test -lt 14; $test++) {
+        $line = (64 + 4 * $test) -shl 8
+        $bank = 0x2000 + $test * 0x800
+        WriteCopperWord ($line + 1) 0xFFFE
+        WriteCopperWord 0x00E2 $bank
+        WriteCopperWord 0x00E6 ($bank + 0x400)
+        WriteCopperWord 0x0108 0
+        WriteCopperWord 0x010A 8
+        WriteCopperWord ($line + 0x45 + $test * 2) 0xFFFE
+        WriteCopperWord 0x0108 0x20
+        WriteCopperWord 0x010A 0x70
+    }
 }
 WriteCopperWord 0xFFFF 0xFFFE
 

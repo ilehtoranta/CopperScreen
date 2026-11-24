@@ -696,6 +696,34 @@ and countdown frames.
 Later stages and the timing of the game's actual Copper list writes remain
 unverified.
 
+### Live DDFSTOP writes
+
+The [bootable bitplane probe](../../scripts/generate-bitplane-modulo-probe.ps1)
+with `-DdfStopSweep` sets up two lores planes and changes DDFSTOP between
+`$0048` and `$0070` at six points in either direction. In cycle-exact
+WinUAE 6.1 beta 23, moving the stop to `$0048` near the comparator edge
+can miss the new position and run to the hard stop. Moving it away from
+`$0048` at the same edge can leave the shorter run intact. The previous
+CopperScreen engine used the new register value too soon in four of the
+twelve cases on each chipset.
+[WinUAE DDFSTOP write timing](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/custom.cpp#L3678-L3686)
+· [WinUAE stop comparators](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/custom.cpp#L9434-L9445)
+
+The bitplane sequencer now observes the change after the comparator
+write delay. The PAL A500 and PAL A1200 probes each match all 210 DMA
+transfers by plane, address, width, and relative CCK. Capture with
+`DBG vl 64 32 13` and repeat every four lines through line 108.
+Four automated cases check the last pointer after moving the stop
+earlier or later on either side of its sampling edge. A separate
+mid-line FMODE sweep between 16- and 64-bit fetches matched all
+132 transfers on the existing engine.
+
+The Release solution build completed with zero warnings. Engine diagnostics
+passed 1,497 tests and skipped seven optional native cases. The original
+ZooL 2, Banshee, P.P. Hammer, Lemmings 3 and RoboCop 3 replays retained all
+13 reference-build frame captures and all final CPU, hardware and output
+fingerprints. Sqrxz reached its title on PAL and NTSC CD32.
+
 ### Egyptian opening level
 
 CopperScreen `9b3e8e4` selected the Egyptian Lemming in the Ark and reached
@@ -721,6 +749,23 @@ for CopperScreen and
 `9F8ACA04C5941DF58317B9DEB82F179A1F877FAFA43E962F55837D707222DC7A`
 for WinUAE. These checks cover the opening level of each of the three
 tribes and the previously recorded Shadow scrolling route.
+
+### Egyptian level 2 and scrolling
+
+A replay on CopperScreen `2b47027` used the spade twice on the opening
+level, first digging diagonally left and then down through the upper
+platform near the exit. The result screen at field 15,304 reported all
+20 Lemmings saved. Selecting Play Next Level continued loading from the
+original Egyptian disk in DF2 and reached level 2 by field 18,184.
+[Game manual for the spade and level controls](https://db.hfsplay.fr/files/2018/10/06/c9f24f28-42dd-4046-aa9b-1d0b7622142e.pdf)
+
+Moving the mouse against the edges scrolled the second level to the
+right by field 18,614 and back to the opening position by field 19,474.
+The skill bar stayed fixed and Lemmings continued moving during the
+scroll. The Release runner with the DDFSTOP correction reproduced the
+level 2 frame at field 18,184 byte for byte. The capture SHA-256 is
+`F6C3E0620B0DB1D217F2DBFFDE81EEA45B19534F1E25D5728FCD5657A7038E42`.
+Independent comparison of the second level remains open.
 
 ## RoboCop 3
 
