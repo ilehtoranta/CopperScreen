@@ -11,8 +11,9 @@ if (args.Contains("--help"))
         Lightweight runner: --rom <ROM> [--frames <count>] [--disk <ADF/IPF/SCP>]
           ROM may be a standard reset image or a 1 MiB CopperStart pair (E00000 bank, then F80000 bank).
         --cd32 [--video-standard <pal|ntsc>] --rom <40.60 or combined CD32 ROM>
-          Experimental stock CD32. For split ROMs add --extended-rom <path>. Use --nvram <path> for persistent saves.
-          --cd <image> mounts a Mode 1 ISO/BIN/IMG or single-file BIN/CUE with CD audio. --cd-turbo accelerates data reads.
+          Experimental CD32. For split ROMs add --extended-rom <path>. --fast-ram-kib adds optional Zorro II Fast RAM.
+          Use --nvram <path> for persistent saves.
+          --cd <image> mounts Mode 1 ISO/BIN/IMG and CUE sheets with binary, PCM WAVE or MP3 tracks. --cd-turbo accelerates data reads.
         --hdf-ffs <existing-image> <DEVICE:HEADS:BLOCKS-PER-TRACK:FIRST-CYLINDER:LAST-CYLINDER>
           One explicit FFS/DOS1 partition, 512-byte blocks, inclusive cylinders; TD64 supports offsets above 4 GiB.
           Read-only by default. Use --hdf-ffs-writable to allow direct backing-file writes.
@@ -285,7 +286,7 @@ if (cd32)
 {
 #if LIGHTWEIGHT_CD32
     if (args.Any(a => a is "--cpu" or "--jit" or "--cpu-clock-multiplier" or "--agnus" or "--denise" or
-        "--chip-ram-kib" or "--slow-ram-kib" or "--fast-ram-kib" or "--rtc" or "--drives" or "--drive-type") ||
+        "--chip-ram-kib" or "--slow-ram-kib" or "--rtc" or "--drives" or "--drive-type") ||
         adfPath is not null || extraAdfPaths.Any(p => p is not null) || hardfiles.Count != 0 || hostDirectories.Count != 0 ||
         diskSerial || ciaTod)
         throw new ArgumentException("The stock CD32 owns its CPU, memory and drives. Remove incompatible hardware and floppy options.");
@@ -297,7 +298,8 @@ if (cd32)
         PathsEqual(nvramPath, extendedRomPath) || PathsEqual(nvramPath, cdPath) || PathsEqual(nvramPath, inputScriptPath)))
         throw new ArgumentException("--nvram must specify a separate file.");
     var stock = LightweightA500Configuration.CreateCd32(cd32Ntsc == true ? LightweightCd32Region.Ntsc : LightweightCd32Region.Pal);
-    cd32Configuration = stock;
+    if (fastRamKiB > 8192) throw new ArgumentException("CD32 supports up to 8 MiB of Fast RAM.");
+    cd32Configuration = stock with { FastRamBytes = fastRamKiB * 1024 };
     cpuModel = stock.CpuModel;
     agnusModel = stock.AgnusModel;
     deniseModel = stock.DeniseModel;

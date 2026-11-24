@@ -53,6 +53,46 @@ public sealed class LightweightAgaCompositionTests
     }
 
     [Theory]
+    [InlineData(1, 0x2100, 1, 2, 4)]
+    [InlineData(2, 0x0100, 1, 0, 2)]
+    public void LisaScrollsOddAndEvenPlanesAtSuperHiresGranularity(
+        int resolution, ushort scroll, int oddStart, int evenStart, int width)
+    {
+        using var m = Create([3, 0, 0, 0], control: 0x2200, resolution: resolution);
+        int[] colors = [0, 0xFF0000, 0x00FF00, 0x0000FF];
+        for (var i = 1; i < colors.Length; i++) Palette(m, i, colors[i]);
+        Write(m, 0x102, scroll);
+        m.ExecuteFrame();
+
+        var first = 44 * 1816 + 516;
+        for (var sample = 0; sample < 8; sample++)
+        {
+            var code = 0;
+            if (sample >= oddStart && sample < oddStart + width) code |= 1;
+            if (sample >= evenStart && sample < evenStart + width) code |= 2;
+            Assert.Equal(unchecked((int)0xFF000000) | colors[code], m.Framebuffer.Span[first + sample]);
+        }
+    }
+
+    [Fact]
+    public void AgaBorderBlankChangesOneSampleBeforeTheDisplayWindow()
+    {
+        using var m = Create(Enumerable.Repeat(1, 320).ToArray(), control: 0x1201);
+        Palette(m, 0, 0x0000FF);
+        Palette(m, 1, 0xFF0000);
+        Write(m, 0x106, 0x0C20);
+        m.ExecuteFrame();
+
+        var row = m.Framebuffer.Span.Slice(44 * 1816, 1816);
+        Assert.Equal(0, row[514]);
+        Assert.Equal(unchecked((int)0xFF0000FF), row[515]);
+        Assert.Equal(unchecked((int)0xFFFF0000), row[516]);
+        Assert.Equal(unchecked((int)0xFFFF0000), row[1794]);
+        Assert.Equal(unchecked((int)0xFF000000), row[1795]);
+        Assert.Equal(0, row[1796]);
+    }
+
+    [Theory]
     [InlineData(1, 0)] [InlineData(1, 1)] [InlineData(1, 2)] [InlineData(1, 3)]
     [InlineData(2, 1)] [InlineData(2, 3)] [InlineData(4, 3)]
     public void Ham8UsesLowControlPlanesAndPreservesTwoComponentBits(int resolution, int fetch)

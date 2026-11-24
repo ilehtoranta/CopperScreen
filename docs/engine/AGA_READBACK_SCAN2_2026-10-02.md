@@ -27,8 +27,10 @@ run only when the vertical beam and the sprite start have matching parity.
 Alternate rows retain Lisa's full previous payload; ordinary sprites and POS/CTL
 reloads continue normally. Lisa removes SH10 from the horizontal comparator while
 SSCAN2 is set. Start/stop parity is equal in the probes, as required by Commodore.
-No secondary clock, raster frequency change, Legacy scheduler or Release logging
-is introduced.
+The original implementation scheduled only the first matching position. The
+[Castlevania AGA replay](CD32.md#castlevania-aga) exercises the second match
+1024 fine pixels later. No secondary clock, raster frequency change, Legacy
+scheduler or Release logging is introduced.
 
 Primary sources are Commodore's [AA functional specification](https://shanson.com/spencer/Amiga-AA-Chipset.pdf),
 printed pages 4–5, and [Lisa specification](https://www.amigawiki.org/lib/exe/fetch.php?media=de%3Aparts%3Aaa_lisa_specification.pdf),

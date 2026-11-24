@@ -5,6 +5,7 @@ namespace CopperMod.Amiga.Lightweight;
 
 internal sealed partial class LightweightSprites
 {
+    private const int AgaSpriteSh10 = 1 << 10;
     private readonly bool _aga;
     private readonly AgaChannel[] _agaChannels;
     private readonly byte[] _agaCollisionMatches;
@@ -143,6 +144,14 @@ internal sealed partial class LightweightSprites
         => ((((state.Pos & (_agaScanDouble ? 127 : 255)) << 1) | (state.Ctl & 1)) + 1) * 4 +
             (state.Ctl >> 4 & 1) * 2 + (state.Ctl >> 3 & 1);
 
+    // SSCAN2 makes SH10 a don't-care in Lisa's comparator. Both horizontal
+    // positions can latch the same sprite data, independently of Alice's DMA.
+    private int NextAgaMatch(int start, int fromX)
+    {
+        if (start < fromX && _agaScanDouble) start += AgaSpriteSh10;
+        return start >= fromX ? start : int.MaxValue;
+    }
+
     private void UpdateAgaComparators(int x, bool begin)
     {
         var dirty = begin ? 255 : _dirtyMask & 255;
@@ -158,13 +167,17 @@ internal sealed partial class LightweightSprites
             if ((_armedMask & bit) != 0)
             {
                 var start = AgaStart(in _channels[sprite]);
-                if (start >= x) { _lineArmedMask |= bit; _upcomingMask |= bit; }
-                else if (begin && x < start + _agaChannels[sprite].Bits * _agaStep)
-                { _lineArmedMask |= bit; LatchAgaSprite(sprite, start); }
+                if (NextAgaMatch(start, x) != int.MaxValue)
+                { _lineArmedMask |= bit; _upcomingMask |= bit; }
+                if (begin)
+                {
+                    var visibleStart = NextAgaMatch(start, x - _agaChannels[sprite].Bits * _agaStep + 1);
+                    if (visibleStart < x) { _lineArmedMask |= bit; LatchAgaSprite(sprite, visibleStart); }
+                }
             }
             else if (wasUpcoming && (_shiftingMask & bit) == 0) _lineArmedMask &= (byte)~bit;
         }
-        RefreshAgaStart();
+        RefreshAgaStart(x);
     }
 
     private void LatchAgaComparators(int x)
@@ -174,11 +187,11 @@ internal sealed partial class LightweightSprites
             var bit = (byte)(1 << sprite);
             if ((_upcomingMask & bit) == 0) continue;
             var start = AgaStart(in _channels[sprite]);
-            if (start > x) continue;
-            _upcomingMask &= (byte)~bit;
-            LatchAgaSprite(sprite, start);
+            if (NextAgaMatch(start, x) != x) continue;
+            if (!_agaScanDouble || x != start) _upcomingMask &= (byte)~bit;
+            LatchAgaSprite(sprite, x);
         }
-        RefreshAgaStart();
+        RefreshAgaStart(x + 1);
     }
 
     private void LatchAgaSprite(int sprite, int start)
@@ -192,12 +205,12 @@ internal sealed partial class LightweightSprites
         else _latchedAttachedMask &= (byte)~bit;
     }
 
-    private void RefreshAgaStart()
+    private void RefreshAgaStart(int fromX)
     {
         _nextStart = int.MaxValue;
         for (var sprite = 0; sprite < 8; sprite++)
             if ((_upcomingMask & (1 << sprite)) != 0)
-                _nextStart = Math.Min(_nextStart, AgaStart(in _channels[sprite]));
+                _nextStart = Math.Min(_nextStart, NextAgaMatch(AgaStart(in _channels[sprite]), fromX));
     }
 
     internal void SetAgaCollisionControl(ushort value)

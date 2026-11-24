@@ -111,8 +111,14 @@ internal sealed class NativeBootProbe
                 irq = $"{akiko.Read(0xB80004, 4, m.Cycle, strobe: false):X8}",
                 tx = akiko.Read(0xB80019, 1, m.Cycle, strobe: false),
                 rx = akiko.Read(0xB8001A, 1, m.Cycle, strobe: false),
+                txEnd = Field<byte>(akiko.Cd, "_txEnd"),
+                rxEnd = Field<byte>(akiko.Cd, "_rxEnd"),
+                ringsBase = $"{Field<uint>(akiko.Cd, "_ringsBase"):X6}",
+                dataBase = $"{Field<uint>(akiko.Cd, "_dataBase"):X6}",
                 lastLba = Field<int>(akiko.Cd, "_lastLba"),
                 sectorsAccepted = Field<int>(akiko.Cd, "_sectorNumber"),
+                audioLba = Field<int>(akiko.Cd, "_audioLba"),
+                audioPlaying = Field<bool>(akiko.Cd, "_playing"),
                 m.IsCd32NvramDirty
             }));
         }

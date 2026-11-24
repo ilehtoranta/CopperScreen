@@ -15,6 +15,11 @@
         "resolved": "1.0.0",
         "contentHash": "3JsCmXbubyK694it2nOL9KDp0LMVRp0VTBIf6e1ZFJ98Q59CAEBtLm+CF8tNgYmfMWkMQYPfGh9AJ9cFhaS2Rw=="
       },
+      "NLayer": {
+        "type": "Transitive",
+        "resolved": "3.0.1",
+        "contentHash": "wmio64yT/zvjGlVaU6uWpjUaj3CkwfPcs2BngElCAc0LA/ORVaPOzqaaq4BGS6gqIp8fa3eZecnWLHUqnR436w=="
+      },
       "copperdisk": {
         "type": "Project"
       },
@@ -22,7 +27,8 @@
         "type": "Project",
         "dependencies": {
           "Copper68k": "[1.5.10, 1.5.10]",
-          "CopperDisk": "[3.0.1-dev.5, )"
+          "CopperDisk": "[3.0.1, )",
+          "NLayer": "[3.0.1, 3.0.1]"
         }
       }
     }

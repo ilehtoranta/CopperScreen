@@ -197,8 +197,16 @@ public sealed class LightweightAgaReadbackScanTests
         m.AdvanceHardwareTo((start+4)*454L+200);
         Assert.Equal(0, m.GetSpriteDmaPos(0)); Assert.Equal(0, m.GetSpriteDmaCtl(0));
         m.ExecuteFrame(); var bits = mode == 0 ? 16 : mode == 3 ? 64 : 32;
-        for (var row = 0; row < 4; row++) for (var x = 520; x < 520+bits*4; x++)
-            Assert.Equal(unchecked((int)((flag ? row/2 : row) % 2 == 0 ? 0xFFFF0000 : 0xFF00FF00)), m.Framebuffer.Span[(start+row)*1816+x]);
+        for (var row = 0; row < 4; row++)
+        {
+            var pixels = m.Framebuffer.Span.Slice((start + row) * 1816, 1816);
+            var expected = unchecked((int)((flag ? row/2 : row) % 2 == 0 ? 0xFFFF0000 : 0xFF00FF00));
+            for (var x = 520; x < 520 + bits * 4; x++)
+            {
+                Assert.Equal(expected, pixels[x]);
+                Assert.Equal(expected, pixels[x + 1024]);
+            }
+        }
         Assert.Null(m.UnsupportedActiveFeature);
     }
 }

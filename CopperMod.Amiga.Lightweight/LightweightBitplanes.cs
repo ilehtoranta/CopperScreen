@@ -42,6 +42,7 @@ internal sealed class LightweightBitplanes
     private ushort _pendingBplcon0;
     private long _pendingBplcon0Cycle;
     private bool _startPermit;
+    private int _earlyDdfStartLine = -1;
     private bool _runActive;
     // Updated at the canonical sync edge; no clock-object lookup per DMA CCK.
     private bool _beamStopped;
@@ -80,6 +81,7 @@ internal sealed class LightweightBitplanes
         _pendingBplcon0 = 0;
         _pendingBplcon0Cycle = long.MaxValue;
         _startPermit = false;
+        _earlyDdfStartLine = -1;
         _runActive = false;
         _beamStopped = false;
         _dmaEnabled = false;
@@ -141,6 +143,7 @@ internal sealed class LightweightBitplanes
     internal void OnFrameStart(long cycle, LightweightA500Machine machine)
     {
         _startPermit = false;
+        _earlyDdfStartLine = -1;
         _runActive = false;
         _sequenceOriginCycle = long.MaxValue;
         _terminalUnitStartCycle = long.MaxValue;
@@ -300,9 +303,24 @@ internal sealed class LightweightBitplanes
             _ownerLine = -1;
         }
 
+        var earlyStartMatch = false;
+        if (TPath.Aga && hardLimits && horizontal <= DdfLimitReleaseHorizontal)
+        {
+            // Alice latches DDFSTRT while the hard limit still blocks the bus.
+            var stopMatch = horizontal == (machine.DdfStop & _ddfMask);
+            if (horizontal < DdfLimitReleaseHorizontal)
+            {
+                if (horizontal == (machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & _ddfMask))
+                    _earlyDdfStartLine = machine.BeamLine;
+                if (stopMatch) _earlyDdfStartLine = -1;
+                return;
+            }
+            earlyStartMatch = !stopMatch && _earlyDdfStartLine == machine.BeamLine;
+            _earlyDdfStartLine = -1;
+        }
+
         if (_startPermit && dmaEnabled && planeCount != 0 &&
-            horizontal == (machine.GetCustomRegister(
-                LightweightRegisters.Ddfstrt) & _ddfMask) &&
+            (earlyStartMatch || horizontal == (machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & _ddfMask)) &&
             IsVerticalWindowOpen<TPath>(machine))
         {
             _runActive = true;
@@ -464,9 +482,26 @@ internal sealed class LightweightBitplanes
         where TPath : struct, ILightweightExecutionPath
     {
         var horizontal = machine.BeamColorClock;
+        var hardLimits = !(TPath.EnhancedDisplay && _ecs) || (_effectiveBplcon0 & 0x20) == 0;
         var target = !_startPermit
-            ? ((TPath.EnhancedDisplay && _ecs) && (_effectiveBplcon0 & 0x20) != 0 ? 0 : DdfLimitReleaseHorizontal)
+            ? (hardLimits ? DdfLimitReleaseHorizontal : 0)
             : machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & _ddfMask;
+        if (TPath.Aga && hardLimits)
+        {
+            var ddfStart = _startPermit ? target : machine.GetCustomRegister(LightweightRegisters.Ddfstrt) & _ddfMask;
+            var hasEarlyStart = _earlyDdfStartLine >= 0 && _earlyDdfStartLine == machine.BeamLine;
+            if (ddfStart < DdfLimitReleaseHorizontal || hasEarlyStart)
+            {
+                target = ddfStart;
+                if (horizontal < DdfLimitReleaseHorizontal)
+                {
+                    target = DdfLimitReleaseHorizontal;
+                    if (ddfStart > horizontal && ddfStart < target) target = ddfStart;
+                    var ddfStop = machine.DdfStop & _ddfMask;
+                    if (hasEarlyStart && ddfStop > horizontal && ddfStop < target) target = ddfStop;
+                }
+            }
+        }
         var colorClocksPerLine = machine.ColorClocksPerLine;
         if ((uint)target >= (uint)colorClocksPerLine)
         {

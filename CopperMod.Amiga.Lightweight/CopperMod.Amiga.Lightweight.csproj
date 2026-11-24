@@ -29,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Copper68k" Version="[$(Copper68kBoundaryVersion)]" />
+    <PackageReference Include="NLayer" Version="[3.0.1]" />
     <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <Target Name="ValidatePackageBoundary" BeforeTargets="GenerateNuspec">

@@ -18,7 +18,8 @@ def palette(index):
     return bytes((index*73%256,index*37%256,index,255))
 
 
-def scan_raster(mode, doubled_planes=True, doubled_sprites=True, masked_position=True):
+def scan_raster(mode, doubled_planes=True, doubled_sprites=True, masked_position=True,
+                repeat_position=True):
     width, height = 1816,313
     data = bytearray(width*height*4)
     length = {'scan16':16,'scan32':32,'scan32page':32,'scan64':64}[mode]
@@ -38,7 +39,10 @@ def scan_raster(mode, doubled_planes=True, doubled_sprites=True, masked_position
                 for bit in range(length):
                     index = bit%16 if mode == 'scan32page' else bit
                     pixel = (index+sprite+index//16+source_row)%4
-                    for sub in range(step): patterns[sprite][left+bit*step+sub] = pixel
+                    for sub in range(step):
+                        x = left+bit*step+sub
+                        patterns[sprite][x] = pixel
+                        if repeat_position: patterns[sprite][x+1024] = pixel
         # Paint low-priority pairs first; transparent pixels preserve earlier
         # data. Pair 6 is attached; the others select independent bank addresses.
         for even in (6,4,2,0):
@@ -86,7 +90,7 @@ class AgaReadbackScanControls(unittest.TestCase):
             with self.subTest(mode=mode): self.check(scan_raster(mode),bytes(2097152),mode,True)
 
     def test_bitplane_sprite_and_horizontal_scan_rules_are_independently_required(self):
-        for feature in ('doubled_planes','doubled_sprites','masked_position'):
+        for feature in ('doubled_planes','doubled_sprites','masked_position','repeat_position'):
             with self.subTest(feature=feature): self.check(scan_raster('scan64',**{feature:False}),bytes(2097152),'scan64',False)
 
     def test_corrupt_scan_pixel_and_truncated_bitmap(self):

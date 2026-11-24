@@ -51,12 +51,15 @@ else:
             values = []
             for channel in range(8):
                 left = (132+40*(channel%4))*4+channel%4
+                # SSCAN2 ignores SH10 in the horizontal comparison, so the
+                # same payload can match in either half of Lisa's counter.
+                sprite_x = (x - left) % 1024
                 value = 0
                 for base in ((64,112,160) if channel < 4 else (80,128,176)):
                     top = base+(channel%2 if channel != 7 else 0)
-                    if top <= y < top+8 and left <= x < left+count*step:
+                    if top <= y < top+8 and sprite_x < count*step:
                         source_row = (y-top)//2 if channel%2 == 0 else y-top
-                        bit = (x-left)//step
+                        bit = sprite_x//step
                         if a.mode == 'scan32page': bit %= 16
                         value = (bit+channel+bit//16+source_row)%4
                 values.append(value)

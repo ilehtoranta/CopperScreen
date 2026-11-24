@@ -121,7 +121,8 @@ an aligned attached pair distinguish the sprite path from the playfield path.
 
 `verify_readback_scan.py <frame.bmp> --mode <scan-mode> --chipram <frame.chipram>`
 checks 139,000 pixels per checkpoint, including gaps, transparent data and ordinary
-sprites alongside doubled ones. It requires complete bitmap and Chip RAM files.
+sprites alongside doubled ones, including a second horizontal match when it falls
+inside the checked area. It requires complete bitmap and Chip RAM files.
 Scan probes do not sample CLXDAT; the earlier sprite probes retain that coverage.
 Validate `aga-screen-proof.txt` separately with the FFS proof reader. These are
 original native PAL hardware probes, not stock VGA monitor drivers or third-party

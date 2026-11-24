@@ -1,6 +1,6 @@
 namespace CopperMod.Amiga.Lightweight;
 
-// CPU-only virtual Zorro II/III memory. Agnus DMA never sees this storage.
+// Virtual Zorro II/III memory. Agnus DMA never sees this storage.
 internal sealed class LightweightFastRam : AutoconfigBoard
 {
     internal byte[] Memory { get; }
@@ -60,7 +60,7 @@ public sealed partial class LightweightA500Machine
     private readonly LightweightFastRam? _fastRam;
     private readonly AutoconfigChain? _autoconfig;
 
-    /// <summary>Installed CPU-only Zorro II/III RAM. Read on the execution owner thread.</summary>
+    /// <summary>Installed Zorro II/III RAM. Read on the execution owner thread.</summary>
     public ReadOnlyMemory<byte> FastRam => _fastRam?.Memory ?? ReadOnlyMemory<byte>.Empty;
     /// <summary>Guest-assigned address, or null until Autoconfig completes.</summary>
     public uint? FastRamBase => _fastRam is { IsConfigured: true } ram ? ram.ConfiguredBase : null;

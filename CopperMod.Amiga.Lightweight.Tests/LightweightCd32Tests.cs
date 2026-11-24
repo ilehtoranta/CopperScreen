@@ -372,13 +372,15 @@ public sealed class LightweightCd32Tests
         Assert.False(machine.IsCd32NvramDirty);
     }
 
-    [Fact]
-    public void CommandAndResponseDmaRetireAtTheRingComparators()
+    [Theory]
+    [InlineData(0x10000u, 0)]
+    [InlineData(0x9FFC00u, 8 * 1024 * 1024)]
+    public void CommandAndResponseDmaRetireAtTheRingComparators(uint rings, int fastRamBytes)
     {
-        using var machine = Create();
+        using var machine = Create(fastRamBytes);
+        long cycle = machine.Cycle;
+        machine.WriteWord(rings + 0x200, 0x00FF, ref cycle, Write); // Checksum-only status command.
         var cd = new AkikoRegisters(machine);
-        const uint rings = 0x10000;
-        machine.WriteChipWordDma(rings + 0x200, 0x00FF); // Checksum-only status command.
         cd.Long(0x14, rings);
         cd.Long(0x08, 0x18000000);
         cd.Long(0x24, 0x60000000);
@@ -390,7 +392,9 @@ public sealed class LightweightCd32Tests
         cd.Advance(700);
         Assert.Equal(2, cd.Byte(0x19));
         Assert.Equal(2, cd.Byte(0x1A));
-        Assert.Equal(0x00FF, machine.ReadChipWordDma(rings));
+        cycle = machine.Cycle;
+        Assert.Equal(0x00FF, machine.ReadWord(rings, ref cycle, Read));
+        if (fastRamBytes != 0) Assert.Equal(0, machine.ReadChipWordDma(rings));
         Assert.Equal(0x18000000u, cd.Long(0x04) & 0x18000000);
         Assert.Equal(8, cd.PaulaInterruptRequests & 8);
 
@@ -400,8 +404,10 @@ public sealed class LightweightCd32Tests
         Assert.Equal(0u, cd.Long(0x04) & 0x18000000);
     }
 
-    [Fact]
-    public void IsoReadDeliversEachCdBlockInPriorityOrderAndReportsMediaChanges()
+    [Theory]
+    [InlineData(0u, 0)]
+    [InlineData(0x200000u, 8 * 1024 * 1024)]
+    public void IsoReadDeliversEachCdBlockInPriorityOrderAndReportsMediaChanges(uint ramBase, int fastRamBytes)
     {
         var path = Path.Combine(Path.GetTempPath(), $"copper-cd32-{Guid.NewGuid():N}.iso");
         var image = new byte[20 * 2048];
@@ -410,7 +416,7 @@ public sealed class LightweightCd32Tests
         File.WriteAllBytes(path, image);
         try
         {
-            using var machine = Create();
+            using var machine = Create(fastRamBytes);
             machine.MountCd32Image(path);
             var cd = new AkikoRegisters(machine);
             cd.Advance(454);
@@ -418,8 +424,8 @@ public sealed class LightweightCd32Tests
             Assert.Throws<ArgumentException>(() => machine.MountCd32Image(Path.ChangeExtension(path, ".nrg")));
             Assert.True(machine.IsCd32DiscMounted);
 
-            cd.Long(0x10, 0x20000);
-            cd.Long(0x14, 0x10000);
+            cd.Long(0x10, ramBase + 0x20000);
+            cd.Long(0x14, ramBase + 0x10000);
             cd.Long(0x24, 0x9C000000);
             cd.Word(0x20, 0x8001);
             cd.SendPacket([0x34, 0, 0x02, 0, 0, 0x02, 2, 0x80, 0, 0, 0, 0]);
@@ -427,19 +433,23 @@ public sealed class LightweightCd32Tests
 
             cd.Advance(90_000);
             Assert.Equal(0x8001, cd.Word(0x20));
-            Assert.Equal(0, machine.ReadChipWordDma(0x2F010));
+            Assert.Equal(0, DmaWord(0x2F010));
             cd.Advance(10_000);
             Assert.Equal(0x0001, cd.Word(0x20));
-            Assert.Equal(0x0002, machine.ReadChipWordDma(0x2F00C));
-            Assert.Equal(0x0001, machine.ReadChipWordDma(0x2F00E));
-            Assert.Equal(0xA500, machine.ReadChipWordDma(0x2F010));
-            Assert.Equal(0xFFFF, machine.ReadChipWordDma(0x10160));
+            Assert.Equal(0x0002, DmaWord(0x2F00C));
+            Assert.Equal(0x0001, DmaWord(0x2F00E));
+            Assert.Equal(0xA500, DmaWord(0x2F010));
+            Assert.Equal(0xFFFF, DmaWord(0x10160));
             Assert.Equal(0x84000000u, cd.Long(0x04) & 0x84000000);
-            Assert.Equal(0, machine.ReadChipWordDma(0x20010));
+            Assert.Equal(0, DmaWord(0x20010));
             cd.Advance(100_000);
             Assert.Equal(0, cd.Word(0x20));
-            Assert.Equal(0x0001, machine.ReadChipWordDma(0x20002));
-            Assert.Equal(0x5A00, machine.ReadChipWordDma(0x20010));
+            Assert.Equal(0x0001, DmaWord(0x20002));
+            Assert.Equal(0x5A00, DmaWord(0x20010));
+            if (fastRamBytes != 0) Assert.Equal(0, machine.ReadChipWordDma(0x20010));
+
+            ushort DmaWord(int offset) => BinaryPrimitives.ReadUInt16BigEndian(
+                (fastRamBytes == 0 ? machine.ChipRam : machine.FastRam).Span[offset..]);
 
             machine.EjectCd32Disc();
             cd.Advance(454);
@@ -447,6 +457,156 @@ public sealed class LightweightCd32Tests
             Assert.Equal(new byte[] { 0x0A, 0, 0xF5 }, cd.ReadPacket(3));
         }
         finally { File.Delete(path); }
+    }
+
+    [Fact]
+    public void CueTracksReadFromSeparateFilesWithRecordedAndSilentPregaps()
+    {
+        const int raw = LightweightCd32DiscImage.RawSectorBytes;
+        const int waveTail = 4 * 17;
+        var directory = Directory.CreateTempSubdirectory("copper-cue-");
+        var cue = Path.Combine(directory.FullName, "mixed.cue");
+        var iso = Path.Combine(directory.FullName, "disc data.iso");
+        var wav = Path.Combine(directory.FullName, "audio.wav");
+        var bin = Path.Combine(directory.FullName, "audio.bin");
+        try
+        {
+            var data = new byte[2 * 2048];
+            data[2048] = 0x67;
+            File.WriteAllBytes(iso, data);
+            using (var writer = new BinaryWriter(File.Create(wav)))
+            {
+                writer.Write("RIFF"u8);
+                writer.Write(36 + 12 + 2 * raw + waveTail);
+                writer.Write("WAVEJUNK"u8);
+                writer.Write(3);
+                writer.Write(0);
+                writer.Write("fmt "u8);
+                writer.Write(16);
+                writer.Write((short)1);
+                writer.Write((short)2);
+                writer.Write(44100);
+                writer.Write(176400);
+                writer.Write((short)4);
+                writer.Write((short)16);
+                writer.Write("data"u8);
+                writer.Write(2 * raw + waveTail);
+                writer.Write(Enumerable.Repeat((byte)0x38, raw).ToArray());
+                writer.Write(Enumerable.Repeat((byte)0x49, raw).ToArray());
+                writer.Write(Enumerable.Repeat((byte)0x5A, waveTail).ToArray());
+            }
+            var binary = new byte[3 * raw];
+            binary[0] = 0x72;
+            binary[raw] = 0x83;
+            binary[2 * raw] = 0x94;
+            File.WriteAllBytes(bin, binary);
+            File.WriteAllText(cue, """
+                FILE "disc data.iso" BINARY
+                  TRACK 01 MODE1/2048
+                    INDEX 01 00:00:00
+                FILE "audio.wav" WAVE
+                  TRACK 02 AUDIO
+                    PREGAP 00:00:02
+                    INDEX 01 00:00:00
+                FILE "audio.bin" BINARY
+                  TRACK 03 AUDIO
+                    INDEX 00 00:00:00
+                    INDEX 01 00:00:01
+                """);
+
+            using var disc = LightweightCd32DiscImage.Open(cue);
+            Assert.Equal(9, disc.SectorCount);
+            Assert.Equal(new LightweightCd32DiscImage.Track(1, 0, 0, false), disc.GetTrack(1));
+            Assert.Equal(new LightweightCd32DiscImage.Track(2, 4, 2, true), disc.GetTrack(2));
+            Assert.Equal(new LightweightCd32DiscImage.Track(3, 7, 6, true), disc.GetTrack(6));
+
+            var sector = new byte[raw];
+            ReadSector(1);
+            Assert.Equal(new byte[] { 0, 2, 1, 1, 0x67 }, sector[12..17]);
+            ReadSector(5);
+            Assert.All(sector, value => Assert.Equal(0x49, value));
+            ReadSector(2);
+            Assert.All(sector, value => Assert.Equal(0, value));
+            ReadSector(3);
+            Assert.All(sector, value => Assert.Equal(0, value));
+            ReadSector(4);
+            Assert.All(sector, value => Assert.Equal(0x38, value));
+            ReadSector(6);
+            Assert.Equal(0x72, sector[0]);
+            ReadSector(7);
+            Assert.Equal(0x83, sector[0]);
+            ReadSector(8);
+            Assert.Equal(0x94, sector[0]);
+            Assert.False(disc.Request(9));
+
+            void ReadSector(int lba)
+            {
+                Assert.True(disc.Request(lba));
+                Assert.True(disc.CopyRequestedSector(sector));
+            }
+        }
+        finally
+        {
+            File.Delete(cue);
+            File.Delete(iso);
+            File.Delete(wav);
+            File.Delete(bin);
+            directory.Delete();
+        }
+    }
+
+    [Theory]
+    [InlineData(417, 0x90, 10)] // 44.1 kHz rounds the last 468 frames up to one CD sector.
+    [InlineData(384, 0x94, 9)]  // 48 kHz converts 640 source frames per CD sector.
+    public void CueMp3SectorsUseDecodedDurationAndSupportRandomReads(int mpegFrameBytes, byte rateHeader, int audioSectors)
+    {
+        var directory = Directory.CreateTempSubdirectory("copper-mp3-cue-");
+        var iso = Path.Combine(directory.FullName, "disc.iso");
+        var mp3 = Path.Combine(directory.FullName, "audio.mp3");
+        var cue = Path.Combine(directory.FullName, "disc.cue");
+        try
+        {
+            File.WriteAllBytes(iso, new byte[2048]);
+            // MPEG-1 Layer III stereo, five silent frames with 1152 samples each.
+            var encoded = new byte[5 * mpegFrameBytes];
+            for (var offset = 0; offset < encoded.Length; offset += mpegFrameBytes)
+            {
+                encoded[offset] = 0xFF;
+                encoded[offset + 1] = 0xFB;
+                encoded[offset + 2] = rateHeader;
+            }
+            File.WriteAllBytes(mp3, encoded);
+            File.WriteAllText(cue, """
+                FILE "disc.iso" BINARY
+                  TRACK 01 MODE1/2048
+                    INDEX 01 00:00:00
+                FILE "audio.MP3" MP3
+                  TRACK 02 AUDIO
+                    PREGAP 00:00:02
+                    INDEX 01 00:00:00
+                """);
+
+            using var disc = LightweightCd32DiscImage.Open(cue);
+            const int start = 3;
+            Assert.Equal(start + audioSectors, disc.SectorCount);
+            Assert.Equal(new LightweightCd32DiscImage.Track(2, start, 1, true), disc.GetTrack(start));
+            var sector = new byte[LightweightCd32DiscImage.RawSectorBytes];
+            foreach (var lba in new[] { start + audioSectors - 1, start + 3, start + 4, start, 1 })
+            {
+                Array.Fill(sector, (byte)0xFF);
+                Assert.True(disc.Request(lba));
+                Assert.True(disc.CopyRequestedSector(sector));
+                Assert.All(sector, value => Assert.Equal(0, value));
+            }
+            Assert.False(disc.Request(start + audioSectors));
+        }
+        finally
+        {
+            File.Delete(cue);
+            File.Delete(iso);
+            File.Delete(mp3);
+            directory.Delete();
+        }
     }
 
     [Fact]
@@ -590,5 +750,16 @@ public sealed class LightweightCd32Tests
         }
     }
 
-    private static LightweightA500Machine Create() => new(LightweightA500Configuration.CreateCd32());
+    private static LightweightA500Machine Create(int fastRamBytes = 0)
+    {
+        var machine = new LightweightA500Machine(LightweightA500Configuration.CreateCd32() with { FastRamBytes = fastRamBytes });
+        if (fastRamBytes != 0)
+        {
+            long cycle = 0;
+            machine.WriteByte(0xE8004A, 0, ref cycle, Write);
+            machine.WriteByte(0xE80048, 0x20, ref cycle, Write);
+            Assert.Equal(0x200000u, machine.FastRamBase);
+        }
+        return machine;
+    }
 }

@@ -23,10 +23,10 @@ public sealed partial class LightweightA500Machine
         if (configuration.Cd32Region is not { } region) return;
         if (!Enum.IsDefined(region) || configuration.AgnusModel != LightweightAgnusModel.Mos8374Alice ||
             configuration.DeniseModel != LightweightDeniseModel.Lisa4203 || configuration.CpuModel != M68kCpuModel.M68EC020 ||
-            configuration.ChipRamBytes != 2 * 1024 * 1024 || configuration.SlowRamBytes != 0 || configuration.FastRamBytes != 0 ||
+            configuration.ChipRamBytes != 2 * 1024 * 1024 || configuration.SlowRamBytes != 0 ||
             configuration.FloppyDriveCount != 0 || configuration.RtcEnabled || configuration.IdeMaster is not null ||
             configuration.Hardfiles.Count != 0 || configuration.HostDirectories.Count != 0)
-            throw new ArgumentException("Stock CD32 requires Alice/Lisa, 68EC020, 2 MiB Chip RAM and no expansion hardware.", nameof(configuration));
+            throw new ArgumentException("CD32 requires Alice/Lisa, 68EC020 and 2 MiB Chip RAM. Only optional Zorro II Fast RAM is supported.", nameof(configuration));
     }
 
     /// <summary>Load a verified Kickstart 40.60 and CD32 extension, or one combined console dump.</summary>
@@ -90,7 +90,7 @@ public sealed partial class LightweightA500Machine
     }
     public void MarkCd32NvramSaved() => RequireAkiko().Eeprom.MarkSaved();
 
-    /// <summary>Mount a read-only Mode 1 image or single-file BIN/CUE disc. A failed open preserves the current disc.</summary>
+    /// <summary>Mount a read-only Mode 1 image or CUE disc. A failed open preserves the current disc.</summary>
     public void MountCd32Image(string path)
     {
         var drive = RequireAkiko().Cd;
@@ -162,19 +162,37 @@ public sealed partial class LightweightA500Machine
 
     internal byte ReadAkikoDmaByte(uint address)
     {
+        address &= 0x00FF_FFFF;
+        if (address >= _chipRam.Length)
+            return _fastRam?.ReadBoardByte(address) ?? 0xFF;
         var word = ReadChipWordBus(address);
         return (byte)((address & 1) == 0 ? word >> 8 : word);
     }
 
     internal void WriteAkikoDmaByte(uint address, byte value)
     {
+        address &= 0x00FF_FFFF;
+        if (address >= _chipRam.Length)
+        {
+            if (_fastRam?.TryWriteBoardByte(address, value) == true) NotifyJitRamWrite(address, 1);
+            return;
+        }
         var word = ReadChipWordDma(address);
         WriteChipWordBus(address, (ushort)((address & 1) == 0
             ? (word & 0x00FF) | (value << 8)
             : (word & 0xFF00) | value));
     }
 
-    internal void WriteAkikoDmaWord(uint address, ushort value) => WriteChipWordBus(address, value);
+    internal void WriteAkikoDmaWord(uint address, ushort value)
+    {
+        address &= 0x00FF_FFFF;
+        if (address < _chipRam.Length) WriteChipWordBus(address, value);
+        else if (_fastRam is { } ram && ram.ContainsRange(address, 2))
+        {
+            BinaryPrimitives.WriteUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2), value);
+            NotifyJitRamWrite(address, 2);
+        }
+    }
 
     private void CompleteAudioFrame(long cycle)
     {

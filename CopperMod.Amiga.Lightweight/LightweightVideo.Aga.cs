@@ -14,6 +14,7 @@ internal sealed partial class LightweightVideo
     private int _agaPendingBits = 16, _agaBits = 16;
     private ushort _agaBplcon4 = 0x11, _agaFmode;
     private int _agaOddReloadDelay, _agaEvenReloadDelay;
+    private int _agaOddShiftPhase, _agaEvenShiftPhase, _agaOutputCode;
 
     private void ResetAga()
     {
@@ -22,7 +23,8 @@ internal sealed partial class LightweightVideo
         Array.Clear(_agaIntermediate); Array.Clear(_agaShift);
         _agaPendingData = 0; _agaPendingBits = _agaBits = 16;
         _agaBplcon4 = 0x11; _agaFmode = 0;
-        _agaOddReloadDelay = _agaEvenReloadDelay = 0;
+        _agaOddReloadDelay = _agaEvenReloadDelay = 3;
+        _agaOddShiftPhase = _agaEvenShiftPhase = _agaOutputCode = 0;
         if (_aga) _ecsBplcon3 = 0x0C00;
         UpdateAgaDualPixels();
     }
@@ -63,99 +65,128 @@ internal sealed partial class LightweightVideo
         }
     }
 
-    private int ShiftAgaPixel(int x)
+    private int AdvanceAgaSample(int x, int pixelMask)
+    {
+        var shiftOdd = ((x ^ _agaOddShiftPhase) & pixelMask) == 0;
+        var shiftEven = ((x ^ _agaEvenShiftPhase) & pixelMask) == 0;
+        if (shiftOdd && shiftEven)
+            _agaOutputCode = ShiftAgaPlanes(0, 1);
+        else if (shiftOdd)
+            _agaOutputCode = (_agaOutputCode & 0xAA) | ShiftAgaPlanes(0, 2);
+        else if (shiftEven)
+            _agaOutputCode = (_agaOutputCode & 0x55) | ShiftAgaPlanes(1, 2);
+
+        // The comparator reloads each group after this sample. Its next pixel
+        // starts one 35 ns tick later and keeps that phase until another reload.
+        if (_pendingReloadParity != 0)
+        {
+            var delayMask = _agaBits * (pixelMask + 1) - 1;
+            var position = x & delayMask;
+            if ((_pendingReloadParity & 1) != 0 && position == (_agaOddReloadDelay & delayMask))
+            {
+                ReloadAgaPlanes(0);
+                _agaOddShiftPhase = (x + 1) & 3;
+            }
+            if ((_pendingReloadParity & 2) != 0 && position == (_agaEvenReloadDelay & delayMask))
+            {
+                ReloadAgaPlanes(1);
+                _agaEvenShiftPhase = (x + 1) & 3;
+            }
+        }
+        return _agaOutputCode & _effectivePlaneMask;
+    }
+
+    private int ShiftAgaPlanes(int first, int stride)
     {
         var code = 0;
-        for (var p = 0; p < 8; p++)
+        for (var p = first; p < 8; p += stride)
         {
             code |= (int)(_agaShift[p] >> 63) << p;
             _agaShift[p] <<= 1;
         }
-        if (_pendingReloadParity != 0)
-        {
-            for (var parity = 0; parity < 2; parity++)
-            {
-                if ((_pendingReloadParity & (1 << parity)) == 0) continue;
-                var delay = parity == 0 ? _agaOddReloadDelay : _agaEvenReloadDelay;
-                if ((x & (_agaBits - 1)) != (delay & (_agaBits - 1))) continue;
-                for (var p = parity; p < _effectivePlaneCount; p += 2)
-                {
-                    var tailMask = _agaBits == 64 ? 0UL : ulong.MaxValue >> _agaBits;
-                    _agaShift[p] = (_agaShift[p] & tailMask) | (_agaIntermediate[p] << (64 - _agaBits));
-                }
-                _pendingReloadParity &= ~(1 << parity);
-            }
-        }
-        return code & _effectivePlaneMask;
+        return code;
+    }
+
+    private void ReloadAgaPlanes(int parity)
+    {
+        var tailMask = _agaBits == 64 ? 0UL : ulong.MaxValue >> _agaBits;
+        for (var p = parity; p < _effectivePlaneCount; p += 2)
+            _agaShift[p] = (_agaShift[p] & tailMask) | (_agaIntermediate[p] << (64 - _agaBits));
+        _pendingReloadParity &= ~(1 << parity);
     }
 
     private void UpdateAgaReloadDelays()
     {
-        var resolution = (_effectiveBplcon0 & 0x8000) != 0 ? 2 : (_effectiveBplcon0 & 0x40) != 0 ? 4 : 1;
         var scroll = _effectiveBplcon1;
         var odd = ((scroll & 15) << 2) | (scroll >> 8 & 3) | ((scroll >> 10 & 3) << 6);
         var even = ((scroll >> 4 & 15) << 2) | (scroll >> 12 & 3) | ((scroll >> 14 & 3) << 6);
-        _agaOddReloadDelay = odd * resolution / 4 + resolution - 1;
-        _agaEvenReloadDelay = even * resolution / 4 + resolution - 1;
+        // Retain the coarse reload phase while comparing all eight scroll bits.
+        _agaOddReloadDelay = odd + 3;
+        _agaEvenReloadDelay = even + 3;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private void RenderAgaCck(int line, int x, LightweightA500Machine machine)
     {
-        var resolution = (_effectiveBplcon0 & 0x8000) != 0 ? 2 : (_effectiveBplcon0 & 0x40) != 0 ? 4 : 1;
+        var pixelMask = (_effectiveBplcon0 & 0x8000) != 0 ? 1 : (_effectiveBplcon0 & 0x40) != 0 ? 0 : 3;
         var enabled = (_effectiveBplcon0 & 1) != 0;
         var dual = (_effectiveBplcon0 & 0x400) != 0;
         var ham = (_effectiveBplcon0 & 0x800) != 0 && (_effectivePlaneCount == 6 || _effectivePlaneCount == 8);
         var start = (line * _ecsLineClocks * 2 + x) * _outputScale;
-        Span<int> codes = stackalloc int[8];
-        Span<int> colors = stackalloc int[8];
-        Span<int> placements = stackalloc int[8];
-        for (var i = 0; i < resolution * 2; i++)
-        {
-            var code = codes[i] = ShiftAgaPixel(x * resolution + i);
-            placements[i] = dual ? _agaDualPixels[code] >> 8 : code == 0 ? 4 : _effectiveSpritePlayfieldPlacement;
-        }
-        for (var i = 0; i < resolution * 2; i++)
-        {
-            var lowX = x + i / resolution;
-            var code = codes[i];
-            var inside = InEcsWindow(line, lowX);
-            var index = (dual ? _agaDualPixels[code] & 255 : code) ^ (_agaBplcon4 >> 8);
-            var color = _agaPalette[index];
-            if (ham && inside) color = DecodeAgaHam(code);
-            else if (_effectivePlaneCount == 6 && !dual && !ham &&
-                (_ecsBplcon2 & 0x200) == 0 && (index & 32) != 0)
-                color = unchecked((int)0xFF000000) | ((_agaPalette[index & 31] & 0xFEFEFE) >> 1);
-            if (!inside)
-            {
-                _hamColor = _agaPalette[0];
-                color = enabled && (_ecsBplcon3 & 0x20) != 0 ? unchecked((int)0xFF000000) : _agaPalette[0];
-                if (enabled && (_ecsBplcon3 & 0x10) == 0) color &= 0xFFFFFF;
-            }
-            colors[i] = color;
-        }
-        // Sample sprites at Lisa's finest resolution independently of the
-        // playfield. HAM is decoded only once per playfield pixel above.
+        var divisor = 4 / _outputScale;
         var spriteEnabled = IsSpriteOutputEnabled(line);
         // BRDSPRT bypasses both the display window and the first BPL1DAT gate.
         var borderSprites = enabled && (_ecsBplcon3 & 0x22) == 2;
+        var borderBlank = enabled && (_ecsBplcon3 & 0x20) != 0;
+        // Lisa's border blank signal leads the display-window comparators by one 35 ns sample.
+        var blankStart = borderBlank ? (_horizontalWindowStop * 4 - 1) & 2047 : -1;
+        var blankEnd = borderBlank ? (_horizontalWindowStart * 4 - 1) & 2047 : -1;
+        var previousCode = -1;
+        var previousInside = false;
+        var playfieldColor = 0;
+        var placement = 4;
         for (var sample = 0; sample < 8; sample++)
         {
-            var i = sample * resolution / 4;
             var lowX = x + sample / 4;
             var inside = InEcsWindow(line, lowX);
-            var color = colors[i];
+            var sampleX = x * 4 + sample;
+            var code = AdvanceAgaSample(sampleX, pixelMask);
+            if (code != previousCode || inside != previousInside)
+            {
+                playfieldColor = AgaPlayfieldColor(code, inside, enabled, dual, ham);
+                placement = !inside ? 4 : dual ? _agaDualPixels[code] >> 8 : code == 0 ? 4 : _effectiveSpritePlayfieldPlacement;
+                previousCode = code;
+                previousInside = inside;
+            }
+            var color = playfieldColor;
+            if (sampleX == blankStart && inside)
+                color = unchecked((int)0xFF000000);
+            else if (sampleX == blankEnd && InEcsWindow(line, (lowX + 1) & 511))
+                color = _agaPalette[0];
             if (borderSprites || inside && spriteEnabled)
             {
-                var sprite = machine.ComposeAgaSpritePixel(line, x * 4 + sample,
-                    inside ? placements[i] : 4, codes[i]);
+                var sprite = machine.ComposeAgaSpritePixel(line, sampleX, placement, code);
                 if (sprite >= 0) color = _agaPalette[sprite];
             }
             if (machine.IsRasterBlanked(line, lowX) || enabled && (_ecsBplcon3 & 1) != 0 && _externalBlank)
                 color = unchecked((int)0xFF000000);
-            var divisor = 4 / _outputScale;
             if (sample % divisor == 0) _rendering[start + sample / divisor] = color;
         }
+    }
+
+    private int AgaPlayfieldColor(int code, bool inside, bool enabled, bool dual, bool ham)
+    {
+        if (!inside)
+        {
+            _hamColor = _agaPalette[0];
+            var border = enabled && (_ecsBplcon3 & 0x20) != 0 ? unchecked((int)0xFF000000) : _agaPalette[0];
+            return enabled && (_ecsBplcon3 & 0x10) == 0 ? border & 0xFFFFFF : border;
+        }
+        if (ham) return DecodeAgaHam(code);
+        var index = (dual ? _agaDualPixels[code] & 255 : code) ^ (_agaBplcon4 >> 8);
+        if (_effectivePlaneCount == 6 && !dual && (_ecsBplcon2 & 0x200) == 0 && (index & 32) != 0)
+            return unchecked((int)0xFF000000) | ((_agaPalette[index & 31] & 0xFEFEFE) >> 1);
+        return _agaPalette[index];
     }
 
     internal ushort ReadAgaColor(int register)

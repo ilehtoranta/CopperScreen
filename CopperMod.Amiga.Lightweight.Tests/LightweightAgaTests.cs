@@ -157,6 +157,34 @@ public sealed class LightweightAgaTests
     }
 
     [Fact]
+    public void EarlyDdfStartWaitsForAliceAndFetchesEveryRasterline()
+    {
+        using var m = Create();
+        Configure(m, 3, 127);
+        Write(m, 0x100, 0x7201);
+        Write(m, 0x092, 0x0010);
+        Write(m, 0x094, 0x00A0);
+        Write(m, 0x106, 0x6C00);
+        Write(m, 0x1BE, 0x0F00);
+        Write(m, 0x106, 0x0C00);
+
+        var firstLine = 44L * 454;
+        m.AdvanceHardwareTo(firstLine + 0x18 * 2);
+        Assert.Equal(long.MinValue, m.BitplaneLastOutputCycle);
+        for (var line = 1; line <= 3; line++)
+        {
+            m.AdvanceHardwareTo(firstLine + line * 454);
+            Assert.Equal(0x20000u + (uint)line * 48, m.GetLiveBitplanePointer(0));
+        }
+
+        m.ExecuteFrame();
+        m.ExecuteFrame();
+        var pixels = m.Framebuffer.Span;
+        Assert.Equal(unchecked((int)0xFFFF0000), pixels[44 * 1816 + 800]);
+        Assert.Equal(pixels[44 * 1816 + 800], pixels[45 * 1816 + 800]);
+    }
+
+    [Fact]
     public void AlignedChipLongUsesOneGrantAndMisalignedLongKeepsWordPhases()
     {
         using var m = Create(); var bus = new LightweightAcceleratorBus(m, M68kCpuModel.M68EC020);
