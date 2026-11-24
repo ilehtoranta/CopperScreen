@@ -1,6 +1,8 @@
 # CPU support and Copper68k package scope
 
-CopperScreen pins Copper68k 1.5.10 from NuGet.org. On 68000/68010, arithmetic
+CopperScreen pins Copper68k 1.5.11 from NuGet.org. MOVES operands use their selected address space,
+memory bit fields use sized transfers, and MOVE16 starts each burst at the
+addressed longword within the line. On 68000/68010, arithmetic
 and logical longword writeback stores the low word first. The 68010 clears
 memory without reading the destination. On 68040/68060, memory ADDX.L and
 SUBX.L use native longword transfers. The 1.5.7 correction for unimplemented
