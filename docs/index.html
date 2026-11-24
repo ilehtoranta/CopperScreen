@@ -60,9 +60,9 @@
         <div><dt>Amiga models</dt><dd>PAL Amiga 500, 500+ and 1200</dd></div>
         <div><dt>CPU upgrades</dt><dd>Optional 68040 JIT on x64 and Arm64 hosts, including Apple Silicon</dd></div>
         <div><dt>Floppy drives</dt><dd>Up to four DD or HD drives</dd></div>
-        <div><dt>Hard disks</dt><dd>HDF images with native Kickstart</dd></div>
+        <div><dt>Hard disks</dt><dd>Raw HDF with native Kickstart. Builds from current source also mount fixed and dynamic WinUAE VHDs.</dd></div>
       </dl>
-      <div class="link-list"><a href="https://github.com/ilehtoranta/CopperScreen#supported-machine">Machine configurations</a><a href="https://github.com/ilehtoranta/CopperScreen/blob/main/docs/engine/CPU_SUPPORT.md">CPU support</a></div>
+      <div class="link-list"><a href="https://github.com/ilehtoranta/CopperScreen#supported-machine">Machine configurations</a><a href="https://github.com/ilehtoranta/CopperScreen/blob/main/docs/engine/CPU_SUPPORT.md">CPU support</a><a href="https://github.com/ilehtoranta/CopperScreen/blob/main/docs/engine/STORAGE.md#copperhdf-interface">Hard disk image support</a></div>
     </section>
     <section class="section split" id="start" aria-labelledby="start-title">
       <div><h2 id="start-title">Get started</h2><div class="link-list"><a href="https://github.com/ilehtoranta/CopperScreen/blob/main/docs/ONBOARDING.md">Onboarding guide</a><a href="https://github.com/ilehtoranta/CopperScreen#build-and-run">Build from source</a></div></div>
@@ -71,7 +71,7 @@
           <li>Open CopperScreen and select your Amiga model.</li>
           <li>Select <strong>Start Amiga</strong> and insert a compatible boot floppy when prompted.</li>
         </ol>
-        <p class="note">For Workbench or an HDF hard disk, select an original Kickstart ROM using <b>Choose ROM…</b>.</p>
+        <p class="note">For Workbench or a hard disk image, select an original Kickstart ROM using <b>Choose ROM…</b>.</p>
       </div>
     </section>
     <section class="section split" aria-labelledby="disk-title"><div><h2 id="disk-title">CopperDisk</h2></div><div><p>CopperDisk is a .NET 10 Amiga disk-image library with managed SPS/CAPS IPF decoding. It exposes encoded track streams and a best-effort AmigaDOS sector view for emulator hosts and disk tools. A native CAPS library is not required.</p><div class="link-list"><a href="copperdisk.html">CopperDisk API and IPF support</a></div></div></section>
