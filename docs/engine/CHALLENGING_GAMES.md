@@ -79,9 +79,9 @@ of the sprite correction passed all 88 AGA sprite tests.
 
 The SPS 0415 release accepts the original code-wheel response and proceeds
 through the options and character-select screens into Swan Lake Stage 1 on
-CopperScreen, WinUAE 6.0.3 and WinUAE 6.1 beta 23. The Commodore Combat pressing, SPS 2427, also
-requires the wheel. The [interactive wheel](https://steveleonardweb.co.uk/?page_id=7116)
-supplied the response for each engine's challenge.
+CopperScreen, WinUAE 6.0.3 and WinUAE 6.1 beta 23. The Commodore Combat
+pressing, SPS 2427, also requires the wheel. The interactive wheel supplied
+the response for each engine's challenge. [Zool 2 code wheel](https://steveleonardweb.co.uk/?page_id=7116)
 
 CopperScreen `bdb72d5` completed 11,250 fields with no unsupported feature
 reported. The first-stage captures consistently show missing HUD counters.
@@ -128,14 +128,43 @@ final-D drain for area blits. The remaining task is to trace that interval
 against cycle-exact WinUAE and establish which in-game blits expose it.
 [WinUAE area blitter completion](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L408-L461)
 
+## P.P. Hammer and His Pneumatic Weapon
+
+The original SPS 2809 disk passed the disk-operation screen, played the
+intro and entered Level 1 on CopperScreen `61e2d42` and cycle-exact WinUAE
+6.1 beta 23. The early 2,100-field probe had ended while disk loading was
+still in progress. An 8,000-field replay used brief port 2 fire presses to
+advance the prompts. It completed without an unsupported feature report.
+
+The CopperScreen field 6,450 capture and WinUAE's opening-room capture match
+86,362 of 86,664 RGB samples from the playfield at CopperScreen x=260–887,
+y=80–217. For each sample, WinUAE x is `x - 198` and its double-height y is
+`2 * y - 54`. The differences are confined to the animated flames, player
+outline and pickup. These are captures from different gameplay fields.
+
+A second 7,200-field CopperScreen replay moved and jumped through the room,
+picked up items and used the hammer. The score reached 100 and the camera
+scrolled as the player moved. The WinUAE replay also showed movement,
+jumping, item collection and scrolling. Both replays showed the animated
+flames and running countdown. The CopperScreen replay ended with CPU
+fingerprint `0x29F2B9E8C02194C4`, hardware `0x652E5424481AC45A` and output
+`0x5253696AB2B81319`, with no unsupported feature report.
+
+The opening-room capture SHA-256 hashes were
+`36B3D7687C628514B372D6EF6CADB36BACE3EBA5FADDBAF6D32582ECBFE91BD0`
+for CopperScreen and
+`73D8A3CBC93A2724D607D6631DA93ABCCABC1F93A27DB1C8E5F51C27A1AD4DA5`
+for WinUAE. The opening-room comparison required no emulator change. The
+historical WinUAE timing note identifies a broad CPU and blitter improvement.
+Later rooms and exact CPU and blitter contention remain unverified.
+[WinUAE P.P. Hammer history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19736-L19741)
+
 ## Other baseline observations
 
-The initial 2,100-field CopperScreen replays at `e086a46` reached the Zool 2
-code-wheel screen, the P.P. Hammer disk-operation screen, the DMA Design logo
-in All New World of Lemmings, and the expected access-denied screen in
-RoboCop 3 with no dongle fitted. These captures establish boot checkpoints.
+The initial 2,100-field CopperScreen replays at `e086a46` reached the DMA
+Design logo in All New World of Lemmings and the expected access-denied
+screen in RoboCop 3 with no dongle fitted. These captures establish boot
+checkpoints.
 
-The same changelog records historical P.P. Hammer CPU and blitter timing
-improvements and an All New World of Lemmings bitplane modulo correction.
-[P.P. Hammer history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19736-L19741)
-· [Lemmings history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19933-L19936)
+The same changelog records an All New World of Lemmings bitplane modulo
+correction. [WinUAE Lemmings history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19933-L19936)
