@@ -5,6 +5,27 @@ namespace CopperScreen.Tests;
 
 public sealed class MainWindowPresentationTests
 {
+    [Fact]
+    public void DueFrameRunsBetweenInputBatchesAndEarlyFrameYields()
+    {
+        var dispatcher = Dispatcher.CurrentDispatcher;
+        var order = new List<string>();
+        const long due = 100;
+        dispatcher.Post(() =>
+        {
+            order.Add("input");
+            dispatcher.Post(() => order.Add("more input"), DispatcherPriority.Input);
+            dispatcher.Post(() =>
+            {
+                order.Add("due frame");
+                dispatcher.Post(() => order.Add("early frame"), MainWindow.FramePriorityAt(due, due + 1));
+            }, MainWindow.FramePriorityAt(due, due));
+        }, DispatcherPriority.Input);
+
+        dispatcher.RunJobs();
+        Assert.Equal(new[] { "input", "due frame", "more input", "early frame" }, order);
+    }
+
     [Theory]
     [InlineData(false, 1)]
     [InlineData(true, 64)]
