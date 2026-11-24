@@ -67,6 +67,7 @@ internal sealed class LightweightBlitter
     private bool _fillExclusive;
     private bool _fillCarryInitial;
     private bool _fillCarry;
+    private bool _fillIdleFollowsDestination;
     private bool _effectiveNasty;
     private bool _pendingNasty;
     private long _nastyVisibilityCycle;
@@ -167,6 +168,7 @@ internal sealed class LightweightBlitter
         _fillExclusive = false;
         _fillCarryInitial = false;
         _fillCarry = false;
+        _fillIdleFollowsDestination = false;
         _effectiveNasty = false;
         _pendingNasty = false;
         _nastyVisibilityCycle = long.MaxValue;
@@ -483,6 +485,7 @@ internal sealed class LightweightBlitter
         _fillCarryInitial = !_lineMode &&
             (bltcon1 & Bltcon1FillCarryIn) != 0;
         _fillCarry = _fillCarryInitial;
+        _fillIdleFollowsDestination = _fillEnabled && _useD && !_useC;
         _bOnly = !_lineMode && !_useA && _useB && !_useC && !_useD &&
             !_fillEnabled;
         // OCS line mode only runs its DMA sequence when C is enabled. The D
@@ -638,17 +641,20 @@ internal sealed class LightweightBlitter
             if (_useD)
             {
                 _pendingWriteValue = _areaResult;
-                if (!draining && IsFinalWord())
-                {
-                    _areaDrainCycle = cycle + 2 * LightweightClock.CpuCyclesPerColorClock;
-                    if (_alice) _areaCompletionCycle = _areaDrainCycle;
-                    else PublishMainCompletion(cycle, machine);
-                }
             }
             else if (ComputeAreaOutput() != 0)
             {
                 _zero = false;
             }
+        }
+
+        // Fill can drain the preceding result before the last, idle phase.
+        // The completion and final write stay anchored to the last phase.
+        if (_useD && !draining && _phaseIndex == _phaseCount - 1 && IsFinalWord())
+        {
+            _areaDrainCycle = cycle + 2 * LightweightClock.CpuCyclesPerColorClock;
+            if (_alice) _areaCompletionCycle = _areaDrainCycle;
+            else PublishMainCompletion(cycle, machine);
         }
 
         _hasPendingOutput = true;
@@ -1138,6 +1144,10 @@ internal sealed class LightweightBlitter
             }
             index--;
         }
+        if (_fillIdleFollowsDestination)
+        {
+            return index == 0 ? AreaChannel.D : AreaChannel.Idle;
+        }
         if (_useC || _fillEnabled)
         {
             if (index == 0)
@@ -1176,7 +1186,8 @@ internal sealed class LightweightBlitter
             AreaChannel.A => _useA,
             AreaChannel.B => _useB,
             AreaChannel.C => _useC,
-            _ => _useD
+            AreaChannel.D => _useD,
+            _ => false
         };
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

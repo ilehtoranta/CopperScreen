@@ -724,6 +724,30 @@ public sealed class LightweightBlitterTests
         Assert.Equal(0xFFFF, ReadWord(machine, DestinationD));
     }
 
+    [Theory]
+    [InlineData(false, 22)]
+    [InlineData(true, 26)]
+    public void FillWithoutCDrainsThePreviousWordBeforeTheIdleSlot(bool alice, int interruptOffset)
+    {
+        using var machine = alice ? CreateAgaMachine() : new LightweightA500Machine();
+        machine.WriteChipWordDma(SourceA + 4, 0x5000);
+        machine.WriteChipWordDma(DestinationD + 4, 0xA5A5);
+        ConfigureArea(machine, 0x09F0, 0x0012);
+        WritePointer(machine, LightweightRegisters.Bltapth, SourceA + 4);
+        WritePointer(machine, LightweightRegisters.Bltdpth, DestinationD + 4);
+        EnableBlitter(machine, nasty: true);
+        var start = StartBlit(machine, 0x0043);
+
+        machine.AdvanceHardwareTo(start + 14);
+        Assert.Equal(0xA5A5, machine.ReadChipWordDma(DestinationD + 4));
+        machine.AdvanceHardwareTo(start + 16);
+        Assert.Equal(0x3000, machine.ReadChipWordDma(DestinationD + 4));
+
+        AdvanceUntilBlitterIdle(machine);
+        Assert.Equal(start + interruptOffset, machine.BlitterLastCompletionCycle);
+        Assert.Equal(start + 28, machine.BlitterLastTerminationCycle);
+    }
+
     [Fact]
     public void LineModeRetainsFourStartupAndIdleCIdleDPhases()
     {

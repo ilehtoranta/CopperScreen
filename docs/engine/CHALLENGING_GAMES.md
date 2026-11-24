@@ -231,8 +231,8 @@ writes on PAL AGA. `-LiveMinterm Full` selects full writes and can be
 combined with `-Ocs` for a PAL OCS boot. The AGA alternate, AGA full and
 OCS full replays matched all 576 destination addresses and values in order
 against WinUAE 6.1 beta 23. The ordinary area writes have a consistent
-three-CCK beam offset between the traces. In the fill cases the offset
-ranges from one to three CCKs.
+three-CCK beam offset between the traces. Before the fill slot correction
+below, the offset in the fill cases ranged from one to three CCKs.
 
 Both the candidate and its upstream control, `e573375`, reached Swan Lake
 Stage 1 on the original disks. The 11,250-field replays matched all 39
@@ -244,9 +244,45 @@ The Release build passed with zero warnings and 1,458 engine diagnostics
 passed with seven optional tests skipped. An exploratory 14,400-field
 Zool 2 replay reached a wall farther into the stage with a score of 670.
 
-Live channel, shift and data-register writes, absolute Copper start timing,
-fill slot timing, source-only schedules, the game's actual register
-rewrites and physical signal measurements remain open.
+### Descending fill destination slots
+
+With D enabled and C disabled, fill inserts an idle slot after the
+ordinary D output. CopperScreen previously waited through that slot
+before writing D. In the width-three A+D probe, WinUAE reads the last A
+word at `$34` and writes the preceding D word at `$35`. It raises the
+interrupt at `$35` on OCS and `$37` on AGA and writes the final D word at
+`$38` on both profiles. After aligning the BLTSIZE writes, only the
+ordinary D writes were one CCK late in CopperScreen.
+
+The sequencer now places the idle phase after the ordinary D write and
+keeps completion tied to the last phase. The area generator's `-Fill`
+probe with widths one and three matched 124 DMA address and interrupt
+events relative to BLTSIZE on PAL OCS and AGA. The five cases exercise D,
+A+D, A+C+D, A+B+D and A+B+C+D. The 576 live-control probe writes also
+matched in data, address and relative timing after this change.
+[WinUAE fill idle phase selection](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1145-L1155)
+
+The 12,850-field Zool 2 replay reached the same wall in Swan Lake Stage
+1 and matched all 66 captures and all three final fingerprints from the
+preceding minterm build. The 7,200-field P.P. Hammer replay matched its
+25 captures and all three fingerprints. Both runs completed with zero
+unsupported features reported. The Release build completed with zero warnings
+and 1,460 engine diagnostics passed with seven optional tests skipped.
+The build, diagnostics, 124 timing events and both game replays were
+repeated after rebasing onto the Copper68k 1.5.11 package update. All game
+captures and fingerprints matched the run with the earlier package.
+
+Live channel, shift and data-register writes, absolute Copper start
+timing, source-only schedules, the game's actual register rewrites and
+physical signal measurements remain open.
+
+A separate D-only probe changed BLTADAT, BLTBDAT and BLTCDAT during
+live blits with their source DMA channels disabled. The current build
+differed from WinUAE in 163 of 192 destination words. On the first
+shifted A case, the third D word was `$9579` in WinUAE and `$8246`
+in CopperScreen. The B cases also show that a manual B write changes
+the held, shifted value for subsequent words.
+[WinUAE data register writes](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/custom.cpp#L3715-L3736)
 
 ## P.P. Hammer and His Pneumatic Weapon
 
