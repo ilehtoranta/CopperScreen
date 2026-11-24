@@ -115,6 +115,48 @@ public sealed class LightweightCd32Tests
     }
 
     [Theory]
+    [InlineData(0x001FFFFDu, 0x1FFFFC, 0xFF112233u, 8)]
+    [InlineData(0x001FFFFFu, 0x1FFFFC, 0xFFFFFF11u, 12)]
+    [InlineData(0x00FFFFFFu, 0, 0x223344FFu, 8)]
+    public void Ec020LongWriteDecodesEachSideOfChipRamBoundary(uint address, int inspectAt, uint expected, int cycles)
+    {
+        using var machine = Create();
+        var bus = new LightweightAcceleratorBus(machine, M68kCpuModel.M68EC020);
+        long cycle = 16;
+        bus.WriteLong((uint)inspectAt, uint.MaxValue, ref cycle, Write);
+        var before = cycle;
+        bus.WriteLong(address, 0x11223344, ref cycle, Write);
+        Assert.Equal(cycles, cycle - before);
+        Assert.Equal(expected, BinaryPrimitives.ReadUInt32BigEndian(machine.ChipRam.Span[inspectAt..]));
+    }
+
+    [Theory]
+    [InlineData(0x37, 0x00010204u, 0x80000000u)]
+    [InlineData(0x39, 0x01020400u, 0x40000000u)]
+    public void Ec020OddLongWritesThreePixelLanesInOneStrobe(int offset, uint pixels, uint firstPlane)
+    {
+        using var machine = Create();
+        var rom = new byte[512 * 1024];
+        BinaryPrimitives.WriteUInt32BigEndian(rom, 0x0007FFF0);
+        BinaryPrimitives.WriteUInt32BigEndian(rom.AsSpan(4), 0x00F80100);
+        ushort[] program =
+        [
+            0x23FC, (ushort)(pixels >> 16), (ushort)pixels, 0x00B8, (ushort)offset, // MOVE.L #pixels,Akiko
+            0x2039, 0x00B8, 0x0038, // Read successive planes into D0-D2.
+            0x2239, 0x00B8, 0x0038,
+            0x2439, 0x00B8, 0x0038,
+            0x4E72, 0x2700
+        ];
+        for (var i = 0; i < program.Length; i++)
+            BinaryPrimitives.WriteUInt16BigEndian(rom.AsSpan(0x100 + i * 2), program[i]);
+        machine.LoadCd32RomBanks(rom, new byte[rom.Length]);
+        machine.ExecuteFrame();
+        Assert.True(machine.Cpu.Stopped);
+        for (var plane = 0; plane < 3; plane++)
+            Assert.Equal(firstPlane >> plane, machine.Cpu.D[plane]);
+    }
+
+    [Theory]
     [InlineData(LightweightCd32Region.Pal)]
     [InlineData(LightweightCd32Region.Ntsc)]
     public void Ec020BootCodeCanIdentifyAkikoAndPollACommand(LightweightCd32Region region)
@@ -173,13 +215,19 @@ public sealed class LightweightCd32Tests
         Assert.NotEqual(0, machine.ReadWord(0xDFF016, ref cycle, Read) & returnBit);
     }
 
-    [Fact]
-    public void EepromAcknowledgesWhenOneLongWriteLowersClockAndReleasesData()
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void EepromAcknowledgesWhenOneLongWriteLowersClockAndReleasesData(bool threeLanes)
     {
         using var machine = Create();
         long cycle = 0;
         const uint pins = 0xB80030;
-        void Drive(uint value) => machine.WriteLong(pins, value, ref cycle, Write);
+        void Drive(uint value)
+        {
+            if (threeLanes) machine.WriteLong(pins - 1, value >> 8, ref cycle, Write);
+            else machine.WriteLong(pins, value, ref cycle, Write);
+        }
 
         Drive(0xC000C000);
         Drive(0x8000C000); // START

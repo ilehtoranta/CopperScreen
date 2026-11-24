@@ -31,15 +31,25 @@ public sealed partial class LightweightA500Machine
         return value;
     }
 
-    internal void WriteAgaLong(uint address, uint value, ref long cycle)
+    internal void WriteAgaBusLanes(uint address, uint value, int size, ref long cycle)
     {
         GrantCpuWord(address, cycle, out var grant, out var complete);
         AdvanceHardwareTo(grant);
-        if (IsAkikoAddress(address)) WriteAkiko(address, 4, value, grant);
-        else
+        if (IsAkikoAddress(address)) WriteAkiko(address, size, value, grant);
+        else if (size == 4)
         {
             WriteWordRaw(address, (ushort)(value >> 16), grant);
             WriteWordRaw(address + 2, (ushort)value, grant);
+        }
+        else if ((address & 1) == 0)
+        {
+            WriteWordRaw(address, (ushort)(value >> 8), grant);
+            WriteByteRaw(address + 2, (byte)value, grant);
+        }
+        else
+        {
+            WriteByteRaw(address, (byte)(value >> 16), grant);
+            WriteWordRaw(address + 1, (ushort)value, grant);
         }
         AdvanceHardwareTo(complete);
         cycle = complete;

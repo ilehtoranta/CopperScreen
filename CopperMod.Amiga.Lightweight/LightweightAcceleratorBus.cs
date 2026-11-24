@@ -113,8 +113,12 @@ internal class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpu
     {
         if ((address & 3) == 0 && machine.HasAgaLongBus(address & _addressMask))
         {
-            address &= _addressMask; BeginTransfer(ref cycle); var requested = cycle;
-            machine.WriteAgaLong(address, value, ref cycle); CompleteTransfer(requested, ref cycle); return;
+            address &= _addressMask;
+            BeginTransfer(ref cycle);
+            var requested = cycle;
+            machine.WriteAgaBusLanes(address, value, 4, ref cycle);
+            CompleteTransfer(requested, ref cycle);
+            return;
         }
         if ((address & 1) == 0)
         {
@@ -122,9 +126,40 @@ internal class LightweightAcceleratorBus(LightweightA500Machine machine, M68kCpu
             WriteWord(unchecked(address + 2), (ushort)value, ref cycle, kind);
             return;
         }
-        WriteByte(address, (byte)(value >> 24), ref cycle, kind);
-        WriteWord(unchecked(address + 1), (ushort)(value >> 8), ref cycle, kind);
-        WriteByte(unchecked(address + 3), (byte)value, ref cycle, kind);
+        // Only one aligned longword contains three of the operand's bytes.
+        // Decode its port width independently of the single byte across the boundary.
+        if ((address & 3) == 1)
+        {
+            WriteThreeBytes(address, value >> 8, ref cycle, kind);
+            WriteByte(unchecked(address + 3), (byte)value, ref cycle, kind);
+        }
+        else
+        {
+            WriteByte(address, (byte)(value >> 24), ref cycle, kind);
+            WriteThreeBytes(unchecked(address + 1), value & 0xFFFFFF, ref cycle, kind);
+        }
+    }
+
+    private void WriteThreeBytes(uint address, uint value, ref long cycle, M68kBusAccessKind kind)
+    {
+        address &= _addressMask;
+        if (machine.HasAgaLongBus(address & ~3u))
+        {
+            BeginTransfer(ref cycle);
+            var requested = cycle;
+            machine.WriteAgaBusLanes(address, value, 3, ref cycle);
+            CompleteTransfer(requested, ref cycle);
+        }
+        else if ((address & 1) == 0)
+        {
+            WriteWord(address, (ushort)(value >> 8), ref cycle, kind);
+            WriteByte(unchecked(address + 2), (byte)value, ref cycle, kind);
+        }
+        else
+        {
+            WriteByte(address, (byte)(value >> 16), ref cycle, kind);
+            WriteWord(unchecked(address + 1), (ushort)value, ref cycle, kind);
+        }
     }
 
     public bool HasHostGateway(uint address)

@@ -55,11 +55,12 @@ internal sealed class LightweightAkiko(int clockFrequency) : IDisposable
     internal void Write(uint address, int size, uint value, long cycle)
     {
         if ((address & 0x8000) != 0) return;
-        if ((address & 0x3F) == 0x30 && size == 4)
+        if ((address & 0x3F) == 0x30 && size >= 3)
         {
             // Both EEPROM lanes belong to one CPU strobe. Releasing SDA
             // before lowering SCL would synthesize an I2C STOP.
-            _eeprom.WritePinsAndDirection((byte)(value >> 24), (byte)(value >> 8), cycle);
+            var lanes = value >> ((size - 3) * 8);
+            _eeprom.WritePinsAndDirection((byte)(lanes >> 16), (byte)lanes, cycle);
             return;
         }
         for (var lane = size - 1; lane >= 0; lane--)

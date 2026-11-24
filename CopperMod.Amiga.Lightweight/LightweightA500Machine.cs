@@ -68,6 +68,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private ushort _lightPenVpos, _lightPenVhpos;
     private readonly LightweightVideo _video;
     private readonly M68kCoreFactory _cpuFactory = M68kCoreFactory.Default;
+    private readonly IM68kBus _cpuBus;
     private readonly IM68kCore _cpu;
     private readonly IM68kBatchCore _batchCpu;
     private readonly LightweightCpuBoundary _cpuBoundary;
@@ -189,7 +190,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             var pages = 65536 + (_configuration.FastRamBytes > 8388608 ? _configuration.FastRamBytes / 256 : 0);
             _jitPageGenerations = new uint[pages]; _jitObservedPages = new bool[pages];
         }
-        IM68kBus cpuBus = _configuration.CpuModel switch
+        _cpuBus = _configuration.CpuModel switch
         {
             M68kCpuModel.M68000 or M68kCpuModel.M68010 => this,
             M68kCpuModel.M68040 when _cpuClockShift != 0 => new LightweightAccelerated040Bus(this),
@@ -203,8 +204,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_cpuClockShift != 0)
             EnableUncachedFastRamTraces(cpuOptions);
         _cpu = IsAga && _configuration.CpuModel == M68kCpuModel.M68EC020
-            ? _cpuFactory.CreateA1200Ec020(cpuBus)
-            : _cpuFactory.Create(_configuration.CpuModel, cpuBus, cpuOptions);
+            ? _cpuFactory.CreateA1200Ec020(_cpuBus)
+            : _cpuFactory.Create(_configuration.CpuModel, _cpuBus, cpuOptions);
         if (UsesAcceleratedCpuClock && !IsEcsAgnus && !IsAga)
             _timedCpuBatchBoundary = GetTimedCpuBatchBoundaryRequest(_cpu);
         _batchCpu = (IM68kBatchCore)_cpu;
@@ -903,10 +904,15 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public void WriteLong(uint address, uint value, ref long cycle, M68kBusAccessKind accessKind)
     {
-        _ = accessKind;
+        // Direct EC020 bus callers use the same lane grouping as guest instructions.
+        if ((address & 1) != 0 && _configuration.CpuModel == M68kCpuModel.M68EC020)
+        {
+            _cpuBus.WriteLong(address, value, ref cycle, accessKind);
+            return;
+        }
         if ((address & 3) == 0 && IsAkikoAddress(address))
         {
-            WriteAgaLong(address, value, ref cycle);
+            WriteAgaBusLanes(address, value, 4, ref cycle);
             return;
         }
         GrantCpuWord(address, cycle, out var firstWordCycle, out var firstCompletedCycle);
