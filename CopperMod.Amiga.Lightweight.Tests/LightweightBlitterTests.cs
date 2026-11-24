@@ -589,6 +589,48 @@ public sealed class LightweightBlitterTests
         Assert.Equal((ushort)0xCAFE, ReadWord(machine, DestinationD));
     }
 
+    [Theory]
+    [InlineData(false, 0x55)]
+    [InlineData(true, 0x53)]
+    public void AreaStartupRespectsTheCpuGrantAfterCopperAndBitplaneContention(
+        bool priority, int firstBlitterClock)
+    {
+        using var machine = new LightweightA500Machine();
+        const uint list = 0x2000;
+        const int line = 3;
+        const long lineStart = line * LightweightClock.CpuCyclesPerLine;
+        const int cck = LightweightClock.CpuCyclesPerColorClock;
+        WriteWord(machine, list, 0x0347);
+        WriteWord(machine, list + 2, 0xFFFE);
+        WriteWord(machine, list + 4, LightweightRegisters.Bltsize);
+        WriteWord(machine, list + 6, 0x0041);
+        WriteWord(machine, list + 8, 0xFFFF);
+        WriteWord(machine, list + 10, 0xFFFE);
+        WriteWord(machine, SourceA, 0xCAFE);
+        ConfigureArea(machine, bltcon0: 0x09F0);
+        WritePointer(machine, LightweightRegisters.Cop1lch, list);
+        WriteRegister(machine, LightweightRegisters.Copcon, 0x8002);
+        WriteRegister(machine, LightweightRegisters.Diwstrt, 0x0181);
+        WriteRegister(machine, LightweightRegisters.Diwstop, 0x05C1);
+        WriteRegister(machine, LightweightRegisters.Ddfstrt, 0x0038);
+        WriteRegister(machine, LightweightRegisters.Ddfstop, 0x00D0);
+        WriteRegister(machine, LightweightRegisters.Bplcon0, 0x4200);
+        WriteRegister(machine, LightweightRegisters.DmaconWrite, (ushort)(0x83C0 | (priority ? 0x0400 : 0)));
+        WriteRegister(machine, LightweightRegisters.Copjmp1, 0);
+
+        var cpuCycle = lineStart + 0x48 * cck;
+        Assert.Equal((ushort)0xCAFE, machine.ReadWord(SourceA, ref cpuCycle, M68kBusAccessKind.CpuDataRead));
+        Assert.Equal(lineStart + 0x50 * cck, cpuCycle);
+
+        var firstOutput = lineStart + firstBlitterClock * cck;
+        machine.AdvanceHardwareTo(firstOutput - cck);
+        Assert.True(machine.BlitterLastOutputCycle < lineStart);
+        machine.AdvanceHardwareTo(firstOutput);
+        Assert.Equal(firstOutput, machine.BlitterLastOutputCycle);
+        AdvanceUntilBlitterIdle(machine);
+        Assert.Equal((ushort)0xCAFE, ReadWord(machine, DestinationD));
+    }
+
     [Fact]
     public void BitplaneOutputKeepsPriorityAndDelaysOnlyIncomingBlitterPhase()
     {

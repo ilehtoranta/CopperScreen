@@ -496,7 +496,8 @@ Later rooms remain unverified.
 Another WinUAE changelog entry identifies bitplane DMA taking blitter slots
 as a source of rendering glitches in P.P. Hammer. The captured opening-room
 Copper list uses four lores planes, with DDFSTRT `$38` and DDFSTOP `$D0` for
-one display region. BLTPRI is set in the recorded gameplay field.
+one display region. In fields 5,401 through 7,200, BLTPRI stays set across
+all 327,856 recorded A+D blit starts.
 [WinUAE bitplane contention history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19206-L19210)
 
 The [area probe generator](../../scripts/generate-blitter-area-probe.ps1)
@@ -508,11 +509,20 @@ use the Copper BLTSIZE write to align the horizontal origin.
 
 Remove `-BlitterPriority` and add `-Modes 9` to isolate a shared-bus A+D
 blit. The CPU prefetches match before the first arbitration difference.
-WinUAE grants its slot `$56` to the CPU read at `$40000`. CopperScreen
-accepts the blitter A read in the preceding input phase, before the CPU
-request is visible, and grants the CPU the following eligible slot. The
-128 transfers still match by address. Their timing under shared priority
-requires a separate correction and physical verification.
+An instrumented build of the same WinUAE revision shows that startup
+holds at CCK `$51` when the waiting CPU earns the next slot. With the
+extra startup clock, WinUAE grants slot `$56` to the CPU read at `$40000`
+and fetches the first blitter A word at `$58`. The old CopperScreen engine
+advanced startup at that arbitration boundary and fetched A at `$56`.
+Area startup now uses the same CPU-yield rule as active transfers. A
+regression starts the blit while the Copper and bitplanes keep the CPU
+waiting and verifies the first A transfer with both priority settings.
+
+After the correction, all 128 shared A+D transfers match WinUAE in the
+isolated and full probes. The isolated shared A+B+C+D mode (`-Modes 15`)
+also matches all 256 transfers. In the full shared probe, CPU and blitter
+bus order still diverges while the A+B+C+D blit crosses a scanline.
+[WinUAE blitter startup arbitration](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1741-L1778)
 
 ## All New World of Lemmings
 

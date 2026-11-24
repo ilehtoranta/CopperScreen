@@ -613,10 +613,11 @@ internal sealed class LightweightBlitter
         LightweightA500Machine machine,
         bool ownedBusThisCycle)
     {
-        // Line startup clocks are internal and can overlap another owner's
-        // output. Area startup retains the control/output exclusion already
-        // established by H3a.
-        if (!_lineMode && !machine.CanBlitterAdvanceControl(cycle))
+        // Line startup clocks are internal. Area startup advances only when
+        // the blitter can take the input slot, including when a waiting CPU
+        // has earned the next output.
+        if (!_lineMode && (!machine.CanBlitterAdvanceControl(cycle) ||
+            ShouldYieldToCpu(cycle, machine, ownedBusThisCycle)))
         {
             if (_delayedModuloWrites != 0) ApplyDelayedAreaModulos(cycle, stalled: true, machine);
             return;
