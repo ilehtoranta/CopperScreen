@@ -47,6 +47,35 @@ public sealed class LightweightUpgradeTests
     }
 
     [Theory]
+    [InlineData(M68kCpuModel.M68020, 1)]
+    [InlineData(M68kCpuModel.M68030, 1)]
+    [InlineData(M68kCpuModel.M68040, 1)]
+    [InlineData(M68kCpuModel.M68040, 4)]
+    [InlineData(M68kCpuModel.M68060, 1)]
+    public void PublicBusAccessKeepsHighAddressesDistinctFromChipRam(M68kCpuModel cpu, int multiplier)
+    {
+        using var machine = new LightweightA500Machine(Configuration(cpu, aga: true, jit: multiplier > 1)
+            with { CpuClockMultiplier = multiplier });
+        long cycle = 20;
+        machine.WriteWord(0xFF000044, 0x4000, ref cycle, Write);
+        Assert.Equal(0x40000000u, machine.FastRamBase);
+        const uint high = 0x40002000, low = 0x2000;
+        machine.WriteLong(low, 0x11223344, ref cycle, Write);
+        machine.WriteLong(high + 1, 0x55667788, ref cycle, Write);
+        machine.WriteByte(high, 0xAA, ref cycle, Write);
+        machine.WriteWord(high + 1, 0xBBCC, ref cycle, Write);
+        Assert.Equal(0xAABBCC77u, machine.ReadLong(high, ref cycle, Read));
+        Assert.Equal(0xBBCC, machine.ReadWord(high + 1, ref cycle, Read));
+        Assert.Equal(0x88, machine.ReadByte(high + 4, ref cycle, Read));
+        Assert.Equal(0xAABBCC77u, BinaryPrimitives.ReadUInt32BigEndian(machine.FastRam.Span[0x2000..]));
+        Assert.Equal(0x11223344u, machine.ReadLong(low, ref cycle, Read));
+        machine.WriteLong(0x50002000, uint.MaxValue, ref cycle, Write);
+        Assert.Equal(uint.MaxValue, machine.ReadLong(0x50002000, ref cycle, Read));
+        Assert.Equal(0x1122, machine.ReadChipWordDma(low));
+        Assert.Equal(cycle, machine.Cycle);
+    }
+
+    [Theory]
     [InlineData(M68kCpuModel.M68000)] [InlineData(M68kCpuModel.M68010)] [InlineData(M68kCpuModel.M68EC020)]
     public void NarrowAddressCpuCannotFitHighRam(M68kCpuModel cpu)
         => Assert.Throws<ArgumentOutOfRangeException>(() => new LightweightA500Machine(Configuration(cpu, false)));

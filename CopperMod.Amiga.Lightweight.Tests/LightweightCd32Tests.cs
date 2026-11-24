@@ -498,6 +498,51 @@ public sealed class LightweightCd32Tests
         }
     }
 
+    [Theory]
+    [InlineData(0xB90000u)]
+    [InlineData(0xB9FE00u)]
+    [InlineData(0xCFFE00u)]
+    public void CustomMirrorsStrobeBothWordsOfAnInterruptRegisterAccess(uint mirror)
+    {
+        using var machine = Create();
+        long cycle = 20;
+        machine.WriteLong(0xDFF09A, 0x7FFF7FFF, ref cycle, Write);
+        machine.WriteLong(mirror + 0x9A, 0x81018002, ref cycle, Write);
+        Assert.Equal(0x01010002u, machine.ReadLong(0xDFF01C, ref cycle, Read));
+        Assert.Equal(0x01010002u, machine.ReadLong(mirror + 0x1C, ref cycle, Read));
+        machine.WriteLong(mirror + 0x9A, 0x00010002, ref cycle, Write);
+        Assert.Equal(0x01000000u, machine.ReadLong(0xDFF01C, ref cycle, Read));
+    }
+
+    [Fact]
+    public void C2pMirrorsReadTheCurrentPlaneAndOnlyThePrimaryPortAdvancesIt()
+    {
+        using var machine = Create();
+        var cd = new AkikoRegisters(machine);
+        for (var i = 0; i < 8; i++) cd.Long(0x38, 0x01030103);
+        Assert.Equal(uint.MaxValue, cd.Long(0x78));
+        Assert.Equal(0xFFFF, cd.Word(0x7FFA));
+        Assert.Equal(uint.MaxValue, cd.Long(0x38));
+        Assert.Equal(0x55555555u, cd.Long(0x78));
+        Assert.Equal(0x55, cd.Byte(0x3B));
+        Assert.Equal(0u, cd.Long(0x78));
+    }
+
+    [Fact]
+    public void PioReadDuringReceiveDmaAcknowledgesTheInterruptAndKeepsThePacket()
+    {
+        using var machine = Create();
+        var cd = new AkikoRegisters(machine);
+        cd.SendPacket([0x10]);
+        const uint driveRx = 0x20000000;
+        cd.Long(0x24, 0x20000000); // RX index equals its comparator, so no DMA byte can retire.
+        Assert.Equal(driveRx, cd.Long(0x04) & driveRx);
+        Assert.Equal(0u, cd.Long(0x28));
+        Assert.Equal(0u, cd.Long(0x04) & driveRx);
+        cd.Long(0x24, 0);
+        Assert.Equal(new byte[] { 0x10, 0xEF }, cd.ReadPacket(2));
+    }
+
     private sealed class AkikoRegisters(LightweightA500Machine machine)
     {
         private long _cycle = machine.Cycle;

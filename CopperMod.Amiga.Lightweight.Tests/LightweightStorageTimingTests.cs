@@ -1,4 +1,5 @@
 using CopperDisk;
+using Copper68k;
 using Xunit;
 
 namespace CopperMod.Amiga.Lightweight.Tests;
@@ -139,6 +140,29 @@ public sealed class LightweightStorageTimingTests
         ata.WriteControl(4, 2000); Assert.Equal(0x80, ata.ReadRegister(7, true, false));
         ata.WriteControl(0, 2010); ata.Step(ata.NextCycle); Assert.Equal(0x50, ata.ReadRegister(7, true, false));
         ata.WriteRegister(6, 0xB0, 3000); Assert.Equal(0xFF, ata.ReadRegister(7, false, true));
+    }
+
+    [Fact]
+    public void GayleIgnoresA5AndA13ButDecodesHigherRegisterBitsOnLongwordAccesses()
+    {
+        using var media = new Media();
+        using var machine = new LightweightA500Machine(new()
+        {
+            AgnusModel = LightweightAgnusModel.Mos8374Alice, DeniseModel = LightweightDeniseModel.Lisa4203,
+            CpuModel = M68kCpuModel.M68EC020, ChipRamBytes = 2097152, SlowRamBytes = 0,
+            IdeMaster = new(media.Configuration) { Timing = LightweightDriveTimingProfile.Cf }
+        });
+        long cycle = 20;
+        const M68kBusAccessKind read = M68kBusAccessKind.CpuDataRead, write = M68kBusAccessKind.CpuDataWrite;
+        machine.WriteLong(0xDA205C, 0xEC000000, ref cycle, write);
+        machine.AdvanceHardwareTo(cycle + 1000);
+        Assert.Equal(0x50, machine.ReadByte(0xDA201C, ref cycle, read));
+        machine.WriteLong(0xDA203C, 0xEC000000, ref cycle, write); // IDENTIFY at the A5 mirror
+        machine.AdvanceHardwareTo(cycle + 1000);
+        Assert.Equal(0x58, machine.ReadByte(0xDA201C, ref cycle, read));
+        Assert.Equal(0u, machine.ReadLong(0xDA2040, ref cycle, read));
+        Assert.Equal(0x40000800u, machine.ReadLong(0xDA0020, ref cycle, read));
+        Assert.Equal(0x00000400u, machine.ReadLong(0xDA2000, ref cycle, read));
     }
 
     [Fact]

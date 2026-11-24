@@ -68,7 +68,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private ushort _lightPenVpos, _lightPenVhpos;
     private readonly LightweightVideo _video;
     private readonly M68kCoreFactory _cpuFactory = M68kCoreFactory.Default;
-    private readonly IM68kBus _cpuBus;
+    private readonly LightweightAcceleratorBus? _acceleratorBus;
     private readonly IM68kCore _cpu;
     private readonly IM68kBatchCore _batchCpu;
     private readonly LightweightCpuBoundary _cpuBoundary;
@@ -190,12 +190,13 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             var pages = 65536 + (_configuration.FastRamBytes > 8388608 ? _configuration.FastRamBytes / 256 : 0);
             _jitPageGenerations = new uint[pages]; _jitObservedPages = new bool[pages];
         }
-        _cpuBus = _configuration.CpuModel switch
+        _acceleratorBus = _configuration.CpuModel switch
         {
-            M68kCpuModel.M68000 or M68kCpuModel.M68010 => this,
+            M68kCpuModel.M68000 or M68kCpuModel.M68010 => null,
             M68kCpuModel.M68040 when _cpuClockShift != 0 => new LightweightAccelerated040Bus(this),
             _ => new LightweightAcceleratorBus(this, _configuration.CpuModel)
         };
+        IM68kBus cpuBus = (IM68kBus?)_acceleratorBus ?? this;
         var cpuOptions = new M68kCoreOptions
         {
             ExecutionMode = _configuration.CpuExecutionMode,
@@ -204,8 +205,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_cpuClockShift != 0)
             EnableUncachedFastRamTraces(cpuOptions);
         _cpu = IsAga && _configuration.CpuModel == M68kCpuModel.M68EC020
-            ? _cpuFactory.CreateA1200Ec020(_cpuBus)
-            : _cpuFactory.Create(_configuration.CpuModel, _cpuBus, cpuOptions);
+            ? _cpuFactory.CreateA1200Ec020(cpuBus)
+            : _cpuFactory.Create(_configuration.CpuModel, cpuBus, cpuOptions);
         if (UsesAcceleratedCpuClock && !IsEcsAgnus && !IsAga)
             _timedCpuBatchBoundary = GetTimedCpuBatchBoundaryRequest(_cpu);
         _batchCpu = (IM68kBatchCore)_cpu;
@@ -848,7 +849,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public byte ReadByte(uint address, ref long cycle, M68kBusAccessKind accessKind)
     {
-        _ = accessKind;
+        if (address > 0x00FF_FFFF && _acceleratorBus is { } bus)
+            return bus.ReadByte(address, ref cycle, accessKind);
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle, byteAccess: true);
         var value = ReadByteAt(address, grantedCycle);
         AdvanceHardwareTo(completedCycle);
@@ -858,8 +860,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public ushort ReadWord(uint address, ref long cycle, M68kBusAccessKind accessKind)
     {
-        if ((address & 1) != 0 && _configuration.CpuModel == M68kCpuModel.M68EC020)
-            return _cpuBus.ReadWord(address, ref cycle, accessKind);
+        if (((address & 1) != 0 || address > 0x00FF_FFFF) && _acceleratorBus is { } bus)
+            return bus.ReadWord(address, ref cycle, accessKind);
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle);
         var value = ReadWordAt(address, grantedCycle);
         AdvanceHardwareTo(completedCycle);
@@ -869,8 +871,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public uint ReadLong(uint address, ref long cycle, M68kBusAccessKind accessKind)
     {
-        if (_configuration.CpuModel == M68kCpuModel.M68EC020)
-            return _cpuBus.ReadLong(address, ref cycle, accessKind);
+        // Public machine access uses motherboard cycles, including on a clock-multiplied 040.
+        if (_acceleratorBus is { } bus)
+            return bus.ReadLong(address, ref cycle, accessKind);
         GrantCpuWord(address, cycle, out var firstWordCycle, out var firstCompletedCycle);
         var high = ReadWordAt(address, firstWordCycle);
         AdvanceHardwareTo(firstCompletedCycle);
@@ -886,7 +889,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public void WriteByte(uint address, byte value, ref long cycle, M68kBusAccessKind accessKind)
     {
-        _ = accessKind;
+        if (address > 0x00FF_FFFF && _acceleratorBus is { } bus)
+        {
+            bus.WriteByte(address, value, ref cycle, accessKind);
+            return;
+        }
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle, byteAccess: true);
         WriteByteRaw(address, value, grantedCycle);
         AdvanceHardwareTo(completedCycle);
@@ -895,9 +902,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public void WriteWord(uint address, ushort value, ref long cycle, M68kBusAccessKind accessKind)
     {
-        if ((address & 1) != 0 && _configuration.CpuModel == M68kCpuModel.M68EC020)
+        if (((address & 1) != 0 || address > 0x00FF_FFFF) && _acceleratorBus is { } bus)
         {
-            _cpuBus.WriteWord(address, value, ref cycle, accessKind);
+            bus.WriteWord(address, value, ref cycle, accessKind);
             return;
         }
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle);
@@ -908,10 +915,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public void WriteLong(uint address, uint value, ref long cycle, M68kBusAccessKind accessKind)
     {
-        // Direct EC020 bus callers use the same lane grouping as guest instructions.
-        if (_configuration.CpuModel == M68kCpuModel.M68EC020)
+        if (_acceleratorBus is { } bus)
         {
-            _cpuBus.WriteLong(address, value, ref cycle, accessKind);
+            bus.WriteLong(address, value, ref cycle, accessKind);
             return;
         }
         GrantCpuWord(address, cycle, out var firstWordCycle, out var firstCompletedCycle);
@@ -1064,6 +1070,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         address &= 0x00FF_FFFF;
         if (address is >= 0xDF0000 and < 0xE00000) return true;
+        if (address is >= 0xB90000 and < 0xBA0000 or >= 0xC00000 and < 0xD00000 && _akiko is not null)
+            return true;
         // On the A500, fitted slow RAM takes precedence over the Gary custom mirrors.
         return address is >= 0xC00000 and < 0xDF0000 && !IsAga &&
             (address < 0xD80000 && address - 0xC00000 >= _slowRam.Length || address >= 0xDE0000);

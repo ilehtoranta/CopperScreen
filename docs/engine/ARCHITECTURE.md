@@ -51,16 +51,25 @@ to extend it. All device progress remains owned by the machine.
 
 The initial PAL A1200 uses an explicit `CreateA1200Ec020` package profile and
 `a1200-initial-v1` host bridge. An aligned Chip/ROM longword occupies one accepted
-motherboard transfer. Custom registers are 16-bit. Gayle IDE consumes a PIO
+motherboard transfer. Custom registers are 16-bit. Gayle ignores A5 and A13
+when selecting an IDE register. A6 distinguishes `$DA205C` from the command
+port and `$DA2040` from the data port. Gayle IDE consumes a PIO
 data word on a word read. A byte read during the data phase returns zero and
 leaves the next word available. See the WinUAE [Gayle byte-read path](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/gayle.cpp#L411-L419)
 and [ATA data-register handler](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/ide.cpp#L1354-L1369).
 On a 32-bit port, a word at byte offset 1 fits in one transfer. At offset 3 it
 spans two. An odd longword uses three lanes on one side of the aligned boundary
 and one on the other. The bridge decodes the port width separately on each
-side, including at the EC020 address wrap. Each Akiko C2P read advances one
-bitplane per transfer that selects the converter. The public machine longword
-methods use the guest's bus adapter on a 68EC020, including on CD32.
+side, including at the EC020 address wrap. Public machine accesses use
+motherboard cycles. The 68020/030/040/060 profiles retain all 32 address bits,
+including on transfers across the end of the motherboard address space.
+
+On CD32, the custom-register banks at `$B90000–$B9FFFF` and `$C00000–$CFFFFF`
+share the register strobes and arbitration at `$DFF000`. The primary Akiko C2P
+port at `$B80038–$B8003B` advances one bitplane per read transfer. Its mirrors
+return the current plane without advancing. Reading Akiko's PIO data port
+while receive DMA is enabled acknowledges the drive-receive request and
+leaves the pending response available.
 
 On the A500, Gary's custom-register mirrors decode the low nine address bits.
 They share the canonical register strobes and Agnus arbitration. Fitted slow

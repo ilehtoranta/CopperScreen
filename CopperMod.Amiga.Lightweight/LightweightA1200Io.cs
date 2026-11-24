@@ -48,8 +48,10 @@ internal sealed class LightweightA1200Io : IDisposable
         if (line && !_ideInterruptLine) _interruptRequest|=0x80;
         _ideInterruptLine=line;
     }
-    private static bool TaskFileLane(uint address) => (address & 0x1000) == 0 &&
-        (address & 3) == ((address & 0x2000) != 0 ? 0u : 2u);
+    // A5 and A13 select aliases. All other bits above the byte lanes select the register.
+    private static int IdeRegister(uint address) => (int)(((address - IdeStart) & ~0x2020u) >> 2);
+    private const int DeviceControl = 0x406;
+    private static bool TaskFileLane(uint address) => (address & 3) == ((address & 0x2000) != 0 ? 0u : 2u);
 
     internal byte CardControl => _cardControl;
     internal byte InterruptRequest => _interruptRequest;
@@ -99,10 +101,13 @@ internal sealed class LightweightA1200Io : IDisposable
         {
             if (_ide is not null && address < IdeStart+0x4000)
             {
-                var alternate = (address & 0x101C) == 0x1018;
+                var register = IdeRegister(address);
+                if (register is >= 1 and <= 7 && !TaskFileLane(address)) return 0xFF;
+                var alternate = register == DeviceControl;
                 // Gayle only clocks the PIO data FIFO on a word transfer.
-                if (_ide.DataRegister(address) || alternate || TaskFileLane(address))
-                { var value = _ide.ReadRegister(alternate ? 7 : (int)(address >> 2 & 7), alternate, strobe); SyncInterrupt(); return value; }
+                var value = _ide.ReadRegister(alternate ? 7 : register, alternate, strobe);
+                SyncInterrupt();
+                return value;
             }
             // An unattached ATA bus floats high. In particular, status is FF rather
             // than the emulator-specific 7F fast-boot value used by some emulators.
@@ -115,7 +120,7 @@ internal sealed class LightweightA1200Io : IDisposable
 
     internal ushort ReadWord(uint address, long cycle, bool strobe = true)
     {
-        if (_ide is not null && address is >= IdeStart and < GayleCardStatus && _ide.DataRegister(address))
+        if (_ide is not null && address is >= IdeStart and < GayleCardStatus && IdeRegister(address) == 0)
         { var result = _ide.ReadData(cycle, strobe); SyncInterrupt(); return result; }
         return (ushort)((ReadByte(address, strobe, cycle) << 8) | ReadByte(address + 1, strobe, cycle));
     }
@@ -145,8 +150,9 @@ internal sealed class LightweightA1200Io : IDisposable
         }
         else if (_ide is not null && address is >= IdeStart and < IdeStart+0x4000)
         {
-            if ((address & 0x101C) == 0x1018) _ide.WriteControl(value, cycle);
-            else if (TaskFileLane(address)) _ide.WriteRegister((int)(address >> 2 & 7), value, cycle);
+            var register = IdeRegister(address);
+            if (register == DeviceControl) _ide.WriteControl(value, cycle);
+            else if (register is >= 1 and <= 7 && TaskFileLane(address)) _ide.WriteRegister(register, value, cycle);
             SyncInterrupt();
         }
     }

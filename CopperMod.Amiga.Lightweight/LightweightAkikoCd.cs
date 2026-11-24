@@ -362,7 +362,11 @@ internal sealed class LightweightAkikoCd(int clockFrequency) : IDisposable
 
     private byte ReadPio(long cycle, bool strobe)
     {
-        if ((_control & RxDma) != 0 || _responseLength == 0) return _lastResponseByte;
+        if ((_control & RxDma) != 0 || _responseLength == 0)
+        {
+            if (strobe) _requests &= ~DriveRx;
+            return _lastResponseByte;
+        }
         if (!strobe) return _response[_responseIndex];
         var value = TakeResponse(cycle);
         UpdateTransfer(cycle);

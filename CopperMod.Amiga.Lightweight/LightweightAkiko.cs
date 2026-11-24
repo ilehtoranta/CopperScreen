@@ -27,8 +27,7 @@ internal sealed class LightweightAkiko(int clockFrequency) : IDisposable
         _needsConversion = false;
     }
 
-    // Each data strobe reads one plane and advances the index once, regardless
-    // of the number of byte lanes driven. Writes process the low lane first.
+    // The mirrors expose the same plane, but only the primary C2P port clocks the index.
     internal uint Read(uint address, int size, long cycle, bool strobe = true)
     {
         if ((address & 0x8000) != 0) return 0;
@@ -47,7 +46,7 @@ internal sealed class LightweightAkiko(int clockFrequency) : IDisposable
         uint result = 0;
         for (var lane = 0; lane < size; lane++)
             result = (result << 8) | ReadLane((offset + lane) & 0x3F, cycle, strobe);
-        if (strobe && offset is >= 0x38 and < 0x3C)
+        if (strobe && (address & 0xFFFF) is >= 0x38 and < 0x3C)
             _readIndex = (_readIndex + 1) & 7;
         return result;
     }
