@@ -42,12 +42,12 @@ public sealed class CopperScreenRtcTests : IDisposable
         using var previous = new CopperScreenLightweightSession(reloaded.ToStartupOptions(_directory));
         Assert.Equal(enabled, previous.Machine.RtcEnabled);
         var cycle = previous.Machine.Cycle;
-        previous.Machine.WriteByte(0xDC0028, 8, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        previous.Machine.WriteByte(0xDC0029, 8, ref cycle, M68kBusAccessKind.CpuDataWrite);
         previous.TogglePaused();
         using var replacement = new CopperScreenLightweightSession(reloaded.ToStartupOptions(_directory), previous);
         cycle = replacement.Machine.Cycle;
         Assert.Equal(enabled ? 8 : 0xFF,
-            replacement.Machine.ReadByte(0xDC0028, ref cycle, M68kBusAccessKind.CpuDataRead));
+            replacement.Machine.ReadByte(0xDC0029, ref cycle, M68kBusAccessKind.CpuDataRead));
         Assert.Null(replacement.FaultMessage);
     }
 
