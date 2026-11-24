@@ -1048,3 +1048,45 @@ later rooms remain open.
 | CopperScreen opening room, field 7,950 | `4930E1B700D29861FC4BB70EBF40B973A0AACFFFFEC98BB82929DACE38B4CD1E` |
 | CopperScreen after walking forward, field 8,250 | `65F3FF6C1B1FE997213DFE36A5016E5965367CC32F914750282F67CD80F85A23` |
 | Stock cycle-exact WinUAE opening room | `7BC5B5741FB19BF92EC189E501FA1319BE8F451A67F8D7CF2F454FA67BF4B92D` |
+
+Banshee still reached the first mission with both scoreboard panels. Zool 2
+asked for a different code-wheel response and reached the Stage 1 wall
+climb after entering that response. PAL and NTSC Sqrxz still reached the
+title screen at normal drive speed. The NTSC field-1,425 bitmap matched
+the retained replay byte for byte. The Release build passed with zero
+warnings and engine diagnostics passed 1,511 tests with seven optional skips.
+
+### Charlie J. Cool
+
+The PAL A1200 check uses the two NRC/Nevada AGA ADFs. Disk 1 SHA-256 is
+`82B3539B3F1E662234B141C12F56B6E547671B82DC59B2DE7609F19E35E00504`.
+Disk 2 SHA-256 is `58AC029ED8632547AB5E165040343FEB41DFD128A1D01C102B604D90A3418EA4`.
+Both engines use Kickstart 3.0 revision 39.106, 2 MiB Chip RAM and disks in
+DF0 and DF1. The CopperScreen replay pulses joystick port 2 fire at
+1,450–1,465 and 1,720–1,735 to skip the credits and select Start. Both
+CopperScreen and stock cycle-exact WinUAE 6.1 beta 23 reach level 1-1.
+
+The historical Alice busy-signal issue is relevant to the observed game
+configuration. During gameplay both engines report `BPLCON0=$7000`,
+`FMODE=$0000` and `DMACON=$03EF`, which select seven lores planes with
+blitter priority clear. A WinUAE DMA capture on raster line `$27` shows
+CPU byte reads of the busy flag at `$DFF002` interleaved with A and C
+source reads and D writes. The generic final-D and CPU-yield probes in
+[Area blitter pipeline](#area-blitter-pipeline) cover the motherboard rule.
+[WinUAE Alice busy-signal changelog](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L92-L98)
+
+At field 3,400, all 152,960 playfield RGB samples and all 4,480 scoreboard
+samples match the independent WinUAE opening capture. The comparison uses
+reference x=58–697 and even rows 60–536 for the playfield and 44–56 for the
+scoreboard. CopperScreen coordinates are `2*x + 400`, `floor(y/2) + 27`.
+Holding Right at 3,450–3,535 on CopperScreen scrolls past the opening cliff
+and onto the platform with the crates. WinUAE also scrolls to that platform.
+CopperScreen produces audio and reports no unsupported feature at these
+checkpoints. The Release replay reproduced both CopperScreen captures byte
+for byte. Later levels and a paired game DMA timeline remain open.
+
+| Capture | SHA-256 |
+| --- | --- |
+| CopperScreen opening, field 3,400 | `ACB5470F0E283E950F20E4914FEAC7E719F42A8FA0C5FA25A7EB516F068B1DC4` |
+| CopperScreen scrolled playfield, field 3,560 | `87491C4346A3A1A14FF5672BF8595C18644D5D402A6CF92871EA1B1CE5101585` |
+| Stock cycle-exact WinUAE opening | `E9EAC078CDD36E158B24DBB48E140A881210E876AFE48BA00ED9AD5CB8A99A76` |
