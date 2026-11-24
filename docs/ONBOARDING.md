@@ -38,9 +38,9 @@ directory for each game path and slave. **F9** quits WHDLoad inside the guest.
 launcher uses the slave's own settings and the selected data drawer. Per-title
 Workbench icon tooltypes and automatic game installation are outside this flow.
 
-The native save probe ran from both input formats on the A500 profile with
-Kickstart 2.04 and WHDLoad 20.1. The A1200 check pairing Kickstart 3.0 with a
-Workbench 3.1 disk reached a guest Exec alert.
+The native save probe verified both input formats with WHDLoad 20.1 and
+Workbench 3.1 on the A500 profile with Kickstart 2.04 and on the A1200 profile
+with Kickstart 3.0 and 8 MiB of Fast RAM.
 
 ### User-owned ROM and disks
 

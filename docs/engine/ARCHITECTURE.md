@@ -166,6 +166,9 @@ including Kickstart 1.3's 4 MiB assignment at `$200000`. It remains a 16-bit
 expansion, including on the 020 bridge. Fast RAM adds no Agnus wait; CPU transfer
 clocks and the single machine clock continue normally. Code peeks and CopperHDF
 contiguous guest buffers include the configured bank. DMA helpers are unchanged.
+On the A1200, configured Fast RAM takes precedence over the empty PCMCIA
+common-memory window where they overlap at `$600000–$9FFFFF`. The empty card
+space outside the configured bank still reads high.
 Reset removes assignments, preserves bytes and reopens Autoconfig. Full 32-bit
 CPUs can fit a larger virtual Zorro III bank, 16 MiB through 1 GiB, with extended
 size encoding and both configuration apertures. High RAM code generations and

@@ -5,9 +5,9 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 
 public sealed class LightweightAgaTests
 {
-    private static LightweightA500Machine Create() => new(new() { AgnusModel = LightweightAgnusModel.Mos8374Alice,
+    private static LightweightA500Machine Create(int fastRamBytes = 0) => new(new() { AgnusModel = LightweightAgnusModel.Mos8374Alice,
         DeniseModel = LightweightDeniseModel.Lisa4203, CpuModel = M68kCpuModel.M68EC020,
-        ChipRamBytes = 2097152, SlowRamBytes = 0, FramebufferWidth = 1816 });
+        ChipRamBytes = 2097152, SlowRamBytes = 0, FastRamBytes = fastRamBytes, FramebufferWidth = 1816 });
     private static void Write(LightweightA500Machine m, ushort r, ushort v)
     { m.WriteCustomRegisterFromCopper(r, v, m.Cycle); m.AdvanceHardwareTo(m.Cycle + 4); }
     private static void Configure(LightweightA500Machine m, int mode, int index, short odd = 0, short even = 0)
@@ -116,6 +116,37 @@ public sealed class LightweightAgaTests
         m.WriteByte(0xDE1000, 0, ref c, M68kBusAccessKind.CpuDataWrite);
         Assert.Equal(0x80, m.ReadByte(0xDE1000, ref c, M68kBusAccessKind.CpuDataRead));
     }
+
+    [Theory]
+    [InlineData(4, 0xFFFFFFFFu)]
+    [InlineData(8, 0x12345678u)]
+    public void ConfiguredFastRamTakesPriorityOverEmptyPcmciaMemory(int fastRamMiB, uint expected)
+    {
+        const uint address = 0x9FFFFC;
+        const M68kBusAccessKind read = M68kBusAccessKind.CpuDataRead;
+        const M68kBusAccessKind write = M68kBusAccessKind.CpuDataWrite;
+        using var machine = Create(fastRamMiB * 1024 * 1024);
+        var bus = new LightweightAcceleratorBus(machine, M68kCpuModel.M68EC020);
+        long cycle = 0;
+        Assert.Equal(0xFFFFFFFFu, bus.ReadLong(address, ref cycle, read));
+
+        bus.WriteByte(0xE8004A, 0, ref cycle, write);
+        bus.WriteByte(0xE80048, 0x20, ref cycle, write);
+        Assert.Equal(0x200000u, machine.FastRamBase);
+        bus.WriteLong(address, 0x12345678, ref cycle, write);
+        Assert.Equal(expected, bus.ReadLong(address, ref cycle, read));
+        Assert.Equal((ushort)expected, bus.ReadWord(address + 2, ref cycle, read));
+        Assert.Equal((byte)expected, bus.ReadByte(address + 3, ref cycle, read));
+
+        bus.WriteByte(address + 3, 0x9A, ref cycle, write);
+        Assert.Equal(expected == uint.MaxValue ? 0xFFFFu : 0x569Au, bus.ReadWord(address + 2, ref cycle, read));
+        Assert.Equal(0xFFFF, bus.ReadWord(address + 4, ref cycle, read));
+
+        machine.Reset();
+        cycle = 0;
+        Assert.Equal(0xFFFFFFFFu, bus.ReadLong(address, ref cycle, read));
+    }
+
     [Theory]
     [InlineData(0x100, 0x0C10)] [InlineData(0x100, 0x5800)]
     public void UnverifiedNonstandardModesReportTheirMissingFeature(ushort register, ushort value)

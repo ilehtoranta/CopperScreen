@@ -1838,7 +1838,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return ReadRomWord((int)(address - RomBase));
         if (_fastRam is { } ram && ram.ContainsRange(address, 2))
             return BinaryPrimitives.ReadUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2));
-        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address)) return _a1200Io.ReadWord(address, Cycle, false);
+        if (_a1200Io is not null && IsA1200IoAddress(address)) return _a1200Io.ReadWord(address, Cycle, false);
         if (_rtc is not null && LightweightRealTimeClock.ContainsAddress(address))
         {
             _rtc.TryReadByte(address, out var high);
@@ -1853,7 +1853,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         if (_hasClockedStorage && address >= 0x200000 && _hdf?.CopperHdf.TryReadCompletionWord(address, out var completion) == true)
         { RefreshStorageSchedule(cycle); return completion; }
-        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address))
+        if (_a1200Io is not null && IsA1200IoAddress(address))
         { var value = _a1200Io.ReadWord(address, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 2, false, value, cycle); RefreshStorageSchedule(cycle); } return value; }
         if ((address & 0x00FF_FFFEu) == CustomBase + LightweightRegisters.Clxdat)
             return _sprites.ReadCollisionData();
@@ -1878,7 +1878,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_hasClockedStorage && address >= 0x200000 && _hdf?.CopperHdf.TryReadCompletionByte(address, out var completion) == true)
         { RefreshStorageSchedule(cycle); return completion; }
         if (_rtc is not null && _rtc.TryReadByte(address, out var rtcValue)) return rtcValue;
-        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address))
+        if (_a1200Io is not null && IsA1200IoAddress(address))
         { var value = _a1200Io.ReadByte(address, true, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 1, false, value, cycle); RefreshStorageSchedule(cycle); } return value; }
         if ((address & 0x00FF_FFFEu) == CustomBase + LightweightRegisters.Clxdat)
         {
@@ -1921,7 +1921,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
         address &= 0x00FF_FFFFu;
         if (_rtc is not null && _rtc.TryWriteByte(address, value)) return;
-        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address))
+        if (_a1200Io is not null && IsA1200IoAddress(address))
         { _a1200Io.WriteByte(address, value, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 1, true, value, cycle); RefreshStorageSchedule(cycle); } return; }
         if (address >= 0x200000 && TryWriteExpansionByte(address, value)) return;
         var aligned = address & ~1u;
@@ -1977,7 +1977,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             NotifyJitRamWrite(address, 2);
             return;
         }
-        if (_a1200Io is not null && LightweightA1200Io.ContainsAddress(address))
+        if (_a1200Io is not null && IsA1200IoAddress(address))
         { _a1200Io.WriteByte(address, (byte)(value >> 8), cycle); _a1200Io.WriteByte(address + 1, (byte)value, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 2, true, value, cycle); RefreshStorageSchedule(cycle); } return; }
         if (_rtc is not null && LightweightRealTimeClock.ContainsAddress(address))
         {

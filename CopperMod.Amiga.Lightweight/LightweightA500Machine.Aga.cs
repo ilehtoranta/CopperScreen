@@ -8,6 +8,12 @@ public sealed partial class LightweightA500Machine
     public bool IsAga => _configuration.AgnusModel == LightweightAgnusModel.Mos8374Alice;
     private readonly LightweightA1200Io? _a1200Io;
 
+    // With no PCMCIA card fitted, configured Fast RAM owns any overlap with
+    // the common-memory window. Attribute and I/O space begin above it.
+    private bool IsA1200IoAddress(uint address)
+        => LightweightA1200Io.ContainsAddress(address) &&
+            (address >= LightweightA1200Io.PcmciaMemoryEndExclusive || _fastRam?.ContainsRange(address, 1) != true);
+
     // A1200 RAM and ROM use a native long bus. Custom/CIA/Gayle remain narrower.
     // This bounded bridge retains the canonical motherboard clock and arbitration.
     internal bool HasAgaLongBus(uint address)

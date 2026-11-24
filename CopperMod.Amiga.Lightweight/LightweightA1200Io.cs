@@ -12,6 +12,7 @@ namespace CopperMod.Amiga.Lightweight;
 internal sealed class LightweightA1200Io : IDisposable
 {
     internal const uint PcmciaStart = 0x0060_0000;
+    internal const uint PcmciaMemoryEndExclusive = 0x00A0_0000;
     internal const uint PcmciaEndExclusive = 0x00A8_0000;
     internal const uint IdeStart = 0x00DA_0000;
     internal const uint GayleEndExclusive = 0x00DB_0000;
