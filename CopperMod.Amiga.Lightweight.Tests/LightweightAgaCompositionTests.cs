@@ -162,6 +162,27 @@ public sealed class LightweightAgaCompositionTests
     }
 
     [Theory]
+    [InlineData(1, 0x9011, 0x112211)]
+    [InlineData(2, 0x9011, 0x112233)]
+    [InlineData(3, 0x9011, 0x112277)]
+    [InlineData(4, 0x9011, 0x1122FF)]
+    [InlineData(4, 0x0011, 0x142536)]
+    public void NarrowHamUsesHam6ControlAndPaletteWithFewerDataPlanes(
+        int planes, ushort bplcon4, int expected)
+    {
+        var code = (1 << planes) - 1;
+        using var m = Create([code], (ushort)(planes << 12 | 0x0A00));
+        Palette(m, 0, 0x112200);
+        Palette(m, code, 0x142536);
+        Write(m, 0x10C, bplcon4);
+
+        m.ExecuteFrame();
+
+        Pixel(m, 0, expected);
+        Assert.Null(m.UnsupportedActiveFeature);
+    }
+
+    [Theory]
     [InlineData(0x0A10, 0x0111, 0x80, 0x112283)] // XOR chooses blue; modification data stays raw.
     [InlineData(0x0A10, 0xFC11, 0, 0x142536)] // XOR transforms direct register 0 to register 63.
     [InlineData(0x6A00, 0x1311, 0, 0x112200)] // HAM6 XOR chooses blue, raw component remains zero.
@@ -222,6 +243,31 @@ public sealed class LightweightAgaCompositionTests
         Write(m, 0x106, 0x1400); Write(m, 0x10C, 0x8011); Write(m, 0x104, (ushort)(pf2First ? 0x40 : 0));
         m.ExecuteFrame();
         for (var i = 0; i < expected.Count; i++) Pixel(m, i, expected[i], resolution);
+        Assert.Null(m.UnsupportedActiveFeature);
+    }
+
+    [Theory]
+    [InlineData(0x002D, 0xFF0000)] // Both priorities 5; PF1 wins.
+    [InlineData(0x0076, 0x0000FF)] // Both priorities 6; PF2 wins.
+    [InlineData(0x003F, 0xFF0000)] // Both priorities 7; PF1 wins.
+    public void LisaKeepsDualPlayfieldColorsAndPlacesSpritesAbovePrioritiesFiveThroughSeven(
+        ushort bplcon2, int overlapColor)
+    {
+        using var m = Create([3, 3, 1, 2, 0], 0x0610);
+        Palette(m, 1, 0xFF0000);
+        Palette(m, 9, 0x0000FF);
+        Palette(m, 17, 0x00FF00);
+        Write(m, 0x104, bplcon2);
+        Write(m, 0x140, 0x2C40); Write(m, 0x142, 0x2D00);
+        Write(m, 0x146, 0); Write(m, 0x144, 0x8000);
+
+        m.ExecuteFrame();
+
+        Pixel(m, 0, 0x00FF00);
+        Pixel(m, 1, overlapColor);
+        Pixel(m, 2, 0xFF0000);
+        Pixel(m, 3, 0x0000FF);
+        Pixel(m, 4, 0);
         Assert.Null(m.UnsupportedActiveFeature);
     }
 

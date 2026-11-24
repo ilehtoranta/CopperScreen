@@ -174,9 +174,9 @@ its branch-local LWA-NATIVE-011 label collided with Nitro's existing mainline ID
 | LWA-AGA-003 | Brian the Lion visible player / gameplay | Scene rendered; player visibility OPEN | The corrected native hard-disk rip renders the jungle and advancing timer, but sampled rasters do not establish a visible player or correct locomotion. Input changes the guest position state; sampled PCM remains zero. Obtain an independent reference for player rendering, direction/displacement and sound before declaring gameplay verified. No CD32-specific device blocker has been demonstrated. See [replay and control](BRIAN_THE_LION_2026-10-03.md). |
 | LWA-HDF-001 | CopperHDF integration | Implemented; bounded native OFS and FFS proof | Native KS 3.1 FFS/RDB boot/write/dispose/reopen passes at 0 and 2 MiB Fast RAM after correcting the initial DOS lock; see [evidence and limits](KICKSTART_31_HD_2026-09-30.md). Retain KS 1.3 OFS partition/RDB evidence; other filesystem handlers need supplied media. Physical IDE/SCSI and host directories are separate features. The 020 indexed-JSR blocker at `$FC4E28` and subsequent reached operand gaps are [resolved in published CPU `.54`](COPPERHDF_020_2026-09-27.md): 020/EC020 native boot and OFS I/O pass with and without Fast RAM. |
 | LWA-VIDEO-002 | Hires transitions | Unverified; OPEN | Investigate supported raster/scroll/mode-transition failures. |
-| LWA-VIDEO-005 | HAM edges | Mode implemented; edges OPEN | Establish hold reset, mid-line mode and sprite interaction phases. |
+| LWA-VIDEO-005 | HAM edges | Modes implemented; physical edges OPEN | See [narrow Lisa HAM](#narrow-lisa-ham). Establish hold reset, mid-line mode and sprite interaction phases. |
 | LWA-VIDEO-006 | Sprite sequencing edges | Early-blank and direct-position DMA faults repaired; edges OPEN | CPU/Copper POS/CTL writes update Agnus as well as Denise; Superfrog's character is visible. Verify remaining comparator, manual-data and stolen-slot boundaries. |
-| LWA-VIDEO-008 | Dual-playfield edges | Dual HAM and priority codes 5–7 modeled; physical phases OPEN | Broaden native gameplay and establish mode-write boundary expectations; see [nonstandard modes](NONSTANDARD_OCS.md). |
+| LWA-VIDEO-008 | Dual-playfield edges | OCS/ECS dual HAM and priority codes 5–7 modeled. Lisa priority codes 5–7 have pixel tests and priority 7 has native game coverage. Physical phases OPEN. | See [nonstandard OCS modes](NONSTANDARD_OCS.md) and [Lisa priority verification](#lisa-dual-playfield-priorities-57). |
 | LWA-COPPER-001 | WAIT wake-up under bitplane DMA | Confirmed early colour write; repaired 2026-09-18 | WAIT wake-up now yields to higher-priority DMA. Six-plane Beast border starts at x288 instead of x272; see the [native record](../NATIVE_VALIDATION.md#copper-wait-wake-up-correction-2026-09-18). Other undocumented control-state edges remain unverified. |
 | LWA-CIA-001 | Board TOD pulse phase | Unverified; OPEN | Obtain board pulse-to-counter/IRQ evidence. |
 | LWA-CIA-002 | TOD comparator / reset | Unverified; OPEN | Establish write-trigger and latch/reset behavior. |
@@ -366,6 +366,24 @@ BPU=7 and dual HAM now have bounded decoding and native probe coverage; see
 [the evidence record](NONSTANDARD_OCS.md). Native artwork/menu success does not
 verify these transitions, including held colour across resolution changes.
 
+#### Narrow Lisa HAM
+
+The supplied Roots 2.0 AGA disk stopped the native runner at field 22,402
+on the PAL A1200 Kickstart 3.0 profile. Its Copper list wrote
+`BPLCON0=$4A00` during the late effect, then restored `$6A00` before the
+field-end capture. The four-plane interval keeps the HAM bit set.
+
+With one to four active planes, Lisa applies the HAM6 decoder with both
+unfetched control bits clear before the palette XOR. The five focused cases
+cover direct selection, XOR-controlled modification, raw component data and
+the held colour. The [WinUAE HAM decoder](https://github.com/tonioni/WinUAE/blob/ee784914c8d61bb503d137e358b22fcc4758a294/drawing.cpp#L4444)
+supports the model. Five- and seven-plane HAM remain explicit limits.
+
+The corrected replay reached the face morph, credits and end screen, then
+continued through field 28,500 with nonzero PCM and no unsupported-mode stop.
+All 135 shared state, raster and Chip RAM captures before field 22,402 matched
+the baseline byte for byte.
+
 ### LWA-VIDEO-006 — Sprite comparator and control edges
 
 Premature PAL vertical-blank sprite requests are repaired; direct blank-end
@@ -521,6 +539,29 @@ physical start-gate/alignment edges remain unverified. Standard-ADF write DMA an
 byte alignment are implemented in the ideal bit-cell model. Preserved-track/flux
 formats, analog precompensation and general GCR media admission remain outside
 the standard-ADF scope. Slow-mode input retains the approximation above.
+
+### Lisa dual-playfield priorities 5–7
+
+Alfred Chicken AGA stopped the native runner when it reported
+`BPLCON2=$003F` as unsupported in eight-plane dual-playfield mode. The desktop
+session also treats that report as fatal. On the supplied HLM disk pair, the
+baseline `c245c89` stopped at field 5,607 after swapping Disk 2 into DF0.
+The stock PAL A1200 profile used Kickstart 3.0 revision 39.106, 68EC020
+and 2 MiB of Chip RAM.
+
+Lisa's existing lookup places all sprite groups ahead of a playfield at
+priorities 4–7 and preserves its palette colour and opacity. The
+[WinUAE AGA decoder](https://github.com/tonioni/WinUAE/blob/ee784914c8d61bb503d137e358b22fcc4758a294/drawing.cpp#L4522)
+and [sprite mask](https://github.com/tonioni/WinUAE/blob/ee784914c8d61bb503d137e358b22fcc4758a294/drawing.cpp#L3239)
+support this interpretation. The OCS/ECS colour substitution is specific to
+those chipsets. Three pixel tests verify both field orders, sprite overlay,
+individual field colours and transparency. The previous guard failed all three
+after the pixel checks passed.
+
+The corrected runner matched 114 pre-stop state, image and Chip RAM captures
+through field 5,550. It completed 7,300 fields and reached interactive Stage 1
+with visible joystick response and nonzero PCM. This replay covers the game
+handoff and opening stage. Physical Lisa priority transitions remain open.
 
 ### New OCS completion follow-ups
 

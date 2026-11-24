@@ -131,7 +131,7 @@ internal sealed partial class LightweightVideo
         var pixelMask = (_effectiveBplcon0 & 0x8000) != 0 ? 1 : (_effectiveBplcon0 & 0x40) != 0 ? 0 : 3;
         var enabled = (_effectiveBplcon0 & 1) != 0;
         var dual = (_effectiveBplcon0 & 0x400) != 0;
-        var ham = (_effectiveBplcon0 & 0x800) != 0 && (_effectivePlaneCount == 6 || _effectivePlaneCount == 8);
+        var ham = (_effectiveBplcon0 & 0x800) != 0 && _effectivePlaneCount is >= 1 and <= 4 or 6 or 8;
         var start = (line * _ecsLineClocks * 2 + x) * _outputScale;
         var divisor = 4 / _outputScale;
         var spriteEnabled = IsSpriteOutputEnabled(line);
@@ -213,6 +213,8 @@ internal sealed partial class LightweightVideo
         }
         else
         {
+            // With one to four planes, the unfetched HAM6 control bits are zero
+            // before the palette address XOR.
             var component = (code & 15) * 17;
             _hamColor = (addressed & 0x30) switch
             {
@@ -227,6 +229,8 @@ internal sealed partial class LightweightVideo
 
     private void UpdateAgaDualPixels()
     {
+        // Lisa places all sprite groups ahead of priorities 4–7 and still
+        // displays the winning playfield's color for each of those codes.
         var priority1 = Math.Min(_ecsBplcon2 & 7, 4);
         var priority2 = Math.Min(_ecsBplcon2 >> 3 & 7, 4);
         var pf2First = (_ecsBplcon2 & 0x40) != 0;
@@ -245,10 +249,8 @@ internal sealed partial class LightweightVideo
     private void CheckAgaMode()
     {
         if ((_effectiveBplcon0 & 0xC00) == 0xC00) UnsupportedActiveFeature = "AGA combined HAM/dual playfield (unverified)";
-        else if ((_effectiveBplcon0 & 0x800) != 0 && _effectivePlaneCount != 0 && _effectivePlaneCount != 6 && _effectivePlaneCount != 8)
+        else if ((_effectiveBplcon0 & 0x800) != 0 && _effectivePlaneCount is 5 or 7)
             UnsupportedActiveFeature = "AGA HAM with nonstandard plane count (unverified)";
-        else if ((_effectiveBplcon0 & 0x400) != 0 && ((_ecsBplcon2 & 7) >= 5 || (_ecsBplcon2 >> 3 & 7) >= 5))
-            UnsupportedActiveFeature = "AGA nonstandard dual-playfield priority (unverified)";
     }
 
     internal void ReportUnsupportedAgaSpriteWrite()
