@@ -16,12 +16,11 @@ An earlier NTSC replay reproduced a host spin when the
 bounded output deadline expired mid-rasterline. The clock now waits for the
 line boundary that retires that output. The corrected PAL and NTSC replays
 each completed 1,900 fields.
-The [Alien 3 NTSC intro audio comparison](CD32.md#ntsc-intro-audio)
-reproduces a delayed and interrupted Paula soundtrack against WinUAE PCM.
-Disc-free guest copy and ADPCM benchmarks also reproduce an EC020 timing
-gap. The guest decoded early audio too slowly to keep Paula's ring filled.
-Later there was a separate late disc read. The remaining CPU and bus
-timing differences still need qualification.
+The [Alien 3 NTSC intro audio comparison](CD32.md#ntsc-intro-audio) traces
+the Paula ring starvation to EC020 instruction and bus timing. A local
+Copper68k development build restores the affected passage in a stock NTSC
+replay against WinUAE 6.0.3. Remaining work covers brief PCM gaps, a
+quiet-cue level difference and the disc-free decoder timing gap.
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
