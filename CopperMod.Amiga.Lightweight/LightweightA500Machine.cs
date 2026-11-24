@@ -160,7 +160,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _registers = new(IsEcsAgnus ? 0x001F_FFFEu : 0x0007_FFFEu);
         _copper = new(_registers.DmaAddressMask);
         _bitplanes = new(_registers.DmaAddressMask, IsEcsAgnus, IsAga);
-        _blitter = new(_registers.DmaAddressMask);
+        _blitter = new(_registers.DmaAddressMask, IsAga);
         _spriteDma = new(_registers.DmaAddressMask);
         _sprites = new(IsAga);
         // ECS pointer storage is separate from the physical DRAM decoder.

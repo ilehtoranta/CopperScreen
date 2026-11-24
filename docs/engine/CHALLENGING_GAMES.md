@@ -120,19 +120,61 @@ priority off, CPU activity can postpone the final D write after the blitter
 reports completion. The changelog also records an earlier, separate bitplane
 DMA overrun fix for the title. [WinUAE changelog](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L92-L98)
 
-A diagnostic four-word AGA area blit with all four channels enabled under
-seven-plane DMA cleared BUSY at the same cycle that the last destination word
-was written in CopperScreen. The destination-only control cleared BUSY one
-CCK before its last write. An independent bootable PAL A1200 probe runs an
-all-channel four-word blit from the Copper, with FMODE 0, seven-plane DMA,
-blitter priority off and continuous CPU chip accesses. WinUAE 6.1 beta 23
-records the blitter IRQ at horizontal slot `$13` and the final D write to
-`$017806` at slot `$14` of the following trace line. The transfer drains in
-the early part of that line. The reference also pipelines later source reads
-ahead of earlier D writes. A case that isolates the motherboard's BLS signal
-during the display fetch interval, and a trace of the in-game blits that
-expose it, remain open.
-[WinUAE area blitter completion](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L408-L461)
+### Area blitter pipeline
+
+The [probe generator](../../scripts/generate-blitter-area-probe.ps1) creates
+a bootable ADF with known channel selections and Copper starts. With
+`-Overlap`, matching PAL A1200 replays copy three words one word forward in
+Chip RAM using A+D and A+B+C+D. The unmodified input has words `$1111`,
+`$2222`, `$3333` and `$4444`. WinUAE leaves `$1111 $1111 $2222 $3333` in
+memory. CopperScreen `18e5a39` left `$1111` in all four words because it
+wrote D before fetching the second source. The destination latch now writes
+the preceding result while the current sources advance. The source pointers
+apply their modulo with the last read of each row. The destination pointer
+applies its modulo with the last write. Both overlapping-copy regressions
+fail on the old engine and pass with the pipeline. [Commodore Amiga Hardware Reference Manual, §6 Pipeline Register](https://www.ikod.se/wp-content/uploads/2020/08/Amiga_Hardware_Reference_Manual_3rd_Edition.pdf)
+
+With `-Width 1`, the A1200 A+D probe in WinUAE 6.1 beta 23 fetches A six
+CCKs after the Copper writes BLTSIZE, reports IRQ two CCKs after A and writes
+D three CCKs after A. A+B+C+D fetches A, B and C six, seven and eight CCKs
+after BLTSIZE, reports IRQ at ten and writes D at eleven. CopperScreen
+reproduces those relative events in both cases. The OCS probe has the same
+transfer ordering and reports the IRQ two CCKs sooner than AGA. The engine
+retains the final D separately after BUSY clears. [WinUAE area blitter completion](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L408-L461)
+
+Using `-Width 1 -SevenPlanes -CpuPressure -WaitPosition 0x2F` places the
+drain in the seven-plane fetch window. For A+D at raster line `$76`, WinUAE
+shows IRQ at horizontal slot `$3C`, the final D at `$44`, then the next CPU
+transfer at `$4C`. CopperScreen's focused test sets up the same arbitration
+condition with an all-channel blit. It observes the old destination after
+IRQ and obtains the new value from the subsequent CPU read. Disabling the
+interrupt's arbitration effect in a diagnostic probe lets that read see the
+old value. The engine counts all blocked CPU chip slots toward a nice-mode
+yield, including bitplane DMA, and suppresses the yield for the CPU request
+that observes Alice's completion pulse. [WinUAE AGA CPU arbitration](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/custom.cpp#L12344-L12362)
+
+The 11,250-field Zool 2 replay passed the original code wheel and reached
+Swan Lake Stage 1 with scrolling, movement, jumping, pickups and live HUD
+counters. Of 39 comparable captures, 31 matched the earlier sprite-fixed
+build byte for byte. The eight changes start after entering gameplay and
+the runs show different positions, scores and animation states. The replay
+ended with CPU `0x6A1322DAF11C0F43`, hardware `0xAA48D0AC246FFD9D` and
+output `0x90011C90E526E705`.
+
+The same build also replayed Banshee through the opening mission, P.P.
+Hammer through the first room, Lemmings through the first Classic level and
+RoboCop 3 through the driving sequence. Banshee matched all 36 sampled
+frames from the earlier replay, P.P. Hammer matched all 25 and Lemmings
+matched all nine. RoboCop 3 matched 34 of 40 captures and continued driving
+with different positions in the later captures. Per-field and final
+fingerprints can change with the new bus ordering. All five replays ran
+without unsupported feature reports. The Release build passed with zero
+warnings. Engine diagnostics passed 1,432 tests with seven optional native
+tests skipped.
+
+Absolute Copper start timing, source-only channel schedules, physical signal
+measurement and a matched capture of the game's active blitter register
+rewrites remain open.
 
 ## P.P. Hammer and His Pneumatic Weapon
 

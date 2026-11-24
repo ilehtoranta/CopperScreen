@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 namespace CopperMod.Amiga.Lightweight;
 
 /// <summary>
-/// Compact OCS blitter sequencer. Control inputs and their following physical
+/// Compact blitter sequencer. Control inputs and their following physical
 /// output phases are kept separate; only enabled channels own the Chip-RAM
 /// bus.
 /// </summary>
@@ -33,9 +33,14 @@ internal sealed class LightweightBlitter
     private const ushort Bltcon1InclusiveFill = 0x0008;
     private const ushort Bltcon1ExclusiveFill = 0x0010;
     private readonly uint _addressMask;
+    private readonly bool _alice;
 
-    internal LightweightBlitter(uint addressMask = 0x0007_FFFEu) => _addressMask = addressMask;
-    private const int NiceDmaGrantsBeforeYield = 3;
+    internal LightweightBlitter(uint addressMask, bool alice)
+    {
+        _addressMask = addressMask;
+        _alice = alice;
+    }
+    private const int NiceWaitBeforeYield = 2 * LightweightClock.CpuCyclesPerColorClock;
 
     private bool _active;
     private bool _beamStopped;
@@ -47,7 +52,6 @@ internal sealed class LightweightBlitter
     private bool _useC;
     private bool _useD;
     private bool _disableOutput;
-    private bool _dOnly;
     private bool _bOnly;
     private bool _requiresDma;
     private bool _lineMode;
@@ -66,8 +70,10 @@ internal sealed class LightweightBlitter
     private bool _pendingNasty;
     private long _nastyVisibilityCycle;
     private bool _cpuRequestPending;
+    private bool _aliceInterruptPending;
+    private bool _cpuStealInhibited;
     private long _cpuRequestCandidateCycle;
-    private int _niceDmaGrants;
+    private long _niceYieldCycle;
     private int _startupRemaining;
     private int _phaseIndex;
     private int _phaseCount;
@@ -101,6 +107,11 @@ internal sealed class LightweightBlitter
     private ushort _dataC;
     private ushort _previousA;
     private ushort _previousB;
+    private ushort _areaResult;
+    private bool _areaResultPending;
+    private int _destinationX;
+    private long _areaDrainCycle;
+    private long _areaCompletionCycle;
     private bool _hasPendingOutput;
     private bool _pendingUsesBus;
     private AreaChannel _pendingChannel;
@@ -137,7 +148,6 @@ internal sealed class LightweightBlitter
         _useB = false;
         _useC = false;
         _useD = false;
-        _dOnly = false;
         _bOnly = false;
         _requiresDma = false;
         _lineMode = false;
@@ -156,8 +166,10 @@ internal sealed class LightweightBlitter
         _pendingNasty = false;
         _nastyVisibilityCycle = long.MaxValue;
         _cpuRequestPending = false;
+        _aliceInterruptPending = false;
+        _cpuStealInhibited = false;
         _cpuRequestCandidateCycle = long.MaxValue;
-        _niceDmaGrants = 0;
+        _niceYieldCycle = long.MaxValue;
         _startupRemaining = 0;
         _phaseIndex = 0;
         _phaseCount = 0;
@@ -191,6 +203,10 @@ internal sealed class LightweightBlitter
         _dataC = 0;
         _previousA = 0;
         _previousB = 0;
+        _areaResultPending = false;
+        _destinationX = 0;
+        _areaDrainCycle = long.MaxValue;
+        _areaCompletionCycle = long.MaxValue;
         _hasPendingOutput = false;
         _pendingUsesBus = false;
         _pendingChannel = default;
@@ -286,7 +302,11 @@ internal sealed class LightweightBlitter
     {
         _cpuRequestPending = true;
         _cpuRequestCandidateCycle = candidateCycle;
-        _niceDmaGrants = 0;
+        _niceYieldCycle = candidateCycle + NiceWaitBeforeYield;
+        // The motherboard gates the next CPU blitter steal with Alice's
+        // interrupt output, leaving the final D transfer eligible.
+        _cpuStealInhibited = _aliceInterruptPending;
+        _aliceInterruptPending = false;
     }
 
     internal void UpdateCpuRequestCandidate(long candidateCycle)
@@ -296,7 +316,8 @@ internal sealed class LightweightBlitter
     {
         _cpuRequestPending = false;
         _cpuRequestCandidateCycle = long.MaxValue;
-        _niceDmaGrants = 0;
+        _niceYieldCycle = long.MaxValue;
+        _cpuStealInhibited = false;
     }
 
     internal void OnBeamSyncChanged(long cycle, LightweightA500Machine machine)
@@ -317,10 +338,16 @@ internal sealed class LightweightBlitter
             var changed = _effectiveNasty != _pendingNasty;
             _effectiveNasty = _pendingNasty;
             _nastyVisibilityCycle = long.MaxValue;
-            if (changed && !_effectiveNasty)
+            if (changed && !_effectiveNasty && _cpuRequestPending)
             {
-                _niceDmaGrants = 0;
+                _niceYieldCycle = Math.Max(_niceYieldCycle, cycle + NiceWaitBeforeYield);
             }
+        }
+
+        if (_areaCompletionCycle == cycle)
+        {
+            _areaCompletionCycle = long.MaxValue;
+            PublishMainCompletion(cycle, machine);
         }
 
         var ownedBusThisCycle = false;
@@ -378,8 +405,6 @@ internal sealed class LightweightBlitter
         _fillCarryInitial = !_lineMode &&
             (bltcon1 & Bltcon1FillCarryIn) != 0;
         _fillCarry = _fillCarryInitial;
-        _dOnly = !_lineMode && !_useA && !_useB && !_useC && _useD &&
-            !_fillEnabled;
         _bOnly = !_lineMode && !_useA && _useB && !_useC && !_useD &&
             !_fillEnabled;
         // OCS line mode only runs its DMA sequence when C is enabled. The D
@@ -424,8 +449,12 @@ internal sealed class LightweightBlitter
         {
             _phaseCount = 2 + (_useB ? 1 : 0) +
                 (_useC || _fillEnabled ? 1 : 0);
-            _startupRemaining = _dOnly ? 6 : _bOnly ? 2 : 3;
+            _startupRemaining = _bOnly ? 2 : 3;
         }
+        _areaResultPending = false;
+        _destinationX = 0;
+        _areaDrainCycle = long.MaxValue;
+        _areaCompletionCycle = long.MaxValue;
         _hasPendingOutput = false;
         _pendingUsesBus = false;
         _pendingOutputCycle = long.MaxValue;
@@ -480,10 +509,6 @@ internal sealed class LightweightBlitter
             return;
         }
 
-        if (_dOnly)
-        {
-            _phaseIndex = _phaseCount - 1;
-        }
         TryAcceptPhase(cycle, machine, ownedBusThisCycle);
     }
 
@@ -504,9 +529,15 @@ internal sealed class LightweightBlitter
             return;
         }
 
-        var channel = GetPhaseChannel(_phaseIndex);
-        var usesBus = ChannelEnabled(channel);
-        if (usesBus && ShouldYieldToCpu(cycle, machine, ownedBusThisCycle))
+        var draining = _rowY == _height;
+        if (draining && cycle < _areaDrainCycle)
+        {
+            return;
+        }
+
+        var channel = draining ? AreaChannel.D : GetPhaseChannel(_phaseIndex);
+        var usesBus = channel == AreaChannel.D ? _areaResultPending : ChannelEnabled(channel);
+        if (ShouldYieldToCpu(cycle, machine, ownedBusThisCycle))
         {
             return;
         }
@@ -522,15 +553,19 @@ internal sealed class LightweightBlitter
         };
         if (channel == AreaChannel.D)
         {
-            _pendingWriteValue = ComputeAreaOutput();
-            if (_pendingWriteValue != 0)
+            if (_useD)
+            {
+                _pendingWriteValue = _areaResult;
+                if (!draining && IsFinalWord())
+                {
+                    _areaDrainCycle = cycle + 2 * LightweightClock.CpuCyclesPerColorClock;
+                    if (_alice) _areaCompletionCycle = _areaDrainCycle;
+                    else PublishMainCompletion(cycle, machine);
+                }
+            }
+            else if (ComputeAreaOutput() != 0)
             {
                 _zero = false;
-            }
-
-            if (_dOnly && IsFinalWord())
-            {
-                PublishMainCompletion(cycle, machine);
             }
         }
 
@@ -598,10 +633,6 @@ internal sealed class LightweightBlitter
         if (usesBus)
         {
             LastBusOutputCycle = cycle;
-            if (_cpuRequestPending)
-            {
-                _niceDmaGrants++;
-            }
         }
 
         if (_lineMode)
@@ -620,13 +651,13 @@ internal sealed class LightweightBlitter
         {
             case AreaChannel.A when _useA:
                 _dataA = machine.ReadChipWordBus(address);
-                _pointerA = AddPointer(_pointerA, _descending ? -2 : 2);
+                _pointerA = AdvanceAreaSource(_pointerA, _moduloA);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltadat, _dataA);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltapth, _pointerA);
                 break;
             case AreaChannel.B when _useB:
                 _dataB = machine.ReadChipWordBus(address);
-                _pointerB = AddPointer(_pointerB, _descending ? -2 : 2);
+                _pointerB = AdvanceAreaSource(_pointerB, _moduloB);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltbdat, _dataB);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltbpth, _pointerB);
                 if (_bOnly && IsFinalWord())
@@ -636,18 +667,26 @@ internal sealed class LightweightBlitter
                 break;
             case AreaChannel.C when _useC:
                 _dataC = machine.ReadChipWordBus(address);
-                _pointerC = AddPointer(_pointerC, _descending ? -2 : 2);
+                _pointerC = AdvanceAreaSource(_pointerC, _moduloC);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltcdat, _dataC);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltcpth, _pointerC);
                 break;
-            case AreaChannel.D:
-                if (_useD)
+            case AreaChannel.D when usesBus:
+                if (!_disableOutput) machine.WriteChipWordBus(address, writeValue);
+                _pointerD = AddPointer(_pointerD, _descending ? -2 : 2);
+                if (++_destinationX == _widthWords)
                 {
-                    if (!_disableOutput) machine.WriteChipWordBus(address, writeValue);
-                    _pointerD = AddPointer(_pointerD, _descending ? -2 : 2);
-                    machine.SetBlitterPointerFromDma(LightweightRegisters.Bltdpth, _pointerD);
+                    _destinationX = 0;
+                    _pointerD = AddModulo(_pointerD, _moduloD, _descending);
                 }
+                machine.SetBlitterPointerFromDma(LightweightRegisters.Bltdpth, _pointerD);
                 break;
+        }
+
+        if (_useD && _rowY == _height)
+        {
+            FinishTermination(cycle, machine);
+            return;
         }
 
         _phaseIndex++;
@@ -656,7 +695,33 @@ internal sealed class LightweightBlitter
             return;
         }
 
-        AdvanceWord(cycle, machine);
+        if (_useD)
+        {
+            // The D slot drains the preceding result while the current
+            // sources feed the next result through the blitter data latch.
+            _areaResult = ComputeAreaOutput();
+            _areaResultPending = true;
+            if (_areaResult != 0) _zero = false;
+            _phaseIndex = 0;
+            if (++_wordX == _widthWords)
+            {
+                _wordX = 0;
+                _rowY++;
+                _fillCarry = _fillCarryInitial;
+            }
+        }
+        else
+        {
+            AdvanceWord(cycle, machine);
+        }
+    }
+
+    private uint AdvanceAreaSource(uint pointer, short modulo)
+    {
+        pointer = AddPointer(pointer, _descending ? -2 : 2);
+        return _useD && _wordX == _widthWords - 1
+            ? AddModulo(pointer, modulo, _descending)
+            : pointer;
     }
 
     private void CompleteLineOutput(
@@ -868,11 +933,6 @@ internal sealed class LightweightBlitter
             _pointerC = AddModulo(_pointerC, _moduloC, _descending);
             machine.SetBlitterPointerFromDma(LightweightRegisters.Bltcpth, _pointerC);
         }
-        if (_useD)
-        {
-            _pointerD = AddModulo(_pointerD, _moduloD, _descending);
-            machine.SetBlitterPointerFromDma(LightweightRegisters.Bltdpth, _pointerD);
-        }
         if (_rowY < _height)
         {
             _fillCarry = _fillCarryInitial;
@@ -895,6 +955,7 @@ internal sealed class LightweightBlitter
         }
 
         _busy = false;
+        _aliceInterruptPending = _alice;
 #if LIGHTWEIGHT_DIAGNOSTICS
         LastCompletionCycle = cycle;
 #endif
@@ -963,8 +1024,10 @@ internal sealed class LightweightBlitter
         LightweightA500Machine machine,
         bool ownedBusThisCycle)
     {
-        if (!_cpuRequestPending || _effectiveNasty ||
-            _niceDmaGrants < NiceDmaGrantsBeforeYield)
+        // At the third blocked candidate the CPU can take the next output.
+        // Higher priority DMA also consumes its wait time.
+        if (!_cpuRequestPending || _effectiveNasty || _cpuStealInhibited ||
+            cycle < _niceYieldCycle)
         {
             return false;
         }
@@ -1068,6 +1131,10 @@ internal sealed class LightweightBlitter
         if (_nastyVisibilityCycle != long.MaxValue)
         {
             Publish(_nastyVisibilityCycle);
+        }
+        if (_areaCompletionCycle != long.MaxValue)
+        {
+            Publish(_areaCompletionCycle);
         }
         if (!_beamStopped && _active && !_hasPendingOutput &&
             (!_requiresDma || _dmaEnabled))
