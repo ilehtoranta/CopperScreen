@@ -423,7 +423,9 @@ public static class IpfDecoder
                     break;
                 case StreamElementType.WeakData:
                     context.Features |= AmigaTrackFeatures.WeakData | AmigaTrackFeatures.ApproximateWeakData;
-                    var weakBits = Math.Min(element.BitCount, maxOutputBits);
+                    // An MFM source bit occupies one clock cell and one data cell.
+                    var encodedWeakBits = encoderType == MfmEncoder ? 2L * element.BitCount : element.BitCount;
+                    var weakBits = (int)Math.Min(encodedWeakBits, maxOutputBits);
                     context.AddRegion(context.Writer.Position, weakBits, AmigaTrackFeatures.WeakData | AmigaTrackFeatures.ApproximateWeakData);
                     if (encoderType == MfmEncoder)
                     {

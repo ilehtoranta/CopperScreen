@@ -207,6 +207,38 @@ public sealed class IpfDecoderTests
         Assert.Equal(AmigaTrackFeatures.PreservedTrackData | AmigaTrackFeatures.WeakData | AmigaTrackFeatures.ApproximateWeakData, track.Features);
     }
 
+    [Fact]
+    public void DecodeMfmWeakDataReservesTwoTrackCellsPerSourceBit()
+    {
+        using var payload = new MemoryStream();
+        WriteUInt32(payload, 160); // two 16-bit marks and 128 weak cells
+        WriteUInt32(payload, 0); // gap bits
+        WriteUInt32(payload, 12); // CAPS block byte size before MFM expansion
+        WriteUInt32(payload, 0); // CAPS gap byte size
+        WriteUInt32(payload, 1); // MFM encoder
+        WriteUInt32(payload, 0); // flags
+        WriteUInt32(payload, 0); // gap value
+        WriteUInt32(payload, 32); // stream offset
+        payload.Write([0x21, 0x02, 0x44, 0x89]); // first raw mark
+        payload.Write([0x25, 0x08]); // eight weak source bytes without a payload
+        payload.Write([0x21, 0x02, 0x44, 0xA9]); // trailing raw mark
+        payload.WriteByte(0);
+
+        using var image = new MemoryStream();
+        WriteChunk(image, "CAPS", Array.Empty<byte>());
+        WriteChunk(image, "INFO", BuildInfo());
+        WriteChunk(image, "IMGE", BuildRawImageDescriptor(startBit: 0, dataBits: 160, gapBits: 0, trackBits: 160, blockCount: 1));
+        WriteChunk(image, "DATA", BuildDataHeader((int)payload.Length), payload.ToArray());
+
+        var track = Assert.Single(IpfDecoder.Decode(image.ToArray()).Tracks);
+        var region = Assert.Single(track.Regions);
+        Assert.Equal(16, region.StartBit);
+        Assert.Equal(128, region.BitLength);
+        Assert.Equal(AmigaTrackFeatures.WeakData | AmigaTrackFeatures.ApproximateWeakData, region.Features);
+        Assert.Equal(0x4489u, ReadBits(track.EncodedData.Span, track.BitLength, 0, 16));
+        Assert.Equal(0x44A9u, ReadBits(track.EncodedData.Span, track.BitLength, 144, 16));
+    }
+
     private static byte[] CreateSingleTrackIpf()
     {
         using var stream = new MemoryStream();

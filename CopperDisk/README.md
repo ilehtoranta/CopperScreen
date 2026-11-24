@@ -39,19 +39,19 @@ browse and extract files. See the [Disk Image Manager guide](../docs/DISK_IMAGE_
 for supported filesystems and package provisioning.
 
 ```shell
-dotnet add package CopperDisk --version 3.0.0
+dotnet add package CopperDisk --version 3.0.1
 ```
 
-## Development source: 3.0.1-dev.5
+## Version 3.0.1
+
+SPS/CAPS IPF decoding reserves two track cells per MFM weak source bit.
+This preserves weak-region lengths and the position of subsequent stream data.
 
 Read-only UAE-1ADF and encoded-track media accept one to 168 physical tracks
 (up to 84 DD cylinders). Extra raw tracks retain their stored bits, and normal
 tracks beyond cylinder 79 decode with their physical AmigaDOS track numbers.
 An absent final head is unformatted. Zero-bit raw UAE entries become a
 zero-filled PAL DD revolution, including entries with no allocated bytes.
-This source version is not published;
-the stable 3.0.0 package remains unchanged.
-
 ## Version 3.0.0
 
 This release includes IPF density selectors and per-cell timing weights, stored
