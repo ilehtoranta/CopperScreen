@@ -137,13 +137,15 @@ internal sealed partial class LightweightVideo
         // Sample sprites at Lisa's finest resolution independently of the
         // playfield. HAM is decoded only once per playfield pixel above.
         var spriteEnabled = IsSpriteOutputEnabled(line);
+        // BRDSPRT bypasses both the display window and the first BPL1DAT gate.
+        var borderSprites = enabled && (_ecsBplcon3 & 0x22) == 2;
         for (var sample = 0; sample < 8; sample++)
         {
             var i = sample * resolution / 4;
             var lowX = x + sample / 4;
             var inside = InEcsWindow(line, lowX);
             var color = colors[i];
-            if (spriteEnabled && (inside || enabled && (_ecsBplcon3 & 0x22) == 2))
+            if (borderSprites || inside && spriteEnabled)
             {
                 var sprite = machine.ComposeAgaSpritePixel(line, x * 4 + sample,
                     inside ? placements[i] : 4, codes[i]);

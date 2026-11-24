@@ -154,6 +154,26 @@ public sealed class LightweightAgaSpriteTests
     }
 
     [Theory]
+    [InlineData(0x2C81, 0x0C42, 0xFF0000)]
+    [InlineData(0x2D81, 0x0C42, 0xFF0000)]
+    [InlineData(0x2D81, 0x0C40, 0x112233)]
+    public void BorderSpritesCanRenderBeforeAnyBitplaneFetchOnTheLine(ushort windowStart, ushort control, int rgb)
+    {
+        using var m = Create();
+        Palette(m, 0, 0x123);
+        Palette(m, 17, 0xF00);
+        Write(m, 0x08E, windowStart);
+        Write(m, 0x092, 0x58);
+        Write(m, 0x106, control);
+        Sprite(m, 0, 0);
+        Write(m, 0x096, 0x8320);
+
+        m.ExecuteFrame();
+
+        Assert.Equal(rgb, m.Framebuffer.Span[44 * 1816 + 520] & 0xFFFFFF);
+    }
+
+    [Theory]
     [InlineData(0xC3, false, 0x23)] [InlineData(0xC1, false, 0)] [InlineData(0xC2, false, 0x20)]
     [InlineData(0xC1, true, 2)] [InlineData(0xC2, true, 0x20)] [InlineData(0, false, 0x23)]
     public void PlanesSevenAndEightGateRawCollisionMatches(ushort clxcon2, bool dual, int expected)
