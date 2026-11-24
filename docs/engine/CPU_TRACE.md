@@ -1,13 +1,12 @@
-# Copper68k stable dependency and trace evidence
+# Copper68k trace correction and development dependency history
 
-The current exact CPU pin is **`1.5.0`**, the public mainline
+See [CPU support](CPU_SUPPORT.md) for the current Copper68k pin and restore policy.
+At this stage of the trace investigation, the stable pin was **`1.5.0`**, the public mainline
 [Copper68k NuGet package](https://www.nuget.org/packages/Copper68k/1.5.0).
 Its source is CopperMod commit
 [`fd12917a8c19c172071f8a3b5d8d75a9c1a2b8b5`](https://github.com/ilehtoranta/CopperMod/commit/fd12917a8c19c172071f8a3b5d8d75a9c1a2b8b5).
-The desktop, engine, runner and test lockfiles resolve that exact version from
-the standard NuGet source; no development-feed bootstrap is needed.
-Restore with `dotnet restore CopperScreen.slnx --locked-mode`, and restore the
-isolated engine diagnostics separately as described in the README.
+The desktop, engine, runner and test lockfiles resolved that exact version from
+the standard NuGet source without the development-feed bootstrap.
 See [mainline release verification and advanced CPU limits](COPPER68K_MAINLINE_1_5_0.md).
 
 The preceding stable 1.4.1 retained the trace correction below and the
@@ -33,7 +32,7 @@ repository metadata therefore still names the base revision.
 The [dated hash manifest](copper68k-trace-development-2026-09-18.json) identifies
 the source files, package and assemblies. Its `published: false` records the
 original 2026-09-18 state; subsequent availability is preserved in
-[the CI record](../CI_DEPENDENCY.md). Raw evidence is under ignored
+[the CI record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/CI_DEPENDENCY.md). Raw evidence is under ignored
 `artifacts/trace-exception-2026-09-18/`. These trace results remain historical
 evidence rather than new validation of the locality package.
 

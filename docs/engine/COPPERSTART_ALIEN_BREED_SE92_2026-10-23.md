@@ -87,7 +87,7 @@ written before the final processes start. Discovery and qualification are
 separate runs. Captures retain state, both RAM banks, full raster and field
 PCM at field 1 and every 100 fields through 24000.
 
-The [machine-readable record](COPPERSTART_ALIEN_BREED_SE92_2026-10-23.json)
+The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_ALIEN_BREED_SE92_2026-10-23.json)
 retains commands, ROM/media/input/binary identities, capture manifests and
 harness provenance. The retained functional harness is not rebuilt. The
 separate ABII instruction probe is diagnostic only and adds no guest patches.

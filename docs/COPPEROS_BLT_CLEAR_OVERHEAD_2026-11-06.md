@@ -97,3 +97,9 @@ diagnostics); the consumer Release build has none. Neither has build errors.
 Local reproducible evidence, exact sources, generating binaries and SHA-256
 manifest: `artifacts/graphics-bltclear-overhead-20261106/rom-qualified`.
 Full results: [NativeBltClearOverhead20261106.json](../../CopperStart/Docs/Measurements/NativeBltClearOverhead20261106.json).
+
+Earlier BltClear experiments compared CPU/DMA crossover, ownership and split
+setup. The [register-home checkpoint](COPPEROS_BLTCLEAR_REGISTER_HOMES_2026-11-05.md)
+records the `.72` results. The [ClearDma setup record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/COPPEROS_CLEAR_DMA_SETUP_2026-11-06.md)
+records `.74`, the remeasured reference for this `.75` qualification. These
+records report guest cycles. The desktop replay retained the same ready time.

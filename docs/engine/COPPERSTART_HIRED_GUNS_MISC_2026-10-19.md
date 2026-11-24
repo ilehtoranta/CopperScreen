@@ -6,7 +6,7 @@ The results below retain their original ROM identity.
 2026-10-19. Native `misc.resource` now passes its Kickstart 1.3 comparison.
 Hired Guns proceeds beyond its previous missing-resource error and returns to
 the CLI with **ERROR #0045 : COULD NOT OPEN CIAA.RESOURCE**. Game entry remains
-unqualified. The [companion JSON](COPPERSTART_HIRED_GUNS_MISC_2026-10-19.json)
+unqualified. The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_HIRED_GUNS_MISC_2026-10-19.json)
 pins the source, ROM, tests, media, physical input and complete mode comparison.
 This follows the [BCPL startup work](COPPERSTART_HIRED_GUNS_BCPL_2026-10-19.md).
 

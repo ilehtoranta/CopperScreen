@@ -3,7 +3,7 @@
 Started 2026-10-18; completed 2026-10-19. The supplied Angels ADF reaches its
 specification, control and options screens, music selection and input-driven opening race under a fresh CopperStart
 ROM containing the Miami Chase fix. No additional compatibility correction is
-needed for this recorded sequence. The [evidence record](COPPERSTART_LOTUS1_2026-10-18.json)
+needed for this recorded sequence. The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LOTUS1_2026-10-18.json)
 binds the exact media, compiler inputs, ROM, execution binaries and captures.
 
 The machine is the bounded PAL OCS A500: 68000, 8371 Agnus, 8362 Denise, 512 KiB

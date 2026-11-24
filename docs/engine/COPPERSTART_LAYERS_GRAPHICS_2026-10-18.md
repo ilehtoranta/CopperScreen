@@ -36,7 +36,7 @@ reports two existing nullable warnings in CopperSharp compiler
 `M68kSpillAndCopy.cs:74`; there are no build errors. This is correctness evidence,
 not throughput, an installed desktop or app-pair admission.
 
-The [machine-readable record](COPPERSTART_LAYERS_GRAPHICS_2026-10-18.json) binds
+The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LAYERS_GRAPHICS_2026-10-18.json) binds
 the ROM, fresh manifest, original frozen root, managed inputs, TRX, receipts,
 captures and source snapshots. Local producer artifacts are under ignored
 `CopperStart/artifacts/layers-graphics-20261018`: `relink-v1` and `qualified-v1`.

@@ -5,7 +5,7 @@ The [subsequent main integration and first-puzzle qualification](COPPERSTART_YEE
 YEET 1.0.4 now boots, displays its menu and advances through the prologue on a
 fresh 512 KiB CopperStart ROM containing the Miami Chase fix. The idle control
 stays at the menu. Puzzle boards, map selection and game completion remain
-unverified. The [evidence record](COPPERSTART_YEET_2026-10-22.json) binds the ROM,
+unverified. The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_YEET_2026-10-22.json) binds the ROM,
 media, compiler components, execution binaries, inputs and captures.
 
 ## Scope and frozen inputs

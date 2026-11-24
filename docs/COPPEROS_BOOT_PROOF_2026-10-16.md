@@ -52,8 +52,8 @@ Validation results, recorded separately in the evidence:
 
 Local generated outputs are preserved under
 `artifacts/copperos-p1-04/recovery-build` and `artifacts/copperos-p1-04/rom3-candidate`.
-The [final native screen](../artifacts/copperos-p1-04/recovery-build/app-proof/20261016T174911420Z/recovery.png)
-and transcript/RAM/CPU captures accompany the hash-bound runtime result. Earlier
+The final native screen (`app-proof/20261016T174911420Z/recovery.png` under the
+recovery-build directory) and transcript/RAM/CPU captures accompany the hash-bound runtime result. Earlier
 failed controls are retained under the same artifact root and do not qualify
 this final pair.
 

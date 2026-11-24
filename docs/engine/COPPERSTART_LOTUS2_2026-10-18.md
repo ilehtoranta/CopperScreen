@@ -2,7 +2,7 @@
 
 2026-10-18. Lotus Turbo Challenge 2 reaches its title, menus and input-driven
 opening race with a fresh CopperStart ROM containing the Major Motion fixes.
-The [evidence record](COPPERSTART_LOTUS2_2026-10-18.json) binds the exact ROM,
+The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LOTUS2_2026-10-18.json) binds the exact ROM,
 unchanged supplied media, execution binaries, input scripts, probes and images.
 
 The [October 24 gameplay continuation](COPPERSTART_LOTUS2_GAMEPLAY_2026-10-24.md)

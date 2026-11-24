@@ -94,7 +94,7 @@ suite was rerun for this evidence-only continuation; the earlier build/test
 record retains its original provenance. This is native-media compatibility
 coverage, not throughput acceptance or complete chipset conformance proof.
 
-The [evidence record](COPPERSTART_APIDYA_2026-10-21.json) preserves ROM/media,
+The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_APIDYA_2026-10-21.json) preserves ROM/media,
 source/binary, input, actual-segment, capture-manifest, verification and
 milestone identities. The [canonical input](../../CopperMod.Amiga.Lightweight.Runner/Workloads/apidya-copperstart-meadow-combat-v1.json)
 contains only physical joystick input. Local captures and probes remain under

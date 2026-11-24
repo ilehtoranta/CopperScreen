@@ -4,7 +4,7 @@
 game and responds to driving input on a freshly compiled CopperStart ROM
 containing the Overdrive fix and the compatibility corrections below. Native
 Kickstart 1.3 provides the independent original-media control. The
-[evidence record](COPPERSTART_MAJOR_MOTION_2026-10-18.json) binds the exact ROM,
+[evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_MAJOR_MOTION_2026-10-18.json) binds the exact ROM,
 media, execution binaries, commands, inputs, native probes and reviewed images.
 
 The machine is a PAL OCS A500: 68000, 8371 Agnus, 8362 Denise, 512 KiB Chip RAM,

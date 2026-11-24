@@ -59,7 +59,7 @@ The engine and CopperDisk are freshly built from CopperScreen
 The frozen functional harness is retained from the
 [Nitro record](COPPERSTART_NITRO_2026-10-23.json). Copper68k remains the pinned
 unpublished `1.5.5-nitro.1` package. Exact identities are in the
-[machine-readable record](COPPERSTART_NORTH_SOUTH_2026-10-23.json).
+[machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_NORTH_SOUTH_2026-10-23.json).
 
 The profile is PAL OCS 8371/8362, 68000 interpreter, 512 KiB Chip plus 512 KiB
 slow RAM, no Fast RAM or RTC, one read-only DF0 and the full 908×313 raster.

@@ -6,7 +6,7 @@ runes to two, moves 0 to 1), and resets the board (three runes, moves 0). The sa
 scenes and interaction run under Kickstart 1.3. Later rounds, levels and game
 completion remain unverified.
 
-The [evidence record](COPPERSTART_YEET_GAMEPLAY_2026-10-23.json) binds the exact ROM,
+The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_YEET_GAMEPLAY_2026-10-23.json) binds the exact ROM,
 source, compiler, media, execution binaries, workload, captures and test results.
 The [earlier prologue record](COPPERSTART_YEET_2026-10-22.md) remains evidence for
 its original candidate; this record qualifies the combined source.

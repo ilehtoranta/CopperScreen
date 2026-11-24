@@ -83,7 +83,7 @@ Discovery and qualification are separate runs. Captures retain state, both
 RAM banks, the full raster and field PCM at field 1 and every 100 fields
 through 28000.
 
-The [machine-readable record](COPPERSTART_TOWER_ASSAULT_2026-10-23.json)
+The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_TOWER_ASSAULT_2026-10-23.json)
 retains actual commands, ROM/media/input/binary identities, capture manifests
 and the retained harness source/build provenance. The unchanged functional
 harness is not rebuilt. Production code and ROM are unchanged, so production

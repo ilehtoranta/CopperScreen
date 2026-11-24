@@ -1424,16 +1424,16 @@ changes. Package publication is not included.
 
 ## Historical evidence index
 
-The [archive](../history/amiga/README.md) preserves full protocols, hashes and sample
+The [archive](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/README.md) preserves full protocols, hashes and sample
 tables. Referenced original-machine raw logs and frozen directories are not in this
 checkout; these rows summarize recorded evidence, not fresh verification.
 
 | Record | Recorded finding | Classification |
 | --- | --- | --- |
-| [450 FPS audit, 2026-09-14](../history/amiga/LIGHTWEIGHT_A500_450_FPS_AUDIT.md) | Original-runner matched work: 447.43 vs 445.31 FPS; wider display/device work explains much of the changed synthetic cost. | Provisional engineering evidence. |
-| [Native profile, 2026-09-14](../history/amiga/LIGHTWEIGHT_A500_NATIVE_GAMEPLAY_PROFILE.md) | CPU was the largest sampled native cost; retained CPU changes included a 347.58 vs 310.03 FPS matched comparison. | Dated profiling and optimization evidence, not today's hotspot ranking. |
-| [Staged execution record](../history/amiga/LIGHTWEIGHT_A500_ENGINE_PLAN.md) | Complete-workload comparison: 343.10 FPS Lightweight vs 28.41 FPS frozen Legacy. | Recorded valid experimental comparison on the original host. |
-| [Supported-v1 acceptance, 2026-09-15/16](../history/amiga/LIGHTWEIGHT_A500_SUPPORTED_V1_READINESS.md) | Three final retention series remained host-invalid; owner accepted the frozen build by a one-off waiver. | Build accepted; underlying INVALID / RERUN labels unchanged. No blanket future waiver. |
+| [450 FPS audit, 2026-09-14](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_450_FPS_AUDIT.md) | Original-runner matched work: 447.43 vs 445.31 FPS; wider display/device work explains much of the changed synthetic cost. | Provisional engineering evidence. |
+| [Native profile, 2026-09-14](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_NATIVE_GAMEPLAY_PROFILE.md) | CPU was the largest sampled native cost; retained CPU changes included a 347.58 vs 310.03 FPS matched comparison. | Dated profiling and optimization evidence, not today's hotspot ranking. |
+| [Staged execution record](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_ENGINE_PLAN.md) | Complete-workload comparison: 343.10 FPS Lightweight vs 28.41 FPS frozen Legacy. | Recorded valid experimental comparison on the original host. |
+| [Supported-v1 acceptance, 2026-09-15/16](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_SUPPORTED_V1_READINESS.md) | Three final retention series remained host-invalid; owner accepted the frozen build by a one-off waiver. | Build accepted; underlying INVALID / RERUN labels unchanged. No blanket future waiver. |
 
 Neither consolidation nor the machine move reopens those accepted sessions or
 requires reruns solely to recreate historical gates.

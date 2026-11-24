@@ -15,7 +15,7 @@ are recorded separately.
 ## ROM, runtime and media
 
 The ROM is the exact rebuilt image retained by the
-[Full Contact continuation](COPPERSTART_FULL_CONTACT_2026-10-24.json): 524288
+[Full Contact continuation](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_FULL_CONTACT_2026-10-24.json): 524288
 bytes, SHA-256
 `fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7`.
 Its owning native emitter source is CopperStart
@@ -88,7 +88,7 @@ exploratory runs. All three exit zero with null captured CPU/video unsupported
 indicators. Reviewed gameplay establishes the milestones; exit status and those
 indicators alone do not establish compatibility.
 
-The [companion JSON](COPPERSTART_LOTUS2_GAMEPLAY_2026-10-24.json) records exact
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LOTUS2_GAMEPLAY_2026-10-24.json) records exact
 media, ROM, binary, harness, input, capture-manifest and log identities. The two
 committed workload files are the exact UTF-8/LF input bytes used by the final
 normal/native runs; scalar uses the normal input unchanged.

@@ -68,7 +68,7 @@ throughput measurement or full hardware-conformance result. Combat/weapons,
 level completion, Disk Two, other worlds, saving, the complete story and full
 Workbench remain unqualified. No new defensive caller checks were added.
 
-[The evidence record](COPPERSTART_SUPERFROG_2026-10-20.json) preserves media,
+[The evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_SUPERFROG_2026-10-20.json) preserves media,
 ROM, binary, probe-source, actual input-segment and capture-manifest identities.
 The physical workloads are
 [gameplay](../../CopperMod.Amiga.Lightweight.Runner/Workloads/superfrog-copperstart-gameplay-v1.json)

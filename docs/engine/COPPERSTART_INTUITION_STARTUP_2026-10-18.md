@@ -5,7 +5,7 @@ retained standalone 512 KiB ROM and 1 MiB PAL OCS A500. Its separate disk entry
 uses real Exec/DOS, installed Utility/Layers and graphics vectors. It does not
 use the ROM Intuition capability fingerprint or admit the older IR01 private
 actor-query implementation. See the [producer implementation record](../../../CopperStart/Docs/NativeIntuitionStartup.md)
-and [machine-readable evidence](COPPERSTART_INTUITION_STARTUP_2026-10-18.json).
+and [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_INTUITION_STARTUP_2026-10-18.json).
 
 The selected classic NewScreen/NewWindow journey uses 320/640 × 256, two
 bitplanes and a 240 × 90 Simple-refresh window. It draws title text, close

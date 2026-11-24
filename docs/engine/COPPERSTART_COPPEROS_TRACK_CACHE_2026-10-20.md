@@ -99,7 +99,7 @@ and 100-cycle sustained stress remain separate work.
 
 Both production solutions build successfully; CopperStart retains 24 existing
 warnings and CopperScreen has none. Exact input, source, TRX, receipt, layout and
-media hashes are in the [machine-readable evidence](COPPERSTART_COPPEROS_TRACK_CACHE_2026-10-20.json), SHA-256
+media hashes are in the [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_COPPEROS_TRACK_CACHE_2026-10-20.json), SHA-256
 `285D572CFABD2AA8100C4639464774EC55E03BB968DA3BC6852216C88FB80E9B`. Generated ROMs/media/runtime outputs remain local artifacts.
 The source projection audit ties the current cache functions to the qualified
 producer while leaving unrelated live codec work outside this comparison.

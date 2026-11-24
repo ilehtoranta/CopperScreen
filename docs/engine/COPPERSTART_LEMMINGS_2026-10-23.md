@@ -81,7 +81,7 @@ Discovery and qualification are separate reset-based runs. State, both RAM
 banks, the full raster and field PCM are retained at field 1 and every 100
 fields through 16600.
 
-The [machine-readable record](COPPERSTART_LEMMINGS_2026-10-23.json) retains
+The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LEMMINGS_2026-10-23.json) retains
 actual commands, ROM/media/input/binary identities, nonzero PCM counts,
 capture manifests, pause checks and retained harness source/build provenance.
 Nonzero PCM establishes sample presence, not listening or fidelity. The
@@ -91,7 +91,7 @@ this documentation/workload change. ROMs, media, captures and build outputs
 remain local.
 
 This replay supplements the earlier bounded native Lemmings acceptance in
-the [historical readiness record](../history/amiga/LIGHTWEIGHT_A500_SUPPORTED_V1_READINESS.md).
+the [historical readiness record](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_SUPPORTED_V1_READINESS.md).
 It does not modify the historical performance workloads, intervals,
 fingerprints or acceptance dispositions. No throughput result is claimed.
 

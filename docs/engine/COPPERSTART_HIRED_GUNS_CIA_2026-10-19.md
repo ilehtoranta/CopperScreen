@@ -8,7 +8,7 @@ SystemTakeover utility pass its resource-open stage. It reaches its warning-wind
 request and reports **ERROR #0045 : STWARNKILLSYS COULD NOT OPEN WINDOW**, returning
 to `1.SYS:>`. Game entry and gameplay remain unqualified.
 
-The [machine-readable evidence](COPPERSTART_HIRED_GUNS_CIA_2026-10-19.json)
+The [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_HIRED_GUNS_CIA_2026-10-19.json)
 records source, ROM, inputs, controls, builds and replays. This continues the
 [misc.resource result](COPPERSTART_HIRED_GUNS_MISC_2026-10-19.md).
 Implementation is committed in CopperStart at

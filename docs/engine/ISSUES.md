@@ -86,9 +86,9 @@ Native Lemmings gameplay, live digger assignment, disk replacement and a separat
 same-build boot-path reset check were accepted in the bounded 2026-09-15 session.
 Hired Guns menu/initial training replays and live music, sound effects and graphics
 have recorded evidence and bounded acceptance. Full game completion, every disk
-transition and every timing edge are not certified. The [acceptance record](../history/amiga/LIGHTWEIGHT_A500_SUPPORTED_V1_READINESS.md)
+transition and every timing edge are not certified. The [acceptance record](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_SUPPORTED_V1_READINESS.md)
 preserves scope and the one-off performance waiver. These checks are not pending
-merely because an earlier paragraph in the [historical register](../history/amiga/LIGHTWEIGHT_A500_ENGINE_ISSUES.md)
+merely because an earlier paragraph in the [historical register](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_ENGINE_ISSUES.md)
 said so.
 
 The [CopperStart/native Kickstart 1.3 Lemmings follow-up](COPPERSTART_LEMMINGS_2026-10-23.md)
@@ -316,7 +316,7 @@ phase/frequency history, FAST-write phases, motor/media gaps and general GCR rem
 unverified or unsupported. MSBSYNC byte alignment now has an ideal-bit-stream
 implementation and focused coverage, without physical recovery timing proof.
 HRM cell rates, the Commodore receiver patent and pinned
-WinUAE comparisons are retained with the [original evidence](../history/amiga/LIGHTWEIGHT_A500_ENGINE_ISSUES.md).
+WinUAE comparisons are retained with the [original evidence](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_ENGINE_ISSUES.md).
 They do not certify the chosen transition rule. Close with successive-phase writes
 around pulse/window boundaries and recovered-bit, DSKBYTR, sync/IRQ and DMA evidence.
 
@@ -468,7 +468,7 @@ explicit host-event/pin/counter evidence, without per-cycle polling or generic e
 ## Resolved defects and implemented gaps
 
 These IDs remain regression references. Full reproductions, build identities and
-historical test results are retained in the [original issue register](../history/amiga/LIGHTWEIGHT_A500_ENGINE_ISSUES.md).
+historical test results are retained in the [original issue register](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_ENGINE_ISSUES.md).
 No historical test count is presented as a newly run suite.
 
 | ID | Resolution to preserve | Coverage / remaining boundary |

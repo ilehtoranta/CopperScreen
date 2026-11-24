@@ -18,7 +18,7 @@ The exact 524288-byte ROM has SHA-256
 `fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7`.
 It retains native emitter producer `0057fb9c38d82d38122ddf69a4aa960573beedd7`
 and the compiled guest root from `cf7c9b54aefea723b018bd68e10e829e67684250`.
-The [Full Contact record](COPPERSTART_FULL_CONTACT_2026-10-24.json) retains the
+The [Full Contact record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_FULL_CONTACT_2026-10-24.json) retains the
 recomposition evidence. This continuation reuses that rebuilt image and checks
 its checksum and equality to the retained independent composition. No producer
 or runtime source is rebuilt here.
@@ -27,7 +27,7 @@ The runtime remains the exact merged CopperScreen
 `29bc8635fe33ae9e267846ade511e9b368f7158d` binaries and pinned, unpublished
 Copper68k `1.5.5-nitro.1`. The evidence parent is
 `c9dc6ae4a23759ae4304993d1482b6bf2f57dd57`. The unchanged 25-field functional
-harness is retained from the [Lotus 2 continuation](COPPERSTART_LOTUS2_GAMEPLAY_2026-10-24.json),
+harness is retained from the [Lotus 2 continuation](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LOTUS2_GAMEPLAY_2026-10-24.json),
 which records its build and earlier capture-cadence prefix check. That harness
 is not rebuilt here. Its runtime/CPU/Disk/Float binaries are unchanged.
 
@@ -85,7 +85,7 @@ cross-ROM CPU or hardware trajectory is asserted. The four pause samples are
 16825, 16850, 16875 and 16900; later world motion, Floater consumption and rescue
 counting establish resumed play.
 
-The [companion JSON](COPPERSTART_LEMMINGS_FUN2_2026-10-25.json) records exact
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LEMMINGS_FUN2_2026-10-25.json) records exact
 ROM/media/binary/harness/input identities, commands, logs, capture manifests,
 pause checks and image comparisons. The committed
 [shared workload](../../CopperMod.Amiga.Lightweight.Runner/Workloads/lemmings-copperstart-fun2-v1.json)

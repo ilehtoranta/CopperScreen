@@ -43,7 +43,7 @@ live-window or peak-load headroom. Utility's retained allocation is 1,808 bytes.
 Retained producer evidence is under
 `CopperStart/artifacts/desktop-providers-20261018/qualified-v3`; exact hashes,
 all startup rows and source/build provenance are in the
-[machine-readable record](COPPERSTART_PROVIDER_STARTUP_2026-10-18.json).
+[machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_PROVIDER_STARTUP_2026-10-18.json).
 The workflow and loader lifetime are documented in producer
 `Docs/NativeDesktopProviders.md`. Earlier failed attempts are retained.
 CopperScreen's shipping firmware pin is unchanged; this is producer evidence.

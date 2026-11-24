@@ -8,7 +8,7 @@ gameplay actions. No new compatibility defect was reproduced, so no additional
 implementation change was required.
 
 This continues the [graphics startup qualification](COPPERSTART_HIRED_GUNS_GRAPHICS_2026-10-19.md).
-The [companion JSON](COPPERSTART_HIRED_GUNS_TRAINING_2026-10-19.json) records exact
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_HIRED_GUNS_TRAINING_2026-10-19.json) records exact
 ROM/media/binary identities, source, inputs, observations, capture hashes and
 limits. Source changes for this continuation are compatibility documentation;
 the two new physical-input fixtures preserve the tested path.

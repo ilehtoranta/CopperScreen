@@ -3,7 +3,7 @@
 Lightweight is CopperScreen's active engine. Legacy remains unavailable.
 [Standalone CopperStart](../COPPERSTART_APP.md) runs as a qualified guest ROM
 through the same machine/reset interface. The old G6/G7 cutover and completed Lightweight H-stage
-procedures are [historical records](../history/amiga/README.md), not prerequisites
+procedures are [historical records](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/README.md), not prerequisites
 for continued development.
 
 The host also offers [Minimal disk boot](MINIMAL_DISK_BOOT.md), an original guest
@@ -644,11 +644,11 @@ assume that an old drive path exists or that an archived citation proves availab
 
 | Reference | Relevant material | Availability and authority |
 | --- | --- | --- |
-| Commodore, Amiga Hardware Reference Manual, 2nd/3rd editions | Copper comparison, bitplane fetches/HAM, sprites, disk/ADKCON and appendix F CIA | Web citations remain in the [staged record](../history/amiga/LIGHTWEIGHT_A500_ENGINE_PLAN.md); the previously named local 2nd-edition PDF is absent. Record edition/section when using it. Primary documentation, not proof of every undocumented phase. |
+| Commodore, Amiga Hardware Reference Manual, 2nd/3rd editions | Copper comparison, bitplane fetches/HAM, sprites, disk/ADKCON and appendix F CIA | Web citations remain in the [staged record](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_ENGINE_PLAN.md); the previously named local 2nd-edition PDF is absent. Record edition/section when using it. Primary documentation, not proof of every undocumented phase. |
 | MOS/Commodore 8520 specification | Timers, serial pins, TOD and interrupts | Citation retained in the staged record's H1 evidence. No local copy inventoried. Primary specification; board propagation still needs evidence. |
-| Commodore US4780844A receiver patent | Recovery windows and phase/frequency correction | Citation retained under LWA-DISK-010 in the [historical issue register](../history/amiga/LIGHTWEIGHT_A500_ENGINE_ISSUES.md). Does not certify the reduced ideal-ADF model. |
+| Commodore US4780844A receiver patent | Recovery windows and phase/frequency correction | Citation retained under LWA-DISK-010 in the [historical issue register](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_ENGINE_ISSUES.md). Does not certify the reduced ideal-ADF model. |
 | UndocumentedChipsetFeatures.md / linked hardware research | Undocumented registers and timing observations | Previously referenced local file absent. Recover provenance and applicable chip revision before relying on a claim. |
 | Pinned WinUAE source and FPGA comparisons | Disk, CIA, display and sprite implementation comparisons | URLs/commits retained with the original investigations. Supporting evidence, not a physical A500 oracle. |
 
 Raw traces, media and frozen binaries referenced by old paths have not been
-recovered by this documentation change. See the [archive availability notes](../history/amiga/README.md).
+recovered by this documentation change. See the [archive availability notes](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/README.md).

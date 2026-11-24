@@ -55,7 +55,7 @@ they do not measure transient allocation peaks or include Intuition. Compare
 lifetimes within a mode: Simple/Smart probe code sizes differ.
 
 Exact inputs, per-stage hashes, failure rows and source/build provenance are in
-the [machine-readable evidence](COPPERSTART_OWNED_LAYER_UPDATES_2026-10-18.json).
+the [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_OWNED_LAYER_UPDATES_2026-10-18.json).
 Producer artifacts are under `CopperStart/artifacts/owned-layer-update-20261018/qualified-v1`;
 the producer workflow and API references are in `Docs/NativeOwnedLayerUpdates.md`.
 Earlier attempts are retained. This is correctness evidence, not a throughput result.

@@ -5,7 +5,7 @@ Psygnosis/Spreadpoint release on a PAL OCS A500, 68000 interpreter, 512 KiB Chip
 plus 512 KiB slow RAM, read-only DF0. **Both fresh CopperStart and native
 Kickstart 1.3 complete the first level with 100% rescued** using the recorded
 mouse input. The original fresh CopperStart build crashes when the crack intro
-exits. The [machine-readable record](COPPERSTART_LEMMINGS_2026-10-17.json)
+exits. The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LEMMINGS_2026-10-17.json)
 identifies the source, ROM/media/input/binary hashes, checks and reviewed
 captures. Local evidence is under `artifacts/copperstart-lemmings-2026-10-17/`.
 

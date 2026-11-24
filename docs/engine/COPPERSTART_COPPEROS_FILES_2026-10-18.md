@@ -35,7 +35,7 @@ and twelve Home scenes pass native bitplane comparisons; 36 PNGs retain those
 scenes and console returns. Both production Release builds pass without warnings
 or errors.
 
-The [machine-readable evidence](COPPERSTART_COPPEROS_FILES_2026-10-18.json) binds
+The [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_COPPEROS_FILES_2026-10-18.json) binds
 96 artifact hashes and 13 source hashes to the ROM, producer inputs, frozen
 application, probe, media replay, bitplanes and reproduced module bundle. Its
 SHA-256 is `A862A36EF93FBA67C6DEF27136E5AC3CEAB3AE2B1466E24D58D0946E711F1AA9`.

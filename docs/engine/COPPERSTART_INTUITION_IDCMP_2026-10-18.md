@@ -4,7 +4,7 @@ The compact Intuition disk entry now delivers native IDCMP_REFRESHWINDOW
 messages after successful system frame repair. It extends the
 [refresh/repaint qualification](COPPERSTART_INTUITION_REFRESH_2026-10-18.md).
 See the [producer implementation](../../../CopperStart/Docs/NativeIntuitionMessages.md)
-and [machine-readable evidence](COPPERSTART_INTUITION_IDCMP_2026-10-18.json).
+and [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_INTUITION_IDCMP_2026-10-18.json).
 
 The retained gate passes **8/8**, zero skips: one exact-input cache control and
 seven real ROM/media journeys. The same payload also passed actual freestanding

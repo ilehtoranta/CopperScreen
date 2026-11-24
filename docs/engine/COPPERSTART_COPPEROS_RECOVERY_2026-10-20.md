@@ -5,7 +5,7 @@ between DOS calls, and adds read-only recovery inspection with unsaved text copi
 All eight selected facts pass with zero skips on the bounded native A500 profile.
 This slice changes no shipping firmware or workspace-admission pin.
 
-The [evidence JSON](COPPERSTART_COPPEROS_RECOVERY_2026-10-20.json) binds 612 artifact hashes
+The [evidence JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_COPPEROS_RECOVERY_2026-10-20.json) binds 612 artifact hashes
 and 23 current source hashes. Its SHA-256 is `829006C3FD1D566589845DAF9A23592BB268599114921361A911C96EAE417D2B`.
 See the [implementation guide](../../../CopperOS/docs/NativeDesktopRecovery.md) and
 [producer/reproduction guide](../../../CopperStart/Docs/NativeCopperOsRecovery.md).

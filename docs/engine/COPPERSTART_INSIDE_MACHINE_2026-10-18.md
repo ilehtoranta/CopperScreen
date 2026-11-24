@@ -8,7 +8,7 @@ demo, emulator, CPU package or public caller requirements.
 
 CopperStart source commit: [`185430afc13cbe98dd349f9972788b68b99bd592`](https://github.com/ilehtoranta/CopperStart/commit/185430afc13cbe98dd349f9972788b68b99bd592), on
 `codex/copperstart-inside-machine-20261018`, based on `55f3952`.
-The [companion JSON](COPPERSTART_INSIDE_MACHINE_2026-10-18.json) records exact
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_INSIDE_MACHINE_2026-10-18.json) records exact
 source, producer, ROM, media, commands, capture hashes and test identities.
 The [previous title](COPPERSTART_LOTUS_III_2026-10-18.md) used the unchanged
 [Full Contact ROM](COPPERSTART_FULL_CONTACT_2026-10-18.md).

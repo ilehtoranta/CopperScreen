@@ -76,7 +76,7 @@ and zero errors. The
 earlier default-output build failed because unrelated active tests held outputs;
 that failed log remains retained separately from the successful isolated build.
 
-The [machine-readable evidence](COPPERSTART_COPPEROS_SAVE_2026-10-19.json) binds
+The [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_COPPEROS_SAVE_2026-10-19.json) binds
 355 artifact hashes and 22 source hashes.
 Its SHA-256 is `77471F9B78E3EF29EE30E44284BFE39FE89B831CAC45F3D35CDB8E8357FB7C93`. Final save replay:
 `CopperStart/artifacts/copperos-save-20261019/qualified-v9`; retained regression:

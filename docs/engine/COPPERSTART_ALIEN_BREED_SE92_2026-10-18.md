@@ -7,7 +7,7 @@ Native Kickstart 1.3 reaches the same milestones on the same PAL OCS 68000 A500
 with 512 KiB Chip RAM, 512 KiB A501 RAM, no Fast RAM and one drive. No new
 firmware or engine compatibility failure was demonstrated; no source correction
 or removal of guest checks is required for this bounded case.
-The [evidence record](COPPERSTART_ALIEN_BREED_SE92_2026-10-18.json) binds the exact
+The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_ALIEN_BREED_SE92_2026-10-18.json) binds the exact
 media, frozen execution binaries, build inputs, commands and reviewed captures.
 
 The [earlier native investigation](DISK_BYTE_WORDSYNC_2026-09-24.md) established
@@ -46,7 +46,7 @@ ammunition-bar segment. No display crop, ROM-byte patch or media edit is used.
 
 The native root was freshly compiled at `2026-10-18T10:53:41.1337392+00:00` using the five
 retained root sources and all eleven frozen, corrected Overdrive component DLLs.
-Their hashes match the [preceding qualification](COPPERSTART_OVERDRIVE_2026-10-18.json).
+Their hashes match the [preceding qualification](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_OVERDRIVE_2026-10-18.json).
 The source qualification commit remains
 [`84525a2`](https://github.com/ilehtoranta/CopperStart/commit/84525a27cb625d03b59be803d2988c6b5bfc5a16).
 The compiler/SDK and graphics composer are also frozen inputs. This preserves

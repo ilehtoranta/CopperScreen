@@ -7,7 +7,7 @@ record retains the original failure and native menu control for its pinned ROM.
 2026-10-19. **CopperStart fails before game entry.** Kickstart 1.3 reaches the
 input-driven main menu from the same original disk. This is the next title after
 the verified [Railroad Tycoon route and arrival](COPPERSTART_RAILROAD_ROUTE_2026-10-19.md).
-The [companion JSON](COPPERSTART_HIRED_GUNS_2026-10-19.json) records exact inputs,
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_HIRED_GUNS_2026-10-19.json) records exact inputs,
 ROMs, media, binaries, trace sources and capture identities.
 
 ## First failure

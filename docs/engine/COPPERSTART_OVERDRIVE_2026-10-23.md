@@ -67,7 +67,7 @@ before launch. Discovery and qualification are separate runs; no guest state
 is restored. Captures retain state, both RAM banks, the full raster and field
 PCM at field 1 and every 100 fields through 24000.
 
-The [machine-readable record](COPPERSTART_OVERDRIVE_2026-10-23.json) records
+The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_OVERDRIVE_2026-10-23.json) records
 the actual commands, ROM/media/input/binary hashes, capture manifests and
 retained harness source/build provenance. The harness was already built and
 qualified in the F17 replay; it is not rebuilt for this unchanged replay.

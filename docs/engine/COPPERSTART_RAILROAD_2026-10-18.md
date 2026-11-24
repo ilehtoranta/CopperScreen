@@ -16,7 +16,7 @@ Source commit
 is pushed on `codex/copperstart-railroad-20261018`. The exact 524,288-byte ROM has
 462,852 compiled code bytes, 26,868 native graphics/bootstrap bytes and SHA-256
 `CE38802911F61D58A4EFD7C074B48F0C3F386A1198E2786E87E13AD7075A7D60`.
-The [companion JSON](COPPERSTART_RAILROAD_2026-10-18.json) records exact local
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_RAILROAD_2026-10-18.json) records exact local
 inputs, artifacts and commands. ROMs, game media and generated files remain local.
 
 ## Machine and controls

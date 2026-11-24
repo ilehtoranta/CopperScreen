@@ -6,7 +6,7 @@ options, car/music selection and the opening race. Holding the accelerator
 moves the car and reaches 89 KPH; time-up returns to the score display. No new
 firmware defect was demonstrated, so this continuation changes evidence only.
 
-The [companion JSON](COPPERSTART_LOTUS_III_2026-10-18.json) records the exact
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LOTUS_III_2026-10-18.json) records the exact
 ROM/media/script identities, commands, capture hashes and reviewed milestones.
 The [preceding Full Contact qualification](COPPERSTART_FULL_CONTACT_2026-10-18.md)
 owns the rebuilt ROM's fixes, source overlay, build and native-test provenance.

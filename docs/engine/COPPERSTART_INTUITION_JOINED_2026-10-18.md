@@ -3,7 +3,7 @@
 The selected compact Intuition owner now has one native application receiving
 refresh and physical input on a caller-owned port shared by two windows. See the
 [producer contract](../../../CopperStart/Docs/NativeIntuitionJoined.md) and
-[machine-readable evidence](COPPERSTART_INTUITION_JOINED_2026-10-18.json).
+[machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_INTUITION_JOINED_2026-10-18.json).
 
 The combined gate passes **14/14**, zero skips, with **281 checked PNG captures**
 across 33 screen lifetimes. Eleven native ROM/media journeys cover startup,
@@ -87,7 +87,7 @@ drain/reply/Wait loop. Join Shell/Demo launch and return with explicit input and
 display ownership transfer. Qualify writable storage on this exact ROM, the
 100-cycle application/child stress gates, complete loader/stack/queue memory
 peaks, GUI interaction latency and the shipping ROM/OS-pair restart/update/itch.io
-journey. See the [desktop implementation plan](../COPPEROS_DESKTOP_PLAN.md).
+journey. See the [desktop implementation plan](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/COPPEROS_DESKTOP_PLAN.md).
 
 The profile retains the earlier cooperative standalone wakeup boundary; it does
 not establish general interrupt-context Exec.Signal behavior or broader

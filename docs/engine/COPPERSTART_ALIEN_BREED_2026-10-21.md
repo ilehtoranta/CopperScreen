@@ -111,7 +111,7 @@ and are not counted as fresh checks. JSON, workload history, binary/media
 identities, capture parity and documentation links are checked for this
 evidence-only follow-up.
 
-The [evidence record](COPPERSTART_ALIEN_BREED_2026-10-21.json) retains source,
+The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_ALIEN_BREED_2026-10-21.json) retains source,
 ROM/media, binary, input, actual-segment, capture-manifest, verification and
 milestone identities. The [canonical workload](../../CopperMod.Amiga.Lightweight.Runner/Workloads/alienbreed-copperstart-first-deck-v1.json)
 contains only ordinary physical input and disk insertion/ejection. Local

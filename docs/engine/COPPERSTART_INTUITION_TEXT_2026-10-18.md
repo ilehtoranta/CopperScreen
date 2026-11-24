@@ -3,7 +3,7 @@
 The compact native desktop profile adds keyboard text through the current
 keymap.library default and completes CopperScreen's presenter focus/capture-loss
 release path. See the [producer contract](../../../CopperStart/Docs/NativeIntuitionText.md)
-and [machine-readable evidence](COPPERSTART_INTUITION_TEXT_2026-10-18.json).
+and [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_INTUITION_TEXT_2026-10-18.json).
 
 The final focused input/text profile passes **6/6**, with zero skips: four native ROM/media journeys and two freestanding checks, retaining **44 checked PNGs** across eight screen lifetimes plus two diagnostic text-console PNGs. Separately, six host checks and both production builds pass. The earlier combined profile passes **17/17** on the provider before the keyboard-transport overflow correction; its broader startup/refresh/shared-port coverage is versioned separately and is not attributed to the final HUNK.
 

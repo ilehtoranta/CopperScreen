@@ -20,7 +20,7 @@ The result is byte-identical to the preceding qualified ROM.
 
 The runtime binaries are retained from the merged CopperScreen
 `29bc8635fe33ae9e267846ade511e9b368f7158d` build recorded with
-[North & South](COPPERSTART_NORTH_SOUTH_2026-10-23.json). The evidence/workload
+[North & South](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_NORTH_SOUTH_2026-10-23.json). The evidence/workload
 parent is `71dbe03b52a90c9191008e4f6c7c2d97d26968c6`. Copper68k remains the
 pinned unpublished `1.5.5-nitro.1` package. No runtime source changed here.
 
@@ -31,7 +31,7 @@ the physical script ejects it at field 12400 and inserts disk two at 12450.
 There is no media patch, trainer, saved state, guest-memory write from the
 harness or host OS service shim. The native comparison uses Kickstart 1.3 on
 the same runtime and machine. Exact media, ROM, binary, script and capture
-identities are in the [companion JSON](COPPERSTART_FULL_CONTACT_2026-10-24.json).
+identities are in the [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_FULL_CONTACT_2026-10-24.json).
 
 ## Player response and progression
 

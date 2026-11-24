@@ -7,7 +7,7 @@ caller-buffer handling, synchronous writes and save/restore ordering are preserv
 The application and GUI payloads are unchanged. Shipping firmware/workspace pins
 remain unchanged.
 
-The [evidence JSON](COPPERSTART_COPPEROS_IO_2026-10-20.json) binds 2922 artifact
+The [evidence JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_COPPEROS_IO_2026-10-20.json) binds 2922 artifact
 hashes and 27 current source hashes; SHA-256 `585DFB67C83F1E7A880A080F359ACA9F98AFFF00D71D5481810D56B1BF34BF70`.
 See the [implementation and reproduction guide](../../../CopperStart/Docs/NativeCopperOsIo.md).
 

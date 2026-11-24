@@ -2,13 +2,13 @@
 
 2026-10-20; replay started 2026-10-19. **Single-player Training zone 3
 (Fire Fight) passes hostile combat and successful level completion.** The
-original game displays “Mission objective completed” with Desverger as the
+original game displays ï¿½Mission objective completedï¿½ with Desverger as the
 winner, score 94. Original Kickstart 1.3 produces the identical full-raster
 success bitmap. No new compatibility defect was reproduced, so the previously
 rebuilt CopperStart ROM remains unchanged.
 
 This continues the [Exploration gameplay qualification](COPPERSTART_HIRED_GUNS_TRAINING_2026-10-19.md).
-The [companion JSON](COPPERSTART_HIRED_GUNS_COMBAT_2026-10-20.json) pins the ROM,
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_HIRED_GUNS_COMBAT_2026-10-20.json) pins the ROM,
 producer, media, frozen binaries, actual loaded segments, capture fingerprints,
 observations and limits. Only documentation and physical-input fixtures change.
 

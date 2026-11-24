@@ -44,7 +44,7 @@ not positive installed-Layers ROM coverage. Raw Hook RP bitmap changes are
 restored. There is no engine timing change, host OS implementation, native
 window, concurrency/refresh qualification, app admission or throughput result.
 
-The [machine-readable record](COPPERSTART_LAYER_DRAWING_2026-10-18.json) binds
+The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LAYER_DRAWING_2026-10-18.json) binds
 the frozen root, emitter, managed inputs, source snapshots, TRX, six native
 display-profile receipts, compiled provider probe and eighteen full PNGs.
 Artifacts stay under ignored `CopperStart/artifacts/layer-drawing-20261018`:

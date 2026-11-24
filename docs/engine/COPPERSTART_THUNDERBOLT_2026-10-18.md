@@ -7,7 +7,7 @@ reaches score 200 and displays the continue screen. The native Kickstart 1.3
 control reaches the same milestones. No new firmware defect was demonstrated;
 this continuation changes qualification evidence only.
 
-The [companion JSON](COPPERSTART_THUNDERBOLT_2026-10-18.json) contains exact
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_THUNDERBOLT_2026-10-18.json) contains exact
 ROM/media/input identities, commands, captures, mode comparisons and reviewed
 milestones. The [preceding Inside the Machine qualification](COPPERSTART_INSIDE_MACHINE_2026-10-18.md)
 owns the unchanged rebuilt ROM's source, producer, build and native-test evidence.

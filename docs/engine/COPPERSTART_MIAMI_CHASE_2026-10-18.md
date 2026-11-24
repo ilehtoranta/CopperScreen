@@ -2,7 +2,7 @@
 
 2026-10-18. Miami Chase reaches its PAL intro, disk-two menu and input-driven
 opening street scene on a fresh CopperStart ROM containing the Lotus 2 stack fix.
-The [evidence record](COPPERSTART_MIAMI_CHASE_2026-10-18.json) binds the exact ROM,
+The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_MIAMI_CHASE_2026-10-18.json) binds the exact ROM,
 unchanged supplied media, execution binaries, input, probes and reviewed images.
 
 The machine is a PAL OCS A500: 68000, 8371 Agnus, 8362 Denise, 512 KiB Chip RAM,

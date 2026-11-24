@@ -2,7 +2,7 @@
 
 2026-10-17: the combined writable-DOS/native-graphics producer ROM passes the
 bounded native prerequisite checks. A first native desktop window is still
-unavailable. The [hash-bound record](COPPERSTART_DESKTOP_PREREQUISITES_2026-10-17.json)
+unavailable. The [hash-bound record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_DESKTOP_PREREQUISITES_2026-10-17.json)
 identifies the exact ROM, source snapshots, binary inputs, fixtures and receipts.
 
 ## Combined native artifact
@@ -125,7 +125,7 @@ repository, use a fresh output directory:
 ./build/Test-DesktopPrerequisites.ps1 -OutputDirectory artifacts/desktop-prerequisites-new
 ```
 
-The broader [desktop implementation plan](../COPPEROS_DESKTOP_PLAN.md) retains
+The broader [desktop implementation plan](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/COPPEROS_DESKTOP_PLAN.md) retains
 the remaining CopperOS, workspace and consumer-package tasks. This record does
 not qualify the full CopperOS Shell/pair, native games, an installed package,
 audio fidelity or host throughput. CopperScreen's existing qualified app ROM pin

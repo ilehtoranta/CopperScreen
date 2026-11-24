@@ -93,7 +93,7 @@ Broader queue pressure, fragmentation and 100-cycle sustained use remain open.
 
 Both production solutions build with zero errors. Exact source, producer, ROM,
 TRX, receipt, layout and exported-media hashes are in the
-[machine-readable evidence](COPPERSTART_COPPEROS_MFM_2026-10-20.json), SHA-256 `25ED7FEF31FBB7A2DE4C65C7EC826D8BC1D008DCEF986925C30C9FB4D76558D1`.
+[machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_COPPEROS_MFM_2026-10-20.json), SHA-256 `25ED7FEF31FBB7A2DE4C65C7EC826D8BC1D008DCEF986925C30C9FB4D76558D1`.
 Generated ROMs/media stay local. The projection check ties the live encoder to
 the qualified candidate while retaining unrelated live decoder work outside
 this comparison. Previous evidence records are unchanged.

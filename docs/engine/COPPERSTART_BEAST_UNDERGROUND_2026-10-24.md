@@ -17,7 +17,7 @@ castle, later areas or a complete game. No successful creature kill is claimed.
 The 524288-byte ROM has SHA-256
 `fefe13e86ad00e3609ad4e385b5e3752e2407e1b5a9b67affa904d2160d9e8e7`.
 It is the rebuilt image retained by the
-[Full Contact continuation](COPPERSTART_FULL_CONTACT_2026-10-24.json), with
+[Full Contact continuation](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_FULL_CONTACT_2026-10-24.json), with
 native emitter producer `0057fb9c38d82d38122ddf69a4aa960573beedd7` and retained
 compiled guest root from `cf7c9b54aefea723b018bd68e10e829e67684250`. This
 continuation reuses that image; its checksum and equality to the retained
@@ -82,7 +82,7 @@ Eleven reviewed milestone BMPs from door opening through death artwork are
 also byte-identical between the two ROMs. This is a bounded image comparison,
 not an assertion of equal cross-ROM CPU or hardware trajectories.
 
-The [companion JSON](COPPERSTART_BEAST_UNDERGROUND_2026-10-24.json) records the
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_BEAST_UNDERGROUND_2026-10-24.json) records the
 exact ROM, runtime, media, harness, inputs, logs and capture manifests. Committed
 workloads contain the exact UTF-8/LF input bytes used by the final runs. The
 normal and native traces differ during one outdoor movement segment; scalar

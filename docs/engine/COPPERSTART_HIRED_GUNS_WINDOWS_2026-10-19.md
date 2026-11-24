@@ -7,7 +7,7 @@ both buttons. Cancel restores the CLI; relaunching and accepting the warning
 hands control to the original game loader. The post-takeover graphics startup
 and gameplay remain **unqualified**.
 
-The [machine-readable evidence](COPPERSTART_HIRED_GUNS_WINDOWS_2026-10-19.json)
+The [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_HIRED_GUNS_WINDOWS_2026-10-19.json)
 records exact source, ROM, build, native controls, media, physical input and
 capture identities. This continues the [CIA resource follow-up](COPPERSTART_HIRED_GUNS_CIA_2026-10-19.md).
 Source is committed at

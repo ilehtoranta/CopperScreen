@@ -5,7 +5,7 @@ responds to acceleration and steering, and advances the lap counter from five to
 four. No additional firmware defect was demonstrated in this sequence, so no
 firmware change or title-specific workaround was added.
 
-The [machine-readable record](COPPERSTART_SUPERCARS2_2026-10-16.json) preserves
+The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_SUPERCARS2_2026-10-16.json) preserves
 the exact ROM, producer assemblies, media, input, test results, capture hashes
 and reviewed milestones. The previous case is
 [Desert Dream](COPPERSTART_DESERT_DREAM_2026-10-16.json).

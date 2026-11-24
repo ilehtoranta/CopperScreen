@@ -116,12 +116,11 @@ The mandatory full and preflight profiles each run their fact with zero skips.
 
 ## Evidence
 
-- [Machine-readable record](COPPERSTART_COPPEROS_MEASUREMENTS_2026-10-20.json),
+- [Machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_COPPEROS_MEASUREMENTS_2026-10-20.json),
   SHA-256 `E33ACD51E422506544A253162D1B5BD92340BAD98EFD38C15D9442F57F9F7BE9`.
-- [Full receipt](../../../CopperStart/artifacts/copperos-measurements-20261020/qualified-v5/qualification.json)
-  and [native TRX](../../../CopperStart/artifacts/copperos-measurements-20261020/qualified-v5/native/measurements.trx).
-- [Preflight](../../../CopperStart/artifacts/copperos-measurements-20261020/preflight-v5/preflight.json)
-  and [independent audit](../../../CopperStart/artifacts/copperos-measurements-20261020/audit-v5.json).
+- Local outputs under `CopperStart/artifacts/copperos-measurements-20261020/`:
+  `qualified-v5/qualification.json`, `qualified-v5/native/measurements.trx`,
+  `preflight-v5/preflight.json` and `audit-v5.json`.
 - [Reproduction script](../../../CopperStart/build/Test-NativeCopperOsMeasurements.ps1),
   [passive driver](../../../CopperStart/tests/CopperStart.Floppy.Native.Tests/NativeDesktopMeasurementDriver.cs),
   [native journey](../../../CopperStart/tests/CopperStart.Floppy.Native.Tests/NativeCopperOsMeasurementTests.cs)

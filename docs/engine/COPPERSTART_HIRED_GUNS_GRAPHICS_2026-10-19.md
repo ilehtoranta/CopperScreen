@@ -6,7 +6,7 @@ Follow-up: [verified Exploration Training gameplay](COPPERSTART_HIRED_GUNS_TRAIN
 draws a complete main menu and responds to F1 through New Game and Training's
 player-count menu.** Its main-menu image matches the retained Kickstart 1.3 fingerprint
 exactly. This continues the [positioned window qualification](COPPERSTART_HIRED_GUNS_WINDOWS_2026-10-19.md).
-The [companion JSON](COPPERSTART_HIRED_GUNS_GRAPHICS_2026-10-19.json) records
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_HIRED_GUNS_GRAPHICS_2026-10-19.json) records
 source, ROMs, build, tests, physical input, media, binaries, captures and limits.
 
 ## First divergence and correction

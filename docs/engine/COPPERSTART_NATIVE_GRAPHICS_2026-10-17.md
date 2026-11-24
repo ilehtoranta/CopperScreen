@@ -116,7 +116,7 @@ The first IRQ ROM and the later stack-only image still fail after GO; their
 corrupted low-memory writes are downstream allocation failures. They are not
 qualified game results.
 
-[The evidence record](COPPERSTART_NATIVE_GRAPHICS_2026-10-17.json) records exact
+[The evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_NATIVE_GRAPHICS_2026-10-17.json) records exact
 ROM, producer, media, input, runner, TRX and capture-manifest hashes. The original
 producer snapshot includes concurrent console/DOS edits excluded from the
 graphics commit. A later source overlay and changed Exec producer identify the

@@ -75,7 +75,7 @@ compatibility results, not hardware-conformance or throughput measurements.
 Interlace, a complete graphics VBlank task owner, gameplay, saving and general
 Workbench remain unqualified.
 
-[The evidence record](COPPERSTART_XENON2_2026-10-20.json) preserves exact ROM, producer, media, input,
+[The evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_XENON2_2026-10-20.json) preserves exact ROM, producer, media, input,
 binary, test and capture identities. The physical workload is
 [recorded here](../../CopperMod.Amiga.Lightweight.Runner/Workloads/xenon2-copperstart-startup-v1.json).
 Local diagnostics/captures remain under `artifacts/copperstart-xenon2-2026-10-20`.

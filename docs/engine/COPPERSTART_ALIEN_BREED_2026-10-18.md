@@ -5,7 +5,7 @@ Exec supervisor-entry conflict in the F17-qualified CopperStart ROM. Native
 Kickstart 1.3 accepts disk two, reaches the menu and starts level one on the
 same PAL OCS 68000 A500 with 512 KiB Chip and 512 KiB A501 RAM. The preceding
 replacement ROM remains black through 18,000 fields. The
-[evidence record](COPPERSTART_ALIEN_BREED_2026-10-18.json) identifies the exact
+[evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_ALIEN_BREED_2026-10-18.json) identifies the exact
 media, source lineage, build inputs, commands, probes and reviewed captures.
 
 The loader temporarily changes trap vector zero while it still uses Exec.

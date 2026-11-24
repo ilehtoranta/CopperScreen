@@ -6,7 +6,7 @@ The compact disk Intuition owner adds an explicit physical input profile via
 The final combined gate passes **11/11**, zero skips: two actual freestanding
 compilations and nine native ROM/media journeys. It checks 225 captures across
 27 screen lifetimes, including six physical-input lifetimes at 320/640 pixels
-and 44 input/console captures. See the [exact evidence](COPPERSTART_INTUITION_INPUT_2026-10-18.json).
+and 44 input/console captures. See the [exact evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_INTUITION_INPUT_2026-10-18.json).
 This result does not admit a new shipping ROM/OS pair.
 
 The native console remains the sole CIA keyboard reader. Its raw handoff feeds
@@ -58,4 +58,4 @@ contention cases, then run the planned 100-cycle stress gate. Join the original
 CopperOS desktop process, fixed Files/Editor views, safe save/error recovery and
 Shell/Demo launch/return. Measure loader peaks, stacks and retained queues, then
 qualify the exact writable ROM/OS bundle and workspace/update journeys. See the
-[desktop plan](../COPPEROS_DESKTOP_PLAN.md).
+[desktop plan](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/COPPEROS_DESKTOP_PLAN.md).

@@ -4,7 +4,7 @@
 exposes a false one-megabyte memory rejection in the Lemmings-qualified
 CopperStart ROM. Native Kickstart 1.3 reaches the title, disk-two prompt, menus
 and driving on the same PAL OCS 68000 A500 with 512 KiB Chip and 512 KiB slow
-RAM. The [evidence record](COPPERSTART_F17_2026-10-17.json) identifies the exact
+RAM. The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_F17_2026-10-17.json) identifies the exact
 sources, ROMs, media, inputs, binaries, native probes and reviewed captures.
 
 The first incorrect operation is the boot loader's `TypeOfMem($C01000)` call.

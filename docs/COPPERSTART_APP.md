@@ -110,7 +110,8 @@ insert formatting targets before boot. DOS2-DOS5 remain read-only. The 512 KiB r
 contains graphics; the matching 512 KiB E00000 extension supplies SFS/SFS2 and the
 shared filesystem task. Both banks are admitted as one hash-pinned file.
 The previous [single-bank qualification](COPPEROS_BLTCLEAR_REGISTER_HOMES_2026-11-05.md)
-retains its own graphics and performance evidence. The Full pair has separate
+and [follow-up BltClear qualification](COPPEROS_BLT_CLEAR_OVERHEAD_2026-11-06.md)
+retain their own graphics and performance evidence. The Full pair has separate
 storage and desktop checks and makes no host-throughput claim.
 The launcher creates `CopperOS/A1200-Desktop/CopperOS.hdf` in the user's app-data
 directory once, mounts it writable with `DH0:2:32:0:255`, and reuses it across

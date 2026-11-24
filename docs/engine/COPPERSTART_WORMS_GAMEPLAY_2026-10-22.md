@@ -223,7 +223,7 @@ and PCM. No snapshot reports
 an unsupported hardware event. Two snapshots contain nonzero PCM; this confirms
 sample presence, without an audio fidelity claim. The canonical physical-input
 workload and exact run identities are retained in the
-[machine-readable evidence](COPPERSTART_WORMS_GAMEPLAY_2026-10-22.json).
+[machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_WORMS_GAMEPLAY_2026-10-22.json).
 
 ## Independent probes
 

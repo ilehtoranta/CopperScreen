@@ -4,7 +4,7 @@
 disk, and responds to takeoff and flight controls on a fresh CopperStart ROM
 containing the Miami Chase fix. The recorded flight returns to the frigate and
 lands. No additional compatibility correction is needed for this sequence.
-The [evidence record](COPPERSTART_DESERT_STRIKE_2026-10-19.json) binds the exact
+The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_DESERT_STRIKE_2026-10-19.json) binds the exact
 ROM, all three media entries, input sequences, execution binaries and captures.
 
 ## Machine, media and fresh ROM

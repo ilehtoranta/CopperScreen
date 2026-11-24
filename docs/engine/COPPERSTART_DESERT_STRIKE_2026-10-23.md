@@ -90,7 +90,7 @@ The complete shared [physical-input workload](../../CopperMod.Amiga.Lightweight.
 contains 61 events. Final input and exit-control files are written before
 process creation. Each reset replay retains state, both RAM banks, the full
 raster and field PCM at field 1 and every 100 fields through 38000.
-The [machine-readable record](COPPERSTART_DESERT_STRIKE_2026-10-23.json) retains
+The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_DESERT_STRIKE_2026-10-23.json) retains
 commands, binary/ROM/media/input identities, capture manifests, independent
 reset comparisons and the separate diagnostic provenance.
 

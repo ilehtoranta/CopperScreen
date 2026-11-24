@@ -54,7 +54,7 @@ coverage uses the caller-built Layer's public semaphore. No installed Layers
 startup, refresh concurrency, native window, app admission or throughput result
 is inferred from these probes.
 
-The [machine-readable record](COPPERSTART_LAYER_TEXT_2026-10-18.json) binds the
+The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LAYER_TEXT_2026-10-18.json) binds the
 frozen root, new emitter, complete managed input identities, source snapshots,
 TRX, eight profile receipts, provider HUNK/map and 24 display captures. Ignored
 producer evidence is under `CopperStart/artifacts/layer-text-20261018`:

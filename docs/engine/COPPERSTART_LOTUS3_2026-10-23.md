@@ -107,7 +107,7 @@ creation; discovery and qualification are separate reset-based runs.
 State, both RAM banks, the full raster and field PCM are retained at field
 1 and every 100 fields through 23200.
 
-The [machine-readable record](COPPERSTART_LOTUS3_2026-10-23.json) retains
+The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_LOTUS3_2026-10-23.json) retains
 actual commands, ROM/media/input/binary identities, capture manifests,
 the per-ROM input difference and retained harness source/build provenance.
 The functional harness is unchanged and is not rebuilt. Production code

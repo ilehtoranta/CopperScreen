@@ -47,7 +47,7 @@ AllocAbs is documented to fail for memory already in use. Removing that overlap
 check would overwrite live firmware objects; the Shadow of the Beast finding
 is a placement problem. [Exec AllocAbs autodoc](https://developer.amigaos3.net/autodocs/exec.library/AllocAbs.html).
 
-[The evidence record](COPPERSTART_AUDIT_FOLLOWUP_2026-10-16.json) contains exact
+[The evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_AUDIT_FOLLOWUP_2026-10-16.json) contains exact
 producer, ROM, media, input, binary, TRX and manifest identities. Local captures
 remain under `artifacts/copperstart-audit2-2026-10-16`. Diagnostic patched copies
 of our ROM isolate the first two blockers; only source-built images provide

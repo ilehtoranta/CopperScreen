@@ -5,7 +5,7 @@ bootstrap memory-order mismatch in the Alien Breed-qualified CopperStart image.
 Native Kickstart 1.3 reaches the menu, loads disk two and enters qualifying on
 the same PAL OCS 68000 A500 with 512 KiB Chip and 512 KiB A501 RAM. The preceding
 replacement ROM leaves a frozen loading logo and an invalid PC.
-The [evidence record](COPPERSTART_OVERDRIVE_2026-10-18.json) identifies source
+The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_OVERDRIVE_2026-10-18.json) identifies source
 lineage, fresh compilation inputs, exact media, commands, probes and reviewed
 captures.
 

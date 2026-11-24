@@ -70,7 +70,7 @@ root compile and its three passing native controls; `relink-v2` contains the
 fresh final graphics composition/manifest; `qualified-v2` contains the passing
 protocol receipt, frozen inputs, TRX and six full PNG captures. Initial attempts
 and preliminary instruction results remain separate. The paired machine-readable
-[record](COPPERSTART_COMPACT_DESKTOP_GRAPHICS_2026-10-17.json) pins these receipts.
+[record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_COMPACT_DESKTOP_GRAPHICS_2026-10-17.json) pins these receipts.
 
 The native protocol is CopperStart `build/Test-CompactDesktopGraphics.ps1`, with
 details in `Docs/CompactDesktopGraphics.md`. It requires the exact input hashes,

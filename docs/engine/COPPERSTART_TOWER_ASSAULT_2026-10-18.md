@@ -5,7 +5,7 @@ Assault boots, loads its matching second disk, opens the options and mission
 briefing, and reaches input-driven opening-level movement and firing on a
 freshly compiled CopperStart ROM containing the Overdrive fix. Native Kickstart
 1.3 reaches the same milestones. No additional firmware or engine fix was needed
-for this bounded case. The [evidence record](COPPERSTART_TOWER_ASSAULT_2026-10-18.json)
+for this bounded case. The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_TOWER_ASSAULT_2026-10-18.json)
 binds the exact inputs, commands, build, execution binaries and reviewed images.
 
 The machine is a PAL OCS A500 with a 68000, 8371 Agnus, 8362 Denise, 512 KiB Chip
@@ -46,7 +46,7 @@ the original dimensions. No display crop, ROM-byte patch or media edit is used.
 
 The root was freshly compiled at `2026-10-18T12:51:22.9589033+00:00` using five retained root
 sources and all eleven frozen, corrected component DLLs from the
-[SE92 continuation](COPPERSTART_ALIEN_BREED_SE92_2026-10-18.json). Their hashes are
+[SE92 continuation](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_ALIEN_BREED_SE92_2026-10-18.json). Their hashes are
 verified before compilation. The source qualification commit remains
 [`84525a2`](https://github.com/ilehtoranta/CopperStart/commit/84525a27cb625d03b59be803d2988c6b5bfc5a16),
 preserving the Overdrive expansion-memory preference, Alien Breed Supervisor

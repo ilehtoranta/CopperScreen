@@ -7,7 +7,7 @@ retains the preceding ROM's results and limits.
 2026-10-19. The original two BCPL Echo commands now run and the boot CLI remains
 interactive after LoadWB fails. **Hired Guns still fails before CopperStart game
 entry.** Its next observed CLI blocker is `misc.resource`. The
-[companion JSON](COPPERSTART_HIRED_GUNS_BCPL_2026-10-19.json) records the new ROM,
+[companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_HIRED_GUNS_BCPL_2026-10-19.json) records the new ROM,
 source, complete input history, native comparison, binaries, captures and limits.
 
 This follows the [original Echo fault](COPPERSTART_HIRED_GUNS_2026-10-19.md).

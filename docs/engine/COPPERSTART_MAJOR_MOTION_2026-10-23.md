@@ -87,7 +87,7 @@ RAM banks, the full raster and field PCM at field 1 and every 100 fields
 through 42400. The mute/unmute checks and pause-image checks are asserted
 against the final reset captures.
 
-The [machine-readable record](COPPERSTART_MAJOR_MOTION_2026-10-23.json)
+The [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_MAJOR_MOTION_2026-10-23.json)
 retains actual commands, ROM/media/input/binary identities, capture manifests,
 the separate Kickstart 3.1 diagnostic and retained harness source/build
 provenance. The unchanged functional harness is not rebuilt. Production code

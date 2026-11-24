@@ -8,7 +8,7 @@ completion screen. Their original-game starting directions and combat states
 are different; cross-ROM bitmap or score identity is not claimed.
 
 This continues the [earlier pinned-ROM completion](COPPERSTART_HIRED_GUNS_COMBAT_2026-10-20.md).
-Its old ROM and results remain historical evidence. The [companion JSON](COPPERSTART_MERGED_HIRED_GUNS_2026-10-20.json)
+Its old ROM and results remain historical evidence. The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_MERGED_HIRED_GUNS_2026-10-20.json)
 pins this new ROM, fresh compiler inputs, physical events, actual loaded segments,
 full capture fingerprints, test results and limitations.
 

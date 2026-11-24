@@ -3,7 +3,7 @@
 This continues the native Intuition/world-generation qualification preserved as
 CopperScreen commit `b05e9bd63ae1a3bacba92de421f55f1b637b1436`.
 The exact source, ROM, inputs, native reference probes, test results and replay
-identities are recorded in [the companion JSON](COPPERSTART_RAILROAD_GAMEPLAY_2026-10-18.json).
+identities are recorded in [the companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_RAILROAD_GAMEPLAY_2026-10-18.json).
 
 ## Compatibility faults and corrections
 

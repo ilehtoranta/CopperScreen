@@ -14,7 +14,7 @@ Escape path under both ROMs; winning the first opponent remains unqualified.
 Source: CopperStart commit
 [`55f39525acb1ecebf60e04267907d2d74e6b2aee`](https://github.com/ilehtoranta/CopperStart/commit/55f39525acb1ecebf60e04267907d2d74e6b2aee),
 branch `codex/copperstart-full-contact-20261018`, based on `9eed3fe`.
-The [companion JSON](COPPERSTART_FULL_CONTACT_2026-10-18.json) records exact media,
+The [companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_FULL_CONTACT_2026-10-18.json) records exact media,
 commands, inputs, captures, binaries, tests, source archive and log hashes.
 The preceding case is [Shadow of the Beast](COPPERSTART_BEAST_2026-10-17.md).
 

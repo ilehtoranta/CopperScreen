@@ -20,7 +20,7 @@ music player. CopperScreen is the canonical development and release repository.
 The application builds the engine and CopperDisk from local projects. Neither
 engine nor runner references a sibling CopperMod checkout. Original assembly and
 namespace names are retained to avoid an unrelated API rename. The historical
-documents are indexed in [the history archive](history/amiga/README.md).
+documents are indexed in [the history archive](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/README.md).
 `CopperMod.Amiga/` retains forwarding notes, not the old execution engine.
 Current development guidance is in [architecture](engine/ARCHITECTURE.md),
 [issues](engine/ISSUES.md) and [performance](engine/PERFORMANCE.md).

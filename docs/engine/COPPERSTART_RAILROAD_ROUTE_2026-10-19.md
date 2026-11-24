@@ -8,7 +8,7 @@ retains the original route evidence and its earlier ROM identity.
 The June 14, 1830 newspaper announces: **First Train Arrives in London Crossing.
 Citizens Celebrate!**
 
-[The companion JSON](COPPERSTART_RAILROAD_ROUTE_2026-10-19.json) pins the ROM,
+[The companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_RAILROAD_ROUTE_2026-10-19.json) pins the ROM,
 source, media, diagnostic runner, input, captures and complete mode comparison.
 This continues the [purchase/report qualification](COPPERSTART_RAILROAD_GAMEPLAY_2026-10-18.md).
 

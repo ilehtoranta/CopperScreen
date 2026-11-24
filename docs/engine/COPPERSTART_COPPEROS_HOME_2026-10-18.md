@@ -5,7 +5,7 @@ bounded CopperStart A500. Home uses one custom screen/window and one IDCMP
 drain/handle/reply/Wait loop. It supports keyboard/mouse tile selection, About,
 damage-clipped refresh and return to the console. Files and Editor are marked
 Planned. The [producer implementation and replay notes](../../../CopperStart/Docs/NativeCopperOsHome.md)
-and [machine-readable evidence](COPPERSTART_COPPEROS_HOME_2026-10-18.json) record
+and [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_COPPEROS_HOME_2026-10-18.json) record
 the exact development profile.
 
 | Item | Qualified result |

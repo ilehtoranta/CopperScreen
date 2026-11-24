@@ -55,7 +55,7 @@ header, scratch and oversize probe. Replacement temporarily owns two documents
 32-entry cache and the existing stack/state/cleanup reserve remain 32,768/256/
 8,192 bytes.
 
-The [machine-readable evidence](COPPERSTART_COPPEROS_EDITOR_2026-10-19.json)
+The [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_COPPEROS_EDITOR_2026-10-19.json)
 binds 282 artifact hashes and 25 source hashes. Its SHA-256 is
 `00A62522DF0718A951743CBBBEADE5A86F858B212DFC0BE3E5234B2D781F902D`.
 The final replay is `CopperStart/artifacts/copperos-editor-20261019/qualified-v11`

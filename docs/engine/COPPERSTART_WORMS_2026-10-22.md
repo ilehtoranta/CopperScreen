@@ -75,7 +75,7 @@ visible and repeatable.
 The machine stays PAL OCS 8371/8362, 68000 interpreter, 512 KiB Chip plus 512 KiB
 slow RAM, no Fast RAM, RTC disabled, one read-only DF0 and a full 908×313 raster.
 Only original Disk 1 is mounted. The supplied ZIP and all three IPF entry hashes
-are retained in the [machine-readable record](COPPERSTART_WORMS_2026-10-22.json).
+are retained in the [machine-readable record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_WORMS_2026-10-22.json).
 
 | Check | Completed result |
 | --- | --- |

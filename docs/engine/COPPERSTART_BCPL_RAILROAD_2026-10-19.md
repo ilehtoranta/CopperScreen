@@ -4,7 +4,7 @@
 train purchase, a two-stop schedule, movement and the first London Crossing
 arrival. This repeats the [earlier route](COPPERSTART_RAILROAD_ROUTE_2026-10-19.md)
 with the new command ABI, startup CLI and keyboard changes. The
-[companion JSON](COPPERSTART_BCPL_RAILROAD_2026-10-19.json) records the exact ROM,
+[companion JSON](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_BCPL_RAILROAD_2026-10-19.json) records the exact ROM,
 build, tests, media, input, executable pins, captures and mode comparison.
 
 ## Guest compatibility fixes

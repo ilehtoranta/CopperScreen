@@ -379,4 +379,4 @@ validation. Only Release builds without diagnostics may be packed.
 - [Performance measurement guide](../docs/engine/PERFORMANCE.md)
 - [Build and isolated diagnostic tests](../README.md#tests-and-headless-execution)
 - [Portable native replay](../docs/NATIVE_VALIDATION.md)
-- [Historical implementation and acceptance records](../docs/history/amiga/README.md)
+- [Historical implementation and acceptance records](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/README.md)

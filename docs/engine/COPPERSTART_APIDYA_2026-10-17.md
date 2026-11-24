@@ -3,7 +3,7 @@
 The supplied SPS 764 `Apidya_Disk1.ipf` reaches options, the opening stage and
 the continue screen on the PAL OCS A500 with 512 KiB Chip plus 512 KiB slow RAM.
 Native Kickstart 1.3 is the control. No new firmware incompatibility was found
-in this bounded pass. The [evidence record](COPPERSTART_APIDYA_2026-10-17.json)
+in this bounded pass. The [evidence record](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_APIDYA_2026-10-17.json)
 identifies the media, ROM, input, binaries and local replay manifests.
 
 This ROM was freshly compiled from the same native root and frozen components

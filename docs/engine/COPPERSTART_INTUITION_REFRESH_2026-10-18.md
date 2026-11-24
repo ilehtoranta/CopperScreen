@@ -4,7 +4,7 @@ The compact native Intuition owner now implements BeginRefresh/EndRefresh and
 repairs exposed desktop and window frames through the installed Layers owner.
 It retains the standalone 512 KiB ROM and 1 MiB PAL OCS A500. See the
 [producer implementation](../../../CopperStart/Docs/NativeIntuitionRefresh.md)
-and [machine-readable evidence](COPPERSTART_INTUITION_REFRESH_2026-10-18.json).
+and [machine-readable evidence](https://github.com/ilehtoranta/CopperScreen/blob/de78b91be4f6aa1b033ed81ecf33656912cb1414/docs/engine/COPPERSTART_INTUITION_REFRESH_2026-10-18.json).
 This extends the [startup/window slice](COPPERSTART_INTUITION_STARTUP_2026-10-18.md).
 
 The exact-input qualification passes **6/6**, zero skips: one freestanding
