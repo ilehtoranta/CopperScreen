@@ -851,3 +851,46 @@ unsupported feature report. The same build without the accessory still
 showed access denied. The Release solution build passed with zero warnings.
 Engine diagnostics passed 1,427 tests and skipped seven optional native
 cases. Physical dongle signal timing and later missions remain unverified.
+
+### Arcade gyropack trials
+
+The original three-disk release selected F4 at the Arcade Action headlines
+and entered the gyropack trial by field 10,500 on CopperScreen. The HUD showed
+the objective, altitude, thrust, heading and cannon ammunition. A second
+replay switched to the external camera and exercised the pitch and bank
+controls. It completed 11,525 fields with CPU fingerprint
+`0x30E5AB522869C032`, hardware `0x38467D30EA168A75` and output
+`0x1B0E7D2987B48C9F`. WinUAE reached the same headline and the disk C cutscene.
+The independent flight comparison remains open.
+[RoboCop 3 manual](https://www.gamesdatabase.org/Media/SYSTEM/Commodore_Amiga/Manual/formated/Robocop_3_-_1992_-_Ocean_Software_Ltd..htm)
+
+## Secondary compatibility checks
+
+### Sly Spy: Secret Agent
+
+The PAL A500 check uses the two original Ocean disks, SPS 1259. The ZIP
+SHA-256 is `BB3565CDF20CDDEA1DBF2DFF7B4AE6C4C2FBACDF834A05CC3E07F37248BBD1B4`.
+The WinUAE 6.0.3 changelog associates this title with a DDFSTRT update
+while the previous value matched.
+[WinUAE changelog](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L201-L205)
+
+CopperScreen `3c98591` with Copper68k 1.5.12 passed the credits, briefing
+and opening skydiving stage. The replay pulsed port 2 fire for 12 fields
+every 450 fields from field 4,050 through 7,650. The game accepted the
+default agent number, scrolled the sky and awarded 400 points. At field
+8,000 it reported BPLCON0 `$5000`, DDFSTRT `$0038`, DDFSTOP `$00D0`
+and no unsupported feature.
+
+An independent cycle-exact WinUAE 6.1 beta 23 capture also showed 400
+points in skydiving. All 29,256 RGB samples of the equipment panel matched.
+The full HUD matched 58,620 of 58,880 samples with game timer and animation
+at different phases. The equipment panel comparison samples CopperScreen
+x=580–897, y=207–298 at WinUAE coordinates `x - 198`, `2 * y - 54`.
+The source capture SHA-256 hashes are
+`4AB3F3545CB7CEA1F26570B129001704B53D4BE1B55EC40A0B4BCD56154836CD`
+for CopperScreen and
+`EF78228DECE8DB2C001DC0F48F05F1D0AC56C89F5D04C4ABA69725921EFF7E12`
+for WinUAE. A longer CopperScreen replay used directional and fire input,
+scored 800 and drew the deployed parachute over the city at field 10,400.
+The specific rasterline behind the historical report and later stages remain
+unverified.
