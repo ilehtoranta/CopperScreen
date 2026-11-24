@@ -1,4 +1,5 @@
 using System.Buffers.Binary;
+using System.IO.Compression;
 using Microsoft.Win32.SafeHandles;
 using NLayer;
 
@@ -16,6 +17,8 @@ internal sealed class LightweightCd32DiscImage : IDisposable
     internal const int RawSectorBytes = 2352;
     private const int UserSectorBytes = 2048;
     private const int MaxSectors = 449850;
+    private const long MaxZipDiscBytes = (long)MaxSectors * RawSectorBytes + 64 * 1024 * 1024;
+    private const int MaxZipCueBytes = 1024 * 1024;
     private const int SectorsPerSecond = 75;
     private const int AudioFramesPerSector = RawSectorBytes / (2 * sizeof(short));
     private const int MaxMp3FramesPerSector = 48000 / SectorsPerSecond;
@@ -58,29 +61,167 @@ internal sealed class LightweightCd32DiscImage : IDisposable
 
     internal static LightweightCd32DiscImage Open(string path)
     {
+        var container = GetContainerPath(path);
+        if (container.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
+            return OpenZip(container, container.Length == path.Length ? null : path[(container.Length + 2)..]);
+
         var extension = Path.GetExtension(path);
-        if (extension.Equals(".cue", StringComparison.OrdinalIgnoreCase))
-            return OpenCue(path);
-        var sectorBytes = extension.Equals(".iso", StringComparison.OrdinalIgnoreCase) ? UserSectorBytes :
-            extension.Equals(".bin", StringComparison.OrdinalIgnoreCase) || extension.Equals(".img", StringComparison.OrdinalIgnoreCase)
-                ? RawSectorBytes : throw new ArgumentException("Use a Mode 1 ISO, raw BIN/IMG, or CUE disc image.", nameof(path));
-        var handle = File.OpenHandle(path, FileMode.Open, FileAccess.Read, FileShare.Read, FileOptions.RandomAccess);
+        if (!extension.Equals(".cue", StringComparison.OrdinalIgnoreCase))
+            return OpenDataImage(extension, () => OpenFile(path));
+
+        var directory = Path.GetDirectoryName(Path.GetFullPath(path))!;
+        return OpenCue(File.ReadLines(path), file => OpenFile(ResolveCueCompanion(Path.GetFullPath(file, directory))));
+    }
+
+    internal static string GetContainerPath(string path)
+    {
+        var marker = path.IndexOf(".zip#/", StringComparison.OrdinalIgnoreCase);
+        return marker < 0 ? path : path[..(marker + 4)];
+    }
+
+    private static FileStream OpenFile(string path)
+        => new(path, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 4096, FileOptions.RandomAccess);
+
+    private static int DataSectorBytes(string extension) => extension.ToUpperInvariant() switch
+    {
+        ".ISO" => UserSectorBytes,
+        ".BIN" or ".IMG" => RawSectorBytes,
+        _ => 0
+    };
+
+    private static LightweightCd32DiscImage OpenDataImage(string extension, Func<FileStream> open)
+    {
+        var sectorBytes = DataSectorBytes(extension);
+        if (sectorBytes == 0)
+            throw new ArgumentException("Use a Mode 1 ISO, raw BIN/IMG, CUE, or ZIP disc image.");
+        var file = open();
         try
         {
-            var sectors = GetSectorCount(RandomAccess.GetLength(handle), sectorBytes);
+            var handle = file.SafeFileHandle;
+            var sectors = GetSectorCount(file.Length, sectorBytes);
             if (sectorBytes == RawSectorBytes) ValidateRawDataHeader(handle, 0);
-            return new([handle], [new(handle, 0, 0, sectorBytes)], sectors, [new(1, 0, 0, false)]);
+            return new([file], [new(handle, 0, 0, sectorBytes)], sectors, [new(1, 0, 0, false)]);
         }
         catch
         {
-            handle.Dispose();
+            file.Dispose();
             throw;
         }
     }
 
-    private static LightweightCd32DiscImage OpenCue(string cuePath)
+    private static LightweightCd32DiscImage OpenZip(string archivePath, string? selector)
     {
-        var directory = Path.GetDirectoryName(Path.GetFullPath(cuePath))!;
+        using var archive = ZipFile.OpenRead(archivePath);
+        var files = archive.Entries.Where(e => e.Name.Length != 0).ToArray();
+        var selected = selector is null ? SelectDisc() : FindEntry(NormalizeZipPath(selector));
+        var selectedName = EntryName(selected);
+        var extension = Path.GetExtension(selectedName);
+        var buffer = new byte[64 * 1024];
+        long totalBytes = 0;
+        if (!extension.Equals(".cue", StringComparison.OrdinalIgnoreCase))
+            return OpenDataImage(extension, () => StageEntry(selected));
+
+        if (selected.Length > MaxZipCueBytes)
+            throw new InvalidDataException("The CUE sheet in the ZIP archive is larger than 1 MiB.");
+        using var cue = new StreamReader(StageEntry(selected));
+        var directory = selectedName[..(selectedName.LastIndexOf('/') + 1)];
+        return OpenCue(ReadLines(), file => StageEntry(FindEntry(NormalizeZipPath(file, directory))));
+
+        ZipArchiveEntry SelectDisc()
+        {
+            var candidates = ListZipDiscs(files);
+            if (candidates.Length != 1)
+                throw new InvalidDataException("Select one CD32 disc with archive.zip#/path/to/disc.cue.");
+            return candidates[0];
+        }
+
+        IEnumerable<string> ReadLines()
+        {
+            while (cue.ReadLine() is { } line) yield return line;
+        }
+
+        ZipArchiveEntry FindEntry(string name)
+        {
+            var matching = files.Where(e => EntryName(e).Equals(name, StringComparison.OrdinalIgnoreCase)).ToArray();
+            var exact = matching.Where(e => EntryName(e).Equals(name, StringComparison.Ordinal)).ToArray();
+            if (exact.Length == 1) return exact[0];
+            if (matching.Length == 1) return matching[0];
+            if (matching.Length == 0) throw new InvalidDataException($"The ZIP archive is missing '{name}'.");
+            throw new InvalidDataException($"The ZIP entry name is ambiguous: '{name}'.");
+        }
+
+        FileStream StageEntry(ZipArchiveEntry entry)
+        {
+            var remaining = entry.Length;
+            if (remaining < 0 || remaining > MaxZipDiscBytes - totalBytes)
+                throw new InvalidDataException("The unpacked ZIP disc exceeds the supported size.");
+
+            // ZIP deflate streams do not support random access. The drive owns
+            // anonymous temporary backing for the lifetime of the mounted disc.
+            var tempPath = Path.Combine(Path.GetTempPath(), $"copperscreen-cd32-{Guid.NewGuid():N}.tmp");
+            var temp = new FileStream(tempPath, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None,
+                bufferSize: 4096, FileOptions.DeleteOnClose | FileOptions.RandomAccess);
+            try
+            {
+                if (!OperatingSystem.IsWindows()) File.Delete(tempPath);
+                using var input = entry.Open();
+                while (remaining != 0)
+                {
+                    var chunk = buffer.AsSpan(0, (int)Math.Min(remaining, buffer.Length));
+                    input.ReadExactly(chunk);
+                    temp.Write(chunk);
+                    remaining -= chunk.Length;
+                }
+                if (input.ReadByte() != -1)
+                    throw new InvalidDataException("A ZIP entry exceeds its declared size.");
+                temp.Position = 0;
+                totalBytes += entry.Length;
+                return temp;
+            }
+            catch
+            {
+                temp.Dispose();
+                throw;
+            }
+        }
+    }
+
+    internal static string[] ListZipDiscNames(string path)
+    {
+        using var archive = ZipFile.OpenRead(path);
+        return ListZipDiscs(archive.Entries).Select(EntryName).ToArray();
+    }
+
+    private static ZipArchiveEntry[] ListZipDiscs(IEnumerable<ZipArchiveEntry> entries)
+    {
+        var files = entries.Where(e => e.Name.Length != 0).ToArray();
+        var cues = files.Where(e => Path.GetExtension(e.Name).Equals(".cue", StringComparison.OrdinalIgnoreCase)).ToArray();
+        return cues.Length != 0 ? cues : files.Where(e => DataSectorBytes(Path.GetExtension(e.Name)) != 0).ToArray();
+    }
+
+    private static string EntryName(ZipArchiveEntry entry) => entry.FullName.Replace('\\', '/');
+
+    private static string NormalizeZipPath(string file, string directory = "")
+    {
+        file = file.Replace('\\', '/');
+        if (file.Length == 0 || file.StartsWith('/') || file.Contains(':'))
+            throw new InvalidDataException("CD32 ZIP entry names must be relative to the archive.");
+        var parts = new List<string>();
+        foreach (var part in (directory + file).Split('/', StringSplitOptions.RemoveEmptyEntries))
+        {
+            if (part == ".") continue;
+            if (part == "..")
+            {
+                if (parts.Count == 0) throw new InvalidDataException("A CD32 ZIP path leaves the archive.");
+                parts.RemoveAt(parts.Count - 1);
+            }
+            else parts.Add(part);
+        }
+        return string.Join('/', parts);
+    }
+
+    private static LightweightCd32DiscImage OpenCue(IEnumerable<string> lines, Func<string, FileStream> open)
+    {
         var files = new List<IDisposable>();
         var sources = new List<TrackSource>();
         var tracks = new List<Track>();
@@ -96,7 +237,7 @@ internal sealed class LightweightCd32DiscImage : IDisposable
         int? pregap = null;
         try
         {
-            foreach (var line in File.ReadLines(cuePath))
+            foreach (var line in lines)
             {
                 var fields = line.Split([' ', '\t'], StringSplitOptions.RemoveEmptyEntries);
                 var complete = number == tracks.Count + fileTracks.Count;
@@ -114,7 +255,7 @@ internal sealed class LightweightCd32DiscImage : IDisposable
                         var file = description[fields[0].Length..^fields[^1].Length].Trim();
                         if (file.Length >= 2 && file[0] == '"' && file[^1] == '"')
                             file = file[1..^1];
-                        path = Path.GetFullPath(file.ToString(), directory);
+                        path = file.ToString();
                         break;
                     case "TRACK":
                         if (path is null || !complete || fields.Length != 3 ||
@@ -165,7 +306,8 @@ internal sealed class LightweightCd32DiscImage : IDisposable
             if (path is null || fileTracks.Count == 0 || number != tracks.Count + fileTracks.Count)
                 throw new InvalidDataException("Each CUE file needs a complete track layout.");
 
-            path = ResolveCueCompanion(path);
+            var input = open(path);
+            files.Add(input);
             SafeFileHandle? handle = null;
             MpegFile? decoder = null;
             long offset = 0;
@@ -173,8 +315,6 @@ internal sealed class LightweightCd32DiscImage : IDisposable
             int sectors;
             if (mp3)
             {
-                var input = File.OpenRead(path);
-                files.Add(input);
                 decoder = new MpegFile(input);
                 if (decoder.SampleRate is not (44100 or 48000) || decoder.Channels is < 1 or > 2)
                     throw new InvalidDataException("CD audio MP3 files require 44.1 or 48 kHz mono or stereo audio.");
@@ -186,9 +326,8 @@ internal sealed class LightweightCd32DiscImage : IDisposable
             }
             else
             {
-                handle = File.OpenHandle(path, FileMode.Open, FileAccess.Read, FileShare.Read, FileOptions.RandomAccess);
-                files.Add(handle);
-                var length = RandomAccess.GetLength(handle);
+                handle = input.SafeFileHandle;
+                var length = input.Length;
                 if (wave)
                 {
                     (offset, length) = ReadWaveData(handle, length);

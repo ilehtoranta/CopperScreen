@@ -76,7 +76,7 @@ internal sealed partial class MainWindow
     private Task RestartAmigaAsync()
     {
         if (_runtime == null || _applyingSettings || _checkingDiskChanges) return Task.CompletedTask;
-        return _settingsDraft.NeedsRestartComparedWith(_committedSettings)
+        return !_runtime.IsCd32 && _settingsDraft.NeedsRestartComparedWith(_committedSettings)
             ? StartRuntimeFromSettingsAsync()
             : ResetRuntimeAsync();
     }

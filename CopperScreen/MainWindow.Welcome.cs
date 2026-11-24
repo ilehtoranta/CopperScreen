@@ -77,11 +77,14 @@ internal sealed partial class MainWindow
         var whdLoad = CreatePanelButton("Open WHDLoad…", () => _ = OpenWhdLoadAsync());
         whdLoad.Background = Brushes.Transparent;
         whdLoad.BorderBrush = QuietBorder;
+        var cd32 = CreatePanelButton("CD32 (Experimental)…", () => _ = OpenCd32LauncherAsync());
+        cd32.Background = Brushes.Transparent;
+        cd32.BorderBrush = QuietBorder;
         content.Children.Add(new WrapPanel
         {
             ItemSpacing = 6,
             LineSpacing = 6,
-            Children = { _welcomeStart, customise, diskManager, whdLoad }
+            Children = { _welcomeStart, customise, diskManager, whdLoad, cd32 }
         });
         _welcomeProfiles = new ComboBox { HorizontalAlignment = HorizontalAlignment.Stretch };
         AutomationProperties.SetName(_welcomeProfiles, "Saved launch profiles");

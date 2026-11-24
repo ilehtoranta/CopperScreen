@@ -71,6 +71,7 @@ internal sealed partial class MainWindow
             Grid.SetRow(_primaryDiskCombo, side ? 1 : 0);
             Grid.SetColumn(_mediaActions, side ? 0 : 2);
             Grid.SetRow(_mediaActions, side ? 2 : 0);
+            LayoutCd32MediaControls(side);
             foreach (var tile in _driveTiles)
             {
                 tile.Width = side ? SideControlsWidth - 24 : 136;
@@ -251,6 +252,8 @@ internal sealed partial class MainWindow
         var disks = _diskContents = new StackPanel { Spacing = 8 };
         disks.Children.Add(media);
         disks.Children.Add(CreateDriveStrip());
+        _cd32Media = CreateCd32MediaControls();
+        disks.Children.Add(_cd32Media);
         disks.Children.Add(_mediaFeedback);
         _toolbarLayout = new Grid { RowDefinitions = new RowDefinitions("Auto,Auto") };
         _toolbarLayout.Children.Add(new Border { Padding = new Thickness(12, 8), Child = _toolbarCommands });
@@ -387,15 +390,18 @@ internal sealed partial class MainWindow
         // Frame presentation may trail a completed pause/reset command.
         var sessionState = _runtime?.CurrentState ?? state;
         var running = _runtime != null;
+        var cd32 = _runtime?.IsCd32 == true;
+        _primaryMedia.IsVisible = !cd32;
+        UpdateCd32MediaControls(cd32, sessionState.Cd32DiscPath);
         if (!running && _restartNotice != null) _restartNotice.IsVisible = false;
         var sessionChanged = _sessionCommands.IsVisible != running;
         _sessionCommands.IsVisible = running;
         _pauseButton.IsVisible = _restartButton.IsVisible = running;
         _pauseButton.IsEnabled = running && state.FaultMessage == null && !_settingsVisible && !_applyingSettings && !_checkingDiskChanges;
         _restartButton.IsEnabled = _stopButton.IsEnabled = running && !_settingsVisible && !_applyingSettings && !_checkingDiskChanges;
-        if (running && _settingsDraft.NeedsRestartComparedWith(_committedSettings))
+        if (running && !cd32 && _settingsDraft.NeedsRestartComparedWith(_committedSettings))
             _restartButton.IsEnabled &= _restartNoticeButton != null && _restartNoticeButton.IsEnabled;
-        var workspace = CopperOsWorkspace.IsWorkspace(_committedSettings.DriveDiskPaths[0]);
+        var workspace = !cd32 && CopperOsWorkspace.IsWorkspace(_committedSettings.DriveDiskPaths[0]);
         _exportWorkspaceButton.IsVisible = running && workspace;
         _exportWorkspaceButton.IsEnabled = !_applyingSettings && !_checkingDiskChanges;
         _releaseInputButton.IsEnabled = running;
@@ -427,9 +433,9 @@ internal sealed partial class MainWindow
         _muteButton.Content = _outputMuted ? "Unmute" : "Mute";
         _volumeButton.IsEnabled = _muteButton.IsEnabled = !_settingsVisible;
         AutomationProperties.SetName(_muteButton, _muteButton.Content.ToString()!);
-        _sessionStatus.Text = !running ? "Ready when you are" : sessionState.FaultMessage != null ? "Stopped" : sessionState.IsPaused ? "Paused" : "Running · " + MachineName(_committedSettings);
+        _sessionStatus.Text = !running ? "Ready when you are" : sessionState.FaultMessage != null ? "Stopped" : sessionState.IsPaused ? "Paused" : "Running · " + (cd32 ? sessionState.ProfileName : MachineName(_committedSettings));
         _sessionStatus.Foreground = sessionState.IsPaused ? Accent : MutedText;
-        _captureStatus.Text = !running ? "" : _mouseGrabActive ? "Mouse captured · F10 to release" : workspace ? "CopperOS: type Demo at the Shell prompt · F10 releases input · More for help/export" : WindowState == WindowState.FullScreen ? "F11 controls · Alt+Enter windowed" : _inputOptions.IsMousePort(0) ? "Click display to capture mouse · F1 help" : "Inputs: switch devices and view controls · F1 help";
+        _captureStatus.Text = !running ? "" : _mouseGrabActive ? "Mouse captured · F10 to release" : cd32 ? "Primary fire maps to Red · secondary fire maps to Blue" : workspace ? "CopperOS: type Demo at the Shell prompt · F10 releases input · More for help/export" : WindowState == WindowState.FullScreen ? "F11 controls · Alt+Enter windowed" : _inputOptions.IsMousePort(0) ? "Click display to capture mouse · F1 help" : "Inputs: switch devices and view controls · F1 help";
         _captureStatus.Foreground = _mouseGrabActive ? Accent : MutedText;
         if (!_toolbar.IsVisible && WindowState != WindowState.FullScreen)
             _captureStatus.Text += " · F11 controls";

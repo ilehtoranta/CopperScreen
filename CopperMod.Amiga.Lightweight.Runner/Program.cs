@@ -13,7 +13,8 @@ if (args.Contains("--help"))
         --cd32 [--video-standard <pal|ntsc>] --rom <40.60 or combined CD32 ROM>
           Experimental CD32. For split ROMs add --extended-rom <path>. --fast-ram-kib adds optional Zorro II Fast RAM.
           Use --nvram <path> for persistent saves.
-          --cd <image> mounts Mode 1 ISO/BIN/IMG and CUE sheets with binary, PCM WAVE or MP3 tracks. --cd-turbo accelerates data reads.
+          --cd <image> mounts Mode 1 ISO/BIN/IMG, CUE, or ZIP containing a disc and its tracks.
+          Use archive.zip#/path/to/disc.cue when a ZIP contains multiple discs. --cd-turbo accelerates data reads.
         --hdf-ffs <existing-image> <DEVICE:HEADS:BLOCKS-PER-TRACK:FIRST-CYLINDER:LAST-CYLINDER>
           One explicit FFS/DOS1 partition, 512-byte blocks, inclusive cylinders; TD64 supports offsets above 4 GiB.
           Read-only by default. Use --hdf-ffs-writable to allow direct backing-file writes.
@@ -294,8 +295,9 @@ if (cd32)
         throw new ArgumentException("--cd32 requires a verified --rom or a synthetic workload.");
     if (syntheticRom && (romPath is not null || extendedRomPath is not null))
         throw new ArgumentException("Choose either native CD32 ROMs or a synthetic workload.");
-    if (nvramPath is not null && (PathsEqual(nvramPath, romPath) ||
-        PathsEqual(nvramPath, extendedRomPath) || PathsEqual(nvramPath, cdPath) || PathsEqual(nvramPath, inputScriptPath)))
+    if (nvramPath is not null && (PathsEqual(nvramPath, romPath) || PathsEqual(nvramPath, extendedRomPath) ||
+        (cdPath is not null && PathsEqual(nvramPath, LightweightCd32DiscImage.GetContainerPath(cdPath))) ||
+        PathsEqual(nvramPath, inputScriptPath)))
         throw new ArgumentException("--nvram must specify a separate file.");
     var stock = LightweightA500Configuration.CreateCd32(cd32Ntsc == true ? LightweightCd32Region.Ntsc : LightweightCd32Region.Pal);
     if (fastRamKiB > 8192) throw new ArgumentException("CD32 supports up to 8 MiB of Fast RAM.");

@@ -90,7 +90,10 @@ public sealed partial class LightweightA500Machine
     }
     public void MarkCd32NvramSaved() => RequireAkiko().Eeprom.MarkSaved();
 
-    /// <summary>Mount a read-only Mode 1 image or CUE disc. A failed open preserves the current disc.</summary>
+    /// <summary>List selectable CD32 disc entries in a ZIP without opening their contents.</summary>
+    public static IReadOnlyList<string> ListCd32ArchiveDiscs(string path) => LightweightCd32DiscImage.ListZipDiscNames(path);
+
+    /// <summary>Mount a read-only Mode 1 or CUE disc, either standalone or in a ZIP. A failed open preserves the current disc.</summary>
     public void MountCd32Image(string path)
     {
         var drive = RequireAkiko().Cd;

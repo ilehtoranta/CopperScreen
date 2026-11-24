@@ -2752,19 +2752,9 @@ internal sealed partial class MainWindow : Window
 				previous.HostClipboardTextChanged -= PublishGuestClipboardText;
 				previous.HostClipboardImageChanged -= PublishGuestClipboardImage;
 			}
-			ReleaseInteractiveInput();
-			DisableCrtPhosphorPresentation();
 			_settingsDraft.ClearRestartRequired();
 			_committedSettings = _settingsDraft.Clone();
-			ApplyCommittedHostSettings();
-			_runtime.FramePublished += QueueFramePresentation;
-			_runtime.HostClipboardTextChanged += PublishGuestClipboardText;
-			_runtime.HostClipboardImageChanged += PublishGuestClipboardImage;
-			_latestState = _runtime.CurrentState;
-			_lastSeenFrameNumber = 0;
-			_presentedFrames = 0;
-			_runtime.Start(paused: wasPaused);
-			_latestState = _runtime.CurrentState;
+			StartAttachedRuntime(_runtime, wasPaused);
 			RememberCurrentSession();
 			CloseSettingsAfterApply();
 			_ = QueueHostClipboardTextAsync();
@@ -2775,6 +2765,21 @@ internal sealed partial class MainWindow : Window
 		catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or NotSupportedException or IOException or InvalidDataException or UnauthorizedAccessException or OverflowException)
 		{ SetSettingsError(ex.Message); }
 		finally { _applyingSettings = false; UpdateSettingsStatus(); }
+	}
+
+	private void StartAttachedRuntime(CopperScreenRuntime runtime, bool wasPaused)
+	{
+		ReleaseInteractiveInput();
+		DisableCrtPhosphorPresentation();
+		ApplyCommittedHostSettings();
+		runtime.FramePublished += QueueFramePresentation;
+		runtime.HostClipboardTextChanged += PublishGuestClipboardText;
+		runtime.HostClipboardImageChanged += PublishGuestClipboardImage;
+		_latestState = runtime.CurrentState;
+		_lastSeenFrameNumber = 0;
+		_presentedFrames = 0;
+		runtime.Start(paused: wasPaused);
+		_latestState = runtime.CurrentState;
 	}
 
     private CopperScreenSettingsDraft ReadSettingsDraft()

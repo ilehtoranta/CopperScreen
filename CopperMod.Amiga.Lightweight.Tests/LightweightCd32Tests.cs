@@ -1,4 +1,5 @@
 using System.Buffers.Binary;
+using System.IO.Compression;
 using Copper68k;
 using Xunit;
 
@@ -553,6 +554,76 @@ public sealed class LightweightCd32Tests
             File.Delete(bin);
             directory.Delete();
         }
+    }
+
+    [Fact]
+    public void ZipPrefersTheCueAndReadsItsCompanionsWithoutOpeningLooseFiles()
+    {
+        var path = Path.Combine(Path.GetTempPath(), $"copper-cd32-{Guid.NewGuid():N}.zip");
+        try
+        {
+            using (var zip = ZipFile.Open(path, ZipArchiveMode.Create))
+            {
+                using (var cue = new StreamWriter(zip.CreateEntry("game/boot.cue").Open()))
+                    cue.Write("""
+                        FILE "media\DATA.ISO" BINARY
+                          TRACK 01 MODE1/2048
+                            INDEX 01 00:00:00
+                        FILE "../music/track.bin" BINARY
+                          TRACK 02 AUDIO
+                            PREGAP 00:00:01
+                            INDEX 01 00:00:00
+                        """);
+                var data = new byte[2 * 2048];
+                data[2048] = 0xA5;
+                using (var entry = zip.CreateEntry("game/media/data.iso").Open()) entry.Write(data);
+                var audio = new byte[LightweightCd32DiscImage.RawSectorBytes];
+                audio[0] = 0x5A;
+                using (var entry = zip.CreateEntry("music/track.bin").Open()) entry.Write(audio);
+            }
+
+            Assert.Equal(["game/boot.cue"], LightweightA500Machine.ListCd32ArchiveDiscs(path));
+            using var disc = LightweightCd32DiscImage.Open(path);
+            using var iso = LightweightCd32DiscImage.Open(path + "#/game/media/data.iso");
+            File.Delete(path);
+            Assert.Equal(2, iso.SectorCount);
+            Assert.Equal(4, disc.SectorCount);
+            Assert.Equal(new LightweightCd32DiscImage.Track(2, 3, 2, true), disc.GetTrack(3));
+            var buffer = new byte[LightweightCd32DiscImage.RawSectorBytes];
+            Assert.True(disc.Request(3));
+            Assert.True(disc.CopyRequestedSector(buffer));
+            Assert.Equal(0x5A, buffer[0]);
+            Assert.True(disc.Request(1));
+            Assert.True(disc.CopyRequestedSector(buffer));
+            Assert.Equal(0xA5, buffer[16]);
+        }
+        finally { File.Delete(path); }
+    }
+
+    [Fact]
+    public void ZipWithMultipleDiscsRequiresSelectionAndRejectsReferencesOutsideTheArchive()
+    {
+        var path = Path.Combine(Path.GetTempPath(), $"copper-cd32-{Guid.NewGuid():N}.zip");
+        try
+        {
+            using (var zip = ZipFile.Open(path, ZipArchiveMode.Create))
+            {
+                foreach (var name in new[] { "first.cue", "second.cue" })
+                {
+                    using var cue = new StreamWriter(zip.CreateEntry(name).Open());
+                    cue.Write("""
+                        FILE "../disc.iso" BINARY
+                          TRACK 01 MODE1/2048
+                            INDEX 01 00:00:00
+                        """);
+                }
+            }
+            Assert.Equal(["first.cue", "second.cue"], LightweightA500Machine.ListCd32ArchiveDiscs(path));
+            Assert.Contains("Select one", Assert.Throws<InvalidDataException>(() => LightweightCd32DiscImage.Open(path)).Message);
+            Assert.Contains("leaves the archive", Assert.Throws<InvalidDataException>(() =>
+                LightweightCd32DiscImage.Open(path + "#/first.cue")).Message);
+        }
+        finally { File.Delete(path); }
     }
 
     [Theory]

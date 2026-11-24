@@ -77,6 +77,36 @@ public sealed partial class LaunchWorkflowTests
         finally { window.Close(); }
     });
 
+    [Fact]
+    public Task ExperimentalCd32LaunchOffersDiscAndSplitRomWithoutChangingTheComputerSetup() => UiAsync(async () =>
+    {
+        var window = new MainWindow([], new CopperScreenRecentSession(_root));
+        window.Show();
+        try
+        {
+            var model = Named<ComboBox>(window, "Amiga model");
+            var originalModel = model.SelectedIndex;
+            Click(Button(window, "CD32 (Experimental)…"));
+            await Until(() => window.OwnedWindows.Any(w => w.Title == "Launch CD32 (Experimental)"));
+            var dialog = window.OwnedWindows.Single(w => w.Title == "Launch CD32 (Experimental)");
+            var fields = dialog.GetLogicalDescendants().OfType<TextBox>().Select(AutomationProperties.GetName).ToArray();
+            Assert.Contains("CD32 Kickstart 40.60 or combined ROM", fields);
+            Assert.Contains("CD32 extended ROM (for split ROMs)", fields);
+            Assert.Contains("CD32 disc (optional)", fields);
+            var buttons = dialog.GetLogicalDescendants().OfType<Button>().ToArray();
+            Click(buttons.Single(b => Equals(b.Content, "Start CD32")));
+            Assert.Contains(dialog.GetLogicalDescendants().OfType<TextBlock>(), t => t.Text == "Choose a CD32 Kickstart ROM.");
+            Click(buttons.Single(b => Equals(b.Content, "Cancel")));
+            await Until(() => !dialog.IsVisible);
+            Assert.Equal(originalModel, model.SelectedIndex);
+        }
+        finally
+        {
+            foreach (var dialog in window.OwnedWindows.Where(w => w.Title == "Launch CD32 (Experimental)").ToArray()) dialog.Close();
+            window.Close();
+        }
+    });
+
     [CopperStartFact]
     public Task SelectingCopperStartResetsUnsupportedHardwareAndKeepsTheOriginalDraftIndependent() => Ui(() =>
     {

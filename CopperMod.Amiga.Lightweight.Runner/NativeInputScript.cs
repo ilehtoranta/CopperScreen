@@ -43,7 +43,7 @@ internal sealed class NativeInputScript
                 {
                     if (entry.EjectCd || string.IsNullOrWhiteSpace(entry.CdPath))
                         throw new ArgumentException("Use separate, nonempty CD mount and eject entries.");
-                    _cdPaths[i] = Path.GetFullPath(entry.CdPath, directory);
+                    _cdPaths[i] = ResolveMediaPath(entry.CdPath, directory);
                 }
             }
             if (entry.AdfPath is not null && entry.DiskPath is not null)
@@ -54,14 +54,17 @@ internal sealed class NativeInputScript
                     throw new ArgumentException("Use separate, nonempty mount and eject entries.");
                 // File/ZIP reading is outside execution. Mount-time track encoding
                 // is still excluded from acceptance timing by the runner's guard.
-                // A ZIP selector is not part of the host filesystem path. In
-                // particular, Windows would turn its #/ delimiter into #\.
-                var selector = mediaPath.IndexOf("#/", StringComparison.Ordinal);
-                var resolvedPath = selector < 0 ? Path.GetFullPath(mediaPath, directory) :
-                    Path.GetFullPath(mediaPath[..selector], directory) + mediaPath[selector..];
-                _media[i] = LightweightFloppyImage.Prepare(readAdf(resolvedPath), mediaPath);
+                _media[i] = LightweightFloppyImage.Prepare(readAdf(ResolveMediaPath(mediaPath, directory)), mediaPath);
             }
         }
+    }
+
+    private static string ResolveMediaPath(string path, string directory)
+    {
+        // Normalize the host path without rewriting the archive's #/ delimiter.
+        var selector = path.IndexOf("#/", StringComparison.Ordinal);
+        return selector < 0 ? Path.GetFullPath(path, directory) :
+            Path.GetFullPath(path[..selector], directory) + path[selector..];
     }
 
     internal bool ChangesMediaBetween(int firstFrame, int endFrame)

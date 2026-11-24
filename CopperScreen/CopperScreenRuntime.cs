@@ -84,6 +84,7 @@ internal readonly record struct CopperScreenState(
 {
 	public double FieldMilliseconds { get; init; }
 	public string? FaultMessage { get; init; }
+	public string? Cd32DiscPath { get; init; }
 	public int FramebufferWidth { get; init; }
 	public int FramebufferHeight { get; init; }
 	public CopperScreenPresentationGeometry PresentationGeometry { get; init; }
@@ -240,8 +241,16 @@ internal sealed class CopperScreenRuntime : IDisposable
 		=> Create(CopperScreenStartupOptions.Parse(args, baseDirectory));
 
     public static CopperScreenRuntime Create(CopperScreenStartupOptions startupOptions, CopperScreenRuntime? previous = null)
+		=> Create(CopperScreenSession.Create(startupOptions, previous?._emulator));
+
+    internal static CopperScreenRuntime CreateCd32(CopperScreenCd32Launch launch, CopperScreenInputOptions input,
+        string baseDirectory, string nvramPath)
+        => Create(new CopperScreenLightweightSession(launch, input, baseDirectory, nvramPath));
+
+    internal bool IsCd32 => _emulator is CopperScreenLightweightSession { IsCd32: true };
+
+	private static CopperScreenRuntime Create(ICopperScreenSession emulator)
 	{
-        var emulator = CopperScreenSession.Create(startupOptions, previous?._emulator);
 		try
 		{
 			var audio = MiniaudioAudioOutput.TryCreate(
@@ -643,6 +652,15 @@ internal sealed class CopperScreenRuntime : IDisposable
 			var ejected = emulator.EjectDisk(driveIndex);
 			return new CopperScreenCommandResult(ejected, emulator.StatusText, CaptureState(0, _audio?.QueuedBufferCount ?? 0));
 		});
+
+    internal Task<CopperScreenCommandResult> ChangeCd32DiscAsync(string? path) => EnqueueAsync(emulator =>
+    {
+        if (emulator is not CopperScreenLightweightSession { IsCd32: true } session)
+            throw new InvalidOperationException("Start a CD32 session to mount a CD.");
+        if (path is null) session.EjectCd32Disc();
+        else session.MountCd32Disc(path);
+        return new CopperScreenCommandResult(true, session.StatusText, CaptureState(0, _audio?.QueuedBufferCount ?? 0));
+    });
 
     public Task<CopperScreenCommandResult> DiscardPersistentStorageAsync() => EnqueueAsync(emulator =>
     {
@@ -1326,6 +1344,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 		{
 			FieldMilliseconds = DisplayFrameMilliseconds,
 			FaultMessage = _emulator.FaultMessage,
+			Cd32DiscPath = (_emulator as CopperScreenLightweightSession)?.Cd32DiscPath,
 			FramebufferWidth = _emulator.Width, FramebufferHeight = _emulator.Height,
 			PresentationGeometry = _emulator.PresentationGeometry
 		};

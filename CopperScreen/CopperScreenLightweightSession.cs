@@ -11,6 +11,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     private readonly bool _bundledMini;
     private readonly bool _copperStart;
     private readonly CopperOsWorkspace? _workspace;
+    private readonly string? _cd32NvramPath;
     private int _checkpointFields;
     private bool _disposed;
     private bool _workspaceSaveFailed, _discardWorkspaceChanges;
@@ -22,6 +23,34 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     private readonly CopperScreenAdfImage?[] _pendingAdf = new CopperScreenAdfImage?[4];
     private readonly int[] _insertDelay = new int[4];
     private readonly string?[] _diskPaths = new string?[4];
+
+    internal CopperScreenLightweightSession(CopperScreenCd32Launch launch, CopperScreenInputOptions input,
+        string baseDirectory, string nvramPath)
+    {
+        BaseDirectory = baseDirectory;
+        _driveTypes = [];
+        _inputOptions = input;
+        FloppyDriveAudioOptions = FloppyDriveAudioOptions.Default with { Enabled = false };
+        _cd32NvramPath = nvramPath;
+        ProfileName = $"CD32 {launch.Region.ToString().ToUpperInvariant()} (Experimental)";
+        _machine = new LightweightA500Machine(LightweightA500Configuration.CreateCd32(launch.Region) with
+        {
+            FastRamBytes = checked(launch.FastRamKiB * 1024)
+        });
+        try
+        {
+            var kickstart = ReadRom(launch.KickstartPath);
+            var extension = launch.ExtendedRomPath is { } path ? ReadRom(path) : [];
+            _machine.LoadCd32Rom(kickstart, extension);
+            if (File.Exists(nvramPath)) _machine.LoadCd32Nvram(File.ReadAllBytes(nvramPath));
+            if (launch.DiscPath is { } disc) MountCd32Disc(disc);
+            ResetHostState();
+        }
+        catch { _machine.Dispose(); throw; }
+
+        static byte[] ReadRom(string path) => CopperScreenKickstartRomArchive.ReadRomImage(
+            path, CopperScreenKickstartSource.KickstartRom, KickstartVersion.Kickstart31);
+    }
 
     public CopperScreenLightweightSession(CopperScreenStartupOptions options, CopperScreenLightweightSession? previous = null)
     {
@@ -57,7 +86,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
                 Hardfiles = options.HardDrives.Select(h => new CopperDisk.AmigaHardfileConfiguration(h.Unit, h.Path, h.ReadOnly, h.CreateSizeBytes, (CopperDisk.AmigaHardfileMountMode)h.Mode, ConvertPartition(h.Partition)) { SparseStorage = h.SparseStorage }).ToArray(),
                 HostDirectories = options.HostDirectories };
         if (previous is not null && !previous.IsPaused) throw new InvalidOperationException("Pause before preparing a replacement machine.");
-        _machine = previous?._machine.CreateRestartCandidate(configuration) ?? new(configuration);
+        _machine = previous is { IsCd32: false } ? previous._machine.CreateRestartCandidate(configuration) : new(configuration);
         try
         {
             if (_copperStart && CopperOsWorkspace.IsWorkspace(options.DriveDiskPaths[0]))
@@ -285,6 +314,22 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public bool IsPrimaryFirePressed => (_mouseButtons & 1) != 0 || ((_joystick0 | _joystick1) & 16) != 0 || _fireFrames > 0;
     public bool AudioFilterEnabled => _machine.AudioFilterControlEnabled;
     internal LightweightA500Machine Machine => _machine;
+    internal bool IsCd32 => _cd32NvramPath != null;
+    internal string? Cd32DiscPath { get; private set; }
+
+    internal void MountCd32Disc(string path)
+    {
+        _machine.MountCd32Image(path);
+        Cd32DiscPath = path;
+        SetStatusText("Mounted " + CopperScreenDiskImageArchive.GetDisplayName(path));
+    }
+
+    internal void EjectCd32Disc()
+    {
+        _machine.EjectCd32Disc();
+        Cd32DiscPath = null;
+        SetStatusText("CD ejected");
+    }
     internal string? WorkspaceSeedPairId => _workspace?.PairId;
 
     public int AudioFramesPerAppFrame(int sampleRate)
@@ -501,7 +546,9 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         Framebuffer = new int[Width * Height];
         Array.Fill(Framebuffer, unchecked((int)0xFF000000));
         ApplyInput();
-        StatusText = _workspace != null ? "CopperOS workspace - changes saved automatically"
+        if (IsCd32) UpdateCd32Pads();
+        StatusText = IsCd32 ? ProfileName
+            : _workspace != null ? "CopperOS workspace - changes saved automatically"
             : _bundledMini ? ProfileName
             : _copperStart ? CopperScreenCopperStartRom.DescriptionFor(_machine.IsAga)
             : _machine.IsAga ? "Amiga 1200 (experimental) — native Kickstart 3.0, initial AGA display"
@@ -531,9 +578,29 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
         var value = (byte)((up ? 1 : 0) | (down ? 2 : 0) | (left ? 4 : 0) | (right ? 8 : 0) | (primary ? 16 : 0) | (secondary ? 32 : 0));
         if (port == 0) _joystick0 = value; else _joystick1 = value;
         ApplyInput();
+        if (IsCd32) UpdateCd32Pad(port, value);
     }
     public void SetInputOptions(CopperScreenInputOptions options)
-    { ValidateInput(options); _inputOptions = options; _joystick0 = _joystick1 = _mouseButtons = 0; ApplyInput(); }
+    {
+        ValidateInput(options);
+        _inputOptions = options;
+        _joystick0 = _joystick1 = _mouseButtons = 0;
+        ApplyInput();
+        if (IsCd32) UpdateCd32Pads();
+    }
+
+    private void UpdateCd32Pads()
+    {
+        UpdateCd32Pad(0, _joystick0);
+        UpdateCd32Pad(1, _joystick1);
+    }
+
+    private void UpdateCd32Pad(int port, byte joystick)
+    {
+        var buttons = (joystick & 16) != 0 ? LightweightCd32Buttons.Red : LightweightCd32Buttons.None;
+        if ((joystick & 32) != 0) buttons |= LightweightCd32Buttons.Blue;
+        _machine.SetCd32PadButtons(port, _inputOptions.IsMousePort(port) ? null : buttons);
+    }
     public void SetPresentationOptions(CopperScreenPresentationOptions options) { /* Host presenter owns these options. */ }
     public void KeyDown(AmigaRawKey key) => _machine.SetKeyState((byte)key, true);
     public void KeyUp(AmigaRawKey key) => _machine.SetKeyState((byte)key, false);
@@ -547,6 +614,12 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
     public void SavePersistentStorage()
     {
         _machine.FlushPersistentStorage();
+        if (_cd32NvramPath is { } nvramPath && _machine.IsCd32NvramDirty)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(nvramPath)!);
+            CopperScreenAtomicFile.Write(nvramPath, _machine.Cd32Nvram.Span, overwrite: true);
+            _machine.MarkCd32NvramSaved();
+        }
         if (_workspace == null) return;
         var paused = IsPaused;
         try
