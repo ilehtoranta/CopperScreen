@@ -344,8 +344,38 @@ build's CPU, hardware and output fingerprints.
 The original code at `$0003ADF0` writes the longword `$000532B6` to
 BLTAPTH and BLTAPTL after writing `$8818` to BLTSIZE. The code bytes
 at that address also match the WinUAE memory dump from the original
-disks. A cycle-aligned trace of the pointer write and in-flight source
-read is still needed to compare their ordering.
+disks.
+
+### Pointer writeback during an accepted area transfer
+
+A WinUAE 6.1 beta 23 watchpoint stopped on the `$32B6` write to
+BLTAPTL. The CPU write overlaps the address phase of an A transfer
+from `$000532C0`. WinUAE then reads `$000532C2` and `$000532C4`.
+CopperScreen also read `$000532C0` first, but then read `$000532B8`
+and `$000532BA` because it added the increment to the new pointer
+value from the CPU. The DMA output phase now calculates pointer
+writeback from the address accepted for the transfer, including the
+latched row modulo. The same rule applies to A, B, C and D.
+
+After aligning the two original-game traces to the low-word write,
+the corrected engine matches the 21 shared A/D transfer addresses
+and destination words. The first 12 transfers also match relative
+CCK. Later transfers in that window still have offsets of one CCK
+at some positions. The CPU traces show a fetch-order difference
+around the write. WinUAE fetches `$0003ADF8` and `$0003ADFC`
+before the low half of the write. CopperScreen fetches them 5 and
+10 CCK after it. Four diagnostic cases cover writes between the
+address and output phases for the four area channels.
+[WinUAE area DMA pointer writeback](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1669-L1684)
+
+The Release build completed with zero warnings. Engine diagnostics
+passed 1,473 tests with seven optional tests skipped. The original
+ZooL 2, Banshee, P.P. Hammer, Lemmings 3 and RoboCop 3 replays
+matched all final CPU, hardware and output fingerprints from the
+preceding build. The five ZooL 2 captures through field 12,850
+also matched byte for byte.
+
+### Live B, C and D channel investigation
 
 A separate synthetic AGA test reproduced a live channel discrepancy.
 With a Copper switch from A+D to A+B+D during the blit, WinUAE schedules
@@ -354,6 +384,15 @@ zero. When the Copper clears D during an A+C+D blit, WinUAE produces
 1 to 3 destination writes across the sweep and CopperScreen produces
 all 16.
 [WinUAE channel selection and shifter](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1220-L1373)
+
+In the isolated B sweep, enabling B adds 7 to 10 B reads while
+retaining all 16 destination writes. Disabling B at two of the
+tested phases leaves 4 or 5 destination writes. The Copper stayed
+in a blitter-finished WAIT after a stalled blit and advanced after
+a completed one. Enabling B at another phase
+during fill can produce C DMA reads even with USEC clear. These
+events give separate tests for changes to the active channel
+selection, the phase shifter and BUSY.
 
 ### Live A source enable
 

@@ -771,18 +771,19 @@ internal sealed class LightweightBlitter
             return;
         }
 
+        // The RAM transfer and pointer writeback use the same accepted address.
         switch (channel)
         {
             case AreaChannel.A when usesBus:
                 _dataA = machine.ReadChipWordBus(address);
-                _pointerA = AdvanceAreaSource(_pointerA, _pendingAreaModulo);
+                _pointerA = AdvanceAreaSource(address, _pendingAreaModulo);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltadat, _dataA);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltapth, _pointerA);
                 break;
             case AreaChannel.B when _useB:
                 _dataB = machine.ReadChipWordBus(address);
                 _shiftedAreaB = ShiftSource(_dataB, ref _previousB, _shiftB, _descending);
-                _pointerB = AdvanceAreaSource(_pointerB, _pendingAreaModulo);
+                _pointerB = AdvanceAreaSource(address, _pendingAreaModulo);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltbdat, _dataB);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltbpth, _pointerB);
                 if (_bOnly && IsFinalWord())
@@ -792,13 +793,13 @@ internal sealed class LightweightBlitter
                 break;
             case AreaChannel.C when _useC:
                 _dataC = machine.ReadChipWordBus(address);
-                _pointerC = AdvanceAreaSource(_pointerC, _pendingAreaModulo);
+                _pointerC = AdvanceAreaSource(address, _pendingAreaModulo);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltcdat, _dataC);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltcpth, _pointerC);
                 break;
             case AreaChannel.D when usesBus:
                 if (!_disableOutput) machine.WriteChipWordBus(address, writeValue);
-                _pointerD = AddPointer(_pointerD, _descending ? -2 : 2);
+                _pointerD = AddPointer(address, _descending ? -2 : 2);
                 if (++_destinationX == _widthWords)
                 {
                     _destinationX = 0;

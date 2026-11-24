@@ -279,6 +279,32 @@ public sealed class LightweightBlitterTests
     }
 
     [Theory]
+    [InlineData(LightweightRegisters.Bltapth, SourceA, 6)]
+    [InlineData(LightweightRegisters.Bltbpth, SourceB, 8)]
+    [InlineData(LightweightRegisters.Bltcpth, SourceC, 10)]
+    [InlineData(LightweightRegisters.Bltdpth, DestinationD, 20)]
+    public void AreaDmaPointerWritebackUsesTheAcceptedAddress(
+        ushort pointerRegister, uint address, int acceptanceOffset)
+    {
+        using var machine = CreateAgaMachine();
+        ConfigureArea(machine, 0x0FFF);
+        EnableBlitter(machine, nasty: true);
+        var start = StartBlit(machine, 0x0043);
+        machine.AdvanceHardwareTo(start + acceptanceOffset);
+        var outputCycle = machine.Cycle + LightweightClock.CpuCyclesPerColorClock;
+        Assert.Equal(outputCycle, machine.BlitterPendingOutputCycle);
+        Assert.Equal(address, machine.GetBlitterPointer(pointerRegister));
+
+        var replacement = address + 0x0100;
+        machine.WriteCustomRegisterFromCopper((ushort)(pointerRegister + 2), (ushort)replacement, machine.Cycle);
+        Assert.Equal(replacement, machine.GetBlitterPointer(pointerRegister));
+
+        machine.AdvanceHardwareTo(outputCycle);
+        Assert.Equal(outputCycle, machine.BlitterLastOutputCycle);
+        Assert.Equal(address + 2, machine.GetBlitterPointer(pointerRegister));
+    }
+
+    [Theory]
     [InlineData(false, false)]
     [InlineData(false, true)]
     [InlineData(true, false)]
