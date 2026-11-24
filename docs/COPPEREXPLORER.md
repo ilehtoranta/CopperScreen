@@ -5,7 +5,7 @@ separately installed Windows Explorer product. CopperScreen owns the shared
 `CopperDisk.FileSystem` 0.1.0-dev.6 sources; both products use this implementation
 for image sessions, reversible Windows names, streaming and staged mutations.
 The shared project references CopperDisk and the exact qualified
-`CopperStart.FileSystem.Service` 0.5.0-dev.8 / Copper68k 1.5.12 packages. It has no
+`CopperStart.FileSystem.Service` 0.5.0-dev.9 / Copper68k 1.5.13 packages. It has no
 Avalonia, desktop executable or Lightweight dependency.
 
 The service's ABI 4 discard gateway is opt-in for owned sparse stages. The guest
