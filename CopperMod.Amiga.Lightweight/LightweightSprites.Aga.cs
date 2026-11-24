@@ -79,7 +79,7 @@ internal sealed partial class LightweightSprites
     internal int ComposeAgaPixel(int line, int x, int placement, int code)
     {
         if (_outputLine != line || x <= _lastOutputX) BeginAgaLine(line, x);
-        else if ((_dirtyMask & 255) != 0) UpdateAgaComparators(line, x, false);
+        else if ((_dirtyMask & 255) != 0) UpdateAgaComparators(x, false);
         if (_nextStart <= x) LatchAgaComparators(x);
         _lastOutputX = x;
         var matches = _agaCollisionMatches[code];
@@ -136,31 +136,33 @@ internal sealed partial class LightweightSprites
         { _dirtyMask &= 255; _collisionTailLine = -1; }
         _outputLine = line; _lastOutputX = x - 1;
         _lineArmedMask = _upcomingMask = _shiftingMask = _latchedAttachedMask = 0;
-        UpdateAgaComparators(line, x, true);
+        UpdateAgaComparators(x, true);
     }
 
     private int AgaStart(in SpriteChannel state)
         => ((((state.Pos & (_agaScanDouble ? 127 : 255)) << 1) | (state.Ctl & 1)) + 1) * 4 +
             (state.Ctl >> 4 & 1) * 2 + (state.Ctl >> 3 & 1);
 
-    private void UpdateAgaComparators(int line, int x, bool begin)
+    private void UpdateAgaComparators(int x, bool begin)
     {
         var dirty = begin ? 255 : _dirtyMask & 255;
         _dirtyMask &= 0x100;
         for (var sprite = 0; sprite < 8; sprite++)
         {
             var bit = (byte)(1 << sprite);
-            if ((dirty & bit) == 0 || (_shiftingMask & bit) != 0) continue;
+            if ((dirty & bit) == 0) continue;
+            // The position comparator can match again while the old data is latched.
             var wasUpcoming = (_upcomingMask & bit) != 0;
             _upcomingMask &= (byte)~bit;
-            if ((_armedMask & bit) != 0 && IsVerticallyActive(in _channels[sprite], line))
+            // Alice controls vertical DMA. Lisa matches whenever SPRxDATA has armed the channel.
+            if ((_armedMask & bit) != 0)
             {
                 var start = AgaStart(in _channels[sprite]);
                 if (start >= x) { _lineArmedMask |= bit; _upcomingMask |= bit; }
                 else if (begin && x < start + _agaChannels[sprite].Bits * _agaStep)
                 { _lineArmedMask |= bit; LatchAgaSprite(sprite, start); }
             }
-            else if (wasUpcoming) _lineArmedMask &= (byte)~bit;
+            else if (wasUpcoming && (_shiftingMask & bit) == 0) _lineArmedMask &= (byte)~bit;
         }
         RefreshAgaStart();
     }

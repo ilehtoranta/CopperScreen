@@ -75,18 +75,65 @@ The Release solution build passed with zero warnings. The engine diagnostics
 passed 1,417 tests and skipped seven optional native cases. An isolated build
 of the sprite correction passed all 88 AGA sprite tests.
 
+## Zool 2
+
+The SPS 0415 release accepts the original code-wheel response and proceeds
+through the options and character-select screens into Swan Lake Stage 1 on
+CopperScreen, WinUAE 6.0.3 and WinUAE 6.1 beta 23. The Commodore Combat pressing, SPS 2427, also
+requires the wheel. The [interactive wheel](https://steveleonardweb.co.uk/?page_id=7116)
+supplied the response for each engine's challenge.
+
+CopperScreen `bdb72d5` completed 11,250 fields with no unsupported feature
+reported. The first-stage captures consistently show missing HUD counters.
+Both engines show the player and foreground objects across the gameplay
+sequence. The independent reference captures show different player positions
+and score values.
+At the CopperScreen checkpoint, BPLCON0 was `$7401` and DMACON was `$03DF`.
+
+The stage Copper list writes SPRxPOS, SPRxDATA and SPRxDATB repeatedly on
+the same scanline to draw the HUD. The WinUAE 6.1 beta 23 register dump
+shows that seven of the eight channels have zero SPRxCTL in this scene.
+Lisa arms on a data write independently of Alice's vertical DMA comparator.
+It can also perform another horizontal match without the position write
+replacing data already in the shifter. Two focused tests reproduce the missing
+pixels in those cases and pass with the Lisa correction. [WinUAE sprite-write logic](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/drawing.cpp#L2711-L2763)
+
+The corrected 11,250-field replay shows player movement, jumping, pickups,
+scrolling and live score, time and lives counters in Swan Lake Stage 1.
+Of 76 captured fields, 62 were byte-identical to the baseline. The 14 captures
+from field 9,300 through 11,250 changed only within HUD rows 45–56.
+At field 9,600 the baseline and corrected BMP SHA-256 hashes were
+`D942F2BDABE35A490A233B9FAC5DFAB7EA798EFDBB5D3D39A11249F56F94C72E` and
+`055FB17D4DD56BC37598FD056F7D925660543F22D3128D9AF649D23E03D16E2F`.
+Both replays ended with CPU fingerprint `0xC0583D2D81EAE174` and hardware
+fingerprint `0xCDC80A370169C5D7`. The final output fingerprint changed from
+`0x429056CF8B5D00FB` to `0x1C203DFD633C79C4`.
+
+The Banshee replay matched all 71 captured frames and all three final
+fingerprints from its 10,500-field verification. The Release solution build
+passed with zero warnings. Engine diagnostics passed 1,419 tests and skipped
+seven optional native cases.
+
+The WinUAE 6.1 beta 5 changelog identifies an Alice mainboard busy-signal
+correction for Zool 2 AGA. In FMODE 0 with seven lores planes and blitter
+priority off, CPU activity can postpone the final D write after the blitter
+reports completion. The changelog also records an earlier, separate bitplane
+DMA overrun fix for the title. [WinUAE changelog](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L92-L98)
+
+A diagnostic four-word AGA area blit with all four channels enabled under
+seven-plane DMA cleared BUSY at the same cycle that the last destination word
+was written in CopperScreen. The destination-only control cleared BUSY one
+CCK before its last write. The reference distinguishes main completion from the
+final-D drain for area blits. The remaining task is to trace that interval
+against cycle-exact WinUAE and establish which in-game blits expose it.
+[WinUAE area blitter completion](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L408-L461)
+
 ## Other baseline observations
 
 The initial 2,100-field CopperScreen replays at `e086a46` reached the Zool 2
 code-wheel screen, the P.P. Hammer disk-operation screen, the DMA Design logo
 in All New World of Lemmings, and the expected access-denied screen in
 RoboCop 3 with no dongle fitted. These captures establish boot checkpoints.
-
-The WinUAE changelog specifically identifies an Alice mainboard busy-signal
-correction for Zool 2 AGA. In FMODE 0 with seven lores planes and blitter
-priority off, CPU activity can postpone the final D write after the blitter
-reports completion. Its changelog also records an earlier, separate bitplane
-DMA overrun fix for the title. [WinUAE changelog](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L94)
 
 The same changelog records historical P.P. Hammer CPU and blitter timing
 improvements and an All New World of Lemmings bitplane modulo correction.

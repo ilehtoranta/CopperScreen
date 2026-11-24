@@ -173,6 +173,47 @@ public sealed class LightweightAgaSpriteTests
         Assert.Equal(rgb, m.Framebuffer.Span[44 * 1816 + 520] & 0xFFFFFF);
     }
 
+    [Fact]
+    public void RewritingAnActiveSpritesPositionPreservesItsPixelsAndAllowsAnotherMatch()
+    {
+        using var m = Create();
+        Palette(m, 17, 0xF00);
+        Palette(m, 18, 0x0F0);
+        Write(m, 0x106, 0x0C42);
+        Write(m, 0x1FC, 0);
+        Write(m, 0x140, 0x2C40);
+        Write(m, 0x142, 0x2D01);
+        Write(m, 0x146, 0);
+        Write(m, 0x144, 0xFFFF);
+
+        m.AdvanceHardwareTo(44L * 454 + 132);
+        Write(m, 0x140, 0x2C54);
+        Write(m, 0x146, 0xFFFF);
+        Write(m, 0x144, 0);
+        m.ExecuteFrame();
+
+        var line = m.Framebuffer.Span.Slice(44 * 1816, 1816);
+        for (var x = 520; x < 584; x++) Assert.Equal(0xFF0000, line[x] & 0xFFFFFF);
+        for (var x = 680; x < 744; x++) Assert.Equal(0x00FF00, line[x] & 0xFFFFFF);
+    }
+
+    [Fact]
+    public void WritingSpriteDataArmsLisaWithoutAnAliceVerticalMatch()
+    {
+        using var m = Create();
+        Palette(m, 17, 0xF00);
+        Write(m, 0x106, 0x0C42);
+        Write(m, 0x1FC, 0);
+        Write(m, 0x140, 0x0040);
+        Write(m, 0x142, 0x0001);
+        Write(m, 0x146, 0);
+        Write(m, 0x144, 0x8000);
+
+        m.ExecuteFrame();
+
+        Assert.Equal(0xFF0000, m.Framebuffer.Span[44 * 1816 + 520] & 0xFFFFFF);
+    }
+
     [Theory]
     [InlineData(0xC3, false, 0x23)] [InlineData(0xC1, false, 0)] [InlineData(0xC2, false, 0x20)]
     [InlineData(0xC1, true, 2)] [InlineData(0xC2, true, 0x20)] [InlineData(0, false, 0x23)]
