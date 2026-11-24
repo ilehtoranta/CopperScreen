@@ -58,16 +58,37 @@ Imported media open read-only with the welcome defaults. Saved profiles retain
 their explicit write-protection choices; this work does not broaden format write
 support. Missing saved paths remain visible for repair rather than being dropped.
 
-### macOS downloads and file access
+### Verify and open the macOS download
 
-The macOS archives come without Developer ID signing or notarization. A
-downloaded app is subject to Gatekeeper approval on first launch.
+1. From the [CopperScreen release page](https://github.com/ilehtoranta/CopperScreen/releases/latest),
+   download the macOS archive for your Mac (`osx-arm64` for Apple Silicon or
+   `osx-x64` for Intel) and `SHA256SUMS.txt` from the same release.
+2. Before extracting the archive, open Terminal and change to the folder
+   containing it. The example uses Downloads. Replace the example filename
+   with the exact name of the archive you downloaded.
 
-Open CopperScreen.app from Finder. Use **Choose ROM…** and **Browse…** to
-select a ROM and floppy image in the macOS file picker. Selecting a file in
-that picker can grant access without a separate folder prompt. If macOS denies
-folder access, check **System Settings → Privacy & Security → Files and
-Folders → CopperScreen**. [Apple's Desktop folder access documentation](https://developer.apple.com/documentation/bundleresources/information-property-list/nsdesktopfolderusagedescription)
+   ```sh
+   cd ~/Downloads
+   shasum -a 256 CopperScreen-1.2.1-osx-arm64.tar.gz
+   ```
+
+   Open `SHA256SUMS.txt` and compare the hash with the entry for your archive.
+   If the hashes differ, download a fresh copy from the release page and
+   verify it before proceeding.
+3. Extract the verified archive and open **CopperScreen.app** in Finder.
+   The macOS app is distributed without Developer ID signing or notarization.
+4. If macOS blocks the app because it cannot verify the developer or check the
+   app for malicious software, open **System Settings → Privacy & Security**.
+   Under **Security**, click **Open Anyway** for CopperScreen, then confirm
+   **Open** when prompted. [Apple's first launch instructions](https://support.apple.com/en-us/102445)
+
+### macOS Desktop file access
+
+Use **Choose ROM…** or **Browse…** to select a ROM or floppy image in the macOS
+file picker. Selecting a file this way can grant access without a separate
+folder prompt. If macOS denies Desktop access, check
+**System Settings → Privacy & Security → Files and Folders → CopperScreen**.
+[Apple's Desktop folder access documentation](https://developer.apple.com/documentation/bundleresources/information-property-list/nsdesktopfolderusagedescription)
 
 ### CopperStart disk boot preview
 
