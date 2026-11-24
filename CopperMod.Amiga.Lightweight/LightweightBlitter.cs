@@ -100,7 +100,6 @@ internal sealed class LightweightBlitter
     private int _lineLastDrawnY;
     private int _lineError;
     private int _lineSourceRowStride;
-    private int _lineBPatternStride;
     private byte _minterm;
     private int _shiftA;
     private int _shiftB;
@@ -214,7 +213,6 @@ internal sealed class LightweightBlitter
         _lineLastDrawnY = int.MinValue;
         _lineError = 0;
         _lineSourceRowStride = 0;
-        _lineBPatternStride = 0;
         _minterm = 0;
         _shiftA = 0;
         _shiftB = 0;
@@ -720,11 +718,12 @@ internal sealed class LightweightBlitter
         _lineAul = (bltcon1 & Bltcon1LineAul) != 0;
         _lineSign = (bltcon1 & Bltcon1LineSign) != 0;
         _lineError = unchecked((short)_pointerA);
+        _moduloA = (short)(_moduloA & ~1);
+        _moduloB = (short)(_moduloB & ~1);
         _lineSourceRowStride = _moduloC & ~1;
-        _lineBPatternStride = _moduloB & ~1;
-        _phaseCount = 4;
-        // The line engine begins after four non-reserving startup CCKs. Each
-        // pixel then consumes exactly four retained input/output phases.
+        // B-enabled lines split the two B reads around C and leave a free
+        // clock after C and D. Ordinary lines retain four phases.
+        _phaseCount = _useB ? 6 : 4;
         _startupRemaining = 4;
         PrepareLinePixel();
     }
@@ -865,8 +864,9 @@ internal sealed class LightweightBlitter
         }
 
         var channel = GetLinePhaseChannel(_phaseIndex);
-        var usesBus = _lineDraw && channel != AreaChannel.Idle;
-        if (usesBus &&
+        var usesBus = channel != AreaChannel.Idle &&
+            (_useB && channel != AreaChannel.D ? _useC : _lineDraw);
+        if ((usesBus || _useB) &&
             (!machine.CanBlitterAdvanceControl(cycle) ||
              ShouldYieldToCpu(cycle, machine, ownedBusThisCycle)))
         {
@@ -884,7 +884,7 @@ internal sealed class LightweightBlitter
         };
         if (usesBus && channel == AreaChannel.D)
         {
-            _pendingWriteValue = ComputeLineOutput();
+            if (!_useB) _pendingWriteValue = ComputeLineOutput();
             if (_pendingWriteValue != 0)
             {
                 _zero = false;
@@ -1205,16 +1205,13 @@ internal sealed class LightweightBlitter
             {
                 case AreaChannel.B:
                 {
-                    var value = machine.ReadChipWordBus(address);
-                    // The first B access reloads the hidden latch. The second
-                    // exposes the pattern word and advances by BLTBMOD.
-                    if (_phaseIndex == 1)
+                    _dataB = machine.ReadChipWordBus(address);
+                    machine.SetBlitterDataFromDma(LightweightRegisters.Bltbdat, _dataB);
+                    // Both reads use the same address. Only the second
+                    // increments the pointer.
+                    if (_phaseIndex == 3)
                     {
-                        _dataB = value;
-                        _pointerB = AddPointer(_pointerB, _lineBPatternStride);
-                        machine.SetBlitterDataFromDma(
-                            LightweightRegisters.Bltbdat,
-                            _dataB);
+                        _pointerB = AddPointer(_pointerB, _moduloB);
                         machine.SetBlitterPointerFromDma(
                             LightweightRegisters.Bltbpth,
                             _pointerB);
@@ -1226,11 +1223,22 @@ internal sealed class LightweightBlitter
                     machine.SetBlitterDataFromDma(
                         LightweightRegisters.Bltcdat,
                         _dataC);
+                    if (_useB) _pendingWriteValue = ComputeLineOutput();
                     break;
                 case AreaChannel.D:
                     if (!_disableOutput) machine.WriteChipWordBus(address, writeValue);
                     _lineLastDrawnY = _lineY;
                     break;
+            }
+        }
+
+        if (_useB && _lineIndex + 1 == _lineLength)
+        {
+            if (_phaseIndex == 3) PublishMainCompletion(cycle, machine);
+            else if (_phaseIndex == 4)
+            {
+                AdvanceLinePixel(cycle, machine);
+                return;
             }
         }
 
@@ -1474,8 +1482,9 @@ internal sealed class LightweightBlitter
     private ushort ComputeLineOutput()
     {
         var lineMask = RotateRight(_dataA, _lineBit);
-        var textureBit = (_dataB &
-            (0x8000 >> ((_shiftB + _lineIndex) & 0x0F))) != 0;
+        var textureBit = _useB
+            ? (_dataB & (1 << ((_shiftB - _lineIndex) & 0x0F))) != 0
+            : (_dataB & (0x8000 >> ((_shiftB + _lineIndex) & 0x0F))) != 0;
         var texture = textureBit ? (ushort)0xFFFF : (ushort)0;
         return ApplyMinterm(_minterm, lineMask, texture, _dataC);
     }
@@ -1539,9 +1548,10 @@ internal sealed class LightweightBlitter
         {
             return index switch
             {
-                0 or 1 => AreaChannel.B,
-                2 => AreaChannel.C,
-                _ => AreaChannel.D
+                0 or 3 => AreaChannel.B,
+                1 => AreaChannel.C,
+                4 => AreaChannel.D,
+                _ => AreaChannel.Idle
             };
         }
 

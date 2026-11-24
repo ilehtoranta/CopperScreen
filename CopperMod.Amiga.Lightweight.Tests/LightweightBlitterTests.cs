@@ -1325,13 +1325,16 @@ public sealed class LightweightBlitterTests
     }
 
     [Fact]
-    public void LineBChannelReloadsEachPatternWordTwiceAndAdvancesByModulo()
+    public void LineBChannelReadsAroundCAndUsesTheDescendingTextureBit()
     {
         const int rowStride = 0x20;
         using var machine = new LightweightA500Machine();
         var baseAddress = DestinationD + 0x4000;
         WriteWord(machine, SourceB, 0x8000);
         WriteWord(machine, SourceB + 2, 0x4000);
+        WriteWord(machine, SourceB + 4, 0x0001);
+        WriteWord(machine, SourceB + 6, 0x2000);
+        WriteWord(machine, baseAddress, 0x0001);
         ConfigureLine(
             machine,
             baseAddress,
@@ -1340,22 +1343,69 @@ public sealed class LightweightBlitterTests
             bModulo: 3,
             channelMask: 0x0F00);
         EnableBlitter(machine, nasty: true);
-        var start = StartBlit(machine, 0x0082);
+        machine.AdvanceHardwareTo(100L * LightweightClock.CpuCyclesPerLine +
+            18L * LightweightClock.CpuCyclesPerColorClock);
+        var start = StartBlit(machine, 0x0102);
 
+        machine.AdvanceHardwareTo(start + 10);
+        Assert.Equal((ushort)0x8000, machine.GetCustomRegister(LightweightRegisters.Bltbdat));
+        Assert.Equal(SourceB, machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
         machine.AdvanceHardwareTo(start + 12);
-        Assert.Equal((ushort)0x8000,
-            machine.GetCustomRegister(LightweightRegisters.Bltbdat));
-        Assert.Equal(SourceB + 2,
-            machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+        Assert.Equal((ushort)0x0001, machine.GetCustomRegister(LightweightRegisters.Bltcdat));
+        Assert.Equal(SourceB, machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+        machine.AdvanceHardwareTo(start + 16);
+        Assert.Equal(SourceB + 2, machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+
+        machine.AdvanceHardwareTo(start + 52);
+        Assert.False(machine.BlitterStatusBusy);
+        Assert.True(machine.BlitterBusy);
+        Assert.False(IsLinePixelSet(machine, baseAddress, rowStride, 3, 3));
+        machine.AdvanceHardwareTo(start + 54);
+        Assert.False(machine.BlitterBusy);
+        Assert.False(IsLinePixelSet(machine, baseAddress, rowStride, 0, 0));
+        Assert.False(IsLinePixelSet(machine, baseAddress, rowStride, 1, 1));
+        Assert.False(IsLinePixelSet(machine, baseAddress, rowStride, 2, 2));
+        Assert.True(IsLinePixelSet(machine, baseAddress, rowStride, 3, 3));
+        Assert.Equal((ushort)0x2000, machine.GetCustomRegister(LightweightRegisters.Bltbdat));
+        Assert.Equal(SourceB + 8, machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+        Assert.Equal(start + 52, machine.BlitterLastCompletionCycle);
+    }
+
+    [Fact]
+    public void LineSlopeIgnoresTheLowBitOfBothModulos()
+    {
+        const int rowStride = 0x20;
+        const int rows = 32;
+        using var machine = new LightweightA500Machine();
+        var baseAddress = DestinationD + 0x4000;
+        for (var row = 0; row < rows; row++)
+        {
+            WriteWord(machine, SourceB + (uint)(row * 2), 0xFFFF);
+        }
+
+        ConfigureLine(
+            machine,
+            baseAddress,
+            rowStride,
+            0x0001,
+            aModulo: -23,
+            bModulo: 3,
+            channelMask: 0x0F00);
+        EnableBlitter(machine, nasty: true);
+        StartBlit(machine, (rows << 6) | 2);
         AdvanceUntilBlitterIdle(machine);
 
-        Assert.True(IsLinePixelSet(machine, baseAddress, rowStride, 0, 0));
-        Assert.True(IsLinePixelSet(machine, baseAddress, rowStride, 1, 1));
-        Assert.Equal((ushort)0x4000,
-            machine.GetCustomRegister(LightweightRegisters.Bltbdat));
-        Assert.Equal(SourceB + 4,
-            machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
-        Assert.Equal(start + 24, machine.BlitterLastCompletionCycle);
+        for (var row = 0; row < rows; row++)
+        {
+            ushort expected = row switch
+            {
+                0 => 0x8000,
+                < 14 => 0x4000,
+                < 27 => 0x2000,
+                _ => 0x1000
+            };
+            Assert.Equal(expected, ReadWord(machine, baseAddress + (uint)(row * rowStride)));
+        }
     }
 
     [Fact]
