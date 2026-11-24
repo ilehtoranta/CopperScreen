@@ -124,6 +124,40 @@ public sealed class LightweightBlitterTests
     }
 
     [Theory]
+    [InlineData(false, 0xBEEF, 0xBEEF, 0xBEEF, 0xA00B, 2)]
+    [InlineData(true, 0xA00B, 0x135C, 0xB460, 0xB460, 6)]
+    public void LiveAreaAEnableChangesUnacceptedReadsWithDestinationEnabled(
+        bool sourceEnabled, ushort firstWord, ushort secondWord, ushort thirdWord,
+        ushort fourthWord, uint sourceAdvance)
+    {
+        using var machine = CreateAgaMachine();
+        machine.WriteChipWordDma(SourceA, 0xA00B);
+        machine.WriteChipWordDma(SourceA + 2, 0x135C);
+        machine.WriteChipWordDma(SourceA + 4, 0xB460);
+        ConfigureArea(machine, sourceEnabled ? (ushort)0x09F0 : (ushort)0x01F0);
+        WriteRegister(machine, LightweightRegisters.Bltadat, 0xBEEF);
+        EnableBlitter(machine, nasty: false);
+        var start = StartBlit(machine, 0x0044);
+        for (var cycle = start + 2;
+             cycle <= start + 32 && machine.GetBlitterPointer(LightweightRegisters.Bltdpth) == DestinationD;
+             cycle += LightweightClock.CpuCyclesPerColorClock)
+        {
+            machine.AdvanceHardwareTo(cycle);
+        }
+        Assert.Equal(DestinationD + 2, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+
+        machine.WriteCustomRegisterFromCopper(LightweightRegisters.Bltcon0,
+            sourceEnabled ? (ushort)0x01F0 : (ushort)0x09F0, machine.Cycle);
+        AdvanceUntilBlitterIdle(machine);
+
+        Assert.Equal(SourceA + sourceAdvance, machine.GetBlitterPointer(LightweightRegisters.Bltapth));
+        Assert.Equal(firstWord, machine.ReadChipWordDma(DestinationD));
+        Assert.Equal(secondWord, machine.ReadChipWordDma(DestinationD + 2));
+        Assert.Equal(thirdWord, machine.ReadChipWordDma(DestinationD + 4));
+        Assert.Equal(fourthWord, machine.ReadChipWordDma(DestinationD + 6));
+    }
+
+    [Theory]
     [InlineData(LightweightRegisters.Bltadat, 0x01F0, 0, 0x1234, 0xABCD)]
     [InlineData(LightweightRegisters.Bltbdat, 0x01CC, 0x5000, 0x0091, 0x055E)]
     [InlineData(LightweightRegisters.Bltcdat, 0x01AA, 0, 0x1234, 0xABCD)]

@@ -326,6 +326,10 @@ replay and 10,500-field Banshee first mission replay matched every
 capture and the final CPU, hardware and output fingerprints from the
 source-data correction. The Release build passed with zero warnings.
 Engine diagnostics passed 1,467 tests with seven optional tests skipped.
+The live-shift build also matched all 48 captures and final fingerprints
+from the verified 14,000-field Lemmings 3 Shadow replay and all 40
+captures and final fingerprints from the preceding 11,600-field
+RoboCop 3 driving replay with the dongle enabled.
 
 ### Register writes in the original game
 
@@ -348,12 +352,32 @@ With a Copper switch from A+D to A+B+D during the blit, WinUAE schedules
 9 to 12 B reads depending on the write cycle. CopperScreen schedules
 zero. When the Copper clears D during an A+C+D blit, WinUAE produces
 1 to 3 destination writes across the sweep and CopperScreen produces
-all 16. The open channel behavior is separate from the pointer writes
-observed in the original game's replay.
+all 16.
 [WinUAE channel selection and shifter](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1220-L1373)
 
-Line-mode data writes, absolute Copper start timing, source-only
-schedules and physical signal measurements also remain open.
+### Live A source enable
+
+The `-LiveAEnable` probe changes BLTCON0.USEA in both directions
+on D-enabled area blits and covers enabling A with C also active.
+CopperScreen previously kept the A enable bit from BLTSIZE, causing
+all 12 AGA cases to diverge from WinUAE. USEA now controls whether
+the next A slot reads Chip RAM. A read accepted in the address
+phase completes at the output phase even if USEA changes in between.
+
+The corrected engine matches WinUAE 6.1.0 beta 23 in 374 transfers
+on AGA and 374 on OCS. The comparison covers source and destination
+addresses, destination words and relative CCK. The earlier shift,
+data and minterm probe sequences also retain their reference results.
+
+The original ZooL 2 wall, P.P. Hammer opening and Banshee first
+mission replays matched all 66, 25 and 36 captures, respectively,
+and all final fingerprints from the live-shift build. The Release
+build completed with zero warnings and the engine diagnostic suite
+passed 1,469 tests with seven optional tests skipped.
+
+Live B, C and D changes, source-only schedules, line-mode data
+writes, absolute Copper start timing and physical signal measurements
+remain open.
 
 ## P.P. Hammer and His Pneumatic Weapon
 

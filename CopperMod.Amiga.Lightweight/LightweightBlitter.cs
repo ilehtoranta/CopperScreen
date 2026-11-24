@@ -319,6 +319,12 @@ internal sealed class LightweightBlitter
             {
                 _shiftA = control >> 12;
                 _fillCarry = _fillCarryInitial;
+                if (_useD)
+                {
+                    // Area destination schedules always keep an A slot.
+                    // USEA controls whether that slot accepts a DMA read.
+                    _useA = (control & 0x0800) != 0;
+                }
             }
         }
     }
@@ -767,7 +773,7 @@ internal sealed class LightweightBlitter
 
         switch (channel)
         {
-            case AreaChannel.A when _useA:
+            case AreaChannel.A when usesBus:
                 _dataA = machine.ReadChipWordBus(address);
                 _pointerA = AdvanceAreaSource(_pointerA, _pendingAreaModulo);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltadat, _dataA);

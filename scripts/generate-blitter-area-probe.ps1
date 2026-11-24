@@ -10,6 +10,7 @@ param(
     [ValidateSet('Full', 'Alternate')][string]$LiveMinterm,
     [switch]$LiveData,
     [switch]$LiveShift,
+    [switch]$LiveAEnable,
     [switch]$Ocs
 )
 
@@ -24,6 +25,9 @@ if ($LiveData -and ($Overlap -or $LiveModulo -or $LiveMinterm)) {
 
 if ($LiveShift -and ($Overlap -or $LiveModulo -or $LiveMinterm -or $LiveData)) {
     throw 'Choose the live shift probe separately from other probe variants.'
+}
+if ($LiveAEnable -and ($Overlap -or $LiveModulo -or $LiveMinterm -or $LiveData -or $LiveShift)) {
+    throw 'Choose the live A enable probe separately from other probe variants.'
 }
 
 $asm = [Collections.Generic.List[uint16]]::new()
@@ -87,7 +91,7 @@ if ($LiveData) {
         WriteCopperWord ($line + 0x35 + ($test % 4) * 2) 0xFFFE
         WriteCopperWord $dataRegister 0xABCD
     }
-} elseif ($LiveShift) {
+} elseif ($LiveShift -or $LiveAEnable) {
     # Change the A or B shift count after several area calculations.
     $source = 0x24000
     foreach ($register in 0x004C, 0x0050) { WriteCopperWord $register 2 }
@@ -101,19 +105,33 @@ if ($LiveData) {
         $line = (64 + 6 * $test) -shl 8
         $target = 0x16100 + 0x200 * $test
         $bank = $test -shr 2
-        $offset = if ($bank -eq 2) { 30 } else { 0 }
+        $offset = if (!$LiveAEnable -and $bank -eq 2) { 30 } else { 0 }
         WriteCopperWord ($line + 1) 0xFFFE
-        WriteCopperWord 0x0040 ((0x09F0, 0x05CC, 0x05CC)[$bank])
-        WriteCopperWord 0x0042 ((0, 0, $descendingControl)[$bank])
+        if ($LiveAEnable) {
+            WriteCopperWord 0x0040 ((0x01F0, 0x09F0, 0x03F0)[$bank])
+            WriteCopperWord 0x0042 0
+            WriteCopperWord 0x0074 0xBEEF
+        } else {
+            WriteCopperWord 0x0040 ((0x09F0, 0x05CC, 0x05CC)[$bank])
+            WriteCopperWord 0x0042 ((0, 0, $descendingControl)[$bank])
+        }
         WriteCopperWord 0x0052 (($source + $offset) -band 0xFFFF)
         WriteCopperWord 0x004E (($source + $offset) -band 0xFFFF)
+        if ($LiveAEnable) {
+            WriteCopperWord 0x0048 2
+            WriteCopperWord 0x004A ($source -band 0xFFFF)
+        }
         WriteCopperWord 0x0056 (($target + $offset) -band 0xFFFF)
         WriteCopperWord 0x009C 0x0040
         WriteCopperWord ($line + 0x2B) 0xFFFE
         WriteCopperWord 0x0058 0x0104
         WriteCopperWord ($line + 0x39 + ($test % 4) * 2) 0xFFFE
-        $controlRegister = if ($bank -eq 0) { 0x0040 } else { 0x0042 }
-        WriteCopperWord $controlRegister ((0x49F0, 0x4000, $descendingChange)[$bank])
+        if ($LiveAEnable) {
+            WriteCopperWord 0x0040 ((0x09F0, 0x01F0, 0x0BF0)[$bank])
+        } else {
+            $controlRegister = if ($bank -eq 0) { 0x0040 } else { 0x0042 }
+            WriteCopperWord $controlRegister ((0x49F0, 0x4000, $descendingChange)[$bank])
+        }
     }
 } elseif ($LiveMinterm) {
     # Sweep control writes over A+D, shifted ABCD and descending fill.
