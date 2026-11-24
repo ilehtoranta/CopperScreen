@@ -36,6 +36,7 @@ public sealed partial class LightweightA500Machine
             if (size == 3)
                 value = (address & 1) == 0 ? value >> 8 : value & 0x00FFFFFF;
         }
+        if (address < ChipRamCpuDecodeSize && !_overlayEnabled) _chipBusLatch = value;
         AdvanceHardwareTo(complete);
         cycle = complete;
         return value;
@@ -63,6 +64,7 @@ public sealed partial class LightweightA500Machine
             WriteByteRaw(address, (byte)(value >> 16), grant);
             WriteWordRaw(address + 1, (ushort)value, grant);
         }
+        if (address < ChipRamCpuDecodeSize && !_overlayEnabled) _chipBusLatch = value;
         AdvanceHardwareTo(complete);
         cycle = complete;
     }

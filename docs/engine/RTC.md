@@ -13,11 +13,12 @@ The port starts from CopperMod's `Machine/RealTimeClock.cs` and
 `39b183d63a13caa2429fb80ffcab11e0752d42f7dc2126e3`. The implementation is owned
 here; there is no build reference or runtime dependency on that checkout.
 
-The Legacy A501-compatible aperture is `$DC0000–$DC003F`: sixteen nibble registers
-at four-byte strides, with Legacy's four byte-lane aliases. Seconds, minutes,
+The A501 clock occupies `$DC0000–$DCFFFF`. Its sixteen nibble registers repeat
+every 64 bytes. Each register responds on both odd addresses in its four-byte stride.
+Even lanes use the engine's undriven byte value (`$FF`) and ignore writes. Seconds, minutes,
 hours, day, month and two-digit year are BCD; weekday is derived from the date.
 Controls D/E/F retain their low nibbles, D.BUSY reads clear and F starts in
-24-hour mode (`$4`). Byte/word/long transfers preserve Legacy's byte order and
+24-hour mode (`$4`). Byte, word and long transfers select each addressed lane and
 go through the existing Agnus CPU grants. Disabled addresses retain Lightweight's
 existing unmapped `$FF` behavior, rather than Legacy's unrelated unmapped-zero
 policy.
@@ -49,7 +50,7 @@ This is a bounded digital implementation, not a claim of physical chip timing.
 
 ## Verification
 
-`LightweightRealTimeClockTests` covers Legacy BCD values, byte aliases, word/long
+`LightweightRealTimeClockTests` covers BCD values, odd byte lanes, bank mirrors, word/long
 access order, guest offsets, host-time progression, the year window, calendar
 rollover, 12-hour readback, resets, restart state isolation, disabled mapping,
 bus grants, coherent leap-day writes and HOLD release.

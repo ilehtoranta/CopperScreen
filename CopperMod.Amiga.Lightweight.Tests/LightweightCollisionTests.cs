@@ -147,7 +147,6 @@ public sealed class LightweightCollisionTests
         Assert.Equal(0x8267, before);
         Assert.Equal(before, Peek(m));
         W(m, 0x098, 0x0FFF);
-        W(m, 0x00E, 0); // Read-only register; writes do not clear it.
         m.ExecuteFrame();
         Assert.Equal(before, Peek(m));
         var cycle = m.Cycle;
@@ -205,6 +204,18 @@ public sealed class LightweightCollisionTests
         cycle = m.Cycle;
         m.ReadWord(0xDFF00E, ref cycle, M68kBusAccessKind.CpuDataRead);
         m.AdvanceHardwareTo(cycle + 8);
+        Assert.Equal(0x8000, Peek(m));
+    }
+
+    [Fact]
+    public void CpuLongWriteClearsCollisionLatchAtItsSecondWord()
+    {
+        using var m = Create(false, false, 0, 0);
+        Sprite(m, 0); Sprite(m, 2);
+        m.ExecuteFrame();
+        Assert.Equal(0x8267, Peek(m));
+        var cycle = m.Cycle;
+        m.WriteLong(0xDFF00C, 0, ref cycle, M68kBusAccessKind.CpuDataWrite);
         Assert.Equal(0x8000, Peek(m));
     }
 

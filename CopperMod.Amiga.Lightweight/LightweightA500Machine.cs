@@ -38,12 +38,13 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private const uint ExtensionRomBase = 0x00E0_0000;
     private readonly byte[] _extensionRom = new byte[512 * 1024];
     private bool _extensionRomLoaded;
+    private bool _overlayUsesExtension;
     private int _extensionRomImageLength;
     private readonly LightweightClock _clock;
     private readonly LightweightBusArbiter _busArbiter = new();
     private readonly LightweightRegisters _registers;
     private readonly LightweightRealTimeClock? _rtc;
-    private ushort _lastDmaBusWord;
+    private uint _chipBusLatch;
     private readonly LightweightCopper _copper;
     private readonly LightweightBitplanes _bitplanes;
     private readonly LightweightBlitter _blitter;
@@ -411,6 +412,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _autoconfig?.ResetConfiguration();
         _hdf?.Reset();
         _clock.Reset();
+        _chipBusLatch = 0;
         _registers.Reset();
         _a1200Io?.Reset();
         _akiko?.Reset(0, cold: true);
@@ -461,7 +463,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _unsupportedActiveFeature = null;
         var stackPointer = ReadLongRaw(0);
         var programCounter = ReadLongRaw(4);
-        if (_akiko is null || !_romLoaded)
+        if (!_romLoaded)
         {
             if (stackPointer == 0 || stackPointer >= _chipRam.Length)
                 stackPointer = (uint)(_chipRam.Length - 4);
@@ -732,6 +734,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
         _romLoaded = true;
         _extensionRomLoaded = false;
+        _overlayUsesExtension = false;
         _extensionRomImageLength = 0;
         Reset();
     }
@@ -746,6 +749,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         image.CopyTo(_extensionRom);
         _extensionRomImageLength = image.Length;
         _extensionRomLoaded = true;
+        _overlayUsesExtension = BinaryPrimitives.ReadUInt16BigEndian(image) == 0x1114;
         InvalidateCpuMemoryMap();
     }
 
@@ -854,6 +858,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return bus.ReadByte(address, ref cycle, accessKind);
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle, byteAccess: true);
         var value = ReadByteAt(address, grantedCycle);
+        LatchAgaCpuData(address, value);
         AdvanceHardwareTo(completedCycle);
         cycle = completedCycle;
         return value;
@@ -865,6 +870,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return bus.ReadWord(address, ref cycle, accessKind);
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle);
         var value = ReadWordAt(address, grantedCycle);
+        LatchAgaCpuData(address, value);
         AdvanceHardwareTo(completedCycle);
         cycle = completedCycle;
         return value;
@@ -897,6 +903,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle, byteAccess: true);
         WriteByteRaw(address, value, grantedCycle);
+        LatchAgaCpuData(address, value);
         AdvanceHardwareTo(completedCycle);
         cycle = completedCycle;
     }
@@ -910,6 +917,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
         GrantCpuWord(address, cycle, out var grantedCycle, out var completedCycle);
         WriteWordRaw(address, value, grantedCycle);
+        LatchAgaCpuData(address, value);
         AdvanceHardwareTo(completedCycle);
         cycle = completedCycle;
     }
@@ -1207,7 +1215,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         return BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(value) : value;
     }
 
-    // Only actual DMA output phases drive this latch. The devices already keep
+    // DMA output phases drive the chipset latch. The devices already keep
     // their completion cycles for arbitration; consult those only on readback.
     // Untimed memory helpers remain side-effect-free for diagnostics/host setup.
     [System.Runtime.CompilerServices.MethodImpl(
@@ -1215,7 +1223,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     internal ushort ReadChipWordBus(uint address)
     {
         var value = ReadChipWordDma(address);
-        _lastDmaBusWord = value;
+        _chipBusLatch = value;
         return value;
     }
 
@@ -1224,7 +1232,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     internal void WriteChipWordBus(uint address, ushort value)
     {
         WriteChipWordDma(address, value);
-        _lastDmaBusWord = value;
+        _chipBusLatch = value;
     }
 
     [System.Runtime.CompilerServices.MethodImpl(
@@ -1834,7 +1842,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     // do not update LastBusOutputCycle. All six histories are cleared on reset.
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-    private ushort ReadUndrivenCustomBus()
+    private bool PreviousSlotHadDmaOutput()
     {
         var lastCycle = Math.Max(_diskDma.LastOutputCycle, _paula.LastOutputCycle);
         lastCycle = Math.Max(lastCycle, _bitplanes.LastOutputCycle);
@@ -1842,8 +1850,15 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         lastCycle = Math.Max(lastCycle, _copper.LastOutputCycle);
         lastCycle = Math.Max(lastCycle, _blitter.LastBusOutputCycle);
         if (_akiko is not null) lastCycle = Math.Max(lastCycle, _akiko.Cd.LastOutputCycle);
-        return _clock.Cycle == lastCycle + LightweightBusArbiter.SlotCycles
-            ? _lastDmaBusWord : (ushort)0xFFFF;
+        return _clock.Cycle == lastCycle + LightweightBusArbiter.SlotCycles;
+    }
+
+    private ushort ReadUndrivenCustomBus()
+        => PreviousSlotHadDmaOutput() ? (ushort)_chipBusLatch : (ushort)0xFFFF;
+
+    private void LatchAgaCpuData(uint address, uint value)
+    {
+        if (IsAga && UsesAgnusBus(address)) _chipBusLatch = value;
     }
 
     private ushort ReadWordRaw(uint address)
@@ -1922,6 +1937,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         { var value = _a1200Io.ReadWord(address, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 2, false, value, cycle); RefreshStorageSchedule(cycle); } return value; }
         if ((address & 0x1FE) == LightweightRegisters.Clxdat && IsCustomAddress(address))
             return _sprites.ReadCollisionData();
+        if (IsAgaBitplanePointerRead(address))
+            return StrobeAgaBitplanePointer(address, cycle);
         StrobeCopperRead(address, cycle);
         var cia = DecodeCiaSelect(address);
         if (cia != CiaSelect.None)
@@ -1948,6 +1965,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             var collision = _sprites.ReadCollisionData();
             return (address & 1) == 0 ? (byte)(collision >> 8) : (byte)collision;
         }
+        if (IsAgaBitplanePointerRead(address))
+        {
+            var data = StrobeAgaBitplanePointer(address, cycle);
+            return (address & 1) == 0 ? (byte)(data >> 8) : (byte)data;
+        }
         StrobeCopperRead(address, cycle);
         var lane = DecodeCiaSelect(address) & CiaByteLane(address);
         if (lane != CiaSelect.None)
@@ -1967,6 +1989,18 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         RefreshNextDeviceCycle();
     }
 
+    private bool IsAgaBitplanePointerRead(uint address)
+        => (address & 0x1E0) == LightweightRegisters.BplPointerFirst && IsAga && IsCustomAddress(address);
+
+    private ushort StrobeAgaBitplanePointer(uint address, long cycle)
+    {
+        // Lisa drives zero into the selected pointer half on a CPU read.
+        var busWord = PreviousSlotHadDmaOutput() || (address & 2) != 0
+            ? (ushort)_chipBusLatch : (ushort)(_chipBusLatch >> 16);
+        WriteCustomRegister((ushort)(address & 0x1FE), 0, cycle);
+        return busWord;
+    }
+
     private const uint KickstartAlias = 0xA80000, ExtensionAlias = 0xB00000;
 
     // Resolve one contiguous run in a physical ROM bank. A transfer across a
@@ -1981,7 +2015,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_overlayEnabled && address < ChipRamCpuDecodeSize)
         {
             bankOffset = address & 0x7FFFF;
-            extension = _cd32OverlayUsesExtension;
+            extension = _overlayUsesExtension;
             if (!extension) bankOffset += (uint)_romImageOffset;
         }
         else if (address is >= RomBase and < 0x1000000)
@@ -2047,7 +2081,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             }
             else if (IsAga && (address & 1) != 0)
                 lanes = value;
-            WriteCustomRegister((ushort)(aligned & 0x1FE), lanes, cycle);
+            WriteCpuCustomRegister((ushort)(aligned & 0x1FE), lanes, cycle);
             return;
         }
         var word = ReadWordRaw(aligned);
@@ -2087,7 +2121,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
         if (IsCustomAddress(address))
         {
-            WriteCustomRegister((ushort)(address & 0x1FE), value, cycle);
+            WriteCpuCustomRegister((ushort)(address & 0x1FE), value, cycle);
             return;
         }
         if (_fastRam is { } ram && ram.ContainsRange(address, 2))
@@ -2117,10 +2151,25 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
     }
 
+    private void WriteCpuCustomRegister(ushort offset, ushort value, long cycle)
+    {
+        if (offset == LightweightRegisters.Dskbytr)
+        {
+            _diskSerial.ReadByteStatus(_registers, _diskDma.Active);
+            return;
+        }
+        WriteCustomRegister(offset, value, cycle);
+    }
+
     private void WriteCustomRegister(ushort offset, ushort value, long cycle)
     {
         offset &= 0x01FE;
-        if (offset is LightweightRegisters.Clxdat or LightweightRegisters.Serdatr) return;
+        if (offset == LightweightRegisters.Clxdat)
+        {
+            _sprites.ReadCollisionData();
+            return;
+        }
+        if (offset == LightweightRegisters.Serdatr) return;
         if (IsEcsAgnus && offset == LightweightRegisters.Bltcon0l)
             _registers.Write(LightweightRegisters.Bltcon0,
                 (ushort)((_registers.Read(LightweightRegisters.Bltcon0) & 0xFF00) | (value & 0xFF)));

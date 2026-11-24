@@ -11,7 +11,7 @@ public sealed class LightweightRealTimeClockTests
     private static LightweightA500Machine Machine(Func<DateTimeOffset>? now = null)
         => new(new() { RtcEnabled = true, RtcNowProvider = now ?? (() => Initial) });
 
-    private static byte Read(LightweightA500Machine machine, int register, uint lane = 0)
+    private static byte Read(LightweightA500Machine machine, int register, uint lane = 1)
     {
         var cycle = machine.Cycle;
         return machine.ReadByte(Base + (uint)register * 4 + lane, ref cycle, M68kBusAccessKind.CpuDataRead);
@@ -20,7 +20,7 @@ public sealed class LightweightRealTimeClockTests
     private static void Write(LightweightA500Machine machine, int register, byte value)
     {
         var cycle = machine.Cycle;
-        machine.WriteByte(Base + (uint)register * 4, value, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        machine.WriteByte(Base + (uint)register * 4 + 1, value, ref cycle, M68kBusAccessKind.CpuDataWrite);
     }
 
     // Expectations ported from Legacy AmigaRealTimeClockTests, CopperMod
@@ -40,24 +40,24 @@ public sealed class LightweightRealTimeClockTests
     [InlineData(1u)]
     [InlineData(2u)]
     [InlineData(3u)]
-    public void FourByteAliasesAndNibbleMaskMatchLegacy(uint lane)
+    public void OnlyOddByteLanesSelectTheRtc(uint lane)
     {
         using var machine = Machine();
         var cycle = machine.Cycle;
         machine.WriteByte(Base + 8 + lane, 0xF8, ref cycle, M68kBusAccessKind.CpuDataWrite);
-        Assert.Equal(8, Read(machine, 2));
-        Assert.Equal(4, Read(machine, 3, lane));
+        Assert.Equal((lane & 1) == 0 ? 5 : 8, Read(machine, 2));
+        Assert.Equal((lane & 1) == 0 ? 0xFF : 4, Read(machine, 3, lane));
     }
 
     [Fact]
-    public void WordAndLongAccessesKeepLegacyByteOrder()
+    public void WordAndLongAccessesSelectTheLowByteOfEachWord()
     {
         using var machine = Machine();
         var cycle = machine.Cycle;
-        Assert.Equal(0x0707, machine.ReadWord(Base, ref cycle, M68kBusAccessKind.CpuDataRead));
-        Assert.Equal(0x07070303u, machine.ReadLong(Base + 2, ref cycle, M68kBusAccessKind.CpuDataRead));
+        Assert.Equal(0xFF07, machine.ReadWord(Base, ref cycle, M68kBusAccessKind.CpuDataRead));
+        Assert.Equal(0xFF07FF03u, machine.ReadLong(Base + 2, ref cycle, M68kBusAccessKind.CpuDataRead));
         machine.WriteWord(Base, 0x0109, ref cycle, M68kBusAccessKind.CpuDataWrite);
-        Assert.Equal(9, Read(machine, 0)); // The second byte is the last write to the same register.
+        Assert.Equal(9, Read(machine, 0));
         machine.WriteLong(Base + 2, 0x00070002, ref cycle, M68kBusAccessKind.CpuDataWrite);
         Assert.Equal(7, Read(machine, 0));
         Assert.Equal(2, Read(machine, 1));
@@ -153,7 +153,7 @@ public sealed class LightweightRealTimeClockTests
     }
 
     [Fact]
-    public void OptionalClockDoesNotMapOutsideIts64ByteWindow()
+    public void OptionalClockRepeatsItsRegistersAcrossOneBank()
     {
         using var machine = Machine();
         using var disabled = new LightweightA500Machine();
@@ -163,7 +163,10 @@ public sealed class LightweightRealTimeClockTests
         Assert.Equal(0xFFFF, disabled.ReadWord(Base, ref cycle, M68kBusAccessKind.CpuDataRead));
         cycle = 0;
         Assert.Equal(0xFF, machine.ReadByte(Base - 1, ref cycle, M68kBusAccessKind.CpuDataRead));
-        Assert.Equal(0xFF, machine.ReadByte(Base + 64, ref cycle, M68kBusAccessKind.CpuDataRead));
+        Assert.Equal(0xFF07FF07u, machine.ReadLong(Base + 64, ref cycle, M68kBusAccessKind.CpuDataRead));
+        machine.WriteLong(Base + 0xFFF8, 0x1234567B, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(0xB, Read(machine, 14));
+        Assert.Equal(0xFF, machine.ReadByte(Base + 0x10001, ref cycle, M68kBusAccessKind.CpuDataRead));
         Assert.Equal(4, Read(machine, 15, 3));
     }
 

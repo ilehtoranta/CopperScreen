@@ -1,3 +1,4 @@
+using System.Buffers.Binary;
 using CopperMod.Amiga.Lightweight;
 using Copper68k;
 using Xunit;
@@ -6,6 +7,44 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 
 public sealed class LightweightA500MachineTests
 {
+    [Fact]
+    public void ResetLoadsBothRomVectorsVerbatim()
+    {
+        using var machine = new LightweightA500Machine();
+        var rom = new byte[0x80000];
+        BinaryPrimitives.WriteUInt32BigEndian(rom, 0x80000); // Empty descending stack.
+        BinaryPrimitives.WriteUInt32BigEndian(rom.AsSpan(4), 0xC00100); // Fitted Slow RAM.
+        machine.LoadKickstart(rom);
+        Assert.Equal(0x80000u, machine.Cpu.A[7]);
+        Assert.Equal(0xC00100u, machine.Cpu.ProgramCounter);
+    }
+
+    [Theory]
+    [InlineData(M68kCpuModel.M68EC020)]
+    [InlineData(M68kCpuModel.M68040)]
+    public void BootstrapSignatureSelectsExtensionForResetVectors(M68kCpuModel cpu)
+    {
+        using var machine = new LightweightA500Machine(new() {
+            AgnusModel = LightweightAgnusModel.Mos8374Alice, DeniseModel = LightweightDeniseModel.Lisa4203,
+            ChipRamBytes = 2097152, SlowRamBytes = 0, CpuModel = cpu });
+        var main = new byte[0x80000];
+        var extension = new byte[0x80000];
+        BinaryPrimitives.WriteUInt32BigEndian(main.AsSpan(4), 0xF80100);
+        BinaryPrimitives.WriteUInt32BigEndian(extension, 0x11144EF9);
+        BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(4), 0xE00200);
+        machine.LoadKickstart(main);
+        machine.LoadExtensionRom(extension);
+        machine.Reset();
+        Assert.Equal(0xE00200u, machine.Cpu.ProgramCounter);
+        Assert.Equal(0x11144EF9u, machine.Cpu.A[7]);
+        long cycle = 0;
+        Assert.Equal(0xE00200u, machine.ReadLong(4, ref cycle, M68kBusAccessKind.CpuDataRead));
+        extension[1] = 0x11;
+        machine.LoadExtensionRom(extension);
+        machine.Reset();
+        Assert.Equal(0xF80100u, machine.Cpu.ProgramCounter);
+    }
+
     [Theory]
     [InlineData(M68kCpuModel.M68000, false, 0x0181, 0x0181)]
     [InlineData(M68kCpuModel.M68EC020, true, 0x0181, 0x0000)]

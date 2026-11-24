@@ -448,6 +448,7 @@ else if (romPath is not null)
     {
         machine.LoadKickstart(image.AsSpan(524288));
         machine.LoadExtensionRom(image.AsSpan(0, 524288));
+        machine.Reset();
     }
     else machine.LoadKickstart(image);
 }

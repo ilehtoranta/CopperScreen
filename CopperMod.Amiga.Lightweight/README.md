@@ -219,7 +219,7 @@ IDE/SCSI controllers, preserved-track writes and save-state
 compatibility are outside current product scope. Unsupported settings fail visibly.
 
 Optional `LightweightA500Configuration.RtcEnabled` ports the Legacy A501 clock
-register model at `$DC0000–$DC003F`. The default remains disabled. Settings >
+register model on the odd lanes of `$DC0000–$DCFFFF`, mirrored every 64 bytes. The default remains disabled. Settings >
 Memory > RTC clock and runner `--rtc` enable it. Host local time supplies the
 clock; guest writes adjust a session-local offset. Resets and enabled-to-enabled
 restart candidates retain that offset; independent machines start from host time.

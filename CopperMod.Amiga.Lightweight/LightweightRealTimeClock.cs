@@ -14,7 +14,7 @@ namespace CopperMod.Amiga.Lightweight
     internal sealed class LightweightRealTimeClock
     {
         public const uint BaseAddress = 0x00DC_0000;
-        public const uint ByteLength = 0x40;
+        public const uint ByteLength = 0x10000;
 
         private const byte ControlF24HourMode = 0x04;
 
@@ -65,7 +65,7 @@ namespace CopperMod.Amiga.Lightweight
                 return false;
             }
 
-            value = ReadRegister(GetRegister(address));
+            value = (address & 1) == 0 ? (byte)0xFF : ReadRegister(GetRegister(address));
             return true;
         }
 
@@ -76,7 +76,7 @@ namespace CopperMod.Amiga.Lightweight
                 return false;
             }
 
-            WriteRegister(GetRegister(address), (byte)(value & 0x0F));
+            if ((address & 1) != 0) WriteRegister(GetRegister(address), (byte)(value & 0x0F));
             return true;
         }
 

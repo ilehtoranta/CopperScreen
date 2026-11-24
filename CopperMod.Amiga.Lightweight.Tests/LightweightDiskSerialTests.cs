@@ -93,6 +93,16 @@ public sealed class LightweightDiskSerialTests
     }
 
     [Fact]
+    public void CpuLongWriteAcknowledgesByteReadyAtItsSecondWord()
+    {
+        using var machine = RunningMachine();
+        machine.AdvanceHardwareTo(machine.DiskSerialNextCycle + 7 * 14);
+        var cycle = machine.Cycle;
+        machine.WriteLong(0xDFF018, 0, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(0x00AA, ReadStatus(machine));
+    }
+
+    [Fact]
     public void SyncIsLiveAndInterruptDoesNotDependOnDmaOrWordsync()
     {
         using var machine = RunningMachine();

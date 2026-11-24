@@ -73,7 +73,10 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
             var integratedExtension = _copperStart && rom.Length == 1048576;
             _machine.LoadKickstart(integratedExtension ? rom.AsSpan(524288) : rom);
             if (integratedExtension)
+            {
                 _machine.LoadExtensionRom(rom.AsSpan(0, 524288));
+                _machine.Reset();
+            }
             else if (_copperStart && !_machine.IsAga && !string.IsNullOrWhiteSpace(options.KickstartRomPath))
             {
                 var romDirectory = Path.GetDirectoryName(Path.GetFullPath(options.KickstartRomPath))!;
@@ -82,6 +85,7 @@ internal sealed class CopperScreenLightweightSession : ICopperScreenSession
                     var companion = Path.Combine(romDirectory, name);
                     if (!File.Exists(companion)) continue;
                     _machine.LoadExtensionRom(File.ReadAllBytes(companion));
+                    _machine.Reset();
                     break;
                 }
             }

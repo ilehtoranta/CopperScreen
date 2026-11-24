@@ -26,6 +26,23 @@ public sealed class LightweightAgaTests
     }
 
     [Fact]
+    public void CpuReadClearsOnlyTheSelectedBitplanePointerHalves()
+    {
+        using var m = Create();
+        long cycle = m.Cycle;
+        m.WriteLong(0xDFF0FC, 0x00012344, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(0x00012344u, m.GetBitplanePointer(7));
+        m.ReadByte(0xDFF0FD, ref cycle, M68kBusAccessKind.CpuDataRead);
+        Assert.Equal(0x2344u, m.GetBitplanePointer(7));
+        m.WriteLong(0xDFF0FC, 0x00012344, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        m.WriteLong(0x4000, 0xABCD5678, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        // First word selects the high CPU bus half. The second sees the preceding word read.
+        Assert.Equal(0xABCDABCDu, m.ReadLong(0xDFF0FC, ref cycle, M68kBusAccessKind.CpuDataRead));
+        Assert.Equal(0u, m.GetBitplanePointer(7));
+        Assert.Equal(0u, m.GetLiveBitplanePointer(7));
+    }
+
+    [Fact]
     public void AliceAndLisaMustBePairedWithTheInitialA1200MemoryAndCpu()
     {
         using var m = Create(); Assert.True(m.IsAga); Assert.Equal(2097152, m.ChipRam.Length);

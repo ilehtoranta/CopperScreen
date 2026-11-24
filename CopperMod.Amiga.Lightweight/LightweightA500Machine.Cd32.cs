@@ -13,7 +13,6 @@ public sealed partial class LightweightA500Machine
 
     private readonly LightweightAkiko? _akiko;
     private readonly LightweightCd32Pads? _cd32Pads;
-    private bool _cd32OverlayUsesExtension;
     private int _cd32TodLines;
 
     public LightweightCd32Region? Cd32Region => _configuration.Cd32Region;
@@ -75,7 +74,7 @@ public sealed partial class LightweightA500Machine
         _romImageOffset = 0;
         _romImageLength = _extensionRomImageLength = Cd32RomBankSize;
         _romLoaded = _extensionRomLoaded = true;
-        _cd32OverlayUsesExtension = BinaryPrimitives.ReadUInt16BigEndian(extension) == 0x1114;
+        _overlayUsesExtension = BinaryPrimitives.ReadUInt16BigEndian(extension) == 0x1114;
         Reset();
     }
 
