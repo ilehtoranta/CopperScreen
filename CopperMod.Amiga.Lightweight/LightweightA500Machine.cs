@@ -95,6 +95,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private ushort _cpuVisibleIntreq;
     private int _interruptPinLevel;
     private long _interruptPinChangeCycle = long.MinValue;
+    private long _ec020PendingInterruptBoundary = long.MinValue;
     private string? _unsupportedActiveFeature;
     private bool _disposed;
 
@@ -459,6 +460,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _cpuVisibleIntreq = 0;
         _interruptPinLevel = 0;
         _interruptPinChangeCycle = long.MinValue;
+        _ec020PendingInterruptBoundary = long.MinValue;
         _unsupportedActiveFeature = null;
         var stackPointer = ReadLongRaw(0);
         var programCounter = ReadLongRaw(4);
@@ -988,6 +990,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _cpuVisibleIntreq = 0;
         _interruptPinLevel = 0;
         _interruptPinChangeCycle = long.MinValue;
+        _ec020PendingInterruptBoundary = long.MinValue;
         _unsupportedActiveFeature = null;
         // RESET resets the CIA, not the independently powered keyboard.
         SetKeyboardPins(_keyboard.DataHigh, _keyboard.ClockHigh, cycle);
@@ -1676,8 +1679,26 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
 
         if (_interruptPinLevel <= 0 || _interruptPinLevel <= interruptMask)
+        {
+            if (_ec020PendingInterruptBoundary != long.MinValue)
+                _ec020PendingInterruptBoundary = long.MinValue;
             return false;
+        }
 
+        if (IsAga && _configuration.CpuModel == M68kCpuModel.M68EC020 && !_cpu.State.Stopped)
+        {
+            // At 14 MHz, allow the two IPL synchronizer samples to settle
+            // before this boundary. Exception entry follows the next instruction.
+            if (_clock.Cycle - _interruptPinChangeCycle < LightweightClock.CpuCyclesPerColorClock)
+                return false;
+
+            if (_ec020PendingInterruptBoundary == long.MinValue)
+                _ec020PendingInterruptBoundary = _cpu.State.Cycles;
+            if (_ec020PendingInterruptBoundary == _cpu.State.Cycles)
+                return false;
+        }
+
+        _ec020PendingInterruptBoundary = long.MinValue;
         _cpu.RequestInterrupt(
             _interruptPinLevel,
             (uint)((24 + _interruptPinLevel) * 4));

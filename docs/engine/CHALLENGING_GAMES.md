@@ -985,3 +985,66 @@ The Release replay reproduced the starting and scrolled captures byte for
 byte through field 7,360 and reported no unsupported feature. This checks
 the opening terrain redraw. Further worlds and independent measurements of
 the title's blitter activity remain open.
+
+### Alien Breed 3D
+
+The original Team 17 AGA release, SPS 0624, uses two disks. Its archive
+SHA-256 is `A7AFF0D799FB1D0C31483F370B871E2D42F779106EA99A0758D6C3C6028A0E03`.
+Both engines use a stock PAL A1200 with 2 MiB Chip RAM and Kickstart
+3.0 revision 39.106. The boot disk starts in DF0 and the level disk in DF1.
+The guest waits for the level disk in DF0 before asking for the printed code.
+
+On `2bd3ac3`, the original loader remained in its fade at field 8,250.
+The loop at `$94B8A` reads bit 5 of the low byte of `INTREQR`, explicitly
+acknowledges VERTB, and updates the palette. CopperScreen entered the
+level-3 handler early enough for it to clear VERTB before almost every
+foreground read. WinUAE 6.1 beta 23 advanced 14 fade steps between adjacent
+register captures about 0.31 seconds apart. Its DMA trace shows the
+foreground read of `$DFF01F` with bit 5 set before interrupt entry.
+[WinUAE 020 interrupt dispatch](https://github.com/tonioni/WinUAE/blob/ee784914c8d61bb503d137e358b22fcc4758a294/newcpu.cpp#L4864-L4884)
+
+The stock AGA 68EC020 path now qualifies the pin at the motherboard clock
+and defers entry through the instruction after the pending sample. A second
+check at the same CPU boundary cannot advance recognition. The same window
+on A1200 and CD32 uses the canonical board clock. The 68EC020 samples IPL
+on consecutive falling edges. The implementation approximates that timing
+at instruction boundaries. Physical sampling, short pulses and mask changes
+around instruction retirement still need qualification.
+[Motorola M68020 User's Manual, section 6.1.9](https://www.nxp.com/docs/en/reference-manual/M68020UM.pdf)
+
+The [bootable VERTB polling probe](../../scripts/generate-ec020-vertb-poll-probe.ps1)
+has SHA-256 `407EE938D0E127DFADE8882C35BC20EE06D83B1D2CF4B103A6E3D5C82F21E95F`.
+The word at `$70000` counts successful foreground polls and the word at
+`$70002` counts handler entries. After 400 fields the baseline reported
+`$0001,$00F2`, and the corrected Release reported `$00F2,$00F2`. Running
+`DBG m 70000 2` in stock WinUAE after boot also gave equal counts. The
+board-level automated regression checks both normal and scalar execution.
+
+The corrected Release replay reached the level-disk prompt by field 4,800.
+It mounted disk 2 in DF0 at 5,000 and pulsed the left mouse button for 15
+fields at 5,200, 5,500 and 6,000. It entered the three digits from the
+original codebook at 7,000, 7,020 and 7,040, pressed Return at 7,060 and
+pressed Space at 7,350 and 7,650. Each key was released eight fields later.
+The first playable room appears at field 7,950. Up at 8,100–8,140 moves
+toward the door and Right at 8,300–8,330 turns the view. The 8,500-field
+Release replay reported no unsupported feature.
+[Original manual](https://amigaland.de/wp-content/uploads/2024/03/Alien-Breed-3D-Manual-DE-ENG-FR-IT.pdf)
+· [Original codebook](https://amigaland.de/wp-content/uploads/2024/03/Alien-Breed-3D-Code-book.pdf)
+
+At the opening position, 59,904 of 59,904 RGB samples in the 3D viewport
+and 5,456 of 5,456 samples in the visible right border match WinUAE.
+The comparison maps the 720×568 WinUAE capture to the raw CopperScreen
+field using `(2*x + 400) mod 1816` and `floor(y/2) + 27`. The viewport
+covers reference x=186–569 and even y=38–348. The right border covers
+x=698–719 and even y=50–544. The left and right HUD samples match
+31,736 of 31,744 and 31,482 of 31,496 respectively. The mismatches are
+confined to one horizontal row on the left and the animated ammunition
+bar on the right. The far-right high-resolution sprite comparator and
+later rooms remain open.
+[WinUAE far-right sprite changelog](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L6056-L6062)
+
+| Capture | SHA-256 |
+| --- | --- |
+| CopperScreen opening room, field 7,950 | `4930E1B700D29861FC4BB70EBF40B973A0AACFFFFEC98BB82929DACE38B4CD1E` |
+| CopperScreen after walking forward, field 8,250 | `65F3FF6C1B1FE997213DFE36A5016E5965367CC32F914750282F67CD80F85A23` |
+| Stock cycle-exact WinUAE opening room | `7BC5B5741FB19BF92EC189E501FA1319BE8F451A67F8D7CF2F454FA67BF4B92D` |

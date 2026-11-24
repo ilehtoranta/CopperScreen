@@ -8,6 +8,55 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 public sealed class LightweightInterruptSamplingTests
 {
     [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void Ec020CanReadVerticalBlankBeforeInterruptEntry(bool batch)
+    {
+        using var machine = new LightweightA500Machine(new()
+        {
+            CpuModel = M68kCpuModel.M68EC020,
+            AgnusModel = LightweightAgnusModel.Mos8374Alice,
+            DeniseModel = LightweightDeniseModel.Lisa4203,
+            ChipRamBytes = 2 * 1024 * 1024,
+            SlowRamBytes = 0
+        }, batch);
+        long cycle = 0;
+        void Put(uint address, ReadOnlySpan<ushort> words)
+        {
+            foreach (var word in words)
+            {
+                machine.WriteWord(address, word, ref cycle, M68kBusAccessKind.CpuDataWrite);
+                address += 2;
+            }
+        }
+
+        Put(0x6C, [0, 0x1200]);
+        Put(0x1000,
+        [
+            0x33FC, 0xC020, 0x00DF, 0xF09A, // Enable VERTB.
+            0x46FC, 0x2000,
+            0x0839, 5, 0x00DF, 0xF01F,     // Poll INTREQR for VERTB.
+            0x67F6,
+            0x33FC, 0x0020, 0x00DF, 0xF09C,
+            0x5240,                         // Count foreground observations.
+            0x60EA
+        ]);
+        Put(0x1200,
+        [
+            0x33FC, 0x0020, 0x00DF, 0xF09C,
+            0x5241,                         // Count handler observations.
+            0x4E73
+        ]);
+        machine.Reset();
+
+        for (var frame = 0; frame < 8; frame++)
+            machine.ExecuteFrame();
+
+        Assert.Equal(7u, machine.Cpu.D[0]);
+        Assert.Equal(7u, machine.Cpu.D[1]);
+    }
+
+    [Theory]
     [InlineData(0x2000)]
     [InlineData(0x2700)]
     public void RepeatedInterruptsRetainTheSameInstructionSamplingWindow(ushort gapStatus)
