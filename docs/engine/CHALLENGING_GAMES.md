@@ -395,6 +395,8 @@ preserves that order by advancing the queue after decoding the full
 extension and before dereferencing the pointer. Six regression cases
 cover aligned fetches, cache control, all three operand sizes, and this
 memory-indirect ordering. All 3,125 tests in the focused EC020 suite passed.
+The complete shared-core suite subsequently passed 5,528 tests and skipped
+109 optional cases.
 [WinUAE displaced MOVE handler](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/cpuemu_21.cpp#L11620-L11643)
 · [WinUAE indexed MOVE handler](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/cpuemu_21.cpp#L11902-L11923)
 · [Motorola MC68020 and MC68EC020 user’s manual](https://www.nxp.com/docs/en/data-sheet/MC68020UM.pdf)
@@ -417,24 +419,53 @@ skipped seven optional native cases. The existing A1200 timing policy
 still approximates general instruction overlap and bus phases. Physical
 A1200 timing remains unverified.
 
-### Live B, C and D channel investigation
+### Live B, C and D channel changes
 
 A separate synthetic AGA test reproduced a live channel discrepancy.
 With a Copper switch from A+D to A+B+D during the blit, WinUAE schedules
-9 to 12 B reads depending on the write cycle. CopperScreen schedules
-zero. When the Copper clears D during an A+C+D blit, WinUAE produces
-1 to 3 destination writes across the sweep and CopperScreen produces
-all 16.
+9 to 12 B reads depending on the write cycle. The previous CopperScreen
+engine scheduled zero. It also wrote all 16 destination words when
+the Copper cleared D during an A+C+D blit, where WinUAE wrote 1 to 3.
 [WinUAE channel selection and shifter](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1220-L1373)
 
-In the isolated B sweep, enabling B adds 7 to 10 B reads while
-retaining all 16 destination writes. Disabling B at two of the
-tested phases leaves 4 or 5 destination writes. The Copper stayed
-in a blitter-finished WAIT after a stalled blit and advanced after
-a completed one. Enabling B at another phase
-during fill can produce C DMA reads even with USEC clear. These
-events give separate tests for changes to the active channel
-selection, the phase shifter and BUSY.
+Changing the channel configuration while an area blit is active can
+insert or remove shifter stages. Inserting B can send the A pulse
+into both B and the following stage. When A and B later select their
+registers on the same clock, the combined selection reads C even
+with USEC clear. Removing B can discard the only pulse and leave BUSY
+asserted. A fixed channel sequence remains sufficient until a
+register write changes the active schedule. After that write, the
+engine advances the live stages on an accepted input and advances
+the two-clock destination latch even when that input stalls.
+An accepted DMA transfer retires with its original address and value.
+
+PAL AGA and OCS boot probes matched cycle-exact WinUAE 6.1 beta 23
+in 2,062 transfers across 72 cases. The comparison covers channel,
+address, destination word and CCK. The probes switch B at four
+Copper timings with and without A or C reads, switch C and D in both
+directions, and exercise descending fill. The fill fixture initializes
+the C buffer used by an overlapping A and B selection. Engine tests
+cover the C transfer with USEC clear, BUSY after the loss of the last
+pulse, recovery by a new BLTSIZE and retirement of a D write after
+USED clears. A Copper blitter-finished WAIT also produced the same
+pass and stall result as WinUAE in two separate boot probes.
+
+Use the [bootable probe generator](../../scripts/generate-blitter-area-probe.ps1)
+with `-LiveChannels B`, `BWithC`, `BWithoutA`, `BWithFill`, `C` or `D`.
+Add `-Ocs` for the PAL A500. With the WinUAE DMA debugger enabled,
+`DBG vl 64 30 8` captures the first case. Repeat at lines 70 through 106
+in six-line steps. Each case starts a four-word by four-row blit and
+changes BLTCON0 once after startup.
+
+The Release solution build completed with zero warnings. Engine
+diagnostics passed 1,483 tests and skipped seven optional native cases.
+The original ZooL 2 Swan Lake replay at field 12,850 and the P.P. Hammer,
+Banshee, Lemmings 3 and RoboCop 3 replays retained all 13 captured frames
+and all final CPU, hardware and output fingerprints. Sqrxz reached its
+title at field 1,425 on PAL and NTSC CD32 with identical images to the
+preceding build.
+Arbitrary active BLTSIZE writes, active BLTCON1 mode changes and
+physical signal timing remain open.
 
 ### Live A source enable
 
@@ -456,9 +487,8 @@ and all final fingerprints from the live-shift build. The Release
 build completed with zero warnings and the engine diagnostic suite
 passed 1,469 tests with seven optional tests skipped.
 
-Live B, C and D changes, source-only schedules, line-mode data
-writes, absolute Copper start timing and physical signal measurements
-remain open.
+Uncovered source-only schedules, line-mode data writes, absolute Copper
+start timing and physical signal measurements remain open.
 
 ## P.P. Hammer and His Pneumatic Weapon
 

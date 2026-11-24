@@ -19,6 +19,13 @@ internal sealed class LightweightBlitter
         D
     }
 
+    private const byte AreaStageA = 1;
+    private const byte AreaStageB = 2;
+    private const byte AreaStageX = 4;
+    private const byte AreaStageY = 8;
+    private const byte AreaDestinationInput = 1;
+    private const byte AreaDestinationSecondClock = 4;
+
     private const ushort DmaconMaster = 0x0200;
     private const ushort DmaconBlitter = 0x0040;
     private const ushort DmaconNasty = 0x0400;
@@ -114,7 +121,17 @@ internal sealed class LightweightBlitter
     private ushort _previousB;
     private ushort _shiftedAreaB;
     private ushort _areaResult;
-    private bool _areaResultPending;
+    private long _areaResultCycle;
+    private bool _areaChannelsChanged;
+    private byte _areaRequestedChannels;
+    private bool _areaUsesLiveStages;
+    private byte _areaStages;
+    private bool _areaSkipB;
+    private bool _areaSkipY;
+    private byte _areaDestinationDelay;
+    private bool _areaDestinationArmed;
+    private bool _pendingAreaWord;
+    private bool _pendingAreaModuloEnabled;
     private int _destinationX;
     private long _areaDrainCycle;
     private long _areaCompletionCycle;
@@ -213,7 +230,9 @@ internal sealed class LightweightBlitter
         _previousA = 0;
         _previousB = 0;
         _shiftedAreaB = 0;
-        _areaResultPending = false;
+        _areaResultCycle = long.MinValue;
+        _areaChannelsChanged = false;
+        _areaUsesLiveStages = false;
         _destinationX = 0;
         _areaDrainCycle = long.MaxValue;
         _areaCompletionCycle = long.MaxValue;
@@ -297,7 +316,7 @@ internal sealed class LightweightBlitter
         var height = offset == LightweightRegisters.Bltsize ? value >> 6 : machine.GetCustomRegister(LightweightRegisters.Bltsizv) & 32767;
         if (width == 0) width = offset == LightweightRegisters.Bltsize ? 64 : 2048;
         if (height == 0) height = offset == LightweightRegisters.Bltsize ? 1024 : 32768;
-        if (_active)
+        if (_active && !LiveAreaPulseLost)
         {
             _deferredStart = true;
             _deferredWidth = width;
@@ -308,7 +327,7 @@ internal sealed class LightweightBlitter
         Start(width, height, cycle, machine);
     }
 
-    internal void WriteAreaControl0(ushort control, bool lowOnly)
+    internal void WriteAreaControl0(ushort control, bool lowOnly, long cycle)
     {
         if (_active && !_lineMode)
         {
@@ -319,11 +338,22 @@ internal sealed class LightweightBlitter
             {
                 _shiftA = control >> 12;
                 _fillCarry = _fillCarryInitial;
-                if (_useD)
+                var channels = (byte)((control >> 8) & 15);
+                if (channels != _areaRequestedChannels)
                 {
-                    // Area destination schedules always keep an A slot.
-                    // USEA controls whether that slot accepts a DMA read.
-                    _useA = (control & 0x0800) != 0;
+                    _areaChannelsChanged |= !_useD || _areaUsesLiveStages ||
+                        ((channels ^ _areaRequestedChannels) & 7) != 0;
+                    _areaRequestedChannels = channels;
+                    // A always has a stage. A-only changes to a fixed destination
+                    // sequence need only change whether it reads Chip RAM.
+                    if (!_areaChannelsChanged)
+                    {
+                        _useA = (channels & 8) != 0;
+                    }
+                    else if (!_beamStopped)
+                    {
+                        Publish(NextCckAfter(cycle));
+                    }
                 }
             }
         }
@@ -474,7 +504,7 @@ internal sealed class LightweightBlitter
         }
 
         if (!_beamStopped && _active && !_hasPendingOutput && _startCycle != cycle &&
-            (!_requiresDma || _dmaEnabled))
+            CanClockBlitter())
         {
             if (_startupRemaining != 0)
             {
@@ -513,6 +543,7 @@ internal sealed class LightweightBlitter
         _useB = (bltcon0 & 0x0400) != 0;
         _useC = (bltcon0 & 0x0200) != 0;
         _useD = (bltcon0 & 0x0100) != 0;
+        _areaRequestedChannels = (byte)((bltcon0 >> 8) & 15);
         _descending = !_lineMode && (bltcon1 & Bltcon1Descending) != 0;
         _fillEnabled = !_lineMode && _descending &&
             (bltcon1 & (Bltcon1InclusiveFill | Bltcon1ExclusiveFill)) != 0;
@@ -570,7 +601,9 @@ internal sealed class LightweightBlitter
                 (_useD && (_useC || _fillEnabled) ? 1 : 0);
             _startupRemaining = 3;
         }
-        _areaResultPending = false;
+        _areaResultCycle = long.MinValue;
+        _areaChannelsChanged = false;
+        _areaUsesLiveStages = false;
         _destinationX = 0;
         _areaDrainCycle = long.MaxValue;
         _areaCompletionCycle = long.MaxValue;
@@ -644,6 +677,17 @@ internal sealed class LightweightBlitter
             return;
         }
 
+        if (_areaChannelsChanged || _areaUsesLiveStages)
+        {
+            if (_areaChannelsChanged)
+            {
+                if (!_areaUsesLiveStages) BeginLiveAreaStages(cycle);
+                ApplyLiveAreaChannels();
+            }
+            TryAcceptLiveAreaPhase(cycle, machine, ownedBusThisCycle);
+            return;
+        }
+
         var canAdvance = _phaseIndex < _phaseCount && machine.CanBlitterAdvanceControl(cycle);
         if (_delayedModuloWrites != 0) ApplyDelayedAreaModulos(cycle, !canAdvance, machine);
         if (!canAdvance)
@@ -658,31 +702,25 @@ internal sealed class LightweightBlitter
         }
 
         var channel = draining ? AreaChannel.D : GetPhaseChannel(_phaseIndex);
-        var usesBus = channel == AreaChannel.D ? _areaResultPending : ChannelEnabled(channel);
+        var usesBus = channel == AreaChannel.D
+            ? _useD && _areaResultCycle != long.MinValue
+            : ChannelEnabled(channel);
         if (ShouldYieldToCpu(cycle, machine, ownedBusThisCycle))
         {
             if (_delayedModuloWrites != 0) ApplyDelayedAreaModulos(cycle, stalled: true, machine);
             return;
         }
 
-        _pendingChannel = channel;
-        _pendingUsesBus = usesBus;
-        (_pendingAddress, _pendingAreaModulo) = channel switch
-        {
-            AreaChannel.A => (_pointerA, _moduloA),
-            AreaChannel.B => (_pointerB, _moduloB),
-            AreaChannel.C => (_pointerC, _moduloC),
-            _ => (_pointerD, _moduloD)
-        };
         if (channel == AreaChannel.D)
         {
             if (_useD)
             {
                 _pendingWriteValue = _areaResult;
             }
-            else if (ComputeAreaOutput() != 0)
+            else
             {
-                _zero = false;
+                _areaResult = ComputeAreaOutput();
+                if (_areaResult != 0) _zero = false;
             }
         }
 
@@ -702,6 +740,20 @@ internal sealed class LightweightBlitter
             }
         }
 
+        AcceptAreaTransfer(cycle, channel, usesBus);
+    }
+
+    private void AcceptAreaTransfer(long cycle, AreaChannel channel, bool usesBus)
+    {
+        _pendingChannel = channel;
+        _pendingUsesBus = usesBus;
+        (_pendingAddress, _pendingAreaModulo) = channel switch
+        {
+            AreaChannel.A => (_pointerA, _moduloA),
+            AreaChannel.B => (_pointerB, _moduloB),
+            AreaChannel.C => (_pointerC, _moduloC),
+            _ => (_pointerD, _moduloD)
+        };
         _hasPendingOutput = true;
         _pendingOutputCycle = cycle + LightweightClock.CpuCyclesPerColorClock;
 #if LIGHTWEIGHT_DIAGNOSTICS
@@ -789,18 +841,18 @@ internal sealed class LightweightBlitter
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltadat, _dataA);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltapth, _pointerA);
                 break;
-            case AreaChannel.B when _useB:
+            case AreaChannel.B when usesBus:
                 _dataB = machine.ReadChipWordBus(address);
                 _shiftedAreaB = ShiftSource(_dataB, ref _previousB, _shiftB, _descending);
                 _pointerB = AdvanceAreaSource(address, _pendingAreaModulo);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltbdat, _dataB);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltbpth, _pointerB);
-                if (_bOnly && IsFinalWord())
+                if (!_areaUsesLiveStages && _bOnly && IsFinalWord())
                 {
                     PublishMainCompletion(cycle, machine);
                 }
                 break;
-            case AreaChannel.C when _useC:
+            case AreaChannel.C when usesBus:
                 _dataC = machine.ReadChipWordBus(address);
                 _pointerC = AdvanceAreaSource(address, _pendingAreaModulo);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltcdat, _dataC);
@@ -809,13 +861,24 @@ internal sealed class LightweightBlitter
             case AreaChannel.D when usesBus:
                 if (!_disableOutput) machine.WriteChipWordBus(address, writeValue);
                 _pointerD = AddPointer(address, _descending ? -2 : 2);
-                if (++_destinationX == _widthWords)
+                if (_areaUsesLiveStages)
+                {
+                    if (_pendingAreaModuloEnabled)
+                        _pointerD = AddModulo(_pointerD, _pendingAreaModulo, _descending);
+                }
+                else if (++_destinationX == _widthWords)
                 {
                     _destinationX = 0;
                     _pointerD = AddModulo(_pointerD, _pendingAreaModulo, _descending);
                 }
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltdpth, _pointerD);
                 break;
+        }
+
+        if (_areaUsesLiveStages)
+        {
+            if (_pendingAreaWord) CompleteLiveAreaWord(cycle);
+            return;
         }
 
         if (_useD && _rowY == _height)
@@ -835,7 +898,7 @@ internal sealed class LightweightBlitter
             // The D slot drains the preceding result while the current
             // sources feed the next result through the blitter data latch.
             _areaResult = ComputeAreaOutput();
-            _areaResultPending = true;
+            _areaResultCycle = cycle;
             if (_areaResult != 0) _zero = false;
             _phaseIndex = 0;
             if (++_wordX == _widthWords)
@@ -849,8 +912,12 @@ internal sealed class LightweightBlitter
         {
             // A source-only C slot is the end of the word. Its fresh data
             // reaches the minterm after the accepted DMA read retires.
-            if (channel == AreaChannel.C && ComputeAreaOutput() != 0)
-                _zero = false;
+            if (channel == AreaChannel.C)
+            {
+                _areaResult = ComputeAreaOutput();
+                if (_areaResult != 0) _zero = false;
+            }
+            _areaResultCycle = cycle;
             AdvanceWord(cycle, machine);
         }
     }
@@ -858,9 +925,159 @@ internal sealed class LightweightBlitter
     private uint AdvanceAreaSource(uint pointer, short modulo)
     {
         pointer = AddPointer(pointer, _descending ? -2 : 2);
-        return _useD && _wordX == _widthWords - 1
-            ? AddModulo(pointer, modulo, _descending)
-            : pointer;
+        var applyModulo = _areaUsesLiveStages
+            ? _pendingAreaModuloEnabled
+            : _useD && _wordX == _widthWords - 1;
+        return applyModulo ? AddModulo(pointer, modulo, _descending) : pointer;
+    }
+
+    private void BeginLiveAreaStages(long cycle)
+    {
+        _areaUsesLiveStages = true;
+        _areaSkipB = !_useB;
+        _areaSkipY = !_useD || !(_useC || _fillEnabled);
+        _areaStages = _rowY == _height ? (byte)0 : _phaseIndex switch
+        {
+            0 => AreaStageA,
+            1 when _useB => AreaStageB,
+            _ when _phaseIndex == _phaseCount - 1 && !_areaSkipY => AreaStageY,
+            _ => AreaStageX
+        };
+
+        // The result latch is written one CCK after acceptance. Reconstruct
+        // the two destination clocks from that retirement time.
+        _areaDestinationDelay = 0;
+        _areaDestinationArmed = false;
+        if (_areaResultCycle == cycle)
+            _areaDestinationDelay = AreaDestinationInput;
+        else if (_areaResultCycle == cycle - LightweightClock.CpuCyclesPerColorClock)
+            _areaDestinationDelay = AreaDestinationSecondClock;
+        else if (_useD && _areaResultCycle != long.MinValue)
+            _areaDestinationArmed = !_fillIdleFollowsDestination || _areaStages != AreaStageY;
+    }
+
+    private void ApplyLiveAreaChannels()
+    {
+        var channels = _areaRequestedChannels;
+        _useA = (channels & 8) != 0;
+        _useB = (channels & 4) != 0;
+        _useC = (channels & 2) != 0;
+        _useD = (channels & 1) != 0;
+        if (!_useD) _areaDestinationArmed = false;
+        _requiresDma = true;
+        _areaChannelsChanged = false;
+    }
+
+    private void TryAcceptLiveAreaPhase(
+        long cycle,
+        LightweightA500Machine machine,
+        bool ownedBusThisCycle)
+    {
+        // This latch runs on physical CCKs even when the input slot stalls.
+        if ((_areaDestinationDelay & AreaDestinationSecondClock) != 0 && _useD)
+            _areaDestinationArmed = true;
+        _areaDestinationDelay = (byte)(((_areaDestinationDelay & AreaDestinationInput) << 1) |
+            ((_areaDestinationDelay & 3) == AreaDestinationInput ? AreaDestinationSecondClock : 0));
+
+        if (_rowY == _height && _areaStages == 0 && _areaDestinationDelay == 0 &&
+            !_areaDestinationArmed && _areaCompletionCycle == long.MaxValue)
+        {
+            FinishTermination(cycle, machine);
+            return;
+        }
+
+        if (LiveAreaPulseLost)
+        {
+            if (_deferredStart) FinishTermination(cycle, machine);
+            return;
+        }
+
+        var canAdvance = _dmaEnabled && machine.CanBlitterAdvanceControl(cycle) &&
+            !ShouldYieldToCpu(cycle, machine, ownedBusThisCycle);
+        if (_delayedModuloWrites != 0) ApplyDelayedAreaModulos(cycle, !canAdvance, machine);
+        if (!canAdvance) return;
+
+        var stages = _areaStages;
+        var channel = GetLiveAreaChannel(stages);
+        _pendingAreaModuloEnabled = channel == AreaChannel.D ? _wordX == 0 : _wordX == _widthWords - 1;
+        if (channel == AreaChannel.D)
+        {
+            _areaDestinationArmed = false;
+            _pendingWriteValue = _areaResult;
+        }
+
+        AdvanceLiveAreaStages(stages);
+        if (_pendingAreaWord && IsFinalWord())
+        {
+            if (_alice && _useD)
+                _areaCompletionCycle = cycle + 2 * LightweightClock.CpuCyclesPerColorClock;
+            else
+                PublishMainCompletion(cycle, machine);
+        }
+
+        AcceptAreaTransfer(cycle, channel, channel != AreaChannel.Idle);
+    }
+
+    private bool LiveAreaPulseLost => _areaUsesLiveStages && _rowY < _height &&
+        _areaStages == 0 && _areaDestinationDelay == 0 && !_areaDestinationArmed && !_hasPendingOutput;
+
+    private void AdvanceLiveAreaStages(byte stages)
+    {
+        var skipB = !_useB;
+        var skipY = !_useD || !(_useC || _fillEnabled);
+        var output = (stages & (skipY ? AreaStageX : AreaStageY)) != 0;
+
+        if (_areaSkipB != skipB)
+        {
+            // Inserting B can feed both B and X from A on this clock.
+            // Removing B discards both the bypassed B and A pulses.
+            if (skipB) stages &= unchecked((byte)~AreaStageA);
+            else stages = (byte)((stages & ~AreaStageB) | ((stages & AreaStageA) << 1));
+        }
+        if (_areaSkipY != skipY)
+        {
+            output = !skipY && (stages & AreaStageX) != 0;
+            if (skipY) stages &= unchecked((byte)~AreaStageX);
+        }
+        _areaSkipB = skipB;
+        _areaSkipY = skipY;
+
+        var next = output && _rowY < _height && !IsFinalWord() ? AreaStageA : 0;
+        if (skipB)
+            next |= (stages & AreaStageA) << 2;
+        else
+            next |= (stages & (AreaStageA | AreaStageB)) << 1;
+        if (!skipY) next |= (stages & AreaStageX) << 1;
+        _areaStages = (byte)next;
+        _pendingAreaWord = output;
+        if (output) _areaDestinationDelay |= AreaDestinationInput;
+    }
+
+    private AreaChannel GetLiveAreaChannel(byte stages)
+    {
+        var readA = _useA && (stages & AreaStageA) != 0;
+        var readB = _useB && (stages & AreaStageB) != 0;
+        // The address generators combine their register selects on the same
+        // input. The overlapping A and B selections also resolve to BLTCDAT.
+        if ((_useC && (stages & AreaStageX) != 0) || (readA && readB)) return AreaChannel.C;
+        if (readA) return AreaChannel.A;
+        if (readB) return AreaChannel.B;
+        return _areaDestinationArmed && (stages & AreaStageA) == 0
+            ? AreaChannel.D
+            : AreaChannel.Idle;
+    }
+
+    private void CompleteLiveAreaWord(long cycle)
+    {
+        _areaResult = ComputeAreaOutput();
+        _areaResultCycle = cycle;
+        if (_areaResult != 0) _zero = false;
+        if (_rowY < _height && ++_wordX == _widthWords)
+        {
+            _wordX = 0;
+            _rowY++;
+            _fillCarry = _fillCarryInitial;
+        }
     }
 
     private void CompleteLineOutput(
@@ -1275,12 +1492,18 @@ internal sealed class LightweightBlitter
         {
             Publish(_areaCompletionCycle);
         }
-        if (!_beamStopped && _active && !_hasPendingOutput &&
-            (!_requiresDma || _dmaEnabled))
+        if (!_beamStopped && _active && !_hasPendingOutput && CanClockBlitter() &&
+            !LiveAreaPulseLost)
         {
             Publish(NextCckAfter(cycle));
         }
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private bool CanClockBlitter()
+        => !_requiresDma || _dmaEnabled ||
+            (_startupRemaining == 0 && (_areaChannelsChanged ||
+                (_areaUsesLiveStages && _areaDestinationDelay != 0)));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void Publish(long cycle)

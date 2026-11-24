@@ -157,6 +157,69 @@ public sealed class LightweightBlitterTests
         Assert.Equal(fourthWord, machine.ReadChipWordDma(DestinationD + 6));
     }
 
+    [Fact]
+    public void InsertingAreaBWithAnAPulseCanReadCWithUseCClear()
+    {
+        using var machine = CreateAgaMachine();
+        ConfigureArea(machine, 0x09AA);
+        EnableBlitter(machine, nasty: false);
+        var start = StartBlit(machine, 0x0048);
+
+        machine.AdvanceHardwareTo(start + 8);
+        machine.WriteCustomRegisterFromCopper(LightweightRegisters.Bltcon0, 0x0DAA, machine.Cycle);
+        machine.AdvanceHardwareTo(start + 14);
+        Assert.Equal(SourceB + 2, machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+        Assert.Equal(SourceC, machine.GetBlitterPointer(LightweightRegisters.Bltcpth));
+
+        machine.AdvanceHardwareTo(start + 18);
+        Assert.Equal(SourceC + 2, machine.GetBlitterPointer(LightweightRegisters.Bltcpth));
+        Assert.Equal(start + 18, machine.BlitterLastOutputCycle);
+    }
+
+    [Fact]
+    public void RemovingAreaBWithABPulseKeepsBusyAssertedUntilAnotherStart()
+    {
+        using var machine = CreateAgaMachine();
+        ConfigureArea(machine, 0x0DF0);
+        EnableBlitter(machine, nasty: false);
+        var start = StartBlit(machine, 0x0048);
+
+        machine.AdvanceHardwareTo(start + 6);
+        machine.WriteCustomRegisterFromCopper(LightweightRegisters.Bltcon0, 0x09F0, machine.Cycle);
+        machine.AdvanceHardwareTo(start + 88);
+        Assert.True(machine.BlitterStatusBusy);
+        Assert.Equal(SourceA + 2, machine.GetBlitterPointer(LightweightRegisters.Bltapth));
+        Assert.Equal(SourceB, machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+        Assert.Equal(DestinationD, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+
+        StartBlit(machine, 0x0041);
+        machine.AdvanceHardwareTo(machine.Cycle + 48);
+        Assert.False(machine.BlitterStatusBusy);
+        Assert.Equal(DestinationD + 2, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+    }
+
+    [Fact]
+    public void RemovingAreaDRetiresItsAcceptedWriteAndFinishesTheRemainingSources()
+    {
+        using var machine = CreateAgaMachine();
+        machine.WriteChipWordDma(SourceA, 0x1234);
+        machine.WriteChipWordDma(DestinationD + 2, 0xFEDC);
+        ConfigureArea(machine, 0x09F0);
+        EnableBlitter(machine, nasty: false);
+        var start = StartBlit(machine, 0x0044);
+
+        machine.AdvanceHardwareTo(start + 12);
+        Assert.Equal(DestinationD, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+        machine.WriteCustomRegisterFromCopper(LightweightRegisters.Bltcon0, 0x08F0, machine.Cycle);
+        machine.AdvanceHardwareTo(start + 50);
+
+        Assert.False(machine.BlitterStatusBusy);
+        Assert.Equal(SourceA + 8, machine.GetBlitterPointer(LightweightRegisters.Bltapth));
+        Assert.Equal(DestinationD + 2, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+        Assert.Equal(0x1234, machine.ReadChipWordDma(DestinationD));
+        Assert.Equal(0xFEDC, machine.ReadChipWordDma(DestinationD + 2));
+    }
+
     [Theory]
     [InlineData(LightweightRegisters.Bltadat, 0x01F0, 0, 0x1234, 0xABCD)]
     [InlineData(LightweightRegisters.Bltbdat, 0x01CC, 0x5000, 0x0091, 0x055E)]
@@ -673,6 +736,7 @@ public sealed class LightweightBlitterTests
     {
         using var machine = new LightweightA500Machine();
         WriteWord(machine, SourceB, 0xCAFE);
+        WriteWord(machine, DestinationD, 0x4321);
         ConfigureArea(machine, bltcon0: 0x04CC);
         EnableBlitter(machine, nasty: true);
         var start = StartBlit(machine, 0x0043);
@@ -689,6 +753,10 @@ public sealed class LightweightBlitterTests
             Assert.Equal(SourceB + (uint)((word + 1) * 2), machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
             Assert.False(machine.BlitterZero);
         }
+
+        AdvanceUntilBlitterIdle(machine);
+        Assert.Equal(DestinationD, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+        Assert.Equal((ushort)0x4321, ReadWord(machine, DestinationD));
     }
 
     [Fact]

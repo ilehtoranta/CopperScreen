@@ -15,6 +15,7 @@ param(
     [switch]$LiveData,
     [switch]$LiveShift,
     [switch]$LiveAEnable,
+    [ValidateSet('B', 'BWithC', 'BWithoutA', 'BWithFill', 'C', 'D')][string]$LiveChannels,
     [switch]$Ocs
 )
 
@@ -36,6 +37,9 @@ if ($LiveShift -and ($Overlap -or $LiveModulo -or $LiveMinterm -or $LiveData)) {
 }
 if ($LiveAEnable -and ($Overlap -or $LiveModulo -or $LiveMinterm -or $LiveData -or $LiveShift)) {
     throw 'Choose the live A enable probe separately from other probe variants.'
+}
+if ($LiveChannels -and ($Overlap -or $LiveModulo -or $LiveMinterm -or $LiveData -or $LiveShift -or $LiveAEnable)) {
+    throw 'Choose the live channel probe separately from other probe variants.'
 }
 
 $asm = [Collections.Generic.List[uint16]]::new()
@@ -78,7 +82,47 @@ WriteCopperWord 0x0046 0xFFFF
 foreach ($register in 0x0060, 0x0062, 0x0064, 0x0066) { WriteCopperWord $register 0 }
 foreach ($register in 0x0048, 0x004C, 0x0050, 0x0054) { WriteCopperWord $register 1 }
 
-if ($LiveData) {
+if ($LiveChannels) {
+    $source = 0x24000
+    foreach ($register in 0x004C, 0x0050) { WriteCopperWord $register 2 }
+    $patterns = @(0xA105, 0x0248, 0x5A00, 0x1030, 0x8000, 0x0001, 0x44C0, 0x0091,
+                  0x0200, 0xA00A, 0x6000, 0x0016, 0x1001, 0x0814, 0x0004, 0x5000)
+    for ($i = 0; $i -lt $patterns.Count; $i++) { WriteWord $patterns[$i] ($source + 2 * $i) }
+
+    $controls = switch ($LiveChannels) {
+        'BWithC'    { 0x0B96, 0x0F96, 0x0F96, 0x0B96 }
+        'BWithoutA' { 0x0196, 0x0596, 0x0596, 0x0196 }
+        'C'         { 0x0996, 0x0B96, 0x0B96, 0x0996 }
+        'D'         { 0x0B96, 0x0A96, 0x0A96, 0x0B96 }
+        default     { 0x0996, 0x0D96, 0x0D96, 0x0996 }
+    }
+    $fillControl = 0
+    $offset = 0
+    if ($LiveChannels -eq 'BWithFill') {
+        $fillControl = 0x0012
+        $offset = 30
+    }
+
+    for ($test = 0; $test -lt 8; $test++) {
+        $line = (64 + 6 * $test) -shl 8
+        $target = 0x16100 + 0x200 * $test
+        $controlPair = 2 * ($test -shr 2)
+        WriteCopperWord ($line + 1) 0xFFFE
+        WriteCopperWord 0x0040 $controls[$controlPair]
+        WriteCopperWord 0x0042 $fillControl
+        foreach ($register in 0x0070, 0x0072, 0x0074) { WriteCopperWord $register 0 }
+        WriteCopperWord 0x0052 (($source + $offset) -band 0xFFFF)
+        WriteCopperWord 0x004E (($source + $offset) -band 0xFFFF)
+        WriteCopperWord 0x0048 2
+        WriteCopperWord 0x004A (($source + $offset) -band 0xFFFF)
+        WriteCopperWord 0x0056 (($target + $offset) -band 0xFFFF)
+        WriteCopperWord 0x009C 0x0040
+        WriteCopperWord ($line + 0x2B) 0xFFFE
+        WriteCopperWord 0x0058 0x0104
+        WriteCopperWord ($line + 0x49 + ($test % 4) * 2) 0xFFFE
+        WriteCopperWord 0x0040 $controls[$controlPair + 1]
+    }
+} elseif ($LiveData) {
     # D-only area blits use a manual source latch with that channel's DMA disabled.
     for ($test = 0; $test -lt 12; $test++) {
         $line = (64 + 6 * $test) -shl 8

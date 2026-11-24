@@ -2184,11 +2184,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         {
             _registers.Write(LightweightRegisters.Bltcon0,
                 (ushort)((_registers.Read(LightweightRegisters.Bltcon0) & 0xFF00) | (value & 0xFF)));
-            _blitter.WriteAreaControl0(value, lowOnly: true);
+            _blitter.WriteAreaControl0(value, lowOnly: true, cycle);
         }
         else if (offset == LightweightRegisters.Bltcon0)
         {
-            _blitter.WriteAreaControl0(value, lowOnly: false);
+            _blitter.WriteAreaControl0(value, lowOnly: false, cycle);
         }
         else if (offset == LightweightRegisters.Bltcon1)
         {
