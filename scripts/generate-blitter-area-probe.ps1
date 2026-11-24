@@ -8,6 +8,7 @@ param(
     [switch]$Overlap,
     [ValidateSet('AD', 'BC')][string]$LiveModulo,
     [ValidateSet('Full', 'Alternate')][string]$LiveMinterm,
+    [switch]$LiveData,
     [switch]$Ocs
 )
 
@@ -15,6 +16,9 @@ $ErrorActionPreference = 'Stop'
 if ($Overlap -and $LiveModulo) { throw 'Choose either the overlap probe or a live modulo probe.' }
 if ($LiveMinterm -and ($Overlap -or $LiveModulo)) {
     throw 'Choose one probe for overlap, live modulo or live minterm writes.'
+}
+if ($LiveData -and ($Overlap -or $LiveModulo -or $LiveMinterm)) {
+    throw 'Choose one probe for overlap, live modulo, live minterm or live data writes.'
 }
 
 $asm = [Collections.Generic.List[uint16]]::new()
@@ -56,7 +60,29 @@ WriteCopperWord 0x0046 0xFFFF
 foreach ($register in 0x0060, 0x0062, 0x0064, 0x0066) { WriteCopperWord $register 0 }
 foreach ($register in 0x0048, 0x004C, 0x0050, 0x0054) { WriteCopperWord $register 1 }
 
-if ($LiveMinterm) {
+if ($LiveData) {
+    # D-only area blits use a manual source latch with that channel's DMA disabled.
+    for ($test = 0; $test -lt 12; $test++) {
+        $line = (64 + 6 * $test) -shl 8
+        $target = 0x16100 + 0x200 * $test
+        $bank = $test -shr 2
+        $control = (0x31F0, 0x01CC, 0x01AA)[$bank]
+        $control1 = (0x0000, 0x5000, 0x0000)[$bank]
+        $dataRegister = (0x0074, 0x0072, 0x0070)[$bank]
+        WriteCopperWord ($line + 1) 0xFFFE
+        WriteCopperWord 0x0040 $control
+        WriteCopperWord 0x0042 $control1
+        WriteCopperWord 0x0044 0xFF0F
+        WriteCopperWord 0x0046 0xF0FF
+        WriteCopperWord $dataRegister 0x1234
+        WriteCopperWord 0x0056 ($target -band 0xFFFF)
+        WriteCopperWord 0x009C 0x0040
+        WriteCopperWord ($line + 0x29) 0xFFFE
+        WriteCopperWord 0x0058 0x0104
+        WriteCopperWord ($line + 0x35 + ($test % 4) * 2) 0xFFFE
+        WriteCopperWord $dataRegister 0xABCD
+    }
+} elseif ($LiveMinterm) {
     # Sweep control writes over A+D, shifted ABCD and descending fill.
     $source = 0x24000
     foreach ($register in 0x0048, 0x004C, 0x0050) { WriteCopperWord $register 2 }

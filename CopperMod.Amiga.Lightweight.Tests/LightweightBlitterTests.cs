@@ -95,6 +95,34 @@ public sealed class LightweightBlitterTests
     }
 
     [Theory]
+    [InlineData(LightweightRegisters.Bltadat, 0x01F0, 0, 0x1234, 0xABCD)]
+    [InlineData(LightweightRegisters.Bltbdat, 0x01CC, 0x5000, 0x0091, 0x055E)]
+    [InlineData(LightweightRegisters.Bltcdat, 0x01AA, 0, 0x1234, 0xABCD)]
+    public void LiveAreaDataWriteFeedsLaterWordsWithDmaDisabledForThatSource(
+        ushort register, ushort control0, ushort control1, ushort oldWord, ushort newWord)
+    {
+        using var machine = CreateAgaMachine();
+        ConfigureArea(machine, control0, control1);
+        WriteRegister(machine, register, 0x1234);
+        EnableBlitter(machine, nasty: false);
+        var start = StartBlit(machine, 0x0044);
+        for (var cycle = start + 2;
+             cycle <= start + 32 && machine.GetBlitterPointer(LightweightRegisters.Bltdpth) == DestinationD;
+             cycle += LightweightClock.CpuCyclesPerColorClock)
+        {
+            machine.AdvanceHardwareTo(cycle);
+        }
+        Assert.Equal(DestinationD + 2, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+        Assert.Equal(oldWord, machine.ReadChipWordDma(DestinationD));
+
+        machine.WriteCustomRegisterFromCopper(register, 0xABCD, machine.Cycle);
+        AdvanceUntilBlitterIdle(machine);
+
+        Assert.Equal(oldWord, machine.ReadChipWordDma(DestinationD));
+        Assert.Equal(newWord, machine.ReadChipWordDma(DestinationD + 6));
+    }
+
+    [Theory]
     [InlineData(LightweightRegisters.Bltcon0, 0x0000)]
     [InlineData(LightweightRegisters.Bltcon0l, 0xFFFF)]
     public void AreaControlWriteReloadsFillCarryOnlyForTheFullRegister(

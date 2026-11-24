@@ -112,6 +112,7 @@ internal sealed class LightweightBlitter
     private ushort _dataC;
     private ushort _previousA;
     private ushort _previousB;
+    private ushort _shiftedAreaB;
     private ushort _areaResult;
     private bool _areaResultPending;
     private int _destinationX;
@@ -211,6 +212,7 @@ internal sealed class LightweightBlitter
         _dataC = 0;
         _previousA = 0;
         _previousB = 0;
+        _shiftedAreaB = 0;
         _areaResultPending = false;
         _destinationX = 0;
         _areaDrainCycle = long.MaxValue;
@@ -317,6 +319,23 @@ internal sealed class LightweightBlitter
             {
                 _fillCarry = _fillCarryInitial;
             }
+        }
+    }
+
+    internal void WriteSourceData(ushort offset, ushort value, LightweightA500Machine machine)
+    {
+        if (offset == LightweightRegisters.Bltbdat)
+        {
+            // B shifts on load. Keep the held word even when no B DMA
+            // is scheduled for the next area calculation.
+            var control = machine.GetCustomRegister(LightweightRegisters.Bltcon1);
+            _shiftedAreaB = ShiftSource(value, ref _previousB, control >> 12,
+                (control & Bltcon1Descending) != 0);
+        }
+        else if (_active && !_lineMode)
+        {
+            if (offset == LightweightRegisters.Bltadat) _dataA = value;
+            else _dataC = value;
         }
     }
 
@@ -745,6 +764,7 @@ internal sealed class LightweightBlitter
                 break;
             case AreaChannel.B when _useB:
                 _dataB = machine.ReadChipWordBus(address);
+                _shiftedAreaB = ShiftSource(_dataB, ref _previousB, _shiftB, _descending);
                 _pointerB = AdvanceAreaSource(_pointerB, _pendingAreaModulo);
                 machine.SetBlitterDataFromDma(LightweightRegisters.Bltbdat, _dataB);
                 machine.SetBlitterPointerFromDma(LightweightRegisters.Bltbpth, _pointerB);
@@ -1086,12 +1106,7 @@ internal sealed class LightweightBlitter
             ref _previousA,
             _shiftA,
             _descending);
-        var sourceB = ShiftSource(
-            _dataB,
-            ref _previousB,
-            _shiftB,
-            _descending);
-        var output = ApplyMinterm(_minterm, sourceA, sourceB, _dataC);
+        var output = ApplyMinterm(_minterm, sourceA, _shiftedAreaB, _dataC);
         return _fillEnabled
             ? ApplyFill(output, _fillExclusive, ref _fillCarry)
             : output;

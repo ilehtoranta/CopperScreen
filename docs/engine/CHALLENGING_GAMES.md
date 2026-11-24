@@ -272,17 +272,33 @@ The build, diagnostics, 124 timing events and both game replays were
 repeated after rebasing onto the Copper68k 1.5.11 package update. All game
 captures and fingerprints matched the run with the earlier package.
 
-Live channel, shift and data-register writes, absolute Copper start
-timing, source-only schedules, the game's actual register rewrites and
-physical signal measurements remain open.
+### Manual area data writes
 
-A separate D-only probe changed BLTADAT, BLTBDAT and BLTCDAT during
-live blits with their source DMA channels disabled. The current build
-differed from WinUAE in 163 of 192 destination words. On the first
-shifted A case, the third D word was `$9579` in WinUAE and `$8246`
-in CopperScreen. The B cases also show that a manual B write changes
-the held, shifted value for subsequent words.
+The D-only `-LiveData` probe changes BLTADAT, BLTBDAT and BLTCDAT
+during a blit with source DMA disabled. Before the correction,
+CopperScreen differed from WinUAE in 163 of 192 destination words
+on AGA. In the first shifted A case, the third D word was `$9579`
+in WinUAE and `$8246` in CopperScreen. The A and C writes now feed
+subsequent area calculations. A B write or DMA read shifts the data
+at load time, and the area calculator reuses the held, shifted B
+word until another load. The destination pipeline keeps results
+already calculated before the register write.
 [WinUAE data register writes](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/custom.cpp#L3715-L3736)
+[WinUAE area B shifter and data path](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1411-L1466)
+
+The corrected probe matches WinUAE 6.1.0 beta 23 in all 192 AGA and
+192 OCS destination writes, including address, data and relative CCK.
+The original ZooL 2 wall replay (12,850 fields, 66 captures), P.P.
+Hammer opening replay (7,200 fields, 25 captures) and Banshee first
+mission replay (10,500 fields, 36 captures) each match the preceding
+mainline in every capture and in the final CPU, hardware and output
+fingerprints. Both builds use Copper68k 1.5.11. The Release solution
+build succeeds and the diagnostic engine suite passes 1,463 tests
+with seven optional tests skipped.
+
+Live area channel and shift changes, line-mode data writes, absolute
+Copper start timing, source-only schedules, the game's actual register
+rewrites and physical signal measurements remain open.
 
 ## P.P. Hammer and His Pneumatic Weapon
 

@@ -2398,6 +2398,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 case LightweightRegisters.Ddfstop:
                     _bitplanes.OnRegisterWrite(offset, value, cycle, this);
                     break;
+                case LightweightRegisters.Bltadat:
+                case LightweightRegisters.Bltbdat:
+                case LightweightRegisters.Bltcdat:
+                    _blitter.WriteSourceData(offset, value, this);
+                    break;
                 case LightweightRegisters.Bltapth:
                 case LightweightRegisters.Bltapth + 2:
                 case LightweightRegisters.Bltbpth:
