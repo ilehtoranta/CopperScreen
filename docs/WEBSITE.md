@@ -233,3 +233,33 @@ The [clean-main integration](engine/SUPERFROG_MAIN_2026-10-16.json) repeats the
 attract and opening-level checks with main's published Copper68k 1.5.1 pin.
 It produces the identical field-7,320 source BMP above, verifying the replacement
 for that integration without changing the earlier development-build attribution.
+
+## AGA games, demos and Deuteros — 2026-11-24
+
+Added five PAL A1200 captures and one Deuteros PAL OCS capture. The homepage
+features Bubble and Squeak, Alfred Chicken and Roots 2.0. The A1200 replays used
+Kickstart 3.0, a 68EC020 and 2 MiB of Chip RAM. Bubble and Squeak, Second Samurai
+and Cubic Dream use the `c245c89` baseline. Alfred Chicken uses the Lisa priority
+fix from [ddc657b](https://github.com/ilehtoranta/CopperScreen/commit/ddc657b1df3a447b54c78e1a3d05b88fd03110d7).
+Roots 2.0 uses the narrow HAM fix from
+[55e8d23](https://github.com/ilehtoranta/CopperScreen/commit/55e8d236a596824292ece62958dfc397d28b62b9).
+The Deuteros capture shows the disk access screen after a cold session restored
+a save from DF1.
+
+The AGA sources retain 1,424 horizontal samples per visible field row
+(`x=392, y=26, width=1424, height=285` in the raw beam). Each row is repeated
+four times to reproduce the full PAL LCD viewport at 1424×1140 with the correct
+pixel proportions. Deuteros uses the existing 712×570 transform. All six
+thumbnails are 356×285.
+
+| Title | Capture relative to `artifacts/` | Original BMP SHA-256 |
+| --- | --- | --- |
+| Bubble and Squeak | `bubble-squeak-aga/bubble-move/frame-006800.bmp` | `F4A03F520526E2E9124A06B9BEA54C33888CBE566C4293839179DD44892B3E85` |
+| Alfred Chicken | `bubble-squeak-aga/alfred-fixed/frame-006900.bmp` | `49AAC12827E5263540B5ED333CDB27EB1253BC695C48E1229587245058FE095E` |
+| Second Samurai | `bubble-squeak-aga/samurai-disk2/frame-005250.bmp` | `F7AB27969031EC1374DEA3270F935DD6691CBC9EFCA3C582C222D932BB4C44D5` |
+| Roots 2.0 | `bubble-squeak-aga/roots-ham-fixed/frame-025500.bmp` | `92C789B704F936DB12347DA3BB4CE63BF2CE1D71C86C372238E27D4EA91906F1` |
+| Cubic Dream | `bubble-squeak-aga/cubic-disk2/frame-023500.bmp` | `38EF95E21BCF3A10B6170B24883CBD4A7BFBF5F5EE16B75948A31B90F8FE710F` |
+| Deuteros | `deuteros-df1/cold-load-session/step-10.bmp` | `A1DC39A7891ED423A505802651BD31E17A8380AAC6C721FFC68D2AC404CAB1C9` |
+
+Reproduce these entries with `scripts/prepare-website-screenshots.ps1 -CaptureRoot
+artifacts -Names bubble-and-squeak-gameplay,alfred-chicken-gameplay,second-samurai-gameplay,roots-face-morph,cubic-dream-wireframes,deuteros-df1-restore`.

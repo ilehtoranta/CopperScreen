@@ -1,5 +1,71 @@
 [
   {
+    "id": "bubble-and-squeak-gameplay",
+    "title": "Bubble and Squeak",
+    "caption": "On the slopes of Stardust Caverns in the AGA version.",
+    "alt": "A character on a striped green slope beside purple rock columns and a blue waterfall, with a score of 50 above.",
+    "image": "assets/screenshots/bubble-and-squeak-gameplay.png",
+    "thumbnail": "assets/screenshots/bubble-and-squeak-gameplay-thumb.png",
+    "width": 1424,
+    "height": 1140,
+    "featured": true
+  },
+  {
+    "id": "alfred-chicken-gameplay",
+    "title": "Alfred Chicken",
+    "caption": "Stage 1 in the AGA version after loading Disk 2.",
+    "alt": "Alfred stands on gold blocks between blue springs and floating diamonds, with the score and item counts below.",
+    "image": "assets/screenshots/alfred-chicken-gameplay.png",
+    "thumbnail": "assets/screenshots/alfred-chicken-gameplay-thumb.png",
+    "width": 1424,
+    "height": 1140,
+    "featured": true
+  },
+  {
+    "id": "second-samurai-gameplay",
+    "title": "Second Samurai",
+    "caption": "AGA opening stage after loading Disk 2.",
+    "alt": "A samurai crosses a stone platform above lava under a purple sky, approaching a tall stone arch.",
+    "image": "assets/screenshots/second-samurai-gameplay.png",
+    "thumbnail": "assets/screenshots/second-samurai-gameplay-thumb.png",
+    "width": 1424,
+    "height": 1140,
+    "featured": false
+  },
+  {
+    "id": "roots-face-morph",
+    "title": "Roots 2.0",
+    "caption": "The face morph in the credits of Sanity's AGA demo.",
+    "alt": "A face and its inverted reflection in cyan and black, beside the scrolling credits.",
+    "image": "assets/screenshots/roots-face-morph.png",
+    "thumbnail": "assets/screenshots/roots-face-morph-thumb.png",
+    "width": 1424,
+    "height": 1140,
+    "featured": true
+  },
+  {
+    "id": "cubic-dream-wireframes",
+    "title": "Cubic Dream",
+    "caption": "A wireframe sequence from the second disk of TRSI's AGA demo.",
+    "alt": "Pale wireframe shapes rotate beneath the metallic TRSI logo against a dark blue background.",
+    "image": "assets/screenshots/cubic-dream-wireframes.png",
+    "thumbnail": "assets/screenshots/cubic-dream-wireframes-thumb.png",
+    "width": 1424,
+    "height": 1140,
+    "featured": false
+  },
+  {
+    "id": "deuteros-df1-restore",
+    "title": "Deuteros",
+    "caption": "The disk access screen after restoring a saved game from DF1.",
+    "alt": "The Deuteros disk access screen showing Load Game 1 and matching timer and last-saved values.",
+    "image": "assets/screenshots/deuteros-df1-restore.png",
+    "thumbnail": "assets/screenshots/deuteros-df1-restore-thumb.png",
+    "width": 712,
+    "height": 570,
+    "featured": false
+  },
+  {
     "id": "superfrog-attract",
     "title": "Superfrog",
     "caption": "Forest platforms and coins in the attract-mode demonstration.",

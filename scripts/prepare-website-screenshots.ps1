@@ -4,14 +4,20 @@ param(
     [string[]]$Names
 )
 
-# Reproduce the application's full PAL LCD viewport from these 908x313 beam captures.
-# This removes hardware blanking, not game overscan, and doubles field rows exactly.
+# Reproduce the application's full PAL LCD viewport from 908x313 and 1816x313 beam captures.
+# Remove hardware blanking and repeat field rows to match the LCD pixel proportions.
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
 $repository = Split-Path $PSScriptRoot -Parent
 $output = Join-Path $repository 'docs/assets/screenshots'
 $null = New-Item -ItemType Directory -Path $output -Force
 $captures = @(
+    @{ Name = 'bubble-and-squeak-gameplay'; File = 'bubble-squeak-aga/bubble-move/frame-006800.bmp'; Hash = 'F4A03F520526E2E9124A06B9BEA54C33888CBE566C4293839179DD44892B3E85' },
+    @{ Name = 'alfred-chicken-gameplay'; File = 'bubble-squeak-aga/alfred-fixed/frame-006900.bmp'; Hash = '49AAC12827E5263540B5ED333CDB27EB1253BC695C48E1229587245058FE095E' },
+    @{ Name = 'second-samurai-gameplay'; File = 'bubble-squeak-aga/samurai-disk2/frame-005250.bmp'; Hash = 'F7AB27969031EC1374DEA3270F935DD6691CBC9EFCA3C582C222D932BB4C44D5' },
+    @{ Name = 'roots-face-morph'; File = 'bubble-squeak-aga/roots-ham-fixed/frame-025500.bmp'; Hash = '92C789B704F936DB12347DA3BB4CE63BF2CE1D71C86C372238E27D4EA91906F1' },
+    @{ Name = 'cubic-dream-wireframes'; File = 'bubble-squeak-aga/cubic-disk2/frame-023500.bmp'; Hash = '38EF95E21BCF3A10B6170B24883CBD4A7BFBF5F5EE16B75948A31B90F8FE710F' },
+    @{ Name = 'deuteros-df1-restore'; File = 'deuteros-df1/cold-load-session/step-10.bmp'; Hash = 'A1DC39A7891ED423A505802651BD31E17A8380AAC6C721FFC68D2AC404CAB1C9' },
     @{ Name = 'superfrog-attract'; File = 'superfrog-viewport-2026-10-16/candidate-copperstart/captures/frame-007320.bmp'; Hash = 'A4063A8C5744392A96749AB306358EF0526AB0FFD2D89B12FB659689AC8B2A9A' },
     @{ Name = 'f17-challenge-race'; File = 'wordsync-investigation/f17-play/frame-018000.bmp'; Hash = '84569DF5A097362ABDCD3C2A92F0CB69CC63A3609E6596FA290EDEAEA4E6954A' },
     @{ Name = 'overdrive-race-selection'; File = 'wordsync-investigation/overdrive-disk2/frame-015300.bmp'; Hash = 'CBB1C31E590CF13649349C8B7435258A7883A2E2FE4A7D764E5BD2733C573329' },
@@ -44,15 +50,17 @@ foreach ($capture in $captures) {
     }
     $source = [Drawing.Bitmap]::new((Join-Path $CaptureRoot $capture.File))
     try {
-        if ($source.Width -ne 908 -or $source.Height -ne 313) { throw 'Unexpected capture geometry' }
+        if ($source.Width -notin 908, 1816 -or $source.Height -ne 313) { throw 'Unexpected capture geometry' }
+        $viewportLeft = [int](196 * $source.Width / 908)
+        $viewportWidth = $source.Width - $viewportLeft
         foreach ($thumbnail in @($false, $true)) {
-            $width = if ($thumbnail) { 356 } else { 712 }
+            $width = if ($thumbnail) { 356 } else { $viewportWidth }
             $height = 570 * $width / 712
             $result = [Drawing.Bitmap]::new([int]$width, [int]$height)
             try {
                 for ($y = 0; $y -lt $height; $y++) {
                     for ($x = 0; $x -lt $width; $x++) {
-                        $sx = 196 + [int][Math]::Floor($x * 712 / $width)
+                        $sx = $viewportLeft + [int][Math]::Floor($x * $viewportWidth / $width)
                         $sy = 26 + [int][Math]::Floor($y * 285 / $height)
                         $result.SetPixel($x, $y, $source.GetPixel($sx, $sy))
                     }
