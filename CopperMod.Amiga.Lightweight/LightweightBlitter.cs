@@ -568,7 +568,7 @@ internal sealed class LightweightBlitter
             // The last shifter stage is bypassed when D is disabled.
             _phaseCount = 2 + (_useB ? 1 : 0) +
                 (_useD && (_useC || _fillEnabled) ? 1 : 0);
-            _startupRemaining = _bOnly ? 2 : 3;
+            _startupRemaining = 3;
         }
         _areaResultPending = false;
         _destinationX = 0;

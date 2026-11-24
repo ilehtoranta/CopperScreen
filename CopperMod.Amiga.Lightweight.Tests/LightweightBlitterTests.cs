@@ -669,6 +669,29 @@ public sealed class LightweightBlitterTests
     }
 
     [Fact]
+    public void AreaBOnlyBlitRetainsTheStartupClocksBeforeItsFirstRead()
+    {
+        using var machine = new LightweightA500Machine();
+        WriteWord(machine, SourceB, 0xCAFE);
+        ConfigureArea(machine, bltcon0: 0x04CC);
+        EnableBlitter(machine, nasty: true);
+        var start = StartBlit(machine, 0x0043);
+
+        machine.AdvanceHardwareTo(start + 8);
+        Assert.Equal(SourceB, machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+        Assert.True(machine.BlitterZero);
+
+        for (var word = 0; word < 3; word++)
+        {
+            var readCycle = start + 10 + word * 6;
+            machine.AdvanceHardwareTo(readCycle);
+            Assert.Equal(readCycle, machine.BlitterLastOutputCycle);
+            Assert.Equal(SourceB + (uint)((word + 1) * 2), machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+            Assert.False(machine.BlitterZero);
+        }
+    }
+
+    [Fact]
     public void BitplaneOutputKeepsPriorityAndDelaysOnlyIncomingBlitterPhase()
     {
         using var machine = new LightweightA500Machine();

@@ -533,16 +533,31 @@ at `$56`, the input phase of the final read. The area pipeline now ends
 each source-only word on the C slot, tests the freshly read data for the
 zero flag, and clears BUSY while the last C output is still pending.
 
-The full shared probe matches all 384 transfers in C, A+C and A+B+C,
-and 127 of 128 in B+C. A+B+C+D now matches all 256 through the scanline
-boundary after the earlier source-only blits. B, B+D and one B+C
-startup transfer still differ in this mixed sequence.
+The source-only correction matches all 384 transfers in C, A+C and A+B+C,
+and 127 of 128 in B+C. A+B+C+D matches all 256 through the scanline boundary
+after the earlier source-only blits.
 [WinUAE area shifter stages](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1120-L1152)
 
 The source-only correction retained the CPU, hardware and output
 fingerprints of all five original game replays on the preceding startup
 build. The Release solution built cleanly, and engine diagnostics passed
 1,479 tests with seven optional cases skipped.
+
+### B-only area startup
+
+The B-only case had one fewer startup clock than the other area blits.
+In the isolated four-plane probe (`-Modes 4`), both engines reach the
+same BLTSIZE write, but the earlier startup schedules a B read at CCK
+`$58` where WinUAE reads at `$5A`. Keeping the standard three startup
+clocks matches all 64 isolated B reads. A focused test also measures the
+first B read and subsequent spacing on a quiet bus.
+
+With all three corrections, the full shared-bus probe matches WinUAE
+across all 2,048 source and destination transfers, covering all channel
+selections that transfer RAM data in this four-plane setup.
+All five original replays retained their prior fingerprints. Sqrxz still
+reached its title on PAL and NTSC CD32. The Release solution built cleanly,
+and engine diagnostics passed 1,480 tests with seven optional cases skipped.
 
 ## All New World of Lemmings
 
