@@ -22,7 +22,7 @@
          Compile app methods optimized immediately instead of running slow Tier 0
          until promotion; framework ReadyToRun code can still use tiering. -->
     <TieredCompilationQuickJit>false</TieredCompilationQuickJit>
-    <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.5.11</Copper68kBoundaryVersion>
+    <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.5.12</Copper68kBoundaryVersion>
     <CopperScreenEnableCopperStart Condition="'$(CopperScreenEnableCopperStart)' == ''">false</CopperScreenEnableCopperStart>
     <DefineConstants Condition="'$(CopperScreenEnableCopperStart)' == 'true'">$(DefineConstants);COPPERSCREEN_ENABLE_COPPERSTART</DefineConstants>
     <CopperOsBundleDirectory Condition="'$(CopperOsBundleDirectory)' == ''">$(MSBuildProjectDirectory)/../artifacts/copperos-bundle</CopperOsBundleDirectory>
@@ -58,7 +58,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CopperMod.Amiga.Lightweight\CopperMod.Amiga.Lightweight.csproj" />
     <PackageReference Include="Copper68k" Version="[$(Copper68kBoundaryVersion)]" />
-    <PackageReference Include="CopperStart.FileSystem.Service" Version="[0.5.0-dev.7]" />
+    <PackageReference Include="CopperStart.FileSystem.Service" Version="[0.5.0-dev.8]" />
     <ProjectReference Include="..\CopperDisk\CopperDisk.csproj" />
   </ItemGroup>
 

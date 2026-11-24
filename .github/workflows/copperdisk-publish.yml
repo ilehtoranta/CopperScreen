@@ -49,6 +49,9 @@ jobs:
           if ($sourceVersion.Trim() -cne $env:RELEASE_VERSION) {
             throw "Requested version must match source version $sourceVersion."
           }
+      - name: Stage the pinned filesystem service
+        shell: pwsh
+        run: ./scripts/stage-filesystem-service.ps1
       - name: Restore locked packages
         run: dotnet restore CopperScreen.slnx --locked-mode
       - name: Build production solution

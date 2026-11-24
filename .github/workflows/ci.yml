@@ -46,6 +46,9 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
+      - name: Stage the pinned filesystem service
+        shell: pwsh
+        run: ./scripts/stage-filesystem-service.ps1
       - name: Restore locked packages
         run: dotnet restore CopperScreen.slnx --locked-mode
       - name: Build
@@ -97,6 +100,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y xvfb xauth libx11-6 libice6 libsm6 libfontconfig1 libgl1
+      - name: Stage the pinned filesystem service
+        shell: pwsh
+        run: ./scripts/stage-filesystem-service.ps1
       - name: Restore locked packages
         run: dotnet restore CopperScreen.slnx --locked-mode
       - name: Stage the qualified CopperStart Mini ROM and license
