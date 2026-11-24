@@ -327,9 +327,33 @@ capture and the final CPU, hardware and output fingerprints from the
 source-data correction. The Release build passed with zero warnings.
 Engine diagnostics passed 1,467 tests with seven optional tests skipped.
 
-Live area channel changes, line-mode data writes, absolute Copper
-start timing, source-only schedules, the game's actual register
-rewrites and physical signal measurements remain open.
+### Register writes in the original game
+
+A separate diagnostic build traced writes to `$DFF040` through `$DFF074`
+while the blitter was active during the 12,850-field original ZooL 2
+wall replay. It recorded 30 CPU writes to BLTAPTH and 30 to BLTAPTL
+while BUSY was set. Those were the only writes in the traced range
+during active blits. The first pair appeared at field 1,300, raster
+line 29, at CCKs 165 and 170. The traced replay reproduced the Release
+build's CPU, hardware and output fingerprints.
+
+The original code at `$0003ADF0` writes the longword `$000532B6` to
+BLTAPTH and BLTAPTL after writing `$8818` to BLTSIZE. The code bytes
+at that address also match the WinUAE memory dump from the original
+disks. A cycle-aligned trace of the pointer write and in-flight source
+read is still needed to compare their ordering.
+
+A separate synthetic AGA test reproduced a live channel discrepancy.
+With a Copper switch from A+D to A+B+D during the blit, WinUAE schedules
+9 to 12 B reads depending on the write cycle. CopperScreen schedules
+zero. When the Copper clears D during an A+C+D blit, WinUAE produces
+1 to 3 destination writes across the sweep and CopperScreen produces
+all 16. The open channel behavior is separate from the pointer writes
+observed in the original game's replay.
+[WinUAE channel selection and shifter](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1220-L1373)
+
+Line-mode data writes, absolute Copper start timing, source-only
+schedules and physical signal measurements also remain open.
 
 ## P.P. Hammer and His Pneumatic Weapon
 
