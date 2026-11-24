@@ -2181,8 +2181,15 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
         if (offset == LightweightRegisters.Serdatr) return;
         if (IsEcsAgnus && offset == LightweightRegisters.Bltcon0l)
+        {
             _registers.Write(LightweightRegisters.Bltcon0,
                 (ushort)((_registers.Read(LightweightRegisters.Bltcon0) & 0xFF00) | (value & 0xFF)));
+            _blitter.WriteAreaMinterm((byte)value, reloadFillCarry: false);
+        }
+        else if (offset == LightweightRegisters.Bltcon0)
+        {
+            _blitter.WriteAreaMinterm((byte)value, reloadFillCarry: true);
+        }
         if (offset is LightweightRegisters.Diwstrt or LightweightRegisters.Diwstop) DiwHighValid = false;
         if (offset == LightweightRegisters.Diwhigh)
         {

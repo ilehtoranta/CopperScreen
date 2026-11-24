@@ -65,6 +65,59 @@ public sealed class LightweightBlitterTests
         Assert.Equal(address + 4 * (8 + 16), machine.GetBlitterPointer(pointerRegister));
     }
 
+    [Theory]
+    [InlineData(LightweightRegisters.Bltcon0)]
+    [InlineData(LightweightRegisters.Bltcon0l)]
+    public void LiveAreaMintermUsesTheNewValueForTheNextCalculation(ushort controlRegister)
+    {
+        using var machine = CreateAgaMachine();
+        machine.WriteChipWordDma(SourceA, 0xA00B);
+        machine.WriteChipWordDma(SourceA + 2, 0x135C);
+        machine.WriteChipWordDma(SourceA + 4, 0xB460);
+        ConfigureArea(machine, 0x49FF);
+        EnableBlitter(machine, nasty: false);
+        var start = StartBlit(machine, 0x0043);
+        for (var cycle = start + 2;
+             cycle <= start + 32 && machine.GetBlitterPointer(LightweightRegisters.Bltdpth) == DestinationD;
+             cycle += LightweightClock.CpuCyclesPerColorClock)
+        {
+            machine.AdvanceHardwareTo(cycle);
+        }
+        Assert.Equal(DestinationD + 2, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+        Assert.Equal(0xFFFF, machine.ReadChipWordDma(DestinationD));
+
+        machine.WriteCustomRegisterFromCopper(controlRegister, 0x49F0, machine.Cycle);
+        AdvanceUntilBlitterIdle(machine);
+
+        Assert.Equal(0xFFFF, machine.ReadChipWordDma(DestinationD));
+        Assert.Equal(0xFFFF, machine.ReadChipWordDma(DestinationD + 2));
+        Assert.Equal(0xCB46, machine.ReadChipWordDma(DestinationD + 4));
+    }
+
+    [Theory]
+    [InlineData(LightweightRegisters.Bltcon0, 0x0000)]
+    [InlineData(LightweightRegisters.Bltcon0l, 0xFFFF)]
+    public void AreaControlWriteReloadsFillCarryOnlyForTheFullRegister(
+        ushort controlRegister, ushort lastWord)
+    {
+        using var machine = CreateAgaMachine();
+        machine.WriteChipWordDma(SourceA + 4, 1);
+        ConfigureArea(machine, 0x09F0, 0x0012);
+        WritePointer(machine, LightweightRegisters.Bltapth, SourceA + 4);
+        WritePointer(machine, LightweightRegisters.Bltdpth, DestinationD + 4);
+        EnableBlitter(machine, nasty: false);
+        var start = StartBlit(machine, 0x0043);
+        machine.AdvanceHardwareTo(start + 18);
+        Assert.Equal(DestinationD + 2, machine.GetBlitterPointer(LightweightRegisters.Bltdpth));
+
+        machine.WriteCustomRegisterFromCopper(controlRegister, 0x09F0, machine.Cycle);
+        AdvanceUntilBlitterIdle(machine);
+
+        Assert.Equal(0xFFFF, machine.ReadChipWordDma(DestinationD + 4));
+        Assert.Equal(0xFFFF, machine.ReadChipWordDma(DestinationD + 2));
+        Assert.Equal(lastWord, machine.ReadChipWordDma(DestinationD));
+    }
+
     [Fact]
     public void AliceCompletionProtectsFinalDestinationFromCpuStealAcrossBitplaneDma()
     {
@@ -635,14 +688,13 @@ public sealed class LightweightBlitterTests
     }
 
     [Theory]
-    [InlineData(0x000A, false, false)]
-    [InlineData(0x000E, false, true)]
-    [InlineData(0x0012, true, false)]
-    [InlineData(0x0016, true, true)]
+    [InlineData(0x000A, 0xFFF8)]
+    [InlineData(0x000E, 0x000F)]
+    [InlineData(0x0012, 0xFFF8)]
+    [InlineData(0x0016, 0x0007)]
     public void DescendingFillUsesInclusiveExclusiveCarryAndIdleCPhase(
         ushort bltcon1,
-        bool exclusive,
-        bool carryIn)
+        ushort expected)
     {
         using var machine = new LightweightA500Machine();
         WriteWord(machine, SourceA, 0x0008);
@@ -651,8 +703,6 @@ public sealed class LightweightBlitterTests
         var start = StartBlit(machine, 0x0041);
         AdvanceUntilBlitterIdle(machine);
 
-        var carry = carryIn;
-        var expected = ApplyFill(0x0008, exclusive, ref carry);
         Assert.Equal(expected, ReadWord(machine, DestinationD));
         Assert.Equal(start + 16, machine.BlitterLastTerminationCycle);
     }
@@ -670,10 +720,8 @@ public sealed class LightweightBlitterTests
         _ = StartBlit(machine, 0x0081);
         AdvanceUntilBlitterIdle(machine);
 
-        var carry = false;
-        var expected = ApplyFill(0x0001, true, ref carry);
-        Assert.Equal(expected, ReadWord(machine, DestinationD + 2));
-        Assert.Equal(expected, ReadWord(machine, DestinationD));
+        Assert.Equal(0xFFFF, ReadWord(machine, DestinationD + 2));
+        Assert.Equal(0xFFFF, ReadWord(machine, DestinationD));
     }
 
     [Fact]
@@ -1231,30 +1279,6 @@ public sealed class LightweightBlitterTests
                 : (ushort)(combined >> (shift & 15));
         previous = current;
         return value;
-    }
-
-    private static ushort ApplyFill(
-        ushort value,
-        bool exclusive,
-        ref bool carry)
-    {
-        ushort output = 0;
-        for (var bit = 0; bit < 16; bit++)
-        {
-            var mask = (ushort)(1 << bit);
-            var input = (value & mask) != 0;
-            if (exclusive)
-            {
-                if (carry) output |= mask;
-                if (input) carry = !carry;
-            }
-            else
-            {
-                if (carry || input) output |= mask;
-                if (input) carry = !carry;
-            }
-        }
-        return output;
     }
 
     private static ushort ApplyMinterm(

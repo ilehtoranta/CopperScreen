@@ -205,13 +205,48 @@ The 11,250-field Zool 2 replay passed the original code wheel, reached
 Swan Lake Stage 1 and matched all 39 captures and all three final
 fingerprints from the previous build. It reported no unsupported feature.
 
-An independent A-to-D control probe starts with BLTCON0 `$09FF` and moves
-`$0900` into it during the blit. On line 82 in WinUAE, the Copper writes at
-`$3A`, D still writes `$FFFF` at `$3B` and switches to `$0000` at `$3F`.
-CopperScreen writes `$FFFF` through the last destination word. The exact
-control phase, other live data writes, absolute Copper start timing,
-source-only schedules, the game's actual register rewrites and physical
-signal measurements remain open.
+### Live area minterms and fill carry
+
+An A-to-D probe starts with BLTCON0 `$09FF` and moves `$0900` into it
+during a blit. On line 82 in WinUAE, the Copper writes at `$3A`. D writes
+the already calculated `$FFFF` at `$3B` and changes to `$0000` at `$3F`.
+CopperScreen previously kept writing `$FFFF` through the last word. The
+area calculation now reads the new minterm on its next calculation and
+preserves the word already waiting for the D transfer.
+[WinUAE control writes](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/custom.cpp#L3778-L3794)
+
+The expanded area probe tests shifted ABCD and descending fill as well
+as A+D. Exclusive fill XORs each input bit with the incoming fill carry
+before the input bit toggles the carry. With carry clear, an exclusive
+fill of `$5000` therefore produces `$3000`. The previous CopperScreen
+implementation produced `$6000`, removing the leading edge of the fill.
+An active full BLTCON0 write also reloads carry from FCI. BLTCON0L retains
+the current carry. At line 130, full and low writes leave the fifth D word
+at `$FFF2` and produce `$7555` and `$8AAA`, respectively, for the sixth.
+[Commodore Hardware Reference Manual, Blitter Hardware](https://www.ikod.se/wp-content/uploads/2020/08/Amiga_Hardware_Reference_Manual_1986.pdf)
+[WinUAE fill table and carry setup](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/blitter.cpp#L1115-L1137)
+
+The generator's `-LiveMinterm Alternate` mode alternates full and low
+writes on PAL AGA. `-LiveMinterm Full` selects full writes and can be
+combined with `-Ocs` for a PAL OCS boot. The AGA alternate, AGA full and
+OCS full replays matched all 576 destination addresses and values in order
+against WinUAE 6.1 beta 23. The ordinary area writes have a consistent
+three-CCK beam offset between the traces. In the fill cases the offset
+ranges from one to three CCKs.
+
+Both the candidate and its upstream control, `e573375`, reached Swan Lake
+Stage 1 on the original disks. The 11,250-field replays matched all 39
+captures and all three final fingerprints and reported no unsupported
+feature. Compared with the earlier modulo-only build, the upstream
+control already differed by one pixel column at the right display edge.
+The PAL OCS P.P. Hammer replay matched its 25 captures and all fingerprints.
+The Release build passed with zero warnings and 1,458 engine diagnostics
+passed with seven optional tests skipped. An exploratory 14,400-field
+Zool 2 replay reached a wall farther into the stage with a score of 670.
+
+Live channel, shift and data-register writes, absolute Copper start timing,
+fill slot timing, source-only schedules, the game's actual register
+rewrites and physical signal measurements remain open.
 
 ## P.P. Hammer and His Pneumatic Weapon
 

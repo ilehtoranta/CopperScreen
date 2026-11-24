@@ -7,11 +7,15 @@ param(
     [switch]$Fill,
     [switch]$Overlap,
     [ValidateSet('AD', 'BC')][string]$LiveModulo,
+    [ValidateSet('Full', 'Alternate')][string]$LiveMinterm,
     [switch]$Ocs
 )
 
 $ErrorActionPreference = 'Stop'
 if ($Overlap -and $LiveModulo) { throw 'Choose either the overlap probe or a live modulo probe.' }
+if ($LiveMinterm -and ($Overlap -or $LiveModulo)) {
+    throw 'Choose one probe for overlap, live modulo or live minterm writes.'
+}
 
 $asm = [Collections.Generic.List[uint16]]::new()
 $copper = [Collections.Generic.List[uint16]]::new()
@@ -52,7 +56,40 @@ WriteCopperWord 0x0046 0xFFFF
 foreach ($register in 0x0060, 0x0062, 0x0064, 0x0066) { WriteCopperWord $register 0 }
 foreach ($register in 0x0048, 0x004C, 0x0050, 0x0054) { WriteCopperWord $register 1 }
 
-if ($LiveModulo) {
+if ($LiveMinterm) {
+    # Sweep control writes over A+D, shifted ABCD and descending fill.
+    $source = 0x24000
+    foreach ($register in 0x0048, 0x004C, 0x0050) { WriteCopperWord $register 2 }
+    $patterns = @(0xA105, 0x0248, 0x5A00, 0x1030, 0x8000, 0x0001, 0x44C0, 0x0091,
+                  0x0200, 0xA00A, 0x6000, 0x0016, 0x1001, 0x0814, 0x0004, 0x5000)
+    for ($i = 0; $i -lt $patterns.Count; $i++) { WriteWord $patterns[$i] ($source + 2 * $i) }
+
+    for ($test = 0; $test -lt 12; $test++) {
+        $line = (64 + 6 * $test) -shl 8
+        $target = 0x16100 + 0x200 * $test
+        $bank = $test -shr 2
+        $control = (0x09FF, 0x3FCC, 0x09F0)[$bank]
+        $next = (0x0900, 0x3FF0, 0x090F)[$bank]
+        $offset = if ($bank -eq 2) { 30 } else { 0 }
+        WriteCopperWord ($line + 1) 0xFFFE
+        WriteCopperWord 0x0040 $control
+        WriteCopperWord 0x0042 ((0, 0x5000, 0x0012)[$bank])
+        WriteCopperWord 0x0052 (($source + $offset) -band 0xFFFF)
+        WriteCopperWord 0x004E ($source -band 0xFFFF)
+        WriteCopperWord 0x004A ($source -band 0xFFFF)
+        WriteCopperWord 0x0056 (($target + $offset) -band 0xFFFF)
+        WriteCopperWord 0x009C 0x0040
+        WriteCopperWord ($line + 0x2B) 0xFFFE
+        WriteCopperWord 0x0058 0x0104
+        WriteCopperWord ($line + (0x39, 0x3F, 0x3B)[$bank] + ($test % 4) * 2) 0xFFFE
+        $register = if (!$Ocs -and $LiveMinterm -eq 'Alternate' -and ($test % 2) -eq 1) {
+            0x005A
+        } else {
+            0x0040
+        }
+        WriteCopperWord $register $next
+    }
+} elseif ($LiveModulo) {
     # Four rows per blit expose writes before and after the first row boundary.
     $allSources = $LiveModulo -eq 'BC'
     for ($test = 0; $test -lt 12; $test++) {

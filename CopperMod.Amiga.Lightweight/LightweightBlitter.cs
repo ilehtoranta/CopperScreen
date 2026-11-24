@@ -304,6 +304,20 @@ internal sealed class LightweightBlitter
         Start(width, height, cycle, machine);
     }
 
+    internal void WriteAreaMinterm(byte minterm, bool reloadFillCarry)
+    {
+        if (_active && !_lineMode)
+        {
+            // The next calculation sees the new control bits. A completed
+            // result is still held for the destination slot.
+            _minterm = minterm;
+            if (reloadFillCarry)
+            {
+                _fillCarry = _fillCarryInitial;
+            }
+        }
+    }
+
     internal void WriteAreaModulo(
         ushort offset,
         ushort value,
@@ -1257,27 +1271,11 @@ internal sealed class LightweightBlitter
         {
             var mask = (ushort)(1 << bit);
             var input = (value & mask) != 0;
-            if (exclusive)
-            {
-                if (fillCarry)
-                {
-                    output |= mask;
-                }
-                if (input)
-                {
-                    fillCarry = !fillCarry;
-                }
-                continue;
-            }
-
-            if (fillCarry || input)
+            if (exclusive ? fillCarry ^ input : fillCarry || input)
             {
                 output |= mask;
             }
-            if (input)
-            {
-                fillCarry = !fillCarry;
-            }
+            fillCarry ^= input;
         }
         return output;
     }
