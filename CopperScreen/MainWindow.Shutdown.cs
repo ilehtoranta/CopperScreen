@@ -14,7 +14,7 @@ internal sealed partial class MainWindow
         _runtime = null;
         _isClosed = true;
         _frameNotification.Dispose();
-        _overdueFrameNotification.Dispose();
+        _frameTurnTimer.Dispose();
         DisableCrtPhosphorPresentation();
         if (runtime != null)
         {

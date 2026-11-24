@@ -82,6 +82,7 @@ internal readonly record struct CopperScreenState(
 	bool IsInterlaced,
 	int InterlaceField)
 {
+	public double FieldMilliseconds { get; init; }
 	public string? FaultMessage { get; init; }
 	public int FramebufferWidth { get; init; }
 	public int FramebufferHeight { get; init; }
@@ -1323,6 +1324,7 @@ internal sealed class CopperScreenRuntime : IDisposable
 			_emulator.IsInterlaced,
 			_emulator.CompletedInterlaceField)
 		{
+			FieldMilliseconds = DisplayFrameMilliseconds,
 			FaultMessage = _emulator.FaultMessage,
 			FramebufferWidth = _emulator.Width, FramebufferHeight = _emulator.Height,
 			PresentationGeometry = _emulator.PresentationGeometry

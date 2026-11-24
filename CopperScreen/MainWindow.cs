@@ -179,13 +179,11 @@ internal sealed partial class MainWindow : Window
 	private CopperScreenDebugSnapshot? _visibleDebugSnapshot;
 	private int _presentationQueued;
 	private DispatcherOperation? _postedFrame;
-	private long _framePostTimestamp;
-	private long _lastFrameRequest;
-	private readonly CopperScreenFrameNotification _overdueFrameNotification;
-	private const int OverdueFrameMilliseconds = 32;
+	private long _nextFrameTurn;
+	private readonly System.Threading.Timer _frameTurnTimer;
 	private double _lastPresenterUpdateMilliseconds;
 	private double _lastPresentationFrameMilliseconds;
-	private bool _isClosed;
+	private volatile bool _isClosed;
 	private bool _startupLayoutCompleted;
 	private CopperScreenPresentationGeometry _presenterGeometry = new(358, 285, 320, 256, 2, 2, true, false);
 	private readonly CrtPhosphorComposer _crtPhosphor = new();
@@ -196,8 +194,7 @@ internal sealed partial class MainWindow : Window
         var whdLoadFile = args is [var game] && CopperScreenWhdLoadLaunch.IsGame(game) ? game : null;
         if (whdLoadFile != null) args = [];
         _frameNotification = new(PostFramePresentation);
-		_overdueFrameNotification = new(() => PromoteOverdueFrame(Volatile.Read(ref _postedFrame),
-			Volatile.Read(ref _framePostTimestamp), Stopwatch.GetTimestamp()));
+		_frameTurnTimer = new System.Threading.Timer(_ => CheckFrameTurn(), null, Timeout.Infinite, Timeout.Infinite);
 		_recentSession = recentSession ?? new(CopperScreenRecentSession.DefaultDirectory);
         StartupHardDiskBackupCleanup = CopperScreenHardDiskBackupCleanup.Cleanup(_recentSession.DataDirectory);
 		Title = "CopperScreen";
@@ -466,7 +463,7 @@ internal sealed partial class MainWindow : Window
 		{
 			_isClosed = true;
             _frameNotification.Dispose();
-            _overdueFrameNotification.Dispose();
+            _frameTurnTimer.Dispose();
 			if (_runtime is { } runtime)
 			{
 				_runtime = null;
@@ -937,30 +934,27 @@ internal sealed partial class MainWindow : Window
 
 	private void QueueFramePresentation()
 	{
-		if (_isClosed) return;
-		var now = Stopwatch.GetTimestamp();
-		if (Interlocked.Exchange(ref _presentationQueued, 1) != 0)
-		{
-			// The machine owner only signals a worker. Changing dispatcher priority
-			// can take the UI lock and must stay off the audio-producing thread.
-			var previous = Volatile.Read(ref _lastFrameRequest);
-			if (Stopwatch.GetElapsedTime(previous, now).TotalMilliseconds >= OverdueFrameMilliseconds &&
-				Interlocked.CompareExchange(ref _lastFrameRequest, now, previous) == previous)
-				_overdueFrameNotification.Signal();
-			return;
-		}
-
-		Volatile.Write(ref _lastFrameRequest, now);
-		_frameNotification.Signal();
+		if (!_isClosed && Interlocked.Exchange(ref _presentationQueued, 1) == 0)
+			_frameNotification.Signal();
 	}
 
-    private void PostFramePresentation()
-    {
-        if (_isClosed) return;
+	internal static DispatcherPriority FramePriorityAt(long now, long due)
+		=> now >= due ? DispatcherPriority.Render : FramePresentationPriority;
+
+	private static int MillisecondsUntilFrameTurn(long now, long due)
+		=> now >= due ? 0 : (int)Math.Ceiling(Stopwatch.GetElapsedTime(now, due).TotalMilliseconds);
+
+	private void PostFramePresentation()
+	{
+		if (_isClosed) return;
 		try
 		{
-			Volatile.Write(ref _framePostTimestamp, Stopwatch.GetTimestamp());
-			Volatile.Write(ref _postedFrame, Dispatcher.UIThread.InvokeAsync(PresentPostedFrame, FramePresentationPriority));
+			// Within a field interval, leave input first in line. Once the interval
+			// expires, one ready frame can run even with native messages pending.
+			var priority = FramePriorityAt(Stopwatch.GetTimestamp(), Volatile.Read(ref _nextFrameTurn));
+			var frame = Dispatcher.UIThread.InvokeAsync(PresentPostedFrame, priority);
+			Volatile.Write(ref _postedFrame, frame);
+			if (priority == FramePresentationPriority) CheckFrameTurn();
 		}
 		catch
 		{
@@ -969,13 +963,17 @@ internal sealed partial class MainWindow : Window
 		}
 	}
 
-	// Native input can keep a Background operation pending for seconds. A new
-	// frame still starts at Background, so successive frames must yield to input.
-	internal static void PromoteOverdueFrame(DispatcherOperation? frame, long posted, long now)
+	private void CheckFrameTurn()
 	{
-		if (frame?.Status == DispatcherOperationStatus.Pending && frame.Priority == FramePresentationPriority &&
-			Stopwatch.GetElapsedTime(posted, now).TotalMilliseconds >= OverdueFrameMilliseconds)
+		var frame = Volatile.Read(ref _postedFrame);
+		if (_isClosed || frame?.Status != DispatcherOperationStatus.Pending || frame.Priority != FramePresentationPriority)
+			return;
+
+		var delay = MillisecondsUntilFrameTurn(Stopwatch.GetTimestamp(), Volatile.Read(ref _nextFrameTurn));
+		if (delay == 0)
 			frame.Priority = DispatcherPriority.Render;
+		else
+			_frameTurnTimer.Change(delay, Timeout.Infinite);
 	}
 
 	private void PresentPostedFrame()
@@ -995,17 +993,21 @@ internal sealed partial class MainWindow : Window
 
 	private void PresentQueuedFrame()
 	{
-		Interlocked.Exchange(ref _presentationQueued, 0);
-		if (_isClosed)
+		try
 		{
-			return;
+			if (_isClosed) return;
+			PresentNextFrame();
 		}
-
-		PresentNextFrame();
+		finally
+		{
+			// Complete this turn before admitting another. Slow paints and bursts
+			// of completed guest fields still give the input loop time to run.
+			var interval = (long)Math.Ceiling(_latestState.FieldMilliseconds * Stopwatch.Frequency / 1000);
+			Volatile.Write(ref _nextFrameTurn, Stopwatch.GetTimestamp() + interval);
+			Interlocked.Exchange(ref _presentationQueued, 0);
+		}
 		if (_runtime?.HasPendingPresentationFrames == true)
-		{
 			QueueFramePresentation();
-		}
 	}
 
 	private void PresentNextFrame(bool forceStatus = false)

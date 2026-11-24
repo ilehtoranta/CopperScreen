@@ -4,6 +4,15 @@ namespace CopperScreen.Tests;
 
 public sealed class RuntimeAudioPacingTests
 {
+    [Theory]
+    [InlineData(50, 20.0)]
+    [InlineData(60, 16.666667)]
+    public void PresentationUsesTheEmulatedFieldInterval(double hz, double expectedMilliseconds)
+    {
+        using var runtime = CopperScreenRuntime.CreateForTests(new ControlledSession(hz));
+        Assert.Equal(expectedMilliseconds, runtime.CurrentState.FieldMilliseconds, 5);
+    }
+
     [Fact]
     public async Task PausePublishesStateWhenPresentationAndAudioQueuesAreFull()
     {

@@ -6,24 +6,24 @@ namespace CopperScreen.Tests;
 public sealed class MainWindowPresentationTests
 {
     [Fact]
-    public void OverdueFrameProgressesWhileFreshFrameYieldsToInput()
+    public void DueFrameRunsBetweenInputBatchesAndEarlyFrameYields()
     {
         var dispatcher = Dispatcher.CurrentDispatcher;
         var order = new List<string>();
-        var first = dispatcher.InvokeAsync(() => order.Add("first frame"), MainWindow.FramePresentationPriority);
-        var second = dispatcher.InvokeAsync(() => order.Add("second frame"), MainWindow.FramePresentationPriority);
-        var secondOfTicks = System.Diagnostics.Stopwatch.Frequency;
+        const long due = 100;
+        dispatcher.Post(() =>
+        {
+            order.Add("input");
+            dispatcher.Post(() => order.Add("more input"), DispatcherPriority.Input);
+            dispatcher.Post(() =>
+            {
+                order.Add("due frame");
+                dispatcher.Post(() => order.Add("early frame"), MainWindow.FramePriorityAt(due, due + 1));
+            }, MainWindow.FramePriorityAt(due, due));
+        }, DispatcherPriority.Input);
 
-        dispatcher.Post(() => order.Add("next input"), DispatcherPriority.Input);
-        MainWindow.PromoteOverdueFrame(first, secondOfTicks, secondOfTicks);
-        Assert.Equal(MainWindow.FramePresentationPriority, first.Priority);
-
-        var overdue = secondOfTicks + secondOfTicks / 20;
-        MainWindow.PromoteOverdueFrame(first, secondOfTicks, overdue);
-        MainWindow.PromoteOverdueFrame(second, overdue, overdue + 1);
         dispatcher.RunJobs();
-
-        Assert.Equal(new[] { "first frame", "next input", "second frame" }, order);
+        Assert.Equal(new[] { "input", "due frame", "more input", "early frame" }, order);
     }
 
     [Theory]
