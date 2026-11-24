@@ -1090,3 +1090,67 @@ for byte. Later levels and a paired game DMA timeline remain open.
 | CopperScreen opening, field 3,400 | `ACB5470F0E283E950F20E4914FEAC7E719F42A8FA0C5FA25A7EB516F068B1DC4` |
 | CopperScreen scrolled playfield, field 3,560 | `87491C4346A3A1A14FF5672BF8595C18644D5D402A6CF92871EA1B1CE5101585` |
 | Stock cycle-exact WinUAE opening | `E9EAC078CDD36E158B24DBB48E140A881210E876AFE48BA00ED9AD5CB8A99A76` |
+
+### Sierra Soccer: World Challenge Edition
+
+The original SPS 1539 archive has SHA-256
+`63085ED808A1284D91BF5DE702B79C84185506B5E8140DE0C95D96A646025C70`.
+Both engines use a stock PAL A500 with Kickstart 1.3, 512 KiB Chip RAM
+and 512 KiB slow RAM. The Presentation disk reaches the animated title.
+Booting the Game disk from DF0 reaches the credits, language selection and
+the printed manual's flag check. At field 5,450, 127,968 of 128,000 RGB
+samples match stock cycle-exact WinUAE 6.1 beta 23. All 32 differences
+are inside the printed page number, which was 39 on CopperScreen and 32
+on WinUAE. Both engines accept the flag sequence from the corresponding
+page of the original manual. [Archived Sierra Soccer manual](https://web.archive.org/web/20250413170545/https://retro-commodore.eu/files/downloads/Game%20Manuals/Amiga/Sierra%20Soccer%20-%20World%20Challenge%20Edition%20(1994)(Sierra)(M3)%5b600dpi%5d%5bocr%5d.pdf)
+
+The original Game disk reaches the USA versus Brazil friendly on both
+engines. Start with Game in DF0 and Presentation in DF1. On CopperScreen,
+pulse port 2 fire at field 4,800 and the left mouse button at 5,100 to select
+English. For the page 39 prompt, choose Canada, Tanzania and England.
+Choose Friendly and Play, then select the USA and Brazil and exit each
+roster. The field-10,400 center-circle kickoff matches 142,666 of 142,720
+RGB samples in the same region used for the demo below. The 54 differences
+are in the referee at reference x=348–361, y=138–158, and around the ball
+at x=382–385, y=266–270. Port 2 fire at 10,418–10,430 followed by Right
+through 10,465 starts play and scrolls the pitch. WinUAE also responds to
+kickoff and movement. CopperScreen reaches 01:56 at field 10,640, with
+962 stereo sample frames and nonzero output on both channels at both
+checkpoints. The ordinary Release runner reproduces both bitmaps byte for
+byte and reports no unsupported feature.
+
+The published Amiga Action #57 disk 1 demo opens an England versus Holland
+match on the same PAL A500 profile. The ADF SHA-256 is
+`9B8FA4FD8FF8D9AA0FAF2B4910454F64E55893B774D49C4D22D39AB9C06B274C`.
+The replay uses joystick port 2 for England. It pulses fire at
+5,200–5,215, Right at 5,520–5,527 to select Exit on the team-selection
+screen, and fire at 5,540–5,555 to load the pitch. Fire at 6,220–6,230
+kicks off. Right remains held from 6,230 to 6,265.
+[Amiga Action demo disk record](https://gamesdb.launchbox-app.com/publishers/games/16032-europress-interactive)
+
+The demo menu at field 5,000 matches all 128,000 RGB samples. The
+field-6,150 kickoff capture matches 142,566 of 142,720 samples against
+WinUAE. All differences are within the two match officials at reference
+x=350–385, y=138–166. The comparison samples reference x=60–699 and even
+rows 66–464 for the menu and 46–490 for kickoff, with CopperScreen
+coordinates `x + 198`, `floor(y/2) + 27`. Both engines respond to kickoff
+and movement. CopperScreen reaches 00:56 on the match clock at field
+6,460. The Release replay reproduced the kickoff and active-match bitmaps
+byte for byte and reported no unsupported feature.
+
+The Release captures contain 962 stereo sample frames at kickoff and
+961 during the active match, with nonzero output on both channels. The
+initial WinUAE Presentation recording is invalid for a timing comparison.
+Its 2,600 recorded PAL fields yielded 5,442,217 stereo sample frames in
+a stream labelled 48 kHz, more than twice the samples expected for that
+interval. Exact audio timing and play through the final whistle remain open.
+
+| Capture | SHA-256 |
+| --- | --- |
+| CopperScreen original flag check, field 5,450 | `58ABB7B16EA1A702B55D7786BE45DD67E3AEC5829BCC0E5F7DE8C8A2160F415B` |
+| CopperScreen original kickoff, field 10,400 | `EAC1894A824271E79C87126F303AEFEF9F2324A9645E4D24D4B3D6054A285ACC` |
+| CopperScreen active original match, field 10,640 | `8BAA1A90252FDCCF61C93437B24E54854973D884B923B02017E5BA9F2CD0CF36` |
+| Stock cycle-exact WinUAE original kickoff | `67FBABC2F168269F7BB6E7A4E51DF79F3D0EBDD25E09853ED7599AA006FB41A0` |
+| CopperScreen demo kickoff, field 6,150 | `D8C7C69EE49C3966AA3D1C0FE2B3B27C8314E6E491404D207F7AC56A12324D52` |
+| CopperScreen active demo match, field 6,460 | `84C1751EF6EEF78AE754B874E2433213DB2E3CC80C2FBA99C954C31DEC28DC25` |
+| Stock cycle-exact WinUAE demo kickoff | `F8E8061BA117B983EB975500F3E6B336C491473F59D779CD824D5F73815806DB` |
