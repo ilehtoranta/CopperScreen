@@ -148,6 +148,7 @@ public sealed class LightweightStorageTimingTests
         io.Attach(new(media.Configuration) { Timing = LightweightDriveTimingProfile.Cf }, null);
         io.WriteByte(0xDAA000,0x80);
         io.WriteByte(0xDA2018, 0xA0); io.WriteByte(0xDA201C, 0xEC);
+        Assert.Equal(0x80, io.ReadByte(0xDA2000)); // BSY before IDENTIFY is ready
         io.Step(io.NextCycle);
         Assert.Equal(0x80, io.ReadByte(0xDA9000));
         Assert.Equal(0x58, io.ReadByte(0xDA3018)); Assert.True(io.InterruptAsserted);
@@ -157,6 +158,8 @@ public sealed class LightweightStorageTimingTests
         Assert.Equal(0,io.ReadByte(0xDA8000)); // live ATA line is now low
         io.WriteByte(0xDA9000,0x7C); Assert.False(io.InterruptAsserted);
         Assert.Equal(0xFF,io.ReadByte(0xDA401C)); // neither chip select
+        Assert.Equal(0, io.ReadByte(0xDA2000));
+        Assert.Equal(0, io.ReadByte(0xDA2001));
         Assert.Equal(0x4000, io.ReadWord(0xDA2000, 1000));
         Assert.Equal(0x0800, io.ReadWord(0xDA2000, 1000)); // eight cylinders
         io.ReadWord(0xDA2000, 1000);

@@ -276,9 +276,10 @@ public sealed class LightweightCopperTests
     }
 
     [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
-    public void JumpInvalidatesDecodeButRetainsAlreadyAcceptedRamOutput(bool readStrobe)
+    [InlineData(false, 0u)]
+    [InlineData(true, 0u)]
+    [InlineData(true, 0x200u)]
+    public void JumpInvalidatesDecodeButRetainsAlreadyAcceptedRamOutput(bool readStrobe, uint mirror)
     {
         using var machine = new LightweightA500Machine();
         long cycle = machine.Cycle;
@@ -299,7 +300,7 @@ public sealed class LightweightCopperTests
         var retainedOutput = machine.CopperPendingOutputCycle;
         cycle = machine.Cycle;
         if (readStrobe)
-            _ = machine.ReadWord(LightweightA500Machine.CustomBase + LightweightRegisters.Copjmp2,
+            _ = machine.ReadWord(LightweightA500Machine.CustomBase + mirror + LightweightRegisters.Copjmp2,
                 ref cycle, M68kBusAccessKind.CpuDataRead);
         else machine.WriteWord(
             LightweightA500Machine.CustomBase + LightweightRegisters.Copjmp2,

@@ -51,12 +51,24 @@ to extend it. All device progress remains owned by the machine.
 
 The initial PAL A1200 uses an explicit `CreateA1200Ec020` package profile and
 `a1200-initial-v1` host bridge. An aligned Chip/ROM longword occupies one accepted
-motherboard transfer; custom registers stay 16-bit and CIA/Gayle byte-wide.
+motherboard transfer. Custom registers are 16-bit. Gayle IDE consumes a PIO
+data word on a word read. A byte read during the data phase returns zero and
+leaves the next word available. See the WinUAE [Gayle byte-read path](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/gayle.cpp#L411-L419)
+and [ATA data-register handler](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/ide.cpp#L1354-L1369).
 On a 32-bit port, a word at byte offset 1 fits in one transfer. At offset 3 it
 spans two. An odd longword uses three lanes on one side of the aligned boundary
 and one on the other. The bridge decodes the port width separately on each
 side, including at the EC020 address wrap. Each Akiko C2P read advances one
-bitplane per transfer that selects the converter.
+bitplane per transfer that selects the converter. The public machine longword
+methods use the guest's bus adapter on a 68EC020, including on CD32.
+
+On the A500, Gary's custom-register mirrors decode the low nine address bits.
+They share the canonical register strobes and Agnus arbitration. Fitted slow
+RAM overrides the custom mirror at its assigned addresses. In the CIA window
+from `$A00000` through `$BFFFFF`, A12 and A13 select the chips independently.
+A dual-select word access strobes CIA-B on the high byte and CIA-A on the low
+byte at the same E-clock edge. See the WinUAE [CIA word read](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/cia.cpp#L2670-L2700)
+and [word write](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/cia.cpp#L2811-L2856).
 
 For custom-register byte writes, stock OCS/ECS drives the byte on both lanes.
 Stock AGA drives both lanes at even addresses and only the low byte (upper

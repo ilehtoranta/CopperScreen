@@ -869,10 +869,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     public uint ReadLong(uint address, ref long cycle, M68kBusAccessKind accessKind)
     {
-        if ((address & 1) != 0 && _configuration.CpuModel == M68kCpuModel.M68EC020)
+        if (_configuration.CpuModel == M68kCpuModel.M68EC020)
             return _cpuBus.ReadLong(address, ref cycle, accessKind);
-        if ((address & 3) == 0 && IsAkikoAddress(address))
-            return ReadAgaBusLanes(address, 4, ref cycle);
         GrantCpuWord(address, cycle, out var firstWordCycle, out var firstCompletedCycle);
         var high = ReadWordAt(address, firstWordCycle);
         AdvanceHardwareTo(firstCompletedCycle);
@@ -911,14 +909,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     public void WriteLong(uint address, uint value, ref long cycle, M68kBusAccessKind accessKind)
     {
         // Direct EC020 bus callers use the same lane grouping as guest instructions.
-        if ((address & 1) != 0 && _configuration.CpuModel == M68kCpuModel.M68EC020)
+        if (_configuration.CpuModel == M68kCpuModel.M68EC020)
         {
             _cpuBus.WriteLong(address, value, ref cycle, accessKind);
-            return;
-        }
-        if ((address & 3) == 0 && IsAkikoAddress(address))
-        {
-            WriteAgaBusLanes(address, value, 4, ref cycle);
             return;
         }
         GrantCpuWord(address, cycle, out var firstWordCycle, out var firstCompletedCycle);
@@ -1022,10 +1015,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return;
         }
 
-        var usesCia = byteAccess
-            ? TryDecodeCiaRegister(address, out _, out _)
-            : IsCiaWordAccess(address);
-        if (usesCia)
+        var cia = DecodeCiaSelect(address);
+        if (byteAccess) cia &= CiaByteLane(address);
+        if (cia != CiaSelect.None)
         {
             var ciaCycle = Math.Max(0, start + 1);
             var remainder = ciaCycle % LightweightCia.CpuCyclesPerTick;
@@ -1064,13 +1056,18 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             return false;
         return address < ChipRamCpuDecodeSize ||
             address >= 0x00C00000 && address < 0x00C00000 + _slowRam.Length ||
-            address >= CustomBase && address < CustomBase + 0x200 ||
+            IsCustomAddress(address) ||
             _rtc is not null && LightweightRealTimeClock.ContainsAddress(address);
     }
 
-    private static bool IsCiaWordAccess(uint address)
-        => TryDecodeCiaRegister(address, out _, out _) ||
-            TryDecodeCiaRegister(address + 1, out _, out _);
+    private bool IsCustomAddress(uint address)
+    {
+        address &= 0x00FF_FFFF;
+        if (address is >= 0xDF0000 and < 0xE00000) return true;
+        // On the A500, fitted slow RAM takes precedence over the Gary custom mirrors.
+        return address is >= 0xC00000 and < 0xDF0000 && !IsAga &&
+            (address < 0xD80000 && address - 0xC00000 >= _slowRam.Length || address >= 0xDE0000);
+    }
 
     internal void AdvanceHardwareToCpuCycle()
         => AdvanceHardwareTo(_cpu.State.Cycles);
@@ -1857,9 +1854,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             var offset = (int)(address - 0x00C00000);
             return BinaryPrimitives.ReadUInt16BigEndian(_slowRam.AsSpan(offset, 2));
         }
-        if (address >= CustomBase && address < CustomBase + 0x200)
+        if (IsCustomAddress(address))
         {
-            var offset = (ushort)(address - CustomBase);
+            var offset = (ushort)(address & 0x1FE);
             return offset switch
             {
                 >= LightweightRegisters.ColorFirst and <= LightweightRegisters.ColorLast when IsAga
@@ -1918,19 +1915,16 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         { RefreshStorageSchedule(cycle); return completion; }
         if (_a1200Io is not null && IsA1200IoAddress(address))
         { var value = _a1200Io.ReadWord(address, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 2, false, value, cycle); RefreshStorageSchedule(cycle); } return value; }
-        if ((address & 0x00FF_FFFEu) == CustomBase + LightweightRegisters.Clxdat)
+        if ((address & 0x1FE) == LightweightRegisters.Clxdat && IsCustomAddress(address))
             return _sprites.ReadCollisionData();
         StrobeCopperRead(address, cycle);
-        if (TryDecodeCiaRegister(address, out var ciaA, out var register))
+        var cia = DecodeCiaSelect(address);
+        if (cia != CiaSelect.None)
         {
-            var value = ReadCiaRegister(ciaA, register, cycle);
-            return (ushort)((value << 8) | 0x00FF);
-        }
-
-        if (TryDecodeCiaRegister(address + 1, out ciaA, out register))
-        {
-            var value = ReadCiaRegister(ciaA, register, cycle);
-            return (ushort)(0xFF00 | value);
+            var register = CiaRegister(address);
+            var high = (cia & CiaSelect.B) != 0 ? ReadCiaRegister(false, register, cycle) : 0xFF;
+            var low = (cia & CiaSelect.A) != 0 ? ReadCiaRegister(true, register, cycle) : 0xFF;
+            return (ushort)((high << 8) | low);
         }
 
         return ReadWordRaw(address);
@@ -1944,14 +1938,15 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_rtc is not null && _rtc.TryReadByte(address, out var rtcValue)) return rtcValue;
         if (_a1200Io is not null && IsA1200IoAddress(address))
         { var value = _a1200Io.ReadByte(address, true, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 1, false, value, cycle); RefreshStorageSchedule(cycle); } return value; }
-        if ((address & 0x00FF_FFFEu) == CustomBase + LightweightRegisters.Clxdat)
+        if ((address & 0x1FE) == LightweightRegisters.Clxdat && IsCustomAddress(address))
         {
             var collision = _sprites.ReadCollisionData();
             return (address & 1) == 0 ? (byte)(collision >> 8) : (byte)collision;
         }
         StrobeCopperRead(address, cycle);
-        if (TryDecodeCiaRegister(address, out var ciaA, out var register))
-            return ReadCiaRegister(ciaA, register, cycle);
+        var lane = DecodeCiaSelect(address) & CiaByteLane(address);
+        if (lane != CiaSelect.None)
+            return ReadCiaRegister(lane == CiaSelect.A, CiaRegister(address), cycle);
         var word = ReadWordRaw(address & ~1u);
         return (address & 1) == 0 ? (byte)(word >> 8) : (byte)word;
     }
@@ -1961,7 +1956,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private void StrobeCopperRead(uint address, long cycle)
     {
         // COPJMP1/2 are address strobes on reads as well as writes. Peeks bypass this path.
-        if ((address & 0x00FF_FFFCu) != CustomBase + LightweightRegisters.Copjmp1)
+        if ((address & 0x1FC) != LightweightRegisters.Copjmp1 || !IsCustomAddress(address))
             return;
         _copper.OnRegisterWrite((ushort)(LightweightRegisters.Copjmp1 + (address & 2)), cycle, this);
         RefreshNextDeviceCycle();
@@ -1976,9 +1971,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     private void WriteByteRaw(uint address, byte value, long cycle)
     {
-        if (TryDecodeCiaRegister(address, out var ciaA, out var register))
+        var cia = DecodeCiaSelect(address);
+        if (cia != CiaSelect.None)
         {
-            WriteCiaRegister(ciaA, register, value, cycle);
+            // A byte is present on both data lanes when Gary selects both CIAs.
+            if (cia == CiaSelect.Both || (cia & CiaByteLane(address)) != 0)
+                WriteSelectedCias(cia, address, value, value, cycle);
             return;
         }
 
@@ -1993,7 +1991,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         { _a1200Io.WriteByte(address, value, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 1, true, value, cycle); RefreshStorageSchedule(cycle); } return; }
         if (address >= 0x200000 && TryWriteExpansionByte(address, value)) return;
         var aligned = address & ~1u;
-        if (aligned >= CustomBase && aligned < CustomBase + 0x200)
+        if (IsCustomAddress(aligned))
         {
             // The custom chips latch a whole word even for a CPU byte write.
             var lanes = (ushort)(value * 0x0101);
@@ -2003,11 +2001,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             }
             else if (IsAga && (address & 1) != 0)
                 lanes = value;
-            WriteCustomRegister((ushort)(aligned - CustomBase), lanes, cycle);
+            WriteCustomRegister((ushort)(aligned & 0x1FE), lanes, cycle);
             return;
         }
-        if (IsCiaWordAccess(aligned))
-            return;
         var word = ReadWordRaw(aligned);
         word = (address & 1) == 0
             ? (ushort)((word & 0x00FF) | (value << 8))
@@ -2018,14 +2014,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private void WriteWordRaw(uint address, ushort value, long cycle = 0)
     {
         address &= 0x00FF_FFFFu;
-        if (TryDecodeCiaRegister(address, out var ciaA, out var register))
+        var cia = DecodeCiaSelect(address);
+        if (cia != CiaSelect.None)
         {
-            WriteCiaRegister(ciaA, register, (byte)(value >> 8), cycle);
-            return;
-        }
-        if (TryDecodeCiaRegister(address + 1, out ciaA, out register))
-        {
-            WriteCiaRegister(ciaA, register, (byte)value, cycle);
+            WriteSelectedCias(cia, address, (byte)(value >> 8), (byte)value, cycle);
             return;
         }
         if (_overlayEnabled && address + 1 < _overlaySize)
@@ -2047,9 +2039,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             NotifyJitRamWrite(address, 2);
             return;
         }
-        if (address >= CustomBase && address < CustomBase + 0x200)
+        if (IsCustomAddress(address))
         {
-            WriteCustomRegister((ushort)(address - CustomBase), value, cycle);
+            WriteCustomRegister((ushort)(address & 0x1FE), value, cycle);
             return;
         }
         if (_fastRam is { } ram && ram.ContainsRange(address, 2))
@@ -2483,31 +2475,25 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_overlayEnabled != enabled) { _overlayEnabled = enabled; InvalidateCpuMemoryMap(); }
     }
 
-    private static bool TryDecodeCiaRegister(
-        uint address,
-        out bool ciaA,
-        out int register)
+    [Flags]
+    private enum CiaSelect : byte { None = 0, A = 1, B = 2, Both = A | B }
+
+    private CiaSelect DecodeCiaSelect(uint address)
     {
-        address &= 0x00FF_FFFFu;
-        if (address >= 0x00BFE001 && address <= 0x00BFEF01 &&
-            (address & 0xFF) == 0x01)
-        {
-            ciaA = true;
-            register = (int)((address >> 8) & 0x0F);
-            return true;
-        }
+        if ((address & 0xE00000) != 0xA00000) return CiaSelect.None;
+        if (IsAga && (address & 0xFFF000) is not (0xBFD000 or 0xBFE000)) return CiaSelect.None;
+        // Gary's active-low A12/A13 selects are independent of the register index.
+        return (CiaSelect)((~address >> 12) & 3);
+    }
 
-        if (address >= 0x00BFD000 && address <= 0x00BFDF00 &&
-            (address & 0xFF) == 0)
-        {
-            ciaA = false;
-            register = (int)((address >> 8) & 0x0F);
-            return true;
-        }
+    private static CiaSelect CiaByteLane(uint address) => (address & 1) == 0 ? CiaSelect.B : CiaSelect.A;
+    private static int CiaRegister(uint address) => (int)((address >> 8) & 15);
 
-        ciaA = false;
-        register = 0;
-        return false;
+    private void WriteSelectedCias(CiaSelect cia, uint address, byte high, byte low, long cycle)
+    {
+        var register = CiaRegister(address);
+        if ((cia & CiaSelect.B) != 0) WriteCiaRegister(false, register, high, cycle);
+        if ((cia & CiaSelect.A) != 0) WriteCiaRegister(true, register, low, cycle);
     }
 
     private uint ReadLongRaw(uint address)

@@ -111,7 +111,31 @@ public sealed class LightweightCd32Tests
 
         using var a500 = new LightweightA500Machine();
         cycle = 0;
-        Assert.Equal(uint.MaxValue, a500.ReadLong(0xB80000, ref cycle, Read));
+        // Gary selects both CIAs here. A1 does not participate in their register decode.
+        var portB = a500.ReadByte(0xBFD000, ref cycle, Read);
+        var portA = a500.ReadByte(0xBFE001, ref cycle, Read);
+        Assert.Equal((uint)((portB << 8) | portA) * 0x10001u, a500.ReadLong(0xB80000, ref cycle, Read));
+    }
+
+    [Theory]
+    [InlineData(0x2000u, 4)]
+    [InlineData(0x2001u, 8)]
+    [InlineData(0x2002u, 8)]
+    [InlineData(0x2003u, 8)]
+    public void DirectAndGuestChipLongwordsUseTheSameBusCycles(uint address, int clocks)
+    {
+        using var direct = Create();
+        using var guest = Create();
+        var bus = new LightweightAcceleratorBus(guest, M68kCpuModel.M68EC020);
+        long directCycle = 20, guestCycle = 20;
+        direct.WriteLong(address, 0x12345678, ref directCycle, Write);
+        bus.WriteLong(address, 0x12345678, ref guestCycle, Write);
+        Assert.Equal(20 + clocks, directCycle);
+        Assert.Equal(guestCycle, directCycle);
+        Assert.Equal(0x12345678u, direct.ReadLong(address, ref directCycle, Read));
+        Assert.Equal(0x12345678u, bus.ReadLong(address, ref guestCycle, Read));
+        Assert.Equal(20 + 2 * clocks, directCycle);
+        Assert.Equal(guestCycle, directCycle);
     }
 
     [Theory]

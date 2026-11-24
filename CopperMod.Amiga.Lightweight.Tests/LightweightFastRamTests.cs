@@ -57,8 +57,10 @@ public sealed class LightweightFastRamTests
         m.WriteByte(address + 1, 0x55, ref cycle, Write);
         Assert.Equal(0x12555678u, m.ReadLong(address, ref cycle, Read));
         Assert.Equal(0x89ABCDEFu, m.ReadLong(end - 4, ref cycle, Read));
-        Assert.Equal(0xCDEFFFFFu, m.ReadLong(end - 2, ref cycle, Read));
-        Assert.Equal(0xFFFF, m.ReadWord(end, ref cycle, Read));
+        // At $A00000 Gary drives CIAB PRA on the high lane and CIAA PRA on the low lane.
+        var beyondRam = end == 0xA00000 ? 0xFFFCu : 0xFFFFu;
+        Assert.Equal(0xCDEF0000u | beyondRam, m.ReadLong(end - 2, ref cycle, Read));
+        Assert.Equal((ushort)beyondRam, m.ReadWord(end, ref cycle, Read));
         Assert.Equal(new byte[] { 0x12, 0x55, 0x56, 0x78 }, m.FastRam.Span[..4].ToArray());
         Assert.True(m.TryPeekInstructionWord(address, out var peek));
         Assert.Equal(0x1255, peek);

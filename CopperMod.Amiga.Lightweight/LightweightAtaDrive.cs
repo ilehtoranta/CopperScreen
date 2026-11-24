@@ -49,12 +49,13 @@ internal sealed class LightweightAtaDrive : IDisposable
     internal byte ReadRegister(int register, bool alternate, bool strobe)
     {
         if ((_device & 0x10) != 0) return 0xFF;
+        if (register == 0 && (_status & 0x80) != 0) register = 7;
         if (register == 7)
         {
             if (!alternate && strobe) _irq = false;
             return _status;
         }
-        return register switch { 1 => _error, 2 => _count, 3 => _sector, 4 => _low, 5 => _high, 6 => _device, _ => (byte)0xFF };
+        return register switch { 0 => 0, 1 => _error, 2 => _count, 3 => _sector, 4 => _low, 5 => _high, 6 => _device, _ => (byte)0xFF };
     }
 
     internal ushort ReadData(long cycle, bool strobe)

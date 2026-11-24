@@ -99,13 +99,9 @@ internal sealed class LightweightA1200Io : IDisposable
         {
             if (_ide is not null && address < IdeStart+0x4000)
             {
-                if (_ide.DataRegister(address))
-                {
-                    var word = _ide.ReadData(cycle, strobe); SyncInterrupt();
-                    return (address & 1) == 0 ? (byte)(word >> 8) : (byte)word;
-                }
                 var alternate = (address & 0x101C) == 0x1018;
-                if (alternate || TaskFileLane(address))
+                // Gayle only clocks the PIO data FIFO on a word transfer.
+                if (_ide.DataRegister(address) || alternate || TaskFileLane(address))
                 { var value = _ide.ReadRegister(alternate ? 7 : (int)(address >> 2 & 7), alternate, strobe); SyncInterrupt(); return value; }
             }
             // An unattached ATA bus floats high. In particular, status is FF rather

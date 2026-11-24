@@ -32,6 +32,45 @@ public sealed class LightweightA500MachineTests
     }
 
     [Fact]
+    public void GaryCustomMirrorsShareRegisterStateAndArbitration()
+    {
+        using var machine = new LightweightA500Machine();
+        const M68kBusAccessKind write = M68kBusAccessKind.CpuDataWrite;
+        const M68kBusAccessKind read = M68kBusAccessKind.CpuDataRead;
+        long cycle = 20;
+        machine.WriteWord(0xDFF09A, 0x7FFF, ref cycle, write);
+        var before = cycle;
+        machine.WriteByte(0xDFF29A, 0x81, ref cycle, write);
+        Assert.Equal(before + 2, cycle);
+        Assert.Equal(0x0181, machine.ReadWord(0xDFF01C, ref cycle, read));
+        Assert.Equal(0x0181, machine.ReadWord(0xDE021C, ref cycle, read));
+        machine.WriteWord(0xC8029A, 0x0080, ref cycle, write);
+        Assert.Equal(0x0101, machine.ReadWord(0xDFFE1C, ref cycle, read));
+        machine.WriteWord(0xC0029A, 0x7FFF, ref cycle, write); // fitted slow RAM
+        Assert.Equal(0x7FFF, machine.ReadWord(0xC0029A, ref cycle, read));
+        Assert.Equal(0x0101, machine.ReadWord(0xDFF01C, ref cycle, read));
+    }
+
+    [Fact]
+    public void GaryDualCiaWordStrobesBothLanesOnOnePeripheralEdge()
+    {
+        using var machine = new LightweightA500Machine();
+        const M68kBusAccessKind write = M68kBusAccessKind.CpuDataWrite;
+        const M68kBusAccessKind read = M68kBusAccessKind.CpuDataRead;
+        long cycle = 0;
+        machine.WriteByte(0xBFD200, 0x12, ref cycle, write);
+        machine.WriteByte(0xBFE201, 0x34, ref cycle, write);
+        Assert.Equal(0x1234, machine.ReadWord(0xBFC200, ref cycle, read));
+        Assert.Equal(30, cycle);
+        machine.WriteWord(0xBFC200, 0x5678, ref cycle, write);
+        Assert.Equal(40, cycle);
+        Assert.Equal(0x56, machine.ReadByte(0xBFD200, ref cycle, read));
+        Assert.Equal(0x78, machine.ReadByte(0xBFE201, ref cycle, read));
+        machine.WriteByte(0xBFC201, 0x9A, ref cycle, write);
+        Assert.Equal(0x9A9A, machine.ReadWord(0xA002FE, ref cycle, read));
+    }
+
+    [Fact]
     public void ResetStartsAtDeterministic68000Loop()
     {
         using var machine = new LightweightA500Machine();
