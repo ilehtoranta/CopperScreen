@@ -636,6 +636,32 @@ and countdown frames.
 Later stages and the timing of the game's actual Copper list writes remain
 unverified.
 
+### Egyptian opening level
+
+CopperScreen `9b3e8e4` selected the Egyptian Lemming in the Ark and reached
+the opening temple on the original four IPFs. The 12,600-field replay
+skipped the title at field 5,450, moved the mouse by a total of `(392, 188)`
+at fields 8,000 through 8,030 and clicked the Egyptian at field 8,200.
+The replay drew the moving Lemmings and fixed skill bar and reported no
+unsupported feature. WinUAE 6.1 beta 23 also reached the temple after
+mounting the requested Egyptian volume, disk three, in DF0.
+
+At field 12,600, the CopperScreen playfield matched 100,230 of 103,040
+RGB samples and the skill bar matched 24,238 of 25,600 samples in the
+independent WinUAE capture. The comparison samples even x values from
+516 through 1,794, playfield rows 70 through 230 and skill-bar rows 231
+through 270. The reference coordinates are `(x - 400) / 2` and `2 * y - 54`.
+The two captures show different Lemming positions, pointer positions and
+timer states. Both engines report BPLCON0 `$5201`, DDFSTRT `$0028` and
+DDFSTOP `$00C8` at the measured level checkpoints.
+
+The capture SHA-256 hashes were
+`95E4FE5A9FC594C1501C3219BD4A1813E7DA5B416A2024878728F8FDE0600AC4`
+for CopperScreen and
+`9F8ACA04C5941DF58317B9DEB82F179A1F877FAFA43E962F55837D707222DC7A`
+for WinUAE. These checks cover the opening level of each of the three
+tribes and the previously recorded Shadow scrolling route.
+
 ## RoboCop 3
 
 The initial 2,100-field CopperScreen replay of SPS 0805 reached the expected
