@@ -83,6 +83,8 @@ public sealed record LightweightA500Configuration
     /// <summary>Optional owner-thread clock source for reproducible RTC callers.
     /// Defaults to DateTimeOffset.Now. Only sampled on RTC register access.</summary>
     public Func<DateTimeOffset>? RtcNowProvider { get; init; }
+    /// <summary>Fit the RoboCop 3 dongle to the second controller port.</summary>
+    public bool RoboCop3DongleEnabled { get; init; }
     /// <summary>Initial raster width: 908 retains hires, 1816 retains ECS SuperHires; 454 is lowres-only.
     /// Guest ECS timing can change completed width/height; read machine dimensions with each field.</summary>
     public int FramebufferWidth { get; init; } = 454;

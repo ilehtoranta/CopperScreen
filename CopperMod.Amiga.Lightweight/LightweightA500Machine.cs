@@ -1905,8 +1905,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 0x07C when IsEcsDenise => 0xFFFC,
                 LightweightRegisters.Hhposr when IsEcsAgnus => (ushort)_clock.ColorClock,
                 0x07C => ReadUndrivenCustomBus(),
-                0x00A => _controllers.ReadJoy(port1: false, padConnected: _cd32Pads?.IsConnected(0) == true),
-                0x00C => _controllers.ReadJoy(port1: true),
+                0x00A => _controllers.ReadJoy0(_cd32Pads?.IsConnected(0) == true),
+                0x00C => _controllers.ReadJoy1(_configuration.RoboCop3DongleEnabled),
                 0x012 or 0x014 => _pots.ReadCounters((offset - 0x012) / 2, Cycle, ReadControllerPotPins(_registers.Read(0x034))),
                 0x016 => _pots.ReadPins(Cycle, ReadControllerPotPins(_registers.Read(0x034)), _registers.Read(0x034)),
                 _ => _registers.Read(offset)
@@ -2458,6 +2458,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
         if (ciaA)
         {
+            if (register == 0 && _configuration.RoboCop3DongleEnabled)
+                _controllers.WriteDongleFire(value, cia.ReadDataDirection(0));
             if (IsAga)
             {
                 // On Alice motherboards the first CIA-A write releases OVL until reset.

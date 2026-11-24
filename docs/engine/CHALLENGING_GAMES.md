@@ -203,3 +203,31 @@ The initial 2,100-field CopperScreen replay of SPS 0805 reached the expected
 access-denied screen with no dongle fitted. With its RoboCop 3 dongle option
 enabled, WinUAE 6.1 beta 23 reached the original developer logo, credits
 and language selection.
+
+The original boot code configures CIA-A PRA bit 7 as an output, samples
+JOY1DAT, pulses the fire line and samples JOY1DAT again. It requires bit 8
+to change across the pulse and repeats the check on the access-denied screen.
+CopperScreen fits the accessory explicitly through
+`LightweightA500Configuration.RoboCop3DongleEnabled` or the runner's
+`--robocop3-dongle` option. The CIA output clocks the dongle's vertical
+counter bit on the rising latch transition. The affected JOY1DAT readback
+uses bits 8 and 0. Focused tests cover the output-direction requirement,
+repeated writes, two pulses, unplugged behavior and the other port.
+[WinUAE dongle model](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/dongle.cpp#L151-L201)
+
+With the accessory enabled, the PAL A500 replay passed protection and
+entered English Movie Adventure, including the Delta City introduction
+and the animated Mediabreak. A separate 11,600-field replay entered
+Arcade Action, selected the driving scenario from the headlines and
+accelerated and steered the car with the cursor keys. Both replays used
+the unmodified disks. WinUAE also reached playable driving. The right
+dashboard fascia matched all 11,620 sampled RGB values from independent
+driving captures. The comparison uses CopperScreen x=732–897, y=174–243
+and WinUAE coordinates `x - 198`, `2 * y - 54`.
+
+The driving replay ended with CPU fingerprint `0xBEC477F258AD96EC`,
+hardware `0x800B30BC29E9F590` and output `0x0730A40FB12432B0`, with no
+unsupported feature report. The same build without the accessory still
+showed access denied. The Release solution build passed with zero warnings.
+Engine diagnostics passed 1,427 tests and skipped seven optional native
+cases. Physical dongle signal timing and later missions remain unverified.

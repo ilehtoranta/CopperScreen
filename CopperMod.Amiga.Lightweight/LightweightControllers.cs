@@ -7,6 +7,7 @@ internal struct LightweightControllers
     private byte _mouseX, _mouseY;
     private ushort _joy1Upper;
     private byte _joy0, _joy1, _buttons;
+    private bool _dongleFireHigh, _dongleVerticalBit;
 
     internal void Submit(LightweightInputState input)
     {
@@ -17,11 +18,25 @@ internal struct LightweightControllers
         _buttons = input.MouseButtons;
     }
 
-    internal ushort ReadJoy(bool port1, bool padConnected = false) => port1
-        ? (ushort)(_joy1Upper | Directions(_joy1))
-        : (_joy0 & 0x80) != 0 || padConnected
-            ? (ushort)((((_mouseY << 8) | _mouseX) & 0xFCFC) | Directions(_joy0))
-            : (ushort)((_mouseY << 8) | _mouseX);
+    internal ushort ReadJoy0(bool padConnected) => (_joy0 & 0x80) != 0 || padConnected
+        ? (ushort)((((_mouseY << 8) | _mouseX) & 0xFCFC) | Directions(_joy0))
+        : (ushort)((_mouseY << 8) | _mouseX);
+
+    internal ushort ReadJoy1(bool roboCop3Dongle)
+    {
+        var directions = Directions(_joy1);
+        return roboCop3Dongle
+            ? (ushort)((directions ^ (_dongleVerticalBit ? 0x0100 : 0)) & 0x0101)
+            : (ushort)(_joy1Upper | directions);
+    }
+
+    internal void WriteDongleFire(byte latch, byte direction)
+    {
+        var high = (latch & 0x80) != 0;
+        if ((direction & 0x80) != 0 && high && !_dongleFireHigh)
+            _dongleVerticalBit = !_dongleVerticalBit;
+        _dongleFireHigh = high;
+    }
 
     private static ushort Directions(byte state)
     {

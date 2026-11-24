@@ -23,6 +23,7 @@ if (args.Contains("--help"))
           Use --hdf-rdb-writable to allow direct writes. The Full CopperStart pair mounts OFS/FFS and SFS partitions
           using TD64 offsets above 4 GiB and selects the highest signed boot priority stored in the RDB.
         --drives <1..4> --drive-type <0..3> <DD|HD>
+        --robocop3-dongle fits the original dongle to controller port 2.
         --cpu 68040 --jit --cpu-clock-multiplier <power-of-two>
           Optional accelerated CPU clock and zero-wait Fast RAM and ROM with the original motherboard clock.
         --boot-probe <directory> --boot-probe-extended --boot-probe-storage
@@ -80,6 +81,7 @@ var diskSerial = false;
 var diskDma = false;
 var ciaTod = false;
 var inputReplay = false;
+var roboCop3Dongle = false;
 var wideOutput = false;
 var hires = false;
 string? bootProbeDirectory = null;
@@ -97,6 +99,7 @@ for (var i = 0; i < args.Length; i++)
     else if (args[i] == "--warmup" && i + 1 < args.Length && int.TryParse(args[++i], out var warmupFrames)) warmup = warmupFrames;
     else if (args[i] == "--rom" && i + 1 < args.Length) romPath = args[++i];
     else if (args[i] == "--cd32") cd32 = true;
+    else if (args[i] == "--robocop3-dongle") roboCop3Dongle = true;
     else if (args[i] == "--cd-turbo") cdTurbo = true;
     else if (args[i] == "--video-standard")
     {
@@ -370,11 +373,17 @@ catch (Exception ex) when (ex is ArgumentException or IOException or Unauthorize
     return;
 }
 
+var machineConfiguration = cd32Configuration ?? (acceleratedCpu ?? new LightweightA500Configuration()) with
+{
+    FramebufferWidth = deniseModel != LightweightDeniseModel.Mos8362 ? 1816 : romPath is null && !wideOutput ? 454 : 908,
+    FloppyDriveCount = driveCount, FloppyDriveTypes = Enumerable.Range(0, driveCount).Select(unit => driveTypes.GetValueOrDefault(unit)).ToArray(),
+    Hardfiles = hardfiles, HostDirectories = hostDirectories, CpuModel = cpuModel, CpuExecutionMode = cpuExecutionMode, FastRamBytes = fastRamKiB * 1024,
+    AgnusModel = agnusModel, DeniseModel = deniseModel, ChipRamBytes = chipRamKiB * 1024,
+    SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024, RtcEnabled = rtcEnabled
+};
+if (roboCop3Dongle) machineConfiguration = machineConfiguration with { RoboCop3DongleEnabled = true };
 using var machine = new LightweightA500Machine(
-    configuration: cd32Configuration ??
-        (acceleratedCpu ?? new LightweightA500Configuration()) with
-        { FramebufferWidth = deniseModel != LightweightDeniseModel.Mos8362 ? 1816 : romPath is null && !wideOutput ? 454 : 908, FloppyDriveCount = driveCount, FloppyDriveTypes = Enumerable.Range(0, driveCount).Select(unit => driveTypes.GetValueOrDefault(unit)).ToArray(), Hardfiles = hardfiles, HostDirectories = hostDirectories, CpuModel = cpuModel, CpuExecutionMode = cpuExecutionMode, FastRamBytes = fastRamKiB * 1024,
-            AgnusModel = agnusModel, DeniseModel = deniseModel, ChipRamBytes = chipRamKiB * 1024, SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024, RtcEnabled = rtcEnabled },
+    configuration: machineConfiguration,
     enableConservativeCpuLoopBatch: !scalarCpu);
 if (cpuClockMultiplier != 1)
     Console.WriteLine($"CPU_CLOCK multiplier={cpuClockMultiplier} memory=zero-wait-fast-ram-and-rom motherboard=pal");

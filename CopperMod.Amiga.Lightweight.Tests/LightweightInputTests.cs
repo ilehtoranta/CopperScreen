@@ -115,6 +115,32 @@ public sealed class LightweightInputTests
         Assert.Equal(expected, ReadCustom(m, 0x00C));
     }
 
+    [Theory]
+    [InlineData(false, 0x0003, 0x0003)]
+    [InlineData(true, 0x0001, 0x0101)]
+    public void ControllerPortDongleClocksOncePerDrivenFirePulse(bool fitted, int idle, int clocked)
+    {
+        using var m = new LightweightA500Machine(new() { RoboCop3DongleEnabled = fitted });
+        m.SubmitInput(new(0, 8, 0, 2, 3, 0));
+
+        WriteCia(m, 0, 0x80);
+        WriteCia(m, 0, 0);
+        Assert.Equal(idle, ReadCustom(m, 0x00C));
+
+        WriteCia(m, 2, 0x80);
+        Assert.Equal(idle, ReadCustom(m, 0x00C));
+        WriteCia(m, 0, 0x80);
+        Assert.Equal(clocked, ReadCustom(m, 0x00C));
+        WriteCia(m, 0, 0x80);
+        WriteCia(m, 0, 0);
+        Assert.Equal(clocked, ReadCustom(m, 0x00C));
+        Assert.Equal(0x0302, ReadCustom(m, 0x00A));
+
+        WriteCia(m, 0, 0x80);
+        WriteCia(m, 0, 0);
+        Assert.Equal(idle, ReadCustom(m, 0x00C));
+    }
+
     [Fact]
     public void JoytestPreservesLowBitsAndWritesBothCounterPairs()
     {
