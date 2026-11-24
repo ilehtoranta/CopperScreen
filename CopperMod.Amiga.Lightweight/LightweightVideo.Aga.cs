@@ -5,12 +5,14 @@ namespace CopperMod.Amiga.Lightweight;
 
 internal sealed partial class LightweightVideo
 {
+    private const int AgaReloadPhase = 3;
     private readonly bool _aga;
     private readonly int[] _agaPalette = new int[256];
     private readonly ushort[] _agaHigh = new ushort[256], _agaLow = new ushort[256];
     private readonly ulong[] _agaData = new ulong[8], _agaIntermediate = new ulong[8], _agaShift = new ulong[8];
     private readonly ushort[] _agaDualPixels = new ushort[256];
     private ulong _agaPendingData;
+    private bool _agaDataCopyPending;
     private int _agaPendingBits = 16, _agaBits = 16;
     private ushort _agaBplcon4 = 0x11, _agaFmode;
     private int _agaOddReloadDelay, _agaEvenReloadDelay;
@@ -22,8 +24,9 @@ internal sealed partial class LightweightVideo
         Array.Clear(_agaHigh); Array.Clear(_agaLow); Array.Clear(_agaData);
         Array.Clear(_agaIntermediate); Array.Clear(_agaShift);
         _agaPendingData = 0; _agaPendingBits = _agaBits = 16;
+        _agaDataCopyPending = false;
         _agaBplcon4 = 0x11; _agaFmode = 0;
-        _agaOddReloadDelay = _agaEvenReloadDelay = 3;
+        _agaOddReloadDelay = _agaEvenReloadDelay = AgaReloadPhase;
         _agaOddShiftPhase = _agaEvenShiftPhase = _agaOutputCode = 0;
         if (_aga) _ecsBplcon3 = 0x0C00;
         UpdateAgaDualPixels();
@@ -59,8 +62,7 @@ internal sealed partial class LightweightVideo
         _agaData[plane] = _agaPendingData;
         if (plane == 0)
         {
-            Array.Copy(_agaData, _agaIntermediate, 8);
-            _agaBits = _agaPendingBits; _pendingReloadParity = 3;
+            _agaDataCopyPending = true;
             _spriteOutputEnableLine = machine.BeamLine;
         }
     }
@@ -121,8 +123,8 @@ internal sealed partial class LightweightVideo
         var odd = ((scroll & 15) << 2) | (scroll >> 8 & 3) | ((scroll >> 10 & 3) << 6);
         var even = ((scroll >> 4 & 15) << 2) | (scroll >> 12 & 3) | ((scroll >> 14 & 3) << 6);
         // Retain the coarse reload phase while comparing all eight scroll bits.
-        _agaOddReloadDelay = odd + 3;
-        _agaEvenReloadDelay = even + 3;
+        _agaOddReloadDelay = odd + AgaReloadPhase;
+        _agaEvenReloadDelay = even + AgaReloadPhase;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -150,6 +152,15 @@ internal sealed partial class LightweightVideo
             var lowX = x + sample / 4;
             var inside = InEcsWindow(line, lowX);
             var sampleX = x * 4 + sample;
+            // The preceding fetch can still match its scroll comparator in
+            // the first three samples. BPL1DAT replaces it at the reload phase.
+            if (sample == AgaReloadPhase && _agaDataCopyPending)
+            {
+                Array.Copy(_agaData, _agaIntermediate, 8);
+                _agaBits = _agaPendingBits;
+                _pendingReloadParity = 3;
+                _agaDataCopyPending = false;
+            }
             var code = AdvanceAgaSample(sampleX, pixelMask);
             if (code != previousCode || inside != previousInside)
             {

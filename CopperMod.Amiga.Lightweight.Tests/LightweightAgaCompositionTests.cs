@@ -93,6 +93,32 @@ public sealed class LightweightAgaCompositionTests
     }
 
     [Theory]
+    [InlineData(0x00FF, 60)]
+    [InlineData(0x11FF, 61)]
+    [InlineData(0x22FF, 62)]
+    [InlineData(0x33FF, 63)]
+    public void LisaRetainsThePrecedingFetchWhenFineScrollWrapsTheReloadPhase(ushort scroll, int delay)
+    {
+        var codes = new int[48];
+        Array.Fill(codes, 1, 0, 16);
+        Array.Fill(codes, 2, 16, 16);
+        using var m = Create(codes, control: 0x2200, fetch: 0);
+        Palette(m, 1, 0xFF0000);
+        Palette(m, 2, 0x00FF00);
+        Write(m, 0x102, scroll);
+        m.ExecuteFrame();
+
+        const int samplesPerWord = 16 * 4;
+        var row = m.Framebuffer.Span.Slice(44 * 1816 + 516, delay + 2 * samplesPerWord + 1);
+        Assert.Equal(unchecked((int)0xFF000000), row[delay - 1]);
+        Assert.Equal(unchecked((int)0xFFFF0000), row[delay]);
+        Assert.Equal(unchecked((int)0xFFFF0000), row[delay + samplesPerWord - 1]);
+        Assert.Equal(unchecked((int)0xFF00FF00), row[delay + samplesPerWord]);
+        Assert.Equal(unchecked((int)0xFF00FF00), row[delay + 2 * samplesPerWord - 1]);
+        Assert.Equal(unchecked((int)0xFF000000), row[delay + 2 * samplesPerWord]);
+    }
+
+    [Theory]
     [InlineData(1, 0)] [InlineData(1, 1)] [InlineData(1, 2)] [InlineData(1, 3)]
     [InlineData(2, 1)] [InlineData(2, 3)] [InlineData(4, 3)]
     public void Ham8UsesLowControlPlanesAndPreservesTwoComponentBits(int resolution, int fetch)
