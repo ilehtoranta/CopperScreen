@@ -213,7 +213,13 @@ internal sealed class LightweightCopper
                 TryAcceptWord(cycle, WordPurpose.Second, machine);
                 break;
             case ControlStage.WaitIdle:
-                _stage = ControlStage.WaitCompare;
+                // The post-decode phase advances on a free Copper clock even
+                // though it does not transfer a word.
+                if (machine.CanCopperOwnOutputSlot(cycle + LightweightClock.CpuCyclesPerColorClock,
+                    normalInputPhase: true))
+                {
+                    _stage = ControlStage.WaitCompare;
+                }
                 break;
             case ControlStage.WaitCompare:
                 // WAIT's wake-up memory cycle yields to higher-priority DMA

@@ -245,6 +245,28 @@ public sealed class LightweightBitplaneTests
     }
 
     [Fact]
+    public void EnablingTheFirstOcsPlaneAfterHardLimitReleaseFetchesOnTheSameLine()
+    {
+        using var machine = new LightweightA500Machine();
+        ConfigureLowRes(machine, planeCount: 0, ddfStop: 0x0040);
+        var cycle = machine.Cycle;
+        Write(machine, LightweightA500Machine.CustomBase + LightweightRegisters.BplPointerFirst,
+            (ushort)(PlaneBase >> 16), ref cycle);
+        Write(machine, LightweightA500Machine.CustomBase + LightweightRegisters.BplPointerFirst + 2,
+            (ushort)PlaneBase, ref cycle);
+        var lineStart = (long)DisplayLine * LightweightClock.CpuCyclesPerLine;
+        var enable = lineStart + (0x20L * LightweightClock.CpuCyclesPerColorClock);
+        machine.AdvanceHardwareTo(enable);
+        machine.WriteCustomRegisterFromCopper(LightweightRegisters.Bplcon0, 0x1200, enable);
+
+        var output = lineStart + (0x40L * LightweightClock.CpuCyclesPerColorClock);
+        machine.AdvanceHardwareTo(output);
+        Assert.Equal(output, machine.BitplaneLastOutputCycle);
+        Assert.Equal(0, machine.BitplaneLastPlane);
+        Assert.Equal(PlaneBase, machine.BitplaneLastAddress);
+    }
+
+    [Fact]
     public void EnablingBitplanesAfterDdfStartWaitsForNextRasterline()
     {
         using var machine = new LightweightA500Machine();

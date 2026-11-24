@@ -183,6 +183,11 @@ internal sealed class LightweightBitplanes
         {
             Publish(NextCckAfter(cycle));
         }
+        else if (!_ecs)
+        {
+            // The OCS hard-limit release is visible even with no DMA requests.
+            Publish(cycle + DdfLimitReleaseHorizontal * LightweightClock.CpuCyclesPerColorClock);
+        }
     }
 
     private long _syncStopCycle;
@@ -273,7 +278,7 @@ internal sealed class LightweightBitplanes
 
         NextCycle = Math.Min(PendingDdfWriteCycle, TPath.Aga
             ? Math.Min(_pendingFmodeCycle, _pendingBplcon0Cycle) : _pendingBplcon0Cycle);
-        if (dmaEnabled && planeCount != 0)
+        if ((!_ecs && !_startPermit) || (dmaEnabled && planeCount != 0))
         {
             PublishNextInactiveControlCycle<TPath>(cycle, machine);
         }
