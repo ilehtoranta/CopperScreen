@@ -163,6 +163,9 @@ public sealed class LightweightBitplaneTests
     [InlineData(0x50, 0x38, 0x37, 0)]
     [InlineData(0x38, 0x50, 0x35, 5)]
     [InlineData(0x38, 0x50, 0x37, 8)]
+    [InlineData(0x38, 0x38, 0x33, 8)]
+    [InlineData(0x38, 0x38, 0x35, 0)]
+    [InlineData(0x38, 0x38, 0x37, 8)]
     public void DdfStartWriteSuppressesComparisonOneClockBeforePublication(
         ushort initialStart, ushort newStart, int writeClock, uint wordsPerPlane)
     {

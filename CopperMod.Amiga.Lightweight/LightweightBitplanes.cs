@@ -146,8 +146,9 @@ internal sealed class LightweightBitplanes
                 _pointers[plane] = machine.GetBitplanePointer(plane);
             }
         }
-        else if (offset == LightweightRegisters.Ddfstrt && value != _pendingDdfStart)
+        else if (offset == LightweightRegisters.Ddfstrt)
         {
+            // The write strobe suppresses comparison even when the value is unchanged.
             ApplyDdfStart(cycle);
             _pendingDdfStart = value;
             _pendingDdfStartCycle = LightweightBusArbiter.AlignToSlot(cycle + DdfWriteDelay);

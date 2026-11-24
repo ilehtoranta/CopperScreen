@@ -753,6 +753,22 @@ game replays retained all 13 captures and final CPU, hardware and output
 fingerprints. Sqrxz retained both title captures and final fingerprints on
 PAL and NTSC CD32.
 
+### DDFSTRT rewrites of the same value
+
+Run the same probe with `-DdfStartSweep -RepeatDdfStartValue` to rewrite
+the initial value at each of the 12 positions. A Copper MOVE of `$0038`
+on line 100 suppressed the start comparator in both PAL WinUAE profiles.
+CopperScreen previously skipped writes that left the value unchanged and
+issued 16 extra reads on that line. Every DDFSTRT write now participates in
+comparator timing. The corrected trace matches all 140 DMA transfers per
+chipset by plane, address, width and CCK. Three more regression cases cover
+rewriting `$0038` before, on and after the compare edge.
+
+The Release solution build completed with zero warnings. Engine diagnostics
+passed 1,505 tests and skipped seven optional native cases. The five original
+game replays and the two CD32 region checks retained their captures and final
+fingerprints. The same checks passed again with Copper68k 1.5.12.
+
 ### Egyptian opening level
 
 CopperScreen `9b3e8e4` selected the Egyptian Lemming in the Ark and reached
@@ -797,6 +813,8 @@ level 2 frame at field 18,184 byte for byte. The capture SHA-256 is
 With the DDFSTRT correction, a fresh Release replay from boot reproduced
 the field 19,474 framebuffer and Chip RAM byte for byte. The framebuffer
 SHA-256 is `217334EC8B5364207DEF2850A6C28B5387432AA5E339792B74B60578920DA483`.
+The same-value write correction reproduced that capture, Chip RAM, audio
+and all three final fingerprints in a second boot replay.
 Independent comparison of the second level remains open.
 
 ## RoboCop 3

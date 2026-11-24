@@ -1,11 +1,13 @@
 param(
     [Parameter(Mandatory)][string]$Path,
     [switch]$DdfStopSweep,
-    [switch]$DdfStartSweep
+    [switch]$DdfStartSweep,
+    [switch]$RepeatDdfStartValue
 )
 
 $ErrorActionPreference = 'Stop'
 if ($DdfStopSweep -and $DdfStartSweep) { throw 'Select one DDF sweep.' }
+if ($RepeatDdfStartValue -and !$DdfStartSweep) { throw 'Select -DdfStartSweep to repeat the start value.' }
 $ddfSweep = $DdfStopSweep -or $DdfStartSweep
 $asm = [Collections.Generic.List[uint16]]::new()
 $copper = [Collections.Generic.List[uint16]]::new()
@@ -51,13 +53,15 @@ if ($ddfSweep) {
         $bank = 0x2000 + $test * 0x800
         $movesLater = $test -ge 6
         WriteCopperWord ($line + 1) 0xFFFE
-        WriteCopperWord $register $(if ($movesLater) { $early } else { $late })
+        $initial = if ($movesLater) { $early } else { $late }
+        $updated = if ($RepeatDdfStartValue) { $initial } elseif ($movesLater) { $late } else { $early }
+        WriteCopperWord $register $initial
         WriteCopperWord 0x00E2 $bank
         WriteCopperWord 0x00E6 ($bank + 0x400)
         WriteCopperWord 0x0108 0
         WriteCopperWord 0x010A 0
         WriteCopperWord ($line + $wait + ($test % 6) * 2) 0xFFFE
-        WriteCopperWord $register $(if ($movesLater) { $late } else { $early })
+        WriteCopperWord $register $updated
     }
 } else {
     # Separate bitplane banks expose which modulo won on the next scanline.
