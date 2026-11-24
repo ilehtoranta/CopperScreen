@@ -518,8 +518,38 @@ for CopperScreen and
 `73D8A3CBC93A2724D607D6631DA93ABCCABC1F93A27DB1C8E5F51C27A1AD4DA5`
 for WinUAE. The opening-room comparison required no emulator change. The
 historical WinUAE timing note identifies a broad CPU and blitter improvement.
-Later rooms remain unverified.
 [WinUAE P.P. Hammer history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19736-L19741)
+
+### Castlemaster and the ice room
+
+The same original SPS 2809 disk loaded level 2, Castlemaster, in
+CopperScreen `f13a116` and cycle-exact WinUAE 6.1 beta 23. The replays
+used the game’s name and password prompts with player name `HAMMER`
+and password `UDICGRAJ`. The CopperScreen input starts the name at field
+2,950 and the password at field 3,220, with keys 14 fields apart.
+Port 2 fire advances the prompts at fields 2,750, 3,050 and 3,400,
+then starts play after disk loading.
+[Published level codes](https://manuals.plus/m/20b7a97d11212a193646ac40a312191e3e24a6a49630ad30e22bf2e0d259aa58.pdf)
+· [Amiga Computing correction for the player name](https://amigaland.com/dataz/press_magazine/Amiga_Computing/PDF_TXT/Amiga_Computing_Issue_040_1991_Sep.pdf)
+
+At CopperScreen field 5,700, 86,638 of 86,664 playfield RGB samples
+match the independent WinUAE capture using the opening-room coordinate
+mapping. The status region matches 13,426 of 13,816 samples at rows
+58 through 79. Animation positions and countdown values differ between
+the captures. The 7,200-field CopperScreen replay moved through the
+room and collected a pickup, raising the score to 10. It ended with
+CPU `0xC0D4505B618D84E1`, hardware `0x3DF27FC578695A57` and output
+`0xFC7AECABC09D609D` and reported no unsupported feature.
+
+Changing the password to `RVJBTFHH` loaded level 30 in both emulators.
+At CopperScreen field 5,700, the ice room matches 86,242 of 86,664
+playfield samples and 13,370 of 13,816 status samples in an independent
+WinUAE capture at a different countdown value. The CopperScreen replay
+then moved and jumped through the room while the camera scrolled. Its
+final field 7,500 fingerprints were CPU
+`0xCA10C5947634AF96`, hardware `0x56905E1DA6F54047` and output
+`0x0EDAD125AA9D132E`. It reported no unsupported feature. Other rooms
+and physical A500 timing remain unverified.
 
 ### Four-plane chipset contention
 
