@@ -9,7 +9,7 @@ public sealed partial class LightweightA500Machine
     // Recognition runs only through the existing CPU gateway consumer boundary.
     private const uint CopperStartBootstrapToken = 0x43534731;
 
-    private bool IsCopperStartBootstrapGateway(uint address) => address == 0x780 && _romLoaded &&
+    private bool IsCopperStartBootstrapGateway(uint address) => address == 0x780 && !_overlayEnabled && _romLoaded &&
         BinaryPrimitives.ReadUInt16BigEndian(_chipRam.AsSpan(0x780, 2)) == 0xFF00 &&
         BinaryPrimitives.ReadUInt32BigEndian(_chipRam.AsSpan(0x782, 4)) == CopperStartBootstrapToken;
 

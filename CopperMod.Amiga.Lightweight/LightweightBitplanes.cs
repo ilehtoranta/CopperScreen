@@ -378,7 +378,8 @@ internal sealed class LightweightBitplanes
         _dataLatches[plane] = value;
         if (TPath.Aga) machine.OnBitplaneWideOutput(plane, wide, bits, cycle);
         else machine.OnBitplaneDataOutput(plane, value, cycle);
-        var pointer = MaskAddress(address + (uint)(TPath.Aga ? bits / 8 : 2));
+        var stride = (uint)(bits / 8);
+        var pointer = MaskAddress((TPath.Aga ? address & ~(stride - 1) : address) + stride);
         if (applyModulo)
         {
             // A terminal group may cross horizontal sync. BSCAN2 selects

@@ -79,23 +79,8 @@ public sealed partial class LightweightA500Machine
 
     internal bool TryGetAcceleratedRom(uint address, int bytes, out byte[] memory, out int offset)
     {
-        var romOffset = address - RomBase;
-        if (_romLoaded && bytes > 0 && romOffset >= (uint)_romImageOffset &&
-            (ulong)romOffset + (uint)bytes <= (uint)(_romImageOffset + _romImageLength))
-        {
-            memory = _rom;
-            offset = (int)romOffset;
-            return true;
-        }
-
-        var extensionOffset = address - ExtensionRomBase;
-        if (_extensionRomLoaded && bytes > 0 &&
-            (ulong)extensionOffset + (uint)bytes <= (uint)_extensionRomImageLength)
-        {
-            memory = _extensionRom;
-            offset = (int)extensionOffset;
-            return true;
-        }
+        if (address >= KickstartAlias)
+            return TryGetRomRange(address, bytes, out memory, out offset);
 
         memory = null!;
         offset = 0;

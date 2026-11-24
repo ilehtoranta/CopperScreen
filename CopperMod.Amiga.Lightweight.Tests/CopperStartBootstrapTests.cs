@@ -17,6 +17,9 @@ public sealed class CopperStartBootstrapTests
         var machine = new LightweightA500Machine();
         machine.LoadKickstart(new byte[524288]);
         machine.WriteChipWordDma(0x780, 0xFF00); Long(machine, 0x782, 0x43534731);
+        Assert.False(machine.HasHostGateway(0x780));
+        long cycle = machine.Cycle;
+        machine.WriteByte(0xBFE001, 2, ref cycle, M68kBusAccessKind.CpuDataWrite);
         machine.WriteChipWordDma(0x786, 0x4E75);
         Long(machine, 0x760, 0x43534231); Long(machine, 0x764, 1);
         Long(machine, 0x768, 0x12345678); Long(machine, 0x76C, 1);

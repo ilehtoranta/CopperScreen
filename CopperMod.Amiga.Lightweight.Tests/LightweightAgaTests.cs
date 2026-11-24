@@ -100,6 +100,58 @@ public sealed class LightweightAgaTests
         bus.WriteLong(0x2002, 0xAABBCCDD, ref c, M68kBusAccessKind.CpuDataWrite); Assert.Equal(32, c);
         Assert.Equal(0xAABB, m.ReadChipWordDma(0x2002)); Assert.Equal(0xCCDD, m.ReadChipWordDma(0x2004));
     }
+
+    [Theory]
+    [InlineData(1, 4)]
+    [InlineData(2, 4)]
+    [InlineData(3, 8)]
+    public void MisalignedBitplaneFetchAdvancesFromTheAlignedAddress(int mode, int stride)
+    {
+        using var m = Create();
+        Configure(m, mode, 0);
+        const uint bank = 0x3C000;
+        Write(m, 0xFE, 0xC002);
+        for (uint offset = 0; offset < 16; offset += 2)
+            m.WriteChipWordDma(bank + offset, (ushort)(0xA000 + offset));
+        var first = 44L * 454 + 0x38 * 2 + 2;
+        m.AdvanceHardwareTo(first);
+        Assert.Equal(bank + 2, m.BitplaneLastAddress);
+        Assert.Equal(0xA002, m.GetBitplaneDataLatch(7));
+        Assert.Equal(bank + (uint)stride, m.GetLiveBitplanePointer(7));
+        m.AdvanceHardwareTo(first + stride * 8);
+        Assert.Equal(bank + (uint)stride, m.BitplaneLastAddress);
+        Assert.Equal(0xA000 + stride, m.GetBitplaneDataLatch(7));
+    }
+
+    [Fact]
+    public void GayleRegisterBanksShareWritesAndCardStatusReadback()
+    {
+        using var m = Create();
+        long cycle = 20;
+        const M68kBusAccessKind read = M68kBusAccessKind.CpuDataRead, write = M68kBusAccessKind.CpuDataWrite;
+        m.WriteLong(0xDBA000, 0x85000000, ref cycle, write);
+        Assert.Equal(0x85000000u, m.ReadLong(0xDAA000, ref cycle, read));
+        m.WriteLong(0xDA8000, 0x42000000, ref cycle, write);
+        Assert.Equal(0x42000000u, m.ReadLong(0xDB8000, ref cycle, read));
+        m.WriteByte(0xDB8000, 0, ref cycle, write);
+        Assert.Equal(0, m.ReadByte(0xDA8000, ref cycle, read));
+    }
+
+    [Theory]
+    [InlineData(false, 0xD1)]
+    [InlineData(true, 0xF1)]
+    public void IdentificationBanksShareEightSerialBitsAndAnyWriteRestartsThem(bool cd32, byte id)
+    {
+        using var m = cd32 ? new LightweightA500Machine(LightweightA500Configuration.CreateCd32()) : Create();
+        long cycle = 20;
+        for (var i = 0; i < 10; i++)
+        {
+            var expected = (i < 8 && (id & (0x80 >> i)) != 0) ? 0x80000000u : 0;
+            Assert.Equal(expected, m.ReadLong(i % 2 == 0 ? 0xDD1000u : 0xDE1000u, ref cycle, M68kBusAccessKind.CpuDataRead));
+        }
+        m.WriteLong(0xDDFFFC, 0, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(0x80000000u, m.ReadLong(0xDE1000, ref cycle, M68kBusAccessKind.CpuDataRead));
+    }
     [Fact]
     public void GayleIdPeeksDoNotStrobeAndAnEmptyAtaBusFloatsHigh()
     {

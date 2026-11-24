@@ -11,14 +11,15 @@ public sealed partial class LightweightA500Machine
     // With no PCMCIA card fitted, configured Fast RAM owns any overlap with
     // the common-memory window. Attribute and I/O space begin above it.
     private bool IsA1200IoAddress(uint address)
-        => LightweightA1200Io.ContainsAddress(address) &&
+        => _a1200Io!.ContainsAddress(address) &&
             (address >= LightweightA1200Io.PcmciaMemoryEndExclusive || _fastRam?.ContainsRange(address, 1) != true);
 
     // AGA Chip RAM, A1200 ROM and Akiko data accesses use a native long bus.
     // This bounded bridge retains the canonical motherboard clock and arbitration.
     internal bool HasAgaLongBus(uint address)
         => IsAga && (address < 0x1FFFFD ? !_overlayEnabled || _akiko is null :
-            address is >= RomBase and <= 0xFFFFFC ? _akiko is null : IsAkikoAddress(address));
+            IsAkikoAddress(address) || _akiko is null &&
+            (address is >= RomBase and <= 0xFFFFFC || TryGetRomRange(address, 4, out _, out _)));
 
     internal uint ReadAgaBusLanes(uint address, int size, ref long cycle)
     {

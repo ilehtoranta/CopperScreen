@@ -7,15 +7,12 @@ namespace CopperMod.Amiga.Lightweight;
 public sealed partial class LightweightA500Machine
 {
     private const int Cd32RomBankSize = 512 * 1024;
-    private const uint Cd32KickstartAlias = 0x00A8_0000;
-    private const uint Cd32ExtensionAlias = 0x00B0_0000;
     private const string Cd32KickstartSha1 = "3525BE8887F79B5929E017B42380A79EDFEE542D";
     private const string Cd32ExtensionSha1 = "5BEF3D628CE59CC02A66E6E4AE0DA48F60E78F7F";
     private const string Cd32PhysicalDumpSha1 = "816CE6C5077875850C7D43452230A9BA3A2902DB";
 
     private readonly LightweightAkiko? _akiko;
     private readonly LightweightCd32Pads? _cd32Pads;
-    private readonly uint _overlaySize;
     private bool _cd32OverlayUsesExtension;
     private int _cd32TodLines;
 
@@ -136,23 +133,6 @@ public sealed partial class LightweightA500Machine
     {
         ThrowIfDisposed();
         return _akiko ?? throw new InvalidOperationException("This motherboard has no CD32 hardware.");
-    }
-
-    private bool IsCd32RomAlias(uint address)
-        => address is >= Cd32KickstartAlias and < 0x00B7_FFFF && address != Cd32ExtensionAlias - 1 &&
-            _akiko is not null && _romLoaded;
-
-    private ushort ReadCd32RomAlias(uint address)
-        => address < Cd32ExtensionAlias
-            ? ReadRomWord((int)(address - Cd32KickstartAlias))
-            : BinaryPrimitives.ReadUInt16BigEndian(_extensionRom.AsSpan((int)(address - Cd32ExtensionAlias), 2));
-
-    private ushort ReadOverlayWord(uint address)
-    {
-        var offset = (int)(address & (Cd32RomBankSize - 1));
-        return _cd32OverlayUsesExtension
-            ? BinaryPrimitives.ReadUInt16BigEndian(_extensionRom.AsSpan(offset, 2))
-            : ReadRomWord(_romImageOffset + offset);
     }
 
     private bool IsAkikoAddress(uint address) => LightweightAkiko.ContainsAddress(address) && _akiko is not null;

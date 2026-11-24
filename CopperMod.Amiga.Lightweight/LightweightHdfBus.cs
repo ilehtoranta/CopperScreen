@@ -76,6 +76,7 @@ internal sealed class LightweightHdfBus : IDisposable
 
     internal bool HasHostGateway(uint address)
     {
+        if (_machine.RomOverlayEnabled && address < 0x200000) return false;
         if ((address & 1) != 0 || ReadWord(address) != 0xFF00) return false;
         var token = ReadLong(address + 2);
         if (_fixedGateways.TryGetValue(address, out var expected)) return token == expected;
@@ -154,15 +155,12 @@ public sealed partial class LightweightA500Machine
     internal byte PeekHdfByte(uint address)
     {
         if (IsHdfRamRange(address, 1)) return HdfRam(address, 1)[0];
-        if (_extensionRomLoaded && address >= ExtensionRomBase && address - ExtensionRomBase < _extensionRomImageLength)
-            return _extensionRom[address - ExtensionRomBase];
-        if (address >= RomBase && address - RomBase < _rom.Length) return _rom[address - RomBase];
+        if (address >= KickstartAlias && TryGetRomRange(address, 1, out var rom, out var offset))
+            return rom[offset];
         return _hdf?.ReadExpansionByte(address) ?? (byte)255;
     }
-    internal bool IsHdfRomRange(uint address, int count) => count >= 0 &&
-        (_extensionRomLoaded && address >= ExtensionRomBase && address - ExtensionRomBase <= _extensionRomImageLength &&
-            (uint)count <= _extensionRomImageLength - (address - ExtensionRomBase) ||
-         address >= RomBase && address - RomBase <= _rom.Length && (uint)count <= _rom.Length - (address - RomBase));
+    internal bool IsHdfRomRange(uint address, int count)
+        => address >= KickstartAlias && TryGetRomRange(address, count, out _, out _);
 
     internal void PokeHdfByte(uint address, byte value)
     {

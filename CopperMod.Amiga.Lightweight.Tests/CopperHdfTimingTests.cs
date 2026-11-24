@@ -18,7 +18,7 @@ public sealed partial class CopperHdfControllerTests
                 Hardfiles=[new(0,path,readOnly:true)],
                 HardfileTimings=new Dictionary<int,LightweightDriveTimingProfile> { [0]=LightweightDriveTimingProfile.Cf }
             });
-            var rom=new byte[256*1024]; WriteUInt32(rom,0,0x7000); WriteUInt32(rom,4,0x6000); machine.LoadKickstart(rom);
+            ResetToRamFixture(machine);
             var bus=machine.HardfileBus!; SupplyPublicMemory(bus); var controller=bus.CopperHdf;
             var request=new M68kCpuState(); request.A[1]=0x5000; request.A[7]=0x7000;
             bus.WriteWord(0x501C,2); bus.WriteByte(0x501E,1); bus.WriteLong(0x5024,512); bus.WriteLong(0x5028,0x12000);
@@ -30,7 +30,7 @@ public sealed partial class CopperHdfControllerTests
             bus.WriteWord(0x1000-378,0x5279); bus.WriteLong(0x1000-376,0x7100); bus.WriteWord(0x1000-372,0x4E75);
             bus.CopyToMemory(0x6200,LightweightStorageCompletionCode.Image);
             bus.WriteLong(0x7200,controller.ConfiguredBase);
-            ushort[] entry=[0x13FC,2,0x00BF,0xE001,0x227C,0,0x7200,0x4EB9,0,0x6200,0x4E72,0x2700];
+            ushort[] entry=[0x227C,0,0x7200,0x4EB9,0,0x6200,0x4E72,0x2700];
             for(var i=0;i<entry.Length;i++) bus.WriteWord(0x6000u+(uint)i*2,entry[i]);
             machine.Cpu.A[2]=0x12345678; machine.Cpu.A[5]=0x23456780; machine.Cpu.A[6]=0x34567890;
             machine.Cpu.D[2]=0x45678901;

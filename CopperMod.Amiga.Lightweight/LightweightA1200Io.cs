@@ -9,20 +9,19 @@ namespace CopperMod.Amiga.Lightweight;
 /// A1200 motherboard decode with an optional read-only IDE master and no PCMCIA
 /// card. Unfitted devices float high; no boot-delay shortcuts are used.
 /// </summary>
-internal sealed class LightweightA1200Io : IDisposable
+internal sealed class LightweightA1200Io(bool cd32 = false) : IDisposable
 {
     internal const uint PcmciaStart = 0x0060_0000;
     internal const uint PcmciaMemoryEndExclusive = 0x00A0_0000;
     internal const uint PcmciaEndExclusive = 0x00A8_0000;
     internal const uint IdeStart = 0x00DA_0000;
-    internal const uint GayleEndExclusive = 0x00DB_0000;
-    internal const uint MotherboardResourcesStart = 0x00DE_0000;
+    internal const uint GayleEndExclusive = 0x00DC_0000;
+    internal const uint MotherboardResourcesStart = 0x00DD_0000;
     internal const uint MotherboardResourcesEndExclusive = 0x00DF_0000;
     internal const uint GayleCardStatus = 0x00DA_8000;
     internal const uint GayleInterruptRequest = 0x00DA_9000;
     internal const uint GayleInterruptEnable = 0x00DA_A000;
     internal const uint GayleConfiguration = 0x00DA_B000;
-    internal const uint GayleIdentification = 0x00DE_1000;
 
     private byte _cardControl;
     private byte _interruptRequest;
@@ -36,7 +35,7 @@ internal sealed class LightweightA1200Io : IDisposable
     internal long NextCycle => _ide?.NextCycle ?? long.MaxValue;
     internal void Attach(LightweightIdeDriveConfiguration configuration, ILightweightStorageObserver? observer)
         => _ide = new(configuration, observer);
-    internal void Step(long cycle) { _ide?.Step(cycle); SyncInterrupt(); }
+    internal void Step(long cycle) { if (_ide is null) return; _ide.Step(cycle); SyncInterrupt(); }
     internal void Grant(long cycle, out long grant, out long end)
     { grant = Math.Max(cycle, _lastAccessEnd); end = checked(grant + 5); _lastAccessEnd = end; }
     private void SyncInterrupt()
@@ -59,16 +58,26 @@ internal sealed class LightweightA1200Io : IDisposable
     internal byte Configuration => _configuration;
     internal bool InterruptAsserted => (_interruptRequest & _interruptEnable & 0x80) != 0;
 
-    internal static bool ContainsAddress(uint address)
-        => address is >= PcmciaStart and < PcmciaEndExclusive ||
-            address is >= IdeStart and < GayleEndExclusive ||
-            address is >= MotherboardResourcesStart and < MotherboardResourcesEndExclusive;
+    internal bool ContainsAddress(uint address)
+        => address is >= MotherboardResourcesStart and < MotherboardResourcesEndExclusive ||
+            !cd32 && address is (>= PcmciaStart and < PcmciaEndExclusive) or (>= IdeStart and < GayleEndExclusive);
+
+    internal static bool IsTimedIdeAddress(uint address)
+        => address is >= IdeStart and < GayleEndExclusive && (address & 0x8000) == 0;
 
     internal byte PeekByte(uint address) => ReadByte(address, false);
 
     internal byte ReadByte(uint address, bool strobe = true, long cycle = 0)
     {
         address &= 0x00FF_FFFF;
+        if (address is >= MotherboardResourcesStart and < MotherboardResourcesEndExclusive)
+        {
+            if ((address & 0xFFFF) != 0x1000) return 0;
+            var value = (byte)(((cd32 ? 0xF1 : 0xD1) << _identificationBit) & 0x80);
+            if (strobe && _identificationBit < 8) _identificationBit++;
+            return value;
+        }
+        if (address is >= IdeStart and < GayleEndExclusive) address &= ~0x10000u;
         if (address == GayleCardStatus)
         {
             return (byte)(_cardControl | (_ideInterruptLine ? 0x80 : 0));
@@ -89,17 +98,9 @@ internal sealed class LightweightA1200Io : IDisposable
             return (byte)(_configuration & 0x0F);
         }
 
-        if (address == GayleIdentification)
+        if (address is >= IdeStart and < IdeStart + 0x4000)
         {
-            // AA Gayle identification is D1, shifted out most-significant bit first.
-            var value = (byte)((0xD1 << _identificationBit) & 0x80);
-            if (strobe) _identificationBit = (_identificationBit + 1) & 7;
-            return value;
-        }
-
-        if (address is >= IdeStart and < GayleCardStatus)
-        {
-            if (_ide is not null && address < IdeStart+0x4000)
+            if (_ide is not null)
             {
                 var register = IdeRegister(address);
                 if (register is >= 1 and <= 7 && !TaskFileLane(address)) return 0xFF;
@@ -114,13 +115,14 @@ internal sealed class LightweightA1200Io : IDisposable
             return 0xFF;
         }
 
-        // Empty PCMCIA and unpopulated motherboard-resource lanes float high.
+        if (address is >= GayleCardStatus and < IdeStart + 0x10000) return 0;
+        // Unselected IDE and empty PCMCIA space float high.
         return 0xFF;
     }
 
     internal ushort ReadWord(uint address, long cycle, bool strobe = true)
     {
-        if (_ide is not null && address is >= IdeStart and < GayleCardStatus && IdeRegister(address) == 0)
+        if (_ide is not null && IsTimedIdeAddress(address) && IdeRegister(address & ~0x10000u) == 0)
         { var result = _ide.ReadData(cycle, strobe); SyncInterrupt(); return result; }
         return (ushort)((ReadByte(address, strobe, cycle) << 8) | ReadByte(address + 1, strobe, cycle));
     }
@@ -128,9 +130,10 @@ internal sealed class LightweightA1200Io : IDisposable
     internal void WriteByte(uint address, byte value, long cycle = 0)
     {
         address &= 0x00FF_FFFF;
+        if (address is >= IdeStart and < GayleEndExclusive) address &= ~0x10000u;
         if (address == GayleCardStatus)
         {
-            _cardControl = (byte)(value & 0x03);
+            _cardControl = value;
         }
         else if (address == GayleInterruptRequest)
         {

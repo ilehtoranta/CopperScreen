@@ -71,6 +71,24 @@ return the current plane without advancing. Reading Akiko's PIO data port
 while receive DMA is enabled acknowledges the drive-receive request and
 leaves the pending response available.
 
+While the reset overlay is enabled, CPU reads in the low 2 MiB select ROM
+and CPU writes leave Chip RAM intact. Agnus DMA still addresses RAM. The A500
+controls OVL through CIA-A port A. On the A1200 and CD32 the first CIA-A write
+releases OVL until reset. A standard 256 KiB Kickstart repeats in both halves
+of the 512 KiB ROM bank. Without an extension ROM, Kickstart also appears at
+`$E00000`. The A1200 and CD32 decode ROM banks at `$A80000` and `$B00000`,
+with the extension taking precedence at `$B00000` and `$E00000` when fitted.
+
+The A1200 Gayle registers share their `$DA` and `$DB` banks. Identification
+reads at `$DD1000` and `$DE1000` share one eight-bit sequence (`$D1` on
+A1200, `$F1` on CD32). Subsequent reads return zero until a write to either
+identification bank. In the CD32 CIA banks (`$BE` and `$BF`), A13 selects
+CIA-B when clear and CIA-A when set.
+
+AGA wide bitplane DMA uses the accepted pointer's low bits to select or repeat
+words for the current fetch. It aligns the pointer to the fetch width before
+adding the stride and any end-of-line modulo for the next fetch.
+
 On the A500, Gary's custom-register mirrors decode the low nine address bits.
 They share the canonical register strobes and Agnus arbitration. Fitted slow
 RAM overrides the custom mirror at its assigned addresses. In the CIA window

@@ -159,9 +159,7 @@ public sealed partial class CopperHdfControllerTests
         {
             AmigaHardfile.CreateBlank(path, 32768);
             using var machine = new LightweightA500Machine(new() { Hardfiles = [new(0, path)] });
-            var rom = new byte[256 * 1024];
-            WriteUInt32(rom, 0, 0x7000); WriteUInt32(rom, 4, 0x6000);
-            machine.LoadKickstart(rom);
+            ResetToRamFixture(machine);
             var bus = machine.HardfileBus!;
             var (_, exec, _, _) = InvokeBootstrap(bus);
             var state = new M68kCpuState(); state.A[1] = 0x5000;
@@ -170,7 +168,7 @@ public sealed partial class CopperHdfControllerTests
             bus.WriteWord(0x501C, 15); bus.WriteByte(0x501E, quick ? (byte)1 : (byte)0);
             // A minimal Exec ReplyMsg fixture increments a guest counter, then RTS.
             bus.WriteWord(exec - 378, 0x5279); bus.WriteLong(exec - 376, 0x7100); bus.WriteWord(exec - 372, 0x4E75);
-            ushort[] code = [0x13FC, 2, 0x00BF, 0xE001, 0x227C, 0, 0x5000, 0x2C7C, 0x1234, 0x5678, 0x4EB9,
+            ushort[] code = [0x227C, 0, 0x5000, 0x2C7C, 0x1234, 0x5678, 0x4EB9,
                 (ushort)((bus.CopperHdf.DeviceBase - 30) >> 16), (ushort)(bus.CopperHdf.DeviceBase - 30), 0x4E72, 0x2700];
             for (var i = 0; i < code.Length; i++) bus.WriteWord(0x6000u + (uint)(i * 2), code[i]);
             machine.ExecuteFrame();
@@ -182,6 +180,14 @@ public sealed partial class CopperHdfControllerTests
             Assert.Equal(0, bus.ReadByte(0x501F));
         }
         finally { DeleteTemp(path); }
+    }
+
+    private static void ResetToRamFixture(LightweightA500Machine machine)
+    {
+        var bus = machine.HardfileBus!;
+        bus.WriteLong(0, 0x7000);
+        bus.WriteLong(4, 0x6000);
+        machine.Reset();
     }
 
 	[Fact]

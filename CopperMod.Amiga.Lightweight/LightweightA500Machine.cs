@@ -120,7 +120,6 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         MotherboardClockHz = Cd32Region == LightweightCd32Region.Ntsc
             ? LightweightPaulaAudio.NtscCpuFrequency : LightweightPaulaAudio.PalCpuFrequency;
         _paula = new(MotherboardClockHz);
-        _overlaySize = Cd32Region.HasValue ? ChipRamCpuDecodeSize : 0x400;
         if (Cd32Region.HasValue)
         {
             _akiko = new(MotherboardClockHz);
@@ -154,7 +153,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             throw new ArgumentException("Alice and Lisa require the complete A1200 configuration.", nameof(configuration));
         if (IsAga && _configuration.CpuModel is M68kCpuModel.M68000 or M68kCpuModel.M68010)
             throw new ArgumentException("A1200 requires 68EC020 or a 68020/030/040/060 upgrade.", nameof(configuration));
-        _a1200Io = IsAga && !Cd32Region.HasValue ? new() : null;
+        _a1200Io = IsAga ? new(cd32: Cd32Region.HasValue) : null;
         if (_configuration.IdeMaster is not null && !IsAga)
             throw new ArgumentException("Native Gayle IDE requires an A1200 motherboard.", nameof(configuration));
         _registers = new(IsEcsAgnus ? 0x001F_FFFEu : 0x0007_FFFEu);
@@ -467,7 +466,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             if (stackPointer == 0 || stackPointer >= _chipRam.Length)
                 stackPointer = (uint)(_chipRam.Length - 4);
             var programCounterInChipRam = programCounter < _chipRam.Length;
-            var programCounterInRom = _romLoaded && programCounter >= RomBase && programCounter < RomBase + (uint)_rom.Length;
+            var programCounterInRom = TryGetRomRange(programCounter, 2, out _, out _);
             if (programCounter == 0 || (!programCounterInChipRam && !programCounterInRom))
                 programCounter = 0x1000;
         }
@@ -573,10 +572,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             address >= 0x00C00000 &&
                 address + 1 < 0x00C00000 + _slowRam.Length ||
             _fastRam?.ContainsRange(address, 2) == true ||
-            _extensionRomLoaded && address >= ExtensionRomBase &&
-                address + 1 < ExtensionRomBase + _extensionRomImageLength ||
-            address >= RomBase && address + 1 < RomBase + _rom.Length ||
-            IsCd32RomAlias(address);
+            TryGetRomRange(address, 2, out _, out _);
         if (!readable)
         {
             value = 0;
@@ -720,8 +716,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (image.Length is not (0x40000 or 0x80000))
             throw new ArgumentException("The A500 engine accepts 256 KiB or 512 KiB Kickstart images.", nameof(image));
 
-        // A 256 KiB Kickstart occupies the upper half of the A500's 512 KiB
-        // ROM window ($FC0000-$FFFFFF); 512 KiB images occupy the full window.
+        // A standard 256 KiB part ignores A18 in the 512 KiB ROM bank.
         var mappedBase = image.Length == 0x40000 && baseAddress == RomBase ? RomBase + 0x40000u : baseAddress;
         if (mappedBase < RomBase || mappedBase >= RomBase + (uint)_rom.Length || image.Length > _rom.Length - (mappedBase - RomBase))
             throw new ArgumentOutOfRangeException(nameof(baseAddress));
@@ -729,6 +724,12 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _romImageOffset = (int)(mappedBase - RomBase);
         _romImageLength = image.Length;
         image.CopyTo(_rom.AsSpan(_romImageOffset, image.Length));
+        if (_romImageOffset == 0x40000 && image.Length == 0x40000)
+        {
+            image.CopyTo(_rom);
+            _romImageOffset = 0;
+            _romImageLength = _rom.Length;
+        }
         _romLoaded = true;
         _extensionRomLoaded = false;
         _extensionRomImageLength = 0;
@@ -745,7 +746,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         image.CopyTo(_extensionRom);
         _extensionRomImageLength = image.Length;
         _extensionRomLoaded = true;
-        _cpuMemoryMapGeneration++;
+        InvalidateCpuMemoryMap();
     }
 
     public void MountAdf(ReadOnlySpan<byte> image) => MountAdf(0, image);
@@ -997,7 +998,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         bool byteAccess = false)
     {
         var start = Math.Max(requestedCycle, _clock.Cycle);
-        if (_a1200Io?.HasDrive == true && address is >= LightweightA1200Io.IdeStart and < LightweightA1200Io.GayleCardStatus)
+        if (_a1200Io?.HasDrive == true && LightweightA1200Io.IsTimedIdeAddress(address))
         {
             _a1200Io.Grant(start, out grantedCycle, out completedCycle);
             AdvanceHardwareTo(grantedCycle);
@@ -1058,7 +1059,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private bool UsesAgnusBus(uint address)
     {
         address &= 0x00FF_FFFFu;
-        if (_overlayEnabled && address < _overlaySize)
+        if (_overlayEnabled && address < ChipRamCpuDecodeSize)
             return false;
         return address < ChipRamCpuDecodeSize ||
             address >= 0x00C00000 && address < 0x00C00000 + _slowRam.Length ||
@@ -1848,8 +1849,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private ushort ReadWordRaw(uint address)
     {
         address &= 0x00FF_FFFFu;
-        if (_overlayEnabled && address + 1 < _overlaySize)
-            return ReadOverlayWord(address);
+        if (_overlayEnabled && address < ChipRamCpuDecodeSize)
+            return ReadMappedRomWord(address);
         if (address + 1 < ChipRamCpuDecodeSize)
         {
             var chipAddress = address & _chipRamCpuAddressMask;
@@ -1896,14 +1897,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 _ => _registers.Read(offset)
             };
         }
-        if (_extensionRomLoaded && address >= ExtensionRomBase &&
-            address + 1 < ExtensionRomBase + _extensionRomImageLength)
-            return BinaryPrimitives.ReadUInt16BigEndian(_extensionRom.AsSpan((int)(address - ExtensionRomBase), 2));
-        if (address >= RomBase && address + 1 < RomBase + _rom.Length)
-            return ReadRomWord((int)(address - RomBase));
+        if (address >= KickstartAlias && TryGetRomRange(address, 2, out var rom, out var romOffset))
+            return BinaryPrimitives.ReadUInt16BigEndian(rom.AsSpan(romOffset, 2));
         if (_fastRam is { } ram && ram.ContainsRange(address, 2))
             return BinaryPrimitives.ReadUInt16BigEndian(ram.Memory.AsSpan((int)(address - ram.ConfiguredBase), 2));
-        if (IsCd32RomAlias(address)) return ReadCd32RomAlias(address);
         if (IsAkikoAddress(address)) return (ushort)_akiko!.Read(address, 2, Cycle, strobe: false);
         if (_a1200Io is not null && IsA1200IoAddress(address)) return _a1200Io.ReadWord(address, Cycle, false);
         if (_rtc is not null && LightweightRealTimeClock.ContainsAddress(address))
@@ -1970,12 +1967,53 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         RefreshNextDeviceCycle();
     }
 
-    private ushort ReadRomWord(int offset)
+    private const uint KickstartAlias = 0xA80000, ExtensionAlias = 0xB00000;
+
+    // Resolve one contiguous run in a physical ROM bank. A transfer across a
+    // bank boundary falls back to the individual bus strobes.
+    private bool TryGetRomRange(uint address, int bytes, out byte[] memory, out int offset)
     {
-        if (!_romLoaded || offset < _romImageOffset || offset + 1 >= _romImageOffset + _romImageLength)
-            return 0xFFFF;
-        return BinaryPrimitives.ReadUInt16BigEndian(_rom.AsSpan(offset, 2));
+        memory = _rom;
+        offset = 0;
+        if (bytes <= 0) return false;
+        uint bankOffset;
+        bool extension;
+        if (_overlayEnabled && address < ChipRamCpuDecodeSize)
+        {
+            bankOffset = address & 0x7FFFF;
+            extension = _cd32OverlayUsesExtension;
+            if (!extension) bankOffset += (uint)_romImageOffset;
+        }
+        else if (address is >= RomBase and < 0x1000000)
+        {
+            bankOffset = address - RomBase;
+            extension = false;
+        }
+        else if (address is >= ExtensionRomBase and < ExtensionRomBase + 0x80000)
+        {
+            bankOffset = address - ExtensionRomBase;
+            extension = _extensionRomLoaded;
+        }
+        else if (IsAga && address is >= KickstartAlias and < ExtensionAlias + 0x80000)
+        {
+            bankOffset = address & 0x7FFFF;
+            extension = address >= ExtensionAlias && _extensionRomLoaded;
+        }
+        else return false;
+
+        offset = (int)bankOffset;
+        if (extension)
+        {
+            memory = _extensionRom;
+            return (long)offset + bytes <= _extensionRomImageLength;
+        }
+        return _romLoaded && offset >= _romImageOffset &&
+            (long)offset + bytes <= _romImageOffset + _romImageLength;
     }
+
+    private ushort ReadMappedRomWord(uint address)
+        => TryGetRomRange(address, 2, out var memory, out var offset)
+            ? BinaryPrimitives.ReadUInt16BigEndian(memory.AsSpan(offset, 2)) : (ushort)0xFFFF;
 
     private void WriteByteRaw(uint address, byte value, long cycle)
     {
@@ -2028,7 +2066,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             WriteSelectedCias(cia, address, (byte)(value >> 8), (byte)value, cycle);
             return;
         }
-        if (_overlayEnabled && address + 1 < _overlaySize)
+        if (_overlayEnabled && address < ChipRamCpuDecodeSize)
             return;
         if (address + 1 < ChipRamCpuDecodeSize)
         {
@@ -2371,11 +2409,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
         if (ciaA)
         {
-            if (_cd32Pads is not null)
+            if (IsAga)
             {
-                // The first write to CIA-A releases the CD32 boot overlay.
+                // On Alice motherboards the first CIA-A write releases OVL until reset.
                 if (_overlayEnabled) SetOverlay(false);
-                if (register is 0x00 or 0x02)
+                if (_cd32Pads is not null && register is 0x00 or 0x02)
                     _cd32Pads.WriteCiaPort(cia.ReadPortLatch(0), cia.ReadDataDirection(0));
             }
             else if (register is 0x00 or 0x02)
@@ -2489,6 +2527,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     private CiaSelect DecodeCiaSelect(uint address)
     {
         if ((address & 0xE00000) != 0xA00000) return CiaSelect.None;
+        if (_akiko is not null)
+        {
+            if ((address & 0xFE0000) != 0xBE0000) return CiaSelect.None;
+            return (address & 0x2000) == 0 ? CiaSelect.B : CiaSelect.A;
+        }
         if (IsAga && (address & 0xFFF000) is not (0xBFD000 or 0xBFE000)) return CiaSelect.None;
         // Gary's active-low A12/A13 selects are independent of the register index.
         return (CiaSelect)((~address >> 12) & 3);

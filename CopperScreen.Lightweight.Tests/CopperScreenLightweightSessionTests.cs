@@ -315,6 +315,7 @@ public sealed class CopperScreenLightweightSessionTests : IDisposable
         var machine = session.Machine;
         void WriteByte(uint address, byte value) { var cycle = machine.Cpu.Cycles; machine.WriteByte(address, value, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite); machine.Cpu.Cycles = cycle; }
         void WriteWord(uint address, ushort value) { var cycle = machine.Cpu.Cycles; machine.WriteWord(address, value, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite); machine.Cpu.Cycles = cycle; }
+        WriteByte(0xBFE001, 2); // The synthetic ROM loop leaves the reset overlay enabled.
         WriteByte(0xBFD100, 0x77); WriteByte(0xBFD300, 255);
         for (var i = 0; i < 31; i++) session.RenderNextFrame(session.Framebuffer);
         // Write a complete valid track through Paula DMA, including padding.

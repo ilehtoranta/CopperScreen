@@ -76,6 +76,19 @@ public sealed class LightweightCd32Tests
         Assert.Equal(0, machine.CompletedFrames);
     }
 
+    [Theory]
+    [InlineData(0xBF0200u, 0xBFD200u, 0x56FF56FFu)]
+    [InlineData(0xBFF200u, 0xBFE200u, 0xFF78FF78u)]
+    [InlineData(0xBED200u, 0xBFD200u, 0x56FF56FFu)]
+    public void CiaMirrorsSelectTheSameDataDirectionRegister(uint mirror, uint canonical, uint expected)
+    {
+        using var m = Create();
+        long cycle = 0;
+        m.WriteLong(mirror, 0x12345678, ref cycle, Write);
+        Assert.Equal(expected, m.ReadLong(canonical, ref cycle, Read));
+        Assert.Equal(expected, m.ReadLong(mirror, ref cycle, Read));
+    }
+
     [Fact]
     public void OutputDeadlineInsideAnExtendedRasterlineAdvancesToItsBoundary()
     {

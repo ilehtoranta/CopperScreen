@@ -18,9 +18,7 @@ public sealed partial class LightweightA500Machine
     // still cover the complete snapshot.
     internal bool IsJitCodeAddress(uint address, int bytes, bool readOnly = false)
     {
-        // The boot overlay ends at $400 and the first ROM window starts at
-        // ExtensionRomBase. Decode the complete range for the remaining cases.
-        if (readOnly && address is >= 0x400 and < ExtensionRomBase)
+        if (readOnly && address < KickstartAlias && (!_overlayEnabled || address >= ChipRamCpuDecodeSize))
             return false;
 
         if (bytes <= 0 || (address & 1) != 0)
@@ -44,17 +42,17 @@ public sealed partial class LightweightA500Machine
             key = 0x1000000 + address - _fastRam.ConfiguredBase;
             return true;
         }
-        if (_overlayEnabled && address < 0x400)
-        { key = RomBase + (uint)_romImageOffset + address; readOnly = true; return true; }
+        if ((_overlayEnabled && address < ChipRamCpuDecodeSize || address >= KickstartAlias) &&
+            TryGetRomRange(address, 1, out var memory, out var offset))
+        {
+            key = (memory == _rom ? RomBase : ExtensionRomBase) + (uint)offset;
+            readOnly = true;
+            return true;
+        }
         if (address < ChipRamCpuDecodeSize)
         { key = address & _chipRamCpuAddressMask; return key < _chipRam.Length; }
         if (address >= 0xC00000 && address < 0xC00000 + _slowRam.Length || _fastRam?.ContainsRange(address, 1) == true)
             return true;
-        if (_extensionRomLoaded && address >= ExtensionRomBase &&
-            address < ExtensionRomBase + _extensionRomImageLength)
-        { readOnly = true; return true; }
-        if (address >= RomBase && address < RomBase + _rom.Length)
-        { readOnly = true; return true; }
         return false;
     }
 

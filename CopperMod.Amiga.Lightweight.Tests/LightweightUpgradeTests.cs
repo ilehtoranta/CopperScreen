@@ -47,6 +47,48 @@ public sealed class LightweightUpgradeTests
     }
 
     [Theory]
+    [InlineData(false, 0x40000)]
+    [InlineData(true, 0x80000)]
+    public void KickstartMirrorsAndOverlayAgreeForDataAndInstructionReads(bool aga, int romBytes)
+    {
+        using var m = new LightweightA500Machine(Configuration(M68kCpuModel.M68040, aga, fast: 0, jit: true));
+        var rom = new byte[romBytes];
+        uint entry = aga ? 0xA80100u : 0xE00100u;
+        BinaryPrimitives.WriteUInt32BigEndian(rom.AsSpan(4), entry);
+        BinaryPrimitives.WriteUInt32BigEndian(rom.AsSpan(0x400), 0x11223344);
+        m.LoadKickstart(rom);
+        Assert.Equal(entry, m.Cpu.ProgramCounter);
+        long cycle = 0;
+        void CheckRom(uint address, uint expected)
+        {
+            Assert.Equal(expected, m.ReadLong(address, ref cycle, Read));
+            Assert.True(m.IsJitCodeAddress(address, 4, readOnly: true));
+            Assert.Equal((ushort)(expected >> 16), m.ReadJitCodeWord(address));
+        }
+        m.WriteChipWordDma(0x400, 0xAABB);
+        m.WriteLong(0x400, 0x55667788, ref cycle, Write);
+        CheckRom(0x400, 0x11223344);
+        CheckRom(0x180400, 0x11223344);
+        Assert.Equal(0xAABB, m.ReadChipWordDma(0x400));
+        CheckRom(0xF80400, 0x11223344);
+        CheckRom(0xE00400, 0x11223344);
+        if (aga)
+        {
+            CheckRom(0xA80400, 0x11223344);
+            CheckRom(0xB00400, 0x11223344);
+            var extension = new byte[0x80000];
+            BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(0x400), 0x98765432);
+            m.LoadExtensionRom(extension);
+            CheckRom(0xE00400, 0x98765432);
+            CheckRom(0xB00400, 0x98765432);
+        }
+        else CheckRom(0xFC0400, 0x11223344);
+        m.WriteByte(0xBFE001, 0, ref cycle, Write);
+        Assert.False(m.IsJitCodeAddress(0x400, 4, readOnly: true));
+        Assert.Equal(0xAABB, m.ReadWord(0x400, ref cycle, Read));
+    }
+
+    [Theory]
     [InlineData(M68kCpuModel.M68020, 1)]
     [InlineData(M68kCpuModel.M68030, 1)]
     [InlineData(M68kCpuModel.M68040, 1)]

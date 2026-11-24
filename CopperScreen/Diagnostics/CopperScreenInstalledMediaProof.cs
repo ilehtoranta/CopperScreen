@@ -145,6 +145,7 @@ internal static class CopperScreenInstalledMediaProof
         var machine = session.Machine;
         void Byte(uint address, byte value) { var cycle = machine.Cpu.Cycles; machine.WriteByte(address, value, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite); machine.Cpu.Cycles = cycle; }
         void Word(uint address, ushort value) { var cycle = machine.Cpu.Cycles; machine.WriteWord(address, value, ref cycle, Copper68k.M68kBusAccessKind.CpuDataWrite); machine.Cpu.Cycles = cycle; }
+        Byte(0xBFE001, 2); // Release the reset ROM overlay before filling the Chip RAM DMA buffer.
         Byte(0xBFD100, 0x77); Byte(0xBFD300, 255);
         for (var i = 0; i < 31; i++) session.RenderNextFrame(session.Framebuffer);
         var track = CopperDisk.AmigaDosTrackEncoder.EncodeTrack(CopperDisk.AmigaDiskLoader.FromAdfBytes(bytes), 0, 0);
