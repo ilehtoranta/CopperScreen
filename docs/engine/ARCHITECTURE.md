@@ -138,7 +138,8 @@ latches its modulo with its DMA address one CCK before sampling RAM. A group
 crossing horizontal sync uses the live beam at each plane's address phase.
 SSCAN2 suppresses alternate active data
 slots only for sprites with SH10 set, retaining the full Lisa payload. Control
-reloads still run; the global bit removes SH10 from Lisa's horizontal comparison.
+reloads still run. Lisa ignores SH10 on both sides of its horizontal comparison,
+so an armed sprite can latch at both horizontal positions in one raster line.
 Accepted transfers remain accepted across subsequent control changes. Focused
 phase/row-wrap checks preserve this bounded ordering contract, without certifying
 physical transition timing. No raster frequency or output clock is changed.
