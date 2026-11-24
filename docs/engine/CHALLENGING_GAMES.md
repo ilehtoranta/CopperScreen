@@ -894,3 +894,27 @@ for WinUAE. A longer CopperScreen replay used directional and fire input,
 scored 800 and drew the deployed parachute over the city at field 10,400.
 The specific rasterline behind the historical report and later stages remain
 unverified.
+
+### Katakis
+
+The PAL A500 check uses Rainbow Arts Katakis v1.1, SPS 0347. The archive
+SHA-256 is `E305FC1207791952D5E1E0BF28281421C4A2F7F40C4EE004957154CEECB5731E`.
+At the title's insert-disk prompt, move disk two to DF0. The replay mounts
+it at field 4,200 and reaches the opening gameplay at field 6,800. WinUAE
+6.1 beta 23 also boots past the prompt with disk two in DF0.
+[UAE changelog on Katakis and exception 3](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/ChangeLog#L2245-L2248)
+
+The loader executes `TST.L (A6)` at `$0007F016` with the odd address
+`$00DFF001`. CopperScreen with Copper68k 1.5.12 fetches vector 3 during
+field 4,421 and enters the same `$000000C0` handler as WinUAE. The seven
+stack words at `$00C7FFEC` match exactly in both engines:
+`4A95 00DF F001 4A96 2004 0007 F018`. They record the fault address,
+opcode, status and saved PC `$0007F018`. The comparison reads the stack
+words directly; WinUAE's one-line exception log reports `$0007F018` in
+its fault-address field for this case.
+
+All 4,851 RGB samples in the high-score panel match the independent
+WinUAE capture at CopperScreen x=472–702, y=246–266 and reference
+coordinates `x - 198`, `2 * y - 54`. The other gameplay objects were
+captured at different times. The address-error route required no code
+change. Later stages and physical timing remain open.
