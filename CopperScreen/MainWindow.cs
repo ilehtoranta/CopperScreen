@@ -178,6 +178,11 @@ internal sealed partial class MainWindow : Window
 	private PixelPoint? _mouseGrabCenterScreenPoint;
 	private CopperScreenDebugSnapshot? _visibleDebugSnapshot;
 	private int _presentationQueued;
+	private DispatcherOperation? _postedFrame;
+	private long _framePostTimestamp;
+	private long _lastFrameRequest;
+	private readonly CopperScreenFrameNotification _overdueFrameNotification;
+	private const int OverdueFrameMilliseconds = 32;
 	private double _lastPresenterUpdateMilliseconds;
 	private double _lastPresentationFrameMilliseconds;
 	private bool _isClosed;
@@ -191,6 +196,8 @@ internal sealed partial class MainWindow : Window
         var whdLoadFile = args is [var game] && CopperScreenWhdLoadLaunch.IsGame(game) ? game : null;
         if (whdLoadFile != null) args = [];
         _frameNotification = new(PostFramePresentation);
+		_overdueFrameNotification = new(() => PromoteOverdueFrame(Volatile.Read(ref _postedFrame),
+			Volatile.Read(ref _framePostTimestamp), Stopwatch.GetTimestamp()));
 		_recentSession = recentSession ?? new(CopperScreenRecentSession.DefaultDirectory);
         StartupHardDiskBackupCleanup = CopperScreenHardDiskBackupCleanup.Cleanup(_recentSession.DataDirectory);
 		Title = "CopperScreen";
@@ -459,6 +466,7 @@ internal sealed partial class MainWindow : Window
 		{
 			_isClosed = true;
             _frameNotification.Dispose();
+            _overdueFrameNotification.Dispose();
 			if (_runtime is { } runtime)
 			{
 				_runtime = null;
@@ -929,19 +937,60 @@ internal sealed partial class MainWindow : Window
 
 	private void QueueFramePresentation()
 	{
-		if (_isClosed || Interlocked.Exchange(ref _presentationQueued, 1) != 0)
+		if (_isClosed) return;
+		var now = Stopwatch.GetTimestamp();
+		if (Interlocked.Exchange(ref _presentationQueued, 1) != 0)
 		{
+			// The machine owner only signals a worker. Changing dispatcher priority
+			// can take the UI lock and must stay off the audio-producing thread.
+			var previous = Volatile.Read(ref _lastFrameRequest);
+			if (Stopwatch.GetElapsedTime(previous, now).TotalMilliseconds >= OverdueFrameMilliseconds &&
+				Interlocked.CompareExchange(ref _lastFrameRequest, now, previous) == previous)
+				_overdueFrameNotification.Signal();
 			return;
 		}
 
-        _frameNotification.Signal();
+		Volatile.Write(ref _lastFrameRequest, now);
+		_frameNotification.Signal();
 	}
 
     private void PostFramePresentation()
     {
         if (_isClosed) return;
-        try { Dispatcher.UIThread.Post(PresentQueuedFrame, FramePresentationPriority); }
-        catch { Interlocked.Exchange(ref _presentationQueued, 0); throw; }
+		try
+		{
+			Volatile.Write(ref _framePostTimestamp, Stopwatch.GetTimestamp());
+			Volatile.Write(ref _postedFrame, Dispatcher.UIThread.InvokeAsync(PresentPostedFrame, FramePresentationPriority));
+		}
+		catch
+		{
+			Interlocked.Exchange(ref _presentationQueued, 0);
+			throw;
+		}
+	}
+
+	// Native input can keep a Background operation pending for seconds. A new
+	// frame still starts at Background, so successive frames must yield to input.
+	internal static void PromoteOverdueFrame(DispatcherOperation? frame, long posted, long now)
+	{
+		if (frame?.Status == DispatcherOperationStatus.Pending && frame.Priority == FramePresentationPriority &&
+			Stopwatch.GetElapsedTime(posted, now).TotalMilliseconds >= OverdueFrameMilliseconds)
+			frame.Priority = DispatcherPriority.Render;
+	}
+
+	private void PresentPostedFrame()
+	{
+		try
+		{
+			PresentQueuedFrame();
+		}
+		catch (Exception error)
+		{
+			// InvokeAsync stores exceptions on its operation. Preserve the original
+			// Post behaviour so the application's UI exception handler receives them.
+			Dispatcher.UIThread.Post(System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(error).Throw,
+				DispatcherPriority.Send);
+		}
 	}
 
 	private void PresentQueuedFrame()
