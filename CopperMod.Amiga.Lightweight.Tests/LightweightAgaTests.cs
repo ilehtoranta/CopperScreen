@@ -42,6 +42,27 @@ public sealed class LightweightAgaTests
         Assert.Equal(0u, m.GetLiveBitplanePointer(7));
     }
 
+    [Theory]
+    [InlineData(0x080, 0)]
+    [InlineData(0x084, 1)]
+    [InlineData(0x120, 0)]
+    [InlineData(0x13C, 7)]
+    public void Cd32CpuReadStrobesCopperAndSpritePointerHalves(int offset, int index)
+    {
+        using var m = new LightweightA500Machine(LightweightA500Configuration.CreateCd32());
+        long cycle = m.Cycle;
+        uint address = 0xDFF000u + (uint)offset;
+        uint Pointer() => offset < 0x120 ? m.GetCopperListPointer(index == 1) : m.GetSpritePointer(index);
+        m.WriteLong(address, 0x00012344, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(0x00012344u, Pointer());
+        m.ReadByte(address + 1, ref cycle, M68kBusAccessKind.CpuDataRead);
+        Assert.Equal(0x2344u, Pointer());
+        m.WriteLong(address, 0x00012344, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        m.WriteLong(0x4000, 0xABCD5678, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        Assert.Equal(0xABCDABCDu, m.ReadLong(address, ref cycle, M68kBusAccessKind.CpuDataRead));
+        Assert.Equal(0u, Pointer());
+    }
+
     [Fact]
     public void AliceAndLisaMustBePairedWithTheInitialA1200MemoryAndCpu()
     {

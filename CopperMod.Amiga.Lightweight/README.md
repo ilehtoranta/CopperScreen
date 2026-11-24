@@ -209,7 +209,9 @@ open-bus behavior is unverified.
 Original Denise has no chip-ID register. Its `$DFF07C` read uses the bounded
 preceding-DMA/idle bus model documented in the
 [Tower Assault investigation](../docs/engine/TOWER_ASSAULT_INVESTIGATION.md).
-Electrical edge cases and broader write-only readback remain unverified.
+On AGA, CPU reads of Copper, sprite and bitplane pointer registers clear the addressed
+half and sample the chipset bus latch. Electrical edge cases and other write-only
+registers remain unverified.
 
 Lightweight is the application's active/default engine. Legacy and CopperStart
 are unavailable in the standard build. Supported input is mouse, keyboard

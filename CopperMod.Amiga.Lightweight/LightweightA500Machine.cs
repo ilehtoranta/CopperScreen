@@ -1937,8 +1937,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         { var value = _a1200Io.ReadWord(address, cycle); if (_a1200Io.HasDrive) { _configuration.StorageObserver?.AtaAccess(address, 2, false, value, cycle); RefreshStorageSchedule(cycle); } return value; }
         if ((address & 0x1FE) == LightweightRegisters.Clxdat && IsCustomAddress(address))
             return _sprites.ReadCollisionData();
-        if (IsAgaBitplanePointerRead(address))
-            return StrobeAgaBitplanePointer(address, cycle);
+        if (IsAgaPointerRead(address))
+            return StrobeAgaPointerRead(address, cycle);
         StrobeCopperRead(address, cycle);
         var cia = DecodeCiaSelect(address);
         if (cia != CiaSelect.None)
@@ -1965,9 +1965,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
             var collision = _sprites.ReadCollisionData();
             return (address & 1) == 0 ? (byte)(collision >> 8) : (byte)collision;
         }
-        if (IsAgaBitplanePointerRead(address))
+        if (IsAgaPointerRead(address))
         {
-            var data = StrobeAgaBitplanePointer(address, cycle);
+            var data = StrobeAgaPointerRead(address, cycle);
             return (address & 1) == 0 ? (byte)(data >> 8) : (byte)data;
         }
         StrobeCopperRead(address, cycle);
@@ -1989,10 +1989,16 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         RefreshNextDeviceCycle();
     }
 
-    private bool IsAgaBitplanePointerRead(uint address)
-        => (address & 0x1E0) == LightweightRegisters.BplPointerFirst && IsAga && IsCustomAddress(address);
+    private bool IsAgaPointerRead(uint address)
+    {
+        if (!IsAga) return false;
+        var offset = address & 0x1FE;
+        return (offset is >= LightweightRegisters.Cop1lch and <= LightweightRegisters.Cop2lcl ||
+                (offset & 0x1E0) is LightweightRegisters.BplPointerFirst or LightweightRegisters.SpritePointerFirst) &&
+            IsCustomAddress(address);
+    }
 
-    private ushort StrobeAgaBitplanePointer(uint address, long cycle)
+    private ushort StrobeAgaPointerRead(uint address, long cycle)
     {
         // Lisa drives zero into the selected pointer half on a CPU read.
         var busWord = PreviousSlotHadDmaOutput() || (address & 2) != 0
