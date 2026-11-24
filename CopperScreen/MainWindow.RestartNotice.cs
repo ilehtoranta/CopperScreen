@@ -61,7 +61,7 @@ internal sealed partial class MainWindow
         if (_runtime == null || _applyingSettings || _checkingDiskChanges || _applyingLiveMedia) return;
         var restored = _committedSettings.Clone();
         restored.ClearRestartRequired();
-        _recentSession.Save(restored, _outputVolume, _outputMuted, AppContext.BaseDirectory);
+        _recentSession.Save(_whdLoadLaunch == null ? restored : null, _outputVolume, _outputMuted, AppContext.BaseDirectory);
         if (_recentSession.LastError is { } error) { SetSettingsError(error); return; }
         _settingsDraft = restored;
         _lastAutoSavedDraft = restored.Clone();

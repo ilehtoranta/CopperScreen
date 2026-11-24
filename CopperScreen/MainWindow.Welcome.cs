@@ -74,11 +74,14 @@ internal sealed partial class MainWindow
         var diskManager = CreatePanelButton("Disk Image Manager…", () => _ = ShowDiskImageManagerAsync());
         diskManager.Background = Brushes.Transparent;
         diskManager.BorderBrush = QuietBorder;
+        var whdLoad = CreatePanelButton("Open WHDLoad…", () => _ = OpenWhdLoadAsync());
+        whdLoad.Background = Brushes.Transparent;
+        whdLoad.BorderBrush = QuietBorder;
         content.Children.Add(new WrapPanel
         {
             ItemSpacing = 6,
             LineSpacing = 6,
-            Children = { _welcomeStart, customise, diskManager }
+            Children = { _welcomeStart, customise, diskManager, whdLoad }
         });
         _welcomeProfiles = new ComboBox { HorizontalAlignment = HorizontalAlignment.Stretch };
         AutomationProperties.SetName(_welcomeProfiles, "Saved launch profiles");
@@ -266,6 +269,11 @@ internal sealed partial class MainWindow
 
     private void RememberCurrentSession()
     {
+        if (_whdLoadLaunch != null)
+        {
+            _recentSession.Save(null, _outputVolume, _outputMuted);
+            return;
+        }
         var machine = _committedSettings.Clone();
         var options = machine.ToStartupOptions(AppContext.BaseDirectory);
         if (machine.KickstartSource != CopperScreenKickstartSource.MinimalDiskBoot)
@@ -317,16 +325,19 @@ internal sealed partial class MainWindow
         {
             var files = args.DataTransfer.TryGetFiles()?.ToArray();
             var path = files is { Length: 1 } ? files[0].TryGetLocalPath() : null;
-            args.DragEffects = !_settingsVisible && !_applyingSettings && !_welcomeCopperOs && CopperScreenLaunchWorkflow.StartChoice(_settingsDraft) != 3 && IsSupportedDiskDrop(path) ? DragDropEffects.Copy : DragDropEffects.None;
+            var supported = _runtime == null && CopperScreenWhdLoadLaunch.IsGame(path) ||
+                !_welcomeCopperOs && CopperScreenLaunchWorkflow.StartChoice(_settingsDraft) != 3 && IsSupportedDiskDrop(path);
+            args.DragEffects = !_settingsVisible && !_applyingSettings && supported ? DragDropEffects.Copy : DragDropEffects.None;
             args.Handled = true;
         });
         target.AddHandler(DragDrop.DropEvent, async (_, args) =>
         {
             args.Handled = true;
-            if (_settingsVisible || _applyingSettings || _welcomeCopperOs || CopperScreenLaunchWorkflow.StartChoice(_settingsDraft) == 3) return;
+            if (_settingsVisible || _applyingSettings) return;
             var files = args.DataTransfer.TryGetFiles()?.ToArray();
             var path = files is { Length: 1 } ? files[0].TryGetLocalPath() : null;
-            if (!IsSupportedDiskDrop(path)) return;
+            if (_runtime == null && CopperScreenWhdLoadLaunch.IsGame(path)) { await OpenWhdLoadAsync(path); return; }
+            if (_welcomeCopperOs || CopperScreenLaunchWorkflow.StartChoice(_settingsDraft) == 3 || !IsSupportedDiskDrop(path)) return;
             try
             {
                 ReleaseInteractiveInput();

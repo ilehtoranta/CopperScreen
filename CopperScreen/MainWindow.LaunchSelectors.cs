@@ -32,9 +32,12 @@ internal sealed partial class MainWindow
 
     private CopperScreenSettingsDraft SelectRememberedSetup(CopperScreenSettingsDraft current, int choice)
     {
-        _recentSession.RememberKickstart(current, AppContext.BaseDirectory);
-        _recentSession.RememberDisks(current, AppContext.BaseDirectory);
-        _recentSession.RememberConfiguration(current, AppContext.BaseDirectory);
+        if (_whdLoadLaunch == null)
+        {
+            _recentSession.RememberKickstart(current, AppContext.BaseDirectory);
+            _recentSession.RememberDisks(current, AppContext.BaseDirectory);
+            _recentSession.RememberConfiguration(current, AppContext.BaseDirectory);
+        }
         var fallback = CopperScreenLaunchWorkflow.SelectStartChoice(current, choice);
         var draft = _recentSession.RestoreConfiguration(fallback, AppContext.BaseDirectory);
         draft = _recentSession.RestoreKickstart(draft);

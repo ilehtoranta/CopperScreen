@@ -188,6 +188,8 @@ internal sealed partial class MainWindow : Window
 
 	public MainWindow(string[] args, CopperScreenRecentSession? recentSession = null)
 	{
+        var whdLoadFile = args is [var game] && CopperScreenWhdLoadLaunch.IsGame(game) ? game : null;
+        if (whdLoadFile != null) args = [];
         _frameNotification = new(PostFramePresentation);
 		_recentSession = recentSession ?? new(CopperScreenRecentSession.DefaultDirectory);
         StartupHardDiskBackupCleanup = CopperScreenHardDiskBackupCleanup.Cleanup(_recentSession.DataDirectory);
@@ -358,6 +360,7 @@ internal sealed partial class MainWindow : Window
 			_ = QueueHostClipboardTextAsync();
 			StartGamepadHost();
 			PresentNextFrame(forceStatus: true);
+            if (whdLoadFile != null) _ = OpenWhdLoadAsync(whdLoadFile);
 		};
 		_presenter.PointerMoved += (_, args) => UpdateMousePort(args);
 		_presenter.PointerPressed += (_, args) =>
@@ -469,6 +472,7 @@ internal sealed partial class MainWindow : Window
 
 			_gamepadHost.ControllersChanged -= OnGamepadControllersChanged;
 			_gamepadHost.Dispose();
+            EndWhdLoadLaunch();
 		};
 	}
 
@@ -2625,6 +2629,7 @@ internal sealed partial class MainWindow : Window
 
 	private void SaveCurrentProfile()
 	{
+		if (_whdLoadLaunch != null) { SetSettingsError("Stop the temporary WHDLoad session before saving a machine profile."); return; }
 		if (!TryApplySettingsFromUi(out var error))
 		{
 			SetSettingsError(error);
@@ -2646,6 +2651,7 @@ internal sealed partial class MainWindow : Window
 
 	private void SaveCurrentProfileAs()
 	{
+		if (_whdLoadLaunch != null) { SetSettingsError("Stop the temporary WHDLoad session before saving a machine profile."); return; }
 		if (!TryApplySettingsFromUi(out var error))
 		{
 			SetSettingsError(error);

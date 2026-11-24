@@ -85,6 +85,15 @@
           "HotPathGuard.Abstractions": "0.1.0"
         }
       },
+      "Hst.Compression": {
+        "type": "Direct",
+        "requested": "[1.0.104, )",
+        "resolved": "1.0.104",
+        "contentHash": "wvhQtaaUfWRsTd/jEjPi3ZE2PHFgPtJX2XeZDhJvzt5TEce79AN2U/B7+ZdULX4AZwKaH5Tq1MSyl2vJMAAdlQ==",
+        "dependencies": {
+          "Hst.Core": "1.0.104"
+        }
+      },
       "Miniaudio-CS": {
         "type": "Direct",
         "requested": "[1.0.4, )",
@@ -235,6 +244,11 @@
         "type": "Transitive",
         "resolved": "2.6.4",
         "contentHash": "UcGvtnXFcatwHBXr+ei8GEXvg//wjGmDGQ6Xvb+7M4vHjURAhSLIJ+dSZv0BnAhQEpNlH8G4P7JxYnMH8Aph4g=="
+      },
+      "Hst.Core": {
+        "type": "Transitive",
+        "resolved": "1.0.104",
+        "contentHash": "r1QAOi2QaoP7Gfus2QW3W7+Zub4kguBMLiHY9EOgEG0HqK/Zb43aDHRUcz5WDRuB2vhHRANOvQW2wAF1tcQLdQ=="
       },
       "MicroCom.Runtime": {
         "type": "Transitive",

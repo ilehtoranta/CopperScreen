@@ -44,7 +44,8 @@ internal sealed partial class MainWindow
             _runtime = null;
             DisableCrtPhosphorPresentation();
             if (WindowState == WindowState.FullScreen) WindowState = WindowState.Normal;
-            _settingsDraft = _committedSettings.Clone();
+            _settingsDraft = EndWhdLoadLaunch() ?? _committedSettings.Clone();
+            _committedSettings = _settingsDraft.Clone();
             _latestState = CreateIdleState(_settingsDraft);
             _welcomeCopperOs = CopperOsWorkspace.IsWorkspace(_settingsDraft.DriveDiskPaths[0]);
             ClearSettingsStartupError();

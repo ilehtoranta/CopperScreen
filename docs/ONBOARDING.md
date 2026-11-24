@@ -2,7 +2,7 @@
 
 P1-05 implements the desktop workflows on Lightweight. CopperStart and CopperOS
 remain explicitly labelled experimental previews. Legacy and host OS shims are
-unavailable. WHDLoad is outside this work.
+unavailable.
 
 The normal build includes the emulator and immutable machine presets, **not**
 Kickstart, Workbench, games or the development CopperStart/CopperOS boot pair.
@@ -13,6 +13,34 @@ Commercial admission of a bundled pair remains a release requirement under
 [the integration contract](COPPEROS_INTEGRATION.md).
 
 ## Walkthroughs available in the app
+
+### WHDLoad games
+
+With the Amiga stopped, choose **Open WHDLoad…** or drop a `.slave` or `.lha`
+onto the launcher. You can also pass the game file as the single argument to
+CopperScreen. Keep an unpacked slave and its game data in the same game drawer.
+Choose a preinstalled archive that includes the game data. Installer-only
+archives still require the original game media and an installation.
+
+For the first launch, choose an **Amiga 500 (68010)** or **Amiga 1200 (AGA)**,
+your matching native Kickstart ROM, the Workbench system ADF for that ROM, and
+your [WHDLoad user package](https://www.whdload.de/) or extracted
+Amiga executable. CopperScreen remembers these selections. For a title that
+uses Kickstart emulation, supply its ROM and relocation files in **Kickstarts
+drawer**. If a title needs a data drawer override, enter its path relative to
+the slave. CopperScreen offers a choice when the archive has several slaves.
+The launcher accepts Kickstart 2.04, 3.0 and 3.1. The A1200 requires 3.0 or 3.1.
+
+CopperScreen starts WHDLoad in a temporary guest session with read-only game
+files. Saves are stored under `WHDLoad/Saves` in CopperScreen's user-data
+directory for each game path and slave. **F9** quits WHDLoad inside the guest.
+**Stop** returns to the original CopperScreen machine configuration. The
+launcher uses the slave's own settings and the selected data drawer. Per-title
+Workbench icon tooltypes and automatic game installation are outside this flow.
+
+The native save probe ran from both input formats on the A500 profile with
+Kickstart 2.04 and WHDLoad 20.1. The A1200 check pairing Kickstart 3.0 with a
+Workbench 3.1 disk reached a guest Exec alert.
 
 ### User-owned ROM and disks
 

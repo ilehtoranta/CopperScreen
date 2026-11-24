@@ -112,7 +112,7 @@ internal sealed partial class MainWindow
 
     private void RememberSettingsEdits()
     {
-        if (!_settingsVisible || _updatingSettingsUi || _applyingSettings) return;
+        if (!_settingsVisible || _updatingSettingsUi || _applyingSettings || _whdLoadLaunch != null) return;
         try
         {
             var draft = ReadSettingsDraft();
