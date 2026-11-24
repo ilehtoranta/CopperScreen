@@ -378,15 +378,44 @@ also matched byte for byte.
 ### EC020 fetch order around the pointer write
 
 A standalone A1200 boot probe repeats the `MOVE.L` and the following
-`ADDA.L` with custom DMA disabled. WinUAE fetches the two following
-instruction longwords at CCKs `$06` and `$08`, then writes the custom
-register halves at `$0A` and `$0C`. A direct trace of the pinned
-Copper68k 1.5.11 A1200 core on a logging bus shows the operand write
-before either following instruction fetch. The discrepancy is
-reproducible outside blitter arbitration. A correction belongs in
-the shared core's instruction pipeline, with physical timing and
-coverage of other instruction forms still open.
-[Motorola MC68020 and MC68EC020 user’s manual](https://www.nxp.com/docs/en/data-sheet/MC68020UM.pdf)
+`ADDA.L` with custom DMA disabled. WinUAE fetches both successor instruction
+longwords before writing the custom-register halves, with CACR enabled and
+disabled. A direct trace of the pinned Copper68k 1.5.11 A1200 core on a
+logging bus placed the operand write before either successor fetch.
+
+The shared core now fetches aligned instruction longwords in RAM and ROM
+for the A1200 profile and holds both words even with CACR disabled.
+Immediate moves to memory advance the existing instruction queue before
+writing the operand.
+A second WinUAE boot probe uses `MOVE.L #$000532B6,([$100,A5])` with the
+cache off. The base-displacement longword is fetched at CCK `$08`, the two
+successor instruction longwords at `$0A` and `$0C`, the pointer at `$0E`,
+and the two custom-register halves at `$10` and `$12`. The correction
+preserves that order by advancing the queue after decoding the full
+extension and before dereferencing the pointer. Six regression cases
+cover aligned fetches, cache control, all three operand sizes, and this
+memory-indirect ordering. All 3,125 tests in the focused EC020 suite passed.
+[WinUAE displaced MOVE handler](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/cpuemu_21.cpp#L11620-L11643)
+· [WinUAE indexed MOVE handler](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/cpuemu_21.cpp#L11902-L11923)
+· [Motorola MC68020 and MC68EC020 user’s manual](https://www.nxp.com/docs/en/data-sheet/MC68020UM.pdf)
+
+A local Release build of the shared core completed the original ZooL 2
+Swan Lake wall-climb replay through field 15,150. The timing change
+selected a different code-wheel challenge, so the replay supplies the
+corresponding original response and resumes joystick input after loading.
+The final frame shows the wall climb and all HUD counters. Banshee reached
+first-mission combat at field 10,500 and Lemmings reached the scrolling
+Shadow stage at field 14,000. Both 68000 controls, P.P. Hammer and RoboCop 3,
+retained their CPU, hardware and output fingerprints. The PAL and NTSC
+CD32 Sqrxz boots both showed the v1.2 title at field 1,425. None of these
+replays reported an unsupported feature.
+[CopperMod source correction](https://github.com/ilehtoranta/CopperMod/commit/4ce0a14420d22f4c49b6225022a971244c2561d5)
+
+CopperScreen currently pins Copper68k 1.5.11. The Release solution build
+passed with zero warnings. Engine diagnostics passed 1,473 tests and
+skipped seven optional native cases. The existing A1200 timing policy
+still approximates general instruction overlap and bus phases. Physical
+A1200 timing remains unverified.
 
 ### Live B, C and D channel investigation
 
