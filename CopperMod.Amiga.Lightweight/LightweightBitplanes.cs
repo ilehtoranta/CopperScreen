@@ -3,8 +3,8 @@ using System.Runtime.CompilerServices;
 namespace CopperMod.Amiga.Lightweight;
 
 /// <summary>
-/// Direct OCS/ECS DDF and bitplane DMA path, including two-plane SuperHires. One accepted address
-/// is retained until the following CCK samples Chip RAM.
+/// Direct DDF and bitplane DMA path. The accepted address and modulo
+/// are retained until the following CCK samples Chip RAM.
 /// </summary>
 internal sealed class LightweightBitplanes
 {
@@ -53,7 +53,7 @@ internal sealed class LightweightBitplanes
     private bool _hasPendingOutput;
     private int _pendingPlane;
     private uint _pendingAddress;
-    private bool _pendingModulo;
+    private short _pendingModulo;
     private long _pendingOutputCycle;
 
     internal long NextCycle { get; private set; } = long.MaxValue;
@@ -90,7 +90,7 @@ internal sealed class LightweightBitplanes
         _hasPendingOutput = false;
         _pendingPlane = -1;
         _pendingAddress = 0;
-        _pendingModulo = false;
+        _pendingModulo = 0;
         _pendingOutputCycle = long.MaxValue;
         NextCycle = long.MaxValue;
         LastInputCycle = long.MinValue;
@@ -355,8 +355,12 @@ internal sealed class LightweightBitplanes
         _hasPendingOutput = true;
         _pendingPlane = plane; if (TPath.Aga) _pendingMode = _fmode;
         _pendingAddress = _pointers[plane];
-        _pendingModulo = _terminalUnitStartCycle != long.MaxValue &&
+        var applyModulo = _terminalUnitStartCycle != long.MaxValue &&
             cycle >= _terminalUnitStartCycle + _terminalFetchOffset;
+        _pendingModulo = !applyModulo ? (short)0 :
+            TPath.Aga && (_pendingMode & 0x4000) != 0
+                ? machine.GetScanDoubleModulo(machine.BeamLine)
+                : machine.GetBitplaneModulo(plane);
         _pendingOutputCycle = outputCycle;
 #if LIGHTWEIGHT_DIAGNOSTICS
         LastInputCycle = cycle;
@@ -368,7 +372,6 @@ internal sealed class LightweightBitplanes
     {
         var plane = _pendingPlane;
         var address = _pendingAddress;
-        var applyModulo = _pendingModulo;
         _hasPendingOutput = false;
         _pendingOutputCycle = long.MaxValue;
         var mode = TPath.Aga ? _pendingMode & 3 : 0;
@@ -379,15 +382,8 @@ internal sealed class LightweightBitplanes
         if (TPath.Aga) machine.OnBitplaneWideOutput(plane, wide, bits, cycle);
         else machine.OnBitplaneDataOutput(plane, value, cycle);
         var stride = (uint)(bits / 8);
-        var pointer = MaskAddress((TPath.Aga ? address & ~(stride - 1) : address) + stride);
-        if (applyModulo)
-        {
-            // A terminal group may cross horizontal sync. BSCAN2 selects
-            // by the beam at the modulo phase, not the DDF owner's row.
-            var modulo = TPath.Aga && (_pendingMode & 0x4000) != 0
-                ? machine.GetScanDoubleModulo(machine.BeamLine) : machine.GetBitplaneModulo(plane);
-            pointer = MaskAddress(unchecked(pointer + (uint)modulo));
-        }
+        var fetchBase = TPath.Aga ? address & ~(stride - 1) : address;
+        var pointer = MaskAddress(unchecked(fetchBase + stride + (uint)_pendingModulo));
         _pointers[plane] = pointer;
         machine.SetBitplanePointerFromDma(plane, pointer);
         LastOutputCycle = cycle;

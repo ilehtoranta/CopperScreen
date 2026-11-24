@@ -172,6 +172,10 @@ without unsupported feature reports. The Release build passed with zero
 warnings. Engine diagnostics passed 1,432 tests with seven optional native
 tests skipped.
 
+The production build and diagnostics were repeated on pushed revision
+`4169eac` with Copper68k 1.5.10. The same Zool 2 replay matched all 39
+captures and all three final fingerprints from the run with Copper68k 1.5.7.
+
 Absolute Copper start timing, source-only channel schedules, physical signal
 measurement and a matched capture of the game's active blitter register
 rewrites remain open.
@@ -236,8 +240,53 @@ raster position.
 The changelog records a historical cycle-exact bitplane modulo correction.
 Moving the cursor to both edges in a 13,750-field replay left this level's
 view fixed while animation continued. WinUAE also kept the first-level view
-fixed at the right edge. Modulo write timing and scrolling in a larger
-level still need a matched trace. [WinUAE Lemmings history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19933-L19936)
+fixed at the right edge. [WinUAE Lemmings history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19933-L19936)
+
+### Terminal bitplane modulo timing
+
+The [bootable probe generator](../../scripts/generate-bitplane-modulo-probe.ps1)
+sets up two 64-bit lores planes and sweeps Copper writes to BPL1MOD and
+BPL2MOD across the terminal fetches on 14 raster lines. Capture each line
+and its successor in cycle-exact WinUAE 6.1 beta 23 on the PAL A1200 profile.
+`DBG vl 64 48 6` starts the DMA trace at line 64 and horizontal position
+48. Collect the trace through line 117.
+
+WinUAE samples the old modulo when the Copper writes the new one one CCK
+before the terminal RAM access. BPL2 on line 96 uses `$0008`, producing
+the next line's first address `$00016418`. BPL1 on line 112 uses `$0000`,
+producing `$00018010`. CopperScreen sampled modulo at RAM output and
+produced `$00016480` and `$00018030`, respectively. Capturing the signed
+modulo alongside the accepted DMA address fixes both cases. The candidate
+matches all 112 bitplane transfer addresses after aligning each engine's
+trace to its first bitplane transfer. Four automated cases verify the old
+and new modulo on the two sides of the address-phase edge. No physical
+chipset measurement was taken.
+[WinUAE bitplane address and modulo pipeline](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/custom.cpp#L9248-L9272)
+
+On the original disks, the 14,000-field Shadow replay selected the masked
+Lemming in the Ark and reached the opening city level. Moving the cursor
+to opposite edges scrolled the city in both directions while the skill bar
+stayed fixed. All 48 captures matched the pre-fix replay, including fields
+11,700 and 12,300 on either side of the first scroll and field 13,800 after
+scrolling back. The replay ended with CPU `0x260E5FABF29EFBAE`, hardware
+`0x425D28FE61A7129B` and output `0x1A80A903249080BB` and no unsupported
+feature report. The Release build passed with zero warnings and the engine
+diagnostics passed 1,436 tests with seven optional tests skipped. Repeating
+the build after the AGA custom register read corrections in `9b383f0`
+also passed with zero warnings and 1,440 diagnostic tests passed. The same
+Shadow replay matched all 48 captures and all three fingerprints.
+
+The 7,200-field PAL OCS P.P. Hammer replay matched all 25 captures and
+all three final fingerprints from the earlier area blitter build.
+
+WinUAE 6.1 beta 23 also scrolled the opening Shadow level to the right and
+back with the skill bar fixed. After alignment using the same coordinates as
+the Classic level, the initial left, right and return views matched 125,446,
+124,450 and 125,302 of 128,000 RGB samples respectively. The captures came
+from different fields with different Lemming positions, pointer positions
+and countdown frames.
+Later stages and the timing of the game's actual Copper list writes remain
+unverified.
 
 ## RoboCop 3
 

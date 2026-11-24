@@ -132,9 +132,11 @@ physical sub-CCK phases remain unverified; the retained raster phase is +1 lores
 Lisa [palette readback and Alice scan doubling](AGA_READBACK_SCAN2_2026-10-02.md)
 share these owners and deadlines. RDRAM reads the BANK/LOCT-selected palette half
 and suppresses colour writes, including Copper writes. BSCAN2 applies BPL1MOD
-to every plane when DIWSTRT and the live vertical beam have matching parity;
-otherwise every plane uses BPL2MOD. A terminal fetch group crossing horizontal
-sync uses the beam at its modulo phase. SSCAN2 suppresses alternate active data
+to every plane when DIWSTRT and the live vertical beam have matching parity.
+Every plane uses BPL2MOD when the parities differ. The terminal fetch
+latches its modulo with its DMA address one CCK before sampling RAM. A group
+crossing horizontal sync uses the live beam at each plane's address phase.
+SSCAN2 suppresses alternate active data
 slots only for sprites with SH10 set, retaining the full Lisa payload. Control
 reloads still run; the global bit removes SH10 from Lisa's horizontal comparison.
 Accepted transfers remain accepted across subsequent control changes. Focused

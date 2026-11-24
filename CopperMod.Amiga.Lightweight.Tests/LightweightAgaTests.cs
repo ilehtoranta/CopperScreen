@@ -81,6 +81,33 @@ public sealed class LightweightAgaTests
         m.AdvanceHardwareTo(45L * 454);
         for (var p = 0; p < 8; p++) Assert.Equal(0x20000u + (uint)p * 0x4000 + (p % 2 == 0 ? oddAdvance : 50), m.GetLiveBitplanePointer(p));
     }
+
+    [Theory]
+    [InlineData(0, false, 48u)]
+    [InlineData(0, true, 16u)]
+    [InlineData(1, false, 128u)]
+    [InlineData(1, true, 24u)]
+    public void TerminalFetchLatchesModuloBeforeRegisterWritesOnItsAddressCck(
+        int plane, bool writeOnAddressCck, uint advance)
+    {
+        using var m = Create();
+        Configure(m, mode: 3, index: 0, even: 8);
+        Write(m, LightweightRegisters.Ddfstop, 0x50);
+        Write(m, LightweightRegisters.Bplcon0, 0x2200);
+
+        var lineStart = 44L * LightweightClock.CpuCyclesPerLine;
+        var outputCycle = lineStart + (plane == 0 ? 0x60 : 0x5C) * 2;
+        var writeCycle = outputCycle - (writeOnAddressCck ? 2 : 4);
+        m.AdvanceHardwareTo(writeCycle);
+        var register = plane == 0 ? LightweightRegisters.Bpl1mod : LightweightRegisters.Bpl2mod;
+        m.WriteCustomRegisterFromCopper(register, (ushort)(plane == 0 ? 0x20 : 0x70), writeCycle);
+
+        m.AdvanceHardwareTo(outputCycle);
+        Assert.Equal(outputCycle, m.BitplaneLastOutputCycle);
+        Assert.Equal(plane, m.BitplaneLastPlane);
+        Assert.Equal(0x20000u + (uint)plane * 0x4000 + advance, m.GetLiveBitplanePointer(plane));
+    }
+
     [Theory]
     [InlineData(0)] [InlineData(1)] [InlineData(2)] [InlineData(3)]
     public void EightPlanesSelectBankSevenAndPreserveFullRgb24(int mode)
