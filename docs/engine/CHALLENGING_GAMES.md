@@ -956,3 +956,32 @@ capture or run `DBG m 70000 2` in WinUAE. Both produced the same records:
 
 The probe requires no CPU correction. The original game's CHK stack frame
 and progression from qualifying to the full race remain open.
+
+### Spindizzy Worlds
+
+The PAL A500 check uses the Electric Dreams disk, SPS 1179, with archive
+SHA-256 `8E9DB60BCEEB7EF9BF3D7935ECF97DC2B5A4B016378AADB9E018302061612000`.
+The WinUAE history groups this title with P.P. Hammer in its blitter
+timing changes. Both cycle-exact WinUAE 6.1 beta 23 and CopperScreen
+entered the Easy cluster's Ramp Run world. Cluster selection requires
+holding the direction through the fire-button release.
+[WinUAE blitter changelog](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19208-L19211)
+· [Spindizzy Worlds manual](https://www.lemonamiga.com/doc/spindizzy-worlds/1516)
+
+The replay pulses port 2 fire for 12 fields at 2,400, 3,000, 3,600, 4,200
+and 4,800. It holds left at 6,550, adds fire at 6,570, releases fire at
+6,600 and releases left at 6,640. A fire pulse at 6,800 enters Ramp Run.
+Holding down for 30 fields from 7,220 moves GERALD down the ramp and
+scrolls the scenery. The space bar at 7,270 brakes the movement.
+
+At field 7,220, the landscape matched 69,590 of 69,696 RGB samples in
+the reference capture. All 106 differences lie within GERALD's animated
+sprite area at x=724–751, y=120–134. The right clue panel also matches all
+3,131 samples. The comparison uses CopperScreen landscape coordinates
+x=290–865, y=92–212 and clue panel coordinates x=760–860, y=215–245,
+mapped by `x - 198`, `2 * y - 54`.
+
+The Release replay reproduced the starting and scrolled captures byte for
+byte through field 7,360 and reported no unsupported feature. This checks
+the opening terrain redraw. Further worlds and independent measurements of
+the title's blitter activity remain open.
