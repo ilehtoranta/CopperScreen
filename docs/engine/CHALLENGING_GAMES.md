@@ -918,3 +918,41 @@ WinUAE capture at CopperScreen x=472–702, y=246–266 and reference
 coordinates `x - 198`, `2 * y - 54`. The other gameplay objects were
 captured at different times. The address-error route required no code
 change. Later stages and physical timing remain open.
+
+### Days of Thunder
+
+The PAL A500 check uses the original Mindscape disk, SPS 0285, with archive
+SHA-256 `48073E1FFD0EE3CE79387C8FF620F8446B4F9BF8706C83AA7D627B0DE745AAEB`.
+The WinUAE history identifies an incorrect CHK exception return address
+in this game. With Copper68k 1.5.12, CopperScreen booted through the
+credits to the options screen at field 5,500. All 128,000 RGB samples of
+the options screen matched stock cycle-exact WinUAE 6.1 beta 23 over
+CopperScreen x=258–897 and y=44–243 using WinUAE coordinates
+`x - 198`, `2 * y - 54`.
+[WinUAE CHK history](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L19712-L19723)
+
+Selecting Go to Trials reached the qualifying cockpit on both engines.
+The CopperScreen replay pulses fire for 15 fields at 2,600, 3,100,
+3,600, 4,100, 4,600 and 5,100. In the options menu it presses down for ten
+fields at 5,900, 5,960, 6,020 and 6,080, then up over 6,112–6,117 and
+fire over 6,140–6,145.
+At field 8,200 all 27,520 samples in the upper trim and upper dashboard
+match the independent WinUAE capture using the same coordinates. The
+regions cover x=258–897 and rows 44–57 and 174–202. Both engines responded
+to the gear and throttle inputs in qualifying.
+[Days of Thunder manual](https://www.lemonamiga.com/doc/days-of-thunder/435)
+
+The [bootable 68000 probe](../../scripts/generate-68000-chk-probe.ps1)
+checks `CHK.W #5,D0` with operands −1, 6 and 5. The first two take vector 6.
+Each writes the saved SR, saved PC and expected resume PC to Chip RAM at
+`$00070000`. The third resumes without another exception and writes the
+`$BEEF` completion marker. Read 22 bytes in the CopperScreen Chip RAM
+capture or run `DBG m 70000 2` in WinUAE. Both produced the same records:
+
+| Operand | Saved SR | Saved PC | Expected PC |
+| --- | --- | --- | --- |
+| −1 | `$2708` | `$0000158C` | `$0000158C` |
+| 6 | `$2700` | `$00001596` | `$00001596` |
+
+The probe requires no CPU correction. The original game's CHK stack frame
+and progression from qualifying to the full race remain open.
