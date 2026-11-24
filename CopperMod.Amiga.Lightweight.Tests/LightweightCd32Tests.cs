@@ -174,6 +174,28 @@ public sealed class LightweightCd32Tests
     }
 
     [Fact]
+    public void EepromAcknowledgesWhenOneLongWriteLowersClockAndReleasesData()
+    {
+        using var machine = Create();
+        long cycle = 0;
+        const uint pins = 0xB80030;
+        void Drive(uint value) => machine.WriteLong(pins, value, ref cycle, Write);
+
+        Drive(0xC000C000);
+        Drive(0x8000C000); // START
+        for (var bit = 7; bit >= 0; bit--)
+        {
+            var data = (uint)((0xA0 >> bit) & 1) << 30;
+            Drive(data | 0xC000);
+            Drive(data | 0x8000C000);
+        }
+
+        Drive(0x00008000); // Falling SCL and SDA direction change on the same strobe.
+        Drive(0x80008000);
+        Assert.Equal(0x80, machine.ReadByte(pins, ref cycle, Read) & 0xC0);
+    }
+
+    [Fact]
     public void EepromBanksWrapPageWritesAndFinishOnTheBoardClock()
     {
         using var machine = Create();

@@ -74,7 +74,13 @@ internal sealed class LightweightCd32Eeprom(int clockFrequency)
 
     internal void WriteDirection(byte value, long cycle)
     {
-        _direction = (byte)(value & (Scl | Sda));
+        WritePinsAndDirection(_latch, value, cycle);
+    }
+
+    internal void WritePinsAndDirection(byte pins, byte direction, long cycle)
+    {
+        _direction = (byte)(direction & (Scl | Sda));
+        _latch = pins;
         UpdateLines(cycle);
     }
 

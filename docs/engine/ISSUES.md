@@ -9,12 +9,13 @@ coverage. The CD32 qualification matrix tracks the open WinUAE parity work.
 The 2026-11-24 native replay uses the verified Amiga Forever 40.60 ROM pair
 and [Retroguru's Sqrxz disc](https://www.sqrxz.de/sqrxz/), ISO SHA-256
 `F3ECFD7F9D8840EE80F59E8EEE3DEE757E3F6E8498B6CD2C9480A3AFE030C988`.
-The PAL firmware draws its startup animation and delivers disc sectors
-through LBA 41 before returning to the ROM startup sequence. The title
-screen remains unverified. An NTSC replay reproduced a host spin when the
+The stock PAL and NTSC profiles reach the Sqrxz title after the Akiko EEPROM
+strobe correction. The [Sqrxz boot timing investigation](CD32.md#sqrxz-boot-timing)
+records the earlier guest reboot and the remaining ROM execution timing gap.
+An earlier NTSC replay reproduced a host spin when the
 bounded output deadline expired mid-rasterline. The clock now waits for the
-line boundary that retires that output. The NTSC rerun completed 1,260 fields
-and observed the same disc-read limit and guest restart.
+line boundary that retires that output. The corrected PAL and NTSC replays
+each completed 1,900 fields.
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
