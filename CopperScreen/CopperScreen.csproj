@@ -57,7 +57,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CopperMod.Amiga.Lightweight\CopperMod.Amiga.Lightweight.csproj" />
     <PackageReference Include="Copper68k" Version="[$(Copper68kBoundaryVersion)]" />
-    <PackageReference Include="CopperStart.FileSystem.Service" Version="[0.5.0-dev.9]" />
+    <PackageReference Include="CopperStart.FileSystem.Service" Version="[0.5.0-dev.10]" />
     <ProjectReference Include="..\CopperDisk\CopperDisk.csproj" />
   </ItemGroup>
 

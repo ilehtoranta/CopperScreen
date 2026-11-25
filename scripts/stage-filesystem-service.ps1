@@ -3,9 +3,9 @@ param([string]$PackagePath)
 
 $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
-$packageName = 'CopperStart.FileSystem.Service.0.5.0-dev.9.nupkg'
-$releaseUrl = 'https://github.com/ilehtoranta/CopperScreen/releases/download/filesystem-service-0.5.0-dev.9'
-$expectedHash = '67B6044DF71118F71D18B884611A78FD21C8768E932CE966EA262CD05080856E'
+$packageName = 'CopperStart.FileSystem.Service.0.5.0-dev.10.nupkg'
+$releaseUrl = 'https://github.com/ilehtoranta/CopperScreen/releases/download/filesystem-service-0.5.0-dev.10'
+$expectedHash = 'FC9671935C2D5ED41D16F67EBFCA623AD5F546645AC60E01219D17AB99BEDBBF'
 
 if ($PackagePath) {
     $bytes = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $PackagePath).ProviderPath)

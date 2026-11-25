@@ -14,9 +14,9 @@ try {
         dotnet pack $project -c Release -o $outputPath
         if ($LASTEXITCODE) { throw "Package build failed: $project" }
     }
-    $service = Join-Path $repo 'artifacts/packages/copperstart.filesystem.service/0.5.0-dev.9/copperstart.filesystem.service.0.5.0-dev.9.nupkg'
+    $service = Join-Path $repo 'artifacts/packages/copperstart.filesystem.service/0.5.0-dev.10/copperstart.filesystem.service.0.5.0-dev.10.nupkg'
     if (!(Test-Path -LiteralPath $service)) { throw 'The exact qualified service artifact is required; do not rebuild or substitute it.' }
-    if ((Get-FileHash -LiteralPath $service -Algorithm SHA256).Hash -ne '67B6044DF71118F71D18B884611A78FD21C8768E932CE966EA262CD05080856E') { throw 'Qualified service artifact hash mismatch.' }
+    if ((Get-FileHash -LiteralPath $service -Algorithm SHA256).Hash -ne 'FC9671935C2D5ED41D16F67EBFCA623AD5F546645AC60E01219D17AB99BEDBBF') { throw 'Qualified service artifact hash mismatch.' }
     Copy-Item -LiteralPath $service -Destination $outputPath -Force
     $fixtureProject = Join-Path $fixturePath 'Fixtures.csproj'
     @'

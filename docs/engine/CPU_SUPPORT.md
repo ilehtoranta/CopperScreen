@@ -1,6 +1,6 @@
 # CPU support and Copper68k package scope
 
-CopperScreen pins Copper68k 1.5.13 from NuGet.org. MOVES operands use their selected address space,
+CopperScreen pins Copper68k 1.5.14 from NuGet.org. MOVES operands use their selected address space,
 memory bit fields use sized transfers, and MOVE16 starts each burst at the
 addressed longword within the line. On 68000/68010, arithmetic
 and logical longword writeback stores the low word first. The 68010 clears
@@ -8,6 +8,15 @@ memory without reading the destination. On 68040/68060, memory ADDX.L and
 SUBX.L use native longword transfers. The 1.5.7 correction for unimplemented
 68060 floating-point memory operations is retained. See the [SysInfo and 040 JIT report](SYSINFO_040_JIT_2026-11-21.md)
 for the 1.5.5 performance baseline.
+
+Copper68k 1.5.14 corrects the MC68040 FSAVE frame that FPSP consumes after
+an integer FMOVE operand error.
+
+A no-input Smoke & Mirrors replay used the NuGet.org 1.5.14 DLL with PAL AGA,
+Kickstart 3.0, 68040 JIT and 128 MiB of Zorro III Fast RAM. The demo ran from
+a read-only hardfile and returned to the AmigaDOS prompt by field 16,500. The
+prompt was still visible at field 18,000. The clockwork frame at field 7,500
+matched the gallery capture byte for byte.
 
 The 2026-10-23 published baseline used Copper68k `1.5.4`
 from NuGet.org. It retains the qualified integer suite, general logical handler
@@ -175,14 +184,14 @@ positive compilation count alone is not proof of compiled execution.
 From a CopperScreen checkout:
 
 ```powershell
+./scripts/stage-filesystem-service.ps1
 dotnet restore CopperScreen.slnx --locked-mode
-dotnet build CopperScreen.slnx -c Release
+dotnet build CopperScreen.slnx -c Release --no-restore
 ```
 
-Normal configuration uses NuGet.org alone. Locks retain the published `1.5.4`
-package's content identity; no local feed, repacking or sibling source reference
-is needed. Earlier ignored development packages remain historical evidence.
-Published versions remain immutable; further CPU changes require a new version.
+The locks pin the Copper68k package from NuGet.org and the matching filesystem
+service from the CopperScreen GitHub prerelease. The staging script verifies
+the prerelease asset before adding it to the repository-local restore source.
 
 ## Verification on 2026-10-07
 
