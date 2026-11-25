@@ -1,5 +1,16 @@
 [
   {
+    "id": "smoke-and-mirrors-clockwork",
+    "title": "Smoke & Mirrors",
+    "caption": "A clockwork scene from the 2013 AGA demo by Ghostown and Loonies.",
+    "alt": "A skull on a clock face surrounded by interlocking gears and curved metal frames.",
+    "image": "assets/screenshots/smoke-and-mirrors-clockwork.png",
+    "thumbnail": "assets/screenshots/smoke-and-mirrors-clockwork-thumb.png",
+    "width": 1424,
+    "height": 1140,
+    "featured": false
+  },
+  {
     "id": "bubble-and-squeak-gameplay",
     "title": "Bubble and Squeak",
     "caption": "On the slopes of Stardust Caverns in the AGA version.",

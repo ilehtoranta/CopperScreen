@@ -266,3 +266,21 @@ thumbnails are 356×285.
 
 Reproduce these entries with `scripts/prepare-website-screenshots.ps1 -CaptureRoot
 artifacts -Names bubble-and-squeak-gameplay,alfred-chicken-gameplay,second-samurai-gameplay,roots-face-morph,cubic-dream-wireframes,deuteros-df1-restore`.
+
+## Smoke & Mirrors — 2026-11-25
+
+Ghostown and Loonies released the demo at Revision 2013.
+[Revision 2013 competition results](https://files.scene.org/view/parties/2013/revision13/results.txt)
+
+The clockwork scene comes from field 7,500 of the native Lightweight PAL AGA
+replay with Kickstart 3.0, 68040 JIT and 128 MiB of Zorro III Fast RAM. The
+replay used the Fast RAM fix later committed as `2677663` and the local
+Copper68k `1.5.13-dev.smoke040.1` build with the 68040 FPU fix. The demo
+returned to AmigaDOS without input.
+
+| Title | Capture relative to `artifacts/` | Original BMP SHA-256 |
+| --- | --- | --- |
+| Smoke & Mirrors | `smoke-and-mirrors/68040-exit-investigation/direct-fast/frame-007500.bmp` | `B19409A84E92F1CA887762DBB699C65569708C11C567FE83F31916DCABE11D55` |
+
+Reproduce the full PAL LCD viewport and its thumbnail with
+`scripts/prepare-website-screenshots.ps1 -CaptureRoot artifacts -Names smoke-and-mirrors-clockwork`.
