@@ -194,7 +194,9 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _acceleratorBus = _configuration.CpuModel switch
         {
             M68kCpuModel.M68000 or M68kCpuModel.M68010 => null,
-            M68kCpuModel.M68040 when _cpuClockShift != 0 => new LightweightAccelerated040Bus(this),
+            M68kCpuModel.M68040 when _cpuClockShift != 0 ||
+                (IsAga && _configuration.CpuExecutionMode == M68kExecutionMode.Jit &&
+                 _fastRam?.Identity.BusKind == AutoconfigBusKind.ZorroIII) => new LightweightAccelerated040Bus(this),
             _ => new LightweightAcceleratorBus(this, _configuration.CpuModel)
         };
         IM68kBus cpuBus = (IM68kBus?)_acceleratorBus ?? this;

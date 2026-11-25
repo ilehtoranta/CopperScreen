@@ -3,8 +3,8 @@ using Copper68k;
 
 namespace CopperMod.Amiga.Lightweight;
 
-// Fast RAM and backed ROM use zero-wait access. Chip RAM, Slow RAM and
-// devices use the regular accelerator bridge on the motherboard clock.
+// Fast RAM uses direct access. Backed ROM also uses direct reads with the
+// clock multiplier. All other accesses use the timed motherboard bridge.
 internal sealed class LightweightAccelerated040Bus(LightweightA500Machine machine)
     : LightweightAcceleratorBus(machine, M68kCpuModel.M68040), IM68kBus, IM68kJitFastMemoryBus
 {
@@ -111,7 +111,8 @@ internal sealed class LightweightAccelerated040Bus(LightweightA500Machine machin
         if (TryGetJitZeroWaitWriteMemory(address, bytes, out memory, out offset, out kind))
             return true;
         kind = M68kJitMemoryKind.Rom;
-        return Machine.TryGetAcceleratedRom(address, bytes, out memory, out offset);
+        return Machine.UsesAcceleratedCpuClock &&
+            Machine.TryGetAcceleratedRom(address, bytes, out memory, out offset);
     }
 
     public bool TryGetJitZeroWaitWriteMemory(

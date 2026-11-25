@@ -122,6 +122,36 @@ public sealed class LightweightUpgradeTests
     public void NarrowAddressCpuCannotFitHighRam(M68kCpuModel cpu)
         => Assert.Throws<ArgumentOutOfRangeException>(() => new LightweightA500Machine(Configuration(cpu, false)));
 
+    [Fact]
+    public void Aga68040JitDirectBusKeepsZorro3RamSeparateFromTimedMemory()
+    {
+        using var machine = new LightweightA500Machine(Configuration(M68kCpuModel.M68040, aga: true, jit: true));
+        var kickstart = new byte[512 * 1024];
+        BinaryPrimitives.WriteUInt16BigEndian(kickstart, 0x2345);
+        machine.LoadKickstart(kickstart);
+        IM68kBus bus = new LightweightAccelerated040Bus(machine);
+        var direct = (IM68kJitFastMemoryBus)bus;
+        const uint fast = 0x40000000;
+        const uint rom = 0xF80000;
+        long cycle = machine.Cycle;
+
+        Assert.False(direct.TryGetJitZeroWaitReadMemory(fast, 4, out _, out _, out _));
+        machine.WriteWord(0xFF000044, 0x4000, ref cycle, Write);
+        Assert.Equal(fast, machine.FastRamBase);
+        var before = cycle;
+        bus.WriteLong(fast, 0x12345678, ref cycle, Write);
+        Assert.Equal(0x12345678u, bus.ReadLong(fast, ref cycle, Read));
+        Assert.Equal(before, cycle);
+        Assert.Equal(before, machine.Cycle);
+
+        Assert.False(direct.TryGetJitZeroWaitReadMemory(fast + 0x00FFFFFE, 4, out _, out _, out _));
+        Assert.False(direct.TryGetJitZeroWaitReadMemory(rom, 4, out _, out _, out _));
+        Assert.False(direct.TryGetJitZeroWaitReadMemory(0x1000, 4, out _, out _, out _));
+        Assert.Equal(0x2345, bus.ReadWord(rom, ref cycle, Read));
+        Assert.True(cycle > before);
+        Assert.Equal(cycle, machine.Cycle);
+    }
+
     [Theory]
     [InlineData(false)] [InlineData(true)]
     public void HighRamInstructionsExecuteAndJitInvalidatesModifiedCode(bool aga)

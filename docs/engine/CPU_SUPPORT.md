@@ -161,6 +161,11 @@ the original failure where a compiled loop continued despite a visible interrupt
 Enabled paging or transparent translation disables compiled execution so timed
 walks, permissions and fault behavior stay on the interpreter path.
 
+On AGA with 68040 JIT, configured virtual Zorro III Fast RAM is accessed directly
+at the standard motherboard clock setting. Zero added motherboard wait cycles
+approximate fast expansion memory. Chip RAM, ROM and devices use the timed
+motherboard bridge at that clock setting.
+
 `LightweightA500Machine.JitStatistics` exposes compiled traces, compiled
 instructions, fallback instructions and invalidations. A selected JIT mode or
 positive compilation count alone is not proof of compiled execution.
