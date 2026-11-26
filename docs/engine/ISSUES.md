@@ -934,6 +934,43 @@ finishing at the same elapsed field without shifting the captures.
 The artifacts are under
 `artifacts/the-company/drift-investigation/from-dev2/fill-deadline/deadline-18359/`.
 
+The combined startup regression came from the optimized MC68000
+`MOVE.W (An)+,Dn` refill. It used the end of the fast-memory bus phase
+as the instruction's retirement floor after the fetched word was already
+ready. The two edges coincide for the observed chip-memory refill. A
+Kickstart table read at `$FC02CA` was the first observed difference
+between the original and combined CPU builds. The timing change propagated
+through the floppy read sequence. The packed loader started 212,552 CPU
+clocks earlier, and the first level-4 handler ran before the first demo
+field sample. Its initial countdown dropped from 180 to 179.
+
+Copper68k now waits for publication of the required word and retains
+the bus tail for subsequent accesses. The fast-refill regression covers
+both optimized dispatch paths. The contended chip-memory regression also
+passes. The cold replay restores entry at field 1,692 and initial count
+180. WinUAE logs the same field and count. Its Lua capture labels that
+sample 1,693 because the callback runs before the emulator increments
+its field counter. Comparing equal emulator field counters gives the
+same result as pairing equal elapsed indices from the first sample of
+vector `$030960`.
+
+The corrected frozen combined build finishes at elapsed field 30,498,
+the same as WinUAE. It matches 30,250 of 30,498 active RGB images in
+the common 724 by 287 viewport. Elapsed field 18,359 matches in RGB.
+The rotation-ready word differs at that sample. The third fill starts 114
+CPU clocks before WinUAE in the preceding raster. The next image
+differs at field 18,360. The earlier indexed MOVE and EXG build still
+has the highest exact-image count. A fresh WinUAE run reproduced all
+31,385 reference hashes and the field telemetry byte for byte.
+
+The maintained Copper68k branch contains a different set of CPU timing
+changes from the frozen combined build. Its local development package
+with the same startup correction enters at field 1,692, up from 1,691 in
+the branch control. It finishes 39 fields early and matches 18,541 of
+30,459 jointly active images at equal field counters. Artifacts for the
+startup follow-up are under
+`artifacts/the-company/drift-investigation/from-dev2/fill-deadline/startup-followup/`.
+
 | ID | Resolution to preserve | Coverage / remaining boundary |
 | --- | --- | --- |
 | LWA-EXEC-001 | Advance canonical hardware time through accepted interrupt-entry retirement. | `LightweightInterruptProgressTests`; native stall repaired, not full Hired Guns certification. |
