@@ -271,6 +271,25 @@ public sealed class LightweightBitplaneTests
     }
 
     [Fact]
+    public void SettingPlaneCountBeforeDdfStartFetchesOnTheCurrentRasterline()
+    {
+        using var machine = new LightweightA500Machine();
+        ConfigureLowRes(machine, planeCount: 0, ddfStop: 0x0040);
+        long cycle = machine.Cycle;
+        Write(machine, LightweightA500Machine.CustomBase + LightweightRegisters.BplPointerFirst + 2,
+            (ushort)PlaneBase, ref cycle);
+
+        var lineStart = (long)DisplayLine * LightweightClock.CpuCyclesPerLine;
+        cycle = lineStart + (0x28L * LightweightClock.CpuCyclesPerColorClock);
+        Write(machine, LightweightA500Machine.CustomBase + LightweightRegisters.Bplcon0, 0x1000, ref cycle);
+
+        var firstOutput = lineStart + (0x40L * LightweightClock.CpuCyclesPerColorClock);
+        machine.AdvanceHardwareTo(firstOutput);
+        Assert.Equal(firstOutput, machine.BitplaneLastOutputCycle);
+        Assert.Equal(PlaneBase, machine.BitplaneLastAddress);
+    }
+
+    [Fact]
     public void InactiveBitplanesPublishTheNextDdfComparatorPhase()
     {
         using var machine = new LightweightA500Machine();

@@ -1038,7 +1038,7 @@ public sealed class LightweightBlitterTests
     }
 
     [Fact]
-    public void LineModeRetainsFourStartupAndIdleCIdleDPhases()
+    public void OcsLineReadsCFiveColorClocksAfterStartAndWritesDTwoLater()
     {
         using var machine = new LightweightA500Machine();
         WriteWord(machine, DestinationD, 0x1234);
@@ -1046,11 +1046,11 @@ public sealed class LightweightBlitterTests
         EnableBlitter(machine, nasty: true);
         var start = StartBlit(machine, 0x0042);
 
-        machine.AdvanceHardwareTo(start + 8);
-        Assert.Equal(start + 10, machine.BlitterPendingOutputCycle);
+        machine.AdvanceHardwareTo(start + 6);
+        Assert.Equal(start + 8, machine.BlitterPendingOutputCycle);
         Assert.Equal(long.MinValue, machine.BlitterLastOutputCycle);
 
-        machine.AdvanceHardwareTo(start + 12);
+        machine.AdvanceHardwareTo(start + 10);
         var cData = machine.GetCustomRegister(LightweightRegisters.Bltcdat);
         Assert.True(
             cData == 0x1234,
@@ -1058,21 +1058,21 @@ public sealed class LightweightBlitterTests
             $"next={machine.BlitterNextCycle}, pending={machine.BlitterPendingOutputCycle}, " +
             $"lastInput={machine.BlitterLastAcceptedInputCycle}, lastOutput={machine.BlitterLastOutputCycle}, " +
             $"BLTCPT=0x{machine.GetBlitterPointer(LightweightRegisters.Bltcpth):X}");
-        Assert.Equal(start + 12, machine.BlitterLastOutputCycle);
+        Assert.Equal(start + 10, machine.BlitterLastOutputCycle);
+        Assert.Equal(start + 12, machine.BlitterPendingOutputCycle);
+        Assert.Equal((ushort)0x1234, ReadWord(machine, DestinationD));
+
+        machine.AdvanceHardwareTo(start + 12);
+        Assert.True(machine.BlitterStatusBusy);
         Assert.Equal(start + 14, machine.BlitterPendingOutputCycle);
         Assert.Equal((ushort)0x1234, ReadWord(machine, DestinationD));
 
         machine.AdvanceHardwareTo(start + 14);
-        Assert.True(machine.BlitterStatusBusy);
-        Assert.Equal(start + 16, machine.BlitterPendingOutputCycle);
-        Assert.Equal((ushort)0x1234, ReadWord(machine, DestinationD));
-
-        machine.AdvanceHardwareTo(start + 16);
         Assert.False(machine.BlitterStatusBusy);
         Assert.False(machine.BlitterActive);
-        Assert.Equal(start + 16, machine.BlitterLastCompletionCycle);
-        Assert.Equal(start + 16, machine.BlitterLastTerminationCycle);
-        Assert.Equal(start + 16, machine.BlitterLastOutputCycle);
+        Assert.Equal(start + 14, machine.BlitterLastCompletionCycle);
+        Assert.Equal(start + 14, machine.BlitterLastTerminationCycle);
+        Assert.Equal(start + 14, machine.BlitterLastOutputCycle);
         Assert.Equal((ushort)0x9234, ReadWord(machine, DestinationD));
         Assert.NotEqual(0, machine.Intreq & 0x0040);
     }
@@ -1165,6 +1165,117 @@ public sealed class LightweightBlitterTests
         _ = StartBlit(withoutD, 0x0042);
         AdvanceUntilBlitterIdle(withoutD);
         Assert.True(IsLinePixelSet(withoutD, baseAddress, 0x20, 0, 0));
+    }
+
+    [Fact]
+    public void OcsSingleDotLineStillReadsCWhenItSkipsTheDestinationWrite()
+    {
+        using var machine = new LightweightA500Machine();
+        var baseAddress = DestinationD + 0x2400;
+        WriteWord(machine, baseAddress, 0x0100);
+        WriteWord(machine, baseAddress + 2, 0x2468);
+        ConfigureLine(machine, baseAddress, rowStride: 40, bltcon1: 0x0053,
+            minterm: 0xFA, initialAccumulator: -2);
+        WriteRegister(machine, LightweightRegisters.Bltcon0, 0xFBFA);
+        EnableBlitter(machine, nasty: true);
+
+        var start = StartBlit(machine, 0x0082);
+        machine.AdvanceHardwareTo(start + 18);
+
+        Assert.Equal(start + 18, machine.BlitterLastOutputCycle);
+        Assert.Equal((ushort)0x2468,
+            machine.GetCustomRegister(LightweightRegisters.Bltcdat));
+        AdvanceUntilBlitterIdle(machine);
+        Assert.Equal(start + 18, machine.BlitterLastOutputCycle);
+        Assert.Equal((ushort)0x0101, ReadWord(machine, baseAddress));
+        Assert.Equal((ushort)0x2468, ReadWord(machine, baseAddress + 2));
+    }
+
+    [Fact]
+    public void ThreeDisplayPlanesDelayInternalLinePhases()
+    {
+        using var machine = new LightweightA500Machine();
+        const uint list = 0x10000;
+        WriteRegister(machine, LightweightRegisters.Bltafwm, 0xFFFF);
+        WriteRegister(machine, LightweightRegisters.Bltalwm, 0xFFFF);
+        WriteRegister(machine, LightweightRegisters.Diwstrt, 0x2881);
+        WriteRegister(machine, LightweightRegisters.Diwstop, 0x28C1);
+        WriteRegister(machine, LightweightRegisters.Ddfstrt, 0x0038);
+        WriteRegister(machine, LightweightRegisters.Ddfstop, 0x00D0);
+        WriteRegister(machine, LightweightRegisters.Bplcon0, 0x3200);
+        for (var plane = 0; plane < 3; plane++)
+        {
+            WritePointer(machine, (ushort)(LightweightRegisters.BplPointerFirst + 4 * plane),
+                0x30000u + 0x4000u * (uint)plane);
+        }
+
+        ushort[] copperWords =
+        [
+            0x7801, 0xFFFE,
+            LightweightRegisters.Bltcon0, 0x4B4A,
+            LightweightRegisters.Bltcon1, 0x005B,
+            LightweightRegisters.Bltcmod, 40,
+            LightweightRegisters.Bltbmod, 4,
+            LightweightRegisters.Bltamod, 0xFFF6,
+            LightweightRegisters.Bltdmod, 40,
+            LightweightRegisters.Bltadat, 0x8000,
+            LightweightRegisters.Bltbdat, 0xFFFF,
+            LightweightRegisters.Bltapth, 0,
+            LightweightRegisters.Bltapth + 2, 0xFFFC,
+            LightweightRegisters.Bltcpth, 1,
+            LightweightRegisters.Bltcpth + 2, 0xE000,
+            LightweightRegisters.Bltdpth, 1,
+            LightweightRegisters.Bltdpth + 2, 0xE000,
+            0x7A3F, 0xFFFE,
+            LightweightRegisters.Bltsize, 0x1202,
+            0xFFFF, 0xFFFE
+        ];
+        for (var i = 0; i < copperWords.Length; i++)
+        {
+            WriteWord(machine, list + 2u * (uint)i, copperWords[i]);
+        }
+        WriteRegister(machine, LightweightRegisters.Copcon, 0x8002);
+        WritePointer(machine, LightweightRegisters.Cop1lch, list);
+        WriteRegister(machine, LightweightRegisters.Copjmp1, 0);
+        WriteRegister(machine, LightweightRegisters.DmaconWrite, 0x83C0);
+
+        var start = 122L * LightweightClock.CpuCyclesPerLine +
+            65 * LightweightClock.CpuCyclesPerColorClock;
+        machine.AdvanceHardwareTo(start + 20);
+        Assert.Equal(start, machine.CopperLastMoveCycle);
+        Assert.Equal(start + 20, machine.BlitterLastOutputCycle);
+
+        machine.AdvanceHardwareTo(start + 832);
+        Assert.Equal(start + 832, machine.BlitterLastOutputCycle);
+    }
+
+    [Fact]
+    public void OcsLineRetainsFinalErrorSignForTheNextBlit()
+    {
+        using var machine = new LightweightA500Machine();
+        const int stride = 40;
+        var first = DestinationD + 0x2600;
+        var second = first + 0x100;
+        ConfigureLine(machine, first, rowStride: stride, bltcon1: 0x005B,
+            minterm: 0x4A, initialAccumulator: -3, aModulo: -10, bModulo: 4);
+        WriteRegister(machine, LightweightRegisters.Bltcon0, 0x4B4A);
+        EnableBlitter(machine, nasty: true);
+        _ = StartBlit(machine, 0x0202);
+        AdvanceUntilBlitterIdle(machine);
+
+        WriteRegister(machine, LightweightRegisters.Bltcon0, 0x4B4A);
+        WriteRegister(machine, LightweightRegisters.Bltapth + 2, 0xFFFD);
+        WritePointer(machine, LightweightRegisters.Bltcpth, second);
+        WritePointer(machine, LightweightRegisters.Bltdpth, second);
+        _ = StartBlit(machine, 0x0202);
+        AdvanceUntilBlitterIdle(machine);
+
+        Assert.Equal((ushort)0x0800, ReadWord(machine, first));
+        Assert.Equal((ushort)0x0200, ReadWord(machine, first - stride));
+        Assert.Equal((ushort)0x0020, ReadWord(machine, first - 2 * stride));
+        Assert.Equal((ushort)0x0800, ReadWord(machine, second));
+        Assert.Equal((ushort)0x0400, ReadWord(machine, second - stride));
+        Assert.Equal((ushort)0x0020, ReadWord(machine, second - 2 * stride));
     }
 
     [Fact]
@@ -1284,11 +1395,11 @@ public sealed class LightweightBlitterTests
         AdvanceUntilBlitterIdle(machine);
 
         Assert.Equal((ushort)0x8000, ReadWord(machine, baseAddress));
-        Assert.Equal(start + 32, machine.BlitterLastCompletionCycle);
+        Assert.Equal(start + 30, machine.BlitterLastCompletionCycle);
     }
 
     [Fact]
-    public void DeferredLineRestartReceivesItsOwnFourStartupClocks()
+    public void DeferredLineRestartReceivesItsOwnStartupClocks()
     {
         using var machine = new LightweightA500Machine();
         ConfigureLine(
@@ -1301,8 +1412,8 @@ public sealed class LightweightBlitterTests
         WriteRegister(machine, LightweightRegisters.Bltsize, 0x0042);
         AdvanceUntilBlitterIdle(machine);
 
-        Assert.Equal(firstStart + 32, machine.BlitterLastCompletionCycle);
-        Assert.Equal(firstStart + 32, machine.BlitterLastTerminationCycle);
+        Assert.Equal(firstStart + 28, machine.BlitterLastCompletionCycle);
+        Assert.Equal(firstStart + 28, machine.BlitterLastTerminationCycle);
     }
 
     [Fact]
@@ -1321,21 +1432,21 @@ public sealed class LightweightBlitterTests
             machine,
             LightweightRegisters.Bltsize,
             0x0042,
-            lineStart + (219 * LightweightClock.CpuCyclesPerColorClock));
+            lineStart + (220 * LightweightClock.CpuCyclesPerColorClock));
 
-        machine.AdvanceHardwareTo(start + 16);
+        machine.AdvanceHardwareTo(start + 14);
         Assert.True(machine.BlitterStatusBusy);
         Assert.Equal((ushort)0, ReadWord(machine, destination));
-        Assert.Equal(start + 18, machine.BlitterPendingOutputCycle);
+        Assert.Equal(start + 16, machine.BlitterPendingOutputCycle);
 
-        machine.AdvanceHardwareTo(start + 18);
+        machine.AdvanceHardwareTo(start + 16);
         Assert.False(machine.BlitterStatusBusy);
         Assert.Equal((ushort)0x8000, ReadWord(machine, destination));
-        Assert.Equal(start + 18, machine.BlitterLastCompletionCycle);
+        Assert.Equal(start + 16, machine.BlitterLastCompletionCycle);
     }
 
     [Fact]
-    public void LineStartupAndIdlePhasesOverlapMandatoryRefresh()
+    public void LineStartupWaitsForMandatoryRefresh()
     {
         using var machine = new LightweightA500Machine();
         var destination = DestinationD + 0x6000;
@@ -1350,10 +1461,10 @@ public sealed class LightweightBlitterTests
             machine,
             LightweightRegisters.Bltsize,
             0x0042,
-            lineStart + (222 * LightweightClock.CpuCyclesPerColorClock));
+            lineStart + (223 * LightweightClock.CpuCyclesPerColorClock));
         AdvanceUntilBlitterIdle(machine);
 
-        Assert.Equal(start + 16, machine.BlitterLastCompletionCycle);
+        Assert.Equal(start + 22, machine.BlitterLastCompletionCycle);
         Assert.Equal((ushort)0x8000, ReadWord(machine, destination));
     }
 
@@ -1367,19 +1478,19 @@ public sealed class LightweightBlitterTests
 
         // The first retained line phase is internal; the following C read
         // owns the bus. A completed C read must not reserve the next idle slot.
+        machine.AdvanceHardwareTo(start + 6);
+        Assert.Equal(start + 8, machine.BlitterPendingOutputCycle);
+        Assert.True(machine.CanSpriteOwnOutputSlot(start + 8));
+
         machine.AdvanceHardwareTo(start + 8);
         Assert.Equal(start + 10, machine.BlitterPendingOutputCycle);
-        Assert.True(machine.CanSpriteOwnOutputSlot(start + 10));
+        Assert.False(machine.CanSpriteOwnOutputSlot(start + 10));
 
         machine.AdvanceHardwareTo(start + 10);
+        Assert.Equal(start + 10, machine.BlitterLastOutputCycle);
+        Assert.True(machine.IsCpuOutputOwned(start + 10));
         Assert.Equal(start + 12, machine.BlitterPendingOutputCycle);
-        Assert.False(machine.CanSpriteOwnOutputSlot(start + 12));
-
-        machine.AdvanceHardwareTo(start + 12);
-        Assert.Equal(start + 12, machine.BlitterLastOutputCycle);
-        Assert.True(machine.IsCpuOutputOwned(start + 12));
-        Assert.Equal(start + 14, machine.BlitterPendingOutputCycle);
-        Assert.True(machine.CanSpriteOwnOutputSlot(start + 14));
+        Assert.True(machine.CanSpriteOwnOutputSlot(start + 12));
     }
 
     private static LightweightA500Machine CreateThreeWordAllChannelBlit(

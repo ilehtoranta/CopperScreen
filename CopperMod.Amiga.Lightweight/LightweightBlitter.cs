@@ -95,7 +95,7 @@ internal sealed class LightweightBlitter
     private int _lineBit;
     private int _lineY;
     private int _lineLastDrawnY;
-    private int _lineError;
+    private short _lineError;
     private int _lineSourceRowStride;
     private int _lineBPatternStride;
     private byte _minterm;
@@ -592,7 +592,7 @@ internal sealed class LightweightBlitter
         _phaseIndex = 0;
         if (_lineMode)
         {
-            StartLine(bltcon1);
+            StartLine(bltcon1, machine.IsEcsAgnus);
         }
         else
         {
@@ -620,7 +620,7 @@ internal sealed class LightweightBlitter
         Publish(NextCckAfter(cycle));
     }
 
-    private void StartLine(ushort bltcon1)
+    private void StartLine(ushort bltcon1, bool ecsAgnus)
     {
         _lineIndex = 0;
         _lineLength = _height;
@@ -636,9 +636,10 @@ internal sealed class LightweightBlitter
         _lineSourceRowStride = _moduloC & ~1;
         _lineBPatternStride = _moduloB & ~1;
         _phaseCount = 4;
-        // The line engine begins after four non-reserving startup CCKs. Each
-        // pixel then consumes exactly four retained input/output phases.
-        _startupRemaining = 4;
+        // Ordinary OCS line DMA reads C five CCKs after BLTSIZE and
+        // writes D two CCKs later. B-enabled and later Agnus paths retain
+        // their existing startup until their phases are qualified.
+        _startupRemaining = ecsAgnus || _useB ? 4 : 3;
         PrepareLinePixel();
     }
 
@@ -647,11 +648,10 @@ internal sealed class LightweightBlitter
         LightweightA500Machine machine,
         bool ownedBusThisCycle)
     {
-        // Line startup clocks are internal. Area startup advances only when
-        // the blitter can take the input slot, including when a waiting CPU
-        // has earned the next output.
-        if (!_lineMode && (!machine.CanBlitterAdvanceControl(cycle) ||
-            ShouldYieldToCpu(cycle, machine, ownedBusThisCycle)))
+        // Startup requires an available control slot. Area startup also
+        // defers when a waiting CPU has earned the next output.
+        if (!machine.CanBlitterAdvanceControl(cycle) ||
+            (!_lineMode && ShouldYieldToCpu(cycle, machine, ownedBusThisCycle)))
         {
             if (_delayedModuloWrites != 0) ApplyDelayedAreaModulos(cycle, stalled: true, machine);
             return;
@@ -766,20 +766,20 @@ internal sealed class LightweightBlitter
         LightweightA500Machine machine,
         bool ownedBusThisCycle)
     {
-        if (_phaseIndex >= _phaseCount)
+        // Internal line phases and suppressed D writes leave the bus free,
+        // but Agnus still needs an available slot to advance the sequencer.
+        if (_phaseIndex >= _phaseCount || !machine.CanBlitterAdvanceControl(cycle) ||
+            ShouldYieldToCpu(cycle, machine, ownedBusThisCycle))
         {
             return;
         }
 
         var channel = GetLinePhaseChannel(_phaseIndex);
-        var usesBus = _lineDraw && channel != AreaChannel.Idle;
-        if (usesBus &&
-            (!machine.CanBlitterAdvanceControl(cycle) ||
-             ShouldYieldToCpu(cycle, machine, ownedBusThisCycle)))
-        {
-            return;
-        }
-
+        // Single-dot mode suppresses the destination write on the same row.
+        // The enabled C channel still reads and occupies its bus slot.
+        var usesBus = channel == AreaChannel.C
+            ? _useC
+            : _lineDraw && channel != AreaChannel.Idle;
         _pendingChannel = channel;
         _pendingUsesBus = usesBus;
         _pendingAddress = channel switch
@@ -1138,6 +1138,13 @@ internal sealed class LightweightBlitter
         _rowY = _lineIndex;
         if (_lineIndex >= _lineLength)
         {
+            // The final pixel still advances the error accumulator. Its sign
+            // seeds the next line if software reuses BLTCON1.
+            StepLineError();
+            var bltcon1 = machine.GetCustomRegister(LightweightRegisters.Bltcon1);
+            bltcon1 = (ushort)((bltcon1 & ~Bltcon1LineSign) |
+                (_lineSign ? Bltcon1LineSign : 0));
+            machine.SetBlitterDataFromDma(LightweightRegisters.Bltcon1, bltcon1);
             PublishLineRegisters(machine);
             PublishMainCompletion(cycle, machine);
             FinishTermination(cycle, machine);
@@ -1156,17 +1163,22 @@ internal sealed class LightweightBlitter
 
     private void StepLineAddress()
     {
-        if (_lineSign)
+        if (!_lineSign)
         {
-            _lineError = unchecked(_lineError + _moduloB);
-        }
-        else
-        {
-            _lineError = unchecked(_lineError + _moduloA);
             MoveLineMinorAxis();
         }
 
         MoveLineMajorAxis();
+        StepLineError();
+    }
+
+    private void StepLineError()
+    {
+        if (_useA)
+        {
+            var modulo = _lineSign ? _moduloB : _moduloA;
+            _lineError = unchecked((short)(_lineError + modulo));
+        }
         _lineSign = _lineError < 0;
     }
 

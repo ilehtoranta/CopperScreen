@@ -127,8 +127,17 @@ internal sealed class LightweightCopper
 
     internal void OnFrameStart(long cycle, LightweightA500Machine machine)
     {
+        var previousProgramCounter = _programCounter;
         Restart(machine.GetCopperListPointer(secondList: false), cycle);
-        if (_dmaEnabled)
+        if (_dmaEnabled && !machine.IsEcsAgnus)
+        {
+            // The vertical strobe starts a dummy read at the old Copper PC
+            // before the first output from COP1LC on OCS.
+            _programCounter = previousProgramCounter;
+            _stage = ControlStage.FrameRestart;
+            NextCycle = cycle;
+        }
+        else if (_dmaEnabled)
         {
             ActivateAfter(cycle);
         }

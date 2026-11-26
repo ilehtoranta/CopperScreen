@@ -498,6 +498,320 @@ These IDs remain regression references. Full reproductions, build identities and
 historical test results are retained in the [original issue register](https://github.com/ilehtoranta/CopperScreen/blob/f83c9092efa9e75d930cb602415a2b8da1637db5/docs/history/amiga/LIGHTWEIGHT_A500_ENGINE_ISSUES.md).
 No historical test count is presented as a newly run suite.
 
+The 2026-11-24 *Amiga Master* replay found an OCS display-fetch timing defect.
+Agnus must release the DDF start limit with bitplane DMA enabled even while
+`BPLCON0` selects zero planes. The demo selects three planes between that edge
+and `DDFSTRT`. CopperScreen now fetches on the same raster line, and the logo
+matches WinUAE 6.0.3 pixel for pixel at the aligned checkpoint. The regression
+`SettingPlaneCountBeforeDdfStartFetchesOnTheCurrentRasterline` checks the first
+accepted fetch. WinUAE screenshot timing can repeat an earlier framebuffer
+during motion. At the checked scroller, the guest variables, Copper list and
+bitplane data matched at aligned fields in both emulators.
+
+The full PAL A500 replay used WinUAE 6.0.3 uncompressed video and aligned the
+fields at guest interrupt-vector installation. The common viewport was
+724 × 287 pixels. With the DDF correction in place, 17,805 of the first
+17,819 fields were pixel-identical and the sampled guest state matched on all
+17,819. The rotating object exposed a bitplane-memory difference at identical
+geometry. The later scrolling state was 45 fields ahead in Lightweight.
+
+Three bounded OCS line-blitter probes reproduced the causes of specific
+differences. Single-dot mode still fetches C when it suppresses a repeated
+D write on the same row. The final signed error reaches BLTCON1, so a second
+plane can reuse the control word with the correct starting sign. With the B
+channel disabled, the first C output is five CCKs after BLTSIZE and the first D
+output is two CCKs later. Both outputs were one CCK late in the previous engine.
+The focused regressions cover the suppressed write, repeated line, and startup
+timing.
+
+The corrected Release replay compared 31,310 fields through the return to
+Kickstart. The first six affected 3D frames became pixel-identical. Of the
+30,461 fields with both demos active, 18,561 matched at the same elapsed field.
+The late scroll lead decreased from 45 to 36 fields. Aligning the late section
+by that measured offset yields 11,422 exact images out of 11,425. The current
+workspace build with Copper68k 1.5.12 reproduced the full framebuffer and guest
+state captures from the controlled 1.5.10 build byte for byte.
+
+The remaining phase difference is open. A larger timing difference begins
+around a descending fill spanning the start of display DMA. Four matched
+72-row, six-word area-fill probes with four display planes reached their final
+D transfers at identical intervals from BLTSIZE. The bounded DBRA and
+multiply loops also did not isolate an instruction defect. The full trace,
+probe outputs and per-field pixel counts are retained under
+`artifacts/the-company/full-parity/`. Release built with zero warnings and
+errors. Engine diagnostics passed 1,459 tests with seven optional skips.
+
+A follow-up verified that display DMA also stalls the OCS line-blitter
+startup and internal phases. An idle phase and a suppressed single-dot write
+still leave the physical bus free. With three display planes, a bounded line
+finished 250 CPU clocks early before the correction. All six stopped-CPU line
+probes then matched WinUAE's transfer addresses and timing from BLTSIZE.
+`ThreeDisplayPlanesDelayInternalLinePhases` preserves the observed timing.
+
+The follow-up Release replay completed 33,000 fields with Copper68k 1.5.12.
+The comparison covered 31,310 fields through the return to Kickstart. Both
+demos were active in 30,458 fields and 18,543 matched at the same elapsed
+field. The late lead changed from 36 to 39 fields. At that measured offset,
+11,416 of 11,419 late fields matched. Release built with zero warnings and
+errors. Engine diagnostics passed 1,497 tests with seven optional skips.
+
+The remaining drift builds during the rotating object. Masking the CIA music
+interrupt in both emulators left the drift in place. A bounded replay of the
+demo's rotation, projection and face calculations found the three measured
+intervals together took 558 fewer CPU clocks in Lightweight with three display
+planes. The two bitplane DMA streams used the same addresses and slot spacing.
+The CPU traces exposed bus waits being absorbed into instruction-cycle floors
+and a different divide prefetch phase. Three focused CPU tests fail on 1.5.12
+and pass on the development build. A local Copper68k candidate preserving the
+multiply and shift waits and issuing the divide prefetch after its internal
+cycles reduced the isolated gap to 204 CPU clocks and the late demo lead to 19
+fields. An additional candidate moved the long register clear and indexed
+MOVEM bus phases. It reduced the isolated gap to 128 CPU clocks and left a
+25-field lead in the full replay. Both development captures reached Kickstart.
+The later candidate passed 335 focused Copper68k tests and the CopperScreen
+engine diagnostic suite. The additional demo timing differences are open.
+The production build at that stage used Copper68k 1.5.12. Captures and comparisons
+are in `artifacts/the-company/drift-investigation/`.
+
+The next investigation started from the 19-field development build. At the
+first missed update the emulators wrote the same rotation value only 24 CPU
+clocks apart. Lightweight started the second fill 662 clocks early and
+cleared the frame-ready word before the Copper interrupt. WinUAE cleared the
+word after servicing the interrupt and waited another field.
+
+Development CPU corrections preserve the internal clocks that follow the
+required prefetch for long register ADD, SUB and CLR. Indexed memory-to-register
+MOVEM now charges two internal clocks after the index extension is ready.
+The isolated three-plane calculation was eight CPU clocks early after those
+changes, compared with 204 on the starting build. In the live trace the first
+frame-ready clear moved 336 clocks later, reaching one CCK before the Copper
+interrupt. The full native replay's late lead fell to eight fields. The
+development package passed the eight focused CPU regressions and the engine
+suite with 1,497 passes and seven optional skips. The trace and per-field
+evidence are in `artifacts/the-company/drift-investigation/from-dev2/`.
+
+Preserving post-prefetch execution time for immediate and address arithmetic
+reduced the late lead to five fields. The following build also preserved the
+register BTST tail and the indexed BCHG read, prefetch and write sequence.
+It finished four fields behind the reference. Both bit-operation regressions
+failed before their fixes. The combined build passed 346 focused CPU tests and
+1,497 engine tests, with seven optional engine skips. A fresh complete WinUAE
+run matched the archived capture's Copper interrupt flag in 2,210 sampled
+fields and returned to Kickstart at the same elapsed field.
+
+Separate rotation replays attributed the change in direction to register BTST
+timing. The indexed BCHG change alone left the five-field lead. The combined
+build matched 650 of 887 rotation updates at the same elapsed field, with the
+first persistent lag at elapsed field 18,640. The full comparison included
+31,310 fields, with 19,788 exact RGB images among 30,497 jointly active fields.
+The verified changes are in local development CPU packages.
+
+The first late-field trace used the frozen replay engine and a diagnostic-only
+CPU package. The same rotation value was written within four CPU clocks of the
+WinUAE trace. Both emulators observed the first area fill ready 7,028 CPU clocks
+after BLTSIZE. Lightweight started the third fill about 14 CPU clocks later
+than WinUAE. Lightweight's Copper handler set the flag before the guest
+cleared it. In WinUAE, the guest cleared the flag before the handler set it.
+This accounts for the first extra field in the combined build. The remaining
+bus-timing difference before that interrupt is open.
+
+The follow-up started from that same four-field build. During line drawing,
+a wait on the first fall-through fetch of a non-taken MC68000 word branch
+could let the branch retire before its second fetch. WinUAE performs both
+fetches within the branch. Copper68k now completes the second fetch before
+retirement, with the IPL sample at the earlier bus phase. The regression
+covers scalar, kind-table and packed dispatch. A run that enabled the
+correction only after the original rotation write still started the third
+fill 14 CPU clocks late and missed the same Copper interrupt deadline.
+
+The accepted blitter transfers agree in order, channel and address for all
+16 line blits and three fills in that pass. In particular, the second fill
+started 26 CPU clocks late but its final D transfer landed at the same
+aligned raster slot. The guest's successful DMACONR poll still landed 12
+clocks late, and contention added two more clocks before the third BLTSIZE
+write. The traces move the remaining investigation upstream of that write,
+to the CPU polling phase and its interaction with DMA grants.
+
+The same trace matched all 9,000 sampled low-resolution OCS bitplane reads
+by address. They occupied slots four CPU clocks earlier in Lightweight,
+relative to the common Copper interrupt-request edge. A diagnostic shift of
+the fetch phase aligned all 9,000 slots. It changed the timing of the first
+two fills. The last poll and third fill reconverged to the original timing
+with either the display change alone or both timing changes enabled for
+that pass. Applying the fetch shift from reset also reduced exact RGB agreement
+to 201 of the first 2,508 active fields and still returned at elapsed
+field 30,501. A paired correction to the Denise raster cursor restored
+2,505 exact images in that prefix. The paired full replay returned at
+field 30,501 and matched 19,499 of the 30,497 jointly active images.
+The experiments leave qualification of the display path open.
+
+With the word-branch correction enabled from reset on the original display
+path, the frozen engine returned to Kickstart at elapsed field 30,497,
+matching a fresh WinUAE 6.0.3 run. The pixel comparison against the archived
+lossless WinUAE capture covered 31,312 elapsed fields. It found
+30,221 exact RGB images in 30,497 jointly
+active demo fields. Most of the 276 differences are in the rotating
+object sequence. Several differing images exactly matched a nearby
+WinUAE field. The original four-field build returned at field 30,501.
+The same CPU package with the later working-tree engine returned at
+field 30,495. These results leave the local fill deadline and full
+frame-by-frame parity open. The captures and comparisons are under
+`artifacts/the-company/drift-investigation/from-dev2/fill-deadline/`.
+
+The next follow-up captured CPU requests as well as grants in an instrumented
+build of the WinUAE 6.0.3 source. The stock checkpoint that reproduces the
+late third fill and the checkpoint from the fresh boot produced different
+in-field histories for the same rotation value. In the original checkpoint
+pass, all 379 matched `BTST` iterations used the same request spacing on both
+emulators. Each emulator's successful `DMACONR` read was granted on its first
+requested slot. The 12-clock difference was already present at request time.
+
+Upstream, the trace showed missing internal clocks following a contended final
+prefetch in `BCHG #3,D7`, `EXG D1,D3`, and long memory-to-register `ADD`.
+Copper68k now retires these instructions with their internal tails after the
+final refill. Eleven timing regressions cover those instruction families,
+including `SUB` and the other immediate register bit changes, with a modeled
+DMA wait. In the corrected trace, all matched intervals from the relevant
+final refill to the next request agree for `BCHG`, `EXG`, and `ADD`. The
+bit-change correction alone left the original poll slot unchanged. Combining
+the CPU corrections and aligned display fetch in that pass moved the
+successful request to 16 clocks late, with six more clocks waiting for the
+grant. A diagnostic change to the upstream `MOVE` prefetch order moved the
+initial rotation-value write four clocks earlier. Both runs reached the
+same third fill slot. The original deadline remains open.
+
+Full replays from reset with the CPU corrections returned at elapsed field
+30,501, four fields behind a fresh WinUAE run. The bit-change-only replay
+matched 19,623 of 30,497 jointly active images against the lossless WinUAE
+capture. Correcting all three CPU instruction families matched 19,790. The
+combined CPU and display diagnostic build matched 19,853 and returned at the
+same field as the CPU-only build. The same-finish baseline above remains the
+closest of these full replays. The request traces, fixture and replays are under
+`artifacts/the-company/drift-investigation/from-dev2/fill-deadline/poll-followup/`.
+
+The next trace used the same-finish CPU and engine again. It captured each
+physical CPU word grant and the DMA owner of a denied request. The first
+split with a shared request and preceding grant was at line 0, CCK 13. WinUAE
+let the blitter write `$015D16` there and granted the fetch of `$031A02` at
+CCK 15. Lightweight had written the same word at CCK 4 and granted the
+fetch at CCK 13. The direct WinUAE RGA trace shows that CCK 4 belongs to the
+Copper's restart dummy read at the previous list PC. The OCS Copper now takes
+that output slot before fetching COP1LC with DMA already enabled. A regression
+checks both the bus ownership of the dummy and the first MOVE's output time.
+The corrected trace places the write to `$015D16` at CCK 13 and the CPU grant
+at CCK 15 in both emulators.
+The original CPU traces rejoined at line 4, CCK 18 after executing the same
+159 loop-extension fetches since their shared grant at line 0, CCK 11.
+
+The next ten splits before line 111 with a shared request were audio grants.
+The first denied the `$031A02` fetch at line 28, CCK 17 in WinUAE. Lightweight
+had assigned the channel 0 request at line 27, CCK 7 to that same line's slot.
+WinUAE samples the Paula requests at CCK 4 on these aligned coordinates. The
+OCS audio scheduler now defers requests raised after that sample to the next
+line, while keeping a request raised on the sample clock eligible. Five timing
+regressions check CPU contention at the sample boundary and after a late
+request. In a controlled trace, the fix aligned all four channels' 541 audio
+reservations across 267 lines with WinUAE. With both corrections, the next
+observed grant split after a shared request and preceding grant is at line
+210, CCK 144. The successful poll moved from eight to six clocks late in
+this pass. The traces and full replays are under
+`artifacts/the-company/drift-investigation/from-dev2/fill-deadline/grant-followup/`.
+
+A fresh WinUAE 6.0.3 replay finished at elapsed field 30,497. Compared
+field by field against the lossless WinUAE capture, the isolated Copper
+restart fix finished at 30,498 with 8,072 of 30,497 active images exact.
+The isolated Paula fix finished at 30,501 with 19,609 exact images. Combining
+both fixes finished at 30,502 with 7,653 exact images. The same-finish baseline
+matched 30,221 at elapsed field 30,497. A diagnostic one-field shift of the
+Copper-only replay matched 30,218 of the 30,496 overlapping active images,
+which accounts for most of its loss of exact same-field matches. The
+individual DMA ordering fixes are covered by the controlled trace and
+hardware-phase tests. Full replay qualification remains open.
+
+The Copper-only follow-up traced the one-field difference to the first
+guest interrupt. The demo installs vector `$6C` and starts a Copper list
+whose first WAIT is `$6001`. The Copper-only build installs the vector at
+line 272, after the eight-bit vertical comparator has wrapped. Its first
+sampled field still has the initial loop count of 180. The pre-restart
+control installs the vector at line 241 and has already decremented the
+count to 179 when the capture sees the vector. The disk load and subsequent
+depacker reach the launch at different beam positions.
+
+WinUAE 6.0.3 can reproduce either startup under the same machine settings.
+With `rndseed=1`, the vector is installed on line 233 and the initial
+sampled count is 179. With `rndseed=2`, it is installed on line 298 and the
+sampled count is 180, as in the Copper-only build. Leaving the seed open
+lets the CPU reset delay and initial floppy position vary between runs.
+Record the seed, timing profile and first-IRQ witness for comparisons that
+use vector installation as their elapsed-field origin. Pinning the original
+capture seed (`1795547020`) reproduced its vector-entry field and all 370
+checked RGB images, qualifying the new recorder's field indexing.
+
+The fresh Copper-only capture reproduced the previous capture byte for byte.
+The full seed-2 WinUAE replay and Copper-only replay both finished at elapsed
+field 30,498 and matched 30,219 of 30,498 active RGB images at identical
+elapsed field indices. The strict comparison to the original WinUAE capture
+still matches 8,072 of 30,497. Comparing the two WinUAE captures at those
+same indices yields 7,986 exact images. The seed controls the startup
+field difference. The remaining 279 differing fields leave pixel parity
+open. The follow-up captures are under
+`artifacts/the-company/drift-investigation/from-dev2/fill-deadline/field-followup/`.
+
+The pixel-parity follow-up kept the frozen Copper-only engine and the same
+seed-2 reference. The first sustained rotation lead follows the guest's
+frame-ready clear between elapsed field samples 17,842 and 17,843. Both
+emulators wrote the same angle `$3B21` at line 107, CCK 86. At the first
+indexed `MOVE.W` to an absolute-long destination, Lightweight requested the
+source refill one CCK earlier. WinUAE requested the next slot and waited
+through a bitplane transfer. Lightweight also fetched the successor opcode
+before the destination write. The MC68000 timed path now accounts for the
+two index clocks before the source refill and fetches both successor words
+after writeback. A contended-fetch regression covers all three interpreter
+dispatch modes.
+
+The corrected trace matched the requests and grants for all six indexed
+angle-table reads in this rotation. The first line BLTSIZE moved from 72
+CPU clocks early to 12 clocks late. The third fill still started 72 clocks
+early and the guest still cleared the ready flag before the Copper handler.
+The full local development replay recovered elapsed field 18,147 and
+introduced no new mismatches. Both emulators finished at elapsed field
+30,498, with 30,220 of 30,498 active RGB images exact at the original field
+indices. A separate replay using a rebuilt engine with the working-tree line
+blitter changes matched 27,568 images at the same finish field. It changed
+the earlier display sequence and was dropped as a parity candidate.
+
+A field-local absolute-long MOVE source refill correction aligned the operand
+requests in the angle routine. A separate field-local Paula DMAL change
+aligned all 144 CPU requests and grants across lines 158 through 161. The
+third fill began at the same slot in both experiments as in the indexed MOVE
+build. Applying the absolute-long source change from reset moved the vector
+entry one raw field earlier and matched 7,921 of 30,497 jointly active images.
+Reapplying the independently tested MC68000 register bit-change, EXG and long
+memory arithmetic tails only during the affected field aligned the guest's
+frame-ready clear with the WinUAE interrupt order. The first changed request
+followed the contended final refill of `EXG D2,D3` at `$031EFA`. The guest
+sample at elapsed field 17,843 then matched the WinUAE ready flag, angle and
+buffer selection. The next divergence in those guest samples was at elapsed
+field 18,359, where the third fill was 74 CPU clocks early. The timing window
+was an instrumentation control.
+
+Enabling those three corrections from reset with indexed MOVE reduced the
+rotation ready-flag disagreements from 80 to six across 813 samples, then
+returned four fields late and matched 19,789 of 30,498 jointly active RGB
+images. Enabling just the EXG correction with indexed MOVE returned at
+elapsed field 30,498 and matched 30,451 of 30,498 active RGB images without
+shifting the captures. This recovered 231 additional fields with no new
+mismatches. The remaining 47 differences include a second missed rotation
+deadline after elapsed field 18,358. Adding either the bit-change or the
+long memory arithmetic correction to that build made the demo finish four
+fields late. The respective comparisons matched 19,790 and 19,852 active
+images. A replay that computed the viewport RGB hashes directly reproduced
+all 31,311 comparison rows of the lossless EXG capture.
+
+The indexed MOVE correction is in CopperMod. The published dependency pin is
+still 1.5.12. Request traces and per-field comparisons are under
+`artifacts/the-company/drift-investigation/from-dev2/fill-deadline/pixel-followup/`.
+
 | ID | Resolution to preserve | Coverage / remaining boundary |
 | --- | --- | --- |
 | LWA-EXEC-001 | Advance canonical hardware time through accepted interrupt-entry retirement. | `LightweightInterruptProgressTests`; native stall repaired, not full Hired Guns certification. |

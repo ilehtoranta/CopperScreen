@@ -351,13 +351,16 @@ internal sealed partial class LightweightPaulaAudio
                 _requestHeldForBeam = true;
                 return;
             }
-            // One request uses the next channel-specific address phase. Late
-            // enables never recreate an input that has already happened.
-            var lineStart = machine.IsEcsAgnus ? machine.LineStartCycle : cycle - (cycle - _beamOffset) % LightweightClock.CpuCyclesPerLine;
+            var ecsAgnus = machine.IsEcsAgnus;
+            var lineStart = ecsAgnus ? machine.LineStartCycle : cycle - (cycle - _beamOffset) % LightweightClock.CpuCyclesPerLine;
             // HRM figure 6-9: audio address slots $0D/$0F/$11/$13
             // precede sprite 0 at $15. RAM output is one CCK later.
             var input = lineStart + (0x0D + _index * 2) * 2;
-            if (input <= cycle) input += machine.LineCycles;
+            // OCS samples Paula's DMAL request one CCK after the line
+            // strobe. A request after that sample waits for the next line,
+            // even if its channel's address slot is still ahead.
+            var lastRequestCycle = ecsAgnus ? input - 1 : lineStart + LightweightClock.CpuCyclesPerColorClock;
+            if (cycle > lastRequestCycle) input += machine.LineCycles;
             _dmaInputCycle = input;
         }
 

@@ -273,7 +273,7 @@ internal sealed class LightweightBitplanes
 
         NextCycle = Math.Min(PendingDdfWriteCycle, TPath.Aga
             ? Math.Min(_pendingFmodeCycle, _pendingBplcon0Cycle) : _pendingBplcon0Cycle);
-        if (dmaEnabled && planeCount != 0)
+        if (NeedsDdfControl())
         {
             PublishNextInactiveControlCycle<TPath>(cycle, machine);
         }
@@ -497,7 +497,13 @@ internal sealed class LightweightBitplanes
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private bool ShouldClock()
-        => _runActive || _hasPendingOutput || _dmaEnabled && _effectivePlaneCount != 0;
+        => _runActive || _hasPendingOutput || NeedsDdfControl();
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private bool NeedsDdfControl()
+        // OCS releases the DDF start limit even with zero planes. Keep that
+        // edge observable when BPLCON0 enables planes later in the same line.
+        => _dmaEnabled && (_effectivePlaneCount != 0 || !_ecs && !_startPermit);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static bool IsDmaEnabled(ushort dmacon)

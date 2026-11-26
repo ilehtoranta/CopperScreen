@@ -90,6 +90,46 @@ public sealed class LightweightPaulaDmaTests
         Assert.Equal(0x1004u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
     }
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    public void WordRequestAfterDmalSampleLeavesCurrentAudioSlotFree(int channel)
+    {
+        using var m = new LightweightA500Machine();
+        Configure(m, channel, period: 222);
+        Write(m, 0x096, (ushort)(0x8200 | 1 << channel), 0);
+
+        // The second played word starts after the line's DMAL sample, but
+        // before this channel's fixed address phase.
+        m.AdvanceHardwareTo(1372 + channel * 4);
+        var audioSlot = 1390L + channel * 4;
+        var cpuCycle = audioSlot;
+        _ = m.ReadWord(0x2000, ref cpuCycle, Copper68k.M68kBusAccessKind.CpuDataRead);
+        Assert.Equal(audioSlot + 2, cpuCycle);
+
+        // The same CPU access loses the slot when the sampled request is due.
+        audioSlot += LightweightClock.CpuCyclesPerLine;
+        cpuCycle = audioSlot;
+        _ = m.ReadWord(0x2000, ref cpuCycle, Copper68k.M68kBusAccessKind.CpuDataRead);
+        Assert.Equal(audioSlot + 4, cpuCycle);
+    }
+
+    [Fact]
+    public void WordRequestOnDmalSampleCycleOwnsCurrentAudioSlot()
+    {
+        using var m = new LightweightA500Machine();
+        Configure(m, period: 220);
+        Write(m, 0x096, 0x8201, 0);
+
+        // The byte counter reaches the word boundary on the DMAL sample CCK.
+        m.AdvanceHardwareTo(1364);
+        var cpuCycle = 1390L;
+        _ = m.ReadWord(0x2000, ref cpuCycle, Copper68k.M68kBusAccessKind.CpuDataRead);
+        Assert.Equal(1394, cpuCycle);
+    }
+
     [Fact]
     public void LengthOneReloadArmsInterruptAtGrantAndSurvivesIdle()
     {

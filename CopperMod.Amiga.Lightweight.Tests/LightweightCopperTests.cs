@@ -53,6 +53,25 @@ public sealed class LightweightCopperTests
         Assert.Equal(ListAddress + 8, machine.CopperProgramCounter);
     }
 
+    [Fact]
+    public void OcsFieldRestartOwnsFirstSlotBeforeFetchingTheListAgain()
+    {
+        using var machine = new LightweightA500Machine();
+        var cycle = StartCopper(machine, (0x0180, 0x0F00), (0xFFFF, 0xFFFE));
+        machine.AdvanceHardwareTo(cycle + 64);
+        machine.WriteChipWordDma(ListAddress + 2, 0x000F);
+
+        var field = (long)LightweightClock.PalLongFieldCycles;
+        machine.AdvanceHardwareTo(field + 2);
+        Assert.Equal(field + 2, machine.CopperLastOutputCycle);
+        Assert.True(machine.IsCpuOutputOwned(field + 2));
+        Assert.Equal((ushort)0x0F00, machine.GetCustomRegister(0x180));
+
+        machine.AdvanceHardwareTo(field + 10);
+        Assert.Equal(field + 10, machine.CopperLastMoveCycle);
+        Assert.Equal((ushort)0x000F, machine.GetCustomRegister(0x180));
+    }
+
     private static void WriteControl(LightweightA500Machine machine, ushort register, ushort value)
     {
         var cycle = machine.Cycle;
