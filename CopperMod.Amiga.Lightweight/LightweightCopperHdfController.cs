@@ -1241,7 +1241,7 @@ namespace CopperMod.Amiga.Lightweight
                 else
                 {
                     System.Buffers.Binary.BinaryPrimitives.WriteUInt32BigEndian(reply.AsSpan(20), hardfile.MaximumDiscardSectors);
-                    System.Buffers.Binary.BinaryPrimitives.WriteUInt32BigEndian(reply.AsSpan(24), 1);
+                    System.Buffers.Binary.BinaryPrimitives.WriteUInt32BigEndian(reply.AsSpan(24), hardfile.MaximumDiscardDescriptors);
                 }
             }
             var allocation = (bus.ReadByte(cdb + 3) << 8) | bus.ReadByte(cdb + 4);
@@ -1263,14 +1263,18 @@ namespace CopperMod.Amiga.Lightweight
             { CompleteIo(bus, request, IoErrBadLength, 0); return; }
             var descriptorBytes = bus.ReadWord(data + 2);
             var descriptors = descriptorBytes / 16; // A trailing partial descriptor is ignored (SBC-3).
-            if (descriptorBytes > parameterBytes - 8 || descriptors > 1)
+            if (descriptorBytes > parameterBytes - 8 || descriptors > hardfile.MaximumDiscardDescriptors)
             { CompleteIo(bus, request, IoErrBadLength, 0); return; }
+            // Validate the whole list before discarding anything. MAXIMUM UNMAP
+            // LBA COUNT bounds the sum over all descriptors (SBC-3).
+            ulong total = 0;
             for (var index = 0; index < descriptors; index++)
             {
                 var at = data + 8 + (uint)index * 16;
                 var lba = ((ulong)bus.ReadLong(at) << 32) | bus.ReadLong(at + 4);
                 var count = bus.ReadLong(at + 8);
-                if (count > hardfile.MaximumDiscardSectors || lba > (ulong)hardfile.SectorCount ||
+                total += count;
+                if (total > hardfile.MaximumDiscardSectors || lba > (ulong)hardfile.SectorCount ||
                     count > (ulong)hardfile.SectorCount - lba)
                 { CompleteIo(bus, request, IoErrBadLength, 0); return; }
             }

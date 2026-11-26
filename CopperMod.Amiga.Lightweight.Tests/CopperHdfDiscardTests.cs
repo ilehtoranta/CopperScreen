@@ -92,13 +92,63 @@ public sealed class CopperHdfDiscardTests
         });
     }
 
-    private static void WithDisk(bool supported, bool readOnly, Action<LightweightHdfBus, Hook> test)
+    [Theory]
+    [InlineData(1u)] [InlineData(4u)] [InlineData(5000u)]
+    public void VpdReportsTheProvidersDescriptorLimit(uint descriptors)
+    {
+        WithDisk(true, false, (bus, hook) =>
+        {
+            Command(bus, 0x12, 6, 64);
+            bus.WriteByte(0x1401, 1); bus.WriteByte(0x1402, 0xB0); bus.WriteByte(0x1404, 64);
+            Execute(bus); Assert.Equal(Math.Min(descriptors, 4095u), bus.ReadLong(0x1518));
+        }, descriptors);
+    }
+
+    // An opted-in provider accepts several ranges in one UNMAP; each reaches
+    // Discard separately and data between the ranges is left alone.
+    [Fact]
+    public void MultiRangeUnmapDiscardsEveryRangeAndPreservesGaps()
+    {
+        WithDisk(true, false, (bus, hook) =>
+        {
+            bus.CopperHdf.Hardfiles[0].Write(0, Enumerable.Repeat((byte)0x3C, 16 * 512).ToArray());
+            UnmapRanges(bus, (1, 2), (5, 1), (9, 3)); Execute(bus);
+            Assert.Equal(0, bus.ReadByte(0x111F));
+            Assert.Equal(3, hook.Discards);
+            Assert.Equal(new long[] { 512, 5 * 512, 9 * 512 }, hook.Offsets);
+            var data = bus.CopperHdf.Hardfiles[0].ReadBytes(0, 16 * 512);
+            for (var sector = 0; sector < 16; sector++)
+            {
+                var discarded = sector is 1 or 2 or 5 or 9 or 10 or 11;
+                Assert.All(data.AsSpan(sector * 512, 512).ToArray(), value => Assert.Equal(discarded ? 0xA5 : 0x3C, value));
+            }
+        }, descriptors: 4);
+    }
+
+    // Each case is refused before any range is discarded: too many ranges for
+    // the provider, more than the default single range, a sum over MAXIMUM
+    // UNMAP LBA COUNT although every range fits, and a bad last range.
+    [Theory]
+    [InlineData(4u, 5)] [InlineData(1u, 2)] [InlineData(4u, -1)] [InlineData(4u, -2)]
+    public void MultiRangeUnmapIsValidatedBeforeAnyDiscard(uint descriptors, int ranges)
+    {
+        WithDisk(true, false, (bus, hook) =>
+        {
+            if (ranges > 0) UnmapRanges(bus, Enumerable.Range(0, ranges).Select(i => ((uint)i * 2, 1u)).ToArray());
+            else if (ranges == -1) UnmapRanges(bus, (0, 5), (8, 4)); // 9 sectors, maximum 8
+            else UnmapRanges(bus, (0, 2), (4, 2), (15, 2)); // last range past the end
+            Execute(bus);
+            Assert.NotEqual(0, bus.ReadByte(0x111F)); Assert.Equal(0, hook.Discards);
+        }, descriptors);
+    }
+
+    private static void WithDisk(bool supported, bool readOnly, Action<LightweightHdfBus, Hook> test, uint descriptors = 1)
     {
         var path = Path.GetTempFileName();
         try
         {
             using (var file = File.OpenWrite(path)) file.SetLength(16 * 512);
-            var hook = new Hook { SupportsDiscard = supported };
+            var hook = new Hook { SupportsDiscard = supported, Descriptors = descriptors };
             using var machine = new LightweightA500Machine(new() { Hardfiles = [new(0, path, readOnly: readOnly) { IoHook = hook }] });
             var bus = machine.HardfileBus!;
             bus.WriteLong(0x1000, 0); bus.WriteLong(0x1118, 0x1000);
@@ -122,18 +172,32 @@ public sealed class CopperHdfDiscardTests
         bus.WriteLong(0x150C, block); bus.WriteLong(0x1510, count);
     }
 
+    private static void UnmapRanges(LightweightHdfBus bus, params (uint Block, uint Count)[] ranges)
+    {
+        var bytes = 8 + ranges.Length * 16;
+        Command(bus, 0x42, 10, (uint)bytes); bus.WriteByte(0x1407, (byte)(bytes >> 8)); bus.WriteByte(0x1408, (byte)bytes);
+        bus.WriteWord(0x1500, (ushort)(bytes - 2)); bus.WriteWord(0x1502, (ushort)(ranges.Length * 16));
+        for (var i = 0; i < ranges.Length; i++)
+        {
+            bus.WriteLong(0x150C + (uint)i * 16, ranges[i].Block); bus.WriteLong(0x1510 + (uint)i * 16, ranges[i].Count);
+        }
+    }
+
     private static void Execute(LightweightHdfBus bus) => Assert.True(bus.CopperHdf.TryExecuteIoRequest(bus, 0x1100));
 
     private sealed class Hook : IAmigaHardfileDiscardIoHook
     {
         public bool SupportsDiscard { get; init; }
+        public uint Descriptors { get; init; } = 1;
         public uint MaximumDiscardSectors => 8;
+        public uint MaximumDiscardDescriptors => Descriptors;
         public bool FlushOnDispose => true;
         public int Discards;
+        public readonly List<long> Offsets = [];
         public void Read(FileStream backing, long offset, Span<byte> destination) { backing.Position = offset; backing.ReadExactly(destination); }
         public void Write(FileStream backing, long offset, ReadOnlySpan<byte> source) { backing.Position = offset; backing.Write(source); }
         public void Flush(FileStream backing) => backing.Flush();
         public void Discard(FileStream backing, long offset, int bytes)
-        { Discards++; backing.Position = offset; backing.Write(Enumerable.Repeat((byte)0xA5, bytes).ToArray()); }
+        { Discards++; Offsets.Add(offset); backing.Position = offset; backing.Write(Enumerable.Repeat((byte)0xA5, bytes).ToArray()); }
     }
 }

@@ -34,8 +34,13 @@ namespace CopperDisk
     {
         /// <summary>Whether manual discard can be sent to this backing store.</summary>
         bool SupportsDiscard { get; }
-        /// <summary>Maximum 512-byte sectors in one request, greater than zero.</summary>
+        /// <summary>Maximum 512-byte sectors in one request, greater than zero.
+        /// It bounds the sum of all ranges in one UNMAP command.</summary>
         uint MaximumDiscardSectors { get; }
+        /// <summary>Ranges one UNMAP command may carry (VPD B0 MAXIMUM UNMAP BLOCK
+        /// DESCRIPTOR COUNT). Defaults to one; clamped to 1..4095, the most a
+        /// 16-bit parameter list holds. Discard is still called once per range.</summary>
+        uint MaximumDiscardDescriptors => 1;
         /// <summary>Discard an aligned byte range; no implicit shutdown flush.</summary>
         void Discard(FileStream backing, long offset, int bytes);
     }
@@ -222,6 +227,8 @@ namespace CopperDisk
             { SupportsDiscard: true, MaximumDiscardSectors: > 0 });
         internal uint MaximumDiscardSectors => SupportsDiscard
             ? _ioHook is IAmigaHardfileDiscardIoHook hook ? Math.Min(hook.MaximumDiscardSectors, int.MaxValue / SectorSize) : 4096u : 0;
+        internal uint MaximumDiscardDescriptors => SupportsDiscard
+            ? _ioHook is IAmigaHardfileDiscardIoHook hook ? Math.Clamp(hook.MaximumDiscardDescriptors, 1u, 4095u) : 1u : 0;
 
         internal void Discard(long byteOffset, int bytes)
         {
