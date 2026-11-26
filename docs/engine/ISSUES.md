@@ -808,9 +808,51 @@ fields late. The respective comparisons matched 19,790 and 19,852 active
 images. A replay that computed the viewport RGB hashes directly reproduced
 all 31,311 comparison rows of the lossless EXG capture.
 
-The indexed MOVE correction is in CopperMod. The published dependency pin is
-still 1.5.12. Request traces and per-field comparisons are under
+The indexed MOVE correction is in CopperMod. These replays used local
+development CPU packages. Request traces and per-field comparisons are under
 `artifacts/the-company/drift-investigation/from-dev2/fill-deadline/pixel-followup/`.
+
+The next trace starts from indexed MOVE plus EXG and keeps the seed-2
+WinUAE reference. At angle `$289A`, Lightweight starts the third fill
+42 CPU clocks early, at line 254 CCK 222 versus line 255 CCK 16.
+The guest clears the ready word before servicing the Copper interrupt.
+The first different ready-word sample is elapsed field 18,359.
+
+Both CPUs receive the first `MOVE.W (A7)+,Dn` stack operand at line 182
+CCK 8 after a refresh wait. WinUAE refills `$031F5E` at CCK 10 and then
+reads the next stack operand at CCK 12. The Lightweight optimized CPU
+path read the next operand ahead of the previous refill. Copper68k now
+completes the required prefetch before the next instruction can issue
+its operand. A unit regression with a waited stack read fails on both
+old optimized dispatch paths and passes on scalar, kind-table and packed
+dispatch with the correction. In the field-local trace, the prefetch and
+operand grants match WinUAE. The third fill remains early.
+
+The next traced split follows `BCHG #3,D7` at `$031ED4`. WinUAE keeps
+the two internal clocks after the refill at line 184 CCK 150. Its next
+request waits for bitplane DMA, while the starting build requests the
+earlier free slot. Enabling that timing correction from reset closes
+field 18,359, then finishes four fields late and matches 19,790 of 30,498
+active images. Applying the stack-prefetch correction from reset changes
+the raw demo entry from field 1,692 to 1,691, finishes three fields late,
+and matches 7,679 active images. These results leave full parity open.
+
+With the original startup held fixed, the stack refill, register BCHG
+tail and long memory ADD/SUB tail together restore the interrupt order
+at this deadline. The ready flag and all ten RGB images from elapsed
+field 18,358 through 18,367 match WinUAE. The third fill starts after
+the handler in this bounded run. The field-local timing windows are
+diagnostic controls. Removing the windows changes the raw demo entry
+to field 1,691. The full combined replay finishes one elapsed field
+early and matches 7,925 of 30,497 jointly active images against the
+fresh seed-2 reference.
+
+A fresh WinUAE replay produced all 31,385 reference viewport hashes
+byte for byte. The fresh full indexed-MOVE plus EXG replay reproduced
+all 31,311 comparison rows, matching 30,451 of 30,498 active images and
+finishing at the same elapsed field without shifting the captures.
+The artifacts are under
+`artifacts/the-company/drift-investigation/from-dev2/fill-deadline/deadline-18359/`.
 
 | ID | Resolution to preserve | Coverage / remaining boundary |
 | --- | --- | --- |
