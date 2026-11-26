@@ -284,3 +284,16 @@ returned to AmigaDOS without input.
 
 Reproduce the full PAL LCD viewport and its thumbnail with
 `scripts/prepare-website-screenshots.ps1 -CaptureRoot artifacts -Names smoke-and-mirrors-clockwork`.
+
+## Alien 3 CD32 Edition (2026-11-26)
+
+Ripley's jump comes from field 4,250 of the
+[stock PAL CD32 gameplay replay](engine/CD32.md#alien-3-cd32-edition).
+The diagnostic capture retains the full PAL LCD viewport.
+
+| Title | Capture relative to `artifacts/` | Original BMP SHA-256 |
+| --- | --- | --- |
+| Alien 3 CD32 Edition | `alien3-cd32/pushed-pal/frame-004250.bmp` | `5EF61B23E3D4AC4CA671CBCC65E02F7D4451270C30B738553FC8D5634209F196` |
+
+Reproduce the image and thumbnail with
+`scripts/prepare-website-screenshots.ps1 -CaptureRoot artifacts -Names alien-3-cd32-gameplay`.

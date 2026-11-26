@@ -12,6 +12,7 @@ $repository = Split-Path $PSScriptRoot -Parent
 $output = Join-Path $repository 'docs/assets/screenshots'
 $null = New-Item -ItemType Directory -Path $output -Force
 $captures = @(
+    @{ Name = 'alien-3-cd32-gameplay'; File = 'alien3-cd32/pushed-pal/frame-004250.bmp'; Hash = '5EF61B23E3D4AC4CA671CBCC65E02F7D4451270C30B738553FC8D5634209F196' },
     @{ Name = 'smoke-and-mirrors-clockwork'; File = 'smoke-and-mirrors/68040-exit-investigation/direct-fast/frame-007500.bmp'; Hash = 'B19409A84E92F1CA887762DBB699C65569708C11C567FE83F31916DCABE11D55' },
     @{ Name = 'bubble-and-squeak-gameplay'; File = 'bubble-squeak-aga/bubble-move/frame-006800.bmp'; Hash = 'F4A03F520526E2E9124A06B9BEA54C33888CBE566C4293839179DD44892B3E85' },
     @{ Name = 'alfred-chicken-gameplay'; File = 'bubble-squeak-aga/alfred-fixed/frame-006900.bmp'; Hash = '49AAC12827E5263540B5ED333CDB27EB1253BC695C48E1229587245058FE095E' },
