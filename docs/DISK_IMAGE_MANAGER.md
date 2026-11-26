@@ -303,7 +303,7 @@ opening an image does not eagerly instantiate a runtime for every partition.
 Switching volumes disposes the previous session. Entries from a prior mount cannot
 be used in a new session. The window serializes background operations.
 
-The service embeds its ROM and versioned manifest and uses pinned Copper68k 1.5.14,
+The service embeds its ROM and versioned manifest and uses pinned Copper68k 1.5.15,
 M68020 interpreter execution, flat ROM/RAM and bounded storage gateways. Writes require an explicit writable staged source and service opt-in.
 The default per-command budget is 50 million instructions; cancellation is checked
 every 256 interpreted instructions. There is no managed filesystem fallback or
@@ -314,9 +314,9 @@ in `CopperScreenDiskExtraction`.
 ## Development package
 
 The app builds `CopperDisk.FileSystem` from source and uses the pinned
-`CopperStart.FileSystem.Service` **[0.5.0-dev.10]** from the CopperScreen GitHub prerelease.
-That compatibility archive pins Copper68k 1.5.14 and carries the same service
-assembly and embedded ROM as 0.5.0-dev.9. A clean checkout needs no private feed
+`CopperStart.FileSystem.Service` **[0.5.0-dev.11]** from the CopperScreen GitHub prerelease.
+That compatibility archive pins Copper68k 1.5.15 and carries the same service
+assembly and embedded ROM as 0.5.0-dev.10. A clean checkout needs no private feed
 credentials:
 
 ```powershell
@@ -328,13 +328,13 @@ dotnet build CopperScreen.slnx -c Release --no-restore
 If you have the original qualified archive, you can also stage it in the local feed:
 
 ```powershell
-./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.10.nupkg"
+./scripts/stage-filesystem-service.ps1 -PackagePath "path/to/CopperStart.FileSystem.Service.0.5.0-dev.11.nupkg"
 dotnet restore CopperScreen.slnx --locked-mode
 dotnet build CopperScreen.slnx -c Release --no-restore
 ```
 
 The script verifies the pinned package SHA-256:
-`FC9671935C2D5ED41D16F67EBFCA623AD5F546645AC60E01219D17AB99BEDBBF`.
+`262C52225EA2FDCCB65AE1B3C2E2882F7760D3EE16FC7ED19D79A1F29185ABF4`.
 It copies the package to ignored `artifacts/filesystem-service-feed`, an additional
 restore source when present. Lock files also pin the NuGet content hash.
 Consumers need the managed package and its pinned CPU dependency; CopperStart,

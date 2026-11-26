@@ -38,9 +38,9 @@
       },
       "Copper68k": {
         "type": "Direct",
-        "requested": "[1.5.14, 1.5.14]",
-        "resolved": "1.5.14",
-        "contentHash": "hP/3jTUorxIVwn++NIsSdsuZ0jYK0afGuwFtsErqpcQ75MjrLt+0gt5ulQxLFQPseFTCg4L7j70sa+rh1unvKQ==",
+        "requested": "[1.5.15, 1.5.15]",
+        "resolved": "1.5.15",
+        "contentHash": "4PO4vugSD7PUOvLzBoS0emKdaBC2i/Gnniqrwe8aZGoLFdvom0OIg43eH/SY3v/ieM16PsL0xfr/GZMKVwvaPQ==",
         "dependencies": {
           "CopperFloat": "[1.0.0]"
         }
@@ -63,11 +63,11 @@
       },
       "CopperStart.FileSystem.Service": {
         "type": "Direct",
-        "requested": "[0.5.0-dev.10, 0.5.0-dev.10]",
-        "resolved": "0.5.0-dev.10",
-        "contentHash": "5MmcOwUJqDwhB+6m4UO22Fek4Zx5HvarrFdp+l0KQhlYDK8Yy7k6ceNQhi2YyaAZKxnOazKlWjyLHP1dJsFk0w==",
+        "requested": "[0.5.0-dev.11, 0.5.0-dev.11]",
+        "resolved": "0.5.0-dev.11",
+        "contentHash": "HFgPcwh3tN8F8qMXWa2TKh3uCqvfiCMYj6nHpa9Kyn7OoDeRIeYWsudyNLKFSE6F6g7gqA2BiE4oQrf0DiUkAQ==",
         "dependencies": {
-          "Copper68k": "[1.5.14]"
+          "Copper68k": "[1.5.15]"
         }
       },
       "HotPathGuard.Abstractions": {
@@ -300,15 +300,15 @@
       "copperdisk.filesystem": {
         "type": "Project",
         "dependencies": {
-          "Copper68k": "[1.5.14, 1.5.14]",
+          "Copper68k": "[1.5.15, 1.5.15]",
           "CopperDisk": "[3.0.1, )",
-          "CopperStart.FileSystem.Service": "[0.5.0-dev.10, 0.5.0-dev.10]"
+          "CopperStart.FileSystem.Service": "[0.5.0-dev.11, 0.5.0-dev.11]"
         }
       },
       "coppermod.amiga.lightweight": {
         "type": "Project",
         "dependencies": {
-          "Copper68k": "[1.5.14, 1.5.14]",
+          "Copper68k": "[1.5.15, 1.5.15]",
           "CopperDisk": "[3.0.1, )",
           "NLayer": "[3.0.1, 3.0.1]"
         }
