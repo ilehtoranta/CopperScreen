@@ -215,6 +215,8 @@ public sealed class LightweightBeamSyncTests
         Assert.Equal((ushort)0, m.BitplaneEffectiveBplcon0);
         m.AdvanceHardwareTo(4);
         Assert.Equal((ushort)0x1000, m.BitplaneEffectiveBplcon0);
+        Assert.Equal(0x18 * LightweightClock.CpuCyclesPerColorClock, m.BitplaneNextCycle);
+        m.AdvanceHardwareTo(m.BitplaneNextCycle);
         Assert.Equal(long.MaxValue, m.BitplaneNextCycle);
     }
 

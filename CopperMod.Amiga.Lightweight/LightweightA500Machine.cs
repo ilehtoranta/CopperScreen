@@ -478,6 +478,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         _cpu.Reset(programCounter, stackPointer);
         _input = default;
         RefreshCiaInterruptCycle();
+        _bitplanes.OnFrameStart(_clock.FrameStartCycle, this);
+        RefreshNextDeviceCycle();
         if (_akiko is not null) RefreshStorageSchedule(Cycle);
     }
 
@@ -2395,7 +2397,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                         previousDmacon,
                         _registers.Dmacon,
                         cycle,
-                        this);
+                        this,
+                        fromCopper);
                     _spriteDma.OnDmaconChanged(
                         previousDmacon,
                         _registers.Dmacon,
@@ -2452,7 +2455,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 case LightweightRegisters.Bltsizv:
                 case LightweightRegisters.Bltsizh:
                 case LightweightRegisters.Bltsize:
-                    _blitter.OnRegisterWrite(offset, value, cycle, this);
+                    _blitter.OnRegisterWrite(offset, value, cycle, this, fromCopper);
                     break;
                 case LightweightRegisters.IntenaWrite:
                     ScheduleInterruptEnableVisibility(

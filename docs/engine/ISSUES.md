@@ -235,6 +235,83 @@ performance acceptance does not close these gaps. NTSC is also missing for a
 broader motherboard profile; implemented ECS display on a PAL oscillator, AGA, newer CPUs and expansion/storage devices are separate
 capabilities beyond the agreed PAL OCS/68000 scope.
 
+### Rampage on PAL OCS
+
+TEK's CeBIT 1994 release was replayed from the ADF decoded from the
+[original DMS archive](https://archive.scene.org/pub/mirrors/amigascne/Groups/T/The_Electronic_Knights/TEK-Rampage.DMS).
+The ADF SHA-256 is `470DF16CF52DC7B028E850CAF7F2EE7C1992C764EF821F31DEEE9BA1CBC6C08E`.
+The comparison used WinUAE 6.0.3 and CopperScreen with Copper68k 1.5.12,
+Kickstart 1.3, a PAL A500, 512 KiB Chip RAM, 512 KiB Slow RAM and one
+normal-speed floppy drive. Both runs started from reset without input.
+The [WinUAE beta notes](https://github.com/tonioni/WinUAE/blob/6ae6fb6b84bb9517e0245a80fc9bdca1a8580dde/od-win32/winuaechangelog.txt#L2735)
+record a historical Copper SKIP regression in this demo.
+
+The initial terrain failure began when a short active `BLTSIZE` write
+left a larger area operation running. The destination wrapped through
+Chip RAM and cleared the interrupt vectors. The OCS correction reloads
+the counters while retaining accepted writes and live shifter stages.
+CPU and Copper `DMACON` writes reach active blitter DMA on distinct
+clock phases, and the Copper's live area `BLTSIZE` write takes effect
+on the next CCK. Guarded destination memory matches WinUAE at five
+Copper write positions, including cases that retain an old D write.
+
+In the credits, the two emulators wrote the same Copper control words
+and held identical bitplane source data. CopperScreen started fetching
+the ribbon one raster late because its OCS hard-limit release was
+skipped while the plane count was zero. The hard-limit
+release at CCK `$18` now remains scheduled when the plane count is
+zero, so a later Copper `BPLCON0` write can start fetching on that
+raster. The PAL output also includes border raster 311.
+
+In the earlier acknowledgements scene, the Copper completed a
+`COLOR00` MOVE five CCKs early. Paired traces agree on the terminal
+bitplane addresses and show that the post-decode WAIT phase advanced
+through a slot owned by bitplane DMA. That phase now waits for an
+available Copper slot. A standalone regression verifies the MOVE
+at the final CCK of the PAL raster, and all 27 sampled acknowledgements
+fields match the reference.
+[Commodore Hardware Reference Manual, chapter 2](https://amigadev.elowar.com/read/ADCD_2.1/Hardware_Manual_guide/node0048.html)
+
+CopperScreen completes 38,028 fields with live PCM and valid level-three
+and level-four vectors in the credits loop. All 161 credits captures,
+all 31 distinct terrain images and all 216 captures in eight other
+windows match WinUAE pixel for pixel. The windows align at four fields,
+with one terrain request returning a repeated WinUAE image. The final
+Lotus III run also matches all 95 captures from the clean `ff8e015`
+mainline in the existing 18,000-field normal-mode workload. Both builds
+diverge from the historical Lotus III baseline at the field-1,000 Chip
+RAM capture. Physical timing and general active blitter behavior
+outside the exercised paths require further evidence.
+
+### Flexible Zoom on PAL OCS
+
+The [Cool Fridge archive](https://archive.scene.org/pub/mirrors/amigascne/Groups/U/Upfront/Upfront-CoolFridge.dms)
+contains Upfront's Flexible Zoom. The decoded ADF has SHA-256
+`51D7780F4691595E8C02643CFDD21FEF43D7595B97073249E98C5977BC0C31E9`.
+CopperScreen with Copper68k 1.5.12 and WinUAE 6.0.3 used Kickstart 1.3,
+a PAL A500, 512 KiB Chip RAM, 512 KiB Slow RAM and one normal-speed
+floppy. Both selected Flexible Zoom with the mouse from the disk menu.
+
+The B-enabled line trace shows B, C, idle, B, D, idle. Both B reads
+address the same word. The first supplies the texture for C and the
+second advances the B pointer by the signed even BLTBMOD. The texture
+starts at the selected bit and proceeds toward lower bit numbers.
+The final second B read clears BUSY one CCK before the last D write.
+A four-pixel probe checks the channel phases, texture, writeback and
+BUSY. A 32-pixel probe matches all WinUAE destination words with odd
+values in both slope modulos. Line setup masks off their unused low
+bits before stepping the error accumulator.
+
+The demopart advances its grid once per PAL field with the corrected
+sequencer. Before the change, the next redraw interrupt arrived while
+the previous redraw handler was still running, and every other request
+was lost. All 451 consecutive grid captures and all 233 extended grid
+samples match WinUAE pixel for pixel at a constant offset of 163
+fields. Both runs visit all 128 grid angles and return to the Cool
+Fridge selector after a mouse click. The selector animation runs at a
+different phase in those captures. Physical bus measurements, active
+line register changes and other channel combinations remain open.
+
 ## Disk assumptions
 
 ### LWA-DISK-001 — Request sampling and slot ordering
