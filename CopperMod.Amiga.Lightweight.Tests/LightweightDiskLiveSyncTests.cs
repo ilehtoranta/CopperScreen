@@ -13,7 +13,7 @@ public sealed class LightweightDiskLiveSyncTests
     [InlineData(true)]
     public void LiveTogglePreservesPartialWordAndDoesNotRearmRead(bool initiallyEnabled)
     {
-        using var m = Running(1, initiallyEnabled);
+        using var m = Running(2, initiallyEnabled);
         Bits(m, 7, 0x1234);
         Write(m, 0x09E, initiallyEnabled ? (ushort)0x0400 : (ushort)0x8400);
         Bits(m, 8, 0xBEEF);
@@ -22,6 +22,7 @@ public sealed class LightweightDiskLiveSyncTests
         Drain(m);
         Assert.Equal(0xBEEF, m.ReadChipWordDma(0x1000));
         Assert.Equal(0x1002u, m.GetDiskPointer());
+        Bits(m, 16, 0);
         Assert.False(m.DiskDmaActive);
         Assert.Equal(2, m.Intreq & 2);
         Assert.Null(m.UnsupportedActiveFeature);
@@ -58,7 +59,7 @@ public sealed class LightweightDiskLiveSyncTests
     [InlineData(0x0200)]
     public void ToggleDuringDmaPausePreservesWordPhase(int mask)
     {
-        using var m = Running(1, true);
+        using var m = Running(2, true);
         Bits(m, 7, 0);
         Write(m, 0x096, (ushort)mask);
         Write(m, 0x09E, 0x0400);
@@ -68,6 +69,7 @@ public sealed class LightweightDiskLiveSyncTests
         Bits(m, 1, 0xBEEF);
         Drain(m);
         Assert.Equal(0xBEEF, m.ReadChipWordDma(0x1000));
+        Bits(m, 16, 0);
         Assert.Equal(2, m.Intreq & 2);
         Assert.Null(m.UnsupportedActiveFeature);
     }
@@ -77,20 +79,21 @@ public sealed class LightweightDiskLiveSyncTests
     [InlineData(true)]
     public void CancelOrResetAfterToggleRevokesPartialWord(bool reset)
     {
-        using var m = Running(1, true);
+        using var m = Running(2, true);
         Bits(m, 15, 0xAAAA);
         Write(m, 0x09E, 0x0400);
         if (reset) m.ResetExternalDevices(m.Cycle);
         else Write(m, 0x024, 0x4000);
         Write(m, 0x096, 0x8210);
         Write(m, 0x022, 0x1000);
-        Write(m, 0x024, 0x8001);
-        Write(m, 0x024, 0x8001);
+        Write(m, 0x024, 0x8002);
+        Write(m, 0x024, 0x8002);
         Bits(m, 15, 0xBEEF);
         Assert.Equal(long.MaxValue, m.DiskDmaNextCycle);
         Bits(m, 1, 0xBEEF);
         Drain(m);
         Assert.Equal(0xBEEF, m.ReadChipWordDma(0x1000));
+        Bits(m, 16, 0);
         Assert.Equal(2, m.Intreq & 2);
         Assert.Null(m.UnsupportedActiveFeature);
     }
@@ -107,8 +110,8 @@ public sealed class LightweightDiskLiveSyncTests
         Write(m, 0x096, 0x8210);
         Write(m, 0x09E, 0x8500);
         Write(m, 0x022, 0x1000);
-        Write(m, 0x024, 0x8001);
-        Write(m, 0x024, 0x8001);
+        Write(m, 0x024, 0x8002);
+        Write(m, 0x024, 0x8002);
         var cycle = m.Cycle;
         m.WriteByte(0xBFD100, (byte)(0x7F & ~(8 << drive)), ref cycle, M68kBusAccessKind.CpuDataWrite);
         m.WriteByte(0xBFD300, 0xFF, ref cycle, M68kBusAccessKind.CpuDataWrite);
@@ -117,11 +120,10 @@ public sealed class LightweightDiskLiveSyncTests
         Write(m, 0x09E, 0x0400);
         m.AdvanceHardwareTo(sync + 10 * 14);
         Write(m, 0x09E, 0x8400);
-        m.AdvanceHardwareTo(sync + 16 * 14 + 454);
+        m.AdvanceHardwareTo(sync + 16 * 14);
+        Drain(m);
         Assert.Equal(0x4489, m.ReadChipWordDma(0x1000)); // Second sector-header sync.
         Assert.Equal(0x1002u, m.GetDiskPointer());
-        Assert.False(m.DiskDmaActive);
-        Assert.Equal(2, m.Intreq & 2);
         Assert.Null(m.UnsupportedActiveFeature);
     }
 

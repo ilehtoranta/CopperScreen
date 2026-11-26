@@ -653,6 +653,76 @@ public sealed class LightweightBlitterTests
     }
 
     [Theory]
+    [InlineData(0x40, 0)]
+    [InlineData(0x42, 2)]
+    [InlineData(0x44, 1)]
+    [InlineData(0x48, 2)]
+    [InlineData(0x4C, 0)]
+    public void OcsCopperAreaRestartRetainsAcceptedDestinationWrites(
+        int pauseHorizontal, int retainedWrites)
+    {
+        using var machine = new LightweightA500Machine();
+        const uint list = 0x70000;
+        const uint destination = 0x58000;
+        const ushort guard = 0x55AA;
+        // PAL OCS boot-probe captures retain zero, one or two writes
+        // before the 16 new rows, including their destination modulos.
+        ushort[] instructions =
+        [
+            0x6411, 0xFFFE,
+            LightweightRegisters.Bltdpth, 5,
+            LightweightRegisters.Bltdpth + 2, 0,
+            LightweightRegisters.Bltcon0, 0x0100,
+            LightweightRegisters.Bltcon1, 0,
+            LightweightRegisters.Bltdmod, 0,
+            LightweightRegisters.Bltsize, 0xF014,
+            0x6481, 0xFFFE,
+            LightweightRegisters.Bltapth, 3,
+            LightweightRegisters.Bltapth + 2, 0,
+            LightweightRegisters.Bltbpth, 4,
+            LightweightRegisters.Bltbpth + 2, 0,
+            LightweightRegisters.Bltcon0, 0x0D3C,
+            LightweightRegisters.Bltsize, 0,
+            (ushort)(0x6A01 | pauseHorizontal), 0xFFFE,
+            LightweightRegisters.DmaconWrite, 0x0040,
+            LightweightRegisters.Bltdpth + 2, 0x8000,
+            LightweightRegisters.Bltdmod, 16,
+            LightweightRegisters.Bltcon0, 0x0100,
+            LightweightRegisters.Bltsize, 0x0408,
+            LightweightRegisters.DmaconWrite, 0x8240,
+            0x7D81, 0xFFFE,
+            LightweightRegisters.DmaconWrite, 0x00C0,
+            0xFFFF, 0xFFFE
+        ];
+        for (var i = 0; i < instructions.Length; i++)
+            machine.WriteChipWordDma(list + (uint)(2 * i), instructions[i]);
+        for (var offset = 0; offset < 0x1000; offset += 2)
+            machine.WriteChipWordDma(destination + (uint)offset, guard);
+        WritePointer(machine, LightweightRegisters.Cop1lch, list);
+        WriteRegister(machine, LightweightRegisters.Copcon, 2);
+        WriteRegister(machine, LightweightRegisters.Copjmp1, 0);
+        WriteRegister(machine, LightweightRegisters.DmaconWrite, 0x82C0);
+
+        machine.AdvanceHardwareTo(133 * LightweightClock.CpuCyclesPerLine);
+        var expected = new List<int>();
+        for (var retained = 0; retained < retainedWrites; retained++)
+            expected.Add(18 * retained);
+        for (var row = 0; row < 16; row++)
+            for (var word = 0; word < 8; word++)
+                expected.Add(18 * retainedWrites + 32 * row + 2 * word);
+        var written = new List<int>();
+        for (var offset = 0; offset < 0x1000; offset += 2)
+        {
+            var word = machine.ReadChipWordDma(destination + (uint)offset);
+            if (word == 0)
+                written.Add(offset);
+            else
+                Assert.Equal(guard, word);
+        }
+        Assert.Equal(expected, written);
+    }
+
+    [Theory]
     [InlineData(false, 0x55)]
     [InlineData(true, 0x53)]
     public void AreaStartupRespectsTheCpuGrantAfterCopperAndBitplaneContention(
@@ -827,6 +897,37 @@ public sealed class LightweightBlitterTests
         Assert.Equal(start + 26, machine.BlitterLastTerminationCycle);
     }
 
+    [Theory]
+    [InlineData(0x0042, new int[] { 0, 2, 4, 6, 12, 14 })]
+    [InlineData(0x00C1, new int[] { 0, 2, 4, 6, 12, 18, 24 })]
+    [InlineData(0x00C3, new int[] { 0, 2, 4, 6, 12, 14, 16, 22, 24, 26, 32, 34, 36 })]
+    public void OcsDestinationOnlyRestartDrainsThePriorResultsBeforeTheNewRows(
+        ushort newSize, int[] expectedOffsets)
+    {
+        using var machine = new LightweightA500Machine();
+        var destination = DestinationD + 0x3FE;
+        for (var offset = 0; offset < 0x400; offset += 2)
+            machine.WriteChipWordDma(destination - (uint)offset, 0x55AA);
+        ConfigureArea(machine, 0x0100, bltcon1: 0x0002);
+        WritePointer(machine, LightweightRegisters.Bltdpth, destination);
+        WriteRegister(machine, LightweightRegisters.Bltdmod, 4);
+        EnableBlitter(machine, nasty: true);
+        var start = StartBlit(machine, 0x0551);
+
+        WriteRegisterAt(machine, LightweightRegisters.Bltsize, newSize, start + 18);
+        Assert.True(machine.BlitterActive);
+        AdvanceUntilBlitterIdle(machine);
+
+        var clearedOffsets = new List<int>();
+        for (var offset = 0; offset < 0x400; offset += 2)
+        {
+            var word = machine.ReadChipWordDma(destination - (uint)offset);
+            if (word == 0) clearedOffsets.Add(offset);
+            else Assert.Equal(0x55AA, word);
+        }
+        Assert.Equal(expectedOffsets, clearedOffsets);
+    }
+
     [Fact]
     public void EnabledChannelsPauseWithDmaOffAndResumeFromSameStartupPhase()
     {
@@ -840,11 +941,17 @@ public sealed class LightweightBlitterTests
         Assert.Equal(long.MaxValue, machine.BlitterNextCycle);
         Assert.Equal((ushort)0, ReadWord(machine, DestinationD));
 
-        var enableCycle = start + 110;
-        EnableBlitter(machine, nasty: true, requestedCycle: enableCycle);
-        var enableOutput = enableCycle;
+        var enableOutput = WriteRegisterAt(
+            machine, LightweightRegisters.DmaconWrite, 0x8640, start + 110);
+        // PAL OCS CPU enable: the A read retires after five CCKs,
+        // and the first D write retires after eight CCKs.
+        machine.AdvanceHardwareTo(enableOutput + 8);
+        Assert.Equal(SourceA, machine.GetBlitterPointer(LightweightRegisters.Bltapth));
+        machine.AdvanceHardwareTo(enableOutput + 10);
+        Assert.Equal(SourceA + 2, machine.GetBlitterPointer(LightweightRegisters.Bltapth));
         machine.AdvanceHardwareTo(enableOutput + 14);
-
+        Assert.Equal((ushort)0, ReadWord(machine, DestinationD));
+        machine.AdvanceHardwareTo(enableOutput + 16);
         Assert.Equal((ushort)0x55AA, ReadWord(machine, DestinationD));
         Assert.False(machine.BlitterActive);
     }
@@ -1329,13 +1436,16 @@ public sealed class LightweightBlitterTests
     }
 
     [Fact]
-    public void LineBChannelReloadsEachPatternWordTwiceAndAdvancesByModulo()
+    public void LineBChannelReadsAroundCAndUsesTheDescendingTextureBit()
     {
         const int rowStride = 0x20;
         using var machine = new LightweightA500Machine();
         var baseAddress = DestinationD + 0x4000;
         WriteWord(machine, SourceB, 0x8000);
         WriteWord(machine, SourceB + 2, 0x4000);
+        WriteWord(machine, SourceB + 4, 0x0001);
+        WriteWord(machine, SourceB + 6, 0x2000);
+        WriteWord(machine, baseAddress, 0x0001);
         ConfigureLine(
             machine,
             baseAddress,
@@ -1344,22 +1454,69 @@ public sealed class LightweightBlitterTests
             bModulo: 3,
             channelMask: 0x0F00);
         EnableBlitter(machine, nasty: true);
-        var start = StartBlit(machine, 0x0082);
+        machine.AdvanceHardwareTo(100L * LightweightClock.CpuCyclesPerLine +
+            18L * LightweightClock.CpuCyclesPerColorClock);
+        var start = StartBlit(machine, 0x0102);
 
+        machine.AdvanceHardwareTo(start + 10);
+        Assert.Equal((ushort)0x8000, machine.GetCustomRegister(LightweightRegisters.Bltbdat));
+        Assert.Equal(SourceB, machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
         machine.AdvanceHardwareTo(start + 12);
-        Assert.Equal((ushort)0x8000,
-            machine.GetCustomRegister(LightweightRegisters.Bltbdat));
-        Assert.Equal(SourceB + 2,
-            machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+        Assert.Equal((ushort)0x0001, machine.GetCustomRegister(LightweightRegisters.Bltcdat));
+        Assert.Equal(SourceB, machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+        machine.AdvanceHardwareTo(start + 16);
+        Assert.Equal(SourceB + 2, machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+
+        machine.AdvanceHardwareTo(start + 52);
+        Assert.False(machine.BlitterStatusBusy);
+        Assert.True(machine.BlitterBusy);
+        Assert.False(IsLinePixelSet(machine, baseAddress, rowStride, 3, 3));
+        machine.AdvanceHardwareTo(start + 54);
+        Assert.False(machine.BlitterBusy);
+        Assert.False(IsLinePixelSet(machine, baseAddress, rowStride, 0, 0));
+        Assert.False(IsLinePixelSet(machine, baseAddress, rowStride, 1, 1));
+        Assert.False(IsLinePixelSet(machine, baseAddress, rowStride, 2, 2));
+        Assert.True(IsLinePixelSet(machine, baseAddress, rowStride, 3, 3));
+        Assert.Equal((ushort)0x2000, machine.GetCustomRegister(LightweightRegisters.Bltbdat));
+        Assert.Equal(SourceB + 8, machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
+        Assert.Equal(start + 52, machine.BlitterLastCompletionCycle);
+    }
+
+    [Fact]
+    public void LineSlopeIgnoresTheLowBitOfBothModulos()
+    {
+        const int rowStride = 0x20;
+        const int rows = 32;
+        using var machine = new LightweightA500Machine();
+        var baseAddress = DestinationD + 0x4000;
+        for (var row = 0; row < rows; row++)
+        {
+            WriteWord(machine, SourceB + (uint)(row * 2), 0xFFFF);
+        }
+
+        ConfigureLine(
+            machine,
+            baseAddress,
+            rowStride,
+            0x0001,
+            aModulo: -23,
+            bModulo: 3,
+            channelMask: 0x0F00);
+        EnableBlitter(machine, nasty: true);
+        StartBlit(machine, (rows << 6) | 2);
         AdvanceUntilBlitterIdle(machine);
 
-        Assert.True(IsLinePixelSet(machine, baseAddress, rowStride, 0, 0));
-        Assert.True(IsLinePixelSet(machine, baseAddress, rowStride, 1, 1));
-        Assert.Equal((ushort)0x4000,
-            machine.GetCustomRegister(LightweightRegisters.Bltbdat));
-        Assert.Equal(SourceB + 4,
-            machine.GetBlitterPointer(LightweightRegisters.Bltbpth));
-        Assert.Equal(start + 24, machine.BlitterLastCompletionCycle);
+        for (var row = 0; row < rows; row++)
+        {
+            ushort expected = row switch
+            {
+                0 => 0x8000,
+                < 14 => 0x4000,
+                < 27 => 0x2000,
+                _ => 0x1000
+            };
+            Assert.Equal(expected, ReadWord(machine, baseAddress + (uint)(row * rowStride)));
+        }
     }
 
     [Fact]

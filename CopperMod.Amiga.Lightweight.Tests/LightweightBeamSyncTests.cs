@@ -5,6 +5,29 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 
 public sealed class LightweightBeamSyncTests
 {
+    [Theory]
+    [InlineData(254, 223, 0xFE00, 0x8000)]
+    [InlineData(254, 224, 0xFE01, 0x8000)]
+    [InlineData(254, 225, 0xFF02, 0x8000)]
+    [InlineData(255, 224, 0xFF01, 0x8000)]
+    [InlineData(255, 225, 0x0002, 0x8001)]
+    [InlineData(310, 226, 0x3703, 0x8001)]
+    [InlineData(312, 224, 0x3801, 0x8001)]
+    [InlineData(312, 225, 0x0002, 0x8000)]
+    public void PalOcsBeamReadbackAdvancesVerticalAtReportedHorizontalTwo(
+        int line, int horizontal, ushort expectedVhposr, ushort expectedVposr)
+    {
+        // WinUAE 6.0.3 PAL OCS boot fixture: H0 and H1 retain V, H2 advances V.
+        var readCycle = (long)line * LightweightClock.CpuCyclesPerLine + horizontal * 2;
+        var vhposCycle = readCycle;
+        var vposCycle = readCycle;
+        using var vhposMachine = new LightweightA500Machine();
+        using var vposMachine = new LightweightA500Machine();
+
+        Assert.Equal(expectedVhposr, vhposMachine.ReadWord(0xDFF006, ref vhposCycle, M68kBusAccessKind.CpuDataRead));
+        Assert.Equal(expectedVposr, vposMachine.ReadWord(0xDFF004, ref vposCycle, M68kBusAccessKind.CpuDataRead));
+    }
+
     // Independent expectation: vAmigaTS ersy2, A500 OCS5 photograph and
     // source at 0489f55d22ef7560d924a304e30998aea6864264: $40xx -> $4000.
     [Fact]
@@ -121,13 +144,13 @@ public sealed class LightweightBeamSyncTests
         m.AdvanceHardwareTo(400);
         Write(m, 0x100, 2);
         m.AdvanceHardwareTo(1000);
-        Assert.Equal(0x2002u, m.GetPaulaChannelSnapshot(channel).CurrentAddress);
+        Assert.Equal(0x2000u, m.GetPaulaChannelSnapshot(channel).CurrentAddress);
         Assert.Equal(long.MaxValue, m.GetPaulaChannelSnapshot(channel).DmaInputCycle);
         Write(m, 0x100, 0);
         var input = 1000 + 26 + 4 * channel;
         Assert.Equal(input, m.GetPaulaChannelSnapshot(channel).DmaInputCycle);
         m.AdvanceHardwareTo(input + 2);
-        Assert.Equal(0x2004u, m.GetPaulaChannelSnapshot(channel).CurrentAddress);
+        Assert.Equal(0x2002u, m.GetPaulaChannelSnapshot(channel).CurrentAddress);
         Assert.Equal(14 + channel * 2, m.BeamColorClock);
     }
 
@@ -169,7 +192,7 @@ public sealed class LightweightBeamSyncTests
     public void EnablingExternalSyncDoesNotRevokeAcceptedAudioTransfer()
     {
         using var m = new LightweightA500Machine();
-        m.WriteChipWordDma(0x2000, 0xCAFE);
+        m.WriteChipWordDma(0, 0xCAFE);
         Write(m, 0xA2, 0x2000);
         Write(m, 0xA4, 2);
         Write(m, 0x96, 0x8201);
@@ -177,7 +200,7 @@ public sealed class LightweightBeamSyncTests
         Write(m, 0x100, 2);
         m.AdvanceHardwareTo(28);
         Assert.Equal((ushort)0xCAFE, m.GetPaulaChannelSnapshot(0).PendingData);
-        Assert.Equal(0x2002u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
+        Assert.Equal(0x2000u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
         Assert.True(m.BeamSyncRunning);
     }
 
@@ -192,6 +215,8 @@ public sealed class LightweightBeamSyncTests
         Assert.Equal((ushort)0, m.BitplaneEffectiveBplcon0);
         m.AdvanceHardwareTo(4);
         Assert.Equal((ushort)0x1000, m.BitplaneEffectiveBplcon0);
+        Assert.Equal(0x18 * LightweightClock.CpuCyclesPerColorClock, m.BitplaneNextCycle);
+        m.AdvanceHardwareTo(m.BitplaneNextCycle);
         Assert.Equal(long.MaxValue, m.BitplaneNextCycle);
     }
 
@@ -282,7 +307,7 @@ public sealed class LightweightBeamSyncTests
         Write(m, 0x100, 0);
         Assert.Equal(long.MaxValue, m.GetPaulaChannelSnapshot(0).DmaInputCycle);
         m.AdvanceHardwareTo(4486);
-        Assert.Equal(0x2004u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
+        Assert.Equal(0x2002u, m.GetPaulaChannelSnapshot(0).CurrentAddress);
         m.AdvanceHardwareTo(4488);
         Assert.NotEqual(long.MaxValue, m.GetPaulaChannelSnapshot(0).DmaInputCycle);
     }

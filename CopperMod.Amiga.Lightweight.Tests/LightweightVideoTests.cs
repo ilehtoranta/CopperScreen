@@ -32,7 +32,8 @@ public sealed class LightweightVideoTests
         Assert.Equal(Black, Pixel(frame, 100, 25));
         Assert.Equal(Red, Pixel(frame, 100, 26));
         Assert.Equal(Red, Pixel(frame, 100, 310));
-        Assert.Equal(Black, Pixel(frame, 100, 311));
+        Assert.Equal(Red, Pixel(frame, 100, 311));
+        Assert.Equal(Black, Pixel(frame, 100, 312));
     }
 
     [Fact]

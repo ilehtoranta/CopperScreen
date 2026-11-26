@@ -16,7 +16,7 @@ internal sealed partial class LightweightVideo
     internal const int PalRasterHeight = LightweightClock.PalLongFieldLines;
     private const int VisibleRasterXStart = 98;
     private const int VisibleRasterYStart = 26;
-    private const int VisibleRasterYStop = 311;
+    private const int VisibleRasterYStop = 312;
     private const int MaxPlanes = 6;
     private const int PaletteColorCount = 64;
     private const ulong PlaneZeroLowMask = 0x1041_0410_4104_1041UL;

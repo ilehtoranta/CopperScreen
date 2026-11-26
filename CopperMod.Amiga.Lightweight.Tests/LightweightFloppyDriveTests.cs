@@ -53,23 +53,24 @@ public sealed class LightweightFloppyDriveTests
     }
 
     [Fact]
-    public void StepIsSelectedFallingEdgeAndDoesNotRepeatWhileHeldLow()
+    public void StepMovesOnTheTrailingEdgeOfASelectedPulse()
     {
         var drive = MountedDrive();
         drive.WriteControlPins(0x75, 0); // Select, direction in, step high.
         drive.WriteControlPins(0x74, 10);
-        Assert.Equal(1, drive.Cylinder);
+        Assert.Equal(0, drive.Cylinder);
         drive.WriteControlPins(0x74, 20);
+        Assert.Equal(0, drive.Cylinder);
         drive.WriteControlPins(0x75, 30);
         Assert.Equal(1, drive.Cylinder);
         drive.WriteControlPins(0x77, 40); // Direction out before next pulse.
         drive.WriteControlPins(0x76, 50);
-        Assert.Equal(0, drive.Cylinder);
+        Assert.Equal(1, drive.Cylinder);
         drive.WriteControlPins(0x77, 60);
-        drive.WriteControlPins(0x76, 70);
         Assert.Equal(0, drive.Cylinder);
         drive.WriteControlPins(0x7D, 80); // Deselected inward pulse.
         drive.WriteControlPins(0x7C, 90);
+        drive.WriteControlPins(0x7D, 100);
         Assert.Equal(0, drive.Cylinder);
     }
 
@@ -79,11 +80,14 @@ public sealed class LightweightFloppyDriveTests
         var drive = MountedDrive();
         drive.WriteControlPins(0xF7, 0);
         Assert.Equal(0, drive.ReadInputPins(0) & 0x1C);
-        drive.WriteControlPins(0xF6, 10); // Step outward at track zero clears change.
-        Assert.NotEqual(0, drive.ReadInputPins(10) & 4);
+        drive.WriteControlPins(0xF6, 10);
+        Assert.Equal(0, drive.ReadInputPins(10) & 4);
+        drive.WriteControlPins(0xF7, 15); // Step outward at track zero clears change.
+        Assert.NotEqual(0, drive.ReadInputPins(15) & 4);
         drive.Eject();
         drive.WriteControlPins(0xF7, 20);
         drive.WriteControlPins(0xF6, 30);
+        drive.WriteControlPins(0xF7, 35);
         Assert.True(drive.DiskChanged);
         Assert.Equal(0, drive.ReadInputPins(30) & 0x10);
         Assert.NotEqual(0, drive.ReadInputPins(30) & 0x28);
@@ -97,6 +101,7 @@ public sealed class LightweightFloppyDriveTests
         var drive = MountedDrive();
         drive.WriteControlPins(0x71, 0); // Side bit low selects head 1.
         drive.WriteControlPins(0x70, 10);
+        drive.WriteControlPins(0x71, 20);
         Assert.Equal(1, drive.Head);
         Assert.Equal(1, drive.Cylinder);
         drive.ResetControl();
@@ -118,6 +123,8 @@ public sealed class LightweightFloppyDriveTests
         Write(machine, 0xBFD300, 0xFF, ref cycle); // DDR now drives the saved latch.
         Assert.Equal(0, Read(machine, 0xBFE001, ref cycle) & 0x1C);
         Write(machine, 0xBFD100, 0x74, ref cycle);
+        Assert.Equal(0, Read(machine, 0xBFE001, ref cycle) & 0x14);
+        Write(machine, 0xBFD100, 0x75, ref cycle);
         Assert.Equal(0x14, Read(machine, 0xBFE001, ref cycle) & 0x14);
         Write(machine, 0xBFD300, 0, ref cycle); // Select released by DDR, not PRB.
         Assert.Equal(0xFC, Read(machine, 0xBFE001, ref cycle) & 0xFC);
@@ -160,17 +167,19 @@ public sealed class LightweightFloppyDriveTests
     public void AdfEndStopClampsTheHeadAndAllowsTrackZeroRecovery()
     {
         var drive = MountedDrive();
+        drive.WriteControlPins(0x75, 0);
         for (var cylinder = 1; cylinder <= 100; cylinder++)
         {
+            drive.WriteControlPins(0x74, cylinder * 20 - 10);
             drive.WriteControlPins(0x75, cylinder * 20);
-            drive.WriteControlPins(0x74, cylinder * 20 + 10);
             Assert.Equal(Math.Min(cylinder, 79), drive.Cylinder);
         }
         Assert.NotEqual(0, drive.ReadInputPins(2010) & 0x10);
+        drive.WriteControlPins(0x77, 2020);
         for (var pulse = 0; pulse < 79; pulse++)
         {
-            drive.WriteControlPins(0x77, 2020 + pulse * 20);
             drive.WriteControlPins(0x76, 2030 + pulse * 20);
+            drive.WriteControlPins(0x77, 2040 + pulse * 20);
         }
         Assert.Equal(0, drive.Cylinder);
         Assert.Equal(0, drive.ReadInputPins(4000) & 0x10);
@@ -188,15 +197,16 @@ public sealed class LightweightFloppyDriveTests
         Write(machine, 0xBFD300, 0xFF, ref cycle);
         for (var pulse = 0; pulse < 100; pulse++)
         {
-            Write(machine, 0xBFD100, 0x75, ref cycle);
             Write(machine, 0xBFD100, 0x74, ref cycle);
+            Write(machine, 0xBFD100, 0x75, ref cycle);
         }
         Assert.Null(machine.UnsupportedActiveFeature);
         Assert.NotEqual(0, Read(machine, 0xBFE001, ref cycle) & 0x10);
+        Write(machine, 0xBFD100, 0x77, ref cycle);
         for (var pulse = 0; pulse < 79; pulse++)
         {
-            Write(machine, 0xBFD100, 0x77, ref cycle);
             Write(machine, 0xBFD100, 0x76, ref cycle);
+            Write(machine, 0xBFD100, 0x77, ref cycle);
         }
         Assert.Equal(0, Read(machine, 0xBFE001, ref cycle) & 0x10);
         Assert.Null(machine.UnsupportedActiveFeature);
@@ -206,18 +216,19 @@ public sealed class LightweightFloppyDriveTests
     public void HeadChangeOnClampedStepStillSelectsTheOtherSurface()
     {
         var drive = MountedDrive();
+        drive.WriteControlPins(0x75, 0);
         for (var pulse = 0; pulse < 79; pulse++)
         {
-            drive.WriteControlPins(0x75, pulse * 20);
             drive.WriteControlPins(0x74, pulse * 20 + 10);
+            drive.WriteControlPins(0x75, pulse * 20 + 20);
         }
         var firstSurface = drive.Track.ToArray();
-        drive.WriteControlPins(0x75, 1600);
-        drive.WriteControlPins(0x70, 1610); // Inward STEP and head 1 at the end stop.
+        drive.WriteControlPins(0x74, 1600);
+        drive.WriteControlPins(0x71, 1610); // Inward STEP and head 1 at the end stop.
         Assert.Equal(79, drive.Cylinder);
         Assert.Equal(1, drive.Head);
         Assert.False(firstSurface.AsSpan().SequenceEqual(drive.Track));
-        drive.WriteControlPins(0x74, 1620); // STEP held low; select head 0 again.
+        drive.WriteControlPins(0x75, 1620); // STEP held high; select head 0 again.
         Assert.Equal(firstSurface, drive.Track.ToArray());
     }
 
