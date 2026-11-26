@@ -19,9 +19,12 @@ each completed 1,900 fields.
 The [Alien 3 NTSC intro audio comparison](CD32.md#ntsc-intro-audio) traces
 the Paula ring starvation to EC020 instruction and bus timing. The
 CopperScreen Release build with published Copper68k 1.5.13 restores the
-affected passage in a stock NTSC replay against WinUAE 6.0.3. Remaining
-work covers brief PCM gaps, a quiet-cue level difference and the disc-free
-decoder timing gap.
+affected passage in a stock NTSC replay against WinUAE 6.0.3. The follow-up
+traces the short gaps to NTSC write/playback drift in the guest's PCM ring.
+A local Copper68k timing build removes two multi-field gaps and reduces the
+longest later gap to two fields. WinUAE's area-averaged reference accounts
+for most of the quiet-cue peak difference. Later gaps, small stereo
+differences and full decoder timing parity remain open.
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
