@@ -1914,8 +1914,8 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
                 LightweightRegisters.Vposr when ReadLatchedLightPen => _lightPenVpos,
                 LightweightRegisters.Vhposr when ReadLatchedLightPen => _lightPenVhpos,
                 LightweightRegisters.Vposr => (ushort)((IsEcsAgnus ? ((_registers.Read(LightweightRegisters.Beamcon0) & 0x20) != 0 ? (IsAga ? 0x2300 : 0x2000) : (IsAga ? 0x3300 : 0x3000)) : 0) | (_clock.IsLongField ? 0x8000 : 0) |
-                    ((_clock.Line >> 8) & (IsEcsAgnus ? 7 : 1))),
-                LightweightRegisters.Vhposr => (ushort)(((_clock.Line & 0xFF) << 8) |
+                    ((ReadBeamVerticalPosition() >> 8) & (IsEcsAgnus ? 7 : 1))),
+                LightweightRegisters.Vhposr => (ushort)(((ReadBeamVerticalPosition() & 0xFF) << 8) |
                     (_clock.SyncStopped ? 0 : (_clock.ColorClock + 4) % _clock.ColorClocksPerLine)),
                 LightweightRegisters.Dmaconr =>
                     (ushort)(_registers.Dmacon | _blitter.StatusBits),
@@ -1976,6 +1976,18 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         }
 
         return ReadWordRaw(address);
+    }
+
+    private int ReadBeamVerticalPosition()
+    {
+        // The free-running OCS readback advances V at reported H2. The
+        // hardware timeline still retires the line at its internal boundary.
+        if (_clock.ColorClock + 2 < _clock.ColorClocksPerLine || IsEcsAgnus ||
+            (_registers.Read(LightweightRegisters.Bplcon0) & 2) != 0)
+            return _clock.Line;
+
+        var nextLine = _clock.Line + 1;
+        return nextLine == _clock.LinesThisField ? 0 : nextLine;
     }
 
     private byte ReadByteAt(uint address, long cycle)

@@ -72,6 +72,7 @@ public sealed class LightweightMultipleDriveTests
         m.MountAdf(2, new byte[LightweightFloppyDrive.StandardAdfBytes]);
         Pins(m, 0xDD); // DF2, motor off, step inward.
         Pins(m, 0xDC);
+        Pins(m, 0xDD);
         Assert.Equal(1, m.GetDriveState(2).Cylinder);
         Assert.Equal(0x14, ReadPins(m) & 0x3C); // Changed cleared, off track zero, DD id and WP low.
         Pins(m, 0xD7); // DF0 and DF2: track zero from DF0 pulls shared line low.
@@ -155,6 +156,8 @@ public sealed class LightweightMultipleDriveTests
         using var m = FourDrives();
         Pins(m, 0x85); // All four selected, motor off; inward step.
         Pins(m, 0x84);
+        for (var i = 0; i < 4; i++) Assert.Equal(0, m.GetDriveState(i).Cylinder);
+        Pins(m, 0x85);
         for (var i = 0; i < 4; i++) Assert.Equal(1, m.GetDriveState(i).Cylinder);
         Assert.Null(m.UnsupportedActiveFeature);
         m.MountAdf(0, new byte[LightweightFloppyDrive.StandardAdfBytes]);

@@ -311,7 +311,6 @@ internal sealed partial class LightweightPaulaAudio
             _hasOutputWord = false;
             _nextSampleCycle = long.MaxValue;
             _hasPrefetch = false;
-            _currentAddress = Location;
             _remainingWords = LengthWords;
             _streamInitialized = true;
             _discardRequest = true;
@@ -369,16 +368,19 @@ internal sealed partial class LightweightPaulaAudio
             if (_dmaInputCycle == cycle)
             {
                 _dmaInputCycle = long.MaxValue;
-                _pendingReload = _remainingWords == 0;
-                _pendingAddress = _pendingReload ? Location : _currentAddress;
-                _pendingRemainingWords = (_pendingReload ? LengthWords : _remainingWords) - 1;
                 _pendingDiscard = _discardRequest;
+                _pendingReload = !_pendingDiscard && _remainingWords == 0;
+                _pendingAddress = _pendingReload ? Location : _currentAddress;
+                _pendingRemainingWords = _pendingDiscard
+                    ? _remainingWords
+                    : (_pendingReload ? LengthWords : _remainingWords) - 1;
                 _dmaOutputCycle = cycle + 2;
             }
             if (_dmaOutputCycle == cycle)
             {
                 _pendingData = machine.ReadChipWordBus(_pendingAddress);
-                _currentAddress = (_pendingAddress + 2) & machine.DmaAddressMask;
+                // The startup restart loads AUDxLC after the discarded bus read.
+                _currentAddress = (_pendingDiscard ? Location : _pendingAddress + 2) & machine.DmaAddressMask;
                 _remainingWords = _pendingRemainingWords;
                 if (_pendingReload && !_pendingDiscard && _hasOutputWord)
                     _delayedInterrupt = true;

@@ -55,6 +55,7 @@ public sealed class LightweightDiskSerialTests
             {
                 drive.WriteControlPins(0xF5, 0);
                 drive.WriteControlPins(0xF4, 0);
+                drive.WriteControlPins(0xF5, 0);
             }
         }
     }
@@ -462,13 +463,13 @@ public sealed class LightweightDiskSerialTests
         machine.WriteCustomRegisterFromCopper(0x09E, 0x0100, machine.Cycle);
         machine.WriteCustomRegisterFromCopper(0x022, 0x1000, machine.Cycle);
         machine.WriteCustomRegisterFromCopper(0x096, 0x8210, machine.Cycle);
-        machine.WriteCustomRegisterFromCopper(0x024, 0x8001, machine.Cycle);
-        machine.WriteCustomRegisterFromCopper(0x024, 0x8001, machine.Cycle);
+        machine.WriteCustomRegisterFromCopper(0x024, 0x8002, machine.Cycle);
+        machine.WriteCustomRegisterFromCopper(0x024, 0x8002, machine.Cycle);
         var first = machine.DiskSerialNextCycle;
         machine.AdvanceHardwareTo(first + 30 * 14); // Only 15 recovered bits.
         Assert.Equal(0u, U32(machine.ChipRam.Span.Slice(0x1000)));
-        Assert.Equal(1, machine.DiskDmaRemaining);
-        machine.AdvanceHardwareTo(first + 31 * 14 + LightweightClock.CpuCyclesPerLine);
+        Assert.Equal(2, machine.DiskDmaRemaining);
+        machine.AdvanceHardwareTo(first + 63 * 14 + LightweightClock.CpuCyclesPerLine);
 
         Assert.Equal(0xFFFF0000u, U32(machine.ChipRam.Span.Slice(0x1000)));
         Assert.False(machine.DiskDmaActive);

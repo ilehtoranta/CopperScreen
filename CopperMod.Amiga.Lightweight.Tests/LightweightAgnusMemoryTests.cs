@@ -174,7 +174,7 @@ public sealed class LightweightAgnusMemoryTests
         m.WriteChipWordDma(0, 0x9876);
         Pointer(m, 0x020, 0x180000);
         Register(m, 0x096, 0x8210);
-        Register(m, 0x024, 0x8001); Register(m, 0x024, 0x8001);
+        Register(m, 0x024, 0x8002); Register(m, 0x024, 0x8002);
         for (var i = 0; i < 16; i++) m.ReceiveDiskBit(0xABCD, false, m.Cycle);
         m.AdvanceHardwareTo(14);
         Assert.Equal(0, m.ReadChipWordDma(0x180000));

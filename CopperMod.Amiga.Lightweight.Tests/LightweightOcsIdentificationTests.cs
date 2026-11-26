@@ -87,7 +87,7 @@ public sealed class LightweightOcsIdentificationTests
     private static LightweightA500Machine AudioDma(int channel, ushort data)
     {
         var machine = new LightweightA500Machine();
-        machine.WriteChipWordDma(0x1000, data);
+        machine.WriteChipWordDma(0, data);
         machine.WriteCustomRegisterFromCopper((ushort)(0x0A2 + channel * 16), 0x1000, 0);
         machine.WriteCustomRegisterFromCopper((ushort)(0x0A4 + channel * 16), 2, 0);
         machine.WriteCustomRegisterFromCopper((ushort)(0x0A6 + channel * 16), 200, 0);
@@ -187,8 +187,8 @@ public sealed class LightweightOcsIdentificationTests
         using var machine = new LightweightA500Machine();
         machine.WriteCustomRegisterFromCopper(0x022, 0x1000, 0);
         machine.WriteCustomRegisterFromCopper(0x096, 0x8210, 0);
-        machine.WriteCustomRegisterFromCopper(0x024, 0x8001, 0);
-        machine.WriteCustomRegisterFromCopper(0x024, 0x8001, 0);
+        machine.WriteCustomRegisterFromCopper(0x024, 0x8002, 0);
+        machine.WriteCustomRegisterFromCopper(0x024, 0x8002, 0);
         for (var bit = 0; bit < 16; bit++) machine.ReceiveDiskBit(0xCAFE, false, 0);
         machine.WriteCustomRegisterFromCopper(0x096, 0x8210, 0);
         // Disk address14 / output16; CPU can accept18. For the long read,

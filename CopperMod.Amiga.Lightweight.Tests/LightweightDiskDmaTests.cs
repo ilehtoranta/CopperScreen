@@ -72,7 +72,7 @@ public sealed class LightweightDiskDmaTests
     [Fact]
     public void CpuCannotUseCompletedDiskOutputCck()
     {
-        using var m = Armed(1);
+        using var m = Armed(2);
         FeedWord(m, 0xCAFE);
         long cycle = 16;
         Assert.Equal(0xCAFE, m.ReadWord(0x1000, ref cycle, M68kBusAccessKind.CpuDataRead));
@@ -82,28 +82,32 @@ public sealed class LightweightDiskDmaTests
     [Fact]
     public void AcceptedWordSurvivesCancelAndPointerWriteButDoesNotCompleteNewTransfer()
     {
-        using var m = Armed(1);
+        using var m = Armed(2);
         FeedWord(m, 0xCAFE);
         m.AdvanceHardwareTo(14);
         Write(m, 0x024, 0x4000);
         Write(m, 0x022, 0x2000);
-        Write(m, 0x024, 0x8001);
-        Write(m, 0x024, 0x8001);
+        Write(m, 0x024, 0x8002);
+        Write(m, 0x024, 0x8002);
         FeedWord(m, 0xBEEF);
+        FeedWord(m, 0xABCD);
         m.AdvanceHardwareTo(16);
         Assert.Equal(0xCAFE, m.ReadChipWordDma(0x1000));
         Assert.Equal(0, m.ReadChipWordDma(0x2000));
-        Assert.Equal(1, m.DiskDmaRemaining);
+        Assert.Equal(2, m.DiskDmaRemaining);
         Assert.Equal(0, m.Intreq & 2);
         m.AdvanceHardwareTo(20);
         Assert.Equal(0xBEEF, m.ReadChipWordDma(0x2000));
+        Assert.Equal(0, m.Intreq & 2);
+        m.AdvanceHardwareTo(24);
+        Assert.Equal(0xABCD, m.ReadChipWordDma(0x2002));
         Assert.Equal(2, m.Intreq & 2);
     }
 
     [Fact]
     public void CancelBeforeAddressAcceptanceDropsQueuedWord()
     {
-        using var m = Armed(1);
+        using var m = Armed(2);
         FeedWord(m, 0xFFFF);
         m.AdvanceHardwareTo(12);
         Write(m, 0x024, 0x4000);
@@ -118,7 +122,7 @@ public sealed class LightweightDiskDmaTests
     [InlineData(0x0200)]
     public void DmaDisablePausesQueuedWordButNotAcceptedWord(int mask)
     {
-        using var m = Armed(1);
+        using var m = Armed(2);
         FeedWord(m, 0xBEEF);
         Write(m, 0x096, (ushort)mask);
         m.AdvanceHardwareTo(16);
@@ -128,7 +132,33 @@ public sealed class LightweightDiskDmaTests
         Write(m, 0x096, (ushort)mask);
         m.AdvanceHardwareTo(20);
         Assert.Equal(0xBEEF, m.ReadChipWordDma(0x1000));
+        Assert.Equal(0, m.Intreq & 2);
+        Assert.Equal(1, m.DiskDmaRemaining);
+        Write(m, 0x096, (ushort)(0x8000 | mask));
+        FeedWord(m, 0xABCD);
         Assert.Equal(2, m.Intreq & 2);
+        Assert.Equal(0x1002u, m.GetDiskPointer());
+    }
+
+    [Theory]
+    [InlineData(0, true)]
+    [InlineData(14, true)]
+    [InlineData(16, false)]
+    public void LastReadWordRequiresAnEarlierWordInTheFifo(long cycle, bool preserved)
+    {
+        using var m = Armed(2);
+        m.WriteChipWordDma(0x1002, 0xA55A);
+        FeedWord(m, 0xCAFE);
+        m.AdvanceHardwareTo(cycle);
+        FeedWord(m, 0xBEEF);
+        Assert.Equal(preserved ? 0 : 2, m.Intreq & 2);
+        m.AdvanceHardwareTo(20);
+        Assert.Equal(0xCAFE, m.ReadChipWordDma(0x1000));
+        Assert.Equal(preserved ? 0xBEEF : 0xA55A, m.ReadChipWordDma(0x1002));
+        Assert.Equal(preserved ? 0x1004u : 0x1002u, m.GetDiskPointer());
+        Assert.Equal(0, m.DiskDmaRemaining);
+        Assert.Equal(2, m.Intreq & 2);
+        Assert.False(m.DiskDmaActive);
     }
 
     [Fact]
@@ -148,7 +178,7 @@ public sealed class LightweightDiskDmaTests
     [Fact]
     public void UnalignedSubsequentMatchRestartsWordBoundary()
     {
-        using var m = Armed(1, sync: true);
+        using var m = Armed(2, sync: true);
         m.ReceiveDiskBit(0x4489, true, m.Cycle);
         for (var i = 0; i < 7; i++) m.ReceiveDiskBit(0, false, m.Cycle);
         m.ReceiveDiskBit(0x4489, true, m.Cycle);
@@ -166,7 +196,7 @@ public sealed class LightweightDiskDmaTests
     [InlineData(142100, 142116)] // Queued word crosses the PAL long-field boundary.
     public void NewlyReadyWordWaitsForAFutureAddressPhase(long ready, long input)
     {
-        using var m = Armed(1);
+        using var m = Armed(2);
         m.AdvanceHardwareTo(ready);
         FeedWord(m, 0xABCD);
         Assert.Equal(input, m.DiskDmaNextCycle);
@@ -179,7 +209,7 @@ public sealed class LightweightDiskDmaTests
     [Fact]
     public void PointerWrapsWithinChipRamAndResetRevokesPendingHardware()
     {
-        using var m = Armed(2);
+        using var m = Armed(3);
         Write(m, 0x020, 0xFFFF);
         Write(m, 0x022, 0xFFFF);
         FeedWord(m, 0xA55A);
@@ -197,9 +227,9 @@ public sealed class LightweightDiskDmaTests
     }
 
     [Theory]
-    [InlineData(32)]
-    [InlineData(6334)]
-    public void ActualAdfSerialInputTransfersFollowingWordAndCompletesWithoutAllocation(int words)
+    [InlineData(32, 32)]
+    [InlineData(6334, 6333)]
+    public void ActualAdfSerialInputTransfersFollowingWordAndCompletesWithoutAllocation(int words, int storedWords)
     {
         using var m = Armed(words, sync: true);
         var image = new byte[LightweightFloppyDrive.StandardAdfBytes];
@@ -218,20 +248,20 @@ public sealed class LightweightDiskDmaTests
         allocated = GC.GetAllocatedBytesForCurrentThread() - allocated;
         Assert.Equal(0, allocated);
         Assert.Equal(0x4489, m.ReadChipWordDma(0x1000)); // Second sync in sector header.
-        for (var word = 0; word < words; word++)
+        for (var word = 0; word < storedWords; word++)
         {
             var offset = (6 + word * 2) % expectedDrive.Track.Length;
             var expected = (expectedDrive.Track[offset] << 8) | expectedDrive.Track[offset + 1];
             Assert.Equal(expected, m.ReadChipWordDma((uint)(0x1000 + word * 2)));
         }
-        Assert.Equal((uint)(0x1000 + 2 * words), m.GetDiskPointer());
+        Assert.Equal((uint)(0x1000 + 2 * storedWords), m.GetDiskPointer());
         Assert.Equal(0, m.DiskDmaRemaining);
         Assert.Equal(2, m.Intreq & 2);
         Assert.Null(m.UnsupportedActiveFeature);
     }
 
     [Fact]
-    public void DiskCompletionWakesStoppedCpuThroughLevelOneAutovector()
+    public void EmptyFifoReadCompletionWakesStoppedCpuThroughLevelOneAutovector()
     {
         using var m = new LightweightA500Machine();
         m.WriteChipWordDma(0x1000, 0x4E72);
@@ -253,7 +283,7 @@ public sealed class LightweightDiskDmaTests
         Assert.False(m.Cpu.Stopped);
         Assert.Equal(1, (m.Cpu.StatusRegister >> 8) & 7);
         Assert.InRange(m.Cpu.ProgramCounter, 0x1100u, 0x1104u);
-        Assert.Equal(0xA55A, m.ReadChipWordDma(0x2000));
+        Assert.Equal(0, m.ReadChipWordDma(0x2000));
     }
 
     [Fact]

@@ -827,6 +827,37 @@ public sealed class LightweightBlitterTests
         Assert.Equal(start + 26, machine.BlitterLastTerminationCycle);
     }
 
+    [Theory]
+    [InlineData(0x0042, new int[] { 0, 2, 4, 6, 12, 14 })]
+    [InlineData(0x00C1, new int[] { 0, 2, 4, 6, 12, 18, 24 })]
+    [InlineData(0x00C3, new int[] { 0, 2, 4, 6, 12, 14, 16, 22, 24, 26, 32, 34, 36 })]
+    public void OcsDestinationOnlyRestartDrainsThePriorResultsBeforeTheNewRows(
+        ushort newSize, int[] expectedOffsets)
+    {
+        using var machine = new LightweightA500Machine();
+        var destination = DestinationD + 0x3FE;
+        for (var offset = 0; offset < 0x400; offset += 2)
+            machine.WriteChipWordDma(destination - (uint)offset, 0x55AA);
+        ConfigureArea(machine, 0x0100, bltcon1: 0x0002);
+        WritePointer(machine, LightweightRegisters.Bltdpth, destination);
+        WriteRegister(machine, LightweightRegisters.Bltdmod, 4);
+        EnableBlitter(machine, nasty: true);
+        var start = StartBlit(machine, 0x0551);
+
+        WriteRegisterAt(machine, LightweightRegisters.Bltsize, newSize, start + 18);
+        Assert.True(machine.BlitterActive);
+        AdvanceUntilBlitterIdle(machine);
+
+        var clearedOffsets = new List<int>();
+        for (var offset = 0; offset < 0x400; offset += 2)
+        {
+            var word = machine.ReadChipWordDma(destination - (uint)offset);
+            if (word == 0) clearedOffsets.Add(offset);
+            else Assert.Equal(0x55AA, word);
+        }
+        Assert.Equal(expectedOffsets, clearedOffsets);
+    }
+
     [Fact]
     public void EnabledChannelsPauseWithDmaOffAndResumeFromSameStartupPhase()
     {

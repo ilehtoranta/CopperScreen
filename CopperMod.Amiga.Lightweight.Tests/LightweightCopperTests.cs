@@ -7,6 +7,34 @@ public sealed class LightweightCopperTests
 {
     private const uint ListAddress = 0x2000;
 
+    [Fact]
+    public void ActiveOcsFrameRestartReservesTheFirstOddSlotBeforeFetchingTheNewList()
+    {
+        using var machine = new LightweightA500Machine();
+        var cycle = StartCopper(machine, (0x0180, 0x00F0), (0xFFFF, 0xFFFE));
+        machine.AdvanceHardwareTo(cycle + 64);
+        machine.WriteChipWordDma(ListAddress + 8, 0xA55A);
+        machine.WriteChipWordDma(0x3000, 0x0180);
+        machine.WriteChipWordDma(0x3002, 0x0F00);
+        machine.WriteChipWordDma(0x3004, 0xFFFF);
+        machine.WriteChipWordDma(0x3006, 0xFFFE);
+        WriteControl(machine, LightweightRegisters.Cop1lcl, 0x3000);
+
+        var field = LightweightClock.PalLongFieldCycles;
+        machine.AdvanceHardwareTo(field);
+        Assert.Equal(ListAddress + 8, machine.CopperProgramCounter);
+        Assert.Equal(field + 2, machine.CopperPendingOutputCycle);
+        machine.AdvanceHardwareTo(field + 2);
+        Assert.Equal(field + 2, machine.CopperLastOutputCycle);
+        Assert.Equal(0x3000u, machine.CopperProgramCounter);
+
+        long cpuCycle = field + 2;
+        machine.ReadWord(0x4000, ref cpuCycle, M68kBusAccessKind.CpuDataRead);
+        Assert.Equal(field + 18, cpuCycle);
+        Assert.Equal(field + 12, machine.CopperLastInstructionFirstInputCycle);
+        Assert.Equal((ushort)0x0F00, machine.GetCustomRegister(0x0180));
+    }
+
     // vAmigaTS Agnus/Copper/lc (0489f55), lc1/lc2/lc3 and A500 hardware
     // photographs: a VSYNC restart held by disabled DMA follows later COP1LC
     // writes until Copper can execute. lc4 distinguishes a later ordinary pause.
@@ -432,6 +460,12 @@ public sealed class LightweightCopperTests
             0,
             ref cycle,
             M68kBusAccessKind.CpuDataWrite);
-        return cycle;
+        // Anchor the following instruction and contention assertions to IR1's
+        // accepted input. The restart itself has its own phase tests.
+        var deadline = cycle + 64;
+        while (machine.CopperLastInstructionFirstInputCycle < cycle && machine.Cycle < deadline)
+            machine.AdvanceHardwareTo(machine.Cycle + 2);
+        Assert.InRange(machine.CopperLastInstructionFirstInputCycle, cycle, deadline);
+        return machine.Cycle;
     }
 }

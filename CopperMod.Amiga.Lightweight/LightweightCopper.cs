@@ -19,14 +19,19 @@ internal sealed class LightweightCopper
         SkipDelay,
         SkipCompare,
         End,
-        FrameRestart
+        FrameRestart,
+        JumpDelay,
+        JumpFirstSlot,
+        JumpRestart,
+        LoadJumpPointer
     }
 
     private enum WordPurpose : byte
     {
         First,
         Second,
-        FrameRestart
+        FrameRestart,
+        JumpRestart
     }
 
     private const ushort DmaconMaster = 0x0200;
@@ -48,6 +53,8 @@ internal sealed class LightweightCopper
     private bool _skipNextMove;
     private bool _beamStopped;
     private bool _dmaEnabled;
+    private bool _jumpSecondList;
+    private uint _jumpDummyAddress;
 
     internal long NextCycle { get; private set; } = long.MaxValue;
     internal long PendingOutputCycle => _pendingOutputCycle;
@@ -74,6 +81,8 @@ internal sealed class LightweightCopper
         _skipNextMove = false;
         _beamStopped = false;
         _dmaEnabled = false;
+        _jumpSecondList = false;
+        _jumpDummyAddress = 0;
         NextCycle = long.MaxValue;
         LastOutputCycle = long.MinValue;
         LastAcceptedInputCycle = long.MinValue;
@@ -109,35 +118,41 @@ internal sealed class LightweightCopper
         long cycle,
         LightweightA500Machine machine)
     {
-        if (offset == LightweightRegisters.Copjmp1)
-        {
-            Restart(machine.GetCopperListPointer(secondList: false), cycle);
-        }
-        else if (offset == LightweightRegisters.Copjmp2)
-        {
-            Restart(machine.GetCopperListPointer(secondList: true), cycle);
-        }
+        if (offset is not (LightweightRegisters.Copjmp1 or LightweightRegisters.Copjmp2))
+            return;
 
-        if (_dmaEnabled &&
-            offset is LightweightRegisters.Copjmp1 or LightweightRegisters.Copjmp2)
+        var previousAddress = _stage is ControlStage.JumpDelay or ControlStage.JumpFirstSlot or
+            ControlStage.JumpRestart or ControlStage.LoadJumpPointer ? _jumpDummyAddress : _programCounter;
+        var secondList = offset == LightweightRegisters.Copjmp2;
+        Restart(machine.GetCopperListPointer(secondList), cycle);
+        if (_dmaEnabled)
         {
+            if (!machine.IsEcsAgnus)
+            {
+                _jumpSecondList = secondList;
+                _jumpDummyAddress = previousAddress;
+                _stage = ControlStage.JumpDelay;
+            }
             ActivateAfter(cycle);
         }
     }
 
     internal void OnFrameStart(long cycle, LightweightA500Machine machine)
     {
-        var previousProgramCounter = _programCounter;
-        Restart(machine.GetCopperListPointer(secondList: false), cycle);
-        if (_dmaEnabled && !machine.IsEcsAgnus)
+        if (!machine.IsEcsAgnus)
         {
             // The vertical strobe starts a dummy read at the old Copper PC
-            // before the first output from COP1LC on OCS.
-            _programCounter = previousProgramCounter;
+            // before the first output from COP1LC on OCS. The automatic
+            // strobe can reserve the H0 input phase; its H1 output reads the
+            // old pointer before COP1LC is loaded.
+            Restart(_programCounter, cycle);
             _stage = ControlStage.FrameRestart;
-            NextCycle = cycle;
+            NextCycle = _dmaEnabled && !_beamStopped ? cycle : _pendingOutputCycle;
+            return;
         }
-        else if (_dmaEnabled)
+
+        Restart(machine.GetCopperListPointer(secondList: false), cycle);
+        if (_dmaEnabled)
         {
             ActivateAfter(cycle);
         }
@@ -179,9 +194,26 @@ internal sealed class LightweightCopper
 
         var horizontal = machine.BeamColorClock;
         var phase = ClassifyInput(horizontal, TPath.EnhancedDisplay ? machine.ColorClocksPerLine : 227);
-        if (phase == CopperInputPhase.Normal)
+        switch (_stage)
         {
-            AdvanceControlInput(cycle, machine);
+            case ControlStage.JumpDelay:
+                // The strobe crosses one CCK before it can request a restart.
+                _stage = phase == CopperInputPhase.Normal ? ControlStage.JumpRestart : ControlStage.JumpFirstSlot;
+                break;
+            case ControlStage.JumpFirstSlot:
+                // When the strobe reaches the first input before a RAM grant
+                // has been reserved, only the internal pointer load retires.
+                _stage = phase == CopperInputPhase.Normal && !HasPendingOutput &&
+                    machine.CanCopperOwnOutputSlot(cycle + LightweightClock.CpuCyclesPerColorClock, normalInputPhase: true)
+                    ? ControlStage.LoadJumpPointer : ControlStage.JumpRestart;
+                break;
+            case ControlStage.LoadJumpPointer:
+                LoadJumpPointer(machine);
+                break;
+            default:
+                if (phase == CopperInputPhase.Normal)
+                    AdvanceControlInput(cycle, machine);
+                break;
         }
         // The 227-CCK wrap dummy consumes no instruction address. Its
         // undocumented data-bus value is deliberately not exposed in H2.
@@ -214,6 +246,9 @@ internal sealed class LightweightCopper
         {
             case ControlStage.FrameRestart:
                 TryAcceptWord(cycle, WordPurpose.FrameRestart, machine);
+                break;
+            case ControlStage.JumpRestart:
+                TryAcceptWord(cycle, WordPurpose.JumpRestart, machine);
                 break;
             case ControlStage.ReadFirst:
                 TryAcceptWord(cycle, WordPurpose.First, machine);
@@ -261,10 +296,11 @@ internal sealed class LightweightCopper
         }
 
         _pendingPurpose = purpose;
-        _pendingAddress = _programCounter;
+        _pendingAddress = purpose == WordPurpose.JumpRestart ? _jumpDummyAddress : _programCounter;
         _pendingOutputCycle = outputCycle;
         _pendingGeneration = _decodeGeneration;
-        _programCounter = MaskAddress(_programCounter + 2);
+        if (purpose is WordPurpose.First or WordPurpose.Second)
+            _programCounter = MaskAddress(_programCounter + 2);
 #if LIGHTWEIGHT_DIAGNOSTICS
         LastAcceptedInputCycle = inputCycle;
         if (purpose == WordPurpose.First)
@@ -298,6 +334,10 @@ internal sealed class LightweightCopper
         {
             DecodeInstruction(value, cycle, machine);
         }
+        else if (purpose == WordPurpose.JumpRestart)
+        {
+            LoadJumpPointer(machine);
+        }
         else
         {
             // The restart's retained RAM output is a dummy read, not IR1.
@@ -305,6 +345,12 @@ internal sealed class LightweightCopper
             _programCounter = MaskAddress(machine.GetCopperListPointer(secondList: false));
             _stage = ControlStage.ReadFirst;
         }
+    }
+
+    private void LoadJumpPointer(LightweightA500Machine machine)
+    {
+        _programCounter = MaskAddress(machine.GetCopperListPointer(_jumpSecondList));
+        _stage = ControlStage.ReadFirst;
     }
 
     private void DecodeInstruction(
