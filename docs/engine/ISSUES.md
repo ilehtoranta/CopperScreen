@@ -971,6 +971,48 @@ the branch control. It finishes 39 fields early and matches 18,541 of
 startup follow-up are under
 `artifacts/the-company/drift-investigation/from-dev2/fill-deadline/startup-followup/`.
 
+The startup-fixed combined build reaches the target rotation already
+ahead of WinUAE. In the preceding raster, the third fill starts 54 CPU
+clocks early and the guest writes the next rotation delay 60 clocks
+early. The angle write in the target raster is 98 clocks early and the
+first line blit is 108 clocks early. The target third fill inherits
+114 clocks of lead.
+
+The preceding raster contains a separate MC68000 bus-order error. At
+`$031FDC`, `MOVE.W $03A7D0.L,D2` reads the source after fetching the
+queued successor's extension. WinUAE fetches the successor opcode,
+reads the source, and then refills the queue. Copper68k uses that order
+for this timed MOVE form. The waited operand regression fails on the
+old scalar, kind-table and packed dispatch paths and passes on all
+three with the correction. The full replay reproduces all 31,311
+starting capture rows, including the 114-clock fill lead.
+
+In a shared-request comparison later in the preceding raster, the
+channel 1 Paula transfer at line 208 CCK 19 displaces a line-blitter
+write in Lightweight. The CPU requests `$C31092` at CCK 20 in both
+emulators. WinUAE grants it at CCK 20 and Lightweight grants it at
+CCK 22. In the WinUAE DMAL trace, channel 1 requests the corresponding
+address `$04EC04` on line 209. The isolated Paula startup-discard fix
+from `0139fda` corrects the audio addresses in the replay. Its channel 1
+request phase still differs from WinUAE.
+
+Applying that Paula correction alone to the frozen engine restores
+the ready word at elapsed fields 18,359 and 18,360. Fields 18,355
+through 18,366 all match in RGB. The third fill starts 1,208 CPU clocks
+late in this replay. The guest services the Copper interrupt before
+clearing the ready flag. The full replay finishes four fields late,
+with 19,815 of 30,498 jointly active fields exact at equal emulator
+counters. The next sustained pixel divergence begins at field 18,640.
+Adding the absolute-long word MOVE correction produces the same
+capture byte for byte. A control with the indexed MOVE and EXG CPU
+also finishes four fields late with the Paula patch. That control
+leaves the field 18,359 ready word different and matches 19,850
+active RGB fields.
+
+A fresh WinUAE run reproduced all 31,385 hashes and the field
+telemetry byte for byte. The timings and full comparisons are under
+`artifacts/the-company/fill-114/`.
+
 | ID | Resolution to preserve | Coverage / remaining boundary |
 | --- | --- | --- |
 | LWA-EXEC-001 | Advance canonical hardware time through accepted interrupt-entry retirement. | `LightweightInterruptProgressTests`; native stall repaired, not full Hired Guns certification. |
