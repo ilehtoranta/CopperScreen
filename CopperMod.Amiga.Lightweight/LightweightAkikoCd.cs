@@ -41,13 +41,14 @@ internal sealed class LightweightAkikoCd(int clockFrequency) : IDisposable
     private bool _sendSubcode;
     private bool _subcodePending;
     private long _commandCycle = Never, _noticeCycle = Never, _sectorCycle = Never, _transferCycle = Never;
-    private long _txAllowed, _rxAllowed;
+    private int _txHoldLines, _rxHoldLines;
     private long _audioCycle = Never, _pauseCycle, _pausedDeadline;
     private int _audioLba, _audioEnd, _audioRemainder;
     private bool _audioStartNotice;
     private byte? _audioEndNotice;
     private bool _playing, _paused, _audioHasSector;
 
+    internal bool SectorTransferInProgress => _dataSlot >= 0;
     internal bool IsMounted => _image is not null;
     internal bool TurboReads { get; set; }
     internal int TodLinesPerPulse => (_control & 0x0080_0000) != 0 ? 262 : 313;
@@ -80,7 +81,7 @@ internal sealed class LightweightAkikoCd(int clockFrequency) : IDisposable
         _subcodePosition = 0xC2;
         _received = _responseLength = _responseIndex = _blocks = 0;
         _lastLba = 0;
-        _txAllowed = _rxAllowed = 0;
+        _txHoldLines = _rxHoldLines = 0;
         _led = false;
         _commandCycle = _transferCycle = Never;
         _mediaChange = IsMounted;
@@ -130,12 +131,12 @@ internal sealed class LightweightAkikoCd(int clockFrequency) : IDisposable
                 break;
             case 0x1D:
                 _txEnd = data;
-                _txAllowed = cycle + 3 * LineCycles;
+                _txHoldLines = 3;
                 _requests &= ~TxDone;
                 break;
             case 0x1F:
                 _rxEnd = data;
-                _rxAllowed = cycle + 3 * LineCycles;
+                _rxHoldLines = 3;
                 _requests &= ~RxDone;
                 break;
             case 0x20:
@@ -155,10 +156,20 @@ internal sealed class LightweightAkikoCd(int clockFrequency) : IDisposable
                 break;
             case 0x28 when (_control & TxDma) == 0:
                 _requests &= ~DriveTx;
-                if (CanReceiveCommand) ReceiveCommandByte(data, cycle);
+                if (CanReceiveCommand) ReceiveCommandByte(data, cycle + LineCycles);
                 break;
         }
         UpdateTransfer(cycle);
+    }
+
+    internal bool OnLineCompleted(long cycle)
+    {
+        // The comparator hold counts horizontal syncs following the write.
+        var txReleased = _txHoldLines != 0 && --_txHoldLines == 0;
+        var rxReleased = _rxHoldLines != 0 && --_rxHoldLines == 0;
+        if (!txReleased && !rxReleased) return false;
+        UpdateTransfer(cycle);
+        return true;
     }
 
     internal void Step(long cycle, LightweightA500Machine machine)
@@ -201,10 +212,10 @@ internal sealed class LightweightAkikoCd(int clockFrequency) : IDisposable
     {
         var nextSlot = LightweightBusArbiter.AlignToSlot(cycle + 1);
         _transferCycle = Never;
-        if ((_control & (TxDma | SectorRead)) == TxDma && _tx != _txEnd && CanReceiveCommand)
-            _transferCycle = Math.Max(nextSlot, LightweightBusArbiter.AlignToSlot(_txAllowed));
-        if ((_control & RxDma) != 0 && _rx != _rxEnd && _responseLength != 0)
-            _transferCycle = Math.Min(_transferCycle, Math.Max(nextSlot, LightweightBusArbiter.AlignToSlot(_rxAllowed)));
+        if ((_control & (TxDma | SectorRead)) == TxDma && _txHoldLines == 0 && _tx != _txEnd && CanReceiveCommand)
+            _transferCycle = nextSlot;
+        if ((_control & RxDma) != 0 && _rxHoldLines == 0 && _rx != _rxEnd && _responseLength != 0)
+            _transferCycle = nextSlot;
         if (_dataSlot >= 0 || _subcodePending) _transferCycle = nextSlot;
     }
 
@@ -212,27 +223,29 @@ internal sealed class LightweightAkikoCd(int clockFrequency) : IDisposable
 
     private void Transfer(long cycle, LightweightA500Machine machine)
     {
-        if ((_control & RxDma) != 0 && cycle >= _rxAllowed && _responseLength != 0 && _rx != _rxEnd)
+        if ((_control & RxDma) != 0 && _rxHoldLines == 0 && _responseLength != 0 && _rx != _rxEnd)
         {
             machine.WriteAkikoDmaByte(_ringsBase + _rx, TakeResponse(cycle));
             _rx = unchecked((byte)(_rx + 1));
             if (_rx == _rxEnd) _requests |= RxDone;
         }
-        else if ((_control & (TxDma | SectorRead)) == TxDma && cycle >= _txAllowed &&
+        else if ((_control & (TxDma | SectorRead)) == TxDma && _txHoldLines == 0 &&
             CanReceiveCommand && _tx != _txEnd)
         {
+            _txHoldLines = 1;
             ReceiveCommandByte(machine.ReadAkikoDmaByte((_ringsBase | 0x200) + _tx), cycle);
             _tx = unchecked((byte)(_tx + 1));
             if (_tx == _txEnd) _requests |= TxDone;
+            if (_commandCycle == cycle) ExecuteCommand(cycle);
         }
         else if (_dataSlot >= 0 || _subcodePending) TransferSectorWord(machine);
     }
 
-    private void ReceiveCommandByte(byte value, long cycle)
+    private void ReceiveCommandByte(byte value, long completionCycle)
     {
         _command[_received++] = value;
         var length = (_command[0] & 15) switch { 4 => 13, 5 => 3, <= 7 => 2, _ => 1 };
-        if (_received == length) _commandCycle = cycle + LineCycles;
+        if (_received == length) _commandCycle = completionCycle;
         else _requests |= DriveTx;
     }
 
@@ -310,9 +323,12 @@ internal sealed class LightweightAkikoCd(int clockFrequency) : IDisposable
             var seekSteps = distance < 100 ? 1 : Math.Min(100, 10 + distance / 1000);
             _lba = lba;
             _sectorRate = (_command[8] & 0x40) == 0 ? 75 : 150;
-            _sectorRemainder = 0;
             _sectorNumber = 0;
-            _sectorCycle = cycle + (TurboReads ? LineCycles : (long)clockFrequency * seekSteps / _sectorRate);
+            // Consume seek opportunities on the running spindle clock.
+            var firstSector = cycle * _sectorRate / clockFrequency + seekSteps + 1;
+            var firstSectorTicks = firstSector * clockFrequency;
+            _sectorCycle = TurboReads ? cycle + LineCycles : firstSectorTicks / _sectorRate;
+            _sectorRemainder = (int)(firstSectorTicks % _sectorRate);
             ReturnStatus(tag, 2);
         }
         else if (lba < 0)

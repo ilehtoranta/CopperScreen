@@ -385,12 +385,18 @@ public sealed class LightweightCd32Tests
         cd.Long(0x14, rings);
         cd.Long(0x08, 0x18000000);
         cd.Long(0x24, 0x60000000);
+        const int lineCycles = LightweightClock.CpuCyclesPerLine;
+        cd.Advance(machine.LineStartCycle + lineCycles + lineCycles / 2 - machine.Cycle);
         cd.Byte(0x1D, 2);
         cd.Byte(0x1F, 2);
-        cd.Advance(3 * 454 - 1);
+        long firstTransmitLine = machine.LineStartCycle + 3 * lineCycles;
+        cd.Advance(firstTransmitLine - machine.Cycle - 8);
         Assert.Equal(0, cd.Byte(0x19));
         Assert.Equal(0, cd.Byte(0x1A));
-        cd.Advance(700);
+        cd.Advance(firstTransmitLine + 64 - machine.Cycle);
+        Assert.Equal(1, cd.Byte(0x19));
+        Assert.Equal(0, cd.Byte(0x1A));
+        cd.Advance(lineCycles);
         Assert.Equal(2, cd.Byte(0x19));
         Assert.Equal(2, cd.Byte(0x1A));
         cycle = machine.Cycle;
@@ -432,7 +438,9 @@ public sealed class LightweightCd32Tests
             cd.SendPacket([0x34, 0, 0x02, 0, 0, 0x02, 2, 0x80, 0, 0, 0, 0]);
             Assert.Equal(new byte[] { 0x34, 2, 0xC9 }, cd.ReadPacket(3));
 
-            cd.Advance(90_000);
+            // The first sector opportunity is spent on the seek.
+            long firstSectorCycle = 2L * machine.MotherboardClockHz / 75;
+            cd.Advance(firstSectorCycle - machine.Cycle - 8);
             Assert.Equal(0x8001, cd.Word(0x20));
             Assert.Equal(0, DmaWord(0x2F010));
             cd.Advance(10_000);

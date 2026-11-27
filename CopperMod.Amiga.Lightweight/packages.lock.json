@@ -4,9 +4,9 @@
     "net10.0": {
       "Copper68k": {
         "type": "Direct",
-        "requested": "[1.5.15, 1.5.15]",
-        "resolved": "1.5.15",
-        "contentHash": "4PO4vugSD7PUOvLzBoS0emKdaBC2i/Gnniqrwe8aZGoLFdvom0OIg43eH/SY3v/ieM16PsL0xfr/GZMKVwvaPQ==",
+        "requested": "[1.5.16, 1.5.16]",
+        "resolved": "1.5.16",
+        "contentHash": "us1ti+BxAWrW4EWnajjM/nNYx79OOEZQeXMce0rgjDOnDXub4pFN1PT2ADot1ODQ4n8hdxuUd9gkOketeqxDUQ==",
         "dependencies": {
           "CopperFloat": "[1.0.0]"
         }

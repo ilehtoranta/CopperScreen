@@ -509,6 +509,9 @@ internal sealed class LightweightBlitter
         }
     }
 
+    internal bool HasCpuRequestAt(long cycle)
+        => _cpuRequestPending && cycle == _cpuRequestCandidateCycle;
+
     internal void BeginCpuRequest(long candidateCycle)
     {
         _cpuRequestPending = true;

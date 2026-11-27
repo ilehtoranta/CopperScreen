@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.5.15</Copper68kBoundaryVersion>
+    <Copper68kBoundaryVersion Condition="'$(Copper68kBoundaryVersion)' == ''">1.5.16</Copper68kBoundaryVersion>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <RestoreAdditionalProjectSources Condition="Exists('$(MSBuildThisFileDirectory)artifacts/filesystem-service-feed')">$(RestoreAdditionalProjectSources);$(MSBuildThisFileDirectory)artifacts/filesystem-service-feed</RestoreAdditionalProjectSources>
   </PropertyGroup>

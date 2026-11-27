@@ -159,7 +159,8 @@ public sealed partial class LightweightA500Machine
     }
 
     internal bool CanAkikoOwnOutput(long cycle)
-        => !IsHigherPriorityOutputOwned(cycle) && _blitter.LastBusOutputCycle != cycle;
+        => !IsHigherPriorityOutputOwned(cycle) && _blitter.LastBusOutputCycle != cycle &&
+            (!_akiko!.Cd.SectorTransferInProgress || !_blitter.HasCpuRequestAt(cycle));
 
     internal bool AkikoOwnsOutput(long cycle) => _akiko?.Cd.LastOutputCycle == cycle;
 

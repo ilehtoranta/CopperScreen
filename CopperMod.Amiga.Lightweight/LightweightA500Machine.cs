@@ -609,7 +609,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
             var previousCycle = state.Cycles;
             cpu.ExecuteInstruction();
-            if (state.Cycles <= previousCycle)
+            // Cached EC020 instructions can retire while the board is still in
+            // the same cycle. The instruction boundary still advances.
+            if (state.Cycles <= previousCycle &&
+                (state.Cycles < previousCycle || _configuration.CpuModel != M68kCpuModel.M68EC020 ||
+                 state.ProgramCounter == state.LastInstructionProgramCounter))
             {
                 throw new InvalidOperationException(
                     "The CPU core did not advance the lightweight clock.");
@@ -1591,7 +1595,11 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_clock.Line == 25) _lightPenLatched = false;
         if (_ciaB.TodRunning)
             HandleCiaInterrupt(ciaA: false, _ciaB.PulseTod(cycle));
-        if (_akiko is not null) PulseCd32Tod(cycle);
+        if (_akiko is not null)
+        {
+            PulseCd32Tod(cycle);
+            if (_akiko.Cd.OnLineCompleted(cycle)) RefreshStorageSchedule(cycle);
+        }
     }
 
     internal void OnFrameCompleted(long cycle)

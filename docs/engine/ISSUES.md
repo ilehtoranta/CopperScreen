@@ -25,6 +25,22 @@ Published Copper68k 1.5.15 removes two multi-field gaps and reduces the
 longest later gap to two fields. WinUAE's area-averaged reference accounts
 for most of the quiet-cue peak difference. Later gaps, small stereo
 differences and full decoder timing parity remain open.
+The [CD buffer and task trace](CD32.md#first-cd-buffer-return-and-late-read-wakeup)
+places both first buffer returns after LBA 416 around movie tick 50.
+An Akiko response during an Exec task switch delays the later LBA 2081
+read by a field. A scanline-timed response removes that wait and increases
+the stereo gaps earlier in the passage. The [paired PCM and sector-copy
+traces](CD32.md#effect-of-the-earlier-akiko-response-on-the-pcm-ring) show
+the tick 2532 decoder starting 4.32 ms later when more CD copies run before
+it. The [sector backlog trace](CD32.md#sector-backlog-before-movie-tick-2532)
+identifies the earlier video return and task preemption that let WinUAE
+drain LBAs 2093–2095 sooner. Giving a pending CPU bus request priority over
+sector DMA clears both target windows in a local Release candidate and
+introduces a window at tick 2526 in each channel. The follow-up sector
+clock and command timing correction clears all three one-millisecond
+windows in both channels in the [Release replay with published
+Copper68k 1.5.16](CD32.md#copper68k-1516-release-verification).
+Four samples still fall below the comparison threshold at tick 2526.
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
