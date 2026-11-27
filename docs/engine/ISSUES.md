@@ -1046,6 +1046,47 @@ A fresh seeded WinUAE capture reproduced all 31,385 reference hashes
 and the field telemetry. The bus trace and same-counter comparison
 are under `artifacts/the-company/field-18640/`.
 
+The next replay traces the two late pixel differences to the timed
+MC68000 `CLR.W` with an absolute-long destination. The demo clears
+`COPJMP1` at `$03073A` and `$0307A6`. Both the operand read and
+the write strobe the Copper. WinUAE refills the instruction queue
+between the two strobes. The RTS-fixed Copper68k build writes the
+zero before that refill. The correction samples IPL before the
+operand read and puts the refill before the write. A waited-refill
+regression checks the bus order in scalar, kind-table and packed
+dispatch. [WinUAE MC68000 CLR generator](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/gencpu.cpp#L6134)
+
+The frozen RTS replay with the CLR correction matches 30,481 of
+30,498 active fields in the common 724 by 287 viewport. Both runs
+enter at emulator field 1,692 and finish at field 32,190. Fields
+19,841 and 22,685 now match at their original counters and no
+previously matching field changes. The WinUAE reference was
+recaptured and reproduced all 31,385 hashes and its telemetry.
+The current Copper restart timing on its own also fixes field 19,841.
+Combining it with the CLR correction produces the same count of
+matching fields. The two ready-word differences remain.
+
+The remaining traces identify several different discrepancies.
+Fields 7,321, 8,921, 10,017, 12,120 and 13,719 use low chip RAM
+from Kickstart's floppy-track buffer during Copper list transitions.
+Their sampled bitplane DMA addresses and clocks agree. The data
+already differs before demo entry. The cold-boot write trace links
+the bytes at `$0019E2` and `$00206A` to the Kickstart trackdisk
+routine. WinUAE randomizes the initial position of an inserted
+ADF. Lightweight starts each spindle run at bit zero. Changing
+only WinUAE's random seed also changes the captured track-buffer
+bytes before demo entry. The full comparison retains seed 2.
+[WinUAE ADF insertion](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/disk.cpp#L1763)
+
+At fields 10,611 and 12,714 the display reads four and
+five words respectively before the guest clears them. WinUAE has
+already cleared those words. The steady clearing rate agrees, with
+the affected Lightweight writes 98 and 122 CPU clocks later.
+Field 17,810 shows the reverse race. Lightweight clears one word
+before the display fetch and WinUAE clears it afterward. The
+remaining list transition and rotation differences still require
+timing fixes. Reports are under `artifacts/the-company/remaining-19/`.
+
 | ID | Resolution to preserve | Coverage / remaining boundary |
 | --- | --- | --- |
 | LWA-EXEC-001 | Advance canonical hardware time through accepted interrupt-entry retirement. | `LightweightInterruptProgressTests`; native stall repaired, not full Hired Guns certification. |
