@@ -12,7 +12,7 @@ internal struct LightweightDiskSerial
     internal const int TrackBits = AmigaDosTrackEncoder.EncodedTrackByteCount * 8;
     private LightweightDiskReceiver _receiver;
     internal long NextRecoveredCycle => _receiver.Active ? _receiver.NextCycle : long.MaxValue;
-    private int _byteBits;
+    private int _receiveBits;
     private ushort _shift;
     private byte _data;
     private bool _byteReady;
@@ -25,7 +25,7 @@ internal struct LightweightDiskSerial
     internal void Reset()
     {
         _receiver.Reset();
-        _byteBits = 0;
+        _receiveBits = 0;
         _shift = 0;
         _data = 0;
         _byteReady = _wordEqual = false;
@@ -79,20 +79,34 @@ internal struct LightweightDiskSerial
 
     private void Receive(int bit, long cycle, LightweightA500Machine machine)
     {
-        if (_byteBits == 0 && bit == 0 && (machine.Adkcon & 0x0200) != 0) return;
+        if ((_receiveBits & 7) == 0 && bit == 0 && (machine.Adkcon & 0x0200) != 0) return;
         _shift = (ushort)((_shift << 1) | bit);
-        if (++_byteBits == 8)
+        _receiveBits = (_receiveBits + 1) & 15;
+        if ((_receiveBits & 7) == 0)
         {
-            _byteBits = 0;
             _data = (byte)_shift;
             _byteReady = true;
         }
         CompareSync(cycle, machine);
-        // Received WORDSYNC aligns CPU byte reads too, even with DMA disabled.
-        // Register-only comparisons do not clock the serial byte counter.
-        if (_wordEqual && (machine.Adkcon & 0x0400) != 0) _byteBits = 0;
-        if (machine.DiskDmaActive) machine.ReceiveDiskBit(_shift, _wordEqual, cycle);
+        PublishReceivedBit(_shift, _wordEqual, cycle, machine);
     }
+
+    private void PublishReceivedBit(ushort shift, bool equal, long cycle, LightweightA500Machine machine)
+    {
+        var wordComplete = _receiveBits == 0;
+        // The serial phase runs before DSKLEN is armed. A live WORDSYNC
+        // match realigns the following bits, regardless of the DMA gate.
+        if (equal && (machine.Adkcon & 0x0400) != 0) _receiveBits = 0;
+        if (machine.DiskDmaActive) machine.ReceiveDiskTransferBit(shift, equal, wordComplete, cycle);
+    }
+
+#if LIGHTWEIGHT_DIAGNOSTICS
+    internal void InjectReceivedBit(ushort shift, bool equal, long cycle, LightweightA500Machine machine)
+    {
+        _receiveBits = (_receiveBits + 1) & 15;
+        PublishReceivedBit(shift, equal, cycle, machine);
+    }
+#endif
 
     internal void CompareSync(long cycle, LightweightA500Machine machine)
     {

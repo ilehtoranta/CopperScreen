@@ -281,7 +281,7 @@ public sealed class LightweightDiskInitialSyncTests
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public void CancelOrResetAfterWaitingToggleRevokesGateAndPartialPhase(bool reset)
+    public void CancelOrResetRevokesTheWaitingGateAndOnlyResetClearsTheSerialPhase(bool reset)
     {
         using var m = Waiting(2);
         Write(m, 0x09E, 0x0400);
@@ -293,7 +293,7 @@ public sealed class LightweightDiskInitialSyncTests
         Write(m, 0x022, 0x1000);
         Write(m, 0x024, 0x8002);
         Write(m, 0x024, 0x8002);
-        Bits(m, 15);
+        Bits(m, reset ? 15 : 0);
         Assert.Equal(long.MaxValue, m.DiskDmaNextCycle);
         Bits(m, 1, 0xBEEF);
         Drain(m);

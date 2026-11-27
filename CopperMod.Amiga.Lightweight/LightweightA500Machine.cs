@@ -1474,8 +1474,13 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
 
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    internal void ReceiveDiskTransferBit(ushort shift, bool equal, bool wordComplete, long cycle)
+        => _diskDma.ReceiveBit(shift, equal, wordComplete, cycle, this);
+
+#if LIGHTWEIGHT_DIAGNOSTICS
     internal void ReceiveDiskBit(ushort shift, bool equal, long cycle)
-        => _diskDma.ReceiveBit(shift, equal, cycle, this);
+        => _diskSerial.InjectReceivedBit(shift, equal, cycle, this);
+#endif
 
     internal void WriteDiskBit(int bit, long cycle, bool slow)
     {

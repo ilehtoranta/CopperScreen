@@ -77,7 +77,7 @@ public sealed class LightweightDiskLiveSyncTests
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public void CancelOrResetAfterToggleRevokesPartialWord(bool reset)
+    public void CancelOrResetAfterToggleOnlyClearsTheSerialPhaseOnReset(bool reset)
     {
         using var m = Running(2, true);
         Bits(m, 15, 0xAAAA);
@@ -88,7 +88,7 @@ public sealed class LightweightDiskLiveSyncTests
         Write(m, 0x022, 0x1000);
         Write(m, 0x024, 0x8002);
         Write(m, 0x024, 0x8002);
-        Bits(m, 15, 0xBEEF);
+        Bits(m, reset ? 15 : 0, 0xBEEF);
         Assert.Equal(long.MaxValue, m.DiskDmaNextCycle);
         Bits(m, 1, 0xBEEF);
         Drain(m);

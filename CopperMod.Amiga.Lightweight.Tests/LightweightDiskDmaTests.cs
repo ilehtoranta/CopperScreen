@@ -39,6 +39,30 @@ public sealed class LightweightDiskDmaTests
     }
 
     [Fact]
+    public void ArmingAnUnsynchronizedReadKeepsTheReceiversPartialWord()
+    {
+        using var m = new LightweightA500Machine();
+        m.WriteChipWordDma(0x1000, 0);
+        Write(m, 0x022, 0x1000);
+        Write(m, 0x096, 0x8210);
+        for (var bit = 0; bit < 12; bit++)
+            m.ReceiveDiskBit(0, false, m.Cycle);
+
+        Write(m, 0x024, 0x8002);
+        Write(m, 0x024, 0x8002);
+        for (var bit = 0; bit < 3; bit++)
+            m.ReceiveDiskBit(0, false, m.Cycle);
+        Assert.Equal(long.MaxValue, m.DiskDmaNextCycle);
+
+        m.ReceiveDiskBit(0xCAFE, false, m.Cycle);
+        m.AdvanceHardwareTo(16);
+
+        Assert.Equal(0xCAFE, m.ReadChipWordDma(0x1000));
+        Assert.Equal(0x1002u, m.GetDiskPointer());
+        Assert.Equal(1, m.DiskDmaRemaining);
+    }
+
+    [Fact]
     public void ThreeWordFifoUsesSeparateAddressAndRamPhases()
     {
         using var m = Armed(3);

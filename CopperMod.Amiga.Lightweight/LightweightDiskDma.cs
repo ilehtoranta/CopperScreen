@@ -8,7 +8,6 @@ internal struct LightweightDiskDma
 
     private ulong _fifo;
     private int _fifoCount;
-    private int _wordBits;
     private bool _armed;
     private bool _waitingForSync;
     private bool _pendingCounts;
@@ -34,7 +33,7 @@ internal struct LightweightDiskDma
         _beamHeld = false;
         _beamOffset = 0;
         _fifo = 0;
-        _fifoCount = _wordBits = Remaining = 0;
+        _fifoCount = Remaining = 0;
         _armed = _waitingForSync = _pendingCounts = Active = false;
         _pendingAddress = 0;
         _pendingData = 0;
@@ -73,7 +72,6 @@ internal struct LightweightDiskDma
         }
         Active = true;
         Writing = (value & 0x4000) != 0;
-        _wordBits = 0;
         if (Writing)
         {
             // HRM: the last three transmitted bits are lost. Software pads
@@ -87,7 +85,7 @@ internal struct LightweightDiskDma
     private void Cancel()
     {
         Active = Writing = _waitingForSync = _pendingCounts = false;
-        Remaining = _wordBits = _fifoCount = 0;
+        Remaining = _fifoCount = 0;
         _fifo = 0;
         _inputCycle = long.MaxValue;
         _writeCycle = long.MaxValue;
@@ -106,17 +104,15 @@ internal struct LightweightDiskDma
         RefreshNextCycle();
     }
 
-    internal void ReceiveBit(ushort shift, bool wordEqual, long cycle, LightweightA500Machine machine)
+    internal void ReceiveBit(
+        ushort shift, bool wordEqual, bool wordComplete, long cycle, LightweightA500Machine machine)
     {
         System.Diagnostics.Debug.Assert(Active);
         if (Writing) return;
         if (_waitingForSync)
         {
             // DSKLEN latches the initial gate; clearing WORDSYNC does not
-            // release it. Input keeps its word phase while waiting, and only
-            // a received match with live WORDSYNC enabled realigns it.
-            _wordBits = (_wordBits + 1) & 15;
-            if (wordEqual && (machine.Adkcon & 0x0400) != 0) _wordBits = 0;
+            // release it. The receiver keeps assembling words while we wait.
             if (wordEqual && DmaEnabled(machine))
             {
                 _waitingForSync = false;
@@ -133,9 +129,8 @@ internal struct LightweightDiskDma
             return;
         }
 
-        if (++_wordBits == 16)
+        if (wordComplete)
         {
-            _wordBits = 0;
             if (DmaEnabled(machine) && Remaining > _fifoCount + (_pendingCounts ? 1 : 0))
             {
                 if (Remaining == 1)
@@ -161,9 +156,6 @@ internal struct LightweightDiskDma
                 }
             }
         }
-        // An aligned subsequent sync word may itself be transferred; the
-        // boundary for following words is reset on every match.
-        if (wordEqual && (machine.Adkcon & 0x0400) != 0) _wordBits = 0;
     }
 
     internal void Step(long cycle, LightweightA500Machine machine)

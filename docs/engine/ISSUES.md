@@ -1121,6 +1121,48 @@ also leaves the set of 17 differing fields unchanged. Logs and
 same-counter comparisons are under
 `artifacts/the-company/remaining-17/`.
 
+The raw DMA capture of track 110, taken before Kickstart decodes it,
+contains all 11 original ADF sectors byte for byte on both machines. DMA
+starts sampling at different points in the revolution.
+The synthetic track gap also follows a different sector, and WinUAE's
+revolution boundary changes its bit alignment across the gap. By raw field
+1,690 the captured memory differs within `$002064`–`$0059DF` and at one
+byte, `$0019E3`, in the first 24 KiB of Chip RAM.
+
+Paula now assembles receive words continuously. Arming or cancelling
+`DSKLEN` changes the DMA gate while the receiver keeps its serial phase.
+Live WORDSYNC realigns the following bits, and controller reset clears
+the phase. `ArmingAnUnsynchronizedReadKeepsTheReceiversPartialWord`
+fails before the change because the first DMA word is lost. The full
+bootable ADF replay on the Agnus timing build with Copper68k
+`1.5.12-amigamaster-dev.62` reaches the demo at raw field 1,692 and returns
+to Kickstart at raw field 32,190. The fresh
+seed-2 WinUAE comparison uses equal hardware field counters and reports
+30,481 exact RGB fields out of 30,498 active. All 17 prior mismatches
+remain. Release builds cleanly and engine diagnostics report 1,574 passes
+and seven optional skips.
+[WinUAE receive and synchronization order](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/disk.cpp#L4254)
+
+The drive-control trace shows that the first disk-change check takes an
+extra step before motor-on in Lightweight. Using WinUAE's initial latch
+state removes the step in isolation, but changes the demo entry field.
+Adding the six-clock CIA bus tail reproduces the reference's recurring
+40- and 70-clock write spacings during the earlier drive probe. The first
+write remains about 485,000 CPU clocks apart, so the CIA test does not
+explain the earlier boot phase difference. Spindle and CIA experiments
+remain separate from the Paula fix. The raw captures, decoded sector
+checks and field comparisons are retained in
+`artifacts/the-company/trackdisk-parity/`.
+
+An isolated replay copied the differing track-buffer bytes and `$0019E3`
+from the WinUAE snapshot at raw field 1,690. Entry and exit still match at
+the original counters, and five fields become pixel-identical at raw
+fields 9,013, 10,613, 13,812, 15,411 and 19,512. Field 11,709 changes but
+still differs. The control reaches 30,486 exact fields out of 30,498.
+The normal replay keeps its original guest memory and still has 17
+mismatches. This establishes which fields the buffer can explain while
+leaving spindle and track synthesis parity open.
+
 | ID | Resolution to preserve | Coverage / remaining boundary |
 | --- | --- | --- |
 | LWA-EXEC-001 | Advance canonical hardware time through accepted interrupt-entry retirement. | `LightweightInterruptProgressTests`; native stall repaired, not full Hired Guns certification. |
