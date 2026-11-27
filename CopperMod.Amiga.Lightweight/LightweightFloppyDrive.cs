@@ -17,6 +17,7 @@ internal sealed class LightweightFloppyDrive
     private int _bitWholeCcks = LightweightPaulaAudio.PalCpuFrequency / (10 * LightweightDiskSerial.TrackBits);
     private int _bitRemainder = LightweightPaulaAudio.PalCpuFrequency % (10 * LightweightDiskSerial.TrackBits);
     private int _fraction;
+    private int _parkedRevolutionCcks;
     internal const int StandardAdfBytes = 80 * 2 * 11 * 512;
     internal const int HighDensityAdfBytes = StandardAdfBytes * 2;
     private const int LastPreservedCylinder = 83;
@@ -118,7 +119,7 @@ internal sealed class LightweightFloppyDrive
         var masks = image.WeakMasks;
         var seed = image.Seed;
         _highDensityMedia = false;
-        _mediaSeed = seed ^ (uint)_selectMask;
+        _revolutionSeed = _mediaSeed = seed ^ (uint)_selectMask;
         _image = null;
         _tracks = tracks;
         _trackLengths = lengths;
@@ -157,6 +158,7 @@ internal sealed class LightweightFloppyDrive
         ReadyCycle = long.MaxValue;
         NextBitCycle = long.MaxValue;
         BitPosition = _fraction = 0;
+        _parkedRevolutionCcks = 0;
         _revolution = 0;
         _revolutionSeed = _mediaSeed;
         _writeTrack = -1;
@@ -190,6 +192,8 @@ internal sealed class LightweightFloppyDrive
             else _idBit = (_idBit + 1) & 31;
             if (motor != MotorOn)
             {
+                if (!motor && NextBitCycle != long.MaxValue && cycle >= ReadyCycle)
+                    _parkedRevolutionCcks = ElapsedRevolutionCcks(cycle);
                 MotorOn = motor;
                 ReadyCycle = motor ? cycle + MotorSpinUpCycles : long.MaxValue;
             }
@@ -218,22 +222,33 @@ internal sealed class LightweightFloppyDrive
 
     internal bool UpdateRotation(long cycle, bool mediaChanged)
     {
+        if (mediaChanged)
+        {
+            _parkedRevolutionCcks = BitPosition = 0;
+            _revolution = 0;
+            _revolutionSeed = _mediaSeed;
+        }
+
         if (!Mounted || !MotorOn)
         {
             NextBitCycle = long.MaxValue;
             return false;
         }
         if (NextBitCycle != long.MaxValue && !mediaChanged) return false;
-        // Bounded model: a new spindle run starts at bit zero; no coast-down.
-        BitPosition = 0;
-        _fraction = _bitRateDenominator - 1;
-        NextBitCycle = (Math.Max(cycle, ReadyCycle) + 1) & ~1L;
-        _revolutionStartCycle = NextBitCycle;
-        _revolution = 0;
-        _revolutionSeed = _mediaSeed;
-        ScheduleFollowingBit();
+
+        // Stop holds the disk's angular position. Resume after spin-up, retaining
+        // the part of the current cell that elapsed before the motor stopped.
+        var elapsed = Math.Min(_parkedRevolutionCcks, TrackRevolutionCcks - 1);
+        var resumeCycle = (Math.Max(cycle, ReadyCycle) + 1) & ~1L;
+        _revolutionStartCycle = resumeCycle - 2L * elapsed;
+        ScheduleAtRevolutionPhase(elapsed);
         return true;
     }
+
+    private int TrackRevolutionCcks => _currentDeadlines?[^1] ?? RevolutionCcks;
+
+    private int ElapsedRevolutionCcks(long cycle)
+        => (int)Math.Clamp((cycle - _revolutionStartCycle) / 2, 0, TrackRevolutionCcks - 1);
 
     internal bool AdvanceRotation()
     {
@@ -281,21 +296,28 @@ internal sealed class LightweightFloppyDrive
         _bitRateDenominator = (_highDensityMedia ? 5 : 10) * bits;
         _bitWholeCcks = LightweightPaulaAudio.PalCpuFrequency / _bitRateDenominator;
         _bitRemainder = LightweightPaulaAudio.PalCpuFrequency % _bitRateDenominator;
-        if (preservePhase && NextBitCycle != long.MaxValue)
+        if (preservePhase && MotorOn && NextBitCycle != long.MaxValue)
         {
-            var elapsed = Math.Clamp((cycle - _revolutionStartCycle) / 2, 0, RevolutionCcks - 1);
-            if (_currentDeadlines is { } times)
-            {
-                var found = Array.BinarySearch(times, (int)elapsed);
-                BitPosition = found >= 0 ? found : ~found - 1;
-                ScheduleFollowingBit();
-                return;
-            }
-            BitPosition = (int)(elapsed * bits / RevolutionCcks);
-            var ordinal = (long)BitPosition + 1;
-            NextBitCycle = _revolutionStartCycle + 2 * ((ordinal * RevolutionCcks + bits - 1) / bits);
-            _fraction = (int)((_bitRateDenominator - 1L + ordinal * _bitRemainder) % _bitRateDenominator);
+            var elapsed = cycle < ReadyCycle
+                ? Math.Min(_parkedRevolutionCcks, TrackRevolutionCcks - 1)
+                : ElapsedRevolutionCcks(cycle);
+            ScheduleAtRevolutionPhase(elapsed);
         }
+    }
+
+    private void ScheduleAtRevolutionPhase(int elapsed)
+    {
+        if (_currentDeadlines is { } times)
+        {
+            var found = Array.BinarySearch(times, elapsed);
+            BitPosition = found >= 0 ? found : ~found - 1;
+            ScheduleFollowingBit();
+            return;
+        }
+        BitPosition = (int)((long)elapsed * _trackBits / RevolutionCcks);
+        var ordinal = (long)BitPosition + 1;
+        NextBitCycle = _revolutionStartCycle + 2 * ((ordinal * RevolutionCcks + _trackBits - 1) / _trackBits);
+        _fraction = (int)((_bitRateDenominator - 1L + ordinal * _bitRemainder) % _bitRateDenominator);
     }
 
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

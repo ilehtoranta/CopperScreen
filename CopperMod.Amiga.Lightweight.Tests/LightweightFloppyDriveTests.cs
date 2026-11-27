@@ -53,6 +53,37 @@ public sealed class LightweightFloppyDriveTests
     }
 
     [Fact]
+    public void MotorRestartPreservesTheParkedCellAndTheTimeRemainingInIt()
+    {
+        var drive = MountedDrive();
+        drive.WriteControlPins(0x77, 0);
+        Assert.True(drive.UpdateRotation(0, mediaChanged: true));
+        for (var i = 0; i < 631; i++) drive.AdvanceRotation();
+        var stop = drive.NextBitCycle - 6;
+        drive.WriteControlPins(0xFF, stop - 2);
+        drive.WriteControlPins(0xF7, stop);
+        Assert.False(drive.UpdateRotation(stop, mediaChanged: false));
+        Assert.Equal(long.MaxValue, drive.NextBitCycle);
+
+        var restart = stop + 100;
+        drive.WriteControlPins(0x7F, restart - 2);
+        drive.WriteControlPins(0x77, restart);
+        Assert.True(drive.UpdateRotation(restart, mediaChanged: false));
+
+        var interrupted = drive.ReadyCycle - 50;
+        drive.WriteControlPins(0xFF, interrupted - 2);
+        drive.WriteControlPins(0xF7, interrupted);
+        Assert.False(drive.UpdateRotation(interrupted, mediaChanged: false));
+
+        restart = interrupted + 100;
+        drive.WriteControlPins(0x7F, restart - 2);
+        drive.WriteControlPins(0x77, restart);
+        Assert.True(drive.UpdateRotation(restart, mediaChanged: false));
+        Assert.Equal(631, drive.BitPosition);
+        Assert.Equal(((drive.ReadyCycle + 1) & ~1L) + 6, drive.NextBitCycle);
+    }
+
+    [Fact]
     public void StepMovesOnTheTrailingEdgeOfASelectedPulse()
     {
         var drive = MountedDrive();
