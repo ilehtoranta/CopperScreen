@@ -1087,6 +1087,40 @@ before the display fetch and WinUAE clears it afterward. The
 remaining list transition and rotation differences still require
 timing fixes. Reports are under `artifacts/the-company/remaining-19/`.
 
+The CLR-fixed follow-up reproduced the 17 mismatches with a new
+WinUAE capture. At elapsed field 17,820, both machines write
+`BPLCON0=$3200` at line 59 CCK 110. Lightweight then reads plane 3
+at CCK 113. WinUAE selected that request under the old plane count
+and first reads plane 3 at CCK 121. The difference leaves Lightweight
+one word ahead on that plane. The OCS Agnus path now applies the control
+after the already selected request. This removes all differences above
+row 167 in the shared crop of field 17,820. The field drops from
+9,494 differing pixels to 4,680. The follow-up bus trace matches
+all 8,033 bitplane fetches from lines 59 through 192. It then finds
+364 differing words read at matching addresses and clocks, including
+the Kickstart trackdisk data at `$0019E2` and `$00206A`.
+Field 16,295 changes from 102 to 112 differing pixels. The other active
+fields keep their RGB hashes.
+[WinUAE BPLCON0 pipeline](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/custom.cpp#L3788)
+
+Both emulators still enter at raw 1,692 and finish at raw 32,190.
+The native build with the revised Agnus phase matches 30,481 of
+30,498 active fields without shifting either capture. The reference
+reproduced all 31,385 hashes and the recorded field telemetry.
+The OCS regression checks the pointer on both sides of the
+first newly enabled DMA request.
+
+The boot trace identifies the final trackdisk buffer read as track
+110. Lightweight arms it at bit position 86,440 and WinUAE arms it
+at bit position 36,203. The resulting
+buffer starts at sector 8 in Lightweight, sector 4 in WinUAE with
+seed 2, and sector 0 in WinUAE with seed 3. Preserving the model's
+spindle position across a motor restart leaves all five affected
+demo fields different. Varying the zero-plane sequencer lifetime
+also leaves the set of 17 differing fields unchanged. Logs and
+same-counter comparisons are under
+`artifacts/the-company/remaining-17/`.
+
 | ID | Resolution to preserve | Coverage / remaining boundary |
 | --- | --- | --- |
 | LWA-EXEC-001 | Advance canonical hardware time through accepted interrupt-entry retirement. | `LightweightInterruptProgressTests`; native stall repaired, not full Hired Guns certification. |

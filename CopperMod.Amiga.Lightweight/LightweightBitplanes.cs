@@ -131,10 +131,11 @@ internal sealed class LightweightBitplanes
         if (offset == LightweightRegisters.Bplcon0)
         {
             _pendingBplcon0 = value;
-            // Public bus strobes are even; direct owner input can occur at an
-            // odd CPU phase. Publish the first physical CCK at/after the delay.
-            _pendingBplcon0Cycle = LightweightBusArbiter.AlignToSlot(
-                cycle + LightweightClock.CpuCyclesPerColorClock);
+            // The OCS Agnus control settles two CCKs after the write. The
+            // memory request feeding the following input has already been
+            // selected, so the new control takes effect at the next input.
+            var delay = (_ecs ? 1 : 3) * LightweightClock.CpuCyclesPerColorClock;
+            _pendingBplcon0Cycle = LightweightBusArbiter.AlignToSlot(cycle + delay);
             Publish(_pendingBplcon0Cycle);
         }
         else if (offset >= LightweightRegisters.BplPointerFirst &&

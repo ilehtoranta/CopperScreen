@@ -210,10 +210,10 @@ public sealed class LightweightBeamSyncTests
         using var m = new LightweightA500Machine();
         m.AdvanceHardwareTo(1);
         Write(m, 0x100, 0x1000);
-        Assert.Equal(4, m.BitplaneNextCycle);
-        m.AdvanceHardwareTo(2);
+        Assert.Equal(8, m.BitplaneNextCycle);
+        m.AdvanceHardwareTo(6);
         Assert.Equal((ushort)0, m.BitplaneEffectiveBplcon0);
-        m.AdvanceHardwareTo(4);
+        m.AdvanceHardwareTo(8);
         Assert.Equal((ushort)0x1000, m.BitplaneEffectiveBplcon0);
         Assert.Equal(0x18 * LightweightClock.CpuCyclesPerColorClock, m.BitplaneNextCycle);
         m.AdvanceHardwareTo(m.BitplaneNextCycle);

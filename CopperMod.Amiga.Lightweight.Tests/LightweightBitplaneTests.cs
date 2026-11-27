@@ -97,6 +97,32 @@ public sealed class LightweightBitplaneTests
     }
 
     [Fact]
+    public void OcsPlaneCountWriteLeavesTheAlreadySelectedDmaSlotUnchanged()
+    {
+        using var machine = new LightweightA500Machine();
+        ConfigureLowRes(machine, planeCount: 2, ddfStop: 0x0050);
+        var cycle = machine.Cycle;
+        var thirdPlane = PlaneBase + 0x200;
+        Write(machine, LightweightA500Machine.CustomBase + LightweightRegisters.BplPointerFirst + 10,
+            (ushort)thirdPlane, ref cycle);
+        var lineStart = (long)DisplayLine * LightweightClock.CpuCyclesPerLine;
+        var writeCycle = lineStart + (0x3BL * LightweightClock.CpuCyclesPerColorClock);
+
+        machine.AdvanceHardwareTo(writeCycle);
+        machine.WriteCustomRegisterFromCopper(LightweightRegisters.Bplcon0, 0x3000, writeCycle);
+        machine.AdvanceHardwareTo(lineStart + (0x3EL * LightweightClock.CpuCyclesPerColorClock));
+
+        Assert.Equal(thirdPlane, machine.GetLiveBitplanePointer(2));
+
+        var nextFetch = lineStart + (0x46L * LightweightClock.CpuCyclesPerColorClock);
+        machine.AdvanceHardwareTo(nextFetch);
+        Assert.Equal(nextFetch, machine.BitplaneLastOutputCycle);
+        Assert.Equal(2, machine.BitplaneLastPlane);
+        Assert.Equal(thirdPlane, machine.BitplaneLastAddress);
+        Assert.Equal(thirdPlane + 2, machine.GetLiveBitplanePointer(2));
+    }
+
+    [Fact]
     public void PointerWriteAfterInputCannotRetargetAcceptedOutput()
     {
         using var machine = new LightweightA500Machine();
