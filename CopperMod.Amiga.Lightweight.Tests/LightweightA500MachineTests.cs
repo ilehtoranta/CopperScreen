@@ -100,9 +100,9 @@ public sealed class LightweightA500MachineTests
         machine.WriteByte(0xBFD200, 0x12, ref cycle, write);
         machine.WriteByte(0xBFE201, 0x34, ref cycle, write);
         Assert.Equal(0x1234, machine.ReadWord(0xBFC200, ref cycle, read));
-        Assert.Equal(30, cycle);
+        Assert.Equal(26, cycle);
         machine.WriteWord(0xBFC200, 0x5678, ref cycle, write);
-        Assert.Equal(40, cycle);
+        Assert.Equal(36, cycle);
         Assert.Equal(0x56, machine.ReadByte(0xBFD200, ref cycle, read));
         Assert.Equal(0x78, machine.ReadByte(0xBFE201, ref cycle, read));
         machine.WriteByte(0xBFC201, 0x9A, ref cycle, write);
@@ -684,7 +684,7 @@ public sealed class LightweightA500MachineTests
     }
 
     [Fact]
-    public void CiaCpuAccessesAlignToTheTenCyclePeripheralGrid()
+    public void CiaCpuAccessesStrobeOnThePeripheralGridBeforeTheBusCycleEnds()
     {
         using var machine = new LightweightA500Machine();
         long cycle = 0;
@@ -694,7 +694,11 @@ public sealed class LightweightA500MachineTests
             0x5A,
             ref cycle,
             M68kBusAccessKind.CpuDataWrite);
-        Assert.Equal(10, cycle);
+        Assert.Equal(6, cycle);
+        var timing = (IM68000BusCycleTiming)machine;
+        var writeTiming = timing.GetM68000BusAccessTiming(LightweightA500Machine.CiaBBase,
+            M68kOperandSize.Byte, M68kBusAccessKind.CpuDataWrite, true, 0, cycle);
+        Assert.Equal(new M68000BusAccessTiming(12, 12), writeTiming);
         var value = machine.ReadByte(
             LightweightA500Machine.CiaBBase,
             ref cycle,
@@ -703,7 +707,10 @@ public sealed class LightweightA500MachineTests
         // DDRB is still input, so external pull-ups are observed rather than
         // the written latch.
         Assert.Equal(0xFF, value);
-        Assert.Equal(20, cycle);
+        Assert.Equal(16, cycle);
+        var readTiming = timing.GetM68000BusAccessTiming(LightweightA500Machine.CiaBBase,
+            M68kOperandSize.Byte, M68kBusAccessKind.CpuDataRead, false, 12, cycle);
+        Assert.Equal(new M68000BusAccessTiming(22, 22), readTiming);
     }
 
     [Theory]
@@ -717,15 +724,15 @@ public sealed class LightweightA500MachineTests
         machine.WriteByte(0x00BFD500, 0, ref cycle, M68kBusAccessKind.CpuDataWrite);
         machine.WriteByte(0x00BFDD00, 0x81, ref cycle, M68kBusAccessKind.CpuDataWrite);
         machine.WriteByte(0x00BFDE00, 0x11, ref cycle, M68kBusAccessKind.CpuDataWrite);
-        Assert.Equal(70, machine.NextCiaInterruptCycle);
+        Assert.Equal(60, machine.NextCiaInterruptCycle);
 
-        cycle = 69;
+        cycle = 59;
         var value = wordAccess
             ? machine.ReadWord(0x00BFDD00, ref cycle, M68kBusAccessKind.CpuDataRead)
             : machine.ReadByte(0x00BFDD00, ref cycle, M68kBusAccessKind.CpuDataRead);
 
         Assert.Equal(wordAccess ? 0x81FF : 0x81, value);
-        Assert.Equal(70, cycle);
+        Assert.Equal(66, cycle);
         Assert.Equal(cycle, machine.Cycle);
         Assert.Equal(0, machine.CiaBPendingInterrupts);
         Assert.Equal(0x2000, machine.Intreq & 0x2000);
@@ -755,7 +762,7 @@ public sealed class LightweightA500MachineTests
             ref cycle,
             M68kBusAccessKind.CpuDataRead);
         Assert.Equal(0xFC, pra);
-        Assert.Equal(10, cycle);
+        Assert.Equal(6, cycle);
     }
 
     [Fact]
@@ -773,7 +780,7 @@ public sealed class LightweightA500MachineTests
         machine.WriteByte(0x00BFDD00, 0x81, ref cycle, M68kBusAccessKind.CpuDataWrite);
         machine.WriteByte(0x00BFDE00, 0x11, ref cycle, M68kBusAccessKind.CpuDataWrite);
 
-        Assert.Equal(40, cycle);
+        Assert.Equal(46, cycle);
         Assert.Equal(70, machine.NextCiaInterruptCycle);
         machine.AdvanceHardwareTo(69);
         Assert.Equal(0, machine.Intreq & 0x2000);

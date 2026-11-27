@@ -1179,6 +1179,14 @@ The normal replay keeps its original guest memory and still has 17
 mismatches. This establishes which fields the buffer can explain while
 leaving spindle and track synthesis parity open.
 
+The 68000 CIA transfer strobes four CPU clocks after synchronization to
+the peripheral clock and keeps the CPU bus occupied for six more clocks.
+During the Kickstart drive probe the CIA-B writes now alternate 70 and
+40 clocks apart, matching WinUAE. The previous timing gave 60 and 30.
+In the separate indexed-ADF replay this restores the first Amiga Master
+scene transition to the reference field. Full pixel parity is open.
+[WinUAE CIA transfer timing](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/cia.cpp#L2488)
+
 | ID | Resolution to preserve | Coverage / remaining boundary |
 | --- | --- | --- |
 | LWA-EXEC-001 | Advance canonical hardware time through accepted interrupt-entry retirement. | `LightweightInterruptProgressTests`; native stall repaired, not full Hired Guns certification. |

@@ -859,10 +859,20 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         uint address, M68kOperandSize size, M68kBusAccessKind accessKind,
         bool isWrite, long requestedCycle, long completedCycle)
     {
-        var nextBusCycle = UsesAgnusBus(address)
-            ? completedCycle + LightweightBusArbiter.SlotCycles
-            : Math.Max(requestedCycle, completedCycle) + (size == M68kOperandSize.Long ? 8 : 4);
-        return new(completedCycle, nextBusCycle);
+        if (UsesAgnusBus(address))
+            return new(completedCycle, completedCycle + LightweightBusArbiter.SlotCycles);
+
+        var cia = DecodeCiaSelect(address);
+        if (cia != CiaSelect.None && (size != M68kOperandSize.Byte || (cia & CiaByteLane(address)) != 0))
+        {
+            // CIA register effects occur at the strobe. The 68000 holds the
+            // peripheral bus through the rest of the E-clock transfer.
+            var peripheralEnd = completedCycle + CiaBusTailCycles;
+            return new(peripheralEnd, peripheralEnd);
+        }
+
+        return new(completedCycle, Math.Max(requestedCycle, completedCycle) +
+            (size == M68kOperandSize.Long ? 8 : 4));
     }
 
     public byte ReadByte(uint address, ref long cycle, M68kBusAccessKind accessKind)
@@ -1048,11 +1058,13 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (byteAccess) cia &= CiaByteLane(address);
         if (cia != CiaSelect.None)
         {
-            var ciaCycle = Math.Max(0, start + 1);
+            var synchronousCpu = CpuModel is M68kCpuModel.M68000 or M68kCpuModel.M68010;
+            var ciaCycle = Math.Max(0, synchronousCpu ? start - CiaBusSyncPhase : start + 1);
             var remainder = ciaCycle % LightweightCia.CpuCyclesPerTick;
             grantedCycle = remainder == 0
                 ? ciaCycle
                 : ciaCycle + LightweightCia.CpuCyclesPerTick - remainder;
+            if (synchronousCpu) grantedCycle += CiaBusSyncPhase + CiaBusPreStrobeCycles;
         }
         else
         {
@@ -2649,6 +2661,10 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
     {
         if (_overlayEnabled != enabled) { _overlayEnabled = enabled; InvalidateCpuMemoryMap(); }
     }
+
+    private const int CiaBusSyncPhase = 2;
+    private const int CiaBusPreStrobeCycles = 4;
+    private const int CiaBusTailCycles = LightweightCia.CpuCyclesPerTick - CiaBusPreStrobeCycles;
 
     [Flags]
     private enum CiaSelect : byte { None = 0, A = 1, B = 2, Both = A | B }
