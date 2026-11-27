@@ -1013,6 +1013,39 @@ A fresh WinUAE run reproduced all 31,385 hashes and the field
 telemetry byte for byte. The timings and full comparisons are under
 `artifacts/the-company/fill-114/`.
 
+The field 18,640 follow-up starts from the Paula-corrected combined
+build. In the raster ending at sample 18,639, both emulators write
+the third fill size at line 255 CCK 12. Their RTS stack reads and
+return-target fetches also agree. Lightweight samples IPL after the
+second return-target fetch, stacks the return address `$03069C`,
+and enters the Copper handler before the foreground MOVE clears
+`$03DB16`. WinUAE samples before the second fetch, clears the word at
+line 255 CCK 45, and stacks `$0306A4` when it enters the handler.
+Lightweight's premature interrupt causes it to clear the flag that
+the handler has just set, so the foreground waits for another field.
+[WinUAE MC68000 RTS generator](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/gencpu.cpp#L7330)
+
+Copper68k now takes the RTS IPL sample from the returned-to opcode
+fetch on the timed MC68000 path. It keeps the existing refill and
+bus scheduling. The regression exercises a normal and a waited final
+refill. All 137 CPU requests and grants in the two-line trace agree
+with WinUAE after the correction. The ready-word clear also lands at
+line 255 CCK 45 and the original rotation is visible at field 18,640.
+
+Both full captures enter at emulator field 1,692 and finish at field
+32,190, elapsed field 30,498. In the common 724 by 287 viewport,
+30,479 of 30,498 active RGB images match at equal emulator field
+counters. The correction recovers 10,664 active images with zero new
+RGB differences. The four-field finish drift is gone. The 19 remaining
+RGB differences are isolated fields, including the two entry fields.
+The ready-word samples at elapsed fields 18,146 and 18,147 still differ.
+A sparse RGB capture verified the pixel counts for all 19 fields.
+The last two disagreements are 38 pixels at field 19,841 and six
+pixels at field 22,685.
+A fresh seeded WinUAE capture reproduced all 31,385 reference hashes
+and the field telemetry. The bus trace and same-counter comparison
+are under `artifacts/the-company/field-18640/`.
+
 | ID | Resolution to preserve | Coverage / remaining boundary |
 | --- | --- | --- |
 | LWA-EXEC-001 | Advance canonical hardware time through accepted interrupt-entry retirement. | `LightweightInterruptProgressTests`; native stall repaired, not full Hired Guns certification. |
