@@ -76,7 +76,20 @@ per channel at tick 2526 and zero at ticks 2532 and 2535. Grouping the
 [posted stores with the next instruction](CD32.md#register-transfer-boundaries-in-the-remaining-lba-2081-delay)
 reduces two apparent per-instruction losses to 5 and 3 clocks for the
 respective groups. Moving `MOVEM.L` load setup before the bus reads changes
-their phase and still regresses the stereo replay.
+their phase and still regresses the stereo replay. The [blocking operand read trials](CD32.md#blocking-operand-reads-before-the-lba-2081-copy)
+recover another 38 clocks in the fixed-boot trace. Changing both
+instruction groups together moves the tick 2526 onset early and
+reintroduces a gap at tick 2535. Correcting immediate logical status
+timing recovers another 16 clocks in that diagnostic, leaving 531.
+The [cached instruction trace](CD32.md#cached-instruction-timing-before-the-lba-2081-copy)
+recovers 18 clocks with the narrower word-shift change, leaving 513 in
+the fixed-boot trace. The development Release replay preserves the same
+four low samples per channel at tick 2526. The broader branch and quick
+instruction overlap trial shifts the onset four samples early.
+The [exception-return and arithmetic trace](CD32.md#exception-returns-and-displacement-arithmetic-before-the-lba-2081-copy)
+recovers 15 more clocks with the combined CPU transfer changes, leaving
+498 in the controlled replay. Both stereo channels retain the four
+near-silent samples at tick 2526 and stay clear at ticks 2532 and 2535.
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
