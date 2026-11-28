@@ -10,7 +10,7 @@ if (args.Contains("--help"))
     Console.WriteLine("""
         Lightweight runner: --rom <ROM> [--frames <count>] [--disk <ADF/IPF/SCP>]
           ROM may be a standard reset image or a 1 MiB CopperStart pair (E00000 bank, then F80000 bank).
-        --cd32 [--video-standard <pal|ntsc>] --rom <40.60 or combined CD32 ROM>
+        --cd32 [--video-standard <pal|ntsc>] --rom <stock CD32 or CopperStart Full ROM>
           Experimental CD32. For split ROMs add --extended-rom <path>. --fast-ram-kib adds optional Zorro II Fast RAM.
           Use --nvram <path> for persistent saves.
           --cd <image> mounts Mode 1 ISO/BIN/IMG, CUE, or ZIP containing a disc and its tracks.
@@ -292,7 +292,7 @@ if (cd32)
         diskSerial || ciaTod)
         throw new ArgumentException("The stock CD32 owns its CPU, memory and drives. Remove incompatible hardware and floppy options.");
     if (romPath is null && !syntheticRom)
-        throw new ArgumentException("--cd32 requires a verified --rom or a synthetic workload.");
+        throw new ArgumentException("--cd32 requires a ROM (--rom) or a synthetic workload.");
     if (syntheticRom && (romPath is not null || extendedRomPath is not null))
         throw new ArgumentException("Choose either native CD32 ROMs or a synthetic workload.");
     if (nvramPath is not null && (PathsEqual(nvramPath, romPath) || PathsEqual(nvramPath, extendedRomPath) ||

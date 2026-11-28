@@ -29,12 +29,24 @@ public sealed partial class LightweightA500Machine
             throw new ArgumentException("CD32 requires Alice/Lisa, 68EC020 and 2 MiB Chip RAM. Only optional Zorro II Fast RAM is supported.", nameof(configuration));
     }
 
-    /// <summary>Load a verified Kickstart 40.60 and CD32 extension, or one combined console dump.</summary>
+    /// <summary>Load a stock CD32 ROM pair, a physical console dump, or a CD32-capable CopperStart Full ROM pair.</summary>
     public void LoadCd32Rom(ReadOnlySpan<byte> kickstart, ReadOnlySpan<byte> extension = default)
     {
         RequireAkiko();
         if (extension.IsEmpty && kickstart.Length == 2 * Cd32RomBankSize)
         {
+            var first = kickstart[..Cd32RomBankSize];
+            var second = kickstart[Cd32RomBankSize..];
+            if (IsCopperStartCd32Pair(second, first))
+            {
+                LoadCd32RomBanks(second, first);
+                return;
+            }
+            if (IsCopperStartCd32Pair(first, second))
+            {
+                LoadCd32RomBanks(first, second);
+                return;
+            }
             if (MatchesRom(kickstart, Cd32PhysicalDumpSha1))
             {
                 // This physical dump stores alternating word lanes in separate
@@ -49,8 +61,8 @@ public sealed partial class LightweightA500Machine
                 LoadCd32Rom(decoded.AsSpan(0, Cd32RomBankSize), decoded.AsSpan(Cd32RomBankSize));
                 return;
             }
-            extension = kickstart[Cd32RomBankSize..];
-            kickstart = kickstart[..Cd32RomBankSize];
+            extension = second;
+            kickstart = first;
             if (MatchesRom(kickstart, Cd32ExtensionSha1))
             {
                 var firstBank = kickstart;
@@ -58,10 +70,35 @@ public sealed partial class LightweightA500Machine
                 extension = firstBank;
             }
         }
-        if (kickstart.Length != Cd32RomBankSize || extension.Length != Cd32RomBankSize ||
-            !MatchesRom(kickstart, Cd32KickstartSha1) || !MatchesRom(extension, Cd32ExtensionSha1))
-            throw new ArgumentException("Expected the verified CD32 Kickstart 40.60 and extended ROM.");
+        if (!IsCopperStartCd32Pair(kickstart, extension) &&
+            (kickstart.Length != Cd32RomBankSize || extension.Length != Cd32RomBankSize ||
+             !MatchesRom(kickstart, Cd32KickstartSha1) || !MatchesRom(extension, Cd32ExtensionSha1)))
+            throw new ArgumentException("Choose the stock CD32 Kickstart and extended ROMs, or a CopperStart Full ROM pair.");
         LoadCd32RomBanks(kickstart, extension);
+    }
+
+    private static bool IsCopperStartCd32Pair(ReadOnlySpan<byte> reset, ReadOnlySpan<byte> extension)
+    {
+        if (reset.Length != Cd32RomBankSize || extension.Length != Cd32RomBankSize ||
+            !extension.StartsWith("CSEE"u8) ||
+            BinaryPrimitives.ReadUInt32BigEndian(extension[12..]) != 0x00E0_0010 ||
+            !extension.Slice(16, 4).SequenceEqual("CD32"u8))
+            return false;
+
+        var stack = BinaryPrimitives.ReadUInt32BigEndian(reset);
+        var entry = BinaryPrimitives.ReadUInt32BigEndian(reset[4..]);
+        if ((stack & 1) != 0 || stack is < 4 or > 0x0020_0000 ||
+            (entry & 1) != 0 || entry is < 0x00F8_0008 or >= 0x0100_0000)
+            return false;
+
+        return IsExtensionEntry(extension[4..]) && IsExtensionEntry(extension[8..]) &&
+            IsExtensionEntry(extension[20..]) && IsExtensionEntry(extension[24..]) && IsExtensionEntry(extension[28..]);
+
+        static bool IsExtensionEntry(ReadOnlySpan<byte> pointer)
+        {
+            var address = BinaryPrimitives.ReadUInt32BigEndian(pointer);
+            return (address & 1) == 0 && address is >= 0x00E0_0020 and < 0x00E7_FFE4;
+        }
     }
 
     internal void LoadCd32RomBanks(ReadOnlySpan<byte> kickstart, ReadOnlySpan<byte> extension)

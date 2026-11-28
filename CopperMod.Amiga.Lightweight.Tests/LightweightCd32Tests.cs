@@ -61,6 +61,59 @@ public sealed class LightweightCd32Tests
     }
 
     [Fact]
+    public void CopperStartFullBanksLoadByLayoutAndResetVectors()
+    {
+        using var machine = Create();
+        var reset = new byte[512 * 1024];
+        var extension = new byte[reset.Length];
+        BinaryPrimitives.WriteUInt32BigEndian(reset, 0x00080000);
+        BinaryPrimitives.WriteUInt32BigEndian(reset.AsSpan(4), 0x00F80100);
+        BinaryPrimitives.WriteUInt16BigEndian(reset.AsSpan(12), 99);
+        BinaryPrimitives.WriteUInt16BigEndian(reset.AsSpan(0x100), 0x4E71);
+        "CSEE"u8.CopyTo(extension);
+        BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(4), 0x00E00100);
+        BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(8), 0x00E00200);
+        BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(12), 0x00E00010);
+        "CD32"u8.CopyTo(extension.AsSpan(16));
+        BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(20), 0x00E00300);
+        BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(24), 0x00E00400);
+        BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(28), 0x00E00500);
+        BinaryPrimitives.WriteUInt16BigEndian(extension.AsSpan(0x100), 0x4E75);
+
+        machine.LoadCd32Rom(reset, extension);
+        AssertMappedBanks();
+        machine.LoadCd32Rom([.. extension, .. reset]);
+        AssertMappedBanks();
+        reset[13]++;
+        machine.LoadCd32Rom([.. reset, .. extension]);
+        AssertMappedBanks();
+
+        extension[16] = 0;
+        Assert.Throws<ArgumentException>(() => machine.LoadCd32Rom(reset, extension));
+        AssertMappedBanks();
+        extension[16] = (byte)'C';
+        BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(24), 0x00E0001C);
+        Assert.Throws<ArgumentException>(() => machine.LoadCd32Rom(reset, extension));
+        AssertMappedBanks();
+        BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(24), 0x00E00400);
+        BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(8), 0x00F80100);
+        Assert.Throws<ArgumentException>(() => machine.LoadCd32Rom(reset, extension));
+        AssertMappedBanks();
+        BinaryPrimitives.WriteUInt32BigEndian(extension.AsSpan(8), 0x00E00200);
+        BinaryPrimitives.WriteUInt32BigEndian(reset.AsSpan(4), 0x00E00100);
+        Assert.Throws<ArgumentException>(() => machine.LoadCd32Rom([.. extension, .. reset]));
+        AssertMappedBanks();
+
+        void AssertMappedBanks()
+        {
+            long cycle = machine.Cycle;
+            Assert.Equal(0x00F80100u, machine.Cpu.ProgramCounter);
+            Assert.Equal(0x4E71, machine.ReadWord(0x080100, ref cycle, Read));
+            Assert.Equal(0x4E75, machine.ReadWord(0xE00100, ref cycle, Read));
+        }
+    }
+
+    [Fact]
     public void AkikoTodSelectsItsLineDividerIndependentlyOfTheDisplayField()
     {
         using var machine = Create();

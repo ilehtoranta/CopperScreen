@@ -66,7 +66,7 @@ internal sealed partial class MainWindow
         var error = new TextBlock { Foreground = CopperScreenAppearance.Text, TextWrapping = TextWrapping.Wrap };
         var start = CreatePanelButton("Start CD32", () =>
         {
-            if (string.IsNullOrWhiteSpace(kickstart.Text)) { error.Text = "Choose a CD32 Kickstart ROM."; return; }
+            if (string.IsNullOrWhiteSpace(kickstart.Text)) { error.Text = "Choose a CD32 ROM."; return; }
             dialog.Close(new CopperScreenCd32Launch(kickstart.Text.Trim(), OptionalPath(extension.Text), OptionalPath(disc.Text),
                 region.SelectedIndex == 1 ? LightweightCd32Region.Ntsc : LightweightCd32Region.Pal, fastSizes[fastRam.SelectedIndex]));
         });
@@ -80,7 +80,7 @@ internal sealed partial class MainWindow
             Children =
             {
                 SettingsNote("68EC020 · 2 MiB Chip RAM"),
-                FileRow("CD32 Kickstart 40.60 or combined ROM", kickstart, () => PickCd32LocalFileAsync(dialog, "Choose CD32 Kickstart ROM", Cd32RomFiles)),
+                FileRow("Stock CD32 or CopperStart Full ROM", kickstart, () => PickCd32LocalFileAsync(dialog, "Choose CD32 ROM", Cd32RomFiles)),
                 FileRow("CD32 extended ROM (for split ROMs)", extension, () => PickCd32LocalFileAsync(dialog, "Choose CD32 extended ROM", Cd32RomFiles)),
                 FileRow("CD32 disc (optional)", disc, () => PickCd32DiscPathAsync(dialog)),
                 CommandGroup(new StackPanel { Children = { SectionLabel("Video standard"), region } },
