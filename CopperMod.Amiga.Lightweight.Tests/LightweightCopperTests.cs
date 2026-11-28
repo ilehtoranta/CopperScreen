@@ -221,6 +221,36 @@ public sealed class LightweightCopperTests
         Assert.Equal(lineOne + 10, machine.CopperLastMoveCycle);
     }
 
+    [Fact]
+    public void CopperMoveToCopjmp2ReservesBothOldListReads()
+    {
+        using var machine = new LightweightA500Machine();
+        const uint target = 0x50000;
+        machine.WriteChipWordDma(target, 0x0180);
+        machine.WriteChipWordDma(target + 2, 0x001F);
+        machine.WriteChipWordDma(target + 4, 0xFFFF);
+        machine.WriteChipWordDma(target + 6, 0xFFFE);
+        long cycle = machine.Cycle;
+        machine.WriteLong(0xDFF084, target, ref cycle, M68kBusAccessKind.CpuDataWrite);
+        _ = StartCopper(machine, (0x0101, 0xFFFE), (0x008A, 0),
+            (0x0180, 0x0F00), (0xFFFF, 0xFFFE));
+        var strobe = LightweightClock.CpuCyclesPerLine + 10L;
+        machine.AdvanceHardwareTo(strobe);
+        Assert.Equal(strobe, machine.CopperLastOutputCycle);
+
+        var cpuCycle = strobe + 4;
+        _ = machine.ReadWord(0x3000, ref cpuCycle, M68kBusAccessKind.CpuDataRead);
+        Assert.Equal(strobe + 8, cpuCycle);
+        Assert.Equal(strobe + 8, machine.CopperLastOutputCycle);
+        Assert.Equal((ushort)0, machine.GetCustomRegister(0x180));
+
+        machine.AdvanceHardwareTo(strobe + 12);
+        Assert.Equal(strobe + 12, machine.CopperLastOutputCycle);
+        Assert.Equal((ushort)0, machine.GetCustomRegister(0x180));
+        machine.AdvanceHardwareTo(strobe + 16);
+        Assert.Equal((ushort)0x001F, machine.GetCustomRegister(0x180));
+    }
+
     [Theory]
     [InlineData(0, 0x43)]
     [InlineData(4, 0x43)]

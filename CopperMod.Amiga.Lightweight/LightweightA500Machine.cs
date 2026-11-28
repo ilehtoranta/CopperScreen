@@ -2359,7 +2359,7 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         else if (offset is LightweightRegisters.Copjmp1 or
             LightweightRegisters.Copjmp2)
         {
-            _copper.OnRegisterWrite(offset, cycle, this);
+            _copper.OnRegisterWrite(offset, cycle, this, fromCopper);
         }
         else if (offset >= LightweightRegisters.SpritePosFirst &&
             offset <= LightweightRegisters.SpriteRegisterLast)

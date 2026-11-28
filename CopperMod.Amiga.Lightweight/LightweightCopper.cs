@@ -22,6 +22,7 @@ internal sealed class LightweightCopper
         FrameRestart,
         JumpDelay,
         JumpFirstSlot,
+        JumpDiscard,
         JumpRestart,
         LoadJumpPointer
     }
@@ -31,6 +32,7 @@ internal sealed class LightweightCopper
         First,
         Second,
         FrameRestart,
+        JumpDiscard,
         JumpRestart
     }
 
@@ -116,13 +118,15 @@ internal sealed class LightweightCopper
     internal void OnRegisterWrite(
         ushort offset,
         long cycle,
-        LightweightA500Machine machine)
+        LightweightA500Machine machine,
+        bool fromCopper = false)
     {
         if (offset is not (LightweightRegisters.Copjmp1 or LightweightRegisters.Copjmp2))
             return;
 
         var previousAddress = _stage is ControlStage.JumpDelay or ControlStage.JumpFirstSlot or
-            ControlStage.JumpRestart or ControlStage.LoadJumpPointer ? _jumpDummyAddress : _programCounter;
+            ControlStage.JumpDiscard or ControlStage.JumpRestart or ControlStage.LoadJumpPointer
+            ? _jumpDummyAddress : _programCounter;
         var secondList = offset == LightweightRegisters.Copjmp2;
         Restart(machine.GetCopperListPointer(secondList), cycle);
         if (_dmaEnabled)
@@ -131,7 +135,7 @@ internal sealed class LightweightCopper
             {
                 _jumpSecondList = secondList;
                 _jumpDummyAddress = previousAddress;
-                _stage = ControlStage.JumpDelay;
+                _stage = fromCopper ? ControlStage.JumpDiscard : ControlStage.JumpDelay;
             }
             ActivateAfter(cycle);
         }
@@ -247,6 +251,12 @@ internal sealed class LightweightCopper
             case ControlStage.FrameRestart:
                 TryAcceptWord(cycle, WordPurpose.FrameRestart, machine);
                 break;
+            case ControlStage.JumpDiscard:
+                // A Copper MOVE to COPJMP reserves the first old-list read
+                // if that slot is free. Its second read loads the new pointer.
+                TryAcceptWord(cycle, WordPurpose.JumpDiscard, machine);
+                _stage = ControlStage.JumpRestart;
+                break;
             case ControlStage.JumpRestart:
                 TryAcceptWord(cycle, WordPurpose.JumpRestart, machine);
                 break;
@@ -302,7 +312,8 @@ internal sealed class LightweightCopper
         }
 
         _pendingPurpose = purpose;
-        _pendingAddress = purpose == WordPurpose.JumpRestart ? _jumpDummyAddress : _programCounter;
+        _pendingAddress = purpose is WordPurpose.JumpDiscard or WordPurpose.JumpRestart
+            ? _jumpDummyAddress : _programCounter;
         _pendingOutputCycle = outputCycle;
         _pendingGeneration = _decodeGeneration;
         if (purpose is WordPurpose.First or WordPurpose.Second)
@@ -339,6 +350,10 @@ internal sealed class LightweightCopper
         if (purpose == WordPurpose.Second)
         {
             DecodeInstruction(value, cycle, machine);
+        }
+        else if (purpose == WordPurpose.JumpDiscard)
+        {
+            _jumpDummyAddress = MaskAddress(_jumpDummyAddress + 2);
         }
         else if (purpose == WordPurpose.JumpRestart)
         {
