@@ -90,6 +90,12 @@ The [exception-return and arithmetic trace](CD32.md#exception-returns-and-displa
 recovers 15 more clocks with the combined CPU transfer changes, leaving
 498 in the controlled replay. Both stereo channels retain the four
 near-silent samples at tick 2526 and stay clear at ticks 2532 and 2535.
+The [posted subroutine-call trial](CD32.md#posted-return-address-writes-before-the-lba-2081-copy)
+recovers four clocks in the fixed-boot trace and reintroduces a stereo
+gap at tick 2535. The [displacement AND correction](CD32.md#displacement-and-timing-and-multiply-prefetch-before-the-lba-2081-copy)
+recovers eight clocks with the same audio onset, leaving 490 in the
+controlled trace. The multiply-prefetch trial moves the four quiet
+samples to tick 2529.
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
