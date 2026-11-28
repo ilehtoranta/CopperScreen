@@ -96,6 +96,12 @@ gap at tick 2535. The [displacement AND correction](CD32.md#displacement-and-tim
 recovers eight clocks with the same audio onset, leaving 490 in the
 controlled trace. The multiply-prefetch trial moves the four quiet
 samples to tick 2529.
+The [successor-fetch trace](CD32.md#successor-fetch-ordering-in-the-490-clock-trace)
+finds 15 waits where the instruction could use its fetched word before
+later bus work finishes. Correcting those waits in the diagnostic
+preserves the 490-clock difference. Limiting prefetch to the first
+successor longword during word multiply keeps tick 2529 clear and plays
+four samples early per channel at tick 2526.
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
