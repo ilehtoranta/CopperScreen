@@ -14,7 +14,10 @@ public sealed class LightweightIpfTests
         new Random(0x68_000).NextBytes(adf.AsSpan(0, 11 * 512));
         var encoded = AmigaDosTrackEncoder.EncodeTrack(new AdfDiskMedia(adf), 0, 0);
         var data = Enumerable.Repeat((byte)0xAA, (bits + 7) / 8).ToArray();
-        encoded.AsSpan(0, Math.Min(encoded.Length, data.Length)).CopyTo(data);
+        var sectors = encoded.AsSpan(DiskFormatFixture.DoubleDensityGapBytes);
+        // Vary the trailing gap to preserve all sectors at both test lengths.
+        sectors.CopyTo(data);
+        data[sectors.Length] = encoded[0];
         using var machine = new LightweightA500Machine();
         machine.MountIpf(IpfFixture.Create(new IpfFixture.Track(bits, data, Start: bits - 7)));
         // Capture the raw recovered stream. WORDSYNC deliberately discards a

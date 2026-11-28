@@ -14,6 +14,7 @@ public static class AmigaDosTrackEncoder
 {
     private const int EncodedSectorBytes = 0x440;
     private const int EncodedTrackGapBytes = 0x2BC;
+    internal const int DoubleDensityGapSpliceCell = EncodedTrackGapBytes * 8 / 3;
 
     /// <summary>
     /// The number of bytes in a generated standard AmigaDOS encoded track.
@@ -21,7 +22,6 @@ public static class AmigaDosTrackEncoder
     public const int EncodedTrackByteCount = (EncodedSectorBytes * AmigaDiskGeometry.SectorsPerTrack) + EncodedTrackGapBytes;
 
     private const uint MfmDataMask = 0x5555_5555;
-    private static readonly int[] PhysicalSectorOrder = { 9, 10, 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
     /// <summary>
     /// Encodes one physical track from decoded sector media.
@@ -57,18 +57,22 @@ public static class AmigaDosTrackEncoder
         if (trackData.Length != sectors * AmigaDiskGeometry.SectorSize || sectors is not (11 or 22))
             throw new ArgumentException("AmigaDOS encoding requires 11 or 22 complete sectors.", nameof(trackData));
         var track = Enumerable.Repeat((byte)0xAA, EncodedTrackByteCount * (sectors / 11)).ToArray();
-        for (var physicalIndex = 0; physicalIndex < sectors; physicalIndex++)
+        var sectorOffset = track.Length - sectors * EncodedSectorBytes;
+        var previousDataBit = false;
+        for (var sector = 0; sector < sectors; sector++)
         {
-            var sector = sectors == 11 ? PhysicalSectorOrder[physicalIndex] : (physicalIndex + 20) % sectors;
-            var sectorsUntilGap = sectors - physicalIndex;
             EncodeSector(
                 trackData.Slice(sector * AmigaDiskGeometry.SectorSize, AmigaDiskGeometry.SectorSize),
-                track.AsSpan(physicalIndex * EncodedSectorBytes, EncodedSectorBytes),
+                track.AsSpan(sectorOffset, EncodedSectorBytes),
                 trackNumber,
                 sector,
-                sectorsUntilGap);
+                sectors - sector,
+                ref previousDataBit);
+            sectorOffset += EncodedSectorBytes;
         }
 
+        // The index precedes the gap. Its first clock follows the last data bit of the track.
+        if (previousDataBit) track[0] = 0x2A;
         return track;
     }
 
@@ -81,9 +85,11 @@ public static class AmigaDosTrackEncoder
         return Enumerable.Repeat((byte)0xAA, EncodedTrackByteCount).ToArray();
     }
 
-    private static void EncodeSector(ReadOnlySpan<byte> source, Span<byte> destination, int trackNumber, int sector, int sectorsUntilGap)
+    private static void EncodeSector(ReadOnlySpan<byte> source, Span<byte> destination,
+        int trackNumber, int sector, int sectorsUntilGap, ref bool previousDataBit)
     {
         destination.Fill(0xAA);
+        if (previousDataBit) destination[0] = 0x2A;
         BigEndian.WriteUInt16(destination, 0x04, 0x4489);
         BigEndian.WriteUInt16(destination, 0x06, 0x4489);
 
@@ -105,7 +111,7 @@ public static class AmigaDosTrackEncoder
 
         var headerChecksum = ComputeMfmChecksum(headerAndLabel);
         var dataChecksum = ComputeMfmChecksum(data);
-        var previousDataBit = (BigEndian.ReadUInt16(destination, 0x06, "MFM sync word") & 1) != 0;
+        previousDataBit = true; // The second sync word ends with a one data bit.
         WriteMfmLongs(destination, 0x08, headerAndLabel, ref previousDataBit);
         WriteOddEvenPair(destination, 0x30, headerChecksum, ref previousDataBit);
         WriteOddEvenPair(destination, 0x38, dataChecksum, ref previousDataBit);

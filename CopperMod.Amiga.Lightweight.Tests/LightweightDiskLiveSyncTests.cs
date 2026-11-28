@@ -115,7 +115,7 @@ public sealed class LightweightDiskLiveSyncTests
         var cycle = m.Cycle;
         m.WriteByte(0xBFD100, (byte)(0x7F & ~(8 << drive)), ref cycle, M68kBusAccessKind.CpuDataWrite);
         m.WriteByte(0xBFD300, 0xFF, ref cycle, M68kBusAccessKind.CpuDataWrite);
-        var sync = m.GetDiskNextCycle(drive) + 47 * 14;
+        var sync = DiskFormatFixture.DoubleDensityCellCycle(m.GetDiskNextCycle(drive), DiskFormatFixture.FirstSyncCell);
         m.AdvanceHardwareTo(sync + 7 * 14);
         Write(m, 0x09E, 0x0400);
         m.AdvanceHardwareTo(sync + 10 * 14);

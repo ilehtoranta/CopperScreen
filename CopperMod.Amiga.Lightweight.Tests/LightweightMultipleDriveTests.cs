@@ -24,16 +24,18 @@ public sealed class LightweightMultipleDriveTests
         Custom(m, 0x09E, 0x8100); // FAST; no WORDSYNC, capture from physical bit zero.
         Custom(m, 0x096, 0x8210);
         Custom(m, 0x022, 0x1000);
-        Custom(m, 0x024, 0x8220); // One complete encoded sector, 1088 bytes.
-        Custom(m, 0x024, 0x8220);
+        const int bytes = DiskFormatFixture.DoubleDensityGapBytes + 1088;
+        const ushort length = 0x8000 | (bytes / 2 + 1); // Keep the sector even if Paula drops the final word.
+        Custom(m, 0x024, length);
+        Custom(m, 0x024, length);
         for (var i = 0; i < 4; i++)
             Assert.Equal(i == selected, m.GetDriveState(i).ActiveDma);
-        m.AdvanceHardwareTo(m.DiskSerialNextCycle + 150_000);
+        m.AdvanceHardwareTo(DiskFormatFixture.DoubleDensityCellCycle(m.DiskSerialNextCycle, (bytes + 2) * 8) + 454);
         Assert.False(m.DiskDmaActive);
         Assert.Equal(2, m.Intreq & 2);
-        var encoded = m.ChipRam.Span.Slice(0x1000, 1088);
+        var encoded = m.ChipRam.Span.Slice(0x1000 + DiskFormatFixture.DoubleDensityGapBytes, 1088);
         Assert.Equal(0x44894489u, U32(encoded.Slice(4)));
-        Assert.Equal(0xFF00090Bu, Decode(encoded.Slice(8), encoded.Slice(12)));
+        Assert.Equal(0xFF00000Bu, Decode(encoded.Slice(8), encoded.Slice(12)));
         var value = (uint)(0x31 + selected * 0x23) * 0x01010101u;
         for (var offset = 0; offset < 512; offset += 4)
             Assert.Equal(value, Decode(encoded.Slice(0x40 + offset), encoded.Slice(0x240 + offset)));

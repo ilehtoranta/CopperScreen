@@ -146,9 +146,13 @@ public sealed partial class LightweightA500Machine : IM68kBus, IM68000BusCycleTi
         if (_configuration.FloppyDriveTypes.Count > _floppies.Length ||
             _configuration.FloppyDriveTypes.Any(type => !Enum.IsDefined(type)))
             throw new ArgumentException("Specify valid types for connected floppy drives only.", nameof(configuration));
+        if (_configuration.StandardAdfReplayBitCell is { } replayCell &&
+            ((uint)replayCell >= LightweightDiskSerial.TrackBits || _configuration.AgnusModel != LightweightAgnusModel.Mos8371))
+            throw new ArgumentOutOfRangeException(nameof(configuration), "The ADF replay bit cell must be within a standard PAL OCS DD track.");
         for (var i = 0; i < _floppies.Length; i++)
             _floppies[i] = new(i, i < _configuration.FloppyDriveTypes.Count ?
-                _configuration.FloppyDriveTypes[i] : LightweightFloppyDriveType.DoubleDensity);
+                _configuration.FloppyDriveTypes[i] : LightweightFloppyDriveType.DoubleDensity,
+                _configuration.StandardAdfReplayBitCell);
         LightweightAgnus.ValidateMemory(_configuration.AgnusModel, _configuration.ChipRamBytes, _configuration.SlowRamBytes);
         if (!Enum.IsDefined(_configuration.DeniseModel)) throw new ArgumentOutOfRangeException(nameof(configuration), "Select 8362 or 8373 Denise.");
         if ((_configuration.AgnusModel == LightweightAgnusModel.Mos8374Alice) != (_configuration.DeniseModel == LightweightDeniseModel.Lisa4203))

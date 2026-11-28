@@ -25,6 +25,7 @@ if (args.Contains("--help"))
           Use --hdf-rdb-writable to allow direct writes. The Full CopperStart pair mounts OFS/FFS and SFS partitions
           using TD64 offsets above 4 GiB and selects the highest signed boot priority stored in the RDB.
         --drives <1..4> --drive-type <0..3> <DD|HD>
+        --adf-replay-bit-cell <0..101343> selects PAL OCS DD replay timing and the initial spindle position.
         --robocop3-dongle fits the original dongle to controller port 2.
         --cpu 68040 --jit --cpu-clock-multiplier <power-of-two>
           Optional accelerated CPU clock and zero-wait Fast RAM and ROM with the original motherboard clock.
@@ -49,6 +50,7 @@ var adfPath = (string?)null;
 var extraAdfPaths = new string?[3];
 var driveCount = 1;
 var driveTypes = new Dictionary<int, LightweightFloppyDriveType>();
+int? adfReplayBitCell = null;
 var hardfiles = new List<AmigaHardfileConfiguration>();
 var hostDirectories = new List<LightweightHostDirectoryConfiguration>();
 var hostBootPriorities = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
@@ -181,6 +183,13 @@ for (var i = 0; i < args.Length; i++)
             _ => throw new ArgumentException("--drive-type requires DD or HD.")
         };
     }
+    else if (args[i] == "--adf-replay-bit-cell")
+    {
+        if (++i >= args.Length || !int.TryParse(args[i], out var cell) || cell < 0 ||
+            cell >= AmigaDosTrackEncoder.EncodedTrackByteCount * 8)
+            throw new ArgumentException("--adf-replay-bit-cell requires a cell within a standard DD track.");
+        adfReplayBitCell = cell;
+    }
     else if (args[i] == "--scalar-cpu") scalarCpu = true;
     else if (args[i] == "--rtc") rtcEnabled = true;
     else if (args[i] == "--denise")
@@ -287,7 +296,7 @@ if (cd32)
 {
 #if LIGHTWEIGHT_CD32
     if (args.Any(a => a is "--cpu" or "--jit" or "--cpu-clock-multiplier" or "--agnus" or "--denise" or
-        "--chip-ram-kib" or "--slow-ram-kib" or "--rtc" or "--drives" or "--drive-type") ||
+        "--chip-ram-kib" or "--slow-ram-kib" or "--rtc" or "--drives" or "--drive-type" or "--adf-replay-bit-cell") ||
         adfPath is not null || extraAdfPaths.Any(p => p is not null) || hardfiles.Count != 0 || hostDirectories.Count != 0 ||
         diskSerial || ciaTod)
         throw new ArgumentException("The stock CD32 owns its CPU, memory and drives. Remove incompatible hardware and floppy options.");
@@ -363,6 +372,8 @@ if (writableDrives.Any(d => d < 0 || d >= driveCount) || exportDisks.Any(d => d.
     throw new ArgumentException("Writable/export drive must be connected.");
 if (driveTypes.Keys.Any(unit => unit >= driveCount))
     throw new ArgumentException("--drive-type requires a connected drive; increase --drives.");
+if (adfReplayBitCell.HasValue && agnusModel != LightweightAgnusModel.Mos8371)
+    throw new ArgumentException("--adf-replay-bit-cell requires PAL OCS Agnus.");
 if (syntheticPaulaDma) syntheticSpriteDma = true;
 if (cpuClockMultiplier != 1)
     acceleratedCpu = ConfigureAcceleratedCpu(cpuModel, cpuExecutionMode, cpuClockMultiplier);
@@ -381,6 +392,7 @@ var machineConfiguration = cd32Configuration ?? (acceleratedCpu ?? new Lightweig
 {
     FramebufferWidth = deniseModel != LightweightDeniseModel.Mos8362 ? 1816 : romPath is null && !wideOutput ? 454 : 908,
     FloppyDriveCount = driveCount, FloppyDriveTypes = Enumerable.Range(0, driveCount).Select(unit => driveTypes.GetValueOrDefault(unit)).ToArray(),
+    StandardAdfReplayBitCell = adfReplayBitCell,
     Hardfiles = hardfiles, HostDirectories = hostDirectories, CpuModel = cpuModel, CpuExecutionMode = cpuExecutionMode, FastRamBytes = fastRamKiB * 1024,
     AgnusModel = agnusModel, DeniseModel = deniseModel, ChipRamBytes = chipRamKiB * 1024,
     SlowRamBytes = (slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)) * 1024, RtcEnabled = rtcEnabled
@@ -399,6 +411,7 @@ else
 if (agnusModel != LightweightAgnusModel.Mos8371 || deniseModel != LightweightDeniseModel.Mos8362 || chipRamKiB != 512 || slowRamKiB == 0)
     Console.WriteLine($"machine agnus={agnusModel} chipRamKiB={chipRamKiB} slowRamKiB={slowRamKiB ?? (chipRamKiB == 512 ? 512 : 0)} denise={deniseModel} video=pal");
 if (driveTypes.Count != 0) Console.WriteLine("floppyDriveTypes=" + string.Join(",", Enumerable.Range(0, driveCount).Select(unit => $"DF{unit}:{(driveTypes.GetValueOrDefault(unit) == LightweightFloppyDriveType.HighDensity ? "HD" : "DD")}")));
+if (adfReplayBitCell.HasValue) Console.WriteLine($"adfReplayBitCell={adfReplayBitCell.Value}");
 if (rtcEnabled) Console.WriteLine("rtc=a501 host-local-time session-offset");
 foreach (var hardfile in hardfiles.Where(h => h.MountMode == AmigaHardfileMountMode.Partition))
 {

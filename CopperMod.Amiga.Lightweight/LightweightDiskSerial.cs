@@ -41,6 +41,7 @@ internal struct LightweightDiskSerial
 
     internal void Step(long cycle, LightweightFloppyDrive drive, LightweightA500Machine machine, bool receive = true)
     {
+        var readCellWidth = 0;
         if (drive.Selected && receive)
         {
             var bit = drive.ReadBit();
@@ -54,12 +55,13 @@ internal struct LightweightDiskSerial
             }
             else
             {
-                if ((machine.Adkcon & 0x0100) == 0 || _slowPhase != 0) bit = RecoverSlowCell(bit);
+                readCellWidth = (machine.Adkcon & 0x0100) != 0 ? 1 : 2;
+                if (readCellWidth == 2 || _slowPhase != 0) bit = RecoverSlowCell(bit);
                 if (bit >= 0) Receive(bit, cycle, machine);
             }
         }
 
-        if (drive.AdvanceRotation() && drive.Selected)
+        if (drive.AdvanceRotation(readCellWidth) && drive.Selected)
             machine.LatchDiskIndex(cycle);
     }
 

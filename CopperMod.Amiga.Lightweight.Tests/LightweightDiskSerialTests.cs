@@ -30,7 +30,6 @@ public sealed class LightweightDiskSerialTests
                     image[(track * 11 + sector) * 512 + i] = (byte)(track ^ sector ^ i);
         var drive = new LightweightFloppyDrive();
         drive.Mount(image);
-        int[] order = [9, 10, 0, 1, 2, 3, 4, 5, 6, 7, 8];
         for (var cylinder = 0; cylinder < 80; cylinder++)
         {
             foreach (var side in new[] { 0, 1 })
@@ -38,14 +37,13 @@ public sealed class LightweightDiskSerialTests
                 drive.WriteControlPins((byte)(side == 0 ? 0xF5 : 0xF1), 0);
                 var track = drive.Track;
                 Assert.Equal(12668, track.Length);
-                for (var slot = 0; slot < 11; slot++)
+                for (var sector = 0; sector < 11; sector++)
                 {
-                    var encoded = track.Slice(slot * 0x440, 0x440);
+                    var encoded = track.Slice(DiskFormatFixture.DoubleDensityGapBytes + sector * 0x440, 0x440);
                     Assert.Equal(0x44894489u, U32(encoded.Slice(4)));
                     var logicalTrack = cylinder * 2 + side;
-                    var sector = order[slot];
                     Assert.Equal(0xFF000000u | (uint)(logicalTrack << 16) |
-                        (uint)(sector << 8) | (uint)(11 - slot), Decode(encoded.Slice(8), encoded.Slice(12)));
+                        (uint)(sector << 8) | (uint)(11 - sector), Decode(encoded.Slice(8), encoded.Slice(12)));
                     for (var i = 0; i < 512; i += 4)
                         Assert.Equal(U32(image.AsSpan((logicalTrack * 11 + sector) * 512 + i)),
                             Decode(encoded.Slice(0x40 + i), encoded.Slice(0x240 + i)));
@@ -108,14 +106,14 @@ public sealed class LightweightDiskSerialTests
     {
         using var machine = RunningMachine();
         var first = machine.DiskSerialNextCycle;
-        machine.AdvanceHardwareTo(first + 47 * 14); // 4 gap bytes, first 4489.
+        machine.AdvanceHardwareTo(DiskFormatFixture.DoubleDensityCellCycle(first, DiskFormatFixture.FirstSyncCell));
         Assert.Equal(0x4489, machine.DiskInputShift);
         Assert.NotEqual(0, machine.Intreq & 0x1000);
         Assert.Equal(0, machine.Dmacon);
         Assert.Equal(0, machine.Adkcon & 0x0400);
         Assert.NotEqual(0, ReadStatus(machine) & 0x1000);
         Assert.NotEqual(0, ReadStatus(machine) & 0x1000);
-        machine.AdvanceHardwareTo(first + 48 * 14);
+        machine.AdvanceHardwareTo(DiskFormatFixture.DoubleDensityCellCycle(first, DiskFormatFixture.FirstSyncCell + 1));
         Assert.Equal(0, ReadStatus(machine) & 0x1000);
     }
 
@@ -381,6 +379,7 @@ public sealed class LightweightDiskSerialTests
         var serial = new LightweightDiskSerial();
         serial.OnDriveChanged(drive, 0);
         machine.WriteCustomRegisterFromCopper(0x09E, 0x8100, machine.Cycle);
+        prefix += DiskFormatFixture.DoubleDensityGapBytes * 8;
         for (var i = 0; i < prefix; i++) SampleCell(ref serial, drive, machine);
         machine.WriteCustomRegisterFromCopper(0x09E, 0x0100, machine.Cycle);
         var shift = serial.Shift;
@@ -408,6 +407,7 @@ public sealed class LightweightDiskSerialTests
         var serial = new LightweightDiskSerial();
         serial.OnDriveChanged(drive, 0);
         machine.WriteCustomRegisterFromCopper(0x09E, 0x8100, machine.Cycle);
+        prefix += DiskFormatFixture.DoubleDensityGapBytes * 8;
         for (var i = 0; i < prefix; i++) SampleCell(ref serial, drive, machine);
         machine.WriteCustomRegisterFromCopper(0x09E, 0x0100, machine.Cycle);
         var shift = serial.Shift;
@@ -475,6 +475,34 @@ public sealed class LightweightDiskSerialTests
         Assert.False(machine.DiskDmaActive);
         Assert.NotEqual(0, machine.Intreq & 2);
         Assert.Null(machine.UnsupportedActiveFeature);
+    }
+
+    [Theory]
+    [InlineData(true, 2)]
+    [InlineData(false, 0)]
+    public void ReplayAdfSpliceOmitsCellsOnlyFromTheSelectedReadStream(bool receive, int skipped)
+    {
+        using var machine = new LightweightA500Machine();
+        const int spliceCell = DiskFormatFixture.DoubleDensityGapBytes * 8 / 3;
+        var drive = new LightweightFloppyDrive(replayBitCell: spliceCell - 1);
+        drive.Mount(new byte[LightweightFloppyDrive.StandardAdfBytes]);
+        drive.WriteControlPins(0x77, 0);
+        var serial = new LightweightDiskSerial();
+        serial.OnDriveChanged(drive, 0, mediaChanged: true);
+        machine.WriteCustomRegisterFromCopper(0x09E, 0x8100, machine.Cycle);
+
+        Assert.Equal(spliceCell - 1, drive.BitPosition);
+        Assert.Equal(14, drive.NextBitCycle);
+        serial.Step(drive.NextBitCycle, drive, machine, receive);
+
+        Assert.Equal(spliceCell + skipped, drive.BitPosition);
+        Assert.Equal(28, drive.NextBitCycle);
+        Assert.Equal(0, serial.Shift);
+        if (receive)
+        {
+            serial.Step(drive.NextBitCycle, drive, machine);
+            Assert.Equal(1, serial.Shift);
+        }
     }
 
     private static LightweightFloppyDrive SelectedDrive()

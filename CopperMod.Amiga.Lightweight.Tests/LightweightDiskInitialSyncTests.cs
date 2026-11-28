@@ -149,7 +149,7 @@ public sealed class LightweightDiskInitialSyncTests
         Assert.True(m.DiskDmaActive);
         Assert.Equal(0, m.Intreq & 0x1002);
 
-        var sync = first + 47 * 14;
+        var sync = DiskFormatFixture.DoubleDensityCellCycle(first, DiskFormatFixture.FirstSyncCell);
         m.AdvanceHardwareTo(sync - 2);
         Write(m, 0x09E, 0x0400);
         if (reenable) Write(m, 0x09E, 0x8400);
@@ -159,7 +159,7 @@ public sealed class LightweightDiskInitialSyncTests
         Assert.Equal(0x1000, m.Intreq & 0x1002);
         Assert.Equal(0x1000u, m.GetDiskPointer());
         Assert.Equal(0, m.ReadChipWordDma(0x1000));
-        m.AdvanceHardwareTo(sync + 16 * 14);
+        m.AdvanceHardwareTo(DiskFormatFixture.DoubleDensityCellCycle(first, DiskFormatFixture.FirstSyncCell + 16));
         Drain(m);
         Assert.Equal(0x4489, m.ReadChipWordDma(0x1000)); // Second header sync.
         Assert.Equal(0x1002u, m.GetDiskPointer());

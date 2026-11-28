@@ -55,14 +55,27 @@ public sealed class AmigaDiskLoaderTests
         Assert.Equal(12_668, AmigaDosTrackEncoder.EncodedTrackByteCount);
         Assert.Equal(expectedTrackBytes, encoded.Length);
         Assert.Equal(101_344, track.BitLength);
-        Assert.Equal(0x44, encoded[4]);
-        Assert.Equal(0x89, encoded[5]);
-        Assert.Equal(0x44, encoded[expectedSectorBytes - 0x440 + 4]);
-        Assert.Equal(0x89, encoded[expectedSectorBytes - 0x440 + 5]);
-        for (var offset = expectedSectorBytes; offset < encoded.Length; offset++)
-        {
-            Assert.Equal(0xAA, encoded[offset]);
-        }
+        Assert.All(encoded[..expectedGapBytes], value => Assert.Equal(0xAA, value));
+        Assert.Equal(0x44, encoded[expectedGapBytes + 4]);
+        Assert.Equal(0x89, encoded[expectedGapBytes + 5]);
+        Assert.Equal(0x44, encoded[expectedTrackBytes - 0x440 + 4]);
+        Assert.Equal(0x89, encoded[expectedTrackBytes - 0x440 + 5]);
+    }
+
+    [Fact]
+    public void StandardTrackMfmClockFollowsThePreviousDataBitAcrossSectorAndIndex()
+    {
+        var data = CreateStandardAdf();
+        data[511] = 1;
+        data[11 * 512 - 1] = 1;
+        var media = AmigaDiskLoader.FromAdfBytes(data);
+
+        var encoded = AmigaDosTrackEncoder.EncodeTrack(media, cylinder: 0, head: 0);
+
+        Assert.Equal(0x2A, encoded[0]);
+        Assert.Equal(0xAA, encoded[0x2BC]);
+        Assert.Equal(0x2A, encoded[0x2BC + 0x440]);
+        Assert.Equal(0xAA, encoded[0x2BC + 2 * 0x440]);
     }
 
     [Fact]
@@ -329,9 +342,10 @@ public sealed class AmigaDiskLoaderTests
         }
         else
         {
-            var header = ((track.ReadUInt32AtBit(0x08 * 8) & 0x55555555u) << 1) |
-                (track.ReadUInt32AtBit(0x0C * 8) & 0x55555555u);
-            Assert.Equal(0xFF00090Bu | ((uint)(trackCount - 1) << 16), header);
+            const int gap = 0x2BC;
+            var header = ((track.ReadUInt32AtBit((gap + 0x08) * 8) & 0x55555555u) << 1) |
+                (track.ReadUInt32AtBit((gap + 0x0C) * 8) & 0x55555555u);
+            Assert.Equal(0xFF00000Bu | ((uint)(trackCount - 1) << 16), header);
         }
         if ((trackCount & 1) != 0)
             Assert.Equal(AmigaDosTrackEncoder.CreateUnformattedTrack(), media.ReadTrack(trackCount / 2, 1).EncodedData.ToArray());

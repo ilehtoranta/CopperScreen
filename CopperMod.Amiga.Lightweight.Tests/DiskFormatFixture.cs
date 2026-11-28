@@ -6,6 +6,17 @@ namespace CopperMod.Amiga.Lightweight.Tests;
 // Original synthetic media; no ROM or copyrighted disk contents.
 internal static class DiskFormatFixture
 {
+    internal const int DoubleDensityGapBytes = 700;
+    internal const int FirstSyncCell = (DoubleDensityGapBytes + 6) * 8;
+
+    internal static long DoubleDensityCellCycle(long firstCellCycle, long cell)
+    {
+        const long denominator = 10L * 101_344;
+        const long frequency = 7_093_790;
+        return firstCellCycle + 2 * ((cell * frequency + denominator - 1) / denominator -
+            (frequency + denominator - 1) / denominator);
+    }
+
     internal static byte[] Adz(byte[] image)
     {
         using var output = new MemoryStream();

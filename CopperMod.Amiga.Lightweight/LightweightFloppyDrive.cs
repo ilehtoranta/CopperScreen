@@ -6,12 +6,20 @@ namespace CopperMod.Amiga.Lightweight;
 /// <summary>Owned floppy tracks, control pins and independent spindle.</summary>
 internal sealed class LightweightFloppyDrive
 {
-    internal LightweightFloppyDrive(int index = 0, LightweightFloppyDriveType type = LightweightFloppyDriveType.DoubleDensity)
-        => (_selectMask, _highDensityDrive) = (8 << index, type == LightweightFloppyDriveType.HighDensity);
+    internal LightweightFloppyDrive(
+        int index = 0,
+        LightweightFloppyDriveType type = LightweightFloppyDriveType.DoubleDensity,
+        int? replayBitCell = null)
+        => (_selectMask, _highDensityDrive, _replayBitCell) =
+            (8 << index, type == LightweightFloppyDriveType.HighDensity, replayBitCell);
     private readonly bool _highDensityDrive;
+    private readonly int? _replayBitCell;
+    private bool _replayAdf;
     private bool _highDensityMedia;
     private int _idBit = -1;
-    private int RevolutionCcks => LightweightPaulaAudio.PalCpuFrequency / (_highDensityMedia ? 5 : 10);
+    private int RevolutionCcks => _replayAdf ? _trackBits * ReplayCellCcks :
+        LightweightPaulaAudio.PalCpuFrequency / (_highDensityMedia ? 5 : 10);
+    private int InsertionCcks => _replayAdf ? _replayBitCell.GetValueOrDefault() * ReplayCellCcks : 0;
     private readonly int _selectMask;
     private int _bitRateDenominator = 10 * LightweightDiskSerial.TrackBits;
     private int _bitWholeCcks = LightweightPaulaAudio.PalCpuFrequency / (10 * LightweightDiskSerial.TrackBits);
@@ -23,6 +31,9 @@ internal sealed class LightweightFloppyDrive
     private const int LastPreservedCylinder = 83;
     // Chosen drive-model spin-up time, not a universal drive timing claim.
     internal const long MotorSpinUpCycles = LightweightPaulaAudio.PalCpuFrequency / 2;
+    private const int ReplayCellCcks = 7;
+    // Midpoint of the reference's 18-field spin-up plus 0–511 lines of variation.
+    private const long ReplaySpinUpCycles = (18L * 312 + 256) * LightweightClock.CpuCyclesPerLine;
     private byte[]? _image;
     private byte[][]? _tracks;
     private int[]? _trackLengths;
@@ -82,13 +93,14 @@ internal sealed class LightweightFloppyDrive
         for (var track = 0; track < tracks.Length; track++)
             tracks[track] = AmigaDosTrackEncoder.EncodeTrack(media, track / 2, track & 1);
         _highDensityMedia = image.Length == HighDensityAdfBytes;
+        _replayAdf = !_highDensityMedia && _replayBitCell.HasValue;
         _image = ownedImage;
         _tracks = tracks;
         Format = LightweightFloppyFormat.Adf;
         _trackLengths = null;
         _unstableMasks = null;
         _cellDeadlines = null;
-        SelectTrack(0, preservePhase: false);
+        SelectTrack(0, preservePhase: false, mediaChanged: true);
         Array.Clear(_dirtyTracks);
         IsDirty = false;
         _writeTrack = -1;
@@ -119,6 +131,7 @@ internal sealed class LightweightFloppyDrive
         var masks = image.WeakMasks;
         var seed = image.Seed;
         _highDensityMedia = false;
+        _replayAdf = false;
         _revolutionSeed = _mediaSeed = seed ^ (uint)_selectMask;
         _image = null;
         _tracks = tracks;
@@ -126,7 +139,7 @@ internal sealed class LightweightFloppyDrive
         _unstableMasks = masks;
         _cellDeadlines = image.CellDeadlines;
         Format = format;
-        SelectTrack(0, preservePhase: false);
+        SelectTrack(0, preservePhase: false, mediaChanged: true);
         Array.Clear(_dirtyTracks);
         IsDirty = false;
         _writeTrack = -1;
@@ -136,6 +149,7 @@ internal sealed class LightweightFloppyDrive
     internal void Eject()
     {
         _highDensityMedia = false;
+        _replayAdf = false;
         _image = null;
         _tracks = null;
         _trackLengths = null;
@@ -158,7 +172,7 @@ internal sealed class LightweightFloppyDrive
         ReadyCycle = long.MaxValue;
         NextBitCycle = long.MaxValue;
         BitPosition = _fraction = 0;
-        _parkedRevolutionCcks = 0;
+        _parkedRevolutionCcks = InsertionCcks;
         _revolution = 0;
         _revolutionSeed = _mediaSeed;
         _writeTrack = -1;
@@ -192,10 +206,10 @@ internal sealed class LightweightFloppyDrive
             else _idBit = (_idBit + 1) & 31;
             if (motor != MotorOn)
             {
-                if (!motor && NextBitCycle != long.MaxValue && cycle >= ReadyCycle)
+                if (!motor && NextBitCycle != long.MaxValue && (_replayAdf || cycle >= ReadyCycle))
                     _parkedRevolutionCcks = ElapsedRevolutionCcks(cycle);
                 MotorOn = motor;
-                ReadyCycle = motor ? cycle + MotorSpinUpCycles : long.MaxValue;
+                ReadyCycle = motor ? cycle + (_replayAdf ? ReplaySpinUpCycles : MotorSpinUpCycles) : long.MaxValue;
             }
         }
 
@@ -224,7 +238,9 @@ internal sealed class LightweightFloppyDrive
     {
         if (mediaChanged)
         {
-            _parkedRevolutionCcks = BitPosition = 0;
+            _parkedRevolutionCcks = InsertionCcks;
+            BitPosition = _replayAdf ? _replayBitCell.GetValueOrDefault() : 0;
+            if (_replayAdf && cycle == 0) DiskChanged = false;
             _revolution = 0;
             _revolutionSeed = _mediaSeed;
         }
@@ -236,10 +252,10 @@ internal sealed class LightweightFloppyDrive
         }
         if (NextBitCycle != long.MaxValue && !mediaChanged) return false;
 
-        // Stop holds the disk's angular position. Resume after spin-up, retaining
-        // the part of the current cell that elapsed before the motor stopped.
+        // Stop holds the disk's angular position, including the partial cell.
+        // Replay separates rotation from READY, which is a drive status signal.
         var elapsed = Math.Min(_parkedRevolutionCcks, TrackRevolutionCcks - 1);
-        var resumeCycle = (Math.Max(cycle, ReadyCycle) + 1) & ~1L;
+        var resumeCycle = ((_replayAdf ? cycle : Math.Max(cycle, ReadyCycle)) + 1) & ~1L;
         _revolutionStartCycle = resumeCycle - 2L * elapsed;
         ScheduleAtRevolutionPhase(elapsed);
         return true;
@@ -250,9 +266,16 @@ internal sealed class LightweightFloppyDrive
     private int ElapsedRevolutionCcks(long cycle)
         => (int)Math.Clamp((cycle - _revolutionStartCycle) / 2, 0, TrackRevolutionCcks - 1);
 
-    internal bool AdvanceRotation()
+    internal bool AdvanceRotation(int readCellWidth = 0)
     {
-        var index = ++BitPosition == _trackBits;
+        BitPosition++;
+        if (BitPosition == AmigaDosTrackEncoder.DoubleDensityGapSpliceCell &&
+            readCellWidth != 0 && _replayAdf &&
+            !_dirtyTracks[Cylinder * 2 + Head])
+        {
+            CrossSyntheticReadSplice(readCellWidth);
+        }
+        var index = BitPosition == _trackBits;
         if (index)
         {
             BitPosition = 0;
@@ -261,6 +284,19 @@ internal sealed class LightweightFloppyDrive
         }
         ScheduleFollowingBit();
         return index;
+    }
+
+    private void CrossSyntheticReadSplice(int readCellWidth)
+    {
+        // The synthesized DD gap contains the write splice. Omit one to
+        // three recovered cells here without clocking them into Paula.
+        // A drive-local deterministic sequence keeps replays reproducible.
+        var skipped = readCellWidth * (1 + (int)(Mix(_revolution + (uint)_selectMask) % 3));
+        BitPosition += skipped;
+
+        // Keep the next input at its regular cadence and retain the angular
+        // displacement when parking the spindle.
+        _revolutionStartCycle -= 2L * skipped * ReplayCellCcks;
     }
 
     private void ScheduleFollowingBit()
@@ -280,7 +316,7 @@ internal sealed class LightweightFloppyDrive
         NextBitCycle += 2 * ccks;
     }
 
-    private void SelectTrack(long cycle, bool preservePhase)
+    private void SelectTrack(long cycle, bool preservePhase, bool mediaChanged = false)
     {
         if (_tracks is null) return;
         var track = Cylinder * 2 + Head;
@@ -290,15 +326,15 @@ internal sealed class LightweightFloppyDrive
         var previousDeadlines = _currentDeadlines;
         _currentDeadlines = present ? _cellDeadlines?[track] : null;
         var bits = present ? _trackLengths?[track] ?? (_currentTrack!.Length * 8) : LightweightDiskSerial.TrackBits;
-        if (_trackBits == bits && _bitRateDenominator == (_highDensityMedia ? 5 : 10) * bits &&
+        if (!mediaChanged && _trackBits == bits && _bitRateDenominator == (_highDensityMedia ? 5 : 10) * bits &&
             ReferenceEquals(previousDeadlines, _currentDeadlines)) return;
         _trackBits = bits;
         _bitRateDenominator = (_highDensityMedia ? 5 : 10) * bits;
-        _bitWholeCcks = LightweightPaulaAudio.PalCpuFrequency / _bitRateDenominator;
-        _bitRemainder = LightweightPaulaAudio.PalCpuFrequency % _bitRateDenominator;
+        _bitWholeCcks = _replayAdf ? ReplayCellCcks : LightweightPaulaAudio.PalCpuFrequency / _bitRateDenominator;
+        _bitRemainder = _replayAdf ? 0 : LightweightPaulaAudio.PalCpuFrequency % _bitRateDenominator;
         if (preservePhase && MotorOn && NextBitCycle != long.MaxValue)
         {
-            var elapsed = cycle < ReadyCycle
+            var elapsed = !_replayAdf && cycle < ReadyCycle
                 ? Math.Min(_parkedRevolutionCcks, TrackRevolutionCcks - 1)
                 : ElapsedRevolutionCcks(cycle);
             ScheduleAtRevolutionPhase(elapsed);

@@ -251,8 +251,8 @@ public sealed class LightweightDiskDmaTests
     }
 
     [Theory]
-    [InlineData(32, 32)]
-    [InlineData(6334, 6333)]
+    [InlineData(32, 31)]
+    [InlineData(6335, 6334)]
     public void ActualAdfSerialInputTransfersFollowingWordAndCompletesWithoutAllocation(int words, int storedWords)
     {
         using var m = Armed(words, sync: true);
@@ -268,13 +268,13 @@ public sealed class LightweightDiskDmaTests
         var first = m.DiskSerialNextCycle;
         m.AdvanceHardwareTo(first - 2);
         var allocated = GC.GetAllocatedBytesForCurrentThread();
-        m.AdvanceHardwareTo(first + (48 + 16L * words) * 14 + 454);
+        m.AdvanceHardwareTo(DiskFormatFixture.DoubleDensityCellCycle(first, DiskFormatFixture.FirstSyncCell + 16L * words) + 454);
         allocated = GC.GetAllocatedBytesForCurrentThread() - allocated;
         Assert.Equal(0, allocated);
         Assert.Equal(0x4489, m.ReadChipWordDma(0x1000)); // Second sync in sector header.
         for (var word = 0; word < storedWords; word++)
         {
-            var offset = (6 + word * 2) % expectedDrive.Track.Length;
+            var offset = (DiskFormatFixture.DoubleDensityGapBytes + 6 + word * 2) % expectedDrive.Track.Length;
             var expected = (expectedDrive.Track[offset] << 8) | expectedDrive.Track[offset + 1];
             Assert.Equal(expected, m.ReadChipWordDma((uint)(0x1000 + word * 2)));
         }

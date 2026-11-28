@@ -339,6 +339,14 @@ and bytes. SCP retains CopperDisk's decoded first DD revolution and uses the
 preserved receiver; original flux intervals and multiple revolutions are not replayed.
 See [format contract and validation](../docs/engine/DISK_FORMATS.md).
 
+For a deterministic PAL OCS DD sector-image replay, set
+`LightweightA500Configuration.StandardAdfReplayBitCell`, or pass
+`--adf-replay-bit-cell <cell>` to the runner. The value selects the spindle
+position on insertion. The replay drive advances during spin-up and models a
+one-to-three-cell splice in the synthesized read gap. The gap sequence is
+drive-local and deterministic. See the
+[drive timing evidence](../docs/engine/ISSUES.md#pal-ocs-adf-replay).
+
 `MountIpf(drive, bytes)` decodes preserved tracks at mount time;
 `LightweightIpfImage.Prepare` and `MountIpf(drive, prepared)` separate preparation
 from attachment. Exact bit lengths, index orientation, stored gaps, density and

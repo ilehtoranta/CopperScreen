@@ -393,8 +393,9 @@ Retain documented following-word WORDSYNC coverage.
 
 ### LWA-DISK-008 — Ideal-ADF mechanics
 
-Standard encoded ADF tracks use nominal 300 RPM for DD or 150 RPM for HD and a new motor/media run starting
-at track bit zero after readiness. Insertion phase, coast-down, seek settling and
+The nominal ADF model uses 300 RPM for DD and 150 RPM for HD. Insertion
+starts at track bit zero and motor restarts retain the parked position
+through the readiness interval. Coast-down, seek settling and
 speed variation are not fully modeled. ADF sectors are not physical flux captures.
 Inward over-seeks now clamp without stopping guest execution. Existing model
 limits remain 79 for standard sector/empty drives and 83 for preserved IPF/extended ADF/SCP tracks; actual mechanical travel and
@@ -407,6 +408,44 @@ HD sector ADF/ADZ, media-dependent serial drive IDs and 150 RPM index timing
 are implemented with bounded CopperStart full-ROM read/write/export/reopen
 coverage; see [HD support and qualification](HD_FLOPPY_2026-10-18.md). HD
 preserved/flux formats and physical-drive timing remain unqualified.
+
+#### PAL OCS ADF replay
+
+The opt-in DD replay profile accepts an insertion bit cell, rotates
+during spin-up at seven CCK per cell and varies the synthetic gap
+while the drive is selected for reading. At gap cell 1,866 it omits
+one to three recovered cells while keeping the regular input cadence.
+The drive retains the resulting spindle displacement on motor stop.
+The profile uses a deterministic drive-local gap sequence and a fixed
+READY delay at the midpoint of the reference range.
+[WinUAE ADF synthesis and receiver](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/disk.cpp#L4463)
+
+At the observed seed-2 insertion cell 44,478, the Amiga Master replay
+matches WinUAE's sector order on tracks 106 through 110. Both reads of
+each track decode all 11 ADF sector payloads. On track 110 the sync
+words occur at bit phase 4 before the gap and phase 3 after it in both
+emulators. On tracks 106 through 109 there are remaining differences
+in absolute phase or gap slip size. WinUAE's gap selection shares its
+global random stream, and its motor/step logic also advances the read
+shifter. Replay traces are in `artifacts/the-company/floppy-sector-parity/`.
+
+Kickstart produces one bounded host output at raster field 105 before
+the stretched raster field finishes. `CompletedFrames` includes that
+output. The follow-up records the Agnus raster counter at capture
+time and pairs it with the WinUAE raster counter. This exposes the
+field-count difference in the earlier Amiga Master measurements.
+
+The full seed-2 comparison through raster field 33,002 matches 30,485
+of 30,497 jointly active fields with the replay profile. The same
+CPU build using the nominal drive matches 7,986 of 30,497 on the
+same raster counters. WinUAE enters at 1,692, the replay profile
+enters at 1,693, and both return to Kickstart at 32,190. Field 20,369
+matches. Twelve jointly active fields still differ, including startup.
+Track 110 still arms at physical cell 35,721 in Lightweight and
+36,203 in WinUAE, so the matching sync phases cover different starting
+cells. In separate diagnostic runs, substituting the reference buffer
+for track 110 alone and for all five final tracks both leave entry at
+raster field 1,693.
 
 ### LWA-DISK-010 — Recovery-window phase
 
@@ -1186,6 +1225,102 @@ During the Kickstart drive probe the CIA-B writes now alternate 70 and
 In the separate indexed-ADF replay this restores the first Amiga Master
 scene transition to the reference field. Full pixel parity is open.
 [WinUAE CIA transfer timing](https://github.com/tonioni/WinUAE/blob/857f48fcb09399d4d95527e29a2fdeaedb41f827/cia.cpp#L2488)
+
+### Indexed-track Amiga Master entry timing
+
+The first differing grant between the late indexed-track build and the
+frozen replay is in Kickstart before the first floppy read. When the Copper
+executes a MOVE to `COPJMP2`, WinUAE reserves two reads from the old list
+before fetching the target. The maintained engine leaves the first slot
+free, granting the CPU's second operand word one CCK early. The OCS Copper
+now reserves that first read when the slot is free, advances the old
+pointer on the accepted output and loads the new pointer on the second
+read. The CPU strobe uses its existing phase. The regression asserts the
+CPU grant and both old-list outputs. The corrected depacker Copper trace
+also matches all six output slots on the measured line.
+
+The indexed-track build with that change and the BSET replay package still
+enters at raw field 1,693. It reaches Kickstart at 32,190 and matches
+30,481 of 30,497 jointly active fields through 33,002 without capture
+offsets. Raw field 20,369 matches. The indexed-track control matches
+30,485 jointly active fields. Four transition fields change after the
+Copper correction. A fresh WinUAE seed-2 run reproduces all 31,385 viewport
+hashes and the field telemetry.
+
+The depacker reads the same packed-data address first on both emulators.
+In the corrected build it begins about 26,000 CPU clocks later and spends
+about 34,000 more CPU clocks in the depacking loop. Part of the difference
+comes from crossing the last vertical blank during depacking. The cause of
+the later depacker start and the remaining in-loop timing difference is
+open. Separate controls using the older Copper, beam readback or disk
+last-word behavior each still enter at 1,693. Substituting the seed-2
+WinUAE buffer at completion of the final track 110 read also enters at
+1,693. Traces and full comparisons are in
+`artifacts/the-company/boot-1693/`.
+
+### Amiga Master boot instruction timing
+
+The Kickstart clear loop initially took 24 CPU clocks per longword on an
+uncontended bus. The optimized MC68000 `MOVE.L Dn,(An)+` retired before its
+final queue refill. That fetch was then issued during the following
+`DBRA`. Completing it after the low-word write restores the observed
+22-clock loop. A separate trace of the first depacking stage showed that
+`MOVE.B (d8,An,Xn),-(An)` spent its two index clocks after the memory
+write instead of before the first opcode refill. The CPU correction
+restores that placement. The focused tests exercise both opcode plans
+and include scalar dispatch for the indexed instruction.
+
+The longword-refill correction alone enters at raw 1,689. The combined
+development CPU package enters at 1,693 and returns to Kickstart at
+32,190, matching 30,481 of 30,497 jointly active RGB fields through raw
+33,002 at equal counters. Field 20,369 remains exact. WinUAE enters at
+1,692. The fresh WinUAE run reproduces all 31,385 hashes and its telemetry.
+
+In the combined build the last disk read ends approximately 52,000 CPU
+clocks later within raw field 1,008. Another 40,148 clocks accrue between
+disk completion and the loader's first write to the next output buffer.
+Substituting the reference's last raw track reduces that latter interval
+by 15,910 clocks and still enters at 1,693. Motor-motion, nominal READY
+and fixed-cell controls also enter at 1,693. The second depacking stage
+takes 16,682 CPU clocks more than WinUAE, including time in vertical-blank
+handlers. The remaining boot and full pixel parity differences are open.
+Evidence is in `artifacts/the-company/depacker-parity/`.
+
+The seed-2 follow-up traced each DMA arm and completion through the final
+read. Track 110 arms 51,756 CPU clocks late and completes 51,752 clocks
+late in raw field 1,008. The transfer takes 1,648,160 clocks in
+Lightweight and 1,648,164 in WinUAE. Track 109 has already accumulated
+45,850 clocks of delay at completion. The two emulators use the same
+three CIA-A timer values in the final seek.
+
+Substituting the WinUAE DMA buffer at track 109 completion advances the
+next arm by 21,298 clocks. Substituting tracks 108 through 110 moves the
+final completion to 16,344 clocks late. This diagnostic holds the
+preceding CPU and DMA execution constant up to the first substitution.
+It isolates Kickstart's processing of the differently ordered MFM data
+as a contributor to later arms. The source of the remaining delay and the
+drive and receiver conditions needed to reproduce the same data order
+are open. The buffer substitutions are diagnostic only.
+
+All 11 sector payloads on each of tracks 106 through 110 match the ADF
+in both DMA captures. Track 109 begins with sector 6 in Lightweight and
+sector 7 in WinUAE. Track 110 begins with sectors 3 and 4, respectively.
+The WinUAE sync words also change phase across the synthesized gap,
+whereas Lightweight's sync words retain one phase throughout the read.
+Disabling the synthetic gap jitter in a separate WinUAE control
+advances the last read's completion by 113,500 CPU clocks.
+
+A fresh full replay of the same production execution path through raw
+field 33,002 reproduces all prior hashes. It matches 30,481 of 30,497
+jointly active fields and reaches Kickstart in raw field 32,190 in both
+emulators. WinUAE enters one field earlier, at raw 1,692.
+Two full controls model the disk as already present at startup. The
+second also advances rotation from motor-on and shortens the simulated
+READY delay. They end the final read 28,796 and 26,782 clocks late,
+respectively. Both enter at 1,693 and retain the 16 jointly active
+pixel mismatches. These controls were kept outside the engine source.
+The traces and comparisons are in
+`artifacts/the-company/final-floppy-parity/`.
 
 | ID | Resolution to preserve | Coverage / remaining boundary |
 | --- | --- | --- |

@@ -45,6 +45,12 @@ public sealed record LightweightA500Configuration
     public int FloppyDriveCount { get; init; } = 1;
     /// <summary>Fitted drive types in DF0–DF3 order. Unspecified connected drives are DD.</summary>
     public IReadOnlyList<LightweightFloppyDriveType> FloppyDriveTypes { get; init; } = [];
+    /// <summary>
+    /// Initial bit cell for deterministic PAL OCS standard DD ADF replay.
+    /// When specified, the drive uses seven CCK per bit cell, rotates during
+    /// spin-up and varies the synthetic read gap. Null retains nominal ADF timing.
+    /// </summary>
+    public int? StandardAdfReplayBitCell { get; init; }
     /// <summary>File-backed CopperHDF units, attached at construction. Changes require a new machine.</summary>
     public IReadOnlyList<AmigaHardfileConfiguration> Hardfiles { get; init; } = [];
     /// <summary>Optional synthetic timing per CopperHDF unit. Omitted units remain synchronous.</summary>
