@@ -1,10 +1,9 @@
 using System.IO.Compression;
-using System.Security.Cryptography;
 using System.Text.Json;
 
 namespace CopperScreen;
 
-// A consumer qualification ID, not a claim of a released producer version.
+// Qualification metadata records replay provenance; it does not pin ROM admission.
 // Firmware remains a guest ROM: no callbacks, host services or Legacy fallback.
 internal static class CopperScreenCopperStartRom
 {
@@ -21,13 +20,14 @@ internal static class CopperScreenCopperStartRom
     public static string DescriptionFor(bool a1200)
     {
         var artifact = Select(a1200);
-        return $"CopperStart {artifact.QualificationId} (experimental). {artifact.Requirements}";
+        return $"CopperStart (experimental). {artifact.Requirements}";
     }
     public static string Recovery => RecoveryFor(false);
     public static string RecoveryFor(bool a1200)
     {
-        var artifact = Select(a1200);
-        return $"Choose the qualified CopperStart {artifact.QualificationId} standalone ROM (SHA-256 {artifact.Sha256}). Older builds and native Kickstart ROMs cannot be used with this boot method.";
+        return a1200
+            ? "Choose a 1 MiB ROM image for the configured A1200 CopperStart setup. Other ROMs may not work."
+            : "Choose a 512 KiB ROM image for the configured A500 CopperStart setup. Other ROMs may not work.";
     }
     private static Artifact Select(bool a1200) => a1200 ? QualifiedA1200 : Qualified;
 
@@ -45,7 +45,6 @@ internal static class CopperScreenCopperStartRom
         {
             try { return ReadExisting(path, a1200); }
             // Experimental OCS/ECS launches may use the bundled desktop ROM.
-            // Both paths still verify a pinned artifact; arbitrary firmware is not admitted.
             catch (InvalidOperationException original) when (!a1200)
             {
                 try { return ReadExisting(path, true); }
@@ -80,8 +79,6 @@ internal static class CopperScreenCopperStartRom
             if (input.Length != Select(a1200).Bytes) throw new InvalidOperationException("CopperStart ROM has the wrong size. " + RecoveryFor(a1200));
             bytes = ReadBounded(input, a1200);
         }
-        if (!Convert.ToHexString(SHA256.HashData(bytes)).Equals(Select(a1200).Sha256, StringComparison.OrdinalIgnoreCase))
-            throw new InvalidOperationException("CopperStart ROM is damaged or is an unqualified version. " + RecoveryFor(a1200));
         return bytes;
     }
 

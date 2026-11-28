@@ -67,23 +67,26 @@ public sealed class CopperStartTests : IDisposable
     }
 
     [Fact]
-    public void MissingDamagedNativeAndAmbiguousRomsHaveRecoveryGuidance()
+    public void MissingWrongSizeAndAmbiguousRomsHaveRecoveryGuidance()
     {
-        Assert.Contains(CopperScreenCopperStartRom.Version, Assert.Throws<FileNotFoundException>(() => CopperScreenCopperStartRom.Read(null)).Message);
+        Assert.Contains("512 KiB CopperStart A500", Assert.Throws<FileNotFoundException>(() => CopperScreenCopperStartRom.Read(null)).Message);
         var path = Path.Combine(_directory, "wrong.rom");
         File.WriteAllBytes(path, new byte[20]);
         Assert.Contains("wrong size", Assert.Throws<InvalidOperationException>(() => CopperScreenCopperStartRom.Read(path)).Message);
-        var native = new byte[524288]; native[13] = 40; native[15] = 63;
-        File.WriteAllBytes(path, native);
-        Assert.Contains("unqualified version", Assert.Throws<InvalidOperationException>(() => CopperScreenCopperStartRom.Read(path)).Message);
+        var sameSize = new byte[524288]; sameSize[13] = 40; sameSize[15] = 63;
+        File.WriteAllBytes(path, sameSize);
+        Assert.Equal(sameSize, CopperScreenCopperStartRom.Read(path));
         if (CopperScreenBootMethods.CopperStartEnabled)
-            Assert.Contains("unqualified version", Assert.Throws<InvalidOperationException>(() => CopperScreenSession.Create(Options(path))).Message);
+        {
+            using var session = CopperScreenSession.Create(Options(path));
+            Assert.NotNull(session);
+        }
         else
             Assert.Contains("CopperStart is not enabled", Assert.Throws<NotSupportedException>(() => CopperScreenSession.Create(Options(path))).Message);
         var zip = Path.Combine(_directory, "ambiguous.zip");
         using (var archive = ZipFile.Open(zip, ZipArchiveMode.Create))
             foreach (var name in new[] { "CopperStart.rom", "kickstart.rom" })
-                using (var entry = archive.CreateEntry(name).Open()) entry.Write(native);
+                using (var entry = archive.CreateEntry(name).Open()) entry.Write(sameSize);
         Assert.Contains("exactly one", Assert.Throws<InvalidOperationException>(() => CopperScreenCopperStartRom.Read(zip)).Message);
         File.WriteAllBytes(zip, new byte[16]);
         Assert.Contains(CopperScreenCopperStartRom.Recovery, Assert.Throws<InvalidOperationException>(() => CopperScreenCopperStartRom.Read(zip)).Message);
