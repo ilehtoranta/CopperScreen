@@ -447,6 +447,32 @@ cells. In separate diagnostic runs, substituting the reference buffer
 for track 110 alone and for all five final tracks both leave entry at
 raster field 1,693.
 
+The track-110 substitution also changes the startup pixels and
+reproduces all eleven later mismatched images byte for byte. The
+same-counter follow-up traces the field-3,800 difference to raster
+line 178. The CPU writes the Copper list pointer and strobes
+`COPJMP1` 50 CPU clocks after WinUAE. The delayed list switch moves
+bitplane DMA on the line and produces 190 different pixels.
+
+The CIA-B Timer A interrupt that preempts the display clear loop
+writes stack PC `$03099A` in Lightweight and `$030996` in WinUAE.
+WinUAE has cleared two additional words when it enters the handler.
+With the same timer latch `$00A8`, the trace measures 1,674 CPU
+clocks from the start strobe to the first underflow and 1,680
+between underflows in Lightweight. WinUAE measures 1,710 and 1,690
+clocks, then publishes the timer cause to ICR 10 clocks later.
+The diagnostic build with those timer intervals and the added
+CPU interrupt delay reduces field 3,800 to 136 differing pixels.
+Changing the timer intervals alone reproduces the original 190.
+The timing of the CIA-to-Paula request and the remaining CPU lead-in
+still require verification.
+
+At fields 12,303 and 14,406 the addressed screen clears also arrive
+96 and 120 CPU clocks late. The bus traces already show the delays
+in the preceding raster field while both machines execute the same
+clear loop. These observations and the image comparison are under
+`artifacts/the-company/floppy-sector-parity/after-push/`.
+
 ### LWA-DISK-010 — Recovery-window phase
 
 The implemented slow receiver consumes two/three nominal source cells sequentially
