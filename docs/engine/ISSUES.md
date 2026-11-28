@@ -72,7 +72,11 @@ removes a second charge on the long register loads and recovers another
 recovers a further 126 clocks in that trace, with 585 remaining. The
 status-register timing trials regress the stereo replay at fixed WinUAE
 positions. The stock Release replay reproduces four near-silent samples
-per channel at tick 2526 and zero at ticks 2532 and 2535.
+per channel at tick 2526 and zero at ticks 2532 and 2535. Grouping the
+[posted stores with the next instruction](CD32.md#register-transfer-boundaries-in-the-remaining-lba-2081-delay)
+reduces two apparent per-instruction losses to 5 and 3 clocks for the
+respective groups. Moving `MOVEM.L` load setup before the bus reads changes
+their phase and still regresses the stereo replay.
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
