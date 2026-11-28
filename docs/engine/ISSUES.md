@@ -40,7 +40,39 @@ introduces a window at tick 2526 in each channel. The follow-up sector
 clock and command timing correction clears all three one-millisecond
 windows in both channels in the [Release replay with published
 Copper68k 1.5.16](CD32.md#copper68k-1516-release-verification).
-Four samples still fall below the comparison threshold at tick 2526.
+The [sample deadline trace](CD32.md#tick-2526-sample-deadline) ties the
+remaining four samples in each channel to one pair of Paula DMA reads
+that precedes the decoder's writes. The [CIA bus timing trial](CD32.md#cd32-cia-bus-timing-and-the-level-2-interruption)
+avoids a level-2 interrupt during that refill and introduces a gap at tick
+2535, where the ROM handles LBA 2102 just after vertical blank.
+The [sector phase trace](CD32.md#lba-2102-and-the-vertical-blank-boundary)
+attributes the boundary crossing to the later movie boot phase. Restoring
+the control phase reduces the tick 2535 gap to four samples per channel
+with the CIA trial still enabled. The [decoder startup trace](CD32.md#decoder-startup-after-restoring-the-lba-2102-phase)
+ties the remaining delay to CIA register accesses. A CPU timing trial
+recovers 28 of the 178 motherboard cycles and still misses the Paula
+deadline. The stock Release rerun reproduces the four-sample miss at
+tick 2526 in both channels, with no misses at ticks 2532 and 2535.
+The [CIA synchronization trace](CD32.md#cia-synchronization-waits-at-tick-2535)
+accounts for the remaining 150 clocks and shows where ROM fetches push
+CIA reads past their synchronization point. Allowing CPU execution
+during bus release introduces an early signal at tick 2526.
+The [Paula and CD worker trace](CD32.md#early-pcm-with-split-cia-release-at-tick-2526)
+ties that signal to LBA 2081 interrupting after the decoder's initial
+writes. Advancing that sector in the diagnostic replay replaces the
+early signal with a gap because the decoder resumes too late to meet
+the refill deadline.
+The [LBA 2081 instruction trace](CD32.md#rom-and-cpu-timing-before-the-lba-2081-copy)
+attributes most of the pre-copy delay to ROM fetch timing. Shorter ROM
+fetches recover 1,819 motherboard clocks in a controlled trace, with
+847 still outstanding and stereo regressions in the trial.
+The [blocking read follow-up](CD32.md#cpu-bus-waits-after-the-rom-timing-correction)
+removes a second charge on the long register loads and recovers another
+136 clocks in the fixed-boot trace. The [instruction timing and bus completion follow-up](CD32.md#instruction-timing-and-write-completion-before-the-lba-2081-copy)
+recovers a further 126 clocks in that trace, with 585 remaining. The
+status-register timing trials regress the stereo replay at fixed WinUAE
+positions. The stock Release replay reproduces four near-silent samples
+per channel at tick 2526 and zero at ticks 2532 and 2535.
 The [OCS completion record](OCS_COMPLETION.md) retains earlier evidence and scoped
 performance exceptions. Scope is the [supported PAL A500 profiles with OCS/ECS Denise](../../CopperMod.Amiga.Lightweight/README.md).
 This is a focused follow-up register, not an exhaustive emulator conformance audit.
